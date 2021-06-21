@@ -5,7 +5,7 @@ Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプ�
 
 ![Configuration](../../imgs/terraform_aws_vantiq_config.png)
 
-[Codeフォルダ](../../conf/terraform_aws_vantiq_config)
+[Codeフォルダ](../../conf/terraform_aws)
 ```
 ├── env-dev
 │   ├── main.tf
@@ -140,6 +140,8 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 
 ### 構築/削除の実行
 各environmentのディレクトリに移動し、コマンドを実行する。
+
+**注意！ `env-prod`は本番向けで11台のサーバーで構成するため、多額（月額20万以上）の費用が発生します。お試しであれば、`env-dev`開発向け4台構成をお勧めします。**
 
 ```bash
 # 初期化
