@@ -1,5 +1,5 @@
 # VANTIQ on EKS with Terraform
-The simplest configuration of AWS Infrastructure to configure Vantiq Public Cloud.
+The simplest configuration of AWS Infrastructure to configure Public facing Private Cloud.
 
 ## Configuration
 
