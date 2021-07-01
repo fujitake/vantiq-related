@@ -1,50 +1,50 @@
 
-# はじめに
+# Introduction
 
-本書ではVANTIQ運用のうち、インシデント時の一次切り分け対応について記載する。
+This document describes the preliminary problem diagnosis to incidents in VANTIQ operations.
 
-## 前提
+## Prerequisite
 
-- Kubectlツールを使ってk8sクラスタを操作する環境へのアクセスがあること
-- VANTIQ IDEにOrg Admin以上の権限があること
-- [mermaid プラグイン](https://github.com/BackMarket/github-mermaid-extension) がインストール済みでフローチャートの表示が可能であること  
+- Have access to the environment to manipulate the k8s cluster using the Kubectl tool.
+- Have Org Admin or higher permissions to the VANTIQ IDE.
+- [mermaid plugin](https://github.com/BackMarket/github-mermaid-extension) must be installed and possible to display flowchart.    
 
-# トラブルシューティングシナリオ
+# Troubleshooting scenarios
 
-以下のシナリオについて、対応手順を説明する。
+Describe the response procedures for the following scenarios.
 
-1.  [VANTIQ基盤のサービス異常を検出](#case-1-vantiq基盤のサービス異常を検出)
-2.  [Podの異常ステータスを検出](#case-2-podの異常ステータスを検出)
-3.  [Nodeの再起動イベントを検出](#case-3-nodeの再起動イベントを検出)
-4.  [PodのCPU/Memoryの使用量が閾値を超える](#case-4-podのcpumemoryの使用量が閾値を超える)
-5.  [NodeのCPU/Memoryの使用量が閾値を超える](#case-5-nodeのcpumemoryの使用量が閾値を超える)
+1.  [Service anomaly in VANTIQ infrastructure detected](#case-1-Service-anomaly-in-VANTIQ-infrastructure-detected)
+2.  [Pod anomaly status detected](#case-2-Pod-anomaly-status-detected)
+3.  [Node reboot event detected](#case-3-Node-reboot-event-detected)
+4.  [Pod CPU/Memory usage exceeds threshold](#case-4-Pod-CPUMemory-usage-exceeds-threshold)
+5.  [Node CPU/Memory usage exceeds threshold](#case-5-Node-CPUMemory-usage-exceeds-threshold)
 
-オペレーションの際は以下の点を留意すること。
+The following points should be kept in mind during operations.
 
-- この文書は運用担当のチーム向けに作成されているため、文書内で説明しているオペレーションは、構成情報の更新を行わない操作やコマンド（参照やサービス再起動など）の実行にとどめている。ただし、アカウントの権限自体がそれ以上のオペレーションが行えないよう制限されているとは限らないこと。
+- Since this document is written for the team in charge of operations, the operations described in the document are limited to executing operations and commands that do not update configuration information (such as browsing and restarting services). However, the privileges of the account itself should not necessarily be restricted to prevent further operations.
 
-- この文書で説明したオペレーション以上を行う場合、構成が更新され、結果再インストール作業や復旧作業が必要になる恐れがあること。
+- Performing more than the operations described in this document may cause the configuration will be updated, which may result in the need for reinstallation or recovery operations.  
 
-## Case 1: VANTIQ基盤のサービス異常を検出
+## Case 1: Service anomaly in VANTIQ infrastructure detected
 ```mermaid
 graph TB
-    A("サービス異常を検出、<br />またはインシデントが報告される")
-    B("インフラ障害の有無、影響を確認する")
-    C("インフラ障害の影響範囲、<br />ステータスを整理、アナウンスする")
-    D{"インフラ障害<br />影響あり"}
-    E("インフラ障害の解消を待つ")
-    F("Podが正しい配置になっているか確認する")
-    G("Podの再配置を行う")
-    H("正常性確認")
-    I("Nodeのステータスを確認する")
-    J("Podのステータスを確認する")
-    K{"K8s上のPod<br />ステータス<br />異常あり"}
-    L("問題のあるサービスの再起動を行う")
-    M("Grafanaおよびエラーログを確認する")
-    N{"Vantiq<br />プラットフォーム<br />異常あり"}
-    O("アプリ保守チームに対応を依頼する")
+    A("Service anomaly detected, or incidents are reported")
+    B("Check for announcements about infrastructure failures")
+    C("Organize the scope of impact and status<br />of failures and announce it")
+    D{"Affected by<br />infrastructure<br />failures"}
+    E("Waiting for infrastructure failure to be resolved")
+    F("Confirm the correct placement of the Pod")
+    G("Relocate the Pod")
+    H("Check for normality")
+    I("Check the Node status")
+    J("Check the Pod status")
+    K{"Pod status on K8s<br />is abnormal"}
+    L("Restart the problematic service")
+    M("Check Grafana and Error Logs")
+    N{"Vantiq platform<br />is abnormal"}
+    O("Request a response from the Application Maintenance Team")
     Y("Close Case")
-    Z("Supportにエスカレーションする")
+    Z("Escalate to the Support team")
 
     A --> B
     B --> C
@@ -66,35 +66,35 @@ graph TB
     H -- Yes --> Y
     H -- No --> Z
 
-    click B "#インフラ障害についてのアナウンスを確認する"
-    click F "#podの正しい配置を確認する"
-    click G "#podの再配置を行う"
-    click I "#nodeのステータスを確認する"
-    click J "#podのステータスを確認する"
-    click M "#grafanaおよびエラーログを確認する"
-    click O "#アプリ保守チームへの対応を依頼する"
-    click Z "#supportチームへエスカレーションする"
+    click B "#check-for-announcements-about-infrastructure-failures"
+    click F "#confirm-the-correct-placement-of-the-pod"
+    click G "#relocate-the-pod"
+    click I "#Check-the-Node-status"
+    click J "#Check-the-Pod-status"
+    click M "#check-grafana-and-error-logs"
+    click O "#request-a-response-from-the-application-maintenance-team"
+    click Z "#escalate-to-the-support-team"
 
 
 
 ```
 
-## Case 2: Podの異常ステータスを検出
+## Case 2: Pod anomaly status detected
 ```mermaid
 graph TB
-    A("Pod の異常ステータスを検出")
-    B{"Pod の Status が<br />Pending or<br />Initializing"}
-    C{"CPU または<br />メモリリソース<br />の問題"}
-    D("Node の詳細なリソースを確認")
-    E("Pod が正しい Node で稼働しているか確認")
-    F("Pod を再配置")
-    G{"解決"}
-    H{"ディスクが<br />マウント<br />できない"}
-    I("Pod が正しい AZ で稼働しているか確認")
-    J("Pod のログを確認する")
-    K("Pod の再起動を行う")
+    A("Detect abnormal Pod status")
+    B{"Pod Status is<br />Pending or<br />Initializing"}
+    C{"CPU or memory<br />resource issue"}
+    D("Check the detailed resources for Node")
+    E("Confirm the correct placement of the Pod")
+    F("Relocate the Pod")
+    G{"Resolved"}
+    H{"Disk cannot<br />be mounted"}
+    I("Confirm that the Pod is running in the correct AZ")
+    J("Check the Pod logs")
+    K("Restart the Pod")
     Y("Close Case")
-    Z("Support にエスカレーションする")
+    Z("Escalate to the Support team")
 
     A --> B
     B -- Yes --> C
@@ -112,23 +112,23 @@ graph TB
     I --> F
     H -- No --> Z
 
-    click D "#nodeのステータスを確認する"
-    click E "#podの正しい配置を確認する"
-    click F "#podの再配置を行う"
-    click I "#podの正しい配置を確認する"
-    click J "#podのログを確認する"
-    click K "#podの再起動を行う"
-    click Z "#supportチームへエスカレーションする"
+    click D "#Check-the-Node-status"
+    click E "#Confirm-the-correct-placement-of-the-Pod"
+    click F "#Relocate-the-Pod"
+    click I "#Confirm-the-correct-placement-of-the-Pod"
+    click J "#Check-the-Pod-logs"
+    click K "#Restart-the-Pod"
+    click Z "#escalate-to-the-support-team"
 ```
 
-## Case 3: Nodeの再起動イベントを検出
+## Case 3: Node reboot event detected
 ```mermaid
 graph TB
-    A("Node のステータスを確認する")
-    B("インフラ障害のアナウンスを確認")
-    C("Pod のステータスを確認する")
-    D{"Pod ステータス<br />異常あり<br />(Pending or<br />Initializing)"}
-    E("異常なステータスの Pod について復旧を行う")
+    A("Check the Node status")
+    B("Check for announcements about infrastructure failures")
+    C("Check the Pod status")
+    D{"Pod status is abnormal<br />(Pending or Initializing)"}
+    E("Recovery for abnormal Pod status")
     Y("Close Case")
 
     A --> B
@@ -137,27 +137,27 @@ graph TB
     D -- Yes --> E
     D -- No --> Y
 
-    click A "#nodeのステータスを確認する"
-    click B "#インフラ障害についてのアナウンスを確認する"
-    click C "#podのステータスを確認する"
-    click E "#podの再配置を行う"
+    click A "#Check-the-Node-status"
+    click B "#check-for-announcements-about-infrastructure-failures"
+    click C "#Check-the-Pod-status"
+    click E "#Relocate-the-Pod"
 
 ```
 
-## Case 4: PodのCPU/Memoryの使用量が閾値を超える
+## Case 4: Pod CPU/Memory usage exceeds threshold
 ```mermaid
 graph TB
-    A("Pod の使用率が閾値を超える")
-    B("VANTIQ Platform の Monitor の確認")
-    C{"解決"}
-    D("問題のあるサービス (Pod) の再起動を行う")
-    E{"解決"}
-    F("VANTIQ サポートチームが増強を判断する")
-    G{"増強が必要"}
-    H("VANTIQ サポートチームが増強を実施する")
-    I{"解決"}
+    A("Pod usage exceeds the threshold.")
+    B("Check VANTIQ Platform's Monitor")
+    C{"Resolved"}
+    D("Restart the problematic service (Pod)")
+    E{"Resolved"}
+    F("VANTIQ support team to determine enhancement")
+    G{"Enhancements<br />are necessary"}
+    H("VANTIQ support team to implement enhancement")
+    I{"Resolved"}
     Y("Close Case")
-    Z("Support にエスカレーションする")
+    Z("Escalate to the Support team")
 
     A --> B
     B --> C
@@ -171,28 +171,28 @@ graph TB
     G -- Yes --> H
     H --> I
     I -- Yes --> Y
-    I -- No またはスケール不可 --> Z
+    I -- No or not scalable --> Z
 
-    click B "#grafanaおよびエラーログを確認する"
-    click D "#podの再起動を行う"
-    click Z "#supportチームへエスカレーションする"
+    click B "#Check-Grafana-and-Error-Logs"
+    click D "#Restart-the-Pod"
+    click Z "#escalate-to-the-support-team"
 
 ```
 
-## Case 5: NodeのCPU/Memoryの使用量が閾値を超える
+## Case 5: Node CPU/Memory usage exceeds threshold
 
 ```mermaid
 graph TB
-    A("Node の使用率が閾値を超える")
-    B("Pod が正しい配置になっているか確認する")
-    C("Pod を再配置する")
-    D{"解決"}
-    E("アプリケーション保守チームへ通知する")
-    F{"解決"}
-    G("VANTIQ サポートチームが増強を判断する")
-    H{"増強が必要"}
-    I("VANTIQ サポートチームが増強を実施する")
-    J("Pod を再配置する")
+    A("Node usage exceeds the threshold")
+    B("Confirm the correct placement of the Pod")
+    C("Relocate the Pod")
+    D{"Resolved"}
+    E("Notify the Application Maintenance Team")
+    F{"Resolved"}
+    G("VANTIQ support team to determine enhancement")
+    H{"Enhancements<br />are necessary"}
+    I("VANTIQ support team to implement enhancement")
+    J("Relocate the Pod")
     Y("Close Case")
 
     A --> B
@@ -208,32 +208,32 @@ graph TB
     H -- Yes --> I
     I --> J
 
-    click B "#podの正しい配置を確認する"
-    click C "#podの再配置を行う"
-    click E "#アプリ保守チームへの対応を依頼する"
-    click J "#podの再配置を行う"
+    click B "#Confirm-the-correct-placement-of-the-Pod"
+    click C "#Relocate-the-Pod"
+    click E "#request-a-response-from-the-application-maintenance-team"
+    click J "#Relocate-the-Pod"
 
 ```
 
-# オペレーション
+# Operations
 
-フローチャートに記載したアクションについて、オペレーション方法を記載する。
+Describe the operation method for the actions described in the flowchart.
 
-## Podのステータスを確認する
+## Check the Pod status
 
-チェック項目
-- Podのステータス異常はないか（Running、Completed以外は異常）
-- Podが異常な再起動を繰り返していないか（RESTARTSの回数、statusがCrashLoopBackOffになっている）
-- Podが起動しない (statusがInit:Errorなど) 場合に、Eventsから問題の原因を探る。
-- Podが正しいワーカーノードで稼働しているか
+Check Items
+- Are there any abnormalities in the Pod's status (anything other than _Running_ and _Completed_ is abnormal)?  
+- Is the Pod repeatedly rebooting abnormally (the number of RESTARTS, status is _CrashLoopBackOff_)?  
+- If the Pod does not start (status is _Init:Error_, etc.), find out the cause of the problem from Events.  
+- Is the Pod running on the correct worker node?
 
-Podの一覧でステータスを確認する。
-- `Namespace` -- Podが配置されているnamespace
-- `Name` -- Podの名前
-- `Ready` -- Pod内で稼働しているコンテナの数
-- `Status` -- Podのステータス
-- `Restarts` -- Podの再起動回数
-- `Age` -- Podが起動してからの経過時間
+Check the status in the Pod list
+- `Namespace` -- The namespace in which the Pod is located
+- `Name` -- Pod name
+- `Ready` -- The number of containers running in the Pod
+- `Status` -- Pod status
+- `Restarts` -- The number of times the Pod has been restarted
+- `Age` -- The elapsed time since the Node was started
 
 ```bash
 $ kubectl get pod -A
@@ -294,10 +294,10 @@ shared        telegraf-ds-wvqln                                   1/1     Runnin
 shared        telegraf-prom-6d6598f56b-dsf9n                      1/1     Running     0          6d18h
 ```
 
-Podの一覧で詳細なステータスを確認する
+Check the detailed status in the Pod list
 
-- `IP` -- PodのIP
-- `Node` -- Podが稼働しているワーカーノードの名前
+- `IP` -- IP of the Pod
+- `Node` -- The name of the worker node that the Pod is running on
 
 ```sh
 $ kubectl get pod -A -o wide
@@ -311,12 +311,12 @@ app           mongodb-1                                           2/2     Runnin
 app           mongodb-2                                           2/2     Running     0          6d18h   10.19.113.36    aks-mongodbnp-15823220-vmss000001    <none>           <none>
 app           userdb-0                                            2/2     Running     0          6d18h   10.19.113.203   aks-userdbnp-15823220-vmss000000     <none>
 
-(途中略….)
+(omission…)
 ```
 
-Podの詳細なステータスを確認する
-- `Volumes` -- Podにマウントしているディスク、Configファイルなど
-- `Events` -- Podの起動時のステータス、エラー理由など。リソース不足やディスクのマウント失敗時にはエラー理由がここに現れる。
+Check the detailed status of the Pod
+- `Volumes` -- Disks mounted on the Pod, Config files, etc
+- `Events` -- The status of the Pod at startup, error reasons, etc. If there are insufficient resources or the disk fails to mount, the error reason will be shown here.
 
 ```sh
 $ kubectl describe pod -n <namespace> vantiq-2
@@ -340,7 +340,7 @@ IP:           10.19.112.87
 IPs:
   IP:           10.19.112.87
 
-(途中略……)
+(omission…)
 
 👉Volumes:
   loadmodel-config:
@@ -394,13 +394,13 @@ Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
   Normal  Started    16s        kubelet, aks-vantiqnp-15823220-vmss000002  Started container load-model
 ```
 
-## Podのログを確認する
+## Check the Pod logs
 
-チェック項目：
-- Podが稼働中 (Status = Running) にエラーが発生している場合、コンテナのログを確認してエラーの原因を探る。エラーメッセージやStackTraceがあれば内容を確認する。
-- Podが再起動を繰り返す場合、稼働中に起きているエラーの原因を探る
+Check Items：
+- If an error occurs while the pod is running (Status = _Running_), check the container logs to find out the cause of the error. If there is an error message or StackTrace, check the contents.
+- If the Pod keeps restarting, find out the cause of the error while it is running.
 
-Pod内のログを確認する。
+Check the logs in the Pod
 
 ```sh
 kubectl logs -n <namespace> <pod> -f
@@ -419,16 +419,16 @@ $ kubectl logs -n app vantiq-0 -f
 2020-11-20T09:21:50.008 [hz._hzInstance_1_vantiq-server.cached.thread-9] INFO  com.hazelcast.nio.tcp.TcpIpConnector - [10.19.112.127]:5701 [vantiq-server] [3.12.2] Could not connect to: /10.19.112.86:5701. Reason: SocketTimeoutException[null]
 2020-11-20T09:21:50.008 [hz._hzInstance_1_vantiq-server.cached.thread-9] WARN  c.h.n.t.TcpIpConnectionErrorHandler - [10.19.112.127]:5701 [vantiq-server] [3.12.2] Removing connection to endpoint [10.19.112.86]:5701 Cause => java.net.SocketTimeoutException {null}, Error-Count: 14
 
-(更新を追跡表示…)
+(Updates will be added to the display…)
 ```
 
-## Podの再起動を行う
+## Restart the Pod
 
-対象のPodを再起動するまえに、「[Podのステータスを確認する](#podのステータスを確認する)」、「[Podのログを確認する](#podのログを確認する)」の内容を保全しておく。  
-二通りの方法で Pod を再起動させることができる。状況に応じて使い分ける。
+Before restarting the target pod, preserve the contents of "[Check the Pod status](#Check-the-Pod-status)" and "[Check the Pod logs](#Check-the-Pod-logs)".    
+There are two ways to reboot the Pod. Use them depending on the situation.
 
-1.  スケールを変更する。スケール後のreplicas数により、番号が一番大きなpodが調整される  
-（例：vantiq-0、vantiq-1、vantiq-2がある場合、vantiq-2から調整される）
+1.  Change the scale. The pod with the highest number will be adjusted according to the number of _replicas_ after the scale.  
+(e.g., if vantiq-0, vantiq-1, and vantiq-2 are available, the adjustment is made starting from vantiq-2)
 
 ```sh
 $ kubectl scale sts -n <namespace> --replicas=<replica count>
@@ -454,7 +454,7 @@ vantiq-1                       1/1     Running       0          6d19h
 👉vantiq-2                       1/1     Terminating   0          36m
 ```
 
-2. PodをDeleteする。Deleteされたpodは自動的に再度起動される。
+2. Delete the Pod. The deleted pod will be automatically restarted.
 ```sh
 $ kubectl delete pod -n <namespace> <podname>
 ```
@@ -479,7 +479,7 @@ vantiq-1                       1/1     Running     0          6d19h
 vantiq-2                       1/1     Running     0          91s
 ```
 
-注： 2の方法はPodがreplicaset、daemonset、statefulsetであることを前提とするため、以下のPodのみ実行すること。
+Note: Method 2 assumes that the Pod is a _replicaset_, _daemonset_, or _statefulset_, so only run the following Pods.  
 
 - vantiq
 - mongodb
@@ -488,22 +488,22 @@ vantiq-2                       1/1     Running     0          91s
 
 
 
-## Nodeのステータスを確認する
+## Check the Node status
 
-チェック項目
-- Nodeの稼働ステータスに異常がないか（Ready以外は異常）。
-- 意図した数のNodeが稼働しているか。
-- 最近再起動したNodeはないか (Ageを確認する)。
-- Nodeが意図したAZで稼働しているか（同じVMSSで３台以上構成している場合、1、2、3のゾーンに分散して稼働しているか）。
-- CPU/Memoryリソースは枯渇していないか。枯渇している場合、意図しないPodが稼働していないか。
+Check Items
+- Is there any abnormality in the operating status of the Node (anything other than _Ready_ is abnormal)?
+- Is the intended number of Nodes up and running?
+- Have any Nodes been recently rebooted (check _Age_)?
+- Are the Nodes running in the intended AZ (if more than 3 Nodes are configured in the same VMSS, are they running distributed across zones 1, 2, and 3)?  
+- Are the CPU/Memory resources exhausted? If so, is there an unintended Pod running?
 
-Nodeの一覧でステータスを確認する
+Check the status in the Node list
 
-- `Name` -- Worker Nodeの名前 (VMの名前)
-- `Status` -- Nodeのステータス
-- `Roles` -- Nodeの役割
-- `Age` -- Nodeが起動してからの経過時間
-- `Version` -- NodeのAKSバージョン
+- `Name` -- The name of the Worker Node (name of the VM)
+- `Status` -- Node status
+- `Roles` -- Node roles
+- `Age` -- The elapsed time since the Node was started
+- `Version` -- AKS version of the Node
 
 ```sh
 $ kubectl get nodes
@@ -524,10 +524,10 @@ aks-vantiqnp-15823220-vmss000001     Ready    agent   22d   v1.16.15
 aks-vantiqnp-15823220-vmss000002     Ready    agent   22d   v1.16.15```
 ```
 
-Nodeの一覧で詳細なステータスを確認する
+Check the detailed status in the Node list
 
-- `Internal-IP` -- NodeのIP
-- `External-IP` -- NodeのPublic IPもしくはFQDN
+- `Internal-IP` -- IP of the Node
+- `External-IP` -- Public IP or FQDN of the Node
 
 ```sh
 $ kubectl get nodes -o wide
@@ -548,7 +548,7 @@ aks-vantiqnp-15823220-vmss000001     Ready    agent   22d   v1.16.15   10.19.112
 aks-vantiqnp-15823220-vmss000002     Ready    agent   22d   v1.16.15   10.19.112.69    <none>        Ubuntu 16.04.7 LTS   4.15.0-1096-azure   docker://19.3.12
 ```
 
-Nodeが稼働しているAZ、およびLabelを確認する
+Check the AZ and Label where the Node is running  
 
 ```sh
 $ kubectl get nodes -L failure-domain.beta.kubernetes.io/zone,vantiq.com/workload-preference
@@ -569,12 +569,12 @@ aks-vantiqnp-15823220-vmss000001     Ready    agent   22d   v1.16.15   japaneast
 aks-vantiqnp-15823220-vmss000002     Ready    agent   22d   v1.16.15   japaneast-3   compute
 ```
 
-Nodeの詳細なステータスを確認する
+Check the detailed status of the Node
 
--   `Conditions` -- Memory、Disk、PIDが枯渇していないか。
--   `Allocatable` -- CPU、Disk、Memoryリソースがあとどれくらい割り当て可能か。この割り当て可能以上にPodがリソースを要求すると、PodはこのNodeで起動できない。
--   `Non-terminated Pods` -- 現在そのNodeで稼働中のPodと、リソースの要求・使用状況。意図しないPodが想定以上のリソースを消費していないか。
--   `Allocated resources` -- 現在のリソースの割り当て状況。特にMemoryが枯渇すると、強制的にPodは終了されてしまう。
+- `Conditions` -- Are Memory, Disk, and PID exhausted?
+- `Allocatable` -- How much more CPU, Disk, and Memory resources are available for allocation. If the Pod requires more resources than it can allocate, the Pod will not be able to start on this Node.  
+- `Non-terminated Pods` -- Pods which are currently running on that Node, and their resource requirements and usage. Are there any unintended pods that are consuming more resources than expected?  
+- `Allocated resources` -- Current resource allocation status. In particular, if Memory is exhausted, the Pod will be terminated forcibly.  
 
 ```sh
 $ kubectl describe node <node name>
@@ -666,23 +666,23 @@ ProviderID:                  azure:///subscriptions/72d94fef-e0df-4c3d-9732-da66
 Events:                          <none>
 ```
 
-## Podの再配置を行う
+## Relocate the Pod
 
-以下の4ステップを必要な回数行う。
+Do the following four steps as many times as necessary
 
-1.  `taint`を使い、Podを動かす先のNode以外をスケジュール不可にする
+1.  Use `taint` to disable scheduling for all nodes except the one to which the pod will be run
 ```sh
 $ kubectl taint nodes --all key=value:NoSchedule
 $ kubectl taint nodes <node name> key:NosSchedule-
 ```
 
-2.  動かしたいPodを「[Podの再起動を行う](#podの再起動を行う)」  に従い再起動を行う。
-3.  Podが意図するNodeに移動したかを「[Podのステータスを確認する](#podのステータスを確認する)」 に従い、確認する。
-4.  Taintを解除する
+2.  Restart the desired pod according to "[Restart the Pod](#Restart-the-Pod)"
+3.  Check that the Pod has moved to the intended Node according to "[Check the Pod status](#Check-the-Pod-status)"  
+4.  Remove Taint
 ```sh
 $ kubectl taint nodes --all key:NoSchedule-
 ```
-実施例： 2つの稼働中のPodを、別のNodeに再配置する（入れ替える）
+Example: Relocate (replace) two working Pods to another Node
 
 ![image18_1](../../imgs/vantiq_k8s_troubleshooting/18_1.png)
 
@@ -703,7 +703,7 @@ userdb-2                       2/2     Running     0          6d22h   10.19.113.
 vantiq-1                       1/1     Running     0          35m     10.19.112.61    aks-vantiqnp-15823220-vmss000001   
 vantiq-2                       1/1     Running     0          38m     10.19.112.75    aks-vantiqnp-15823220-vmss000002   
 ```
-`metrics-collector-0`のスケールを変更して、削除する。
+Change the scale of `metrics-collector-0` and remove it  
 
 ```sh
 $ kubectl scale sts -n app metrics-collector --replicas=0
@@ -712,7 +712,7 @@ statefulset.apps/metrics-collector scaled
 
 ![image18_2](../../imgs/vantiq_k8s_troubleshooting/18_2.png)
 
-移動先の`aks-vantiqnp-15823220-vmss000000`以外に`taint`を適用する
+Apply `taint` to all but `aks-vantiqnp-15823220-vmss000000` in the destination
 
 ```sh
 $ kubectl taint nodes --all key=value:NoSchedule
@@ -735,7 +735,7 @@ $ kubectl taint nodes aks-vantiqnp-15823220-vmss000000 key:NoSchedule-
 node/aks-vantiqnp-15823220-vmss000000 untainted
 ```
 
-移動する`vantiq-0`を再起動する（Podを削除すると、自動的に再起動する）
+Restart the `vantiq-0` to be moved (it will restart automatically when the pod is removed)
 
 ```sh
 $ kubectl delete pod -n app vantiq-0
@@ -744,7 +744,7 @@ pod "vantiq-0" deleted
 
 ![image19_1](../../imgs/vantiq_k8s_troubleshooting/19_1.png)
 
-`metrics-collector-0`の移動先の`aks-metricsnp-15823220-vmss000000`以外に`taint`を適用する
+Apply `taint` to all but `aks-metricsnp-15823220-vmss000000` which is the destination of `metrics-collector-0`
 
 ```sh
 $ kubectl taint nodes --all key=value:NoSchedule
@@ -767,7 +767,7 @@ $ kubectl taint nodes aks-metricsnp-15823220-vmss000000 key:NoSchedule-
 node/aks-metricsnp-15823220-vmss000000 untainted
 ```
 
-`Metrics-collector-0` のスケールを変更して、起動させる。
+Change the scale of `Metrics-collector-0` and start it  
 
 ![image19_2](../../imgs/vantiq_k8s_troubleshooting/19_2.png)
 
@@ -789,7 +789,7 @@ userdb-2                       2/2     Running     0          6d23h   10.19.113.
 vantiq-1                       1/1     Running     0          79m     10.19.112.61    aks-vantiqnp-15823220-vmss000001
 vantiq-2                       1/1     Running     0          82m     10.19.112.75    aks-vantiqnp-15823220-vmss000002
 ```
-taintを解除する
+Remove taints
 
 ```sh
 $ kubectl taint nodes --all key:NoSchedule-
@@ -809,15 +809,15 @@ node/aks-vantiqnp-15823220-vmss000002 untainted
 error: taint "key:NoSchedule" not found
 ```
 
-## Podの正しい配置を確認する
+## Confirm the correct placement of the Pod
 
-チェック項目
+Check Items
 
-- ゾーン冗長化しているNodeの場合、Nodeが別々のゾーンに配置されていること。failure-domain.beta.kubernetes.io/zone が1、2、3に均等に配置されていること。
-- DeploymentまたはScaleSetでレプリカが2以上のPodがそれぞれ別のNodeに配置されていること。
-- PV (PersistentVolume) が作成されているZoneでPodが稼働していること（`mongodb`、`grafanadb`、`influxdb`）。
+- For Nodes with zone redundancy, the Nodes should be located in separate zones. *failure-domain.beta.kubernetes.io/zone* should be evenly distributed among 1, 2, and 3.  
+- Pods with replica is greater than or equal to 2 in *Deployment* or *ScaleSet* must be located in different Nodes.  
+- The Pod must be running in the Zone where the PV (PersistentVolume) is created（`mongodb`, `grafanadb`, `influxdb`).  
 
-それぞれのPodが意図したNode上に配置されていること。特に以下のPodが指定されたNode以外で稼働としている状態は不正とみなす。 (\*は任意の数字または文字列を表す)
+Each Pod must be located on its intended Node. In particular, it is invalid for the following Pods are running on a non-specified Node. (\* can be any number or string)  
 
 seq  | Pod  | Node  
 --|---|--
@@ -828,18 +828,18 @@ seq  | Pod  | Node
 5  | keycloak-*  |  aks-keycloaknp-*
 6  | metrics-collector-* |  aks-metricsnp-*
 
-- 上記を満たしていれば、必ずしもNodeのシーケンス番号とPodのシーケンス番号とAZの番号が一致しなくともよい。(例：AZ: japaneast1上に`aks-vantiqnp-xxxxxxx-vmss000004`があり`vantiq-2`のPodが稼働しているなど)
+- As long as the above is satisfied, the Node sequence number, Pod sequence number, and AZ number do not need to match. (Example: There is `aks-vantiqnp-xxxxxxx-vmss000004` on AZ: japaneast1 and Pod `vantiq-2` running, etc.)  
 
-- `nginx-ingress-controller-xxxxxxx`、`grafana-*` については、Nodeは特に決まっていない。
+- As for the `nginx-ingress-controller-xxxxxxx` and `grafana-*`, Node is not specified.  
 
 ![image1](../../imgs/vantiq_k8s_troubleshooting/image1.png)
 
-Podがあるべき場所に配置されていないと、以下の問題が発生しうる
+If the pod is not placed where it should be, the following problems could occur
 
-- CPU/Memoryリソース不足のため、Podが起動しない（Pendingの状態）
-- Podにディスクがマウントできず、Podが起動しない
+- Pod will not start due to insufficient CPU/Memory resources (*Pending* status).  
+- The disk cannot mount to the Pod and the Pod will not start.  
 
-Nodeが正しいZoneに配置されているか確認する
+Check that the Node is placed in the correct Zone
 
 ```sh
 $ kubectl get nodes -L failure-domain.beta.kubernetes.io/zone
@@ -860,7 +860,8 @@ aks-vantiqnp-15823220-vmss000001     Ready    agent   25d   v1.16.15   japaneast
 aks-vantiqnp-15823220-vmss000002     Ready    agent   25d   v1.16.15   japaneast-3
 ```
 
-Podが正しいNodeに配置されているか確認する
+Check that the Pod is placed in the correct Node
+
 ```sh
 $ kubectl get pods -A -o wide
 NAMESPACE     NAME                                                READY   STATUS      RESTARTS   AGE     IP              NODE                                 NOMINATED NODE   READINESS GATES
@@ -878,7 +879,7 @@ app           vantiq-0                                            1/1     Runnin
 app           vantiq-1                                            1/1     Running     0          2d19h   10.19.112.61    aks-vantiqnp-15823220-vmss000001     <none>           <none>
 app           vantiq-2                                            1/1     Running     0          2d20h   10.19.112.75    aks-vantiqnp-15823220-vmss000002     <none>           <none>
 
-(途中略・・・)
+(omission…)
 
 shared        grafana-67df56d6dc-4jj57                            1/1     Running     0          9d      10.19.112.178   aks-keycloaknp-15823220-vmss000001   <none>           <none>
 shared        grafanadb-mysql-85b686d65c-wgx9s                    1/1     Running     0          9d      10.19.112.166   aks-keycloaknp-15823220-vmss000001   <none>           <none>
@@ -907,7 +908,7 @@ shared        telegraf-ds-wvqln                                   1/1     Runnin
 shared        telegraf-prom-6d6598f56b-dsf9n                      1/1     Running     0          9d      10.19.113.249   aks-userdbnp-15823220-vmss000002     <none>           <none>
 ```
 
-PodがClaimしているPVとPVが配置されているZoneを確認する
+Check the PV that the Pod is *Claim* and the Zone where the PV is located
 
 ```sh
 $ kubectl get pv -L failure-domain.beta.kubernetes.io/zone
@@ -924,224 +925,220 @@ pvc-f1fd088d-3704-465a-bba8-1c6eff6ae701   500Gi      RWO            Retain     
 ```
 
 
-## インフラ障害についてのアナウンスを確認する
+## Check for announcements about infrastructure failures
 
-Infra障害のステータスを確認する。
+Check the status of infrastructure failures  
 
 <https://status.azure.com/status/>
 
-チェック項目
+Check Items
 
-- インフラ障害が起きていないこと
-- 各可用性ゾーンが稼働していること
-- Nodeが可用性ゾーンに分散配置されていること（正しく稼働していればゾーンバランスが保たれるはず。）  
- <https://docs.microsoft.com/ja-jp/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-use-availability-zones#zone-balancing>
+- No infrastructure failures have occurred
+- Each Availability Zone is up and running
+- Nodes are distributed across availability zones（if running correctly, zone balance should be maintained)    
+   <https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-use-availability-zones#zone-balancing>
 
-## Grafanaおよびエラーログを確認する
+## Check Grafana and Error Logs
 
-VANTIQ PlatformのMonitorで、アラート・障害の要因について調べる。
+Find out what causes alerts and failures with VANTIQ Platform\'s Monitor.  
 
-System Admin向けチェック項目と必要なアクション
-seq  |  チェック項目 | 権限  |  是正アクション
+Check Items and Remediation Actions for System Admin
+seq  |  Check Items | Privilege  |  Remediation Actions
 --|---|---|--
-1  | VANTIQ IDEにログインはできるか  | system admin  |  VANTIQ IDEにログイン時に内部エラーが出る場合、keycloakとVANTIQ間に問題がある。当該サービスの再起動を行う。
-2  |  VANTIQのリソースの使用量が異常に高くなっていないか（CPU利用率、メモリ使用率、GC時間などが、1週間程度の平均値の倍以上となっていたり、CPU 利用率が 200% を越えてはいないか）。 | system admin  |  Org Adminにリソースを大量に消費している処理、またはそのきっかけとなったオペレーションなどがないか確認を依頼する。原因を取り除いたあと自然に回復しないようであればサービスの再起動を行う。
-3  | mongoDBの使用率が異常に高くなっていないか（リクエスト数、CPU利用率、メモリ使用量などが、1週間程度の平均値の倍以上となっていたり、CPU 利用率が 200% を越えてはいないか）。  | system admin  |  Org Adminにリソースを大量に消費している処理、またはそのきっかけとなったオペレーションなどがないか確認を依頼する。原因を取り除いたあと自然に回復しないようであればサービスの再起動を行う。
-4  | 一時的なデータ量の増大はなかったか。  | system admin  |  Org Adminに急激なデータ量（リクエスト）の増大の原因を解決するよう依頼する。
-5  | Quota Violation、Creditの枯渇が起きていないか(エラーが発生していないか)。  | system admin  |  Org Adminにデータ量（リクエスト）の増大の原因を解決するよう依頼する。原因を取り除いた後自然に回復しないようであればサービスの再起動を行う。
-6  | データ量やイベント数の増大はないか(処理時間が10秒以上かかっていないか)。  | system admin  |  イベント数や処理時間が著しく上昇しているAppやResourceを特定し、アプリケーション保守チームに是正を依頼する。
-7  | Quota Violation、Creditの枯渇が起きていないか(エラーが発生していないか)。  |  system admin |  アプリケーション保守チームと連携し、原因の処理やデータソースを特定し、是正を依頼する。
-8  | タイムアウトエラーが発生していないか（2分以上の処理）。処理時間が長いイベントはないか（数秒～2分）。  | system admin  |  アプリケーション保守チームと連携し、原因の処理やデータソースを特定し、是正を依頼する。
-9  | Dropが発生していないか | system admin  |  イベント数や処理時間が著しく上昇しているAppやResourceを特定し、アプリケーション保守チームに是正を依頼する。
+1  | Is it possible to log in to the VANTIQ IDE?  | system admin  |  If internal errors occur when logging into the VANTIQ IDE, there is a problem between keycloak and VANTIQ. Restart the appropriate service.
+2  |  Whether the usage of VANTIQ resources is abnormally high（if CPU utilization, memory utilization, GC time, etc., is more than double the average value for about one week, or if the CPU utilization exceeds 200%）. | system admin  |  Ask Org Admin to check if there is any process that is consuming a lot of resources or any operation that triggered it. If it does not recover spontaneously after removing the cause, restart the service.
+3  | Whether the usage rate of mongoDB is abnormally high（the number of requests, CPU usage, memory usage, etc., is more than double the average value for about one week, or if the CPU utilization exceeds 200%）.  | system admin  |  Ask Org Admin to check if there is any process that is consuming a lot of resources or any operation that triggered it. If it does not recover spontaneously after removing the cause, restart the service.
+4  | Whether the data volume has temporarily increased.  | system admin  |  Ask Org Admin to resolve the cause of the sudden increase in data volume (requests).
+5  | Whether Quota Violation or Credit Exhaustion has occurred (if any errors have occurred).  | system admin  |  Ask Org Admin to resolve the cause of the sudden increase in data volume (requests). If it does not recover spontaneously after removing the cause, restart the service.
+6  | Whether the amount of data or the number of events has increased (if the processing time is more than 10 seconds).  | system admin  |  Identify Apps and Resources where the number of events or processing time has significantly increased and request the Application Maintenance Team to remediate the situation.
+7  | Whether Quota Violation or Credit Exhaustion has occurred (if any errors have occurred).  |  system admin |  Work with the Application Maintenance Team to identify the cause process and data source, and request remediation.
+8  | Whether timeout errors have occurred (processing for more than 2 minutes). Whether any events with a long processing time have took (a few seconds to 2 minutes).  | system admin  |  Work with the Application Maintenance Team to identify the cause process and data source, and request remediation.
+9  | Whether a Drop is occurring. | system admin  |  Identify Apps and Resources where the number of events or processing time has significantly increased and request the Application Maintenance Team to remediate the situation.
 
 
-Org Admin向けチェック項目と必要なアクション
-seq  |  チェック項目 | 権限  |  是正アクション
+Check Items and Remediation Actions for Org Admin  
+seq  |  Check Items | Privilege  |  Remediation Actions
 --|---|---|--
-6  | データ量やイベント数の増大はないか(処理時間が10秒以上かかっていないか)。  | org admin  |  イベント数や処理時間が著しく上昇しているAppやResourceを特定し、アプリケーション保守チームに是正を依頼する。
-7  | Quota Violation、Creditの枯渇が起きていないか(エラーが発生していないか)。  |  org admin |  アプリケーション保守チームと連携し、原因の処理やデータソースを特定し、是正を依頼する。
-8  | タイムアウトエラーが発生していないか（2分以上の処理）。処理時間が長いイベントはないか（数秒～2分）。  | org admin  |  アプリケーション保守チームと連携し、原因の処理やデータソースを特定し、是正を依頼する。
-9  | Dropが発生していないか | org admin  |  イベント数や処理時間が著しく上昇しているAppやResourceを特定し、アプリケーション保守チームに是正を依頼する。
+6  | Whether the amount of data or the number of events has increased (if the processing time is more than 10 seconds). | org admin  |  Identify Apps and Resources where the number of events or processing time has significantly increased and request the Application Maintenance Team to remediate the situation.
+7  | Whether Quota Violation or Credit Exhaustion has occurred (if any errors have occurred).  |  org admin |  Work with the Application Maintenance Team to identify the cause process and data source, and request remediation.
+8  | Whether timeout errors have occurred (processing for more than 2 minutes). Whether any events with a long processing time have took (a few seconds to 2 minutes). | org admin  |  Work with the Application Maintenance Team to identify the cause process and data source, and request remediation.
+9  | Whether a Drop is occurring. | org admin  |  Identify Apps and Resources where the number of events or processing time has significantly increased and request the Application Maintenance Team to remediate the situation.
 
-#### Grafana 使用方法
+#### How to use Grafana
 
-[運用] → [モニター] → [Grafana] を選択する。(図は System Admin 権限の例)
+Go to [Administer] → [Grafana] (The figure shows an example of System Admin privilege.)
 
-![image2](../../imgs/vantiq_k8s_troubleshooting/image2.png)
+![image2](../../imgs/vantiq_k8s_troubleshooting/image2_eng.png)
 
-*version 1.31 の場合  
-[管理] → [Grafana] を選択する。(図は System Admin 権限の例)*
-![image2_31](../../imgs/vantiq_k8s_troubleshooting/image2_31.png)
-
-[Home] を選択する。
+Select [Home]
 
 ![image3](../../imgs/vantiq_k8s_troubleshooting/image3.png)
 
-[Dashboard] を選択する。  
- \- Dashboard は権限レベルによって異なる。
+Select [Dashboards]  
+ \- Dashboards varies by permission level.  
 
-Dashboard　選択後に、確認対象の日付などを設定する。  
-- 時間の範囲、リフレッシュ間隔の設定
+After selecting Dashboard, set the date, etc. to be checked.    
+- Set the time range and refresh interval.
 
 ![image4](../../imgs/vantiq_k8s_troubleshooting/image4.png)  
-[Relative time ranges] でプリセットの時間の範囲を選択可能 (設定されている time zone に依存する)  
-リフレッシュ間隔の選択も可能  
+[Relative time ranges] allows to select preset time ranges. (depending on the configured time zone)  
+Also possible to select the refresh interval.  
 
-[Absolute time range] で時間の範囲のカスタム設定が可能  
-\- [From] と [To] に日時入力後、[Apply time range] を選択  
+[Absolute time range] allows to set a custom time range.   
+\- Enter the date and time into [From] and [To], and then select [Apply time range]
 
 ![image5](../../imgs/vantiq_k8s_troubleshooting/image5.png)
 
-ここで設定した値は、[Recently used absolute ranges] にリストされ、再利用可能
+The values set here are listed in [Recently used absolute ranges] and are available for reuse.
 
-- 二通りの方法で拡大表示が可能
+- Enlarged view is available in two ways
 
-パネルタイトルのプルダウンメニューから [View] を選択  
-グラフ上で拡大表示させたいエリアをドラッグ
+Select [View] from the pull-down menu of the panel title.   
+Drag the area on the graph that is desired to be enlarged.
 
 
-#### System Admin 権限でのチェック項目確認例
+#### Examples of checking items with System Admin privilege
 
-System Admin 権限の Dashboard
+Dashboard with System Admin privilege
 
 ![image6](../../imgs/vantiq_k8s_troubleshooting/image6.png)
 
-1.  VANTIQ IDE にログインはできるか  
-ログイン時に認証などのエラーメッセージが表示されないか
+1.  Is it possible to log in to the VANTIQ IDE?    
+Whether or not error messages such as authentication are displayed when logging in.  
 
 ![image7](../../imgs/vantiq_k8s_troubleshooting/image7.png)
 
-2.  VANTIQのリソースの使用量が異常に高くなっていないか（CPU利用率、メモリ使用率、GC時間など）  
+2.  Whether the usage of VANTIQ resources is abnormally high (CPU utilization, memory utilization, GC time, etc.）  
 `Vantiq Resources`
 
 ![image8](../../imgs/vantiq_k8s_troubleshooting/image8.png)
 
-3.  mongoDBの使用率が異常に高くなっていないか（リクエスト数、CPU利用率、メモリ使用量）  
+3.  Whether the usage rate of mongoDB is abnormally high (the number of requests, CPU usage, memory usage）  
 `MongoDB Monitoring Dashboard`
 
 ![image9](../../imgs/vantiq_k8s_troubleshooting/image9.png)
 
-4.  一時的なデータ量の増大はなかったか  
+4.  Whether the data volume has temporarily increased.    
 `Organization Activity`
 
 ![image10](../../imgs/vantiq_k8s_troubleshooting/image10.png)
 
-5.  Quota Violation、Creditの枯渇が起きていないか  
+5.  Whether Quota Violation or Credit Exhaustion has occurred.   
 `Organization Activity`
 
 ![image11](../../imgs/vantiq_k8s_troubleshooting/image11.png)
 
-VANTIQ IDE のエラーペインにおいても確認できる
+It is also possible to check in the error pane of the VANTIQ IDE.
 
 ![image12](../../imgs/vantiq_k8s_troubleshooting/image12.png)
 
-6.  タイムアウトエラーが発生していないか。処理時間が長いイベントはないか。  
+6.  Whether timeout errors have occurred. Whether any events with a long processing time have took.  
 `Vantiq Resources` -- `Request Duration`
 
 ![image13](../../imgs/vantiq_k8s_troubleshooting/image13.png)
 
-7.  異常が見つかった場合、Organizationごとのパフォーマンスを確認し、問題のあるOrganizationを特定し、その管理者に適宜指示をする。
+7.  If an anomaly is found, check the performance of each organization, identify the organization with the problem, and instruct its administrator accordingly.
 
 ![image14](../../imgs/vantiq_k8s_troubleshooting/image14.png)
 
-#### Organization Admin 権限でのチェック項目確認例
+#### Examples of checking items with Organization Admin privilege
 
-Organization Admin 権限の Dashboard
+Dashboard with Organization Admin privilege
 
 ![image15](../../imgs/vantiq_k8s_troubleshooting/image15.png)
 
-6.  データ量やイベント数の増大はないか  
+6.  Whether the amount of data or the number of events has increased.    
 `App Execution`
 
 ![image16](../../imgs/vantiq_k8s_troubleshooting/image16.png)
 
-7.  Quota Violation、Creditの枯渇が起きていないか  
+7.  Whether Quota Violation or Credit Exhaustion has occurred.     
 `Usage Overview`
 
 ![image17](../../imgs/vantiq_k8s_troubleshooting/image17.png)
 
-8.  タイムアウトエラーが発生していないか。処理時間が長いイベントはないか。  
-`Rule Execution`、`Procedure Execution`
+8.  Whether timeout errors have occurred. Whether any events with a long processing time have took.  
+`Rule Execution`, `Procedure Execution`
 
 ![image18](../../imgs/vantiq_k8s_troubleshooting/image18.png)
 
-9.  Drop が発生していないか  
+9.  Whether a Drop is occurring.  
 `Event Processing` -- `Drops`
 
 ![image19](../../imgs/vantiq_k8s_troubleshooting/image19.png)
 
-10. 異常が見つかった場合、問題のあるnamespaceを特定し、namespaceの管理者に適宜指示をする。
+10. If an anomaly is found, identify the namespace with the problem and instruct the namespace administrator accordingly.  
 
 ![image20](../../imgs/vantiq_k8s_troubleshooting/image20.png)
 
-## アプリ保守チームへの対応を依頼する
+## Request a response from the Application Maintenance Team
 
-アプリケーション保守チームに問題のあるアプリケーションに関する確認および問題の是正を依頼する。恒常的なデータ量増大によるものでなければ、アプリケーション側で解決を行う。
+Ask the Application Maintenance Team to verify the problematic application and correct the problem. If the problem is not caused by a constant increase in data volume, the application will resolve the issue.  
 
-チェック項目と是正アクション
+Check Items and Remediation Actions
 
-seq  | チェック項目  |  チェック実施者 |  是正アクション
+seq  | Check Items  |  Responsible for checking |  Remediation Actions
 --|---|---|--
-1  | VANTIQ IDEにログインはできるか。イベント処理は動作しているか。  | アプリ保守チーム  |  VANTIQ IDEにログイン時に内部エラーが出る場合、keycloakとVANTIQ間に問題がある。当該サービスの再起動を行う。一方、ログインのみ不可で背後のイベント処理が動作している場合、再起動のタイミングは運用チームと調整する。
-2  | データ量やイベント数の急激な増大はないか(処理時間が10秒以上かかっていないか）。  |  アプリ保守チーム |  イベント数や処理時間が著しく上昇しているAppやResourceを特定し、一時的にdeactivate, データソースの遮断、緊急修正デプロイを行う。
-3  | タイムアウトエラーが発生していないか（2分以上の処理）。処理時間が長いイベントはないか（数秒～2分）。  | アプリ保守チーム  |  原因の処理やデータソースを特定し、一時的に遮断、暫定対応等を行う。よくある原因はVANTIQアプリが連携している先対向システムの同期呼び出しによるレスポンス遅延であり、非同期化の設計の見直しが必要になる。
-4  | 最近アプリケーションの変更がリリースされたか。  | アプリ保守チーム  |  最近デプロイされたアプリケーションに問題がある場合、前バージョンを再デプロイする。
-5  | エラーが大量に発生していないか。  | アプリ保守チーム  |  イベント数や処理時間が著しく上昇しているAppやResourceを特定し、一時的にdeactivate、 データソースの遮断、緊急修正デプロイを行う。アプリケーションのロジックが問題の場合、開発環境で不具合のないことの検証が必要。クォータに関する問題の場合、イベント数やデータ量の調整や設計の再検討も必要になる。
-6  | 最近Typeへのデータの大量投入など行ったか。  | アプリ保守チーム  |  データ投入を中断する。
+1  | Is it possible to log in to the VANTIQ IDE? Is the event processing working?  | Application Maintenance Team  |  If internal errors occur when logging into the VANTIQ IDE, there is a problem between keycloak and VANTIQ. Restart the appropriate service. On the other hand, if only login is disabled but event processing is running behind it, the timing of the restart should be coordinated with the Operations Team.
+2  | Whether the amount of data or the number of events has increased rapidly (if the processing time is more than 10 seconds）.  |  Application Maintenance Team |  Identify Apps and Resources where the number of events or processing time has significantly increased, and do temporarily deactivate, block the data source, and deploy emergency fixes.
+3  | Whether timeout errors have occurred (processing for more than 2 minutes).Whether any events with a long processing time have took (a few seconds to 2 minutes).  | Application Maintenance Team  |  Identify the processing of the cause and data source, temporarily shut it down, and take temporary responses, etc. A common cause is response delays due to synchronous calls from the point-to-point system to which the VANTIQ application is linked, and the asynchronous design needs to be reviewed.
+4  | Whether any changes to the application have been released recently.  | Application Maintenance Team  |  If there is a problem with a recently deployed application, redeploy the previous version.
+5  | Whether a large number of errors have occurred.  | Application Maintenance Team  |  Identify Apps and Resources where the number of events or processing time has significantly increased, and do temporarily deactivate, block the data source, and deploy emergency fixes. If the problem is with the logic of the application, it is necessary to verify that there are no problems in the development environment. If the problem is related to quota, it is necessary to adjust the number of events and the amount of data, and reconsider the design.
+6  | Whether a large amount of data has recently been injected into Type.  | Application Maintenance Team  |  Suspend the data input.
 
 
-#### Developer 権限でのチェック項目確認例
+#### Example of checking items with Developer privilege
 
-Developer 権限の Dashboard  
+Dashboard with Developer privilege  
 ![image21](../../imgs/vantiq_k8s_troubleshooting/image21.png)
 
-1.  VANTIQ IDEにログインはできるか。イベント処理は動作しているか。
+1.  Is it possible to log in to the VANTIQ IDE? Is the event processing working?  
 
 ![image22](../../imgs/vantiq_k8s_troubleshooting/image22.png)
 
-2.  データ量やイベント数の急激な増大はないか。  
+2.  Whether the amount of data or the number of events has increased rapidly.    
 `App Execution`  
 
 ![image23](../../imgs/vantiq_k8s_troubleshooting/image23.png)
 
-3.  タイムアウトエラーが発生していないか。処理時間が長いイベントはないか。  
-`Procedure Execution`、`Rule Execution`  
+3.  Whether timeout errors have occurred. Whether any events with a long processing time have took.   
+`Procedure Execution`, `Rule Execution`  
 
 ![image24](../../imgs/vantiq_k8s_troubleshooting/image24.png)
 
-4.  最近アプリケーションの変更がリリースされたか。  
-リリース情報などの確認を行う。
+4.  Whether any changes to the application have been released recently.    
+Confirm release information, etc.  
 
-5.  エラーが大量に発生していないか。  
-VANTIQ IDE のエラーペインにおいても確認できる。
+5.  Whether a large number of errors have occurred.    
+It is also possible to check in the error pane of the VANTIQ IDE.
 
 ![image25](../../imgs/vantiq_k8s_troubleshooting/image25.png)
 
-6.  最近Typeへのデータの大量投入など行ったか。  
-聞き取りやVANTIQ IDE のエラーペインにおいても確認できる。
+6.  Whether a large amount of data has recently been injected into Type.    
+It is possible to confirm through interviews or in the error pane of the VANTIQ IDE.
 
 ![image26](../../imgs/vantiq_k8s_troubleshooting/image26.png)
 
 
-## Supportチームへエスカレーションする
+## Escalate to the Support team
 
-VANTIQアプリケーションの問題については、以下のテンプレートに従う。
+For VANTIQ application issues, follow the template below.
 
 [Support-Issue-Submission-Template.docx](Support-Issue-Submission-Template.docx)
 
-VANTIQ基盤に関する問題は、以下のテンプレートに従い情報を提供する。
+For issues related to the VANTIQ infrastructure, follow the template below to provide information.
 
-宛先 jp-customersuccess \<jp-customersuccess\@vantiq.com
+To  jp-customersuccess \<jp-customersuccess\@vantiq.com
 
-- Cluster Name / クラスタ の番号
-- Incident Description / Resource / インシデントの内容、問題のあるリソース   
+- Cluster Name / Cluster number
+- Incident Description / Resource / Incident description, resources with problems   
 - Submission Type {Defect, Enhancement, Developer Support, Infrastructure}
-- Severity 影響のあった基盤  {1, 2, 3, 4}
+- Severity Affected infrastructure  {1, 2, 3, 4}
 - Screenshots
-- Diagnosis情報
+- Diagnosis Information
   - `kubectl get pods -A -o wide`
   - `kubectl get nodes -o wide`
   - `kubectl logs`
   - `kubectl describe`
   - etc.
-- すでに行われた復旧アクション
+- Recovery actions already taken.
