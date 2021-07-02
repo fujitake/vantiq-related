@@ -71,6 +71,7 @@ graph TB
     click G "#relocate-the-pod"
     click I "#Check-the-Node-status"
     click J "#Check-the-Pod-status"
+    click L "#Restart-the-Pod"
     click M "#check-grafana-and-error-logs"
     click O "#request-a-response-from-the-application-maintenance-team"
     click Z "#escalate-to-the-support-team"
