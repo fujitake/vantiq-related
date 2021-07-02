@@ -71,6 +71,7 @@ graph TB
     click G "#podの再配置を行う"
     click I "#nodeのステータスを確認する"
     click J "#podのステータスを確認する"
+    click L "#podの再起動を行う"
     click M "#grafanaおよびエラーログを確認する"
     click O "#アプリ保守チームへの対応を依頼する"
     click Z "#supportチームへエスカレーションする"
