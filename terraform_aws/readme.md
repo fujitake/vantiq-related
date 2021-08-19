@@ -1,11 +1,12 @@
+[English Version](readme_en.md)
+
 # VANTIQ on EKS with Terraform
 Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプルな構成。
 
 ## 構成
 
-![Configuration](../../imgs/terraform_aws_vantiq_config.png)
+![Configuration](imgs/terraform_aws_vantiq_config.png)
 
-[Codeフォルダ](../../conf/terraform_aws)
 ```
 ├── env-dev
 │   ├── main.tf

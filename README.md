@@ -1,10 +1,10 @@
 ## Purpose
 This repository is for sharing set up steps of Vantiq product related features.
 
-- [Set up Vantiq External Lifecycle Management](docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
-- [Vantiq on AWS EKS with Terraform](docs/eng/terraform_aws.md)
-- [Vantiq on Azure AKS with Terraform](docs/eng/terraform_azure.md)
-- [Trouble Shooting Guide for Vantiq Cloud operations](docs/eng/vantiq_k8s_troubleshooting.md)
+- [Set up Vantiq External Lifecycle Management](vantiq-operations/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+- [Vantiq on AWS EKS with Terraform](terraform_aws/readme_en.md)
+- [Vantiq on Azure AKS with Terraform](terraform_azure/readme_en.md)
+- [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
 - TBD
 
 
@@ -12,9 +12,9 @@ This repository is for sharing set up steps of Vantiq product related features.
 
 このリポジトリは、Vantiq関連の手順メモを共有するものです。
 
-- [Vantiq External Lifecycle Managementの設定](docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
-- [Terraformを使ってAWS EKSを作成](docs/jp/terraform_aws.md)
-- [Terraformを使ってAzure AKSを作成](docs/jp/terraform_azure.md)
-- [Vantiq Cloud運用におけるトラブルシューティングガイド](docs/jp/vantiq_k8s_troubleshooting.md)
-- [サーバ間時刻同期確認ツール](docs/jp/timestamp_ds.md)
+- [Vantiq External Lifecycle Managementの設定](vantiq-operations/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+- [Terraformを使ってAWS EKSを作成](terraform_aws/readme.md)
+- [Terraformを使ってAzure AKSを作成](terraform_azure/readme.md)
+- [Vantiq Cloud運用におけるトラブルシューティングガイド](vantiq-operations/docs/jp/vantiq_k8s_troubleshooting.md)
+- [サーバ間時刻同期確認ツール](vantiq-operations/docs/jp/timestamp_ds.md)
 - おって投稿

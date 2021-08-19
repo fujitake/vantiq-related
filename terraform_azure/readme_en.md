@@ -3,9 +3,8 @@ The configuration of Azure Infrastructure to configure Vantiq Public facing Rriv
 
 ## Configuration
 
-![Configuration](../../imgs/terraform_azure_vantiq_config.png)
+![Configuration](imgs/terraform_azure_vantiq_config.png)
 
-[Code folder](../../conf/terraform_azure)
 ```
 ├── env-dev
 │   ├── main.tf
@@ -180,7 +179,7 @@ Go to the directory of each environment and execute the command.
 
 **Caution！ `env-prod` will cost a lot of money (more than $1800/month) because it consists of 11 servers for production. If you want to try it out, we recommend you to use `env-dev`, which consists of 4 servers for development.**
 
-![Workflow](../../imgs/Terraform_workflow.png)
+![Workflow](imgs/Terraform_workflow.png)
 
 - `terraform init` – Initialize. Configure the _tfstate_ backend and download the provider.
 - `terraform plan` -  Detect the changes between _tfstate_ and _.tf_
@@ -190,7 +189,7 @@ Go to the directory of each environment and execute the command.
 - `terraform import` – Bring configured resources outside terraform under _tfstate_ managed
 
 
-[Movie](../../imgs/vantiq_terraform_azure.mp4)
+[Movie](imgs/vantiq_terraform_azure.mp4)
 
 1. Initialize terraform（download necessary programs, etc.)  
   ```sh

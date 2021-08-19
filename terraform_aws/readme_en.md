@@ -3,9 +3,8 @@ The simplest configuration of AWS Infrastructure to configure Public facing Priv
 
 ## Configuration
 
-![Configuration](../../imgs/terraform_aws_vantiq_config.png)
+![Configuration](imgs/terraform_aws_vantiq_config.png)
 
-[Code folder](../../conf/terraform_aws)
 ```
 ├── env-dev
 │   ├── main.tf

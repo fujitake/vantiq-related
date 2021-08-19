@@ -32,7 +32,7 @@ ln /usr/sbin/stern_linux_amd64 /usr/sbin/stern
 
 ツールのDaemonSetをデプロイする。
 ```sh
-$ kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/conf/tools/timestamp_ds.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-operations/conf/tools/timestamp_ds.yaml
 
 $ kubectl get pods -n tools
 NAME              READY   STATUS    RESTARTS   AGE
@@ -95,5 +95,5 @@ timestamp-ldmmv timestamp Date is 2021-06-23T22:29:00.
 
 ツールのDaemonSetをアンデプロイする。
 ```sh
-$ kubectl delete -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/conf/tools/timestamp_ds.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-operations/conf/tools/timestamp_ds.yaml
 ```

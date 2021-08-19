@@ -1,11 +1,12 @@
+[English Version here](readme_en.md)
+
 # VANTIQ on AKS with Terraform
 Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 
 ## 構成
 
-![Configuration](../../imgs/terraform_azure_vantiq_config.png)
+![Configuration](imgs/terraform_azure_vantiq_config.png)
 
-[Codeフォルダ](../../conf/terraform_azure)
 ```
 ├── env-dev
 │   ├── main.tf
@@ -180,7 +181,7 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 
 **注意！ `env-prod`は本番向けで11台のサーバーで構成するため、多額（月額20万以上）の費用が発生します。お試しであれば、`env-dev`開発向け4台構成をお勧めします。**
 
-![Workflow](../../imgs/Terraform_workflow.png)
+![Workflow](imgs/Terraform_workflow.png)
 
 - `terraform init` – 初期化する.  tfstateのbackend設定、providerのダウンロードを行う
 - `terraform plan` -  tfstateと.tfの差分を算出する
@@ -190,7 +191,7 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 - `terraform import` – terraform外で構成済みのリソースをtfstate管理下に入れる
 
 
-[Movie](../../imgs/vantiq_terraform_azure.mp4)
+[Movie](imgs/vantiq_terraform_azure.mp4)
 
 1. terraform初期化（必要なプログラムのダウンロードなど）
   ```sh
