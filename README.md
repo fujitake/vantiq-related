@@ -5,7 +5,7 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [Vantiq on AWS EKS with Terraform](terraform_aws/readme_en.md)
 - [Vantiq on Azure AKS with Terraform](terraform_azure/readme_en.md)
 - [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
-- [Vantiq-1-day workshop](1-day-workshop/docs/en/readme.md)
+- [Vantiq-1-day workshop](1-day-workshop/docs/eng/readme.md)
 - TBD
 
 
