@@ -16,6 +16,7 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [Vantiq External Lifecycle Managementの設定](vantiq-operations/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [Terraformを使ってAWS EKSを作成](terraform_aws/readme.md)
 - [Terraformを使ってAzure AKSを作成](terraform_azure/readme.md)
+- [Vantiq Cloud構築における、保守およびトラブルシューティング](vantiq-operations/docs/jp/vantiq-install-maintenance.md)
 - [Vantiq Cloud運用におけるトラブルシューティングガイド](vantiq-operations/docs/jp/vantiq_k8s_troubleshooting.md)
 - [サーバ間時刻同期確認ツール](vantiq-operations/docs/jp/timestamp_ds.md)
 - [Vantiq 1-day workshop](1-day-workshop/docs/jp/readme.md)
