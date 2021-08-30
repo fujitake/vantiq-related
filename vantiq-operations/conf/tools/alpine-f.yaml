@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: "vantiqtools"
+  labels:
+    name: "vantiqtools"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-f
+  namespace: "vantiqtools"
+spec:
+  containers:
+  - name: alpine-f
+    image: docker.io/fujitake/alpine-f:1.0
+    command:
+      - sleep
+      - "3600"
+    imagePullPolicy: IfNotPresent
+  restartPolicy: Always
