@@ -126,6 +126,7 @@ The important configuration values are mainly the followings.
   ```
   - Since we will be using Bs family, ESv3 family, and FSv2 family, increase from the default value of 10. (30~50 is enough)
 
+- Secure VNET IP range. The range of subnets should be greater than /22.  In case of Production configuration, the cluster will have to occupy 30 IPs per node so 11 nodes cannot be accommodated in /24.
 
 
 ### Setting parameters
@@ -219,3 +220,6 @@ Go to the directory of each environment and execute the command.
   ```sh
   az aks get-credentials --resource-group {resouce group} --name {aks cluster name}
   ```
+
+## Reference
+  - [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)

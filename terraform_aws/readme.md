@@ -82,6 +82,8 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 - [このサイト](https://aws.amazon.com/jp/blogs/news/vcpu-based-on-demand-instance-limits-are-now-available-in-amazon-ec2/
 )を参考にアカウントで使用できるVCPUのクオータを緩和申請する。2020/06時点では、c5,r5,t3,m5といったインスタンスは「Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances」といった形でまとめられているため、必要数に応じて適用されている値からvcpuのクォータを挙げる。
 
+- 使用するVPCのIPを確保する。/22以上のサブネットが望ましい。Production構成だと1 nodeあたり30のIPをとるため、11 nodeの構成だと/24では足りない、またサブネットをPrivate, Public, azごと、と分けるため、ギリギリではない方が望ましい
+
 
 ### パラメータの設定
 各tfファイルにて、環境に応じてパラメータを設定する。
@@ -165,3 +167,6 @@ $ terraform destroy \
   -var 'access_key=<YOUR-AWS-ACCESS_KEY>' \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
 ```
+
+## Reference
+- [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)
