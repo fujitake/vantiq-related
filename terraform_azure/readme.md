@@ -129,6 +129,8 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
   - Bsファミリー、ESv3ファミリー、FSv2ファミリーあたりを使用するので、デフォルト値の10から増やす。 (30~50くらいあれば十分）
 
 
+- VNETのIPを確保する。/22以上のサブネットが望ましい。Production構成だと1 nodeあたり30のIPをとるため、11 nodeの構成だと/24では足りない、ギリギリではない方が望ましい。
+
 
 ### パラメータの設定
 各tfファイルにて、環境に応じてパラメータを設定する。
@@ -221,3 +223,6 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
   ```sh
   az aks get-credentials --resource-group {resouce group} --name {aks cluster name}
   ```
+
+## Reference
+- [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)

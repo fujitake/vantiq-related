@@ -20,3 +20,36 @@ AZ障害等で1台になると、読み込みしかできないので、書き�
 その結果 `503 Service Temporary Unavailable`となります。
 
 ![503error](../../imgs/mongodb/503error.png)
+
+
+
+## mongodb backup jobの削除のタイミング
+
+`mongodbbackup`のcronjobの中に、`successfulJobsHistoryLimit: 3`　が設定さている。
+
+```sh
+$ kubectl get cj -n internal mongobackup -o yaml
+```
+```yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  annotations:
+...
+schedule: '@daily'
+successfulJobsHistoryLimit: 3
+suspend: false
+```
+
+それにより、実行済みのJobは３世代以上は自動的に削除される。
+
+```sh
+$ kubectl get pods -n internal
+NAME                           READY   STATUS      RESTARTS   AGE
+metrics-collector-0            1/1     Running     6          81d
+mongobackup-1630195200-z8ztx   0/1     Completed   0          2d11h
+mongobackup-1630281600-q76jh   0/1     Completed   0          35h
+mongobackup-1630368000-f6wjk   0/1     Completed   0          11h
+mongodb-0                      2/2     Running     0          15d
+mongodb-1                      2/2     Running     0          15d
+```

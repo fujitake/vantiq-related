@@ -80,6 +80,7 @@ The important configuration paramters are as follows.
 - Refer to [this page written in Japanese](https://aws.amazon.com/jp/blogs/news/vcpu-based-on-demand-instance-limits-are-now-available-in-amazon-ec2/) to apply for increasing of the VCPU quota available for your account. As of June, 2020, instances such as c5, r5, t3, and m5 are grouped together as "Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances", so increase the vcpu quota from the value applied according to the required number.  
 \* For English, please refer to [this page.](https://docs.amazonaws.cn/en_us/AWSEC2/latest/WindowsGuide/ec2-on-demand-instances.html)
 
+- Secure VPC IP range. The range of subnets should be greater than /22.  In case of Production configuration, the cluster will have to occupy 30 IPs per node so 11 nodes cannot be accommodated in /24. Considering that subdivided public subnets, private subnets for each AZ are needed, securing ample IP ranges are crucial.
 
 ### Setting parameters
 In each _tf_ file, set the parameters according to the environment.
@@ -162,3 +163,6 @@ $ terraform destroy \
   -var 'access_key=<YOUR-AWS-ACCESS_KEY>' \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
 ```
+
+## Reference
+- [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)
