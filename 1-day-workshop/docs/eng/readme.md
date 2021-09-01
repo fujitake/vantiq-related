@@ -3,10 +3,10 @@
 ## Pump Failure Detection System
 
 Learn the basic functions of Vantiq through the implementation of a Pump Failure Detection System.
-* __Assuming features__
+* __Assumed Preset__
   * There are five pumps, each equipped with **a temperature sensor** and **a RPM sensor**.
-* __Functions to be implemented__
-  * A "Failure" is detected when the temperature is **200°C or higher** and the RPM is **4000 rpm or higher for 20 seconds**.
+* __Features to be implemented__
+  * A "Failure" is to be detected when the temperature is **200°C or higher** and the RPM is **4000 rpm or higher for 20 seconds**.
 
 ## Process flow of the Pump Failure Detection System
 
