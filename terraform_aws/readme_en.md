@@ -164,5 +164,13 @@ $ terraform destroy \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
 ```
 
+## Notes
+- If you are using Terraform 0.15 or later, `sensitive` attribute is required to output sensitive field such as password.
+```
+"keycloak-db-admin-password" {
+...
+  sensitive = true
+}
+
 ## Reference
 - [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)
