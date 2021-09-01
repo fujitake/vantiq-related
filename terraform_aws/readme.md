@@ -167,6 +167,14 @@ $ terraform destroy \
   -var 'access_key=<YOUR-AWS-ACCESS_KEY>' \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
 ```
+## Notes
+- Terraform 0.15以降を使用するう場合、password項目をoutputするためには明示的にsensitive属性が必要です。
+```
+"keycloak-db-admin-password" {
+...
+  sensitive = true
+}
+```
 
 ## Reference
 - [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)
