@@ -144,6 +144,101 @@
 
 # 保守作業
 
+### Minor Version Upgrade
+Minor Version Upgradeの場合、EnhancementのためのDB Schema拡張を伴うため、ダウンタイムが必要になる。
+1. 顧客のDTCにアップグレードに伴うサービス停止をアナウンスする。（顧客DTCはサービス停止による影響回避を社内で調整する）
+1. 最新のk8sdeploy_toolsに更新する。k8sdeploy_toolsのルートで`git pull`。
+1. `deploy.yaml`の変更を行う（`vantiq.image.tag`）。
+1. `cluster.properties`の`vantiq_system_release`をvantiqバージョンをサポートするものに変更する。バージョンアップに伴いその他のパラメータが変更が必要な場合もある。
+1. `cluster.properties`に変更があった場合、設定の更新を反映する。`./gradlew -Pcluster=<クラスタ名> setupCluster`
+1. Vantiq podのサービスを停止する。(`metrics-collector`と`vision-analytics`は構成している場合のみ)。ここからダウンタイムが開始する。
+    ```sh
+    kubectl scale sts -n <namespace name> vantiq --replicas=0
+    kubectl scale sts -n <namespace name> metrics-collector --replicas=0
+    kubectl scale sts -n <namespace name> vision-analytics --replicas=0
+    ```
+1. mongodbのバックアップをする。`job name`は任意。
+    ```sh
+    kubectl create job -n <namespace name> <job name> --from=CrobJob/mongobackup
+    # jobの監視
+    kubectl logs -n <namespace name> <mongobackup job pod name>
+    ```
+1. `deploy.yaml`の変更を適用する。 `./gradlew -Pcluster=<クラスタ名> deployVantiq` **Caution:** `deployVantiq`を行うとvantiq podのスケールが規定の数（=3)に戻るが、バージョンアップ適用中は **必ず1つのみ** にする必要があるため、直後にスケールを再変更する。その間、`metrics-collector`, `vision-analytics`は **必ず0である** こと。
+    ```sh
+    ./gradlew -Pcluster=<クラスタ名> deployVantiq
+    kubectl scale sts -n <namespace name> vantiq --replicas=1
+    kubectl scale sts -n <namespace name> metrics-collector --replicas=0
+    kubectl scale sts -n <namespace name> vision-analytics --replicas=0
+    ```
+1. スキーマ変更が正常に終了したか確認する。`kubectl logs -n <namespace name> vantiq-0 -c load-model -f`
+1. `vantiq-0` podが起動完了し、Vantiq IDEがログインできることを確認する。ここでダウンタイムが終了する。
+1. スケールを元に戻す。
+    ```sh
+    kubectl scale sts -n <namespace name> vantiq --replicas=3
+    kubectl scale sts -n <namespace name> metrics-collector --replicas=1
+    kubectl scale sts -n <namespace name> vision-analytics --replicas=2
+    ```
+1. アップグレード作業完了を報告する。Vantiq IDEにログイン -> 右上メニュのユーザーアイコン -> aboutをクリックし、Platformのバージョンをコピーする。例：
+    ```
+    Platform
+    Version 7.6h
+    サーバー https://internal.vantiqjp.com/ui/ide/index.html#!/modelo
+    Namespace 'system' で 'masanori' としてログインしました （システム管理者） （Namespace 管理者）
+    Login expires at Fri Sep 03 23:15:36 2021 (local time)
+
+    UI Build Version : 1.31.8
+    UI Build Commit : 937e25e9a8d63907124fb8366c146f926050f84c
+    UI Build Date : Sun Jun 06 22:22:36 UTC 2021
+
+    Server Build Version : 1.31.8
+    Server Build Commit : eaf73629834f8e3210d62740c573898de6702fce
+    Server Build Date : Sun Jun 06 22:24:11 UTC 2021
+
+    Server License Issued To : Vantiq JP
+    Server License Expiration Date: Thu Feb 24 2028 10:44:12 GMT+0900 (Japan Standard Time)
+    Server License ID: a1585c60-7578-11eb-8d98-acde48001122
+
+    ブラウザー : Chrome 92.0.4515.159
+    Useragent : Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36
+    ロケール: ja-*-*
+
+    ```
+
+
+### Patch Version Upgrade
+1. 最新のk8sdeploy_toolsに更新する。k8sdeploy_toolsのルートで`git pull`。
+1. `deploy.yaml`の変更を行う（`vantiq.image.tag`）。
+1. `cluster.properties`の`vantiq_system_release`をvantiqバージョンをサポートするものに変更する。バージョンアップに伴いその他のパラメータが変更が必要な場合もある。
+1. `cluster.properties`に変更があった場合、設定の更新を反映する。`./gradlew -Pcluster=<クラスタ名> setupCluster`
+1. `deploy.yaml`の変更を適用する。 `./gradlew -Pcluster=<クラスタ名> deployVantiq`
+1. `vantiq`のrolling updateが完了し、Vantiq IDEがログインできることを確認する。
+1. アップグレード作業完了を報告する。Vantiq IDEにログイン -> 右上メニュのユーザーアイコン -> aboutをクリックし、Platformのバージョンをコピーする。例：
+```
+Platform
+Version 7.6h
+サーバー https://internal.vantiqjp.com/ui/ide/index.html#!/modelo
+Namespace 'system' で 'masanori' としてログインしました （システム管理者） （Namespace 管理者）
+Login expires at Fri Sep 03 23:15:36 2021 (local time)
+
+UI Build Version : 1.31.8
+UI Build Commit : 937e25e9a8d63907124fb8366c146f926050f84c
+UI Build Date : Sun Jun 06 22:22:36 UTC 2021
+
+Server Build Version : 1.31.8
+Server Build Commit : eaf73629834f8e3210d62740c573898de6702fce
+Server Build Date : Sun Jun 06 22:24:11 UTC 2021
+
+Server License Issued To : Vantiq JP
+Server License Expiration Date: Thu Feb 24 2028 10:44:12 GMT+0900 (Japan Standard Time)
+Server License ID: a1585c60-7578-11eb-8d98-acde48001122
+
+ブラウザー : Chrome 92.0.4515.159
+Useragent : Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36
+ロケール: ja-*-*
+
+```
+
+
 ### SSL証明書を更新する
 SSL証明書が期限切れになると、ブラウザでアクセス時にエラーとなるが、このようになる前に計画的にSSL証明書を更新が必要である。
 ![Screen Shot 2021-08-30 at 23.04.52](../../imgs/vantiq-install-maintenance/ssl_expired_error.png)
@@ -157,6 +252,13 @@ SSL証明書が期限切れになると、ブラウザでアクセス時にエ�
 5. `./gradlew -Pcluster=<cluster name> deployVantiq`を実行する。
 6. ブラウザでアクセスし、証明書が変わっていることを確認する。
 
+### Licenseファイルを更新する
+
+1. Vantiq SupportからLicenseファイル(それぞれ、`public.pem`、`license.key`とする)を取得する。
+2. 取得したライセンスファイルを`targetCluster/deploy/sensitive`の下の該当するファイルと置き換える。
+3. k8sdeploy_toolsのルートで`./gradlew -Pcluster=<cluster name> generateSecrets`を実行する。
+4. `./gradlew -Pcluster=<cluster name> deployVantiq`を実行する。
+5. vantiq podのrolling restartをする。secretsを反映させるため。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 # トラブルシューティング
 
