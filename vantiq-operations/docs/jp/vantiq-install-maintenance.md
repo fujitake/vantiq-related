@@ -145,7 +145,8 @@
 # 保守作業
 
 ### Minor Version Upgrade
-Minor Version Upgradeの場合、EnhancementのためのDB Schema拡張を伴うため、ダウンタイムが必要になる。
+Minor Versionがインクレメントされるアップグレード（e.g. `1.30.10` -> `1.31.0`)
+EnhancementのためのDB Schema拡張を伴うため、ダウンタイムが必要になる。
 1. 顧客のDTCにアップグレードに伴うサービス停止をアナウンスする。（顧客DTCはサービス停止による影響回避を社内で調整する）
 1. 最新のk8sdeploy_toolsに更新する。k8sdeploy_toolsのルートで`git pull`。
 1. `deploy.yaml`の変更を行う（`vantiq.image.tag`）。
@@ -206,6 +207,8 @@ Minor Version Upgradeの場合、EnhancementのためのDB Schema拡張を伴う
 
 
 ### Patch Version Upgrade
+Patch Versionがインクレメントされるアップグレード（e.g. `1.30.10` -> `1.30.11`)
+DB Schema拡張を伴わないため、Vantiq Podのみの更新となる。
 1. 最新のk8sdeploy_toolsに更新する。k8sdeploy_toolsのルートで`git pull`。
 1. `deploy.yaml`の変更を行う（`vantiq.image.tag`）。
 1. `cluster.properties`の`vantiq_system_release`をvantiqバージョンをサポートするものに変更する。バージョンアップに伴いその他のパラメータが変更が必要な場合もある。
