@@ -22,4 +22,5 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [サーバ間時刻同期確認ツール](vantiq-operations/docs/jp/timestamp_ds.md)
 - [Vantiq 1-day workshop](1-day-workshop/docs/jp/readme.md)
 - [mongodb関連トピック](vantiq-operations/docs/jp/mongodb.md)
+- [Cloudサービスとの接続、構成](vantiq-external-services-integration/readme.md)
 - おって投稿
