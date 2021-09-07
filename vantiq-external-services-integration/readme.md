@@ -1,6 +1,6 @@
 
 ## 各Cloudサービス + Vantiqのシステム構成例
-- Vantiqはストリームデータに特化した複合イベント処理エンジンである。一般的な[ラムダアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/#lambda-architecture)、[カッパアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/#kappa-architecture)等のパターンにおいて、Speed Layerに位置付けられる。
+- Vantiqはストリームデータに特化した複合イベント処理エンジンである。一般的な[ラムダアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/#lambda-architecture)、[カッパアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/#kappa-architecture)等のパターンにおいて、Speed Layer（Hot Path）に位置付けられる。
 
 #### 参考
 - [ビッグ データ アーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/)
@@ -17,8 +17,8 @@
 
 #### AWSサービスとの統合
 - [Amazon MQ]()
-- [DynamoDB]()
-- [Amazon Managed Streaming For Kafka (MSK)]()
+- [DynamoDB](docs/jp/vantiq-aws-dynamodb.md)
+- [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
 
 
 ### Azure系のシステム構成例
