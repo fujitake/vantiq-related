@@ -15,7 +15,7 @@
 その2 (IoT Coreを構成)
 ![aws2](imgs/overall-architecture/aws2.png)
 
-#### AWSサービスとの統合
+#### VantiqとAWSサービスの接続
 - [Amazon MQ]()
 - [DynamoDB](docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
@@ -29,7 +29,7 @@
 ![azure2](imgs/overall-architecture/azure2.png)
 
 
-#### Azureサービスとの統合
+#### VantiqとAzureサービスの接続
 - [EventHubs]()
 
 #### 参考
@@ -39,9 +39,11 @@
 
 
 ### GCP系
+
+#### VantiqとGCPサービスの接続
 - [GCP Pub/Sub]()
 
-## その他の外部サービスとの接続例
+### その他の外部サービスとVantiqの接続
 - [REST API for Vantiq Topic (HTTPS, WebSocket)]()
 - [SendGrid]()
 - [Azure FaceAPI]()
