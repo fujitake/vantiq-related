@@ -10,23 +10,23 @@
 ### Examples of AWS-based System Configuration
 
 Part 1
-![aws1](imgs/overall-architecture/aws1.png)
+![aws1](imgs/overall-architecture/aws1_en.png)
 
 Part 2 (Configure IoT Core)
-![aws2](imgs/overall-architecture/aws2.png)
+![aws2](imgs/overall-architecture/aws2_en.png)
 
 #### Connect Vantiq to AWS Service
 - [Amazon MQ](docs/en/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/en/vantiq-aws-dynamodb.md)
-- [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
+- [Amazon Managed Streaming For Kafka (MSK)](docs/en/vantiq-aws-msk.md)
 
 
 ### Examples of Azure-based System Configuration
 Part 1
-![azure1](imgs/overall-architecture/azure1.png)
+![azure1](imgs/overall-architecture/azure1_en.png)
 
 Part 2 (Configure IoT Hub)
-![azure2](imgs/overall-architecture/azure2.png)
+![azure2](imgs/overall-architecture/azure2_en.png)
 
 
 #### Connect Vantiq to Azure Service
