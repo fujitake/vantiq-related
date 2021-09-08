@@ -9,10 +9,10 @@
 
 ### Examples of AWS-based System Configuration
 
-Part 1
+Part 1  
 ![aws1](imgs/overall-architecture/aws1_en.png)
 
-Part 2 (Configure IoT Core)
+Part 2 (Configure IoT Core)  
 ![aws2](imgs/overall-architecture/aws2_en.png)
 
 #### Connect Vantiq to AWS Service
@@ -22,10 +22,10 @@ Part 2 (Configure IoT Core)
 
 
 ### Examples of Azure-based System Configuration
-Part 1
+Part 1  
 ![azure1](imgs/overall-architecture/azure1_en.png)
 
-Part 2 (Configure IoT Hub)
+Part 2 (Configure IoT Hub)  
 ![azure2](imgs/overall-architecture/azure2_en.png)
 
 
