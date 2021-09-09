@@ -6,13 +6,6 @@
 ![integration_map](../../imgs/device-to-vantiq/integration_map.png)
 
 
-A(Device)
-B[Gateway]
-C[Vantiq Edge]
-D[Broker]
-E[Vantiq Cloud]
-F[IoT Core]
-
 ### Dataflow Patterns
 ゲートウェイからRESTでVantiq Topicに送るパターン。
 ```mermaid
