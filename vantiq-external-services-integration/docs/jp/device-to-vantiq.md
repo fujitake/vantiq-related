@@ -6,18 +6,76 @@
 ![integration_map](../../imgs/device-to-vantiq/integration_map.png)
 
 
-### Pattern 1
+A(Device)
+B[Gateway]
+C[Vantiq Edge]
+D[Broker]
+E[Vantiq Cloud]
+F[IoT Core]
+
+### Dataflow Patterns
+ゲートウェイからRESTでVantiq Topicに送るパターン。
 ```mermaid
 graph LR
+A(Device)
+B[Gateway]
+E[Vantiq Cloud]
 
-A(Start)
-
-A --> B[Look for an item]
-
-B --> C{Did you find it?}
-C -->|Yes| D(Stop looking)
-E -->|No| D
+A -->|PAN| B
+B -->|REST API| E
 ```
+ゲートウェイからMQTT Brokerを使うパターン。
+```mermaid
+graph LR
+A(Device)
+B[Gateway]
+D[Broker]
+E[Vantiq Cloud]
+
+A -->|PAN| B
+B -->|MQTT| D
+D -->|MQTT| E
+```
+IoT Core/ IoT Hubを使用するパターン。
+```mermaid
+graph LR
+A(Device)
+B[Gateway]
+D[Broker]
+E[Vantiq Cloud]
+F[IoT Core/IoT Hub]
+
+A -->|PAN| B
+B -->|MQTT| F
+F -->|Action| D
+D -->|MQTT/AMQP| E  
+```
+```mermaid
+graph LR
+A(Device)
+B[Gateway]
+D[Lambda]
+E[Vantiq Cloud]
+F[IoT Core/IoT Hub]
+
+A -->|PAN| B
+B -->|MQTT| F
+F -->|Action| D
+D -->|HTTPS REST| E  
+```
+Vantiq Edgeを使用するパターン。
+```mermaid
+graph LR
+A(Device)
+B[Gateway]
+C[Vantiq Edge]
+E[Vantiq Cloud]
+
+A -->|PAN| B
+B -->|REST API| C
+C -->|Invoke| E
+```
+
 
 ## Edge~Vantiq構成 データ連携 ガイドライン
 
