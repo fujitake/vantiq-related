@@ -179,3 +179,8 @@ cloudwatch-agent-zvkzk   1/1     Running   0          14s
     ]
 }
 ```
+
+### 費用
+Vantiq標準構成で使用した月額の目安 - 約$210
+- 457 metrics - $137
+- PutLogEvents 103GB - $72
