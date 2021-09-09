@@ -19,6 +19,7 @@
 - [Amazon MQ](docs/jp/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
+- [デバイスからVantiqまで](docs/jp/device-to-vantiq.md)
 
 
 ### Azure系のシステム構成例
@@ -31,6 +32,7 @@
 
 #### VantiqとAzureサービスの接続
 - [EventHubs](docs/jp/vantiq-azure-EventHubs.md)
+- [デバイスからVantiqまで](docs/jp/device-to-vantiq.md)
 
 #### 参考
 - [ビッグ データ アーキテクチャにおけるリアルタイム分析](https://docs.microsoft.com/ja-jp/azure/architecture/solution-ideas/articles/real-time-analytics)
@@ -44,6 +46,6 @@
 - [GCP Pub/Sub](docs/jp/vantiq-gcp-PubSub.md)
 
 ### その他の外部サービスとVantiqの接続
-- [REST API for Vantiq Topic (HTTPS, WebSocket)]()
+- [REST API for Vantiq Topic (HTTPS, WebSocket)](docs/jp/device-to-vantiq.md)
 - [SendGrid]()
 - [Azure FaceAPI]()
