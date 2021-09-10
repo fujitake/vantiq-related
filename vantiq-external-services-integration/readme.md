@@ -47,5 +47,5 @@
 
 ### その他の外部サービスとVantiqの接続
 - [REST API for Vantiq Topic (HTTPS, WebSocket)](https://github.com/fujitake/vantiq-related/tree/main/vantiq-external-services-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
-- [SendGrid]()
+- [SendGrid](docs/jp/vantiq-sendgrid.md)
 - [Azure FaceAPI]()
