@@ -46,6 +46,6 @@
 - [GCP Pub/Sub](docs/jp/vantiq-gcp-PubSub.md)
 
 ### その他の外部サービスとVantiqの接続
-- [REST API for Vantiq Topic (HTTPS, WebSocket)](docs/jp/device-to-vantiq.md)
+- [REST API for Vantiq Topic (HTTPS, WebSocket)](https://github.com/fujitake/vantiq-related/tree/main/vantiq-external-services-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
 - [SendGrid]()
 - [Azure FaceAPI]()
