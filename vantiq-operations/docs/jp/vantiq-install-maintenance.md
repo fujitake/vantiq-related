@@ -252,8 +252,9 @@ SSL証明書が期限切れになると、ブラウザでアクセス時にエ�
 2.  SSL証明書はすべての中間証明書を含む、フルチェーンであること。（すべての必要な中間照明書がオリジナルの証明書のファイルにアペンドされていること）
 3. 取得した証明書と秘密鍵(それぞれ、`fullchain.crt`、`private.key`とする)を`targetCluster/deploy/sensitive`の下の該当するファイルと置き換える。
 4. k8sdeploy_toolsのルートで`./gradlew -Pcluster=<cluster name> generateSecrets`を実行する。
-5. `./gradlew -Pcluster=<cluster name> deployVantiq`を実行する。
-6. ブラウザでアクセスし、証明書が変わっていることを確認する。
+5. `./gradlew -Pcluster=<cluster name> deployVantiq`を実行する。`vantiq-ssl-cert`が更新される。
+6. `./gradlew -Pcluster=<cluster name> deployNginx`を実行する。`-n shared default-ssl-cert`が更新される。
+7. ブラウザでアクセスし、証明書が変わっていることを確認する。
 
 ### Licenseファイルを更新する
 
