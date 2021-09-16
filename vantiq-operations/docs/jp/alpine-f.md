@@ -76,3 +76,12 @@ keycloak=> \l  # DBをリストする
 (5 rows)
 ```
 [PostgreSQLコマンドチートシート](https://qiita.com/Shitimi_613/items/bcd6a7f4134e6a8f0621)
+
+
+### Outbound通信時のGlobal IPを確認する
+つまり、Internet Gateway, NAT　GatewayのPublic IPアドレス
+```sh
+$ curl ifconfig.me
+```
+
+
