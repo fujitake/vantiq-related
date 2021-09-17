@@ -15,10 +15,10 @@ DynamoDBはpublicへのendpointを持たないため、API Gateway経由でア�
 
  
 ### DynamoDBの構成
-テーブルを作成を作成する。APIの汎用的利用を考慮し、以下のキーを設定する。
+テーブルを作成する。APIの汎用的利用を考慮し、以下のキーを設定する。
 - パーティションキー = id
 - ソートキー = timestamp
-![Picture1](../../imgs/vantiq-aws-dynamodb/Picture1.png)
+![Picture1](../../imgs/vantiq-aws-dynamodb/picture1.png)
 
 ### テーブルグループを作成（オプション）
 管理を容易にするため、テーブルグループをアプリ単位等で作成し、テーブルをグループに追加しておく。これは
