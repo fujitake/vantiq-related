@@ -6,7 +6,6 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [Vantiq on Azure AKS with Terraform](terraform_azure/readme_en.md)
 - [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
 - [Vantiq-1-day workshop](1-day-workshop/docs/eng/readme.md)
-- TBD
 
 
 ## 目的
@@ -23,4 +22,4 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [Vantiq 1-day workshop](1-day-workshop/docs/jp/readme.md)
 - [mongodb関連トピック](vantiq-operations/docs/jp/mongodb.md)
 - [Cloudサービスとの接続、構成](vantiq-external-services-integration/readme.md)
-- おって投稿
+- [サーバ証明書用CSR作成手順](vantiq-operations/docs/jp/prepare_csr4rsasslcert.md)
