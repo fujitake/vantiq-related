@@ -29,3 +29,4 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [閉域網構成における考慮事項 (Azure編)](vantiq-operations/docs/jp/vantiq-install-closed-network-azure.md)
 - [Vantiq Cloudwatch Logs](vantiq-operations/docs/jp/vantiq-cloudwatch.md)
 - おって投稿
+
