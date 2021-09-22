@@ -12,8 +12,8 @@
   - [確認画面の表示](#confirm)
   - [メール転送のテスト](#sendemail)
   - [転送方法の選択](#select)
-  - [トラッキングの無効化](#disablet)
   - [SMTP Relay でメールの転送を確認する](#smtp)
+  - [トラッキングの無効化](#disablet)
   - [メールの送受信を確認](#checksr)
 - [Vantiq IDEの設定](#vantiq-ide)
   - [GenericEmailSenderの設定](#genericemailsender)
@@ -73,10 +73,10 @@
 |From Name|転送元の姓名|
 |From Email Address|転送元のメール アドレス|
 |Reply To|返信先のメール アドレス|
-|Companyy Address|会社の住所|
+|Company Address|会社の住所|
 |City|市区町村|
-|Country|Japan(+81)|
-|Nicname|ニックネーム|
+|Country|Japan|
+|Nickname|ニックネーム|
 <img src="../../imgs/vantiq-sendgrid/sender.JPG">
 - 全て入力後「Create」ボタンをクリック
 
@@ -85,7 +85,7 @@
 - 「Create」ボタンをクリック後、確認メールを受信
 <img src="../../imgs/vantiq-sendgrid/confirm.JPG">
 
-- 「Verify Single Sernder」をクリック
+- 「Verify Single Sender」をクリック
 - 2 way 認証の画面が表示されるのでメッセージ通りに進める
 
 <h3 id="confirm">1.7. 確認画面の表示</h3>
@@ -116,14 +116,14 @@
 |I've updated my settings|チェックボックスにチェックを入れる|
 <img src="../../imgs/vantiq-sendgrid/smtprelay.JPG">
 
-- 全て入力した跡「Next: Verify Integration」ボタンをクリック
+- 全て入力した後「Next: Verify Integration」ボタンをクリック
 - このままではトラッキングするように URL が書き換えられるので、これを無効にする
 
 <h3 id="disablet">1.11. トラッキングの無効化</h3>
 
 - 上記の作業から画面遷移した画面を残しておきたいので、以下の作業は別タブにて行う。
 - 左のメールから Settings>Tracking を選択（下 左図）
-- Open Tracking, Click Tracking の両方とも Disabled に変更（下 右図）
+- Open Tracking, Click Tracking の両方とも Disabled に変更 (下 右図)
 
 |メニュー選択|設定項目|
 ---|---
@@ -131,7 +131,7 @@
 
 <h3 id="checksr">1.12. メールの送受信を確認</h3>
 
-- 一旦上記の作業まで終了したらメールが転送できるかどうかを [Vantiq IDE](#vantiq) を用いてチェックする。
+- 一旦上記の作業まで終了したらメールが転送できるかどうかを [Vantiq IDE](#vantiq-ide) を用いてチェックする。
 - 動作確認を終えたらこの画面に戻ってくること
 <img src="../../imgs/vantiq-sendgrid/smtprelay2.JPG">
 
@@ -160,7 +160,7 @@ Namespace への招待を発行するのに使われるGenericEmailSenderの設�
 |password|コピーしておいた API KEY の値|
 |passwordType|string|
 |from|管理者のメール アドレス|
-<img src="../../imgs/gesender.JPG">
+<img src="../../imgs/vantiq-sendgrid/gesender.JPG">
 
 - 動作確認: Namespace への invite を用いて動作確認をする
 - 以下の項目を書き込む
