@@ -46,10 +46,10 @@ $ curl -visk https://internal.vantiqjp.com
 * ALPN, offering http/1.1
 * successfully set certificate verify locations:
 ```
-`-v` - 詳細表示
-`-i` - Http Response Header, Bodyの確認
-`-s` - Responseの結果だけを確認する。
-`-k` - SSL認証をスキップする。自己証明書のサイトなど。
+`-v` - 詳細表示  
+`-i` - Http Response Header、Bodyの確認  
+`-s` - Responseの結果だけを確認する。  
+`-k` - SSL認証をスキップする。自己証明書のサイトなど。  
 
 
 
@@ -79,9 +79,7 @@ keycloak=> \l  # DBをリストする
 
 
 ### Outbound通信時のGlobal IPを確認する
-つまり、Internet Gateway, NAT　GatewayのPublic IPアドレス
+つまり、Internet Gateway、NAT Gateway の Public IP アドレス
 ```sh
 $ curl ifconfig.me
 ```
-
-

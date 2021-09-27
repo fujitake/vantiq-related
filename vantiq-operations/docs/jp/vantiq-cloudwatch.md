@@ -3,7 +3,7 @@
 本セクションでは、[CloudWatch Logs へログを送信する DaemonSet として Fluent Bit を設定する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-logs-FluentBit.html)に従い、EKSクラスタ上のVantiqを含むコンテナログや、メトリクスをCloudWatchに出力する手順を説明します。
 
 #### ワーカーノードのIAMロールにCloudWatchAgentServerPolicyポリシーをアタッチする。
-[前提条件の確認する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html)の「ワーカーノードの IAM ロールに必要なポリシーをアタッチするには」を参照する。
+[前提条件を確認する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html)の「ワーカーノードの IAM ロールに必要なポリシーをアタッチするには」を参照する。
 
 #### amazon-cloudwatch namespaceを作成
 
@@ -83,7 +83,7 @@ default            1         31m
 fluent-bit         1         25m
 ```
 
-#### CoudWatchエージェントのConfigMapを作成する
+#### CloudWatchエージェントのConfigMapを作成する
 
 Configmapのテンプレートをダウンロードする
 ```sh
@@ -150,7 +150,7 @@ cloudwatch-agent-zvkzk   1/1     Running   0          14s
 
 ### ログを確認するためのIAM権限設定
 
-ユーザーとしてVantiq関連のリソースの出力されたログをCloudWatchの今コンソールで確認するためには、以下の権限が必要である。
+ユーザーとしてVantiq関連のリソースの出力されたログをCloudWatchのコンソールで確認するためには、以下の権限が必要である。
 ```json
 {
     "Version": "2012-10-17",
