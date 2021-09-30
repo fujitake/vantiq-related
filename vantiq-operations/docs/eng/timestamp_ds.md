@@ -1,10 +1,10 @@
 # timestamp_ds.yaml
 
-Tool to check if the time is synchronized between servers.
+Tool to check if the time is synchronized across servers.
 
 
 ## Related errors
-The authentication process between the vantiq server and the keycloak server may cause errors due to some causes (time synchronization service is not available) or circumstances.
+The authentication process between the vantiq server and the keycloak server may fail due to some causes (server clock is not synchronized) or other circumstances.
 
 #### Examples of errors
 
