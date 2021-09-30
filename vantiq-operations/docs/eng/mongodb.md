@@ -6,7 +6,7 @@
 At least two of the three mirrored configuration servers need to be up and running.
 
 ### Details
-MongoDBs in the Vantiq are the three-server mirror configuration, and the breakdown is the following.  
+MongoDBs in the Vantiq are the three-server mirror configuration, and its configuration details are the following.  
 
 - Three servers are up and running: Primary + Secondary + Secondary
 - Two servers are up and running: Primary + Secondary
@@ -17,7 +17,7 @@ If the servers become single due to AZ failure etc., it will be able to read onl
 
 ![timeout_error](../../imgs/mongodb/timeout_error.png)
 
-After a few minutes, the Vantiq pod is unable to write regularly (I guess) and the Container of the Pod itself is no longer `Ready`.  
+After a few minutes, as the Vantiq pod is no longer able to do the regular write access, the container of the pod itself turns into NOT Ready`.  
 As a result, it gets `503 Service Temporary Unavailable`.  
 
 ![503error](../../imgs/mongodb/503error.png)
@@ -42,7 +42,7 @@ successfulJobsHistoryLimit: 3
 suspend: false
 ```
 
-With it, executed jobs that are more than three generations old will be automatically deleted.  
+With that, completed jobs older than three generations will be automatically deleted.  
 
 ```sh
 $ kubectl get pods -n internal
