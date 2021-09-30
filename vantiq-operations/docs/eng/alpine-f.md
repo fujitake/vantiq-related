@@ -7,7 +7,7 @@ Deploy with the following command.
 $ kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-operations/conf/tools/alpine-f.yaml
 ```
 
-Get into the alpine-f shell.
+Enter the alpine-f shell.
 ```sh
 $ kubectl exec -n vantiqtools -it alpine-f -- ash
 
