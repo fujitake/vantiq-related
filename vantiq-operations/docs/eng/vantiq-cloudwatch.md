@@ -1,19 +1,19 @@
 # Vantiq Cloudwatch Logs
 
-本セクションでは、[CloudWatch Logs へログを送信する DaemonSet として Fluent Bit を設定する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-logs-FluentBit.html)に従い、EKSクラスタ上のVantiqを含むコンテナログや、メトリクスをCloudWatchに出力する手順を説明します。
+In this section, it will explain the procedures to output container logs and metrics including Vantiq on the EKS cluster to CloudWatch by following [Set up Fluent Bit as a DaemonSet to send logs to CloudWatch Logs](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-logs-FluentBit.html).  
 
-#### ワーカーノードのIAMロールにCloudWatchAgentServerPolicyポリシーをアタッチする。
-[前提条件を確認する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html)の「ワーカーノードの IAM ロールに必要なポリシーをアタッチするには」を参照する。
+#### Attach a policy to the IAM role of worker nodes
+Please refer to "Attaching a policy to the IAM role of your worker nodes" in [Verify prerequisites](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-prerequisites.html).  
 
-#### amazon-cloudwatch namespaceを作成
+#### Create "amazon-cloudwatch" namespace
 
-`amazon-cloudwatch` という名前の名前空間がまだない場合は、次のコマンドを入力して作成します。
+If no namespace named `amazon-cloudwatch` exists yet, create one by entering the following command.  
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cloudwatch-namespace.yaml
 ```
 
-#### fluent-bit-cluster-info Configmapを作成する
-次のコマンドを実行して、クラスター名とログを送信するリージョンを持つ `cluster-info` という名前の ConfigMap を作成します。`cluster-name` と `cluster-region` をクラスターの名前とリージョンに置き換えます。
+#### Create "fluent-bit-cluster-info" Configmap
+Run the following command to create a ConfigMap named `cluster-info` with the cluster name and the Region to logs to send. Replace `cluster-name` and `cluster-region` with the cluster's name and Region.  
 ```sh
 ClusterName=<cluster-name>
 RegionName=<cluster-region>
@@ -30,12 +30,12 @@ kubectl create configmap fluent-bit-cluster-info \
 --from-literal=logs.region=${RegionName} -n amazon-cloudwatch
 ```
 
-#### FluentBit最適化設定でDaemonSetをデプロイする
+#### Deploy the DaemonSet with Fluent Bit optimized configuration
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/fluent-bit/fluent-bit.yaml
 ```
 
-#### デプロイされていることを確認
+#### Validate the deployment
 ```sh
 $ kubectl get pods -n amazon-cloudwatch
 NAME               READY   STATUS    RESTARTS   AGE
@@ -51,30 +51,30 @@ fluent-bit-l2wk5   1/1     Running   0          20s
 fluent-bit-qkmvc   1/1     Running   0          20s
 ```
 
-#### ロググループが作成されていることを確認する。
+#### Check the log groups are created
 
 ![pic1](../../imgs/vantiq-cloudwatch/pic1.png)
 
-Application（Pod）のコンテナのログ
+Application (Pod) container logs  
 
 ![pic2](../../imgs/vantiq-cloudwatch/pic2.png)
 
-ワーカーノードのログ
+Worker nodes logs  
 
 ![pic3](../../imgs/vantiq-cloudwatch/pic3.png)
 
 
 # Vantiq Cloudwatch Metrics
 
-本セクションでは、[クラスターメトリクスを収集するよう CloudWatch エージェントをセットアップする](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-metrics.html)に従い、EKSクラスタ上のVantiqを含むコンテナのメトリクスをCloudWatchに出力する手順を説明します。
+In this section, it will explain the procedures to output the metrics of containers including Vantiq on the EKS cluster to CloudWatch by following [Set up the CloudWatch agent to collect cluster metrics](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Container-Insights-setup-metrics.html).  
 
 
-#### CloudWatchエージェントのサービスアカウントを作成する
+#### Create a service account for the CloudWatch agent
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/cwagent-serviceaccount.yaml
 ```
 
-####  サービスアカウントを確認する
+####  Check the service account
 ```sh
 $ kubectl get sa -n amazon-cloudwatch
 NAME               SECRETS   AGE
@@ -83,14 +83,14 @@ default            1         31m
 fluent-bit         1         25m
 ```
 
-#### CloudWatchエージェントのConfigMapを作成する
+#### Create a ConfigMap for the CloudWatch agent
 
-Configmapのテンプレートをダウンロードする
+Download the ConfigMap template
 ```sh
 curl -O https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/cwagent-configmap.yaml
 ```
 
-テンプレートを編集する。`cluster_name`を実際のクラスタ名に置換する。
+Edit the downloaded template. Replace `cluster_name` with the actual cluster name. 　
 ```sh
 # create configmap for cwagent config
 apiVersion: v1
@@ -115,17 +115,17 @@ metadata:
   namespace: amazon-cloudwatch
 ```
 
-#### ConfigMapをデプロイする
+#### Deploy the ConfigMap
 ```sh
 kubectl apply -f cwagent-configmap.yaml
 ```
 
-#### DaemonSetをデプロイする
+#### Deploy the DaemonSet
 ```sh
 kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch-container-insights/latest/k8s-deployment-manifest-templates/deployment-mode/daemonset/container-insights-monitoring/cwagent/cwagent-daemonset.yaml
 ```
 
-#### デプロイされていることを確認
+#### Validate the deployment
 ```sh
 $ kubectl get pods -n amazon-cloudwatch
 NAME                     READY   STATUS    RESTARTS   AGE
@@ -141,16 +141,16 @@ cloudwatch-agent-zm5ps   1/1     Running   0          14s
 cloudwatch-agent-zvkzk   1/1     Running   0          14s
 ```
 
-#### ロググループが作成されていることを確認する
+#### Check the log groups are created
 
 ![pic4](../../imgs/vantiq-cloudwatch/pic4.png)
 
 ![pic5](../../imgs/vantiq-cloudwatch/pic5.png)
 
 
-### ログを確認するためのIAM権限設定
+### Configure the IAM permissions to check logs
 
-ユーザーとしてVantiq関連のリソースの出力されたログをCloudWatchのコンソールで確認するためには、以下の権限が必要である。
+In order to check the output logs of Vantiq-related resources in the CloudWatch console as a user, the following permissions are required.  
 ```json
 {
     "Version": "2012-10-17",
@@ -180,7 +180,7 @@ cloudwatch-agent-zvkzk   1/1     Running   0          14s
 }
 ```
 
-### 費用
-Vantiq標準構成で使用した月額の目安 - 約$210
+### Costs
+Estimated monthly cost using Vantiq standard configuration - Approximately $210
 - 457 metrics - $137
 - PutLogEvents 103GB - $72
