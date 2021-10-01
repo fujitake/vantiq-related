@@ -1,3 +1,4 @@
+[English Version](readm_en.md)
 
 ## 各Cloudサービス + Vantiqのシステム構成例
 - Vantiqはストリームデータに特化した複合イベント処理エンジンである。一般的な[ラムダアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/#lambda-architecture)、[カッパアーキテクチャ](https://docs.microsoft.com/ja-jp/azure/architecture/data-guide/big-data/#kappa-architecture)等のパターンにおいて、Speed Layer（Hot Path）に位置付けられる。
