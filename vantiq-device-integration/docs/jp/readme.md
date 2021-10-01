@@ -3,7 +3,7 @@
 
 ## Edge ~ Vantiq 構成パターン/Integration Map
 
-![integration_map](../vantiq-device-integration/imgs/device-to-vantiq/integration_map.png)
+![integration_map](../../imgs/device-to-vantiq/integration_map.png)
 
 
 ### Dataflow Patterns
