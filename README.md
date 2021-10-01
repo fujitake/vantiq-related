@@ -1,19 +1,10 @@
 ## Purpose (under construction)
 This repository is for sharing set up steps of Vantiq product related features.
 
-[Vantiq 1-day Workshop]  
+[Training courses]   
 - [Vantiq 1-day workshop](1-day-workshop/docs/eng/readme.md)  
 
-[terraform_aws]
-- [Vantiq on AWS EKS with Terraform](terraform_aws/readme_en.md)
-
-[terraform_azure]
-- [Vantiq on Azure AKS with Terraform](terraform_azure/readme_en.md)
-
-[vantiq-external-services-integration]
-- [Connection and configuration with Cloud services](vantiq-external-services-integration/readme_en.md)
-
-[vantiq-operations]
+[[Vantiq Platform Operation]](vantiq-operations)
 - [Set up Vantiq External Lifecycle Management](vantiq-operations/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
 - [Network Configuration Debugging Tool](vantiq-operations/docs/eng/alpine-f.md)
@@ -21,6 +12,19 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [MongoDB related topics](vantiq-operations/docs/eng/mongodb.md)
 - [Procedure for generating CSR for server certificate](vantiq-operations/docs/eng/prepare_csr4rsasslcert.md)
 - [AWS permissions required to manage Vantiq](vantiq-operations/docs/eng/aws_op_priviliges.md)
+- [Vantiq on AWS EKS with Terraform](vantiq-operations/terraform_aws/readme_en.md)
+- [Vantiq on Azure AKS with Terraform](vantiq-operations/terraform_azure/readme_en.md)
+
+[[Integrating Vantiq with Devices]](vantiq-device-integration)
+- [From Devices to the Vantiq](vantiq-device-integration/docs/en/readme.md)
+
+[[Integrating Vantiq with External Services]](vantiq-external-services-integration)
+- [Amazon MQ](vantiq-external-services-integration/docs/en/vantiq-aws-AmazonMQ.md)
+- [DynamoDB](vantiq-external-services-integration/docs/en/vantiq-aws-dynamodb.md)
+- [Amazon Managed Streaming For Kafka (MSK)](vantiq-external-services-integration/docs/en/vantiq-aws-msk.md)
+- [EventHubs](vantiq-external-services-integration/docs/en/vantiq-azure-EventHubs.md)
+- [GCP Pub/Sub](vantiq-external-services-integration/docs/en/vantiq-gcp-PubSub.md)
+- [SendGrid](vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)
 - [Considerations for Closed Network Configuration (AWS)](vantiq-operations/docs/eng/vantiq-install-closed-network-aws.md)
 - [Considerations for Closed Network Configuration (Azure)](vantiq-operations/docs/eng/vantiq-install-closed-network-azure.md)
 - [Vantiq Cloudwatch Logs](vantiq-operations/docs/eng/vantiq-cloudwatch.md)
@@ -48,7 +52,7 @@ This repository is for sharing set up steps of Vantiq product related features.
 [[Vantiq とデバイスの連携]](vantiq-device-integration)
 - [デバイスから Vantq まで](vantiq-device-integration/docs/jp/readme.md)
 
-[[Vantiqと外部サービスとの連携]](vantiq-external-services-integration)
+[[Vantiq と外部サービスとの連携]](vantiq-external-services-integration)
 - [Amazon MQ](vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
