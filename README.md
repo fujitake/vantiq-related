@@ -1,4 +1,6 @@
-## Purpose (under construction)
+_(Japanese follows English)_
+
+## Purpose
 This repository is for sharing set up steps of Vantiq product related features.
 
 [Training courses]   
