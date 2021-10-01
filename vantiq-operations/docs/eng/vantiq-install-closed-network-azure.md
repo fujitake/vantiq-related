@@ -7,7 +7,7 @@ When creating a Load Balancer in a Closed Network, it is necessary to consider t
 - The Load Balancer must be configured as an internal Load Balancer and not have a Public IP.  
 - The Load Balancer must be connected to the intended subnet and can be managed by the NSG.  
 
-For AKS, add the annotations to `nginx.controller.service` property in the `deploy.yaml`. If necessary, it is possible to specify Subnet and IP with the annotation. [Use an internal load balancer with Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/internal-lb). The following is an example of placing a Load Balancer on a subnet with a specified name.  
+For AKS, add the annotations to `nginx.controller.service` property in the `deploy.yaml`. If necessary, it is possible to specify Subnet and IP with the annotation. [Use an internal load balancer with Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/internal-lb). The following is an example of placing a Load Balancer on a subnet of the specified name.  
 
 ```yaml
 nginx:
