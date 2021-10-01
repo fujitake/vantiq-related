@@ -22,7 +22,7 @@ nginx:
 ```
 
 ### Configure Security Group
-Configure it to restrict access from the Internet. Also, since the LoadBalancer does not perform SNAT, it is necessary to set the same permissions on the AKS worker nodes as the NSG set on the LoadBalancer. This means that if the Load Balancer and the AKS worker nodes are on different Subnets, the same settings should be made on each Subnet.
+Configure it to restrict access from the Internet. Also, since the LoadBalancer does not perform SNAT, it is necessary to set the same permission rules on the AKS worker nodes as that set on the LoadBalancer. This means that if the Load Balancer and the AKS worker nodes are on different Subnets, the same settings should be done on each Subnet.
 
 ![azure-nsg-aks](../../imgs/vantiq-install-closed-network-azure/azure-nsg-aks.png)
 
