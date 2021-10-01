@@ -237,7 +237,7 @@ An important thing to note, Azure Provided DNS (196.63.129.16) refers to the Pri
 ## Internet Gateway
 For a Closed Networks, it is necessary to consider restricting Outbound connections to the Internet.  
 
-#### Do not restrict Outbound
+#### In case the outbound is not to be restricted
 Configure a NAT Gateway and attach it to the subnet where the AKS Worker Nodes are located.
 
 #### Restrict Outbound
