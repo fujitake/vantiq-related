@@ -20,7 +20,7 @@
 - [Amazon MQ](docs/jp/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
-- [デバイスからVantiqまで](docs/jp/device-to-vantiq.md)
+- [デバイスからVantiqまで](../vantiq-device-integration/docs/jp/readme.md)
 
 
 ### Azure系のシステム構成例
