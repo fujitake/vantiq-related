@@ -32,7 +32,8 @@ Part 2 (Configure IoT Hub)
 
 
 #### Connect Vantiq to Azure Service
-- [EventHubs](docs/en/vantiq-azure-EventHubs.md)
+- [EventHubs](docs/en/vantiq-azure-EventHubs.md)  
+- [From Devices to the Vantq](../vantiq-device-integration/docs/en/readme.md)
 
 #### References
 - [Real Time Analytics on Big Data Architecture](https://docs.microsoft.com/en-us/azure/architecture/solution-ideas/articles/real-time-analytics)
@@ -46,6 +47,6 @@ Part 2 (Configure IoT Hub)
 - [GCP Pub/Sub](docs/en/vantiq-gcp-PubSub.md)
 
 ### Connect other External Services to Vantiq
-- [REST API for Vantiq Topic (HTTPS, WebSocket)]()
-- [SendGrid]()
+- [REST API for Vantiq Topic (HTTPS, WebSocket)](https://github.com/fujitake/vantiq-related/tree/main/vantiq-external-services-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
+- [SendGrid](docs/en/vantiq-sendgrid.md)
 - [Azure FaceAPI]()
