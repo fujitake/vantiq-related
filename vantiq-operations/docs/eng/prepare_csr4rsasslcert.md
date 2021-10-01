@@ -81,4 +81,4 @@ Certificate Request:
 
 ## Remarks
 
-The procedure is different from this one when using Elliptic Curve Digital Signature Algorithm (ECDSA) instead of RSA cryptography. Please check with a Certification Authority that can issue Server Certificates.
+The procedure would be different if you want to use Elliptic Curve Digital Signature Algorithm (ECDSA) instead of RSA cryptography. Please check with a Certification Authority that can issue Server Certificates.
