@@ -20,7 +20,7 @@ Part 2 (Configure IoT Core)
 - [Amazon MQ](docs/en/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/en/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/en/vantiq-aws-msk.md)
-- [From Devices to the Vantq](vantiq-device-integration/docs/en/readme.md)
+- [From Devices to the Vantq](../vantiq-device-integration/docs/en/readme.md)
 
 
 ### Examples of Azure-based System Configuration
