@@ -3,7 +3,7 @@ This article describes the data integration patterns from sensors/devices to the
 
 ## Edge - Vantiq configuration patterns/Integration Map
 
-![integration_map](../../vantiq-device-integration/imgs/device-to-vantiq/integration_map.png)
+![integration_map](../../imgs/device-to-vantiq/integration_map.png)
 
 
 ### Dataflow Patterns
@@ -109,16 +109,16 @@ Cloud IoT Service | <ul><li>Security is the highest.</li></ul> | <ul><li>Develop
     - MQTT Broker – Simple and fast, and supports QoS=0, 1
     - AMQP Broker – Transmits more reliably
 
-![decision_tree](../../vantiq-device-integration/imgs/device-to-vantiq/decision_tree.png)
+![decision_tree](../../imgs/device-to-vantiq/decision_tree.png)
 
 ## Samples of connectors
-- [Python Code](../../vantiq-device-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
+- [Python Code](../../conf/vantiq-restapi-mqtt-amqp-python-sample)
   - HTTPS REST API (Python)
   - WebSocket API (Python)
   - MQTT Publish (Python)
   - AMQP Publish (Python)
 
-- [Vantiq Project](../../vantiq-device-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+- [Vantiq Project](../../conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
   - MQTT Source
   - AMQP Source
   - Topic – Websocket subscribe
