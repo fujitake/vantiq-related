@@ -60,7 +60,7 @@ A challenge password []:{password}
 
 ## How to confirm
 
-It is possible to check the contents of the CSR that have already been created with the following command.  
+Use the following command to check the contents of the CSR that have already been created.  
 
 ```sh:
 openssl req -in wildcard.domain.csr -text
