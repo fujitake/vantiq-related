@@ -109,16 +109,16 @@ Cloud IoT Service | <ul><li>セキュリティが最も高い。</li></ul> | <ul
     - MQTT Broker – シンプルで高速、QoS=0, 1をサポートする
     - AMQP Broker – より信頼性の高い伝送を行う
 
-![decision_tree](../../vantiq-device-integration/imgs/device-to-vantiq/decision_tree.png)
+![decision_tree](../../imgs/device-to-vantiq/decision_tree.png)
 
 ## コネクターのサンプル
-- [Python Code](../../vantiq-device-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
+- [Python Code](../../conf/vantiq-restapi-mqtt-amqp-python-sample)
   - HTTPS REST API (Python)
   - WebSocket API (Python)
   - MQTT Publish (Python)
   - AMQP Publish (Python)
 
-- [Vantiq Project](../../vantiq-device-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+- [Vantiq Project](../../conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
   - MQTT Source
   - AMQP Source
   - Topic – Websocket subscribe
