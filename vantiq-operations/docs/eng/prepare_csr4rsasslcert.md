@@ -1,6 +1,6 @@
 ## Introduction
 
-This is the procedure for generating a CSR (Certificate Signing Request) to apply for an SSL Server Certificate (RSA).  
+This is an instruction for generating a CSR (Certificate Signing Request) to apply for an SSL Server Certificate (RSA).  
 
 The following is a common procedure, and it may differ depending on the intended use. Please contact a Certification Authority for details.
 
