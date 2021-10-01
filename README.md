@@ -33,7 +33,7 @@ This repository is for sharing set up steps of Vantiq product related features.
 [Training courses]  
 - [Vantiq 1-day workshop](1-day-workshop/docs/jp/readme.md)  
 
-[Vantiq Platform Operation](vantiq-operations)
+[[Vantiq Platform Operation]](vantiq-operations)
 - [Vantiq External Lifecycle Management の設定](vantiq-operations/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [Vantiq Cloud 構築における、保守およびトラブルシューティング](vantiq-operations/docs/jp/vantiq-install-maintenance.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](vantiq-operations/docs/jp/vantiq_k8s_troubleshooting.md)
@@ -45,10 +45,10 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [Terraform を使って AWS EKS を作成](vantiq-operations/terraform_aws/readme.md)  
 - [Terraform を使って Azure AKS を作成](vantiq-operations/terraform_azure/readme.md)  
 
-[Vantiq とデバイスの連携](vantiq-device-integration)
+[[Vantiq とデバイスの連携]](vantiq-device-integration)
 - [デバイスから Vantq まで](vantiq-device-integration/docs/jp/readme.md)
 
-[Vantiqと外部サービスとの連携](vantiq-external-services-integration)
+[[Vantiqと外部サービスとの連携]](vantiq-external-services-integration)
 - [Amazon MQ](vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
@@ -57,5 +57,4 @@ This repository is for sharing set up steps of Vantiq product related features.
 - [SendGrid](vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
 - [閉域網構成における考慮事項 (AWS編)](vantiq-operations/docs/jp/vantiq-install-closed-network-aws.md)
 - [閉域網構成における考慮事項 (Azure編)](vantiq-operations/docs/jp/vantiq-install-closed-network-azure.md)
-- [Vantiq Cloudwatch Logs](vantiq-operations/docs/jp/vantiq-cloudwatch.md)
--
+- [Vantiq Cloudwatch Logs](vantiq-operations/docs/jp/vantiq-cloudwatch.md)  
