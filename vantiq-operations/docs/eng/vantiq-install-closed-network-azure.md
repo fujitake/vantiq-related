@@ -27,7 +27,7 @@ Configure it to restrict access from the Internet. Also, since the LoadBalancer 
 ![azure-nsg-aks](../../imgs/vantiq-install-closed-network-azure/azure-nsg-aks.png)
 
 ## Configure Private Endpoint
-AKS, Storage and Azure Database for PostgreSQL are configured as public services respectively by default, so they will not be able to be accessed from the Closed Network. Therefore, it is necessary to configure each service as Private. The followings need to be considered.  
+AKS, Storage and Azure Database for PostgreSQL are configured as public services by default, so they will not be able to be accessed from the Closed Network. Therefore, it is necessary to explicitly configure each service as Private. The followings need to be considered.  
 - When configured as private, [the IP is numbered in the specified subnet](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview#private-endpoint-properties). As this IP is indefinite each time it is configured, DNS registration is required to ensure that the application can refer to it.
 - Create a Private DNS Zone and register the FQDN. In Azure Portal, by setting it to Private, it is automatically configured, whereas in terraform, it is necessary to create each resource individually. The followings are samples of terraform scripts.
 
