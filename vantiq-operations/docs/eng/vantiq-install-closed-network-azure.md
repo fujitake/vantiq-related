@@ -240,7 +240,7 @@ For a Closed Networks, it is necessary to consider restricting Outbound connecti
 #### In case the outbound is not to be restricted
 Configure a NAT Gateway and attach it to the subnet where the AKS Worker Nodes are located.
 
-#### Restrict Outbound
+#### In case the outbound is to be restricted
 Consider using a service such as Azure Firewall. With the Azure Firewall, it is possible to restrict traffic on the FQDN of the connection destination.
 Configure the route table so that Outbound traffic routes to the Azure Firewall, and attach it to the subnet where the AKS Worker Nodes are located.
 
