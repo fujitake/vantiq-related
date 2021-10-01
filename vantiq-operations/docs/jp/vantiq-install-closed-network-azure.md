@@ -243,13 +243,13 @@ resource "azurerm_private_dns_zone_virtual_network_link" "pdnslk-a-postgres" {
 ![azure-nsg-aks](../../imgs/vantiq-install-closed-network-azure/dns-config-option2.png)
 
 #### 参考
-- https://docs.microsoft.com/ja-jp/azure/virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances#name-resolution-that-uses-your-own-dns-server
-- https://docs.microsoft.com/ja-jp/azure/private-link/private-endpoint-dns
-- https://docs.microsoft.com/ja-jp/azure/aks/concepts-network
+- [独自の DNS サーバーを使用する名前解決](https://docs.microsoft.com/ja-jp/azure/virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances#name-resolution-that-uses-your-own-dns-server)
+- [Azure プライベート エンドポイントの DNS 構成](https://docs.microsoft.com/ja-jp/azure/private-link/private-endpoint-dns)
+- [チュートリアル: Azure Kubernetes Service (AKS) でのアプリケーションに対するネットワークの概念](https://docs.microsoft.com/ja-jp/azure/aks/concepts-network)
 
 
 ## Internet Gateway
-閉域網の場合、InternetへのOutbound接続を制限を検討する。
+閉域網の場合、InternetへのOutbound接続の制限を検討する。
 
 #### Outboundを制限しない場合
 NAT Gatewayを構成し、AKSワーカーノードが配置されているサブネットにアタッチする。
