@@ -223,7 +223,7 @@ An important thing to note, Azure Provided DNS (196.63.129.16) refers to the Pri
 #### Option 2: Configure a Public DNS Zone
 
 1. Attach the Private DNS Zone to the VNET where the AKS Worker Nodes are hosted.
-1. Specify the DNS server of the VNET where the AKS Worker Nodes are located as the default (Azure Provided DNS).  
+1. Specify the default DNS server (Azure Provided DNS) of the VNET where the AKS Worker Nodes are located.  
 1. Register the DNS that is required for cross-referencing with other than the Vantiq infrastructure, in the Public DNS Zone.  
 
 ![azure-nsg-aks](../../imgs/vantiq-install-closed-network-azure/dns-config-option2.png)
