@@ -210,7 +210,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "pdnslk-a-postgres" {
 ## Information about Custom DNS server
 
 Depending on customer requirements, Customer DNS server could be selected. It should be considered that the names resolving in the Private DNS Zone can also be resolved in the Custom DNS server configuration.
-As a premise, Azure Provided DNS (196.63.129.16) refers to the Private DNS Zone attached to the VNET in question, and queries the higher (Public) DNS if it is unable to resolve.
+An important thing to note, Azure Provided DNS (196.63.129.16) refers to the Private DNS Zone attached to its VNET, and if unable to resolve then queries the higher (Public) DNS.
 
 #### Option 1: Use a DNS Forwarder with a Custom DNS Server
 
