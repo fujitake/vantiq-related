@@ -65,6 +65,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * Unwind  
 * Smooth  
 * Procedure  
+* VAIL
 * Filter  
 * AccumulateState
 
@@ -467,7 +468,7 @@ return event
 
 * VAILで自由に処理を記述することができる
 * Procedureを別途用意する必要はなく、タスクのプロパティに直接VAILを記述できる
-* `event.value`が入出力データの中身に当たる部分
+* `event.value`が入出力データの中身に当たる部分となる
 
 ![VAIL](../../imgs/02_AppBuilder/vail_01.png)
 
