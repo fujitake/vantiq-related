@@ -5,7 +5,7 @@ This article describes the data integration patterns from sensors/devices to the
 
 ## Edge - Vantiq configuration patterns/Integration Map
 
-![integration_map](../../imgs/device-to-vantiq/integration_map.png)
+![integration_map](./imgs/device-to-vantiq/integration_map.png)
 
 
 ### Dataflow Patterns

@@ -73,7 +73,7 @@ C -->|Invoke| E
 
 ## ガイドライン / Guideline
 - [Edge~Vantiq構成 データ連携 ガイドライン](./docs/jp/device-to-vantiq.md)
-- [Edge - Vantiq configuration Data integration Guideline](./docs/en/device-to-vantiq.md)
+- [Edge - Vantiq configuration Data integration Guideline](./docs/eng/device-to-vantiq.md)
 
 
 ## コネクターのテンプレート / Connector Template
