@@ -42,7 +42,7 @@
 - これを右クリックして Administrator として実行する
 <img src="../../imgs/fluentd/admin.jpg" width="50%%">
 
-- Vantiq で動作確認を可能にするため Output 用の Pluging (http-ext) を導入する
+- Vantiq で動作確認を可能にするため Output 用の Plugin (http-ext) を導入する
 - ログ ファイル出力用に nginx を用いる
 - 以下のコマンドを入力
 ```
