@@ -4,4 +4,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 
-（TODO: English)
+# Vantiq Application Development related
+Guides and learning materials for developing and operating Vantiq Applications.
+- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
+- [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
