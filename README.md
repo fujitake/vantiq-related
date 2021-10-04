@@ -25,10 +25,10 @@ Guides and procedures for building and operating the Vantiq Platform.
 
 ### [Vantiq Application Development related](./vantiq-apps-development)
 Guides and learning materials for developing and operating Vantiq Applications.
-- [Vantiq-1-day workshop](1-day-workshop/docs/eng/readme.md)
-- [Set up Vantiq External Lifecycle Management](vantiq-operations/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
+- [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
-### [Vantiq with External Services Integration](./vantiq-external-services-integration/readme.md)
+### [Vantiq with External Services Integration](./vantiq-external-services-integration/readme_en.md)
 Guides and procedures for integrating Vantiq with cloud web services, brokers, and database services.  
 - [Amazon MQ](./vantiq-external-services-integration/docs/en/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/en/vantiq-aws-dynamodb.md)
