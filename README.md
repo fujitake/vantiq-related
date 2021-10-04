@@ -14,8 +14,6 @@ This repository is for sharing various technical guidance and instructions of Va
 
 このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
 
-![vantiq-technology-stack](./vantiq-technology-stack.png)
-
 ### [Vantiqのクラウドインフラ関連](./vantiq-cloud-infra-operations)
 Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
 
