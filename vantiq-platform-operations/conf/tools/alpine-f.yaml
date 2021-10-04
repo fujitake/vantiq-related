@@ -13,9 +13,6 @@ metadata:
 spec:
   containers:
   - name: alpine-f
-    image: docker.io/fujitake/alpine-f:1.0
-    command:
-      - sleep
-      - "3600"
-    imagePullPolicy: IfNotPresent
-  restartPolicy: Always
+    image: quay.io/fujitake/alpine-f:1.3
+    stdin: true
+    tty: true
