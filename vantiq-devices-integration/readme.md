@@ -84,6 +84,7 @@ C -->|Invoke| E
   - MQTT Subscribe
   - AMQP Publish
 - [fluentd](./docs/jp/fluentd.md) - デバイスが取得したメトリクスデータをフラットファイル形式でログファイル等に出力している場合に使用
+- [fluentd](./docs/eng/fluentd.md) - It is used when the metrics data acquired by the device is output in flat file format to a log file, etc.
 
 ## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
-- オムロン環境センサー / Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01
+- [オムロン環境センサー](./conf/omron-env-sensor-sample) / [Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md) 
