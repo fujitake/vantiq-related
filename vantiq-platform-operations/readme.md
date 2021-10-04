@@ -10,7 +10,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [Vantiq Cloudwatch Logs](./docs/jp/vantiq-cloudwatch.md)
 
 
-#Vantiq Platform related
+# Vantiq Platform related
 Guides and procedures for building and operating the Vantiq Platform.
 
 - [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
