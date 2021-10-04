@@ -8,7 +8,7 @@
 ![integration_map](./imgs/device-to-vantiq/integration_map.png)
 
 
-### Dataflow Patterns
+## Dataflow Patterns
 ゲートウェイからRESTでVantiq Topicに送るパターン。
 ```mermaid
 graph LR
@@ -71,24 +71,19 @@ B -->|REST API| C
 C -->|Invoke| E
 ```
 
-### ガイドライン / Guideline
+## ガイドライン / Guideline
 - [Edge~Vantiq構成 データ連携 ガイドライン](./docs/jp/device-to-vantiq.md)
 - [Edge - Vantiq configuration Data integration Guideline](./docs/en/device-to-vantiq.md)
 
 
-### コネクターのテンプレート / Connector Template
-- [Python Code](./conf/vantiq-restapi-mqtt-amqp-python-sample)
-  - HTTPS REST API (Python)
-  - WebSocket API (Python)
-  - MQTT Publish (Python)
-  - AMQP Publish (Python)
+## コネクターのテンプレート / Connector Template
+- [Python Code](./conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+  - HTTPS REST API
+  - WebSocket API
+  - MQTT Publish
+  - MQTT Subscribe
+  - AMQP Publish
+- [fluentd](./docs/jp/fluentd.md) - デバイスが取得したメトリクスデータをフラットファイル形式でログファイル等に出力している場合に使用
 
-- [Vantiq Project](./conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
-  - MQTT Source
-  - AMQP Source
-  - Topic – Websocket subscribe
-  - Topic – Websocket publish
-  - Topic - REST
-
-### デバイスの接続サンプルコード / Device Integration Sample Code
+## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
 - オムロン環境センサー / Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01

@@ -10,3 +10,12 @@ Sample code that can be used to interact with Vantiq from external system or dev
 Sample code that can be used to interact with Brokers from external system or devices.
 - `amqp-publish.py` - sample code to interact with Azure EventHubs via AMQP protocol
 - `mqtt-publish.py`- sample code to interact with Amazon MQ via MQTT protocol
+
+
+### Vantiq Side implementation Sample to Ingest from Above Data Sources
+- [Vantiq Project](./conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+  - MQTT Source
+  - AMQP Source
+  - Topic – Websocket subscribe
+  - Topic – Websocket publish
+  - Topic - REST
