@@ -4,7 +4,7 @@ It is possible to integrate the metrics data acquired by the device into Vantiq 
 ## How to configure Fluentd
 
 - Assuming **Windows 10, Linux (Ubuntu 20.04)** as OS
-- Use Vantiq as a method to verify operation (receive Topics)
+- Use Vantiq as a method to verify operation (receive Topic)
 - An example of transforming a flat file (nginx log) using regular expressions  
 ## Table Of Contents
 - [Install Fluentd (Windows 10)](#instf)
@@ -103,7 +103,7 @@ fluentd -c etc\td-agent\td-agent.conf
 
 - Confirm that it is possible to access the nginx site and receive its access log.
 
-|Topics|Received data|
+|Topic|Received data|
 ---|---
 |<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskvent.jpg">|
 
@@ -180,7 +180,7 @@ sudo bin/fluentd -c share/td-agent.conf
 
 - Confirm that it is possible to access the nginx site and receive its access log.  
 
-|Topics|Received data|
+|Topic|Received data|
 ---|---
 |<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskevent-ubnt.jpg">|
 
