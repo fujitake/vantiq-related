@@ -39,22 +39,22 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 
 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
-Vantiqアプリケーションの開発や運用に関するガイドやマテリアルです。
+Vantiqアプリケーションの開発や運用に関するガイドや学習マテリアルです。
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration/readme.md)
 VantiqとクラウドWebサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
 - [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
-- [DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
+- [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
-- [EventHubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
+- [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
 - [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
 - [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
 
 
 ### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
-VantiqとクラウドWebサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
+Vantiqとデバイスを連携させるガイドラインやサンプルコードです。
 - [Edge~Vantiq構成 データ連携 ガイドライン](./vantiq-devices-integration/docs/jp/device-to-vantiq.md)
 - コネクターサンプル
   - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)

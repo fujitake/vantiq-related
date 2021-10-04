@@ -43,8 +43,6 @@ AWSのサービス（S3, RDS, EKS, ECR)のエンドポイントはデフォル�
   - `api.ecr.ap-northeast-1.amazonaws.com`
   - EKSのエンドポイント(`ap-northeast-1.eks.amazonaws.com`), RDSのエンドポイント(`ap-northeast-1.rds.amazonaws.com`)は構築の設定でprivateで解決できるようになっているはずだが、念の為VPC内から nslookup 確認をしておくこと。
 
-過去のPowerpointから持ってくる
-
 ## Proxyサーバーの利用について
 Proxyを設定する場合、ProxyへのアクセスはDNS解決より前に行われる。つまり、何もしないとPrivate EndpointのDNS解決が、DNSサーバー上で行われてしまう。（参考：https://milestone-of-se.nesuke.com/nw-basic/grasp-nw/proxy/)
 
