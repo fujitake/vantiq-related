@@ -106,7 +106,7 @@ fluentd -c etc\td-agent\td-agent.conf
 
 |Topics|受信データ|
 ---|---
-|<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/tskvent.jpg">|
+|<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskvent.jpg">|
 
 <h2 id="instubnt">2. Fluentd のインストール（Ubuntu 20.04）</h2>
 
@@ -183,7 +183,7 @@ sudo bin/fluentd -c share/td-agent.conf
 
 |Topics|受信データ|
 ---|---
-|<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/tskevent-ubnt.jpg">|
+|<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskevent-ubnt.jpg">|
 
 <h2 id="regexp">3. 正規表現を用いてログを集計する（Vantiq IDE）</h2>
 ここでは、VantiqのTopicで受け取ったイベントデータの整形について説明します。
