@@ -58,7 +58,7 @@ ren etc\td-agent\td-agent.conf etc\td-agent\td-agent.conf.org
 - 適当なエディタで **etc\td-agent\td-agent.conf** ファイルを作成し以下の内容をコピペする
 - ちなみにこの設定は、以下の内容を想定している
 
-|項目|内容を|
+|項目|内容|
 ---|---
 |①: Vantiq Topic 名|Vantiq側でイベントを受信するTopicのリソースURL。<br /> 以下の例は`jp.co.vantiq.fluentd`に相当する。|
 |②: Access Token|VantiqのターゲットのNamespaceで発行したAccess Token|
@@ -134,7 +134,7 @@ sudo td-agent-gem install fluent-plugin-out-http-ext
 - 適当なエディタで **/opt/td-agent/td-agent.conf** ファイルを作成し以下の内容をコピペする
 - ちなみにこの設定は、以下の内容を想定している
 
-|項目|内容を|
+|項目|内容|
 ---|---
 |①: Vantiq Topic 名|Vantiq側でイベントを受信するTopicのリソースURL。<br /> 以下の例は`jp.co.vantiq.fluentd`に相当する。|
 |②: Access Token|VantiqのターゲットのNamespaceで発行したAccess Token|
