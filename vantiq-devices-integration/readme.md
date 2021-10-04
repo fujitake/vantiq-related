@@ -86,4 +86,4 @@ C -->|Invoke| E
 - [fluentd](./docs/jp/fluentd.md) - デバイスが取得したメトリクスデータをフラットファイル形式でログファイル等に出力している場合に使用
 
 ## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
-- オムロン環境センサー / Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01
+- [オムロン環境センサー](./conf/omron-env-sensor-sample) / Omron Environment Sensor 2JCIE-BU01, 2JCIE-BL01
