@@ -54,7 +54,7 @@
     * Can do simple filtering, or can be flexible decision making by configuring `Procedure` as threshold.
   * `AccumulateState`
     * Since events received one after another can be tracked and counted, depending on how the `Procedure` is described, it can be implemented with a high flexibility, such as calculation using the number of events received in a certain period of time.
-  * `Statistics`
+  * `Statistics`/`ComputeStatistics`
     * Can compute the statistics processes of events.
   * `SplitByGroup`
     * Can split streams by groups.    
