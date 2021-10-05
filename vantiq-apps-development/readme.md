@@ -6,5 +6,5 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 
 # Vantiq Application Development related
 Guides and learning materials for developing and operating Vantiq Applications.
-- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
-- [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+- [Vantiq 1-day workshop](./1-day-workshop/docs/eng/readme.md)
+- [Set up Vantiq External Lifecycle Management](./docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
