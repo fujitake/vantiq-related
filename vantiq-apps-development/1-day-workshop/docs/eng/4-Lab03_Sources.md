@@ -107,3 +107,8 @@ Now there should be elements like the following image in the project. Please rev
 
 -   The Topic (MQTT Broker's Topic) set in `TempMQTT` and `RPMSMQTT` should be the Topic for Temperature and for RPM respectively.     
     ✔︎   If there are any mistakes, errors will occur in future steps.
+
+## Vantiq 1-day Workshop; Next Session    
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|5| Introduction to App Builder| Lecture|  |15| [02_AppBuilder](5-02_AppBuilder.md)|  

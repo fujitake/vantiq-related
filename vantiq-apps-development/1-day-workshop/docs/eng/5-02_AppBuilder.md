@@ -608,3 +608,8 @@ return lastEvent
   - [4.4: VAIL](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-4-vail-master/)
   - [4.5: VAIL Procedures](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-5-vail-procedures-master/)
   - [4.6: VAIL Rules](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-6-vail-rules-master/)
+
+## Vantiq 1-day Workshop; Next Session    
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|6|App Builder|Lab|Create the processing logic for received events|45|[Lab04_AppBuilder](6-Lab04_AppBuilder.md)|  
