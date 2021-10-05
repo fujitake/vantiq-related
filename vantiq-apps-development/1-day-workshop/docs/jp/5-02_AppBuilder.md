@@ -61,10 +61,11 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * SplitByGroup  
 * Dwell  
 * SaveToType  
-* Statistics  
+* ComputeStatistics    
 * Unwind  
-* Smooth  
-* Procedure  
+* Smooth
+* Procedure   
+* VAIL    
 * Filter  
 * AccumulateState
 
@@ -310,35 +311,58 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * Type にイベントを保存・更新する
 * 更新させる場合は `Upsert` 設定を行う
 
-## Statistics
+## ComputeStatistics
 
-* タスクを通過するイベントに含まれる 1つのプロパティの統計を行う
-* カウント、最小値、最大値、中央値、平均値、標準偏差を出力する
+* タスクを通過するイベントに含まれる 1つのプロパティの統計を行う  
+* 統計処理はメモリ上で行われ、タスクの出力としては入力されたイベントがそのまま出力される  
+* 統計内容を取得するには、自動生成される統計内容へのアクセス用Procedureを使用する  
+* 統計の項目はイベント数、最小値、最大値、中央値、平均値、標準偏差  
 
-![Statistics](../../imgs/02_AppBuilder/slide20.png)
+![Statistics](../../imgs/02_AppBuilder/computestatistics_01.png)
 
 ① 入力となる前のタスクの出力  
 ```
 {
-   "RPMSSensorID": "rpmsSensor2",
-   "Time": "2020-03-19T06:48:19.218Z",
-   "RPMS": 3265,
-   "PumpID": "pumpId2"
+  "TempSensorID": "tempSensor2",
+  "Time": "2021-10-04T06:48:19.218Z",
+  "Temp": 211,
+  "PumpID": "pumpId2"
 }
-```
-***この例では PumpID ごとに RPMS の統計を取っています。***  
-***＊ `Statistics` の前には `SplitByGroup` を使う必要があります。***  
+```  
 
-② `Statistics` の出力  
+
+② `ComputeStatistics` の出力（①の内容と同じ）    
 ```
 {
-   "count": 34,                           # カウント
-   "mean": 3505.294117647059,             # 平均
-   "min": 3042,                           # 最小値
-   "max": 3997,                           # 最大値
-   "median": 3463,                        # 中央値
-   "stdDeviation": 264.82567501314435,    # 標準偏差
-   "ars_groupKey": "pumpId2"
+  "TempSensorID": "tempSensor2",
+  "Time": "2021-10-04T06:48:19.218Z",
+  "Temp": 211,
+  "PumpID": "pumpId2"
+}
+```
+
+③統計内容へのアクセス用Procedure
+
+* <タスク名>StateGet、<タスク名>StateReset、<タスク名>StateGetUpdateというProcedureが自動で生成される
+* 統計内容の取得には任意の場所のVAILコード（Procedure内、Rule内、Transformタスクなど）から、<タスク名>StateGetを実行する
+* 事前に「SplitByGroup」を使っている場合、統計内容はパーティションごとに保持されるため実行時の引数に「partitionKey」が必要となり、この値にはSplitByGroupの「groupBy」プロパティで使用した値を入力する
+* 使用していない場合はグローバルとなる
+
+
+![ComputeStatisticsの自動生成Procedure](../../imgs/02_AppBuilder/computestatistics_02.png)
+
+
+④<タスク名>StateGetの実行結果
+
+***この例では Tempの統計を取っています。***  
+```
+{
+   "count": 2,                           # カウント
+   "mean": 211.5,                        # 平均
+   "min": 211,                           # 最小値
+   "max": 212,                           # 最大値
+   "median": 211.5,                      # 中央値
+   "stdDeviation": 0.7071067811865476    # 標準偏差
 }
 ```
 
@@ -437,6 +461,47 @@ return event
 ```
 {
   "value": 2
+}
+```
+
+## VAIL
+
+* VAILで自由に処理を記述することができる
+* Procedureを別途用意する必要はなく、タスクのプロパティに直接VAILを記述できる
+* `event.value`が入出力データの中身に当たる部分となる
+
+![VAIL](../../imgs/02_AppBuilder/vail_01.png)
+
+① 入力となる前のタスクの出力  
+```
+{
+   "TempSensorID": "tempSensor2",
+   "Time": "2021-10-04T06:48:19.218Z",
+   "Temp": 211,
+   "PumpID": "pumpId2"
+}
+```
+
+② VAILの内容（例）
+```
+# Tempに「℃」を追加
+event.value.Temp = event.value.Temp + "℃"
+
+# Timeを削除
+deleteKey(event.value, "Time")
+
+# CurrentTimeを追加
+event.value.CurrentTime = now()
+
+```
+
+③ VAILの出力  
+```
+{
+   "TempSensorID": "tempSensor2",
+👉 "Temp": "211℃",
+   "PumpID": "pumpId2",
+👉 "CurrentTime": "2021-10-04T03:54:21.783Z"
 }
 ```
 
