@@ -61,10 +61,11 @@ _＊ Error list can also be displayed via Test > Errors > Run Query_
 * SplitByGroup  
 * Dwell  
 * SaveToType  
-* Statistics  
+* ComputeStatistics  
 * Unwind  
 * Smooth  
 * Procedure  
+* VAIL  
 * Filter  
 * AccumulateState
 
@@ -276,7 +277,7 @@ Output of `Transformation`
 ## SplitByGroup
 
 * Split the stream by groups.
-* Used prior to activities that need to be handled by a specific group (not by event), such as `Dwell`, `Statistics`.
+* Used prior to activities that need to be handled by a specific group (not by event), such as `Dwell`, `ComputeStatistics`.
 * By splitting the stream, the resources used are distributed, and therefore load balancing is achieved.
 
 ![SplitByGroup](../../imgs/02_AppBuilder/slide17.png)
@@ -310,35 +311,57 @@ Output of `Transformation`
 * Save or update events to Type.
 * Use `Upsert` configuration for updating.
 
-## Statistics
+## ComputeStatistics
 
 * Compute statistics for a single property contained of events that pass through the task.
-* Output count, minimum, maximum, median, mean, and standard deviation.
+* The statistical processing is done in memory, and as the output of the task, the input events are output as is.
+* To get the statistics, use the Procedure for accessing the automatically generated statistics.
+* Statistics items are the number of events, minimum, maximum, median, mean, and standard deviation.
 
-![Statistics](../../imgs/02_AppBuilder/slide20.png)
+![ComputeStatistics](../../imgs/02_AppBuilder/computestatistics_01.png)
 
 ① Output of the previous task which will be the input.  
 ```
 {
-   "RPMSSensorID": "rpmsSensor2",
-   "Time": "2020-03-19T06:48:19.218Z",
-   "RPMS": 3265,
+   "TempSensorID": "tempSensor2",
+   "Time": "2021-10-04T06:48:19.218Z",
+   "Temp": 211,
    "PumpID": "pumpId2"
 }
 ```
-***In this example, get the RPMS statistics for each PumpID.***  
-***＊ When using `Statistics`, it is required to use `SplitByGroup` in advance.***  
 
-② Output of `Statistics`  
+② Output of `ComputeStatistics` (the same as in ①).
 ```
 {
-   "count": 34,                           # Count
-   "mean": 3505.294117647059,             # Mean
-   "min": 3042,                           # Minimum
-   "max": 3997,                           # Maximum
-   "median": 3463,                        # Median
-   "stdDeviation": 264.82567501314435,    # Standard Deviation
-   "ars_groupKey": "pumpId2"
+   "TempSensorID": "tempSensor2",
+   "Time": "2021-10-04T06:48:19.218Z",
+   "Temp": 211,
+   "PumpID": "pumpId2"
+}
+```
+
+③ Procedure for access to statistics.  
+
+* Procedures called <task name>StateGet, <task name>StateReset, and <task name>StateGetUpdate are generated automatically.
+* To get the statistics, run <task name>StateGet from the VAIL code (in Procedure, Rule, Transform task, etc.) which is in any location.
+* If using "SplitByGroup" beforehand, the statistics will be kept for each partition, so "partitionKey" is required as an argument at runtime, and the value which was entered in the "groupBy" property of SplitByGroup should be entered for this value.  
+* If not using "SplitByGroup", it will be global.
+
+
+![Automatic generation Procedure for ComputeStatistics](../../imgs/02_AppBuilder/computestatistics_02.png)
+
+
+④ Execution result of <task name> StateGet.
+
+***In this example, take the statistics for Temp.***  
+```
+{
+   "count": 2,                           # Count
+   "mean": 211.5,                        # Mean
+   "min": 211,                           # Minimum
+   "max": 212,                           # Maximum
+   "median": 211.5,                      # Median
+   "stdDeviation": 0.7071067811865476,   # Standard Deviations
 }
 ```
 
@@ -417,7 +440,7 @@ Output of `Transformation`
 ## Procedure
 
 * Use this when you want to use a process in App Builder that is not in the built-in Activity Patterns.
-* It is possible to call and use self-made Procedure (VAIL program).
+* It is possible to call and use self-made Procedure (VAIL code).
 
 ![Procedure](../../imgs/02_AppBuilder/slide24.png)
 
@@ -427,7 +450,7 @@ Output of `Transformation`
   "value": 1
 }
 ```
-② Self-made Procedure calling  
+② Self-made Procedure calling (e.g.)  
 ```
 PROCEDURE myProcedure(event)
 event.value += 1
@@ -437,6 +460,46 @@ return event
 ```
 {
   "value": 2
+}
+```
+
+## VAIL
+
+* VAIL allows to describe the process freely.  
+* Not necessary to prepare Procedure separately, it is possible to describe VAIL directly in task property.  
+* `event.value` is the part that corresponds to the content of input/output data.  
+
+![VAIL](../../imgs/02_AppBuilder/vail_01.png)
+
+① Output of the previous task which will be the input.    
+```
+{
+   "TempSensorID": "tempSensor2",
+   "Time": "2021-10-04T06:48:19.218Z",
+   "Temp": 211,
+   "PumpID": "pumpId2"
+}
+```
+
+② Contents of VAIL (e.g.)
+```
+# Add "℃" to "Temp"
+event.value.Temp = event.value.Temp + "℃"
+
+# Delete "Time"
+deleteKey(event.value, "Time")
+
+# Add "CurrentTime"
+event.value.CurrentTime = now()
+```
+
+③ Output of VAIL  
+```
+{
+   "TempSensorID": "tempSensor2",
+👉 "Temp": "211℃",
+   "PumpID": "pumpId2",
+👉 "CurrentTime": "2021-10-04T03:54:21.783Z"
 }
 ```
 
