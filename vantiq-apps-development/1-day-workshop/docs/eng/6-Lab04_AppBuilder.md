@@ -95,7 +95,7 @@ Combine the events of two streams with **Join**.
 
 Modify the event with **Transformation**.
 
-1. Drag and drop "`Transform`" from the "Modifiers" in the Activity Pattern list to overlap the `JoinEvents` Task. Then set the name.   
+1. Drag and drop "`Transformation`" from the "Modifiers" in the Activity Pattern list to overlap the `JoinEvents` Task. Then set the name.   
     1.  Name: _TransformEvent_
 
 2. Configure the settings as followings.    
@@ -168,7 +168,7 @@ At this point, the project graph and App should have the elements shown in the i
 
 * Resource graph
 
-|![Resource graph](../../imgs/Lab04/image13.png)|
+|![Resource graph](../../imgs/Lab04/image13new.png)|
 |-----------------------------------------------|
 
 * PumpFailureDetection
