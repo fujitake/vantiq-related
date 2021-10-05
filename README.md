@@ -2,8 +2,6 @@
 ## Purpose
 This repository is for sharing various technical guidance and instructions of Vantiq product.
 
-![vantiq-technology-stack](./vantiq-technology-stack.png)
-
 ### [Vantiq Cloud Infrastructure related](./vantiq-cloud-infra-operations)
 Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
 - [Vantiq on AWS EKS with Terraform](./vantiq-cloud-infra-operations/terraform_aws/readme_en.md)
@@ -51,8 +49,6 @@ Guidelines and sample code for integrating Vantiq with devices.
 ## 目的
 
 このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
-
-![vantiq-technology-stack](./vantiq-technology-stack.png)
 
 ### [Vantiqのクラウドインフラ関連](./vantiq-cloud-infra-operations)
 Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
