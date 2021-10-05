@@ -43,7 +43,7 @@
 
 DataGenerator URL: **<https://dev.vantiq.co.jp/ui/rtc/index.html?run=TrainingDataGeneratorClient>**
 
-6. _Save_ ボタンをクリックし、Source を保存します。
+6. _変更の保存_ ボタンをクリックし、Source を保存します。
 
 ![Source の保存](../../imgs/Lab03/image1.png)
 
@@ -106,4 +106,9 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 ## ***▷確認ポイント***
 
 -   `TempMQTT` と `RPMSMQTT` に設定されている Topic（MQTT Broker の Topic）がそれぞれ温度用、回転数用の Topic になっていること    
-    ✔︎   ミスがあると今後の手順でエラーが発生します。
+    ✔︎   ミスがあると今後の手順でエラーが発生します。  
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|5| App Builder の紹介| Lecture|  |15| [02_AppBuilder](5-02_AppBuilder.md)|  
