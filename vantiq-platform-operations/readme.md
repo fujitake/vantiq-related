@@ -13,9 +13,9 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 # Vantiq Platform related
 Guides and procedures for building and operating the Vantiq Platform.
 
-- [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
-- [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
-- [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
-- [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
-- [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)
+- [Trouble Shooting Guide for Vantiq Cloud operations](./docs/eng/vantiq_k8s_troubleshooting.md)
+- [Network Configuration Debug Tool](.//docs/eng/alpine-f.md)
+- [Servers Time Synchronization Check Tool](./docs/eng/timestamp_ds.md)
+- [MongoDB related](./docs/eng/mongodb.md)
+- [Procedure for generating a CSR for a server certificate](./docs/eng/prepare_csr4rsasslcert.md)
+- [Vantiq Cloudwatch Logs](./docs/eng/vantiq-cloudwatch.md)
