@@ -36,13 +36,13 @@ Guides and procedures for integrating Vantiq with cloud web services, brokers, a
 - [SendGrid](./vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)
 
 
-### [Vantiq with Devices Integration](./vantiq-devices-integration)
+### [Vantiq with Devices Integration](./vantiq-devices-integration/readme_en.md)
 Guidelines and sample code for integrating Vantiq with devices.  
 - [Edge - Vantiq configuration Data integration Guideline](./vantiq-devices-integration/docs/eng/device-to-vantiq.md)
 - Connector samples
   - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
   - [fluentd](./vantiq-devices-integration/docs/eng/fluentd.md)
-- [Device connection samples](./vantiq-devices-integration/readme.md#device_sample)
+- [Device connection samples](./vantiq-devices-integration/readme_en.md#device_sample)
 
 
 
