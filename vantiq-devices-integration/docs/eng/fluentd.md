@@ -3,7 +3,7 @@ Fluentd is useful to send the telemetry data to Vantiq if the data are generated
 
 In this article, assume the folllowing:
 
-- Assuming **Windows 10, Linux (Ubuntu 20.04)** as OS
+- Use **Windows 10, Linux (Ubuntu 20.04)** as OS
 - Use Vantiq as a method to verify operation (receive Topic)
 - Use regular expressions to transform a flat file (nginx log)
 ## Table Of Contents
