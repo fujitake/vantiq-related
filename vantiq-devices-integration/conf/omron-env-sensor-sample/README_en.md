@@ -10,7 +10,7 @@
 - SD card
 - Omron Ambient Sensor（2JCIE-BU01 or 2JCIE-BL01）
 - Sample script（[env_usb_observer.py](./) or [env_bag_observer.py](./)）
-    - Sample script to send sensed contents to Vantiq
+    - Sample script to send measurements to Vantiq
     - Use "env_usb_observer.py" for 2JCIE-BU01 (USB type) or " env_bag_observer.py" for 2JCIE-BL01 (Bag type).
 
 ### **Preparation in Vantiq IDE**
