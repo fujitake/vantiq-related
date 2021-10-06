@@ -278,7 +278,6 @@ Output of `Transformation`
 
 * Split the stream by groups.
 * Used prior to activities that need to be handled by a specific group (not by event), such as `Dwell`, `ComputeStatistics`.
-* By splitting the stream, the resources used are distributed, and therefore load balancing is achieved.
 
 ![SplitByGroup](../../imgs/02_AppBuilder/slide17.png)
 
