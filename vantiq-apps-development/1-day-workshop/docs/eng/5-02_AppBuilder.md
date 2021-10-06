@@ -464,7 +464,7 @@ return event
 
 ## VAIL
 
-* VAIL allows to describe the process freely.  
+* VAIL allows to run an arbitrary snippet of VAIL code.  
 * Not necessary to prepare Procedure separately, it is possible to describe VAIL directly in task property.  
 * `event.value` is the part that corresponds to the content of input/output data.  
 
