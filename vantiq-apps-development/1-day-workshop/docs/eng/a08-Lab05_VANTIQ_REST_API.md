@@ -250,7 +250,7 @@ The above steps allow to register, retrieve, update, and delete data from an out
 
 ## ***▷Checkpoints***
 
--   Use VANTIQ's _REST API_ makes it easy to integrate with outside systems.  
+-   Use VANTIQ's _REST API_ makes it easy to integrate with external systems.  
     ✔︎  For example, POSTing data from multiple outside systems to VANTIQ and combining and formatting it in the application, updating the `Type` value from outside systems and changing the `Enrich` content, etc. can be easily implemented using what you have learned in this workshop.
 
 
