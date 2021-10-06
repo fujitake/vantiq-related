@@ -359,7 +359,7 @@ Up to here are the steps to send a message to Slack.
 
 -   Using `Procedure`, it is possible to implement it according to the format required by the service to be cooperated with.  
 
--   VANTIQ allows to program in an original language called "**VAIL**", which is a combination of SQL and JavaScript.    
+-   VANTIQ allows to code in an original language called "**VAIL**", which looks like a combination of SQL and JavaScript.    
     ✔︎ As for the details, please refer to the [VAIL Reference Guide](https://dev.vantiq.co.jp/docs/system/rules/index.html).
 
 ## Vantiq 1-day Workshop; Next Session    
