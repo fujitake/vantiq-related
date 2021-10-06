@@ -1,7 +1,7 @@
 # Data integration to Vantiq using Fluentd
 Fluentd is useful to send the telemetry data to Vantiq if the data are generated in a flat file format like log files, etc. This article explains how to configure and integrate data, using nginx access logs as an example.  
 
-## How to configure Fluentd
+In this article, assume the folllowing:
 
 - Assuming **Windows 10, Linux (Ubuntu 20.04)** as OS
 - Use Vantiq as a method to verify operation (receive Topic)
