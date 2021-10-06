@@ -50,7 +50,7 @@ So, it is necessary to make sure that Private Endpoint is set to `NO_PROXY`.
 #### Reference
 - https://aws.amazon.com/premiumsupport/knowledge-center/eks-http-proxy-configuration-automation/?nc1=h_ls
 
-The reference URL is not fully configured and does not cover all Private Endpoints required by Vantiq. Also refer to the following. Replace CIDR `172.X.X.X/XX` and endpoint region `ap-northeast-1` as appropriate for the environment. As for `<cluster certificate key>`, please refer to [here](https://docs.aws.amazon.com/eks/latest/userguide/private-clusters.html).  
+The reference URL is not fully configured and does not cover all Private Endpoints required by Vantiq. Also refer to the following. Replace CIDR `172.X.X.X/XX` and endpoint region `ap-northeast-1` whereever applicable for your environment. As for `<cluster certificate key>`, please refer to [here](https://docs.aws.amazon.com/eks/latest/userguide/private-clusters.html).  
 
 - `proxy-environment-variable` Example of ConfigMap;
 
