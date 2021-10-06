@@ -343,7 +343,7 @@ Output of `Transformation`
 
 * Procedures called <task name>StateGet, <task name>StateReset, and <task name>StateGetUpdate are generated automatically.
 * To get the statistics, run <task name>StateGet from the VAIL code (in Procedure, Rule, Transform task, etc.) which is in any location.
-* If using "SplitByGroup" beforehand, the statistics will be kept for each partition, so "partitionKey" is required as an argument at runtime, and the value which was entered in the "groupBy" property of SplitByGroup should be entered for this value.  
+* If using "SplitByGroup" beforehand, the statistics will be computed for each partition, so "partitionKey" is required as an argument at runtime, and the value which was entered in the "groupBy" property of SplitByGroup should be used for that.  
 * If not using "SplitByGroup", it will be global.
 
 
