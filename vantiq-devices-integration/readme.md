@@ -87,4 +87,4 @@ C -->|Invoke| E
 - [fluentd](./docs/eng/fluentd.md) - It is used when the metrics data acquired by the device is output in flat file format to a log file, etc.
 
 ## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
-- [オムロン環境センサー](./conf/omron-env-sensor-sample) / [Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md) 
+- [オムロン環境センサー](./conf/omron-env-sensor-sample) / Omron Environment Sensor 2JCIE-BU01, 2JCIE-BL01
