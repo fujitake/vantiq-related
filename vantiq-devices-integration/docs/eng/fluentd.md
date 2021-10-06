@@ -185,7 +185,7 @@ sudo bin/fluentd -c share/td-agent.conf
 |<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskevent-ubnt.jpg">|
 
 <h2 id="regexp">3. Aggregating logs using regular expressions（Vantiq IDE）</h2>
-In this section, describe how to transform the event data received in Vantiq's Topic.  
+This section describes how to transform the event data received in Vantiq's Topic.  
 
 <h3 id="howto">3.1 How to use regular expressions</h3>
 It is possible to extract specific elements in strings using regular expressions in VAIL code.  
