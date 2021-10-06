@@ -70,7 +70,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [mongodb 関連](./vantiq-platform-operations/docs/jp/mongodb.md)
 - [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
-
+- [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
 Vantiqアプリケーションの開発や運用に関するガイドや学習マテリアルです。
