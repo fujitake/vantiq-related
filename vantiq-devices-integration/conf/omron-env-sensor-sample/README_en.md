@@ -27,7 +27,7 @@
     1. Language settings
     2. Network settings (Wifi, SSH)
 4. Connect the Environment Sensor to USB port.
-5. Confirm the MAC address of the Environment Sensor.
+5. Confirm the MAC address of the ambient Sensor.
 ```
 $ sudo hcitool lescan
 LE Scan ...
