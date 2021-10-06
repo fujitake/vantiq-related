@@ -5,7 +5,7 @@ In this article, assume the folllowing:
 
 - Assuming **Windows 10, Linux (Ubuntu 20.04)** as OS
 - Use Vantiq as a method to verify operation (receive Topic)
-- An example of transforming a flat file (nginx log) using regular expressions  
+- Use regular expressions to transform a flat file (nginx log)
 ## Table Of Contents
 - [Install Fluentd (Windows 10)](#instf)
   - [Download from the following site](#download)
