@@ -137,7 +137,7 @@ sudo td-agent-gem install fluent-plugin-out-http-ext
 ---|---
 |①: Vantiq Topic name|The Resource URL of the Topic that receives events on Vantiq side.<br /> The following example corresponds to `jp.co.vantiq.fluentd`.|
 |②: Access Token|Access Token issued in the Namespace of Vantiq target.|
-|③: path|Path and file name of the log to monitor (in this case, nginx).|
+|③: path|Path and file name of the target log to monitor (in this case, nginx).|
 |④: pos_file|Path and file name for counting the log files to monitor.|
 ```
 ####
