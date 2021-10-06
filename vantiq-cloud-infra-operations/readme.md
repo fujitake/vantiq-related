@@ -11,7 +11,7 @@ Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラ
 Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
 
 - [AWS EKS for Vantiq with Terraform](./terraform_aws/readme_en.md)
-- [Vantiq on Azure AKS with Terraform](./terraform_azure/readme_en.md)
+- [Azure AKS for Vantiq with Terraform](./terraform_azure/readme_en.md)
 - [AWS permissions that are required to manage Vantiq](./docs/eng/aws_op_priviliges.md)
 - [Considerations for Closed Network Configuration (AWS)](./docs/eng/vantiq-install-closed-network-aws.md)
 - [Considerations for Closed Network Configuration (Azure)](./docs/eng/vantiq-install-closed-network-azure.md)
