@@ -41,7 +41,7 @@
 - これを右クリックして Administrator として実行する
 <img src="../../imgs/fluentd/admin.jpg" width="50%%">
 
-- Vantiq で動作確認を可能にするため Output 用の Pluging (http-ext) を導入する
+- Vantiq で動作確認を可能にするため Output 用の Plugin (http-ext) を導入する
 - ログ ファイル出力用に nginx を用いる
 - 以下のコマンドを入力
 ```
@@ -57,7 +57,7 @@ ren etc\td-agent\td-agent.conf etc\td-agent\td-agent.conf.org
 - 適当なエディタで **etc\td-agent\td-agent.conf** ファイルを作成し以下の内容をコピペする
 - ちなみにこの設定は、以下の内容を想定している
 
-|項目|内容を|
+|項目|内容|
 ---|---
 |①: Vantiq Topic 名|Vantiq側でイベントを受信するTopicのリソースURL。<br /> 以下の例は`jp.co.vantiq.fluentd`に相当する。|
 |②: Access Token|VantiqのターゲットのNamespaceで発行したAccess Token|
@@ -105,7 +105,7 @@ fluentd -c etc\td-agent\td-agent.conf
 
 |Topics|受信データ|
 ---|---
-|<img src="../../imgs/fluentd/result.jpg">|<img src="./imgs/tskvent.jpg">|
+|<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskvent.jpg">|
 
 <h2 id="instubnt">2. Fluentd のインストール（Ubuntu 20.04）</h2>
 
@@ -133,7 +133,7 @@ sudo td-agent-gem install fluent-plugin-out-http-ext
 - 適当なエディタで **/opt/td-agent/td-agent.conf** ファイルを作成し以下の内容をコピペする
 - ちなみにこの設定は、以下の内容を想定している
 
-|項目|内容を|
+|項目|内容|
 ---|---
 |①: Vantiq Topic 名|Vantiq側でイベントを受信するTopicのリソースURL。<br /> 以下の例は`jp.co.vantiq.fluentd`に相当する。|
 |②: Access Token|VantiqのターゲットのNamespaceで発行したAccess Token|
@@ -182,7 +182,7 @@ sudo bin/fluentd -c share/td-agent.conf
 
 |Topics|受信データ|
 ---|---
-|<img src="../../imgs/fluentd/result.jpg">|<img src="./imgs/tskevent-ubnt.jpg">|
+|<img src="../../imgs/fluentd/result.jpg">|<img src="../../imgs/fluentd/tskevent-ubnt.jpg">|
 
 <h2 id="regexp">3. 正規表現を用いてログを集計する（Vantiq IDE）</h2>
 ここでは、VantiqのTopicで受け取ったイベントデータの整形について説明します。

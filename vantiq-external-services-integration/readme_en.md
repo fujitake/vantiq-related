@@ -19,6 +19,7 @@ Part 2 (Configure IoT Core)
 - [Amazon MQ](docs/en/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/en/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/en/vantiq-aws-msk.md)
+- [From Devices to Vantiq](../vantiq-devices-integration/readme_en.md)
 
 
 ### Examples of Azure-based System Configuration
@@ -31,6 +32,7 @@ Part 2 (Configure IoT Hub)
 
 #### Connect Vantiq to Azure Service
 - [EventHubs](docs/en/vantiq-azure-EventHubs.md)
+- [From Devices to Vantiq](../vantiq-devices-integration/readme_en.md)
 
 #### References
 - [Real Time Analytics on Big Data Architecture](https://docs.microsoft.com/en-us/azure/architecture/solution-ideas/articles/real-time-analytics)
@@ -44,6 +46,6 @@ Part 2 (Configure IoT Hub)
 - [GCP Pub/Sub](docs/en/vantiq-gcp-PubSub.md)
 
 ### Connect other External Services to Vantiq
-- [REST API for Vantiq Topic (HTTPS, WebSocket)]()
-- [SendGrid]()
+- [REST API for Vantiq Topic (HTTPS, WebSocket)](../vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
+- [SendGrid](docs/en/vantiq-sendgrid.md)
 - [Azure FaceAPI]()

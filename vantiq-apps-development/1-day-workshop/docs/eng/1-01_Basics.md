@@ -87,4 +87,9 @@ In App Builder, shortcut keys are available.
 
 - Vantiq Academy (Login required)
   - [2.1: The Vantiq IDE](https://community.vantiq.com/courses/developer-level-1-course/lessons/2-the-vantiq-platform/topic/2-1-the-vantiq-ide-master/)
-  - [2.3: Organizing Resources](https://community.vantiq.com/courses/developer-level-1-course/lessons/2-the-vantiq-platform/topic/2-3-organizing-resources-master/)
+  - [2.3: Organizing Resources](https://community.vantiq.com/courses/developer-level-1-course/lessons/2-the-vantiq-platform/topic/2-3-organizing-resources-master/)  
+
+## Vantiq 1-day Workshop; Next Session    
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|2| Preparation (Configuration of the Data Generator)|Lab|Preparation for the Data Generator |15|[Lab01_Preparation](2-Lab01_Preparation.md)|  

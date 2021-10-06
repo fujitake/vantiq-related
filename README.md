@@ -2,13 +2,49 @@
 ## Purpose
 This repository is for sharing various technical guidance and instructions of Vantiq product.
 
-- [Set up Vantiq External Lifecycle Management](vantiq-operations/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
-- [Vantiq on AWS EKS with Terraform](terraform_aws/readme_en.md)
-- [Vantiq on Azure AKS with Terraform](terraform_azure/readme_en.md)
-- [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
-- [Vantiq-1-day workshop](1-day-workshop/docs/eng/readme.md)
+### [Vantiq Cloud Infrastructure related](./vantiq-cloud-infra-operations)
+Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
+- [AWS EKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_aws/readme_en.md)
+- [Azure AKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_azure/readme_en.md)
+- [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
+- [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
+- [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
 
-(TODO: Enlgish Menu Reorg)
+
+### [Vantiq Platform related](./vantiq-platform-operations)
+Guides and procedures for building and operating the Vantiq Platform.
+- [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
+- [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
+- [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
+- [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
+- [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
+- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)
+
+
+### [Vantiq Application Development related](./vantiq-apps-development)
+Guides and learning materials for developing and operating Vantiq Applications.
+- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
+- [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+
+### [Vantiq with External Services Integration](./vantiq-external-services-integration/readme_en.md)
+Guides and procedures for integrating Vantiq with cloud web services, brokers, and database services.  
+- [Amazon MQ](./vantiq-external-services-integration/docs/en/vantiq-aws-AmazonMQ.md)
+- [Amazon DynamoDB](./vantiq-external-services-integration/docs/en/vantiq-aws-dynamodb.md)
+- [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/en/vantiq-aws-msk.md)
+- [Azure Event Hubs](./vantiq-external-services-integration/docs/en/vantiq-azure-EventHubs.md)
+- [GCP Pub/Sub](./vantiq-external-services-integration/docs/en/vantiq-gcp-PubSub.md)
+- [SendGrid](./vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)
+
+
+### [Vantiq with Devices Integration](./vantiq-devices-integration/readme_en.md)
+Guidelines and sample code for integrating Vantiq with devices.  
+- [Edge - Vantiq configuration Data integration Guideline](./vantiq-devices-integration/docs/eng/device-to-vantiq.md)
+- Connector samples
+  - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+  - [fluentd](./vantiq-devices-integration/docs/eng/fluentd.md)
+- [Device connection samples](./vantiq-devices-integration/readme_en.md#device_sample)
+
+
 
 ## 目的
 

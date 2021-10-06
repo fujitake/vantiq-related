@@ -19,3 +19,8 @@
 
 ![System processing and data flow with VANTIQ](../../imgs/03_Review/slide3.png)  
 ① **Decision can be made in advance without storing data.**  
+
+## Vantiq 1-day Workshop; Next Session    
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|9|VANTIQ REST API|Lab|Next Steps for the Vantiq 1-day Workshop| | [Lab05_VANTIQ_REST_API](a08-Lab05_VANTIQ_REST_API.md)|  

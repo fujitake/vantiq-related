@@ -51,10 +51,10 @@
 
 * ActivityPattern
   * `Filter`
-    * Can do simple filtering, or can be flexible decision making by configuring `Procedure` as threshold.
+    * Can do simple filtering, or can do more complex filtering by leveraging a `Procedure`.
   * `AccumulateState`
-    * Since events received one after another can be tracked and counted, depending on how the `Procedure` is described, it can be implemented with a high flexibility, such as calculation using the number of events received in a certain period of time.
-  * `Statistics`
+    * The task is capable of tracking the state across consecutive events. Also combining with `Procedure`, the task can implement logics such as calculation using the number of events received in a certain period of time.
+  * `Statistics`/`ComputeStatistics`
     * Can compute the statistics processes of events.
   * `SplitByGroup`
     * Can split streams by groups.    

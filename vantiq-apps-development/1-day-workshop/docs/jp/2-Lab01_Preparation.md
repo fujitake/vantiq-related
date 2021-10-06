@@ -30,7 +30,7 @@
 
 ＊ サンプルデータを生成するためのサーバーの設定をご自身で準備された MQTT Broker に設定し直します。  
 
-1. 「追加」 > 「Sources...」 を開き、「Sources」ウィンドウを開きます。
+1. 「追加」 > 「Source...」 を開き、「Sources」ウィンドウを開きます。
 
 2. `TrainingDataGenMQTT` をクリックし、「Source」ウィンドウを開きます。
 
@@ -130,3 +130,8 @@
 
 -   開いているプロジェクトが正しいか
     -   皆様の 2つの開発用 Namespace にはそれぞれ、データジェネレーターで使用しているリソースを確認できる `TrainingDataGen` プロジェクトと、**ポンプ故障検知システム** を構築するために使用するリソースを追加していく `PumpFailureDetection` プロジェクト（今はまだ空の状態）の 2つのプロジェクトが存在しています。次の Lab から `PumpFailureDetection` プロジェクトで作業を行います。
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|3| Types (タイプ)|Lab|データベースのテーブルのような機能|20|[Lab02_Types](3-Lab02_Types.md)|

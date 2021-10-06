@@ -61,7 +61,7 @@ Session #|Session      | Type  |Contents Description       |Duration (m)|Materia
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------------------|
 |1| The basics of developing with VANTIQ| Lecture||10|[01_Basics](1-01_Basics.md) |
 |2| Preparation (Configuration of the Data Generator)|Lab|Preparation for the Data Generator |15|[Lab01_Preparation](2-Lab01_Preparation.md)|
-|3| Typs|Lab|Functions like a table in a database|20|[Lab02_Types](3-Lab02_Types.md)|
+|3| Types|Lab|Functions like a table in a database|20|[Lab02_Types](3-Lab02_Types.md)|
 |4|Source|Lab|Functions used for sending and receiving data|20|[Lab03_Sources](4-Lab03_Sources.md)|
 |5| Introduction to App Builder| Lecture|  |15| [02_AppBuilder](5-02_AppBuilder.md)|
 |6|App Builder|Lab|Create the processing logic for received events|45|[Lab04_AppBuilder](6-Lab04_AppBuilder.md)|

@@ -112,3 +112,8 @@ Confirm that the data is correctly registered in the `Pumps` Type. Open `Pumps` 
     ✔︎   Confirm again that the uppercase and lowercase letters are correct and that there are no input errors. If there are any mistakes, errors will occur in future steps.
 
 -   Whether the data has been registered correctly.
+
+## Vantiq 1-day Workshop; Next Session    
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|4|Source|Lab|Functions used for sending and receiving data|20|[Lab03_Sources](4-Lab03_Sources.md)|  

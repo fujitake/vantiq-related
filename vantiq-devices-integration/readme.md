@@ -73,7 +73,7 @@ C -->|Invoke| E
 
 ## ガイドライン / Guideline
 - [Edge~Vantiq構成 データ連携 ガイドライン](./docs/jp/device-to-vantiq.md)
-- [Edge - Vantiq configuration Data integration Guideline](./docs/en/device-to-vantiq.md)
+- [Edge - Vantiq configuration Data integration Guideline](./docs/eng/device-to-vantiq.md)
 
 
 ## コネクターのテンプレート / Connector Template
@@ -84,6 +84,7 @@ C -->|Invoke| E
   - MQTT Subscribe
   - AMQP Publish
 - [fluentd](./docs/jp/fluentd.md) - デバイスが取得したメトリクスデータをフラットファイル形式でログファイル等に出力している場合に使用
+- [fluentd](./docs/eng/fluentd.md) - It is used when the metrics data acquired by the device is output in flat file format to a log file, etc.
 
 ## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
 - [オムロン環境センサー](./conf/omron-env-sensor-sample) / Omron Environment Sensor 2JCIE-BU01, 2JCIE-BL01

@@ -130,3 +130,8 @@ At the end of each Lab, there is the "**Checkpoints**" step. Please be sure to r
 
 -   Whether the project that is opened is correct.
     -   There are one Project in the two development Namespaces respectively: one is the `TrainingDataGen` Project, which allows to review the Resources used by the Data Generator, and the other is the `PumpFailureDetection` Project, which adds the Resources used to build the **Pump Failure Detection System** (currently empty). Work on the `PumpFailureDetection` Project from the next Lab.
+
+## Vantiq 1-day Workshop; Next Session    
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|3| Types|Lab|Functions like a table in a database|20|[Lab02_Types](3-Lab02_Types.md)|  

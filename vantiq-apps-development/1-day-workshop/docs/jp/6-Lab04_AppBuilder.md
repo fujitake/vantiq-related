@@ -20,7 +20,7 @@
 
 1. 「追加」 > 「App...」 > 「_+新規App_」 から App Builder のウィンドウを開きます。
 
-2. 「プロパティ」をクリックして名前に 「PumpFailureDetection」と入力し、「_OK_」をクリックします。
+2. 名前に 「PumpFailureDetection」と入力し、「_OK_」をクリックします。
 
 3. _オレンジのボックス_ をクリックし、ウィンドウ右側のパラメータを以下の通り設定します。  
     1.  名前: _TempStream_  
@@ -36,7 +36,7 @@
         1.  inboundResource: _sources_  
         2.  inboundResourceId: _RPMSMQTT_  　＊ ドロップダウンリストより選択
 
-5. 右上の _Save_ ボタンをクリックしてアプリケーションを保存します。
+5. 右上の _変更の保存_ ボタンをクリックしてアプリケーションを保存します。
 
 6. データジェネレータを起動し _Start Generator_ ボタンをクリックしてデータ生成を開始します。
 
@@ -77,7 +77,7 @@
 1. Activity Pattern のリストにある「Flow Control」から「`Join`」を `EnrichTemp` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
     1.  名前: _JoinEvents_  
 
-2. `EnrichRPMS` タスク を右クリックし 「_既存タスクとリンク_」 をクリックします。タスク名には「_JoinEvents_」を設定します。
+2. `EnrichRPMS` タスク を右クリックし 「_既存 Task とリンク_」 をクリックします。タスク名には「_JoinEvents_」を設定します。
 
 3. `JoinEvents` タスク をクリックして設定を以下の通り行います。  
     1.  constraints: ＊ \<null>をクリックします。  
@@ -95,7 +95,7 @@
 
 **Transformation** を使用して、イベントを加工します。
 
-1. Activity Pattern のリストにある「Modifiers」から「`Transform`」を `JoinEvents` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
+1. Activity Pattern のリストにある「Modifiers」から「`Transformation`」を `JoinEvents` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
     1.  名前: _TransformEvent_
 
 2. 設定を以下の通り行います。  
@@ -168,7 +168,7 @@
 
 * リソースグラフ
 
-|![Resource graph](../../imgs/Lab04/image13.png)|
+|![Resource graph](../../imgs/Lab04/image13new.png)|
 |-----------------------------------------------|
 
 * PumpFailureDetection
@@ -187,3 +187,9 @@
 -   今回のアプリで使用した以外の Activity pattern について  
     ✔︎   リファレンスに各 Activity pattern についての情報がございますので確認してみましょう。  
     ✔︎   App Builder リファレンス: <https://dev.vantiq.co.jp/docs/system/apps/index.html>
+
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+|7| Lab 04 までの復習| Lecture| |15| [03_Review](7-03_Review.md)|  

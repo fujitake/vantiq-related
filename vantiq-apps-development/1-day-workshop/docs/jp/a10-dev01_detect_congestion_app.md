@@ -53,7 +53,7 @@
     * 単純なフィルタリングから、閾値に `Procedure` を設定することで柔軟に判定を行える
   * `AccumulateState`
     * 次々に受信するイベントをトラッキングしてカウントをしたりできるため、`Procedure` の書き方次第で一定期間に受信したイベント数を使った計算など自由度高く実装することができる
-  * `Statistics`
+  * `Statistics`/`ComputeStatistics`
     * イベントの統計処理が行える
   * `SplitByGroup`
     * グループごとにストリームを分割できる    
