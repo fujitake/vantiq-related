@@ -13,7 +13,7 @@ Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes cluste
 
 ### [Vantiq Platform related](./vantiq-platform-operations)
 Guides and procedures for building and operating the Vantiq Platform.
-- [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
+- [Trouble Shooting Guide for Vantiq Cloud operations](./vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
 - [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
 - [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
