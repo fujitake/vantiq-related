@@ -18,7 +18,8 @@ Guides and procedures for building and operating the Vantiq Platform.
 - [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)
+- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
+- [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
 
 
 ### [Vantiq Application Development related](./vantiq-apps-development)
