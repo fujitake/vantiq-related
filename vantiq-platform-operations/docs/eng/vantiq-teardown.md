@@ -8,7 +8,7 @@ Check if the infrastructure resource is shared or not. When it is shared, the re
 - [ ] Is not the keycloak server shared with other systems?  
 - [ ] Is not the Postgres server shared with other systems?   
 - [ ] Is not the Bastion server for working shared with other systems?  
-- [ ] Are not multiple Vantiq instances deployed in the same Kubernetes cluster? (Are they sharing a shared resource?)
+- [ ] Are not multiple Vantiq instances deployed in the same Kubernetes cluster (are they sharing a shared resource)?
 - [ ] Are VPC/VNET shared?  
 - [ ] Request the signature of confirmation from the customer.
 
@@ -32,7 +32,7 @@ Use k8sdeploy_tools, kubectl, AWS/Azure CLI, and Web console for the work. The w
 - Delete PVCs and PVs which are associated with the mongodb and the userdb.  
 - Delete the volumes which were Released by PV deletion, from the AWS and the Azure consoles.  
 - Delete or save the mongodb backup files.  
-- Delete the S3/Azure Storage　Account (in case it is not shared).  
+- Delete the S3/Azure Storage Account (in case it is not shared).  
 - Execute `undeployShared`, `undeployNigix` (in case there are no other Vantiq instances in the same cluster).   
 - Delete the realm of the keycloak server. And do export, etc. if necessary.
 - Delete the keycloak server (in case it is not shared).  
@@ -42,6 +42,7 @@ Use k8sdeploy_tools, kubectl, AWS/Azure CLI, and Web console for the work. The w
 - Delete Kubernetes worker node pools (in case they are not shared).  
 - Delete Kubernetes master control plane (in case it is not shared).  
 - Delete the resources which are associated with VPC/VNET (in case they are not shared).   
+
 If all of the above are proprietary resources, it is acceptable to execute `terraform destroy` with the terraform definition used at build time. In anticipation of the work to be done during tear down, the followings are encouraged. In Azure, appropriate operation of resource groups, and in AWS, appropriate operation of grouping by tags.  
 
 - Delete or request the deletion of DNS records.  
