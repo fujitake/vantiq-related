@@ -391,7 +391,8 @@ metadata:
     rbac.authorization.k8s.io/aggregate-view-telegraf: "true"
 rules:
   - apiGroups: [""]
-    resources: ["persistentvolumes", "nodes"]
+#    resources: ["persistentvolumes", "nodes"]
+    resources: ["*"]   # 2021/10/7 changed so that kubernetes.cpu_usage_nanocores measurement be obtained
     verbs: ["get", "list"]
 
 ---
