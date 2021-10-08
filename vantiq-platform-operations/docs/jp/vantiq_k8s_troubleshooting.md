@@ -1128,7 +1128,7 @@ VANTIQ IDE のエラーペインにおいても確認できる。
 
 VANTIQアプリケーションの問題については、以下のテンプレートに従う。
 
-[Support-Issue-Submission-Template.docx](Support-Issue-Submission-Template.docx)
+[Support-Issue-Submission-Template.docx](https://community.vantiq.com/ja/forums/topic/support-issue-submission-template/) _(要ログイン)_
 
 VANTIQ基盤に関する問題は、以下のテンプレートに従い情報を提供する。
 
