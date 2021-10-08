@@ -1,3 +1,5 @@
+[Japanese Version here](readme.md)
+
 # VANTIQ on EKS with Terraform
 The simplest configuration of AWS Infrastructure to configure Public facing Private Cloud.
 

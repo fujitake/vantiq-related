@@ -1,4 +1,4 @@
-[English Version](readme_en.md)
+[English Version here](readme_en.md)
 
 # VANTIQ on EKS with Terraform
 Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプルな構成。
