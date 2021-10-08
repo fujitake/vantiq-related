@@ -205,4 +205,4 @@ Confirm that the insertion has been made.
 
  
 ## Reference
-•	https://blog.yuu26.com/api-gateway-dynamodb-json/
+•	https://blog.yuu26.com/api-gateway-dynamodb-json/     _(Japanese)_
