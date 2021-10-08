@@ -1,3 +1,5 @@
+[English Version here](README_en.md)
+
 # 【OMRON環境センサー】センサー起動からVantiqへ送信までの手順
 
 ### **本手順で必要なもの**
@@ -29,20 +31,20 @@
 4. 環境センサーをUSBポートに接続する
 5. 環境センサーのMacアドレスを確認する
 ```
-$ sudo hcitool lescan 
+$ sudo hcitool lescan
 LE Scan ...
 C2:B7:E4:CC:FE:79 Rbt
 ※「Rbt」が環境センサーのMacアドレス
 ```
 6. サンプルスクリプトを編集し、以下の設定を行う
     1. 準備手順で作成したTopicのエンドポイント
-    <br/>例: 
+    <br/>例:
     VANTIQ_ENDPOINT = 'https://dev.vantiq.co.jp/api/v1/resources/topics//devices/env'
     2. 準備手順で作成したアクセストークン
-    <br/>例: 
+    <br/>例:
     VANTIQ_ACCESS_TOKEN = 'abcdefg12345...='
     3. 手順5で確認した環境センサーのMacアドレス
-    <br/>例: 
+    <br/>例:
     ENV_SENSOR_MAC_ADDRESS = 'C2:B7:E4:CC:FE:79'
 7. Raspberry Piの任意のディレクトリにサンプルスクリプトを配置する
 8. bluepy(BLEデバイスを制御するPythonモジュール)をインストールする
@@ -52,7 +54,7 @@ $ pip install bluepy
 ```
 9. その他、サンプルスクリプトで使用しているモジュールでRaspberry Piにないものがあればインストールする
 ```
-例: 
+例:
 $ pip install requests
 ```
 10. サンプルスクリプトを実行し、データが送信されることを確認する

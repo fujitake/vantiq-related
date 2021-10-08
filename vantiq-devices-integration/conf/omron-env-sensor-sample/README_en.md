@@ -1,3 +1,5 @@
+[Japanese Version here](README.md)
+
 # 【Omron Ambient Sensor】Instruction from starting the sensor to sending to Vantiq
 
 ### **Requirements for this instruction**
