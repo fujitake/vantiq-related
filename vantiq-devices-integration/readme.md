@@ -1,3 +1,5 @@
+[English Version here](readme_en.md)
+
 # Vantiqとデバイスとの連携
 
 ## 目的
