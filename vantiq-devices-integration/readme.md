@@ -1,3 +1,5 @@
+[English Version here](readme_en.md)
+
 # Vantiqとデバイスとの連携
 
 ## 目的
@@ -77,7 +79,7 @@ C -->|Invoke| E
 
 
 ## コネクターのテンプレート / Connector Template
-- [Python Code](./conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+- [Python Code](./conf/vantiq-restapi-mqtt-amqp-python-sample)/[Vantiq Project](./conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
   - HTTPS REST API
   - WebSocket API
   - MQTT Publish
@@ -87,4 +89,4 @@ C -->|Invoke| E
 - [fluentd](./docs/eng/fluentd.md) - It is used when the metrics data acquired by the device is output in flat file format to a log file, etc.
 
 ## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
-- [オムロン環境センサー](./conf/omron-env-sensor-sample) / Omron Environment Sensor 2JCIE-BU01, 2JCIE-BL01
+- [オムロン環境センサー](./conf/omron-env-sensor-sample)/[Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md)

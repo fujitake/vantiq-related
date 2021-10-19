@@ -1,3 +1,5 @@
+[Japanese Version here](readme.md)
+
 # VANTIQ on AKS with Terraform
 The configuration of Azure Infrastructure to configure Vantiq Public facing Rrivate Cloud.
 

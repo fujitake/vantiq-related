@@ -1,3 +1,5 @@
+[Japanese Version here](readme.md)
+
 # Vantiq with Devices Integration
 
 ## Purpose
@@ -85,4 +87,4 @@ C -->|Invoke| E
   - [fluentd](./docs/eng/fluentd.md) - It is used when the metrics data acquired by the device is output in flat file format to a log file, etc.
 
 ## Device Integration Sample Code<a id="device_sample"></a>
-  - [Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md) 
+  - [Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md)

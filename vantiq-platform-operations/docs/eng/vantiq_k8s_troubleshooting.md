@@ -1125,7 +1125,7 @@ It is possible to confirm through interviews or in the error pane of the VANTIQ 
 
 For VANTIQ application issues, follow the template below.
 
-[Support-Issue-Submission-Template.docx](Support-Issue-Submission-Template.docx)
+[Support-Issue-Submission-Template.docx](https://community.vantiq.com/forums/topic/support-issue-submission-template/) _(login required)_
 
 For issues related to the VANTIQ infrastructure, follow the template below to provide information.
 

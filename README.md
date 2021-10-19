@@ -13,12 +13,13 @@ Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes cluste
 
 ### [Vantiq Platform related](./vantiq-platform-operations)
 Guides and procedures for building and operating the Vantiq Platform.
-- [Trouble Shooting Guide for Vantiq Cloud operations](vantiq-operations/docs/eng/vantiq_k8s_troubleshooting.md)
+- [Trouble Shooting Guide for Vantiq Cloud operations](./vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md)
 - [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
 - [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)
+- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
+- [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
 
 
 ### [Vantiq Application Development related](./vantiq-apps-development)
@@ -26,7 +27,7 @@ Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
 - [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
-### [Vantiq with External Services Integration](./vantiq-external-services-integration/readme_en.md)
+### [Vantiq with External Services Integration](./vantiq-external-services-integration)
 Guides and procedures for integrating Vantiq with cloud web services, brokers, and database services.  
 - [Amazon MQ](./vantiq-external-services-integration/docs/en/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/en/vantiq-aws-dynamodb.md)
@@ -36,7 +37,7 @@ Guides and procedures for integrating Vantiq with cloud web services, brokers, a
 - [SendGrid](./vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)
 
 
-### [Vantiq with Devices Integration](./vantiq-devices-integration/readme_en.md)
+### [Vantiq with Devices Integration](./vantiq-devices-integration)
 Guidelines and sample code for integrating Vantiq with devices.  
 - [Edge - Vantiq configuration Data integration Guideline](./vantiq-devices-integration/docs/eng/device-to-vantiq.md)
 - Connector samples
@@ -77,7 +78,7 @@ Vantiqアプリケーションの開発や運用に関するガイドや学習�
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
-### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration/readme.md)
+### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
 VantiqとクラウドWebサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
 - [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)

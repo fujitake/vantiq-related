@@ -1,3 +1,4 @@
+[Japanese Version here](readme.md)
 
 ## System configuration examples of each Cloud Service + Vantiq
 - Vantiq is a Complex Event Processing engine that specializes in Stream Data. It is positioned in a Speed Layer (Hot Path) in the general [Lambda architecture](https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/#lambda-architecture), [Kappa architecture](https://docs.microsoft.com/en-us/azure/architecture/data-guide/big-data/#kappa-architecture) etc. pattern.
