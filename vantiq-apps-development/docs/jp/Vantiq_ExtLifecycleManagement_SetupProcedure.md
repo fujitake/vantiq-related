@@ -303,7 +303,9 @@ Deployボタンをクリック
 
 ![DeployButton](../../imgs/lcm/image5.png)
 
-必要項目を入力し、OKをクリック
+必要項目を入力する。
+プライベートリポジトリからImage Pullする場合、Image Pull Secretに前の手順で作成したdocker-registry secret名である`quay-secret`を入力する。
+OKをクリックする。
 
 ![InputItems](../../imgs/lcm/image6.png)
 
