@@ -40,7 +40,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 4.  次のような画面が表示されれば、VANTIQ から E メールが送られていますので、次の手順に進んでください。
 
-<img src="../../imgs/00_Prep1/image4.tiff" style="width:3.58333in;height:1.5in" />
+<img src="../../imgs/00_Prep1/image4.png" style="width:3.58333in;height:1.5in" />
 
 ## ***Step 3 メールアドレスの認証メールの確認をしてアカウント登録***
 
@@ -80,9 +80,9 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 <img src="../../imgs/00_Prep1/image11.png" style="width:6.35417in;height:0.23896in" />  
 
-    ＊ 招待状の受信後に最初ログインした *○○○\_root/○○○\_home* などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
+  ＊ 招待状の受信後に最初ログインした **○○○\_root/○○○\_home** などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
 
-6.  開発環境を開くと次のような画面になります。  <img src="../../imgs/00_Prep1/image12.tiff" style="width:2.91759in;height:1.76111in" />
+6.  開発環境を開くと次のような画面になります。  <img src="../../imgs/00_Prep1/image12.png" style="width:2.91759in;height:1.76111in" />
 
 7.  **Policies and Conditions** の 2つの項目にチェックを入れて [OK] をクリックします。
 
