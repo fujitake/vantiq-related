@@ -10,7 +10,7 @@
 
 1. [管理] > [Users] をクリックします。
 
-<img src="../../imgs/00_Prep2/image1.png" width="100">
+<img src="../../imgs/00_Prep2/image1.png" width=80%>
 
 2. 「ユーザー 一覧」ウィンドウの「+ 新規」をクリックして「新規ユーザー」のウィンドウを開きます。
 
