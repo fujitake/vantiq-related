@@ -12,7 +12,8 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
    ＊ VANTIQ からのメールが迷惑メールに振り分けられる可能性がありますので届いていない場合はご確認ください。
 
 2.  メール中段にある\[here\]をクリック しブラウザーで開きます。  
-   ＊ **招待メールの有効期限は *48* 時間となっています**。  <img src="../../imgs/00_Prep1/image1.png" style="width:5.625in;height:3.77778in" />
+   ＊ **招待メールの有効期限は *48* 時間となっています**。  <img src="../../imgs/00_Prep1/image1.png" style="width:5.625in;height:3.77778in" />   
+   <img src="../../imgs/00_Prep1/image1.png" style="width:100mm;height:67.17mm" />
 
 ## ***Step 2 (アカウント作成)***
 
