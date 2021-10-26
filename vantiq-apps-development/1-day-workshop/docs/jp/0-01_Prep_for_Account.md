@@ -16,20 +16,21 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 ## ***Step 2 アカウント作成***
 
-1.  表示された画面中段にある \[Register\] をクリックします。 <img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
+1.  表示された画面中段にある \[Register\] をクリックします。  
+    <img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
 
 2.  表示されたユーザー情報の入力欄に、ユーザー情報を入力してアカウントを登録します。  <img src="../../imgs/00_Prep1/image3.png" style="width:2.96667in;height:2.07014in" />  
 
-＜注意＞**Username にもメールアドレスを入力してください**。 (Lab 運営上の都合)  
+   ＜注意＞**Username にもメールアドレスを入力してください**。 (Lab 運営上の都合)  
 
-|項目|内容|
-|:---|:---|
-|First name| 名(英語表記) 例 Taro|
-|Last name| 姓(英語表記) 例 Yamada |
-|Email| 認証をしたメールアドレス  |
-|Username| **認証をしたメールアドレス**  |
-|Password| 任意のパスワード (8文字以上)  |
-|Confirm password| パスワードの再入力|
+   |項目|内容|
+   |:---|:---|
+   |First name| 名(英語表記) 例 Taro|
+   |Last name| 姓(英語表記) 例 Yamada |
+   |Email| 認証をしたメールアドレス  |
+   |Username| **認証をしたメールアドレス**  |
+   |Password| 任意のパスワード (8文字以上)  |
+   |Confirm password| パスワードの再入力|
 
 3.  入力が終了したら \[click here\] をクリック、登録したメールアドレスに確認メールが届きます。
 
@@ -56,7 +57,8 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 3.  「+新規」よりNamespaceの新規作成画面を開きます。  <img src="../../imgs/00_Prep1/image9.png" style="width:4.27455in;height:2.41166in" />
 
-4. Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  <img src="../../imgs/00_Prep1/image10.png" style="width:3.54127in;height:2.97917in" />
+4. Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  
+    <img src="../../imgs/00_Prep1/image10.png" style="width:3.54127in;height:2.97917in" />
 
 5. 操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。<img src="../../imgs/00_Prep1/image11.png" style="width:6.35417in;height:0.23896in" />  
 
