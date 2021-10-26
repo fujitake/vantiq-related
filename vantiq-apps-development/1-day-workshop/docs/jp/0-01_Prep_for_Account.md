@@ -16,7 +16,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 ## ***Step 2 アカウント作成***
 
-1.  表示された画面中段にある \[Register\] をクリックします。  <img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
+1.  表示された画面中段にある \[Register\] をクリックします。 <img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
 
 2.  表示されたユーザー情報の入力欄に、ユーザー情報を入力してアカウントを登録します。  <img src="../../imgs/00_Prep1/image3.png" style="width:2.96667in;height:2.07014in" />  
 
@@ -42,9 +42,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 2.  `Link to e-mail address verification` のリンクをブラウザーで開きます。
 
-3.  次の画面が表示された場合は、\[Click here to proceed\] をクリックし、メールアドレス認証を完了します。
-
-<img src="../../imgs/00_Prep1/image6.png" style="width:3.04167in;height:1.095in" />
+3.  次の画面が表示された場合は、\[Click here to proceed\] をクリックし、メールアドレス認証を完了します。 <img src="../../imgs/00_Prep1/image6.png" style="width:3.04167in;height:1.095in" />
 
 4.  「Edit Account」 画面が表示された場合は、アカウント情報登録の際に入力した情報が反映されているか確認し、\[save\] ボタンをクリックしてください。緑のポップアップ \[Your account has been updated\] が表示されます。
 
@@ -58,14 +56,14 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 3.  「+新規」よりNamespaceの新規作成画面を開きます。  <img src="../../imgs/00_Prep1/image9.png" style="width:4.27455in;height:2.41166in" />
 
-4.  Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  <img src="../../imgs/00_Prep1/image10.png" style="width:3.54127in;height:2.97917in" />
+4. Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  <img src="../../imgs/00_Prep1/image10.png" style="width:3.54127in;height:2.97917in" />
 
-5.  操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。<img src="../../imgs/00_Prep1/image11.png" style="width:6.35417in;height:0.23896in" />  
+5. 操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。<img src="../../imgs/00_Prep1/image11.png" style="width:6.35417in;height:0.23896in" />  
 
-  ＊ 招待状の受信後に最初ログインした **○○○\_root/○○○\_home** などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
+   ＊ 招待状の受信後に最初ログインした **○○○\_root/○○○\_home** などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
 
 6.  開発環境を開くと次のような画面になります。  <img src="../../imgs/00_Prep1/image12.png" style="width:2.91759in;height:1.76111in" />
 
-7.  **Policies and Conditions** の 2つの項目にチェックを入れて [OK] をクリックします。
+7.  「Policies and Conditions」 の 2つの項目にチェックを入れて [OK] をクリックします。
 
 8.  以上でワークショップのための開発環境が整いました。＊「新規プロジェクト」ウィンドウはキャンセルしていただいて構いません。ワークショップでの実際の開発時には使用します。<img src="../../imgs/00_Prep1/image13.png" style="width:5.84446in;height:3.30208in" />
