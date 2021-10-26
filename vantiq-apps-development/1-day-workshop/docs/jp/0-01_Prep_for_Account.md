@@ -5,6 +5,7 @@
 1.  ユーザーアカウントを登録する
 2.  招待メールによりroot namespaceへのアクセス権を付与される
 3.  開発用namespaceを作成する
+
 **推奨ブラウザーは Google Chrome です。**
 
 Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からのメールを受信できるメールアドレスをご利用ください。　
