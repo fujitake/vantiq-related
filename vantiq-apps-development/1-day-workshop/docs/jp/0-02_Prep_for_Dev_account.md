@@ -6,7 +6,7 @@
 
 ＊ VANTIQ では Organization 毎に Resources が割り当てられますので、同じ Organization のユーザー間で Resources が共有されます。
 
-## ***Step 2 (アカウント発行)***
+## ***Step 2 (ユーザー招待を発行)***
 
 1. [管理] > [Users] をクリックします。
 
