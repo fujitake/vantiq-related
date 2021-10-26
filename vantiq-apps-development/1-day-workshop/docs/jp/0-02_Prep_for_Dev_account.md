@@ -1,12 +1,12 @@
 # **開発者アカウント発行手順**
 
-## ***Step 1 Organization の決定***
+## ***Step 1 (Organization の決定)***
 
 アカウントを発行したい Organization を決定し、現在の Namespace 名から、その Organization のルート Namespace に切り替えます。
 
-＊ VANTIQ では Organization 毎にリソースが割り当てられますので、同じ Organization のユーザー間でリソースが共有されます。
+＊ VANTIQ では Organization 毎に Resources が割り当てられますので、同じ Organization のユーザー間で Resources が共有されます。
 
-## **Step 2 アカウント発行**
+## ***Step 2 (アカウント発行)***
 
 1. [管理] > [Users] をクリックします。
 
@@ -16,7 +16,7 @@
 
 3. Authorization を **「User(Developer)」** にします。
 
-**＊ User(Developer) の他に「Organization Admin」、「User」、「Custom」を選択することができますが、必ず「User(Developer)」に設定してください。**
+   **＊ User(Developer) の他に「Organization Admin」、「User」、「Custom」を選択することができますが、必ず「User(Developer)」に設定してください。**
 
 4. [Invite Destination] に招待するユーザーのメールアドレスを入力します。
 

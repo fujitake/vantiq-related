@@ -6,7 +6,7 @@
 
 Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からのメールを受信できるメールアドレスをご利用ください。　
 
-## ***Step 1 招待メールの確認***
+## ***Step 1 (招待メールの確認)***
 
 1. VANTIQ からの招待メール (件名: Vantiq -- Namespace Authorization) を開きます。  
    ＊ VANTIQ からのメールが迷惑メールに振り分けられる可能性がありますので届いていない場合はご確認ください。
@@ -14,7 +14,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 2.  メール中段にある\[here\]をクリック しブラウザーで開きます。  
    ＊ **招待メールの有効期限は *48* 時間となっています**。  <img src="../../imgs/00_Prep1/image1.png" style="width:5.625in;height:3.77778in" />
 
-## ***Step 2 アカウント作成***
+## ***Step 2 (アカウント作成)***
 
 1.  表示された画面中段にある \[Register\] をクリックします。  
     <img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
@@ -36,7 +36,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 4.  次のような画面が表示されれば、VANTIQ から E メールが送られていますので、次の手順に進んでください。  <img src="../../imgs/00_Prep1/image4.png" style="width:3.58333in;height:1.5in" />
 
-## ***Step 3 メールアドレスの認証メールの確認をしてアカウント登録***
+## ***Step 3 (メールアドレスの認証メールの確認をしてアカウント登録)***
 
 1.  メールアドレスの認証メール (件名: Verify email) を開きます。  
     ＊ **メールアドレス認証メールの有効期限は *15* 分です。**  <img src="../../imgs/00_Prep1/image5.png" style="width:4.46502in;height:2.65278in" />
@@ -49,7 +49,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 5.  以上でアカウント登録は終了となります。
 
-## ***Step 4 作業用 Namespace を作成***
+## ***Step 4 (作業用 Namespace の作成)***
 
 1.  VANTIQ 開発環境にログインします。＊ 表示される次のような「新規プロジェクト」ウィンドウはキャンセルします。  <img src="../../imgs/00_Prep1/image7.png" style="width:1.95522in;height:1.9617in" />
 
