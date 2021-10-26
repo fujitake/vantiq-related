@@ -10,7 +10,7 @@
 
 1. [管理] > [Users] をクリックします。
 
-<img src="../../imgs/00_Prep2/image1.png" style="width:5.15055in;height:1.47006in" />
+<img src="../../imgs/00_Prep2/image1.png" width=100mm>
 
 2. 「ユーザー 一覧」ウィンドウの「+ 新規」をクリックして「新規ユーザー」のウィンドウを開きます。
 
@@ -22,6 +22,6 @@
 
 5. [Invite Source] が「***GenericEmailSender***」になっていることを確認します。
 
-6. 最後に右上の [変更の保存] ボタンをクリックして、招待メールを送信します。<img src="../../imgs/00_Prep2/image2.png" style="width:4.19192in;height:1.98152in" />
+6. 最後に右上の [変更の保存] ボタンをクリックして、招待メールを送信します。<img src="../../imgs/00_Prep2/image2.png"  width=100mm>
 
 手順は以上です。
