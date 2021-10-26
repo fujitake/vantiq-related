@@ -60,7 +60,8 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 2.  画面上部の「管理」から「Namespace」をクリックします。  <img src="../../imgs/00_Prep1/image8.png" width=60%>
 
-3.  「+新規」よりNamespaceの新規作成画面を開きます。  <img src="../../imgs/00_Prep1/image9.png" width=55%>
+3.  「+新規」よりNamespaceの新規作成画面を開きます。  
+   <img src="../../imgs/00_Prep1/image9.png" width=55%>
 
 4. Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  
     <img src="../../imgs/00_Prep1/image10.png" width=45%>
