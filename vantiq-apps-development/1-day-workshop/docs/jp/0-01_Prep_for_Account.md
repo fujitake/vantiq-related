@@ -1,7 +1,10 @@
 # **開発者向け環境準備手順書**
 
 ## ***＜はじめに＞***
-
+この記事は、初めてVantiq Public Cloud環境（__dev.vantiq.co.jp__）を利用する開発者向けに環境準備の手順を説明します。　作業環境が利用できるためには、以下の3つのステップが必要です。
+1.  ユーザーアカウントを登録する
+2.  招待メールによりroot namespaceへのアクセス権を付与される
+3.  開発用namespaceを作成する
 **推奨ブラウザーは Google Chrome です。**
 
 Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からのメールを受信できるメールアドレスをご利用ください。　
