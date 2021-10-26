@@ -1,5 +1,5 @@
 # **Organization管理者向け開発者アカウント発行手順**
-
+この記事は、Vantiq Public Cloud環境（__dev.vantiq.co.jp__）において、Organization管理者が新たな開発者を招待する手順を説明します。
 ## ***Step 1 (Organization の決定)***
 
 アカウントを発行したい Organization を決定し、現在の Namespace 名から、その Organization のルート Namespace に切り替えます。
