@@ -16,14 +16,15 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
    ＊ VANTIQ からのメールが迷惑メールに振り分けられる可能性がありますので届いていない場合はご確認ください。
 
 2.  メール中段にある\[here\]をクリック しブラウザーで開きます。  
-   ＊ **招待メールの有効期限は *48* 時間となっています**。  <img src="../../imgs/00_Prep1/image1.png" width=60%>   
+   ＊ **招待メールの有効期限は *48* 時間となっています。**　　  
+   <img src="../../imgs/00_Prep1/image1.png" width=60%>   
 
 ## ***Step 2 (アカウント作成)***
 
 1.  表示された画面中段にある \[Register\] をクリックします。  
     <img src="../../imgs/00_Prep1/image2.png" width=50%>
 
-2.  表示されたユーザー情報の入力欄に、ユーザー情報を入力してアカウントを登録します。  <img src="../../imgs/00_Prep1/image3.png" width=55%>  
+2.  表示されたユーザー情報の入力欄に、ユーザー情報を入力してアカウントを登録します。  <img src="../../imgs/00_Prep1/image3.png" width=53%>  
 
    ＜注意＞**Username にもメールアドレスを入力してください**。 (Lab 運営上の都合)  
 
@@ -55,20 +56,21 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 ## ***Step 4 (作業用 Namespace の作成)***
 
-1.  VANTIQ 開発環境にログインします。＊ 表示される次のような「新規プロジェクト」ウィンドウはキャンセルします。  <img src="../../imgs/00_Prep1/image7.png" width=50%>
+1.  VANTIQ 開発環境にログインします。＊ 表示される次のような「新規プロジェクト」ウィンドウはキャンセルします。  <img src="../../imgs/00_Prep1/image7.png" width=45%>
 
 2.  画面上部の「管理」から「Namespace」をクリックします。  <img src="../../imgs/00_Prep1/image8.png" width=60%>
 
-3.  「+新規」よりNamespaceの新規作成画面を開きます。  <img src="../../imgs/00_Prep1/image9.png" width=60%>
+3.  「+新規」よりNamespaceの新規作成画面を開きます。  <img src="../../imgs/00_Prep1/image9.png" width=55%>
 
 4. Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  
-    <img src="../../imgs/00_Prep1/image10.png" width=55%>
+    <img src="../../imgs/00_Prep1/image10.png" width=45%>
 
 5. 操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。<img src="../../imgs/00_Prep1/image11.png" width=70%>  
 
    ＊ 招待状の受信後に最初ログインした **○○○\_root/○○○\_home** などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
 
-6.  開発環境を開くと次のような画面になります。  <img src="../../imgs/00_Prep1/image12.png" width=55%>
+6.  開発環境を開くと次のような画面になります。  
+    <img src="../../imgs/00_Prep1/image12.png" width=55%>
 
 7.  「Policies and Conditions」 の 2つの項目にチェックを入れて [OK] をクリックします。
 
