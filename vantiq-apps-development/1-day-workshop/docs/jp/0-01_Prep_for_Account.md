@@ -12,18 +12,13 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
    ＊ VANTIQ からのメールが迷惑メールに振り分けられる可能性がありますので届いていない場合はご確認ください。
 
 2.  メール中段にある\[here\]をクリック しブラウザーで開きます。  
-   ＊ **招待メールの有効期限は *48* 時間となっています**。
-
-<img src="../../imgs/00_Prep1/image1.png" style="width:5.625in;height:3.77778in" />
+   ＊ **招待メールの有効期限は *48* 時間となっています**。  <img src="../../imgs/00_Prep1/image1.png" style="width:5.625in;height:3.77778in" />
 
 ## ***Step 2 アカウント作成***
 
-1.  表示された画面中段にある \[Register\] をクリックします。  
-<img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
+1.  表示された画面中段にある \[Register\] をクリックします。  <img src="../../imgs/00_Prep1/image2.png" style="width:3.57292in;height:1.66667in" />
 
-2.  表示されたユーザー情報の入力欄に、ユーザー情報を入力してアカウントを登録します。
-
-<img src="../../imgs/00_Prep1/image3.png" style="width:2.96667in;height:2.07014in" />  
+2.  表示されたユーザー情報の入力欄に、ユーザー情報を入力してアカウントを登録します。  <img src="../../imgs/00_Prep1/image3.png" style="width:2.96667in;height:2.07014in" />  
 
 ＜注意＞**Username にもメールアドレスを入力してください**。 (Lab 運営上の都合)  
 
@@ -38,16 +33,12 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 3.  入力が終了したら \[click here\] をクリック、登録したメールアドレスに確認メールが届きます。
 
-4.  次のような画面が表示されれば、VANTIQ から E メールが送られていますので、次の手順に進んでください。
-
-<img src="../../imgs/00_Prep1/image4.png" style="width:3.58333in;height:1.5in" />
+4.  次のような画面が表示されれば、VANTIQ から E メールが送られていますので、次の手順に進んでください。  <img src="../../imgs/00_Prep1/image4.png" style="width:3.58333in;height:1.5in" />
 
 ## ***Step 3 メールアドレスの認証メールの確認をしてアカウント登録***
 
 1.  メールアドレスの認証メール (件名: Verify email) を開きます。  
-    ＊ **メールアドレス認証メールの有効期限は *15* 分です。**
-
-<img src="../../imgs/00_Prep1/image5.png" style="width:4.46502in;height:2.65278in" />
+    ＊ **メールアドレス認証メールの有効期限は *15* 分です。**  <img src="../../imgs/00_Prep1/image5.png" style="width:4.46502in;height:2.65278in" />
 
 2.  `Link to e-mail address verification` のリンクをブラウザーで開きます。
 
@@ -61,24 +52,15 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 ## ***Step 4 作業用 Namespace を作成***
 
-1.  VANTIQ 開発環境にログインします。＊ 表示される次のような「新規プロジェクト」ウィンドウはキャンセルします。  
+1.  VANTIQ 開発環境にログインします。＊ 表示される次のような「新規プロジェクト」ウィンドウはキャンセルします。  <img src="../../imgs/00_Prep1/image7.png" style="width:1.95522in;height:1.9617in" />
 
-<img src="../../imgs/00_Prep1/image7.png" style="width:1.95522in;height:1.9617in" />
+2.  画面上部の「管理」から「Namespace」をクリックします。  <img src="../../imgs/00_Prep1/image8.png" style="width:3.75853in;height:1.33333in" />
 
-2.  画面上部の「管理」から「Namespace」をクリックします。  
-<img src="../../imgs/00_Prep1/image8.png" style="width:3.75853in;height:1.33333in" />
+3.  「+新規」よりNamespaceの新規作成画面を開きます。  <img src="../../imgs/00_Prep1/image9.png" style="width:4.27455in;height:2.41166in" />
 
-3.  「+新規」よりNamespaceの新規作成画面を開きます。  
+4.  Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  <img src="../../imgs/00_Prep1/image10.png" style="width:3.54127in;height:2.97917in" />
 
-<img src="../../imgs/00_Prep1/image9.png" style="width:4.27455in;height:2.41166in" />
-
-4.  Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  
-
-<img src="../../imgs/00_Prep1/image10.png" style="width:3.54127in;height:2.97917in" />
-
-5.  操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。
-
-<img src="../../imgs/00_Prep1/image11.png" style="width:6.35417in;height:0.23896in" />  
+5.  操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。<img src="../../imgs/00_Prep1/image11.png" style="width:6.35417in;height:0.23896in" />  
 
   ＊ 招待状の受信後に最初ログインした **○○○\_root/○○○\_home** などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
 
