@@ -51,7 +51,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 2. `Link to e-mail address verification` のリンクをブラウザーで開きます。
 
-3. 次の画面が表示された場合は、\[Click here to proceed\] をクリックし、メールアドレス認証を完了します。
+3. 次の画面が表示された場合は、\[Click here to proceed\] をクリックし、メールアドレス認証を完了します。  
     <img src="../../imgs/00_Prep1/image6.png" width=55%>
 
 4. 「Edit Account」 画面が表示された場合は、アカウント情報登録の際に入力した情報が反映されているか確認し、\[save\] ボタンをクリックしてください。緑のポップアップ \[Your account has been updated\] が表示されます。
