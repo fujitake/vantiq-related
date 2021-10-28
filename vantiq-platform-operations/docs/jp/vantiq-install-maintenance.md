@@ -129,6 +129,9 @@
    1. Role mapping タブに移動し、Client roles の realm management を選択する
    1. 全ての Available roles を選択し、Add selected ボタンをクリック
    1. 右上のユーザー名アイコンからログアウト
+1. Keycloakの`Frontend URL`を設定する
+   1. 対象のRealmの Realm Settings -> Generalタブ に移動する
+   1. Frontend URLに`https://<ドメイン名>/auth/`と設定する
 1. Vantiq IDE で system namespace の初期設定をする。
    1. 次のページにアクセスし、作成したユーザー名、パスワードでログインする。
   	`https://<ドメイン名>/`  
@@ -523,6 +526,16 @@ nginx:
 
 サーバー間で時刻同期ができていないと、pod 間 の token が無効と見なされてエラーとなる。閉域網で構成する際、時刻同期サービスへ通信ができないと時刻はズレる。
 [時刻同期確認ツール](./timestamp_ds.md) を使用し、サーバー間で時刻が同期されているかを確認する。
+
+
+### Vantiq IDEにログインしようとするとエラーメッセージが出てループする
+
+![login_error_keycloak](../../imgs/vantiq-install-maintenance/login_error_keycloak.gif)
+
+Keycloakにfront-end URLが設定されていないため。
+Keycloakの`Frontend URL`を設定する。
+1. 対象のRealmの Realm Settings -> Generalタブ に移動する
+1. Frontend URLに`https://<ドメイン名>/auth/`と設定する
 
 
 ### System Admin 用の key を紛失した、期限切れになった<a id="lost_or_expired_key_for_system_admin"></a>
