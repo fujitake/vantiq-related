@@ -56,8 +56,8 @@ Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラ
 
 - [Terraform を使って AWS EKS を作成](./vantiq-cloud-infra-operations/terraform_aws/readme.md)
 - [Terraform を使って Azure AKS を作成](./vantiq-cloud-infra-operations/terraform_azure/readme.md)
-- [kubernetes（EKS) バージョンアップ](./vantiq-platform-operations/docs/jp/kubernetes-upgrade.md#eks_upgrade)    
-- [kubernetes（AKS) バージョンアップ](./vantiq-platform-operations/docs/jp/kubernetes-upgrade.md#aks_upgrade)
+- [kubernetes（EKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#eks_upgrade)    
+- [kubernetes（AKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#aks_upgrade)
 - [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)
 - [閉域網構成における考慮事項 (AWS編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-aws.md)
 - [閉域網構成における考慮事項 (Azure編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-azure.md)
