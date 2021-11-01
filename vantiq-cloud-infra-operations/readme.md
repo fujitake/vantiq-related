@@ -14,6 +14,8 @@ Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes cluste
 
 - [AWS EKS for Vantiq with Terraform](./terraform_aws/readme_en.md)
 - [Azure AKS for Vantiq with Terraform](./terraform_azure/readme_en.md)
+- [kubernetes (EKS) upgrade](./docs/eng/kubernetes-upgrade.md#eks_upgrade)
+- [kubernetes (AKS) upgrade](./docs/eng/kubernetes-upgrade.md#aks_upgrade)
 - [AWS permissions that are required to manage Vantiq](./docs/eng/aws_op_priviliges.md)
 - [Considerations for Closed Network Configuration (AWS)](./docs/eng/vantiq-install-closed-network-aws.md)
 - [Considerations for Closed Network Configuration (Azure)](./docs/eng/vantiq-install-closed-network-azure.md)
