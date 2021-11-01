@@ -1,0 +1,18 @@
+{
+  "activationConstraint" : "",
+  "active" : false,
+  "ars_properties" : null,
+  "ars_relationships" : [ ],
+  "config" : {
+    "host" : "smtp.office365.com",
+    "password" : "your-password",
+    "passwordType" : "string",
+    "port" : 587,
+    "username" : "your-mail-address"
+  },
+  "direction" : "BOTH",
+  "messageType" : null,
+  "mockProcedures" : { },
+  "name" : "MailServer",
+  "type" : "EMAIL"
+}

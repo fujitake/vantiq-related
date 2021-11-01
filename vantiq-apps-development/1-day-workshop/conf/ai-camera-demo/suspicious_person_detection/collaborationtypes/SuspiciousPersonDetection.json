@@ -1,0 +1,244 @@
+{
+  "active" : true,
+  "appType" : true,
+  "ars_properties" : {
+    "dataVersion" : 5,
+    "graph" : {
+      "lastZoomRequest" : 0,
+      "scale" : 0.8931623931623932,
+      "translate" : [ 211.56001268696582, 30.367521367521363 ]
+    },
+    "groupSettings" : {
+      "appGroupOpenHash" : {
+        "actions" : true,
+        "filters" : true,
+        "flowControl" : true
+      },
+      "ctGroupOpenHash" : {
+        "actions" : true,
+        "mobile" : true
+      },
+      "ctServiceOpen" : false,
+      "serviceGroupOpenHash" : { }
+    }
+  },
+  "ars_relationships" : [ ],
+  "assembly" : {
+    "AiCamera" : {
+      "configuration" : {
+        "childStreams" : [ "IsTargetEvent" ],
+        "condition" : "",
+        "inboundResource" : "topics",
+        "inboundResourceId" : "/cameras/suspicious_person",
+        "parentStreams" : [ ],
+        "upsert" : false
+      },
+      "pattern" : "EventStream",
+      "uuid" : "44d80641-4e6c-4d44-810c-9c673dc9dd2c"
+    },
+    "EnrichAiCamera" : {
+      "configuration" : {
+        "associatedType" : "ai_cameras",
+        "childStreams" : [ "TransformAiCamera" ],
+        "foreignKeys" : [ {
+          "type" : "Property",
+          "value" : "camera_id"
+        } ],
+        "parentStreams" : [ "IsTargetEvent" ],
+        "upsert" : false
+      },
+      "pattern" : "Enrich",
+      "uuid" : "be88f1fa-c170-443c-8648-0d7fb0fd22b2"
+    },
+    "EnrichGuard" : {
+      "configuration" : {
+        "associatedType" : "guards",
+        "childStreams" : [ "TransformGuard" ],
+        "foreignKeys" : [ {
+          "type" : "Property",
+          "value" : "guard_id"
+        } ],
+        "parentStreams" : [ "Guard" ],
+        "upsert" : false
+      },
+      "pattern" : "Enrich",
+      "uuid" : "edb61afb-93a9-4d98-b41b-0b3beca39547"
+    },
+    "FindNearestGuard" : {
+      "configuration" : {
+        "childStreams" : [ "SendEmail" ],
+        "parentStreams" : [ "TransformAiCamera" ],
+        "procedure" : "findNearestGuard",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "16014195-ded9-48d8-892e-2ea2f95b46eb"
+    },
+    "Guard" : {
+      "configuration" : {
+        "childStreams" : [ "EnrichGuard" ],
+        "condition" : "",
+        "inboundResource" : "sources",
+        "inboundResourceId" : "GuardMqttBroker",
+        "parentStreams" : [ ],
+        "upsert" : false
+      },
+      "pattern" : "EventStream",
+      "uuid" : "0dcc0305-ae62-4f03-abad-ae7eb9895f65"
+    },
+    "IsTargetEvent" : {
+      "configuration" : {
+        "childStreams" : [ "EnrichAiCamera" ],
+        "condition" : "event.event_type == \"notice_001\"",
+        "parentStreams" : [ "AiCamera" ],
+        "upsert" : false
+      },
+      "pattern" : "Filter",
+      "uuid" : "75af6c15-46e7-4cc3-9582-bad6ac9c0834"
+    },
+    "SaveGuardStatus" : {
+      "configuration" : {
+        "parentStreams" : [ "TransformGuard" ],
+        "type" : "guard_status",
+        "upsert" : true
+      },
+      "pattern" : "SaveToType",
+      "uuid" : "7eb70779-5e61-43ef-8034-61834dad9e99"
+    },
+    "SendEmail" : {
+      "configuration" : {
+        "parentStreams" : [ "FindNearestGuard" ],
+        "procedure" : "sendEmail",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "46d36e3f-0c40-4bb1-8814-8de33b751ee2"
+    },
+    "TransformAiCamera" : {
+      "configuration" : {
+        "childStreams" : [ "FindNearestGuard" ],
+        "parentStreams" : [ "EnrichAiCamera" ],
+        "transformation" : {
+          "camera_id" : {
+            "expression" : "event.ai_cameras.camera_id",
+            "type" : "expression"
+          },
+          "image" : {
+            "expression" : "event.image",
+            "type" : "expression"
+          },
+          "lat" : {
+            "expression" : "event.ai_cameras.lat",
+            "type" : "expression"
+          },
+          "location" : {
+            "expression" : "event.ai_cameras.location",
+            "type" : "expression"
+          },
+          "lon" : {
+            "expression" : "event.ai_cameras.lon",
+            "type" : "expression"
+          }
+        },
+        "upsert" : false
+      },
+      "pattern" : "Transformation",
+      "uuid" : "84a112d4-3b2a-48e0-a8cd-d654260a9771"
+    },
+    "TransformGuard" : {
+      "configuration" : {
+        "childStreams" : [ "SaveGuardStatus" ],
+        "parentStreams" : [ "EnrichGuard" ],
+        "transformation" : {
+          "email" : {
+            "expression" : "event.guards.email",
+            "type" : "expression"
+          },
+          "guard_id" : {
+            "expression" : "event.guard_id",
+            "type" : "expression"
+          },
+          "lat" : {
+            "expression" : "event.lat",
+            "type" : "expression"
+          },
+          "lon" : {
+            "expression" : "event.lon",
+            "type" : "expression"
+          },
+          "name" : {
+            "expression" : "event.guards.name",
+            "type" : "expression"
+          },
+          "updated_at" : {
+            "expression" : "now()",
+            "type" : "expression"
+          }
+        },
+        "upsert" : false
+      },
+      "pattern" : "Transformation",
+      "uuid" : "32ee63e9-b8d6-4b5f-85f1-82b5ece82060"
+    }
+  },
+  "collaboratorRoles" : [ ],
+  "compilerOCC" : 25,
+  "currentState" : {
+    "code" : "success"
+  },
+  "description" : "false",
+  "disableBadging" : false,
+  "entityRoles" : [ ],
+  "isComponent" : false,
+  "keyTypes" : [ "system.collaborations" ],
+  "name" : "SuspiciousPersonDetection",
+  "resourceBinding" : {
+    "optionalResources" : [ ],
+    "requiredResources" : [ {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.Guard"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.AiCamera"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.SendEmail"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.SaveGuardStatus"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.FindNearestGuard"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.EnrichAiCamera"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.IsTargetEvent"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.EnrichGuard"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.TransformAiCamera"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.SuspiciousPersonDetection.TransformGuard"
+    }, {
+      "resource" : "procedures",
+      "resourceId" : "apps.SuspiciousPersonDetection.TransformAiCamera"
+    }, {
+      "resource" : "procedures",
+      "resourceId" : "apps.SuspiciousPersonDetection.TransformGuard"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.SuspiciousPersonDetection.SendEmail"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.SuspiciousPersonDetection.SaveGuardStatus"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.SuspiciousPersonDetection.FindNearestGuard"
+    } ]
+  }
+}

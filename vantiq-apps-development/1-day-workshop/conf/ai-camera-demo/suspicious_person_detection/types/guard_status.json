@@ -1,0 +1,71 @@
+{
+  "adminAccessLevel" : "ars_readWrite",
+  "ars_properties" : null,
+  "ars_relationships" : [ ],
+  "audited" : false,
+  "encapsulated" : false,
+  "expiresAfter" : null,
+  "foreignKeys" : null,
+  "groupBy" : "",
+  "groupEnabled" : false,
+  "groupRequired" : false,
+  "indexes" : [ {
+    "keys" : [ "guard_id" ],
+    "options" : {
+      "unique" : true
+    }
+  } ],
+  "maxObjects" : 0,
+  "maxStorage" : 0,
+  "metadata" : false,
+  "name" : "guard_status",
+  "naturalKey" : [ "guard_id" ],
+  "properties" : {
+    "email" : {
+      "encrypted" : false,
+      "multi" : false,
+      "required" : true,
+      "type" : "String",
+      "unique" : false
+    },
+    "guard_id" : {
+      "encrypted" : false,
+      "multi" : false,
+      "required" : true,
+      "type" : "String",
+      "unique" : false
+    },
+    "lat" : {
+      "encrypted" : false,
+      "multi" : false,
+      "required" : true,
+      "type" : "Real",
+      "unique" : false
+    },
+    "lon" : {
+      "encrypted" : false,
+      "multi" : false,
+      "required" : true,
+      "type" : "Real",
+      "unique" : false
+    },
+    "name" : {
+      "encrypted" : false,
+      "multi" : false,
+      "required" : true,
+      "type" : "String",
+      "unique" : false
+    },
+    "updated_at" : {
+      "encrypted" : false,
+      "multi" : false,
+      "required" : false,
+      "type" : "DateTime",
+      "unique" : false
+    }
+  },
+  "role" : "standard",
+  "rulesSuppressed" : false,
+  "userAccessLevel" : "ars_readOnly",
+  "volatile" : false
+}

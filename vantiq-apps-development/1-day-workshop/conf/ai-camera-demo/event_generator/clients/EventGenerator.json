@@ -1,0 +1,130 @@
+{
+  "ars_properties" : {
+    "tags" : [ "#launchable" ]
+  },
+  "ars_public" : false,
+  "ars_relationships" : [ ],
+  "controllers" : {
+    "client" : { },
+    "dataStream" : {
+      "GeneratedAiCamDataStream" : {
+        "onDataArrived" : "RELOCATED to controllers/dataStream/GeneratedAiCamDataStream/onDataArrived.js"
+      },
+      "GeneratedGaurdDataStream" : {
+        "onDataArrived" : "RELOCATED to controllers/dataStream/GeneratedGaurdDataStream/onDataArrived.js"
+      }
+    },
+    "page" : {
+      "Start" : {
+        "widgets" : {
+          "Start" : {
+            "onClick" : "RELOCATED to controllers/page/Start/widgets/Start/onClick.js"
+          },
+          "Stop" : {
+            "onClick" : "RELOCATED to controllers/page/Start/widgets/Stop/onClick.js"
+          }
+        }
+      }
+    }
+  },
+  "isLaunchable" : true,
+  "models" : {
+    "dataObjects" : {
+      "__GLOBAL__" : {
+        "properties" : {
+          "lastAiCamData" : {
+            "defaultLabel" : "lastAiCamData",
+            "defaultValue" : ".. Please press start button.",
+            "type" : "String"
+          },
+          "lastGuardData" : {
+            "defaultLabel" : "lastGuardData",
+            "defaultValue" : "",
+            "type" : "String"
+          }
+        }
+      },
+      "__PARAMETERS__" : {
+        "properties" : { }
+      }
+    },
+    "dataStreams" : [ {
+      "advancedWhereClause" : null,
+      "dataObjectName" : null,
+      "dataTypeList" : [ ],
+      "isDeleteOp" : false,
+      "isInsertOp" : false,
+      "isUpdateOp" : false,
+      "maxRecords" : 0,
+      "name" : "GeneratedAiCamDataStream",
+      "pauseAtStartup" : false,
+      "property" : null,
+      "sortByProperty" : null,
+      "sortDescending" : false,
+      "topic" : "/last/ai_camera/event",
+      "type" : 2,
+      "updateInterval" : 60,
+      "uuid" : "b26ab5d2-84b2-403d-b81f-80fd797879ce",
+      "v" : 1
+    }, {
+      "advancedWhereClause" : null,
+      "dataObjectName" : null,
+      "dataTypeList" : [ ],
+      "isDeleteOp" : false,
+      "isInsertOp" : false,
+      "isUpdateOp" : false,
+      "maxRecords" : 0,
+      "name" : "GeneratedGaurdDataStream",
+      "pauseAtStartup" : false,
+      "property" : null,
+      "sortByProperty" : null,
+      "sortDescending" : false,
+      "topic" : "/last/guard/event",
+      "type" : 2,
+      "updateInterval" : 60,
+      "uuid" : "8f9a268c-34ba-4dea-85f7-7fee33702a8a",
+      "v" : 1
+    } ]
+  },
+  "name" : "EventGenerator",
+  "options" : {
+    "RELOCATE" : [ {
+      "path" : "controllers",
+      "type" : "js"
+    }, {
+      "path" : "views",
+      "type" : "json"
+    } ],
+    "activeTab" : "add",
+    "badgeCount" : 0,
+    "description" : "",
+    "docAssets" : [ ],
+    "productV" : "7.6n",
+    "showCategoryButtons" : true,
+    "showCategoryDataDisplay" : true,
+    "showCategoryDataInput" : true,
+    "showCategoryLayout" : false,
+    "showGridWhileEditing" : true,
+    "theme" : {
+      "backgroundColor" : "#ffffff",
+      "borderColor" : "#d3d6db",
+      "cardAccentColor" : "#ffffff",
+      "cardColor" : "#3c424d",
+      "dataDisplayColor" : "#ffffff",
+      "dataDisplayColors" : [ "#3cbce1", "#996db8", "#86d557", "#ff9800", "#425b71", "#cc467c", "#01aa93", "#ffca28", "#f583a9", "#1c84d4", "#ff6767", "#4caf50" ],
+      "dataInputColor" : "#ffffff",
+      "foregroundColor" : "#566076",
+      "label" : "Light",
+      "name" : "light",
+      "titleBarColor" : "#dddddd",
+      "titleForegroundColor" : "#1f1d17",
+      "v" : 3
+    },
+    "v" : 5
+  },
+  "targetDevice" : "all",
+  "userList" : [ ],
+  "views" : {
+    "Start" : "RELOCATED to views/Start.json"
+  }
+}

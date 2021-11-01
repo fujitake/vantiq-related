@@ -1,0 +1,20 @@
+PROCEDURE findNearestGuard(event Object)
+var cameraLat = event.lat
+var cameraLon = event.lon
+var nearestGuard = null
+for guard in SELECT FROM guard_status {
+    var distance = calcDistance(cameraLat, cameraLon, guard.lat, guard.lon)
+    if nearestGuard == null or nearestGuard.distance > distance {
+        nearestGuard = guard
+        nearestGuard.distance = distance  
+    }
+}
+var result = {
+    guard_id: nearestGuard.guard_id,
+    guard_name: nearestGuard.name,
+    email: nearestGuard.email,
+    ai_camera_location: event.location,
+    image: event.image,
+    distance: nearestGuard.distance
+}
+return result

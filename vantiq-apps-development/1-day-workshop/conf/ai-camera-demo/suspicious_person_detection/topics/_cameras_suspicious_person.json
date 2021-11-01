@@ -1,0 +1,6 @@
+{
+  "ars_relationships" : [ ],
+  "description" : "detected suspicious person event",
+  "isReliable" : false,
+  "name" : "/cameras/suspicious_person"
+}

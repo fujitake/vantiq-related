@@ -1,0 +1,2 @@
+PROCEDURE TimeUtils.unixTimestamp()
+return date(now(), "date", "epochSeconds")

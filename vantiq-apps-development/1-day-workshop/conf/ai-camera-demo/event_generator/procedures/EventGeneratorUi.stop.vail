@@ -1,0 +1,5 @@
+PROCEDURE EventGeneratorUi.stop()
+DELETE system.scheduledevents WHERE name IN ["GenerateAiCameraEvents","GenerateGuardEvents"]
+PUBLISH { "message": "stopped" } TO TOPIC "/last/ai_camera/event"
+PUBLISH { "message": "stopped" } TO TOPIC "/last/guard/event" 
+

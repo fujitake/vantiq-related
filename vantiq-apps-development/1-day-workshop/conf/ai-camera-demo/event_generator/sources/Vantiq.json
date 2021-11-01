@@ -1,0 +1,19 @@
+{
+  "activationConstraint" : "",
+  "active" : true,
+  "ars_properties" : null,
+  "ars_relationships" : [ ],
+  "config" : {
+    "accessToken" : "your-access-token",
+    "accessTokenType" : "string",
+    "pollingInterval" : 0,
+    "query" : { },
+    "requestDefaults" : { },
+    "uri" : "https://dev.vantiq.co.jp/api/v1/resources/topics//cameras/suspicious_person"
+  },
+  "direction" : "BOTH",
+  "messageType" : null,
+  "mockProcedures" : { },
+  "name" : "Vantiq",
+  "type" : "REMOTE"
+}
