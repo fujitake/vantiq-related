@@ -164,7 +164,7 @@ This section describes the points to keep in mind from the infrastructure admini
 Minor Upgrade is an upgrade that involves metadata schema changes. Therefore, it is required to set the service outage time.  
 1. Change the parameters of the Vantiq Deployment Tool. Review it on the repository.  
 2. Stop the Vantiq service (set Vantiq Statefulset scale to `0`).
-3. Do a Mongodb backup.  
+3. Backup Mongodb.  
 4. Apply the changes with the Vantiq Deploy tool.&emsp;→&emsp;The new container image of the Vantiq is retrieved and the pod is replaced. In this process, the schema changes to the DB are applied.  
 5. Confirm that the Vantiq service is working, and then restore the scale value.  
 
