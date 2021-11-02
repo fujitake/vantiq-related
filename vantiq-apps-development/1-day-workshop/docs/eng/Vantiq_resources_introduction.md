@@ -135,7 +135,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 }
 ```
 ② Call the custom procedure to compare locations and identify the nearest security guards   
-③ Specify the nearest security guard by comparing the location information contained in _the AI camera data which is being stream processing_ and the location information in _the security guard data stored in Type_.    
+③ Identify the nearest security guard by comparing the location contained in _the AI camera data in the stream_ and the locations in _the security guard data saved in Type_.    
 ④ Store the latest location information of the security guards.  
 
 
