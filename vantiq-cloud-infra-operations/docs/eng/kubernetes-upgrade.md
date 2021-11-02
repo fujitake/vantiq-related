@@ -112,7 +112,7 @@ Upgrade with Terraform | Update the version within the Terraform configuration f
 
 #### Upgrade with AWS Management Console
 
-1. Specify the cluster in Amazon EKS and execute the Control Plane upgrade with **Update Now**.  
+1. Select the cluster in Amazon EKS and execute the Control Plane upgrade with **Update Now**.  
 ![eks1](../../imgs/kubernetes-upgrade/eks-1.png)
 
 1. Once the Control Plane upgrade is complete, select the Nodepool from the Node Group and execute the Node Pool upgrade with **Update Now**. Repeat for as many Node Group as necessary and upgrade the versions of each.  
