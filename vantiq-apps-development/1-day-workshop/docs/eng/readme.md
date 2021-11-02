@@ -69,6 +69,7 @@ Session #|Session      | Type  |Contents Description       |Duration (m)|Materia
 |8|Q&A||Question and Answer session|15||
 |9|VANTIQ REST API|Lab|Next Steps for the Vantiq 1-day Workshop| | [Lab05_VANTIQ_REST_API](a08-Lab05_VANTIQ_REST_API.md)|
 |10| Integrate with other services|Lab|Next Steps for the Vantiq 1-day Workshop| |[Lab06_Integrate_other_services](a09-Lab06_Integrate_other_services.md)|
-|11| Task in detect congestion app development|Lecture|Next Steps for the Vantiq 1-day Workshop| | [detect_congestion_app](a10-dev01_detect_congestion_app.md)|
+|11|Introducing overall Vantiq Resources||Reference||Understanding Vantiq Resources through real-world example(Vantiq_resources_introduction.md)|
+|12| Task in detect congestion app development|Lecture|Next Steps for the Vantiq 1-day Workshop| | [detect_congestion_app](a10-dev01_detect_congestion_app.md)|
 
 ＊ After completing the above sessions, developers are encouraged to attend [Applications Developer Level I Course](https://community.vantiq.com/courses/developer-level-1-course/)(Login required）for a deeper understanding.

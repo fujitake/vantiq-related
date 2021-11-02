@@ -1,4 +1,4 @@
-# Understanding Vantiq Resources through real-world examples
+# Understanding Vantiq Resources through real-world example
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%> Notification system to security guards using AI cameras  
 
