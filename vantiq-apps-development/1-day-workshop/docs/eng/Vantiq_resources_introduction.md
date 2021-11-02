@@ -157,7 +157,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 A sample App (consisting of App and Data Generator) can be found [here](../../conf/ai-camera-demo).    
 
 
-# Introduction to each Resource
+# Review of basic Resources
 
 |Reource|Description|
 |:-----|:---|
