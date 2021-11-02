@@ -161,7 +161,7 @@ A sample App (consisting of App and Data Generator) can be found [here](../../co
 
 |Reource|Description|
 |:-----|:---|
-|Source|A client that sends and receives data. &nbsp; Sending and Receiving: MQTT, AMQP, Kafka &nbsp; Sending only: HTTP(S), E-mail, SMS|
+|Source|A client that sends and receives data. &nbsp; Sending and Receiving: MQTT, AMQP, Kafka &nbsp; Sending only: HTTP(S) REST, E-mail, SMS|
 |Topic|An event bus that passes events between App in Vantiq, etc. It also functions as an endpoint of REST API.|
 |Type|Store the data. Resource which corresponds to the DB in Vantiq.|
 |App|The application itself which can be developed on GUI by combining prepared patterns and Procedure.|
