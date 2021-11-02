@@ -202,5 +202,5 @@ The Fallback procedure;
 - System Admin can access the IDE and System Admin/Grafana, and various items should display the same information as before the upgrade.  
 - Confirm whether errors are occurring in System Namespace, and identify the cause of error if any.  
 - Confirm whether errors are occurring in Organization root, and identify the cause of error if any.  
-- In the Application Namespace, confirm whether the data which existed before the upgrade is missing.  
+- In the Application Namespace, confirm whether the data which existed before the upgrade is NOT missing.  
 - Confirm whether errors are occurring in Application Namespace, and isolate the problem if an error is occurring.  
