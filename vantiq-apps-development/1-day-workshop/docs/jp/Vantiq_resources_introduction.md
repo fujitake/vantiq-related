@@ -163,7 +163,7 @@ Procedure へ渡すデータ
 
 |Reource|説明|
 |:-----|:---|
-|Source|データの送受信を行うクライアント。送受信: MQTT、AMQP、Kafka &emsp;  送信のみ: HTTP(S)、E-mail、SMS|
+|Source|データの送受信を行うクライアント。送受信: MQTT、AMQP、Kafka &emsp;  送信のみ: REST、E-mail、SMS|
 |Topic|Vantiq 内のアプリ間などでイベントの受け渡しをするイベントバス。REST API のエンドポイントとしても機能する。|
 |Type|データを保存する。Vantiq で DB に該当するリソース。|
 |App|用意されたパターンや Procedure を組み合わせながら GUI 上で開発することができるアプリケーション本体。|
