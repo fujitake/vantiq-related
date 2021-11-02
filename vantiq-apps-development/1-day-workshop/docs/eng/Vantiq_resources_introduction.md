@@ -139,7 +139,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 ④ This Type holds the latest locations of the security guards.  
 
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>5. Notify the specified security guard  
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>5. Notify the identified security guard  
 
 <img src="../../imgs/Vantiq_resources_introduction/slide12.png" width=70%>  
 
