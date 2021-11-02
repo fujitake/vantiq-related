@@ -44,16 +44,16 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Process to be implemented in Vantiq
 
-1. Receive data from the AI camera and the location acquiring App.  
+1. Receive data from AI cameras and the location acquiring App.  
    * It is preferable to be able to easily respond to the specification changes caused by protocols and version upgrades.    
 
-1. Add the necessary information to the data sent from the AI camera.  
+1. Add the necessary information to the data sent from AI cameras.  
    * AI camera does not have location information, so it will be stored on the Vantiq side and added.    
 
-1. Store and update the latest location information of security guard.    
-   * In order to reduce the time lag for notification, the location information of the security guard is stored in advance on the Vantiq side instead of being acquired when a suspicious person is detected.    
+1. Store and update the latest location information of security guards.    
+   * In order to reduce the time lag for notification, the location information of the security guards is stored in advance on the Vantiq side instead of being acquired when a suspicious person is detected.    
 
-1. Comparing the location of the AI camera which notifications were made and the location of security guard.  
+1. Comparing the location of the AI camera which notifications were made and the location of security guards.  
    * Specify the nearest security guard.    
 
 1. Notify the nearest security guard.    
@@ -71,7 +71,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 ②　Source receives data via various protocols.    
 ③　Topic is an endpoint of REST API.    
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Adding information to data which comes from the AI camera
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Adding information to data which comes from AI cameras
 
 <img src="../../imgs/Vantiq_resources_introduction/slide9.png" width=70%>
 
@@ -84,7 +84,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 }
 ```  
 ② Data formatting as needed, such as changing or deleting parameters. (Transformation)  
-③ App retrieves information of Type and adds it to the stream data that comes from the AI camera. (Enrich)    
+③ App retrieves information of Type and adds it to the stream data that comes from AI cameras. (Enrich)    
 ```sh
 {
 👉“camera_id”: "camera_001",
@@ -94,7 +94,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 “image”: "data:image/jpe...."
 }
 ```  
-④ Store information that want to add, such as the location information of the AI camera.  
+④ Store information that want to add, such as the location information of AI cameras.  
 ``` sh
 {
 👉“camera_id”: "camera_001",
@@ -103,7 +103,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 }
 ```
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>3. Store and update the latest location information of security guard  
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>3. Store and update the latest location information of security guards  
 
 <img src="../../imgs/Vantiq_resources_introduction/slide10.png" width=70%>  
 
@@ -120,7 +120,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 ② Add information using `Enrich` if E-mail address, phone number, etc. are required for notification.    
 ③ Store only the latest one in *Type* by using `SaveToType` with `Upsert` setting in App.  
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. Comparing the location of AI cameras and security guards  
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. Comparing the location of the AI camera and security guards  
 
 <img src="../../imgs/Vantiq_resources_introduction/slide11.png" width=70%>  
 
@@ -136,7 +136,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 ```
 ② Call your own function which is programmed the logic for comparing positions, from App.    
 ③ Specify the nearest security guard by comparing the location information contained in _the AI camera data which is being stream processing_ and the location information in _the security guard data stored in Type_.    
-④ Store the latest location information of the security guard.  
+④ Store the latest location information of the security guards.  
 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>5. Notify the specified security guard  
@@ -154,14 +154,14 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Sample App  
 
-A sample App (consisting of App and Data Generator) can be found[here](../.. /conf/ai-camera-demo).    
+A sample App (consisting of App and Data Generator) can be found [here](../.. /conf/ai-camera-demo).      
 
 
 # Introduction to each Resource
 
 |Reource|Description|
 |:-----|:---|
-|Source|A client that sends and receives data.  Sending and Receiving: MQTT, AMQP, Kafka &nbsp; Sending only: HTTP(S), E-mail, SMS|
+|Source|A client that sends and receives data. &nbsp; Sending and Receiving: MQTT, AMQP, Kafka &nbsp; Sending only: HTTP(S), E-mail, SMS|
 |Topic|An event bus that passes events between App in Vantiq, etc. It also functions as an endpoint of REST API.|
 |Type|Store the data. Resource which corresponds to the DB in Vantiq.|
 |App|The application itself which can be developed on GUI by combining prepared patterns and Procedure.|
