@@ -11,7 +11,7 @@ Upgrade with Terraform  | Update the version within the Terraform configuration 
 
 #### Upgrade with Azure Portal  
 1. Upgrade Control Plane    
-   There are two options **to upgrade only the Control Plane** or **to also upgrade all node pools**, **do the former**. For Nodepool, the dependencies of the Vantiq pod group should be considered and executed in order.  
+   There are two available options **to upgrade only the Control Plane** or **to also upgrade all node pools**, but **use the former** one. For Nodepool, the dependencies of the Vantiq pod group should be considered and executed according to that order.  
 
    ![aks1](../../imgs/kubernetes-upgrade/aks-1.png)
 
