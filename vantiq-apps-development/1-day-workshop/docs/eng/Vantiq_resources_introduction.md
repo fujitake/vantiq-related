@@ -171,6 +171,6 @@ A sample App (consisting of App and Data Generator) can be found [here](../../co
 
 ① Send data to and receive data from external services and call external APIs.    
 ② Implement Apps using predefined patterns and Procedures.    
-③ Implement the process that is external to the pattern on your own.    
+③ Implement the custom logic.    
 ④ Stream data which are sent from the device.    
 ⑤ Holds information to be enriched to the stream data, and store real-time status, etc.  
