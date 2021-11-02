@@ -71,7 +71,7 @@
 ②　Source は様々なプロトコルでデータを受信する  
 ③　Topic は REST API のエンドポイント経由でデータを受信する  
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. AI カメラからのデータへ情報追加
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. AI カメラからのデータへ情報付加
 
 <img src="../../imgs/Vantiq_resources_introduction/slide9.png" width=70%>
 
