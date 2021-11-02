@@ -203,4 +203,4 @@ The Fallback procedure;
 - Confirm whether errors are occurring in System Namespace, and identify the cause of error if any.  
 - Confirm whether errors are occurring in Organization root, and identify the cause of error if any.  
 - In the Application Namespace, confirm whether the data which existed before the upgrade is NOT missing.  
-- Confirm whether errors are occurring in Application Namespace, and isolate the problem if an error is occurring.  
+- Confirm whether errors are NOT occurring in Application Namespace,  and identify the cause of error if any.  
