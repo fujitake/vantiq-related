@@ -57,7 +57,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
    * Identify the nearest security guard on site.    
 
 1. Notify the nearest security guard.    
-   * Send notifications via E-mail, SMS, LINE, Slack, and in any other way you choose.    
+   * notify via arbitrary channels such as E-mail, SMS, LINE, Slack
 
 
 # Implementation method
