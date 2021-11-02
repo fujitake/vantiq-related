@@ -6,7 +6,7 @@
 There are two ways to upgrade AKS.  
 Method | Content | Requirements
 --|---|--
-Upgrade with Azure Portal  | Upgrade manually via Azure Portal in the order of Control Plane, Node Pools. | <ul><li>The execute user must have the necessary update permissions for the subscription.</li></ul>
+Upgrade with Azure Portal  | Upgrade manually via Azure Portal in the order of the Control Plane, then the Node Pools. | <ul><li>The operating user must have the required access to manage resoruces for the subscription.</li></ul>
 Upgrade with Terraform  | Update the version within the Terraform configuration file and apply it to Azure.  |<ul><li>The user of the Terraform execution environment must have the necessary update permissions for the subscription.</li><li>There must be no deviation in the configuration of Terraform before the update is applied (No configuration changes have been made outside of Terraform after configuring with Terraform).</li></ul>
 
 #### Upgrade with Azure Portal  
