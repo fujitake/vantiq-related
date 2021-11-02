@@ -32,7 +32,7 @@ Upgrade with Terraform  | Update the version within the Terraform configuration 
 
 The following is the procedure assuming that it was installed using the template ["Azure AKS for Vantiq with Terraform"](../../../vantiq-cloud-infra-operations/terraform_azure/readme_en.md). In case that different template was used, make the changes as per the template.  
 
-1. Change the value of `kubernetes_version` in `main.tf` to the version of the target.  
+1. Change the value of `kubernetes_version` in `main.tf` to the value of the target version.  
 
 ```terraform
 ###
