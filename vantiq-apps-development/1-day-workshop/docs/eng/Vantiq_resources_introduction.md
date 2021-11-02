@@ -120,7 +120,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 ② `Enrich` additional information such as E-mail address, phone number, etc. required for notification.    
 ③ Save to *Type* by `SaveToType` activity with `Upsert` option to retain the latest information only.  
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. Comparing the location of the AI camera and security guards  
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. Compare the location of the AI camera and the locations of security guards  
 
 <img src="../../imgs/Vantiq_resources_introduction/slide11.png" width=70%>  
 
