@@ -194,7 +194,7 @@ The Fallback procedure;
 ## Items to be verified after upgrading
 
 #### Items to be verified with CLI
-- The STATUS of the Worker node should be `Ready` with Kubectl command.  
+- The STATUS of the Worker node should be confirmed as`Ready` in Kubectl command.  
 - All Pods should be `Running` with Kubectl command. However, mongobackup is not included because it is a job.  
 
 
