@@ -108,7 +108,7 @@
 
 <img src="../../imgs/Vantiq_resources_introduction/slide10.png" width=70%>  
 
-①
+①　送信されるデータ
 ```sh
 {
 "guard_id": "134678493_1",
