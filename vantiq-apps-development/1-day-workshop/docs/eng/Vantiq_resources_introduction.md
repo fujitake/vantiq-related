@@ -69,7 +69,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 
 ①　Vantiq can process data even if the schema of the data to be received is not defined.    
 ②　Source receives data via various protocols.    
-③　Topic is an endpoint of REST API.    
+③　A Topic is an endpoint of REST API.    
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Adding information to data which comes from AI cameras
 
