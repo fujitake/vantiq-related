@@ -1,5 +1,5 @@
 # Kubernetes upgrade
- This article describes how to upgrade a Kubernetes cluster running Vantiq by an infrastructure administrator in a Vantiq Private Cloud configuration, and what to keep in mind.  
+ This article describes instructions and points to keep in mind for an infrastructure administrator to upgrade a Kubernetes cluster running Vantiq Private Cloud.  
 
 ## AKS upgrade<a id="aks_upgrade"></a>
 
