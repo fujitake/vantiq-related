@@ -30,7 +30,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Method of obtaining location information of security guard  
 
 - A security guard has a smartphone with an App that acquires location.    
-- App sends the following data to MQTT broker at an optional frequency, such as every 30 seconds.  
+- App sends the following data to MQTT broker at a certain frequency, such as every 30 seconds.  
 
 ```sh
 {
