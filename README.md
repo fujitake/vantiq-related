@@ -6,6 +6,8 @@ This repository is for sharing various technical guidance and instructions of Va
 Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
 - [AWS EKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_aws/readme_en.md)
 - [Azure AKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_azure/readme_en.md)
+- [kubernetes (EKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#eks_upgrade)    
+- [kubernetes (AKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#aks_upgrade)
 - [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
 - [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
 - [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
@@ -25,6 +27,7 @@ Guides and procedures for building and operating the Vantiq Platform.
 ### [Vantiq Application Development related](./vantiq-apps-development)
 Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
+- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/1-day-workshop/docs/eng/Vantiq_resources_introduction.md)
 - [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiq with External Services Integration](./vantiq-external-services-integration)
@@ -79,6 +82,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
 Vantiqアプリケーションの開発や運用に関するガイドや学習マテリアルです。
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
+- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/1-day-workshop/docs/jp/Vantiq_resources_introduction.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
