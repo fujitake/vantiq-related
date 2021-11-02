@@ -106,7 +106,7 @@ Plan: 0 to add, 5 to change, 0 to destroy.
 There are two ways to upgrade EKS.  
 Method | Content  | Requirements
 --|---|--
-Upgrade with AWS Management Console | Upgrade manually via AWS Management Console in the order of Control Plane, Node Pools. | <ul><li>The execute user must have the necessary IAM update permissions.</li></ul>
+Upgrade with AWS Management Console | Upgrade manually via AWS Management Console in the order of Control Plane followed by Node Pools. | <ul><li>The execute user must have the necessary IAM update permissions.</li></ul>
 Upgrade with Terraform | Update the version within the Terraform configuration file and apply it to AWS.  |<ul><li>The user of the Terraform execution environment must have the necessary IAM update permissions.</li><li>There must be no deviation in the configuration of Terraform before the update is applied (No configuration changes have been made outside of Terraform after configuring with Terraform).</li></ul>
 
 
