@@ -165,7 +165,7 @@ A sample App (consisting of App and Data Generator) can be found [here](../../co
 |Topic|An event bus that passes events between App's in Vantiq, etc. It also receives data via REST API endpoint.|
 |Type|Store the data. A resource equivalent to a DB table in Vantiq.|
 |App| An application which can be developed on GUI using predefined patterns and Procedures.|
-|Procedure|Resource which can be programmed by oneself. It is possible to use the original features by calling them in App and so on.|
+|Procedure| A resource in which the custom logic can be implemented. It can be called from various resources such as Apps and Procedures.|
 
 <img src="../../imgs/Vantiq_resources_introduction/slide14.png" width=73%>  
 
