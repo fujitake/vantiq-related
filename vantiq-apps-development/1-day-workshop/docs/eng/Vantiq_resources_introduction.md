@@ -24,7 +24,7 @@ Detect suspicious persons in a large park using AI cameras, and notify the neare
 ```
 
 ***※ Generally, AI cameras do not have location information with them.
-If they have them, it will be required to have an AI camera engineer along with a construction worker to replace them.***
+If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Method of obtaining location information of security guard  
