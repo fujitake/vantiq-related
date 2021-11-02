@@ -103,7 +103,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 }
 ```
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>3. Store and update the latest location information of security guards  
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>3. Continuously update the latest location of security guards.   
 
 <img src="../../imgs/Vantiq_resources_introduction/slide10.png" width=70%>  
 
