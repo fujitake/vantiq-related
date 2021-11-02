@@ -187,7 +187,7 @@ The Fallback procedure;
 &nbsp; 6. Restore the scale value of the Vantiq service.  
 
 #### Known risks and considerations
-- It is required that access to the required Public repository is allowed. When a Whitelist is configured in the Firewall, the mirror server of the Public container repository has no public information, and permissions to access unknown mirror servers need to be added each time.  
+- An access to the required Public container repository must be allowed. When a Whitelist is configured in the Firewall, the mirror server of the Public container repository has no public information, so chances are that permissions to access unknown mirror servers need to be added each time.  
 - This may take longer than expected in a non-direct ssh work environment.  
 
 
