@@ -153,7 +153,7 @@ module "eks" {
 -  Prior to upgrading operation, make sure that new kubernetes version is supported by Vantiq.  Please contact Vantiq Support in advance.  
 - When upgrading the Vantiq Node pool (nodegroup) and the mongodb Node pool (nodegroup) at the same time, there will be a timing when the vantiq pod will not start, which may cause a short disruption of the vantiq service. Do NOT do each at the same time.  
 - Effective from AKS 1.19, **containerd** is used instead of docker. There are two issues regarding the metrics collection done by Vantiq. One is that in System Admin Grafana, Influxdb's Measurements for CPU for Vantiq Resources and MongoDB Monitoring Dashboard have been changed, so the dashboard's query parameters need to be updated (attached separately). Another is that the connection to "docker.sock" on "ds/telegraf-ds" is continuously failing. This has not been resolved as of the update of wiriting this article, and needs an operational workaround.  
-- There is a possibility that the pod moves to an unintended node when the Worker node is restarted. Confirm the placement of the pod and relocate it if necessary (preliminary rocedure).  
+- There is a chance that the pods get scheduled on an unintended node when the Worker node is restarted. Confirm the placement of the pod and relocate it if necessary (refer to [Trouble Shooting Guide for Vantiq Cloud operations](../../../vantiq-platform-operations/docs/en/vantiq_k8s_troubleshooting.md)).  
 
 
 
