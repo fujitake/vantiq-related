@@ -136,7 +136,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 ```
 ② Call the custom procedure to compare locations and identify the nearest security guards   
 ③ Identify the nearest security guard by comparing the location contained in _the AI camera data in the stream_ and the locations in _the security guard data saved in Type_.    
-④ Store the latest location information of the security guards.  
+④ This Type holds the latest locations of the security guards.  
 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>5. Notify the specified security guard  
