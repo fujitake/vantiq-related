@@ -69,7 +69,7 @@
 
 ①　Vantiq は受信するデータのスキーマが定まっていなくても処理することができる  
 ②　Source は様々なプロトコルでデータを受信する  
-③　Topic は REST API のエンドポイントになる  
+③　Topic は REST API のエンドポイント経由でデータを受信する  
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. AI カメラからのデータへ情報追加
 
