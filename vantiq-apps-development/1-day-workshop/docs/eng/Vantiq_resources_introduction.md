@@ -154,14 +154,14 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Sample App  
 
-A sample app (consisting of App and Data Generator) can be found [here](. /.. /conf/ai-camera-demo).    
+A sample app (consisting of App and Data Generator) can be found [here](../.. /conf/ai-camera-demo).    
 
 
 # Introduction to each resource
 
 |Reource|Description|
 |:-----|:---|
-|Source|A client that sends and receives data.  Sending and Receiving: MQTT, AMQP, Kafka &emsp;  Sending only: HTTP(S), E-mail, SMS|
+|Source|A client that sends and receives data.  Sending and Receiving: MQTT, AMQP, Kafka &nbsp; Sending only: HTTP(S), E-mail, SMS|
 |Topic|An event bus that passes events between App in Vantiq, etc. It also functions as an endpoint of REST API.|
 |Type|Store the data. Resource which corresponds to the DB in Vantiq.|
 |App|The application itself which can be developed on GUI by combining prepared patterns and Procedure.|
