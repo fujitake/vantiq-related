@@ -44,7 +44,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Process to be implemented in Vantiq
 
-1. Receive data from AI cameras and the location acquiring App.  
+1. Receive data from AI cameras and the location App.  
    * It is preferable to be able to easily respond to the specification changes caused by protocols and version upgrades.    
 
 1. Add the necessary information to the data sent from AI cameras.  
