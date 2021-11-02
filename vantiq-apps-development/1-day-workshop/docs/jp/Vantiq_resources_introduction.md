@@ -118,7 +118,7 @@
 "time": 1631083251
 }
 ```  
-② 通知時にメールアドレス、電話番号などが必要な場合は、`Enrich` を使って情報を追加する  
+② 通知時にメールアドレス、電話番号などが必要な情報を、`Enrich` を使って追加する  
 ③ アプリで `SaveToType` を `Upsert` 設定で使用することで最新の一件のみを *Type* に保存する
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. AI カメラと警備員の位置を比較
