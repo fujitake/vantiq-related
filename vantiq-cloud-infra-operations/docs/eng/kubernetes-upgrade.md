@@ -123,7 +123,7 @@ Upgrade with Terraform | Update the version within the Terraform configuration f
 
 The following is the procedure assuming that it was installed using the template ["AWS EKS for Vantiq with Terraform"](../../../vantiq-cloud-infra-operations/terraform_aws/readme_en.md). If it used a different template, make the necessary changes accordingly.  
 
-1. Change the value of `cluster_version` in `main.tf` to the version of the target.  
+1. Change the value of `cluster_version` in `main.tf` to the value of the target version.  
 
 ```terraform
 module "eks" {
