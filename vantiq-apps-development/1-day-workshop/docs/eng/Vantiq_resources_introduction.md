@@ -117,7 +117,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 "time": 1631083251
 }
 ```  
-② Add information using `Enrich` if E-mail address, phone number, etc. are required for notification.    
+② `Enrich` additional information such as E-mail address, phone number, etc. required for notification.    
 ③ Store only the latest one in *Type* by using `SaveToType` with `Upsert` setting in App.  
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. Comparing the location of the AI camera and security guards  
