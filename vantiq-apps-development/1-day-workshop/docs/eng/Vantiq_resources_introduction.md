@@ -94,7 +94,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 “image”: "data:image/jpe...."
 }
 ```  
-④ Store information that want to add, such as the location information of AI cameras.  
+④ Additional information used in ③, such as the locations are maintained in Type. 
 ``` sh
 {
 👉“camera_id”: "camera_001",
