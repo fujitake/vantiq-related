@@ -201,6 +201,6 @@ The Fallback procedure;
 #### In Vantiq IDE
 - System Admin can access the IDE and System Admin/Grafana, and various items should display the same information as before the upgrade.  
 - Confirm whether errors are occurring in System Namespace, and identify the cause of error if any.  
-- Confirm whether errors are occurring in Organization root, and isolate the problem if an error is occurring.  
+- Confirm whether errors are occurring in Organization root, and identify the cause of error if any.  
 - In the Application Namespace, confirm whether the data which existed before the upgrade is missing.  
 - Confirm whether errors are occurring in Application Namespace, and isolate the problem if an error is occurring.  
