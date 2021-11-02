@@ -75,7 +75,7 @@
 
 <img src="../../imgs/Vantiq_resources_introduction/slide9.png" width=70%>
 
-①
+①　送信されるデータ
 ```sh
 {
 👉“camera_id”: "camera_001",
