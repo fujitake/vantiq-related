@@ -107,7 +107,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 
 <img src="../../imgs/Vantiq_resources_introduction/slide10.png" width=70%>  
 
-①
+① Sent Data
 ```sh
 {
 "guard_id": "134678493_1",
