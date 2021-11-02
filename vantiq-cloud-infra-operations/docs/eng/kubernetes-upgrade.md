@@ -18,7 +18,7 @@ Upgrade with Terraform  | Update the version within the Terraform configuration 
 1. Upgrade Nodepool   
    Select the target Nodepools from the Node pools and upgrade them respectively. Keep in mind the following points;  
 
-    - Nodepools running Vantiq pod and Mongodb pod should be upgraded at different times from other Nodepools. It is acceptable to upgrade them at the same time if the criteria are met.  
+    - Nodepools running Vantiq pod and Mongodb pod should NOT be upgraded at the same time. It is acceptable to upgrade them at the same time if the criteria are met.  
     - When upgrading Nodepool running Vantiq pod, confirm that both Mongodb pod and Keycloak pod are running normally (status=Running) before upgrading.  
 
     ![aks2](../../imgs/kubernetes-upgrade/aks-2.png)  
