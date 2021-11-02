@@ -13,7 +13,7 @@ Detect suspicious persons in a large park using AI cameras, and notify the neare
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Specification of the AI camera
 
 - Model has been trained to identify the characteristics of suspicious persons.  
-- When a suspicious person is seen within the angle of view, send the following data via _HTTPS REST_.
+- When a suspicious person is captured in the camera view, send the following data via _HTTPS REST_.
 
 ```sh
 {
