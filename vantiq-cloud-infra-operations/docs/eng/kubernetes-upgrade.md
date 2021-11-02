@@ -198,7 +198,7 @@ The Fallback procedure;
 - All Pods should be `Running` with Kubectl command. However, mongobackup is not included because it is a job.  
 
 
-#### Items to be verified with Vantiq IDE
+#### In Vantiq IDE
 - System Admin can access the IDE and System Admin/Grafana, and various items should display the same information as before the upgrade.  
 - Confirm whether errors are occurring in System Namespace, and isolate the problem if an error is occurring.  
 - Confirm whether errors are occurring in Organization root, and isolate the problem if an error is occurring.  
