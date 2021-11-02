@@ -50,7 +50,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 1. Enrich the data sent from AI cameras.  
    * Since AI camera does not have location itself, such data should be maintained in Vantiq side and added when necessary.    
 
-1. Store and update the latest location information of security guards.    
+1. Continuously update the latest location of security guards.    
    * In order to reduce the time lag for notification, the location information of the security guards is stored in advance on the Vantiq side instead of being acquired when a suspicious person is detected.    
 
 1. Comparing the location of the AI camera which notifications were made and the location of security guards.  
