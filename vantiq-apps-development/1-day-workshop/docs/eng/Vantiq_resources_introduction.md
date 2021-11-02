@@ -23,7 +23,7 @@ Detect suspicious persons in a large park using AI cameras, and notify the neare
 }
 ```
 
-***※ Generally, AI cameras do not have location information.  
+***※ Generally, AI cameras do not have location information with them.
 If they have them, it will be required to have an AI camera engineer along with a construction worker to replace them.***
 
 
