@@ -1,0 +1,12 @@
+PROCEDURE EventGenerator.generateAiCameraEvent(aiCamera Object)
+var event = {
+    camera_id: aiCamera.camera_id,
+    event_type: "active",
+    image: "none",
+    timestamp: TimeUtils.unixTimestamp()
+}
+if aiCamera.camera_id == "camera_001" {
+    event.event_type = "notice_001"
+    event.image = ImageUtils.suspiciousPersonImage()
+}
+return event

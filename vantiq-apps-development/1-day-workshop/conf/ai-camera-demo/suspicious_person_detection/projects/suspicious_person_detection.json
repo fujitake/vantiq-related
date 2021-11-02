@@ -1,0 +1,266 @@
+{
+  "ars_relationships" : [ ],
+  "links" : [ {
+    "source" : "topic//cameras/suspicious_person",
+    "target" : "app/SuspiciousPersonDetection"
+  }, {
+    "source" : "type/ai_cameras",
+    "target" : "app/SuspiciousPersonDetection"
+  }, {
+    "source" : "type/guards",
+    "target" : "app/SuspiciousPersonDetection"
+  }, {
+    "source" : "source/GuardMqttBroker",
+    "target" : "app/SuspiciousPersonDetection"
+  }, {
+    "source" : "app/SuspiciousPersonDetection",
+    "target" : "type/guard_status"
+  }, {
+    "source" : "type/guard_status",
+    "target" : "procedure/findNearestGuard"
+  }, {
+    "source" : "procedure/findNearestGuard",
+    "target" : "procedure/calcDistance"
+  }, {
+    "source" : "app/SuspiciousPersonDetection",
+    "target" : "procedure/findNearestGuard"
+  }, {
+    "source" : "procedure/sendEmail",
+    "target" : "source/MailServer"
+  }, {
+    "source" : "app/SuspiciousPersonDetection",
+    "target" : "procedure/sendEmail"
+  } ],
+  "name" : "suspicious_person_detection",
+  "options" : {
+    "description" : "",
+    "dockCollapsed" : {
+      "bottom" : true,
+      "left" : false,
+      "right" : false,
+      "top" : false,
+      "viewtabs" : false
+    },
+    "dockDimensions" : {
+      "bottom" : 200,
+      "debug" : [ 0, 0, 0 ],
+      "left" : 242,
+      "right" : 220,
+      "top" : 0,
+      "viewtabs" : 0
+    },
+    "exclusionList" : [ "source/GuardsLocationMqttBroker", "source/MqttBroker", "source/guardsLocationMqttBroker", "type/gurd_status" ],
+    "filterBitArray" : "ffffffffffffffffffffffffffffffff",
+    "isModeloProject" : true,
+    "layoutStyle" : "custom",
+    "openFolders" : [ "source", "type", "services", "app", "procedure" ],
+    "rootViewFlavor" : 1,
+    "showGrid" : true,
+    "type" : "dev",
+    "v" : 4,
+    "viewUUID" : "MAINVIEW"
+  },
+  "resources" : [ {
+    "label" : "/cameras/suspicious_person",
+    "name" : "/cameras/suspicious_person",
+    "resourceReference" : "/topics//cameras/suspicious_person",
+    "type" : 10
+  }, {
+    "inventory" : {
+      "clientHash" : [ ],
+      "clients" : [ ],
+      "collaborationHash" : [ ],
+      "collaborations" : [ ],
+      "eventstreamHash" : [ ],
+      "eventstreams" : [ ],
+      "procedureHash" : [ ],
+      "procedures" : [ ],
+      "sourceHash" : [ ],
+      "sources" : [ ],
+      "systemmodelHash" : [ ],
+      "systemmodels" : [ ],
+      "topicHash" : [ ],
+      "topics" : [ ],
+      "typeHash" : [ ],
+      "types" : [ ]
+    },
+    "label" : "GuardMqttBroker",
+    "name" : "GuardMqttBroker",
+    "resourceReference" : "/sources/GuardMqttBroker",
+    "timestamp" : "2021-09-21T05:24:29.150Z",
+    "type" : 4
+  }, {
+    "inventory" : {
+      "clientHash" : [ ],
+      "clients" : [ ],
+      "collaborationHash" : [ ],
+      "collaborations" : [ ],
+      "eventstreamHash" : [ ],
+      "eventstreams" : [ ],
+      "procedureHash" : [ ],
+      "procedures" : [ ],
+      "sourceHash" : [ ],
+      "sources" : [ ],
+      "systemmodelHash" : [ ],
+      "systemmodels" : [ ],
+      "topicHash" : [ ],
+      "topics" : [ ],
+      "typeHash" : [ ],
+      "types" : [ ]
+    },
+    "label" : "MailServer",
+    "name" : "MailServer",
+    "resourceReference" : "/sources/MailServer",
+    "timestamp" : "2021-09-13T01:48:17.343Z",
+    "type" : 4
+  }, {
+    "inventory" : {
+      "clientHash" : [ ],
+      "clients" : [ ],
+      "collaborationHash" : [ ],
+      "collaborations" : [ ],
+      "eventstreamHash" : [ ],
+      "eventstreams" : [ ],
+      "procedureHash" : [ "out", "out" ],
+      "procedures" : [ "findNearestGuard", "sendEmail" ],
+      "sourceHash" : [ "in" ],
+      "sources" : [ "GuardMqttBroker" ],
+      "systemmodelHash" : [ ],
+      "systemmodels" : [ ],
+      "topicHash" : [ "in" ],
+      "topics" : [ "/cameras/suspicious_person" ],
+      "typeHash" : [ "in", "in", "out" ],
+      "types" : [ "ai_cameras", "guards", "guard_status" ]
+    },
+    "label" : "SuspiciousPersonDetection",
+    "name" : "SuspiciousPersonDetection",
+    "resourceReference" : "/collaborationtypes/SuspiciousPersonDetection",
+    "timestamp" : "2021-09-15T01:24:23.432Z",
+    "type" : 12
+  }, {
+    "label" : "ai_cameras",
+    "name" : "ai_cameras",
+    "resourceReference" : "/types/ai_cameras",
+    "timestamp" : "2021-09-13T08:59:01.078Z",
+    "type" : 1
+  }, {
+    "inventory" : {
+      "clientHash" : [ ],
+      "clients" : [ ],
+      "collaborationHash" : [ ],
+      "collaborations" : [ ],
+      "eventstreamHash" : [ ],
+      "eventstreams" : [ ],
+      "procedureHash" : [ "out", "out" ],
+      "procedures" : [ "Math.PI", "Math.acos" ],
+      "sourceHash" : [ ],
+      "sources" : [ ],
+      "systemmodelHash" : [ ],
+      "systemmodels" : [ ],
+      "topicHash" : [ ],
+      "topics" : [ ],
+      "typeHash" : [ ],
+      "types" : [ ]
+    },
+    "label" : "calcDistance",
+    "name" : "calcDistance",
+    "procedureName" : "calcDistance",
+    "resourceReference" : "/procedures/calcDistance",
+    "timestamp" : "2021-09-21T05:22:41.128Z",
+    "type" : 3
+  }, {
+    "inventory" : {
+      "clientHash" : [ ],
+      "clients" : [ ],
+      "collaborationHash" : [ ],
+      "collaborations" : [ ],
+      "eventstreamHash" : [ ],
+      "eventstreams" : [ ],
+      "procedureHash" : [ "out" ],
+      "procedures" : [ "calcDistance" ],
+      "sourceHash" : [ ],
+      "sources" : [ ],
+      "systemmodelHash" : [ ],
+      "systemmodels" : [ ],
+      "topicHash" : [ ],
+      "topics" : [ ],
+      "typeHash" : [ "in" ],
+      "types" : [ "guard_status" ]
+    },
+    "label" : "findNearestGuard",
+    "name" : "findNearestGuard",
+    "procedureName" : "findNearestGuard",
+    "resourceReference" : "/procedures/findNearestGuard",
+    "timestamp" : "2021-09-21T05:22:56.679Z",
+    "type" : 3
+  }, {
+    "label" : "guard_status",
+    "name" : "guard_status",
+    "resourceReference" : "/types/guard_status",
+    "timestamp" : "2021-09-13T01:25:31.722Z",
+    "type" : 1
+  }, {
+    "label" : "guards",
+    "name" : "guards",
+    "resourceReference" : "/types/guards",
+    "timestamp" : "2021-09-13T01:24:55.563Z",
+    "type" : 1
+  }, {
+    "inventory" : {
+      "clientHash" : [ ],
+      "clients" : [ ],
+      "collaborationHash" : [ ],
+      "collaborations" : [ ],
+      "eventstreamHash" : [ ],
+      "eventstreams" : [ ],
+      "procedureHash" : [ "out" ],
+      "procedures" : [ "Math.round" ],
+      "sourceHash" : [ "out" ],
+      "sources" : [ "MailServer" ],
+      "systemmodelHash" : [ ],
+      "systemmodels" : [ ],
+      "topicHash" : [ ],
+      "topics" : [ ],
+      "typeHash" : [ ],
+      "types" : [ ]
+    },
+    "label" : "sendEmail",
+    "name" : "sendEmail",
+    "procedureName" : "sendEmail",
+    "resourceReference" : "/procedures/sendEmail",
+    "timestamp" : "2021-09-13T08:59:58.572Z",
+    "type" : 3
+  } ],
+  "tools" : [ {
+    "isPinned" : false,
+    "name" : "Project Contents",
+    "type" : 2
+  }, {
+    "isPinned" : false,
+    "name" : "SuspiciousPersonDetection",
+    "pane" : {
+      "h" : 500,
+      "w" : 800,
+      "x" : 10,
+      "y" : 10
+    },
+    "resourceKey" : "app/SuspiciousPersonDetection",
+    "state" : 3,
+    "toolOptions" : { },
+    "type" : 15
+  }, {
+    "isPinned" : false,
+    "name" : "エラー",
+    "type" : 13
+  }, {
+    "dockLocation" : "top",
+    "isPinned" : false,
+    "name" : "非アクティブ ペイン",
+    "type" : 99
+  } ],
+  "type" : "dev",
+  "views" : [ {
+    "name" : "Project Contents",
+    "projectToolKeys" : [ "list/Project Contents", "app/SuspiciousPersonDetection", "errorviewer/エラー", "tiledock/非アクティブ ペイン" ]
+  } ]
+}

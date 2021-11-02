@@ -1,0 +1,295 @@
+{
+  "active" : true,
+  "appType" : true,
+  "ars_properties" : {
+    "dataVersion" : 5,
+    "graph" : {
+      "lastZoomRequest" : 0,
+      "scale" : 0.7804955685310999,
+      "translate" : [ 89.79357611085138, 52.90088629378002 ]
+    },
+    "groupSettings" : {
+      "appGroupOpenHash" : {
+        "actions" : true,
+        "filters" : true,
+        "flowControl" : true
+      },
+      "ctGroupOpenHash" : {
+        "actions" : true,
+        "mobile" : true
+      },
+      "ctServiceOpen" : false,
+      "serviceGroupOpenHash" : { }
+    }
+  },
+  "ars_relationships" : [ ],
+  "assembly" : {
+    "AiCamera" : {
+      "configuration" : {
+        "childStreams" : [ "GenerateAiCameras" ],
+        "condition" : "",
+        "inboundResource" : "topics",
+        "inboundResourceId" : "/generate/ai_camera/event",
+        "parentStreams" : [ ],
+        "upsert" : false
+      },
+      "pattern" : "EventStream",
+      "uuid" : "f36a2992-4fe0-4711-848a-8ccb6dcfba28"
+    },
+    "CreateScheduledEvents" : {
+      "configuration" : {
+        "parentStreams" : [ "GetConfigurations" ],
+        "procedure" : "EventGenerator.createScheduledEvents",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "4b0695c6-9616-479b-be51-666aca322b32"
+    },
+    "DelayAiCameras" : {
+      "configuration" : {
+        "childStreams" : [ "GenerateAiCameraEvent" ],
+        "delay" : "stringToInterval(Math.random(1, 6) + \" seconds\")",
+        "parentStreams" : [ "UnwindAiCameras" ]
+      },
+      "pattern" : "Delay",
+      "uuid" : "67edd2c4-9fc6-4513-9017-79b15e83cf3c"
+    },
+    "DelayGuards" : {
+      "configuration" : {
+        "childStreams" : [ "GenerateGuardEvent" ],
+        "delay" : "stringToInterval(Math.random(1, 3) + \" seconds\")",
+        "parentStreams" : [ "UnwindGuards" ]
+      },
+      "pattern" : "Delay",
+      "uuid" : "0ea2e7f5-17cd-4d24-8d76-4fc8567e1fc1"
+    },
+    "GenerateAiCameraEvent" : {
+      "configuration" : {
+        "childStreams" : [ "PublishToVantiq", "PassAiCameraEventToUi" ],
+        "parentStreams" : [ "DelayAiCameras" ],
+        "procedure" : "EventGenerator.generateAiCameraEvent",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "364f8ad4-cb34-434e-833e-9e104c35497d"
+    },
+    "GenerateAiCameras" : {
+      "configuration" : {
+        "childStreams" : [ "UnwindAiCameras" ],
+        "parentStreams" : [ "AiCamera" ],
+        "procedure" : "EventGenerator.generateAiCameras",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "b586dba2-212e-4086-83fe-68c668ea52c1"
+    },
+    "GenerateGuardEvent" : {
+      "configuration" : {
+        "childStreams" : [ "PublishToMqttBroker", "PassGuardEventToUi" ],
+        "parentStreams" : [ "DelayGuards" ],
+        "procedure" : "EventGenerator.generateGuardEvent",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "3dfe5682-42f3-49ec-8195-9fdf6eb60998"
+    },
+    "GenerateGuards" : {
+      "configuration" : {
+        "childStreams" : [ "UnwindGuards" ],
+        "parentStreams" : [ "Guard" ],
+        "procedure" : "EventGenerator.generateGuards",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "521cdaad-9bc8-45d7-82d0-583c0390687d"
+    },
+    "GetConfigurations" : {
+      "configuration" : {
+        "childStreams" : [ "CreateScheduledEvents" ],
+        "parentStreams" : [ "Trigger" ],
+        "procedure" : "EventGenerator.getConfigurations",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "beae153d-85f0-4156-8e28-70c1cdfe1ab2"
+    },
+    "Guard" : {
+      "configuration" : {
+        "childStreams" : [ "GenerateGuards" ],
+        "condition" : "",
+        "inboundResource" : "topics",
+        "inboundResourceId" : "/generate/guard/event",
+        "parentStreams" : [ ],
+        "upsert" : false
+      },
+      "pattern" : "EventStream",
+      "uuid" : "bb0e757d-8f3c-46cd-8bc0-e5226b9cbc69"
+    },
+    "PassAiCameraEventToUi" : {
+      "configuration" : {
+        "parentStreams" : [ "GenerateAiCameraEvent" ],
+        "topic" : "/last/ai_camera/event"
+      },
+      "pattern" : "PublishToTopic",
+      "uuid" : "a9070891-2c7b-4559-878e-9cd1f58b8087"
+    },
+    "PassGuardEventToUi" : {
+      "configuration" : {
+        "parentStreams" : [ "GenerateGuardEvent" ],
+        "topic" : "/last/guard/event"
+      },
+      "pattern" : "PublishToTopic",
+      "uuid" : "69f3eac6-6987-41b0-9572-9c1418cfaf68"
+    },
+    "PublishToMqttBroker" : {
+      "configuration" : {
+        "childStreams" : [ ],
+        "parentStreams" : [ "GenerateGuardEvent" ],
+        "procedure" : "EventGenerator.publishToMqttBroker",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "159bba4f-520c-4df4-b5e6-2b2c9cfc30f5"
+    },
+    "PublishToVantiq" : {
+      "configuration" : {
+        "childStreams" : [ ],
+        "parentStreams" : [ "GenerateAiCameraEvent" ],
+        "procedure" : "EventGenerator.publishToVantiq",
+        "returnBehavior" : "Use Return Value as Outbound event"
+      },
+      "pattern" : "Procedure",
+      "uuid" : "290db528-cd85-4200-8752-744907d2f377"
+    },
+    "Trigger" : {
+      "configuration" : {
+        "childStreams" : [ "GetConfigurations" ],
+        "condition" : "",
+        "inboundResource" : "topics",
+        "inboundResourceId" : "/trigger/eventgenerator",
+        "parentStreams" : [ ],
+        "upsert" : false
+      },
+      "pattern" : "EventStream",
+      "uuid" : "a6579e7b-12e9-46f6-8402-d98656812638"
+    },
+    "UnwindAiCameras" : {
+      "configuration" : {
+        "childStreams" : [ "DelayAiCameras" ],
+        "parentStreams" : [ "GenerateAiCameras" ]
+      },
+      "pattern" : "Unwind",
+      "uuid" : "d4102bd9-647e-4dd7-8cfa-d0779261b70d"
+    },
+    "UnwindGuards" : {
+      "configuration" : {
+        "childStreams" : [ "DelayGuards" ],
+        "parentStreams" : [ "GenerateGuards" ]
+      },
+      "pattern" : "Unwind",
+      "uuid" : "48225d9d-d373-45dd-951d-35fc73272076"
+    }
+  },
+  "collaboratorRoles" : [ ],
+  "compilerOCC" : 37,
+  "currentState" : {
+    "code" : "success"
+  },
+  "description" : "false",
+  "disableBadging" : false,
+  "entityRoles" : [ ],
+  "isComponent" : false,
+  "keyTypes" : [ "system.collaborations" ],
+  "name" : "EventGenerator",
+  "resourceBinding" : {
+    "optionalResources" : [ ],
+    "requiredResources" : [ {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.GenerateGuardEvent"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.GenerateGuards"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.PassGuardEventToUi"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.AiCamera"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.DelayGuards"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.PublishToMqttBroker"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.UnwindAiCameras"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.Guard"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.UnwindGuards"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.GenerateAiCameras"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.DelayAiCameras"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.GenerateAiCameraEvent"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.PublishToVantiq"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.PassAiCameraEventToUi"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.Trigger"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.GetConfigurations"
+    }, {
+      "resource" : "system.eventstreams",
+      "resourceId" : "apps.EventGenerator.CreateScheduledEvents"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.GenerateGuardEvent"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.PassGuardEventToUi"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.DelayGuards"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.PublishToMqttBroker"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.GenerateGuards"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.GenerateAiCameras"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.GenerateAiCameraEvent"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.DelayAiCameras"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.PublishToVantiq"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.GetConfigurations"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.PassAiCameraEventToUi"
+    }, {
+      "resource" : "rules",
+      "resourceId" : "apps.EventGenerator.CreateScheduledEvents"
+    } ]
+  }
+}

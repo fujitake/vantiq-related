@@ -1,0 +1,12 @@
+PROCEDURE sendEmail(event Object)
+var toAddress = event.email
+var fromAddress = "your-mail-address"
+var subject = " 不審者を検知しました"
+var body = "<div>警備員ID: " + event.guard_id + "</div>"
+body += "<div>" + event.guard_name + " 様</div>"
+body += "<div>現場に急行してください。</br> ------------------------------ </div>"
+body += "<div>検出場所:　" + event.ai_camera_location + "</div>"
+body += "<div>検出場所までの距離:　約" + Math.round(event.distance) + " m</div>"
+body += "<img src='" + event.image + "'  width='200'>"
+PUBLISH { html: body } TO SOURCE MailServer USING { from: fromAddress, to: toAddress, subject: subject }    
+return event

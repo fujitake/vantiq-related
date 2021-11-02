@@ -1,0 +1,2 @@
+PROCEDURE EventGenerator.getConfigurations(event Object)
+Configurations.constants()

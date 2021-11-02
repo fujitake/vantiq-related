@@ -1,0 +1,2 @@
+PROCEDURE TimeUtils.jstNow()
+return format("{0,date,yyyy-MM-dd HH:mm:ss.ss}", now().plusMillis(9 hours))

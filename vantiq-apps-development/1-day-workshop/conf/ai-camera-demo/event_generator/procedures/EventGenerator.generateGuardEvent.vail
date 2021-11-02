@@ -1,0 +1,9 @@
+PROCEDURE EventGenerator.generateGuardEvent(guard Object)
+var event = {
+    guard_id: guard.guard_id,
+    type: "location",
+    lat: 35.688 + Math.random(1, 100) / 100000,
+    lon: 139.7650 + Math.random(1, 100) / 100000,
+    time: now()
+}
+return event 

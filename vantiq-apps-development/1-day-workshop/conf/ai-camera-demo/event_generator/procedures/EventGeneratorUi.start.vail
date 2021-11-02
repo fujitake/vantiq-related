@@ -1,0 +1,2 @@
+PROCEDURE EventGeneratorUi.start()
+PUBLISH {} TO TOPIC "/trigger/eventgenerator" 
