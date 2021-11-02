@@ -195,7 +195,7 @@ The Fallback procedure;
 
 #### Items to be verified with CLI
 - The STATUS of the Worker node should be confirmed as`Ready` in Kubectl command.  
-- All Pods should be `Running` with Kubectl command. However, mongobackup is not included because it is a job.  
+- All Pods should be confirmed `Running` in  Kubectl command. However, mongobackup is not included because it is a job.  
 
 
 #### In Vantiq IDE
