@@ -83,7 +83,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 “image”: "data:image/jpe...."
 }
 ```  
-② Data formatting as needed, such as changing or deleting parameters. (Transformation)  
+② Format data as needed, such as changing or deleting parameters. (Transformation)  
 ③ App retrieves information of Type and adds it to the stream data that comes from AI cameras. (Enrich)    
 ```sh
 {
