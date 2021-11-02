@@ -169,7 +169,7 @@ A sample App (consisting of App and Data Generator) can be found [here](../../co
 
 <img src="../../imgs/Vantiq_resources_introduction/slide14.png" width=73%>  
 
-① Sending data externally and executing other APIs.    
+① Send data to and receive data from external services and call external APIs.    
 ② Implement the process with combining patterns.    
 ③ Implement the process that is external to the pattern on your own.    
 ④ Stream data which is sent from the device.    
