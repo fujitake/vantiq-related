@@ -154,7 +154,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Sample App  
 
-A sample App (consisting of App and Data Generator) can be found [here](../../conf/ai-camera-demo) .    
+A sample App (consisting of App and Data Generator) can be found [here](../../conf/ai-camera-demo).    
 
 
 # Introduction to each Resource
