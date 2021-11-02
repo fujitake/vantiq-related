@@ -167,7 +167,7 @@ Procedure へ渡すデータ
 |Topic|Vantiq 内のアプリ間などでイベントの受け渡しをするイベントバス。REST API のエンドポイントとしても機能する。|
 |Type|データを保存する。Vantiq で DB に該当するリソース。|
 |App|用意されたパターンや Procedure を組み合わせながら GUI 上で開発することができるアプリケーション本体。|
-|Procedure|自分でプログラミングすることができるリソース。App で呼び出すなどしてオリジナルの機能を使うことができる。|
+|Procedure|任意のロジックを実装することができるリソース。App で呼び出すなどしてオリジナルの機能を使うことができる。|
 
 <img src="../../imgs/Vantiq_resources_introduction/slide14.png" width=73%>  
 
