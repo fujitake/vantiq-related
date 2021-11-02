@@ -1,4 +1,4 @@
-# Understanding Vantiq resources through real-world examples
+# Understanding Vantiq Resources through real-world examples
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%> Notification system to security guards using AI cameras  
 
@@ -29,7 +29,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Method of obtaining location information of security guard  
 
-- A security guard has a smartphone and a location acquiring app is installed.    
+- A security guard has a smartphone and a location acquiring App is installed.    
 - App sends the following data to MQTT broker at an optional frequency, such as every 30 seconds.  
 
 ```sh
@@ -44,7 +44,7 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Process to be implemented in Vantiq
 
-1. Receive data from the AI camera and the location acquiring app.  
+1. Receive data from the AI camera and the location acquiring App.  
    * It is preferable to be able to easily respond to the specification changes caused by protocols and version upgrades.    
 
 1. Add the necessary information to the data sent from the AI camera.  
@@ -154,10 +154,10 @@ If they have them, it will be required to have an AI camera engineer along with 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Sample App  
 
-A sample app (consisting of App and Data Generator) can be found [here](../.. /conf/ai-camera-demo).    
+A sample App (consisting of App and Data Generator) can be found[here](../.. /conf/ai-camera-demo).    
 
 
-# Introduction to each resource
+# Introduction to each Resource
 
 |Reource|Description|
 |:-----|:---|
