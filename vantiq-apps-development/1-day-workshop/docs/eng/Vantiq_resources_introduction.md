@@ -53,7 +53,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 1. Continuously update the latest location of security guards.    
    * In order to minimuze the latency for notification, the location of the security guards should be fetched continuously in Vantiq prior to when a suspicious person is detected.    
 
-1. Comparing the location of the AI camera which notifications were made and the location of security guards.  
+1. Compare the location of the AI camera which detected the suspicous person and the locations of security guards.  
    * Specify the nearest security guard.    
 
 1. Notify the nearest security guard.    
