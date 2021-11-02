@@ -71,7 +71,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 ②　A Source receives data via various protocols.    
 ③　A Topic is an endpoint of REST API.    
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Adding information to data which comes from AI cameras
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Enrich the data sent from AI cameras. 
 
 <img src="../../imgs/Vantiq_resources_introduction/slide9.png" width=70%>
 
