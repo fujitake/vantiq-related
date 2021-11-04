@@ -24,7 +24,7 @@ Detect suspicious persons in a large park using AI cameras, and notify the neare
 ```
 
 ***※ Generally, AI cameras do not have location information with them.
-If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
+If they do, AI camera needs to be reconfigured when it gets reinstalled.***
 
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Method of obtaining location information of security guard  
@@ -62,7 +62,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled. ***
 
 # Implementation method
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>1. Inputting data into Vantiq  
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>1. Ingest data into Vantiq  
 
 <img src="../../imgs/Vantiq_resources_introduction/slide8.png" width=70%>
 
@@ -161,7 +161,7 @@ A sample App (consisting of App and Data Generator) can be found [here](../../co
 
 |Reource|Description|
 |:-----|:---|
-|Source|A client that sends and receives data. &nbsp; Sending and Receiving: MQTT, AMQP, Kafka &nbsp; Sending only: HTTP(S) REST, E-mail, SMS|
+|Source|A client that sends and receives data. &nbsp; Sending and Receiving: MQTT, AMQP, Kafka, HTTP(S) REST &nbsp; Sending only:  E-mail, SMS|
 |Topic|An event bus that passes events between App's in Vantiq, etc. It also receives data via REST API endpoint.|
 |Type|Store the data. A resource equivalent to a DB table in Vantiq.|
 |App| An application which can be developed on GUI using predefined patterns and Procedures.|
