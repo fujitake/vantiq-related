@@ -1,7 +1,8 @@
 # Vantiqプラットフォーム関連
 Vantiq Platformの構築や運用に関するガイドや手順です。
 
-- [Vantiq Cloud 構築における、保守およびトラブルシューティング](./docs/jp/vantiq-install-maintenance.md)
+- [Vantiq Cloud 構築および保守 ](./docs/jp/vantiq-install-maintenance.md)
+- [Vantiq Cloud 構築および保守におけるトラブルシューティング](./docs/jp/vantiq-install-maintenance-troubleshooting.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./docs/jp/vantiq_k8s_troubleshooting.md)
 - [ネットワーク構成デバッグツール](./docs/jp/alpine-f.md)
 - [サーバー間時刻同期確認ツール](./docs/jp/timestamp_ds.md)
