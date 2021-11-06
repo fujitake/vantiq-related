@@ -9,7 +9,8 @@
 # 目次
 
   - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
-  - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)  
+  - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
+  - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい](#reuse_old_pv)
   - [Grafana でメトリクスが表示されない](#metrics_not_showing_up_in_grafana)  
   - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった](#metrics_gone_after_vantiq_update)
   - [Keycloak pod が起動しない](#keycloak_pod_will_not_start)  
@@ -58,7 +59,7 @@ vantiq:
     bucket: <bucket名>
 ```
 
-# undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。
+# undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。<a id="reuse_old_pv"></a>
 
 `undeploy`と`deploy`を繰り返すと、新しいPVが作られ、古いPVに入った情報が見れなくなる。(status = `Released`)
 ```

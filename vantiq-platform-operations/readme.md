@@ -7,6 +7,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [ネットワーク構成デバッグツール](./docs/jp/alpine-f.md)
 - [サーバー間時刻同期確認ツール](./docs/jp/timestamp_ds.md)
 - [mongodb 関連](./docs/jp/mongodb.md)
+- [grafana 関連](./docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./docs/jp/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./docs/jp/vantiq-cloudwatch.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)

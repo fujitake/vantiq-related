@@ -1,10 +1,9 @@
 ## Grafana 環境構築全般
 - ここでは Grafana の環境構築にまつわるトピックを全般的扱う
 ## Table Of Contents
-- [DB を sqlite3 から grafana-mysql に切替](#2mysql)
+- [Email Notification のための設定](#email_notification)
 
-<h2 id="2mysql">1. DB を sqlite3 から grafana-mysql に切替</h2>
-## Grafana: Email Notification 環境の構築
+## Email Notification のための設定 <a id="email_notification"></a>
 ### 1. deploy.yaml の編集
 - 以下の項目を適宜書き換える
 
@@ -24,7 +23,7 @@ grafana:
       host: &lt;smtp server host name&gt;
       from_address &lt;from address&gt;
       user: &lt;user name&gt;
-      password: &lt;password&gt;
+      password: &lt;password&gt;git
 </pre>
 
 ### 2. Task deployVantiq の実行
