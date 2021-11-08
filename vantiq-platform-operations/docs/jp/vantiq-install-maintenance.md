@@ -168,7 +168,7 @@ Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが
     ```
 1. mongodb のバックアップをする。`job name` は任意。
     ```sh
-    kubectl create job -n <namespace name> <job name> --from=CrobJob/mongobackup
+    kubectl create job -n <namespace name> <job name> --from=CronJob/mongobackup
     # jobの監視
     kubectl logs -n <namespace name> <mongobackup job pod name>
     ```
