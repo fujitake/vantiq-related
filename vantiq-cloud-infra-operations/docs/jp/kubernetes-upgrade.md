@@ -154,7 +154,7 @@ module "eks" {
 
 
 
-## Vantiqのアップグレードについて
+# Vantiqのアップグレードについて
 インフラ管理者視点での留意事項について説明します。（実際のオペレーション手順については、「[Vantiqバージョンアップ](../../../vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md#minor_version_upgrade)」に記載）
 
 #### Vantiqマイナーアップグレード
