@@ -295,7 +295,7 @@ ingress-nginx-controller-6568c69569-ncmhs        1/1     Running            0   
 kubectl exec -n shared -it grafanadb-mysql-xxxxxxxxx-aaaaaa -- bash
 ```
 ```
-root@<pod name>:/# mysql -u <user name> -p
+root@<pod name>:/# mysql -u grafana -p
 Enter password:
 Welcome to the MySQL monitor. Commands end with ; or \g.
 Your MySQL connection id is 2985
