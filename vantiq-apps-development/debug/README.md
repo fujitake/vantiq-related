@@ -107,3 +107,8 @@ log.info(toString(event.temperature))
 無事、開発画面下部のログ出力部分に`100`と表示されたのでアプリケーションのバグが修正されたことがわかります。
 
 ![log](./img/log.png)
+
+
+## Next step
+
+[Autopsyについて学ぶ](./autopsy_demo.md)
