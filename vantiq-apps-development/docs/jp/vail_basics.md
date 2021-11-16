@@ -325,7 +325,7 @@ var member = SELECT ONE id, name FROM members WHERE id == 2
 ```
 WHERE句の条件に合致するレコードが1件だとわかっている場合`SELECT ONE`を使用することができます。通常の`SELECT`と異なり、配列ではなく1つのObjectが返り値となります。
 
-![select-one](./gif/select-one.gif)
+![select-one](../../imgs/vail-basics/gif/select-one.gif)
 
 結果
 ```
@@ -346,14 +346,14 @@ var member = SELECT ONE id, name FROM members WHERE id == 2
 
 その場合は`SELECT EXACTLY ONE`を使用することでレコードが存在しない場合にエラーを発生させることができます。
 
-![select-one-ex](./gif/select-one-ex.gif)
+![select-one-ex](../../imgs/vail-basics/gif/select-one-ex.gif)
 
 
 
 ### INSERT (追加)
 ---
 
-![insert](./gif/insert.gif)
+![insert](../../imgs/vail-basics/gif/insert.gif)
 
 ```VAIL
 var member = {
@@ -389,7 +389,7 @@ INSERT members(member)
 ### UPDATE (更新)
 ---
 
-![update](./gif/update.gif)
+![update](../../imgs/vail-basics/gif/update.gif)
 
 ```VAIL
 UPDATE members(age: 60) WHERE id == 4
@@ -415,7 +415,7 @@ UPDATE members(member) WHERE id == 4
 ### UPSERT (既存レコードがない場合はINSERT、既存がある場合はUPDATE)
 ---
 
-![upsert](./gif/upsert.gif)
+![upsert](../../imgs/vail-basics/gif/upsert.gif)
 
 ナチュラルキー（今回のシナリオでは`id`）を基準として既存レコードがない場合はINSERTされ、ある場合はUPDATEされます。
 ナチュラルキーが設定されていないTypeに対しては使用できません。
@@ -457,7 +457,7 @@ UPSERT members(id: 1, age: 28)
 ### DELETE (削除)
 ---
 
-![delete](./gif/delete.gif)
+![delete](../../imgs/vail-basics/gif/delete.gif)
 
 WHERE句の条件に合致するレコードを全て削除します。
 
@@ -478,7 +478,7 @@ members Typeから削除されたレコード
 
 **MQTTブローカーへの送信イメージ**
 
-![mqtt](./gif/mqtt.gif)
+![mqtt](../../imgs/vail-basics/gif/mqtt.gif)
 
 ### HTTP
 

@@ -7,7 +7,7 @@
 
 Vantiqの性質上、データを貯めずに処理を行うため、場合によっては後から何が起こっていたのか？ということを追跡するのが困難な場合があります。しかしこの機能を有効化しておくことで後からどのような値のデータを処理し、どの段階でエラーになったのかなどを確認でき、問題を解剖するのに役立ちます。
 
-![Autopsy](./gif/autopsy.gif)
+![Autopsy](../.../../imgs/debug/imgs/debug/gif/autopsy.gif)
 
 
 ## 1. Autopsy有効化
@@ -15,12 +15,12 @@ Vantiqの性質上、データを貯めずに処理を行うため、場合に�
 Procdure、Ruleに対して使用することができ、`トレース`にチェックを入れることで有効になります。
 エラーの発生の有無に関わらず、`どのようにProcedure/Ruleが実行されたのか`ということを記録に残します。
 
-![ActivateTracing](./img/activate-tracing.png)
+![ActivateTracing](../../imgs/debug/img/activate-tracing.png)
 
 ## 2. Autopsy確認
 Autopsyを有効にしたProcedureまたはRuleの`View`にある`Autopsy`をクリック、またはメニューの`Test` → `Autopsy`から確認することができます。
 
-![Autopsy](./img/autopsy.png)
+![Autopsy](../../imgs/debug/img/autopsy.png)
 
 緑のボタンをクリックしていくことで一行ずつステップでどう実行されたかを確認でき、その時の変数の内容も確認できます。これによって一行単位で詳細に過去の処理内容を解剖してみていくことができます。
 

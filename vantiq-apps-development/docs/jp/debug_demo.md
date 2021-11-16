@@ -1,7 +1,7 @@
 
 # Vantiqアプリのデバッグデモ
 
-![debug](./gif/debug.gif)
+![debug](../../imgs/debug/gif/debug.gif)
 
 <br/>
 <br/>
@@ -12,7 +12,7 @@
 
 ## デバッグ対象のアプリの説明
 
-![App](./img/app.png)
+![App](../../imgs/debug/img/app.png)
 
 このアプリケーションは`Event`と`LogEvent`という名前の2つのタスクだけで構成されたシンプルなアプリケーションです。それぞれのアクティビティパターンとして`Event`には`EventStream`、`LogEvent`には`Procedure`が設定されています。
 
@@ -64,11 +64,11 @@ log.info(event.temperature)
 1. 開発画面下部にエラー出力部
 1. メニューの`Test` → `エラー`から確認、またはメニュー部のエラーリストへのアイコンをクリック
 
-    ![error-list](./img/error-list.png)
+    ![error-list](../../imgs/debug/img/error-list.png)
 
 ### 2. エラー内容の確認
 
-![error-details](./img/error-details.png)
+![error-details](../../imgs/debug/img/error-details.png)
 
 エラーメッセージを見ると以下のような内容になっています。
 
@@ -80,9 +80,9 @@ String型でないためエラーになっていると書かれています。�
 
 アプリケーションのタスクを右クリックし`Task Eventの表示`をクリックするとそのタスクのSubscriptionが表示されます。ここにはタスクで処理した結果が出力されていきます。エラーが起こっているLogEventタスクの前にあるEventタスクの出力結果を確認することでどのようなイベントがLogEventタスクの入力値となっているかがわかります。
 
-![subscription](./img/subscription.png)
+![subscription](../../imgs/debug/img/subscription.png)
 
-やはりtemperatureの値がString型ではなくInteger型のようです（温度でしょうから自然ですが）。
+やはりtemperatureの値がString型ではなくInteger型のようです（温度ですから自然ですが）。
 
 ### 4. Procedureを修正
 
@@ -106,7 +106,7 @@ log.info(toString(event.temperature))
 古いエラーを消し、再度アプリケーションの動作を確認します。
 無事、開発画面下部のログ出力部分に`100`と表示されたのでアプリケーションのバグが修正されたことがわかります。
 
-![log](./img/log.png)
+![log](../../imgs/debug/img/log.png)
 
 
 ## Next step
