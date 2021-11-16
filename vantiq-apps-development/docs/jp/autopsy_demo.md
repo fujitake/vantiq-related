@@ -1,7 +1,7 @@
 
 # Autopsyの解説
 
-[Vantiqアプリのデバッグデモ](./README.md)の続編です。Vantiqのデバッグ機能の一つである`Autopsy`いついての解説です。
+[Vantiqアプリのデバッグデモ](./debug_demo.md)の続編です。Vantiqのデバッグ機能の一つである`Autopsy`いついての解説です。
 
 
 
