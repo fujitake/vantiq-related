@@ -7,7 +7,7 @@
 
 Vantiqの性質上、データを貯めずに処理を行うため、場合によっては後から何が起こっていたのか？ということを追跡するのが困難な場合があります。しかしこの機能を有効化しておくことで後からどのような値のデータを処理し、どの段階でエラーになったのかなどを確認でき、問題を解剖するのに役立ちます。
 
-![Autopsy](../.../../imgs/debug/imgs/debug/gif/autopsy.gif)
+![Autopsy](../../imgs/debug/imgs/debug/gif/autopsy.gif)
 
 
 ## 1. Autopsy有効化
