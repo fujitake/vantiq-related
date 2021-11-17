@@ -231,6 +231,9 @@ module "aks" {
   # enable private cluster
   private_cluster_enabled = false
 
+  # enable container insights + loganalytics
+  loganalytics_enabled = false
+
   # netowrk profile - required. may be variable for each client
   service_cidr = "10.1.1.0/25"
   dns_service_ip = "10.1.1.10"
