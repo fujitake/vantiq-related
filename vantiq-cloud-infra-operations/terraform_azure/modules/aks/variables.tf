@@ -196,6 +196,12 @@ variable "log_analytics_workspace_sku" {
   default = "standard"
 }
 
+variable "loganalytics_enabled" {
+  description = "whether log analytics should be enabled"
+  type = bool
+  default = false
+}
+
 variable "create_service_principal" {
   description = "subnet id to place the loadbalancer"
   type = bool

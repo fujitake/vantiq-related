@@ -73,9 +73,12 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
   }
 
   addon_profile {
-    oms_agent {
-      enabled                    = true
-      log_analytics_workspace_id = azurerm_log_analytics_workspace.k8s.id
+    dynamic "oms_agent" {
+      for_each = var.loganalytics_enabled != null ? list("1") : []
+      content {
+        enabled = var.loganalytics_enabled
+        log_analytics_workspace_id = var.loganalytics_enabled == true ? azurerm_log_analytics_workspace.k8s[0].id : null
+      }
     }
     kube_dashboard {
       enabled = false
