@@ -31,12 +31,12 @@ Create ***Pumps*** Type.
 
 3. Open the "Properties" tab of the `Pumps` Type and use the _+ Add Property_ button to create the following four properties.  
 
-| Name         | Data type |
-|--------------|----------|
-| PumpID       | Integer  |
-| Location     | GeoJSON  |
-| TempSensorID | String   |
-| RPMSSensorID | String   |
+| Name         | Data type | Note |
+|--------------|----------| --- |
+| PumpID       | Integer  | |
+| Location     | GeoJSON  | Lon/Lat coordinates |
+| TempSensorID | String   | |
+| RPMSSensorID | String   | |
 
 4. Open "Indexes" tab and click the _+ Add Index_ button.  
 

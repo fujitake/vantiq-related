@@ -32,10 +32,10 @@ Type には、データを格納するための Type である「**Standard**」
 
 3. `Pumps` Typeの「Property」タブを開き「_+Propertyの追加_」から以下の４つのプロパティを作成します。
 
-| 名前         | データ型 |説明|
-|--------------|----------|---|
+| 名前         | データ型 | 説明 |
+|--------------|----------| --- |
 | PumpID       | Integer  | |
-| Location     | GeoJSON  |緯度経度の座標 |
+| Location     | GeoJSON  | 緯度経度の座標 |
 | TempSensorID | String   | |
 | RPMSSensorID | String   | |
 
