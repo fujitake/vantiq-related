@@ -72,8 +72,7 @@ __５台分のポンプの__  __温度__   __と__   __回転数__  __のデー�
 |12| 混雑検出アプリ開発課題|Lab|Vantiq 1-day Workshop の次のステップ| |[混雑検出課題アプリ](a10-dev01_detect_congestion_app.md)|
 
 
+＊上記のセッションを修了後、開発者の方はより深く理解をするため、[Vantiq アプリケーション開発者コース＆レベル1認定試験](https://community.vantiq.com/courses/vantiq%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e3%82%b3%e3%83%bc%e3%82%b9%ef%bc%86%e3%83%ac%e3%83%99%e3%83%ab1%e8%aa%8d%e5%ae%9a%e8%a9%a6%e9%a8%93v1-2/)（要ログイン）の受講をお勧めします。
+
 ## 参考情報
 [トラブルシューティング](./troubleshootings.md)
-
-
-＊上記のセッションを修了後、開発者の方はより深く理解をするため、[Vantiq アプリケーション開発者コース＆レベル1認定試験](https://community.vantiq.com/courses/vantiq%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e3%82%b3%e3%83%bc%e3%82%b9%ef%bc%86%e3%83%ac%e3%83%99%e3%83%ab1%e8%aa%8d%e5%ae%9a%e8%a9%a6%e9%a8%93v1-2/)（要ログイン）の受講をお勧めします。
