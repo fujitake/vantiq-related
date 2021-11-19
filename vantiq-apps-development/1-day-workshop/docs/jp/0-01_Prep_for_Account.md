@@ -8,6 +8,8 @@
 
 **推奨ブラウザーは Google Chrome です。**
 
+**資料を参照しながら開発作業を行いますのでPCと別途、ディスプレイを用意することを推奨します。**
+
 Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からのメールを受信できるメールアドレスをご利用ください。　
 
 ## ***Step 1 (招待メールの確認)***
