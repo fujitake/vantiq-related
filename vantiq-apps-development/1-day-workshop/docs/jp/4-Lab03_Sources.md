@@ -41,27 +41,28 @@
 |**/your name/pump/Temp**|
 |**＊ ***your name*** の箇所には Lab 01 でデータジェネレーター設定の「TempSensorTopic」に入力した値を入力します。**|  
 
-DataGenerator URL: **<https://dev.vantiq.co.jp/ui/rtc/index.html?run=TrainingDataGeneratorClient>**
+＊ DataGenerator は次のようにして起動します。
+    ![RTC](../../imgs/Lab03/RTC.gif)  
 
-6. _変更の保存_ ボタンをクリックし、Source を保存します。
+6. _変更の保存_ ボタンをクリックし、Source を保存します。  
 
-![Source の保存](../../imgs/Lab03/image1.png)
+    <img src="../../imgs/Lab03/image1.png" width=60%>
 
 7. 上記の `TempMQTT` Source と同様の手順で以下の画像を参考に `RPMSMQTT` Source を作成してください。  
    **＊ 入力する Topic に注意してください。**
 
-![RPMSMQTT Source の作成](../../imgs/Lab03/image2.png)
+    <img src="../../imgs/Lab03/image2.png" width=60%>
 
 以上で、Source の作成は終了です。
 
 ## ***Step 2（Source の受信テスト）***
 
-1. 以下の URL より **Data Generator** を開き、_Start Generator_ ボタンをクリックして温度と回転数データの生成を開始します。 (URL を開いても表示されない場合は自分のネームスペースに切り替えてください）  
-  **<https://dev.vantiq.co.jp/ui/rtc/index.html?run=TrainingDataGeneratorClient>**
+1. 以下のようにして、**Data Generator** を開き、_Start Generator_ ボタンをクリックして温度と回転数データの生成を開始します。
+    ![RTC](../../imgs/Lab03/RTC.gif)  
 
 2. VANTIQ 開発画面に戻って TempMQTT を開き、「_データの受信テスト_」をクリックし、データを受信できていることを確認します。
 
-![データ受信の確認](../../imgs/Lab03/image3.png)
+    <img src="../../imgs/Lab03/image3.png" width=80%>
 
 3. `RPMSMQTT` でも同様の手順でデータが受信できていることを確認してください。
 
@@ -73,11 +74,11 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
 1. `TempMQTT` の「データの受信テスト」で開いたウィンドウの「_Type Data の作成_」をクリックします。
 
-![データの作成](../../imgs/Lab03/image4.png)
+    <img src="../../imgs/Lab03/image4.png" width=80%>
 
 2. 以下の画像を参考に Type 名を「_TempMQTTSchema_」に修正し「_保存_」をクリックします。これで `TempMQTT` の「Schema」Type が作成されます。
 
-![TempMQTT　Schema　の保存](../../imgs/Lab03/image5.png)
+    <img src="../../imgs/Lab03/image5.png" width=45%>
 
 3. 画面左のリソースペインの「Type」の箇所にある、作成した「`TempMQTTSchema`」を開き、自動で認識された型のうち、「Time」プロパティの型を「_DateTime_」に変更します。
 
@@ -85,23 +86,23 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
    b. 「Time」プロパティの _編集_ ボタンをクリックします。
 
-![プロパティの編集](../../imgs/Lab03/image6.png)  
+    <img src="../../imgs/Lab03/image6.png" width=60%>
 
 &emsp;  c. 型を「_DateTime_」に修正して保存します。
 
-![型の変更](../../imgs/Lab03/image7.png)
+    <img src="../../imgs/Lab03/image7.png" width=60%>
 
 4. 画面左のリソースペインの「Source」の箇所にある「`TempMQTT`」を開き、「Properties」タブの「Message Type」に「_TempMQTTSchema_」を設定し、Source を保存します。
 
-![Message Type の変更](../../imgs/Lab03/image8.png)
+    <img src="../../imgs/Lab03/image8.png" width=60%>
 
 5. 1.\~4. の Step を繰り返し、「`RPMSMQTT`」Source から「`RPMSMQTTSchema`」Typeを作成し、「RPMSMQTT」Source の「Message Type」に設定してください。
 
 以上で、Schema の設定は終了です。
 
-ここまでの手順でプロジェクトには下の画像のような要素が存在しているはずですので、ご確認ください。
+ここまでの手順でプロジェクトには下の画像のような要素が存在しているはずですので、ご確認ください。  
 
-![Project Contents](../../imgs/Lab03/image9.png)
+   <img src="../../imgs/Lab03/image9.png" width=28%>
 
 ## ***▷確認ポイント***
 

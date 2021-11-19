@@ -43,11 +43,11 @@ Type には、データを格納するための Type である「**Standard**」
 
 5. 「Is Index unique?」にチェックを入れ、Keyに「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Key」タブを開き「_Keyの編集_」をクリックします。
+6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。
 
 7. Keyに「`PumpID`」を設定して「_OK_」をクリックします。
 
-    ![Pumps Type の設定](../../imgs/Lab02/image1.png)
+    <img src="../../imgs/Lab02/image1.png" width=65%>
 
 8. _変更の保存_ ボタンをクリックし、Typeを保存します。
 
@@ -63,23 +63,23 @@ Type には、データを格納するための Type である「**Standard**」
 
 3. `PumpStatus` Typeの「Property」タブを開き「_+Propertyの追加_」から以下の5つのプロパティを作成します。
 
-| 名前       | データ型 |
-|------------|----------|
-| PumpID     | Integer  |
-| Temp       | Integer  |
-| RPMS       | Integer  |
-| Location   | GeoJSON  |
-| ReceivedAt | DateTime |
+| 名前       | データ型 |説明|
+|------------|----------|---|
+| PumpID     | Integer  | |
+| Temp       | Integer  | |
+| RPMS       | Integer  | |
+| Location   | GeoJSON  | 緯度経度の座標|
+| ReceivedAt | DateTime | |
 
 4. 「Index」タブを開き「_+Indexの追加_」をクリックします。
 
 5. 「Is Index unique?」にチェックを入れ、Keyに「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Key」タブを開き「_Keyの編集_」をクリックします。
+6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。
 
 7. Keyに「`PumpID`」を設定して「_OK_」をクリックします。
 
-    ![PumpsStatus Type の設定](../../imgs/Lab02/image2.png)
+   <img src="../../imgs/Lab02/image2.png" width=65%>
 
 8. _変更の保存_ ボタンをクリックし、Type を保存します。
 
@@ -87,9 +87,10 @@ Type には、データを格納するための Type である「**Standard**」
 
 これで `PumpFailureDetection` Project に 2つの Type が加わった状態になりましたので、その関連付けを保存するために Project 名の右にある _保存_ ボタンから Project の保存を行なってください。
 
-＊ Type の保存と Project の保存は別の作業です。今現在 Namespace 上に 2つの Type が作成されましたが、Project の保存を行うまで Project との関連付けは保存されておりません。
+＊ Type の保存と Project の保存は別の作業です。今現在 Namespace 上に 2つの Type が作成されましたが、Project の保存を行うまで Project との関連付けは保存されておりません。  
 
-  ![Type の表示](../../imgs/Lab02/image3.png)
+
+<img src="../../imgs/Lab02/image3.png" width=30%>
 
 
 ## ***Step 3 （データ登録）***
@@ -99,13 +100,13 @@ Type には、データを格納するための Type である「**Standard**」
 1. **Pumps Type へのデータ登録**  
 Pumps Type にマスタデータを登録します。今回は複数件のデータをまとめてアップロードしたい場合に使用する手順でデータ登録を行います。  
     1. 「プロジェクト」 > 「インポート...」 をクリックして「プロジェクトまたはデータのインポート」ウィンドウを開き、「Select Import Type」を「Projects」から「Data」に変更します。  
-    2. 事前に配布した「`Pumps.json`」をドラッグ&ドロップします。  
+    2. 事前に配布した「[`Pumps.json`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/Pumps.json)」の内容を保存し JSON ファイルを作成して、ドラッグ&ドロップします。  
     3. 「_インポート_」をクリックします。
 
 2.  **登録データ確認**  
 `Pumps` Type にデータが正しく登録されているか確認します。`Pumps` Type を開き、「すべてのレコードの表示」をクリックして以下の画像のようにデータが登録されているか確認してください。
 
-  ![登録データの確認](../../imgs/Lab02/image4.png)
+    <img src="../../imgs/Lab02/image4.png" width=65%>
 
 ## ***▷確認ポイント***
 
