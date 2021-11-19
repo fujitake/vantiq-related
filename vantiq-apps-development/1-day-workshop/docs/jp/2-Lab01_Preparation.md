@@ -32,19 +32,23 @@
 
 1. 「追加」 > 「Source...」 を開き、「Sources」ウィンドウを開きます。
 
-2.  「_新規 Source_」 ボタンをクリックし、「新規 Source」ウィンドウを開きます。
+2.  `TrainingDataGenMQTT` をクリックし、「Source」ウィンドウを開きます。
 
-3.  Source 名として、`TrainingDataGenMQTT` を入力し、Source Type に `MQTT` を選択します。
+3. 「Server URI」タブをクリックします。
 
-4. 「Server URI」タブをクリックします。
+4. 「編集」(小さい鉛筆) アイコンをクリックし、「Server URI の編集」ダイアログを開きます。  
 
-5. 「_+ Server URI の追加_」 ボタンをクリックし、「新規 Server URI の作成」ダイアログを開きます。
+    <img src="../../imgs/Lab01/image02.png" width=60%>
 
-6. 「Server URI:」に、ご自身で準備された MQTT Broker サーバーの URI を設定してください。「OK」をクリックします。
+5. 「Server URI:」には、仮の値が設定されているので、ご自身で準備された MQTT Broker サーバーの URI に設定し直してください。「OK」をクリックします。  
 
-    <img src="../../imgs/Lab01/image003.png" width=60%>
+    <img src="../../imgs/Lab01/image03.png" width=60%>
 
-7. タイトルバーの右上にある _変更の保存_ アイコンをクリックして、保存します。
+6. タイトルバーの右上にある _アクティブ状態オンに_ アイコンをクリックして、Source をアクティブにします。
+
+    <img src="../../imgs/Lab01/image002.png" width=60%>
+
+7. 隣にある _変更の保存_ アイコンをクリックして、保存します。
 
 
 ## ***Step 5（データジェネレーターの設定）***
