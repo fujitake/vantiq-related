@@ -6,7 +6,7 @@
 
 ### * App Builder の全体図
 
-![App Builder の全体図](../../imgs/Lab04/image1.png)
+<img src="../../imgs/Lab04/image1.png" width=65%>
 
 ### ①. Activity pattern のリスト  
 * Activity pattern という VANTIQ 側で予め用意されたファンクションのリスト  
@@ -28,7 +28,7 @@
         1.  inboundResource: _sources_  
         2.  inboundResourceId: _TempMQTT_  　＊ ドロップダウンリストより選択
 
-![App Builder のウィンドウ](../../imgs/Lab04/image2_3.png)  
+    <img src="../../imgs/Lab04/image2_3.png" width=70%>
 
 4. ウィンドウ左側の Activity Pattern のリストにある「Flow Control」から「`EventStream`」をドラッグ&ドロップし、以下の通り設定します。 ＊ 開発エリアが狭い場合はウィンドウを広げてください。  
     1.  名前: _RPMSStream_  
@@ -44,7 +44,7 @@
     1.  それぞれのイベントストリームをクリックし「_タスクイベントの表示_」をクリックします。  
     2.  それぞれ `Temp` データ (イベント) と `RPMS` データ (イベント) が表示されることを確認します。
 
-![タスクイベントの表示](../../imgs/Lab04/image4_5.png)  
+    <img src="../../imgs/Lab04/image4_5.png" width=60%>  
 &emsp;&emsp;&emsp;&emsp;&emsp;   ＊「タスクイベントの表示」は各タスクを右クリックすることで表示されるメニューからも表示できます。
 
 ## ***Step 2（Enrich による情報付加）***
@@ -62,8 +62,9 @@
 
 アプリケーションを保存してから、`EnrichTemp` タスクをクリックし、「タスクイベントの表示」にて受信した `Temp` イベントに `Pumps` Type のデータが付加されていることを確認してください。また、データジェネレータが停止している場合は再度実行してください。
 
-![Pumps Type が付加されていることの確認](../../imgs/Lab04/image6.png)  
+<img src="../../imgs/Lab04/image6.png" width=60%>  
 ① 受信した `Temp` イベント  
+
 ② 付加された `Pumps` Type のデータ　　
 
 センサーの ID で受信したセンサーのデータとポンプのマスタデータが関連付けられていることが確認できます。
@@ -87,9 +88,10 @@
 
 4. アプリケーションを保存してから、`JoinEvents` タスクをクリックし「タスクイベントの表示」にて `JoinEvents` タスクで処理したイベントの結果を確認し、下の画像のようになっているか確認してください。データジェネレータが停止している場合は再度実行してください。
 
-![JoinEvents タスクで処理したイベントの結果](../../imgs/Lab04/image7.png)  
-① `EnrichTemp` の処理結果  
-② `EnrichRPMS` の処理結果  
+    <img src="../../imgs/Lab04/image7.png" width=55%>  
+&emsp;&emsp;① `EnrichTemp` の処理結果  
+
+&emsp;&emsp;② `EnrichRPMS` の処理結果  
 
 ## ***Step 4（Transformation による加工）***
 
@@ -101,21 +103,19 @@
 2. 設定を以下の通り行います。  
     1. transformation の \<null> をクリックして、以下のプロパティ一覧を表示します。  
 
-|![プロパティ一覧](../../imgs/Lab04/image8.png)  |  
-|--------|  
+    <img src="../../imgs/Lab04/image8.png" width=55%>  
 
 &emsp;&emsp;&emsp;  ⅱ. 上の画像の状態のプロパティ一覧を、削除や手入力を行いながら以下の画像の通りに変更します。  
 
-|![プロパティの設定](../../imgs/Lab04/image9.png) |  
-|---------|  
+&emsp;&emsp;<img src="../../imgs/Lab04/image9.png" width=55%>  
 
 &emsp;&emsp;&emsp;  ⅲ. schema に「_PumpStatus_」を設定します。  
 
 
 3. アプリケーションを保存してから、`TransformEvent` タスクをクリックし「タスクイベントの表示」にて `TransformEvent` タスクで処理したイベントの結果が下の画像のようになっているか確認してください。データジェネレータが停止している場合は再度実行してください。
 
-![TransformEvent タスクで処理したイベントの結果](../../imgs/Lab04/image10.png)  
-↑ 重複した内容などが削除され、必要なプロパティのみのシンプルな構造になっています。
+    <img src="../../imgs/Lab04/image10.png" width=60%>  
+&emsp;&emsp;↑ 重複した内容などが削除され、必要なプロパティのみのシンプルな構造になっています。
 
 ## ***Step 5（SaveToType による Type への保存）***
 
@@ -130,8 +130,9 @@
 
 3. アプリケーションを保存してから、`PumpStatus` Type のデータを確認し下の画像のようにデータが保存されているか確認してください (`PumpStatus` Type を開き、「すべてのレコードを表示」をクリックします)。また、データジェネレータが停止している場合は再度実行してください。
 
-![すべてのレコードを表示](../../imgs/Lab04/image11.png)  
-    ＊ PumpID 1\~5 までの値が保存されています。`PumpStatus` Type で保存されるデータは `Upsert` しているためポンプの台数以上の件数にはなりません。
+    <img src="../../imgs/Lab04/image11.png" width=60%>   
+
+&emsp;&emsp;＊ PumpID 1\~5 までの値が保存されています。`PumpStatus` Type で保存されるデータは `Upsert` しているためポンプの台数以上の件数にはなりません。
 
 ## ***Step 6（Dwell による異常検知）***
 
@@ -162,18 +163,17 @@
 
 10. 温度 200度以上・回転数 4000回以上のイベントが 20秒間継続して生成されると検出します。
 
-![異常の検出](../../imgs/Lab04/image12.png)
+    <img src="../../imgs/Lab04/image12.png" width=60%>    
 
 ここまでの手順でプロジェクトのグラフと App には下の画像のような要素が存在しているはずですので、ご確認ください。
 
 * リソースグラフ
 
-|![Resource graph](../../imgs/Lab04/image13new.png)|
-|-----------------------------------------------|
+<img src="../../imgs/Lab04/image13new.png" width=30%>  
 
 * PumpFailureDetection
 
-![PumpFailureDetection](../../imgs/Lab04/image14.png)
+<img src="../../imgs/Lab04/image14.png" width=65%>  
 
 ## ***▷確認ポイント***
 

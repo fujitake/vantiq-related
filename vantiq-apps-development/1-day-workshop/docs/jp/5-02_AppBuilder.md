@@ -8,7 +8,7 @@
 
 ## App Builder概要
 
-![App Builder概要](../../imgs/02_AppBuilder/slide3.png)
+<img src="../../imgs/02_AppBuilder/slide3.png" width=65%>  
 
 ① タスクと呼ばれるボックスの一つ一つが処理のかたまり  
 _②_ 全ての処理は、保存する処理を入れない限り DB を経由せず、メモリ上で行われます  
@@ -37,11 +37,11 @@ _③_ タスクの出力は、次のタスクの入力になります
 
 ## Application のデバッグ①&nbsp;&nbsp; 処理データの確認
 * 「タスクイベントの表示」を使用して処理したデータを確認する
-![タスクイベントの表示で確認](../../imgs/02_AppBuilder/slide6.png)
+<img src="../../imgs/02_AppBuilder/slide6.png" width=90%>
 
 * タスクをクリックして「タスクイベントの表示」を使用する
 
-![タスクイベントの表示の使用](../../imgs/02_AppBuilder/slide7.png)
+<img src="../../imgs/02_AppBuilder/slide7.png" width=40%>
 
 ## Application のデバッグ②&nbsp;&nbsp; エラーの確認
 
@@ -61,7 +61,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * SplitByGroup  
 * Dwell  
 * SaveToType  
-* ComputeStatistics 
+* ComputeStatistics
 * Unwind  
 * Smooth  
 * Procedure  
@@ -77,7 +77,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 
 ## Enrich (Cashed Enrich) 例
 
-![Cashed Enrich](../../imgs/02_AppBuilder/slide12.png)
+<img src="../../imgs/02_AppBuilder/slide12.png" width=40%>
 
 ① 入力となる前のタスクの出力  
 ```
@@ -124,7 +124,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 
 ## Join 例
 
-![Join](../../imgs/02_AppBuilder/slide14.png)
+<img src="../../imgs/02_AppBuilder/slide14.png" width=60%>
 
 
 ① 入力となる前のタスクの出力①  
@@ -213,7 +213,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 
 ## Transformation 例
 
-![Transformation](../../imgs/02_AppBuilder/slide16.png)
+<img src="../../imgs/02_AppBuilder/slide16.png" width=40%>
 
 ① 入力となる前のタスクの出力  
 ```
@@ -255,7 +255,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 }
 ```
 ② 必要な項目のみに変換  
-![configuration](../../imgs/02_AppBuilder/slide16_1.png) &nbsp; _＊_ Procedure 呼び出し  
+<img src="../../imgs/02_AppBuilder/slide16_1.png" width=70%>  &nbsp; _＊_ Procedure 呼び出し  
 
 `Transformation` の出力  
 ```
@@ -280,13 +280,13 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * `Dwell`、`ComputeStatistics` などイベントごとではなく特定のグループごとに処理する必要があるアクティビティの前などで使用する
 * ストリームを分割する事で使用するリソースが分散するため負荷分散になる
 
-![SplitByGroup](../../imgs/02_AppBuilder/slide17.png)
+<img src="../../imgs/02_AppBuilder/slide17.png">
 
 ## Dwell
 
 * 設定した条件に合致するイベントを、設定した期間継続して検出した場合にイベントを発行する
 
-![Dwell](../../imgs/02_AppBuilder/slide18.png)  
+<img src="../../imgs/02_AppBuilder/slide18.png" width=40%>
 
 ① 温度が 200度以上、回転数が 4000回以上が 20秒継続したらイベント発行と設定  
 ② `Dwell` の出力
@@ -374,7 +374,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 
 ## Unwind 例
 
-![Unwind](../../imgs/02_AppBuilder/slide22.png)
+<img src="../../imgs/02_AppBuilder/slide22.png" width=40%>
 
 ① 入力となる前のタスクの出力  
 ```
@@ -433,7 +433,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * 設定した期間に通過させるイベントの最大数を設定できる
 * 次以降のタスクが許容できるイベント数に合うようにストリームを調整できる
 
-![Smooth](../../imgs/02_AppBuilder/slide23.png)
+<img src="../../imgs/02_AppBuilder/slide23.png" width=40%>
 
 ① 1度に 10イベント発生  
 ② 10秒で 5イベントに設定  
@@ -444,7 +444,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * 用意されている Activity Pattern にない処理を App Builder で使用したい時に使用する
 * 自作の Procedure（VAILコード）を呼び出して使うことができる
 
-![Procedure](../../imgs/02_AppBuilder/slide24.png)
+<img src="../../imgs/02_AppBuilder/slide24.png" width=40%>
 
 ① 入力となる前のタスクの出力  
 ```
@@ -452,7 +452,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
   "value": 1
 }
 ```
-② 呼び出している自作 Procedure（例） 
+② 呼び出している自作 Procedure（例）
 ```
 PROCEDURE myProcedure(event)
 event.value += 1
@@ -465,7 +465,7 @@ return event
 }
 ```
 
-## VAIL 
+## VAIL
 
 * VAILで自由に処理を記述することができる
 * Procedureを別途用意する必要はなく、タスクのプロパティに直接VAILを記述できる
@@ -492,7 +492,7 @@ event.value.Temp = event.value.Temp + "℃"
 deleteKey(event.value, "Time")
 
 # CurrentTimeを追加
-event.value.CurrentTime = now() 
+event.value.CurrentTime = now()
 
 ```
 
@@ -510,7 +510,7 @@ event.value.CurrentTime = now()
 
 * 設定した条件に合致するイベントのみ通過させる
 
-![Filter](../../imgs/02_AppBuilder/slide25.png)
+<img src="../../imgs/02_AppBuilder/slide25.png" width=60%>
 
 ① 入力となる前のタスクの出力  
 ```
@@ -535,7 +535,7 @@ event.value == 100
 
 ## AccumulateState 例: 通過したイベント数をカウントしてみる❶
 
-![AccumulateState_1](../../imgs/02_AppBuilder/slide27.png)
+<img src="../../imgs/02_AppBuilder/slide27.png" width=40%>  
 
 * `SampleAccumulateState` における ***1*** 件目のイベント
 ```
@@ -597,7 +597,7 @@ return lastEvent
 
 ## AccumulateState 例: 通過したイベント数をカウントしてみる❸
 
-![AccumulateState_3](../../imgs/02_AppBuilder/slide29.png)
+<img src="../../imgs/02_AppBuilder/slide29.png" width=65%>  
 
 ① _procedure_: `AccumulateState` 用に自作した Procedure  
 ② _outboundProperty_: `AccumulateState` のオブジェクトのプロパティ名    

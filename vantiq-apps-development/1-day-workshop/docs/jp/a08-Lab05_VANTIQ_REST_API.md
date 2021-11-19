@@ -198,7 +198,7 @@ curl -g -X DELETE
 
 5.  「_OK_」をクリックし、`Topic` を保存します。
 
- ![Create TOPIC](../../imgs/Lab05/image7.png)  
+ &emsp;&emsp;<img src="../../imgs/Lab05/image7.png" width=50%>  
 
 6.  **PumpFailureDetection** Appを開きます。
 
