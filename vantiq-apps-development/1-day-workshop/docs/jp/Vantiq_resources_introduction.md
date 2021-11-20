@@ -6,7 +6,10 @@
 
 ➡️ 不審者を検出した  **AI カメラの位置情報** と **全警備員の位置情報** を比較して最も距離が近い警備員に通知する  
 
-※この記事で説明しているサンプルアプリは [**こちら**](../../conf/ai-camera-demo) (App とデータジェネレーターで構成されています) から取得できます。
+この記事で説明しているサンプルアプリは [**こちら**](../../conf/ai-camera-demo) から取得できます。以下は直リンク。
+
+  - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/suspicious_person_detection.zip)
+  - [データジェネレーター](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/event_generator.zip)
 
 
 <img src="../../imgs/Vantiq_resources_introduction/slide2.png" width=70%>

@@ -1,2 +1,0 @@
-PROCEDURE EventGenerator.publishToMqttBroker(event Object)
-PUBLISH { message: event } TO SOURCE MqttBroker USING { topic: "/guards/location" }
