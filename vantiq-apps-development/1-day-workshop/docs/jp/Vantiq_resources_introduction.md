@@ -6,6 +6,9 @@
 
 ➡️ 不審者を検出した  **AI カメラの位置情報** と **全警備員の位置情報** を比較して最も距離が近い警備員に通知する  
 
+※この記事で説明しているサンプルアプリは [**こちら**](../../conf/ai-camera-demo) (App とデータジェネレーターで構成されています) から取得できます。
+
+
 <img src="../../imgs/Vantiq_resources_introduction/slide2.png" width=70%>
 
 # 前提条件
@@ -154,9 +157,6 @@ Procedure へ渡すデータ
 
 <img src="../../imgs/Vantiq_resources_introduction/slide13.png" width=70%>
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>サンプルアプリ  
-
-サンプルアプリ (App とデータジェネレーターで構成されています) は[こちら](../../conf/ai-camera-demo) にあります。  
 
 
 # 基本リソースの紹介
