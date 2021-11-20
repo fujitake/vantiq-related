@@ -1,1 +1,0 @@
-   client.data.lastGuardData = JSON.stringify(data,null,2);

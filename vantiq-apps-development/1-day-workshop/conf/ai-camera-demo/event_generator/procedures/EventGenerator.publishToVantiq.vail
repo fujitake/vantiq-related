@@ -1,2 +1,0 @@
-PROCEDURE EventGenerator.publishToVantiq(event Object)
-PUBLISH { body: event } TO SOURCE Vantiq 

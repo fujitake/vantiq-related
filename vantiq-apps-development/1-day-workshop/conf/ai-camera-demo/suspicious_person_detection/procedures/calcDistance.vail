@@ -1,8 +1,0 @@
-PROCEDURE calcDistance(lat1 Real, lon1 Real, lat2 Real, lon2 Real)
-var earthRadius = 6371
-var radian = Math.PI() / 180
-lat1 *= radian
-lon1 *= radian
-lat2 *= radian
-lon2 *= radian
-return Math.acos(Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1) + Math.sin(lat1) * Math.sin(lat2)) * earthRadius * 1000

@@ -1,8 +1,0 @@
-PROCEDURE EventGenerator.generateGuards(config Object)
-var guards = []
-for i in range(1, config.num_of_guard + 1, 1) {
-    push(guards, { 
-        guard_id: "134678493_" + i 
-    })
-}
-return guards
