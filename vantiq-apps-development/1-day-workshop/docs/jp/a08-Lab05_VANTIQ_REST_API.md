@@ -59,7 +59,7 @@ Postman (REST Client) からご自身の `Namespace` の `Type` を操作しま�
 
     | KEY           | VALUE                                 |
     |---------------|---------------------------------------|
-    | Authorization | **Bearer** ***コピーしたアクセストークン*** |  
+    | Authorization | **Bearer** ***<コピーしたアクセストークン>***  <br /> 例: "Bearer 2h4s7b-Yzg70kk6wxG37jsEFVZ_iPtV0eeqYABCDEFI=" (ダブルクォートは除く) |  
 
     4.  Body タブを開き、以下のように設定します。  
         1.  _raw_ のラジオボタンを選択します。  
@@ -103,7 +103,7 @@ Postman (REST Client) からご自身の `Namespace` の `Type` を操作しま�
 curl
 -X POST
 -H 'Content-Type:application/json'
--H "Authorization: Bearer アクセストークン"
+-H "Authorization: Bearer <アクセストークン>"
 -d '{"Location": {"coordinates": [ 0, 0 ], "type": "Point" }, "PumpID": 7, "RPMS": 5000, "ReceivedAt": "2020-01-01T00:00:00Z", "Temp": 250 }'
 https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 ```
@@ -120,7 +120,7 @@ https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 
 ```
 curl
--H "Authorization: Bearer アクセストークン" https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
+-H "Authorization: Bearer <アクセストークン>" https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 ```
 
 5.  以下の手順を行い、Postman から `PumpStatus` Type のデータを更新します。
@@ -154,7 +154,7 @@ curl
 curl
 -g -X PUT
 -H 'Content-Type: application/json'
--H 'Authorization: Bearer アクセストークン'
+-H 'Authorization: Bearer <アクセストークン>'
 -d '{"Location": {"coordinates": [130,35],"type": "Point"}}' 'https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
 ```
 
@@ -175,7 +175,7 @@ curl
 ```
 curl -g -X DELETE
 -H 'Content-Type: application/json'
--H 'Authorization: Bearer アクセストークン'
+-H 'Authorization: Bearer <アクセストークン>'
 'https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
 ```
 
