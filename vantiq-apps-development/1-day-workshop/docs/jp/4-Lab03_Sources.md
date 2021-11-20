@@ -32,24 +32,20 @@
 
 3. Source の種類 を「MQTT」に設定します。
 
-4. 「Server URI」タブを開き「_+Server URI の追加_」をクリックし、ご自身で事前に準備された MQTT Broker server の URI を設定します。
+4. 「Server URI」タブを開き「_+Server URI の追加_」をクリックし、[ご自身で事前に準備された MQTT Broker server の URI](./2-Lab01_Preparation.md#mqtt_broker_setting) を設定します。
 
 5. 「Topic」タブを開き「_+Topic の追加_」をクリックし、以下の Topic を設定します。
 
-|   |
-|:----------------------|
-|**/your name/pump/Temp**|
-|**＊ ***your name*** の箇所には Lab 01 でデータジェネレーター設定の「TempSensorTopic」に入力した値を入力します。**|  
+  Topic： "_/***your name***/pump/Temp_"
 
-＊ DataGenerator は次のようにして起動します。
-    ![RTC](../../imgs/Lab03/RTC.gif)  
+  ＊ [Lab 01 でデータジェネレーター設定](./2-Lab01_Preparation.md#data_generator_setting)の **「TempSensorTopic」に入力した値と同じ**にします。また、topic名に**ダブルクォーテーションは含みません**。topic名の**前後に半角スペースが入らないよう**にしてください。**
+
 
 6. _変更の保存_ ボタンをクリックし、Source を保存します。  
 
     <img src="../../imgs/Lab03/image1.png" width=60%>
 
 7. 上記の `TempMQTT` Source と同様の手順で以下の画像を参考に `RPMSMQTT` Source を作成してください。  
-   **＊ 入力する Topic に注意してください。**
 
     <img src="../../imgs/Lab03/image2.png" width=60%>
 
@@ -86,15 +82,15 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
    b. 「Time」プロパティの _編集_ ボタンをクリックします。
 
-    <img src="../../imgs/Lab03/image6.png" width=60%>
+   <img src="../../imgs/Lab03/image6.png" width=60%>
 
-&emsp;  c. 型を「_DateTime_」に修正して保存します。
+   c. 型を「_DateTime_」に修正して保存します。
 
-    <img src="../../imgs/Lab03/image7.png" width=60%>
+   <img src="../../imgs/Lab03/image7.png" width=60%>
 
 4. 画面左のリソースペインの「Source」の箇所にある「`TempMQTT`」を開き、「Properties」タブの「Message Type」に「_TempMQTTSchema_」を設定し、Source を保存します。
 
-    <img src="../../imgs/Lab03/image8.png" width=60%>
+   <img src="../../imgs/Lab03/image8.png" width=60%>
 
 5. 1.\~4. の Step を繰り返し、「`RPMSMQTT`」Source から「`RPMSMQTTSchema`」Typeを作成し、「RPMSMQTT」Source の「Message Type」に設定してください。
 

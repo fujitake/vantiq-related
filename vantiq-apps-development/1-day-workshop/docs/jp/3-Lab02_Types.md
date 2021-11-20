@@ -32,12 +32,12 @@ Type には、データを格納するための Type である「**Standard**」
 
 3. `Pumps` Typeの「Property」タブを開き「_+Propertyの追加_」から以下の４つのプロパティを作成します。
 
-| 名前         | データ型 | 説明 |
-|--------------|----------| --- |
-| PumpID       | Integer  | |
-| Location     | GeoJSON  | 緯度経度の座標 |
-| TempSensorID | String   | |
-| RPMSSensorID | String   | |
+| 名前         | データ型 | 説明               |
+|--------------|----------|--------------------|
+| PumpID       | Integer  | ポンプのID         |
+| Location     | GeoJSON  | 緯度経度の座標     |
+| TempSensorID | String   | 温度センサーのID   |
+| RPMSSensorID | String   | 回転数センサーのID |
 
 4. 「Index」タブを開き「_+Indexの追加_」をクリックします。
 
@@ -63,13 +63,13 @@ Type には、データを格納するための Type である「**Standard**」
 
 3. `PumpStatus` Typeの「Property」タブを開き「_+Propertyの追加_」から以下の5つのプロパティを作成します。
 
-| 名前       | データ型 |説明|
-|------------|----------|---|
-| PumpID     | Integer  | |
-| Temp       | Integer  | |
-| RPMS       | Integer  | |
-| Location   | GeoJSON  | 緯度経度の座標|
-| ReceivedAt | DateTime | |
+| 名前       | データ型 | 説明                   |
+|------------|----------|------------------------|
+| PumpID     | Integer  | ポンプのID             |
+| Temp       | Integer  | 温度の値               |
+| RPMS       | Integer  | 回転数の値             |
+| Location   | GeoJSON  | 緯度経度の座標         |
+| ReceivedAt | DateTime | 受信したタイムスタンプ |
 
 4. 「Index」タブを開き「_+Indexの追加_」をクリックします。
 

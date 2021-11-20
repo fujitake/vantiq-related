@@ -55,7 +55,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 
 ## Contents
 
-* Enrich\(Cached Enrich\)  
+* Enrich, Cached Enrich
 * Join  
 * Transformation  
 * SplitByGroup  
@@ -69,13 +69,13 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 * Filter  
 * AccumulateState
 
-## Enrich（Cached Enrich）
+## Enrich, Cached Enrich
 
 * イベントに Type に保存されたデータを追加する
 * `Cached Enrich` は Type の値キャッシュしておくことによりパフォーマンスを向上させた `Enrich` です。その代わり Type の値を変更しても、次に Type の値を取得するタイミングまではイベントに追加される値として反映されません
   * `Cached Enrich` を使用する場合は事前に `SplitByGroup` を使用してストリームを分割しておく必要があります。
 
-## Enrich (Cashed Enrich) 例
+## Enrich, Cashed Enrich 例
 
 <img src="../../imgs/02_AppBuilder/slide12.png" width=40%>
 
