@@ -14,3 +14,9 @@ Topicが間違っていると想定しているものと違うTopicにPublishま
 
 エラーが起こるタスクの前のタスクで「Task Eventsの表示」を行い、意図した通りのデータが出力されているか確認しましょう。
 また表示されるエラーの内容と併せて原因を追っていき、修正してください。
+
+### 4. **Generator の再起動の方法**
+
+Source がアクティブであることを確認します。「TrainingDataGeneratorClient」の「起動」 > 「現在保存されているClientをClient Launcher(RTC)で実行」をクリックし、Data Generator を開きます。_Start Generator_ ボタンをクリックします。データの生成が開始されます。  
+
+    ![RestartRTC](../../imgs/troubleshootings/Restart_Data.generator.gif)  
