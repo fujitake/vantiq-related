@@ -19,4 +19,4 @@ Topicが間違っていると想定しているものと違うTopicにPublishま
 
 Source がアクティブであることを確認します。「TrainingDataGeneratorClient」の「起動」 > 「現在保存されているClientをClient Launcher(RTC)で実行」をクリックし、Data Generator を開きます。_Start Generator_ ボタンをクリックします。データの生成が開始されます。  
 
-    ![RestartRTC](../../imgs/troubleshootings/Restart_Data.generator.gif)  
+![RestartRTC](../../imgs/troubleshootings/Restart_Data.generator.gif)
