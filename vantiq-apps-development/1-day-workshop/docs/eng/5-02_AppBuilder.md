@@ -8,7 +8,7 @@
 
 ## App Builder Overview
 
-![App Builder Overview](../../imgs/02_AppBuilder/slide3.png)
+<img src="../../imgs/02_AppBuilder/slide3.png" width=65%>
 
 ① Each rectangle, called a task, is a chunk of processing.    
 _②_ All processing is done in memory without going through the DB unless there is a process to save.   
@@ -37,11 +37,11 @@ _③_ The output of a Task will be the input of the next Task.
 
 ## Debugging the Application ①&nbsp;&nbsp; Confirming the processing data
 * Confirm the processing data with "View Task Events".
-![Confirm with View Task Events](../../imgs/02_AppBuilder/slide6.png)
+<img src="../../imgs/02_AppBuilder/slide6.png" width=90%>
 
 * Click a Task and use "View Task Events"
 
-![Use View Task Events](../../imgs/02_AppBuilder/slide7.png)
+<img src="../../imgs/02_AppBuilder/slide7.png" width=40%>
 
 ## Debugging the Application ②&nbsp;&nbsp; Confirming errors
 
@@ -55,7 +55,7 @@ _＊ Error list can also be displayed via Test > Errors > Run Query_
 
 ## Contents
 
-* Enrich\(Cached Enrich\)  
+* Enrich, Cached Enrich  
 * Join  
 * Transformation  
 * SplitByGroup  
@@ -69,15 +69,15 @@ _＊ Error list can also be displayed via Test > Errors > Run Query_
 * Filter  
 * AccumulateState
 
-## Enrich（Cached Enrich）
+## Enrich, Cached Enrich  
 
 * Add the data stored in Type to the event.
 * `Cached Enrich` is an `Enrich` which improves performance by caching the value of Type. Instead, even if changes the value of Type, it will not be reflected in the value added to the event until the next time when the Type value is retrieved.
   * When using `Cached Enrich`, it is required to use `SplitByGroup` to split the stream in advance.
 
-## An example of Enrich (Cashed Enrich)
+## An example of Enrich, Cashed Enrich  
 
-![Cashed Enrich](../../imgs/02_AppBuilder/slide12.png)
+<img src="../../imgs/02_AppBuilder/slide12.png" width=40%>
 
 ① Output of the previous task which will be the input.  
 ```
@@ -124,7 +124,7 @@ _＊ Error list can also be displayed via Test > Errors > Run Query_
 
 ## An example of Join
 
-![Join](../../imgs/02_AppBuilder/slide14.png)
+<img src="../../imgs/02_AppBuilder/slide14.png" width=60%>
 
 
 ① Output of the previous task which will be the input ①.  
@@ -213,7 +213,7 @@ _＊ Error list can also be displayed via Test > Errors > Run Query_
 
 ## An example of Transformation
 
-![Transformation](../../imgs/02_AppBuilder/slide16.png)
+<img src="../../imgs/02_AppBuilder/slide16.png" width=40%>
 
 ① Output of the previous task which will be the input.  
 ```
@@ -255,7 +255,7 @@ _＊ Error list can also be displayed via Test > Errors > Run Query_
 }
 ```
 ② Transform only the necessary items.  
-![configuration](../../imgs/02_AppBuilder/slide16_1.png) &nbsp; _＊_ Procedure calling    
+<img src="../../imgs/02_AppBuilder/slide16_1.png" width=70%>  &nbsp; _＊_ Procedure calling    
 
 Output of `Transformation`    
 ```
@@ -279,13 +279,13 @@ Output of `Transformation`
 * Split the stream by groups.
 * Used prior to activities that need to be handled by a specific group (not by event), such as `Dwell`, `ComputeStatistics`.
 
-![SplitByGroup](../../imgs/02_AppBuilder/slide17.png)
+<img src="../../imgs/02_AppBuilder/slide17.png">
 
 ## Dwell
 
 * Issue an event when an event that meets the configured conditions is detected for a configured period of time.
 
-![Dwell](../../imgs/02_AppBuilder/slide18.png)  
+<img src="../../imgs/02_AppBuilder/slide18.png" width=40%>  
 
 ① Configure the event to be issued when the temperature is 200°C or higher and the RPM is 4000 times or higher for 20 seconds continuously.  
 ② Output of `Dwell`  
@@ -371,7 +371,7 @@ Output of `Transformation`
 
 ## An example of Unwind
 
-![Unwind](../../imgs/02_AppBuilder/slide22.png)
+<img src="../../imgs/02_AppBuilder/slide22.png" width=40%>
 
 ① Output of the previous task which will be the input.  
 ```
@@ -430,7 +430,7 @@ Output of `Transformation`
 * It is possible to configure the maximum number of events that can pass through in a configured period of time.
 * It is possible to adjust the stream to match the number of events allowed for the next and subsequent tasks.
 
-![Smooth](../../imgs/02_AppBuilder/slide23.png)
+<img src="../../imgs/02_AppBuilder/slide23.png" width=40%>
 
 ① 10 events happening at once.  
 ② Configure to pass 5 events per 10 seconds.    
@@ -441,7 +441,7 @@ Output of `Transformation`
 * Use this when you want to use a process in App Builder that is not in the built-in Activity Patterns.
 * It is possible to call and use self-made Procedure (VAIL code).
 
-![Procedure](../../imgs/02_AppBuilder/slide24.png)
+<img src="../../imgs/02_AppBuilder/slide24.png" width=40%>
 
 ① Output of the previous task which will be the input.  
 ```
@@ -506,7 +506,7 @@ event.value.CurrentTime = now()
 
 * Only events that match the configured conditions will be allowed to pass through.
 
-![Filter](../../imgs/02_AppBuilder/slide25.png)
+<img src="../../imgs/02_AppBuilder/slide25.png" width=60%>
 
 ① Output of the previous task which will be the input.  
 ```
@@ -531,7 +531,7 @@ event.value == 100
 
 ## An example of AccumulateState: Count the number of events that have passed through ❶
 
-![AccumulateState_1](../../imgs/02_AppBuilder/slide27.png)
+<img src="../../imgs/02_AppBuilder/slide27.png" width=40%>
 
 * The ***1*** st event in the `SampleAccumulateState`.
 ```
@@ -593,7 +593,7 @@ return lastEvent
 
 ## An example of AccumulateState: Count the number of events that have passed through ❸
 
-![AccumulateState_3](../../imgs/02_AppBuilder/slide29.png)
+<img src="../../imgs/02_AppBuilder/slide29.png" width=65%>
 
 ① _procedure_: Self-made Procedure for `AccumulateState`.    
 ② _outboundProperty_: Property names of objects in `AccumulateState`.    

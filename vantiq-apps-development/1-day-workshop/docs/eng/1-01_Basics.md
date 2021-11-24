@@ -17,7 +17,7 @@
 * There are two types of layouts for the VANTIQ Development screen: "Custom" and "Tiled".
 * Click the _gear_ icon in the upper right corner of the screen and select "Layout\.\.\.".
 
-![the two types of layouts](../../imgs/01_Basics/slide3.png)
+<img src="../../imgs/01_Basics/slide3.png" width=30%>  
 
 ## Example of "Tiled”（2×2）
 
@@ -53,14 +53,14 @@ _However, it has been created and is saved in the Namespace._
 Setting up Auto Save prevents from losing the changes in an unexpected situation.   
 Open the "IDE Settings" window with the _human_ icon in the upper right corner of the screen to configure the setting.  
 
-![Auto Save](../../imgs/01_Basics/slide8.png)
+<img src="../../imgs/01_Basics/slide8.png" width=80%>  
 
 ## About the way to display Resources
 
 The "Project Contents" on the left side of the screen displays a list of Resources related to the Project.    
 Click on the name of the Resource to be displayed, and a window will open.  
 
-![display Resources](../../imgs/01_Basics/slide9.png)
+<img src="../../imgs/01_Basics/slide9.png" width=35%>  
 
 ## Shortcut keys
 
@@ -75,7 +75,8 @@ In App Builder, shortcut keys are available.
 
 * Click the _?_ icon in the navigation bar to open the Reference。
 
-![References](../../imgs/01_Basics/slide11.png)  
+<img src="../../imgs/01_Basics/slide11.png" width=30%>  
+
 |Menu items|functions|
 |:------|:---:|
 |What's New|The latest Vantiq system release note|

@@ -7,7 +7,7 @@ In this lab, learn how to use **VANTIQ's REST API** to manipulate VANTIQ Resourc
 The following tools are also used in this lab.  
 **Postman（**<https://www.getpostman.com/>**）**  
 Or **Postman Chrome App**  
-**(**<https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=ja-jp>**)**  
+**(**<https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl>**)**  
 ***＊ Alternatively, it is possible to use the curl command or any other REST client.***
 
 -   **Register, retrieve, update, and delete data from outside to `Type` in VANTIQ.**  
@@ -58,7 +58,7 @@ Use Postman (REST Client) to manipulate the `Type` of your `Namespace`.
 
     | KEY           | VALUE                                 |
     |---------------|---------------------------------------|
-    | Authorization | **Bearer** ***Copied Access Token*** |  
+    | Authorization | **Bearer** ***<Copied Access Token>***  <br /> eg. "Bearer 2h4s7b-Yzg70kk6wxG37jsEFVZ_iPtV0eeqYABCDEFI=" (Excluding the double quotes)  |  
 
     4.  Open the "Body" tab, and configure as followings.  
         1.  Select the _raw_ radio button.  
@@ -102,7 +102,7 @@ Use Postman (REST Client) to manipulate the `Type` of your `Namespace`.
 curl
 -X POST
 -H 'Content-Type:application/json'
--H "Authorization: Bearer Access Token"
+-H "Authorization: Bearer <Access Token>"
 -d '{"Location": {"coordinates": [ 0, 0 ], "type": "Point" }, "PumpID": 7, "RPMS": 5000, "ReceivedAt": "2020-01-01T00:00:00Z", "Temp": 250 }'
 https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 ```
@@ -119,7 +119,7 @@ https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 
 ```
 curl
--H "Authorization: Bearer Access Token" https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
+-H "Authorization: Bearer <Access Token>" https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 ```
 
 5.  Follow the steps below and update the data of `PumpStatus` type via Postman.
@@ -153,7 +153,7 @@ curl
 curl
 -g -X PUT
 -H 'Content-Type: application/json'
--H 'Authorization: Bearer Access Token'
+-H 'Authorization: Bearer <Access Token>'
 -d '{"Location": {"coordinates": [130,35],"type": "Point"}}' 'https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
 ```
 
@@ -174,7 +174,7 @@ curl
 ```
 curl -g -X DELETE
 -H 'Content-Type: application/json'
--H 'Authorization: Bearer Access Token'
+-H 'Authorization: Bearer <Access Token>'
 'https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
 ```
 
@@ -197,7 +197,7 @@ The above steps allow to register, retrieve, update, and delete data from an out
 
 5.  Click the _OK_ button, and save `Topic`.
 
- ![Create TOPIC](../../imgs/Lab05/image7.png)  
+ &emsp;&emsp;<img src="../../imgs/Lab05/image7.png" width=50%>    
 
 6.  Open **PumpFailureDetection** App.
 
@@ -252,9 +252,3 @@ The above steps allow to register, retrieve, update, and delete data from an out
 
 -   Use VANTIQ's _REST API_ makes it easy to integrate with external systems.  
     ✔︎  For example, POSTing data from multiple outside systems to VANTIQ and combining and formatting it in the application, updating the `Type` value from outside systems and changing the `Enrich` content, etc. can be easily implemented using what you have learned in this workshop.
-
-
-## Vantiq 1-day Workshop; Next Session    
-|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
-|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|10| Integrate with other services|Lab|Next Steps for the Vantiq 1-day Workshop| |[Lab06_Integrate_other_services](a09-Lab06_Integrate_other_services.md)|  
