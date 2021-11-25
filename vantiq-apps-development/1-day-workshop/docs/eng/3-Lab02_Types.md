@@ -16,6 +16,7 @@ There are two types of Type: "**Standard**" for storing data, and "**Schema**" f
 - Vantiq Academy (Login required)
   - [4.1: Persistent Types](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-1-persistent-types-master/)
 
+
 ## ***Step 1***
 
 The followings will be worked on in the `PumpFailureDetection` project.
@@ -31,12 +32,12 @@ Create ***Pumps*** Type.
 
 3. Open the "Properties" tab of the `Pumps` Type and use the _+ Add Property_ button to create the following four properties.  
 
-| Name         | Data type | Note |
-|--------------|----------| --- |
-| PumpID       | Integer  | |
+| Name         | Data type | Note      |
+|--------------|----------|-------------------|
+| PumpID       | Integer  | ID of the Pump|
 | Location     | GeoJSON  | Lon/Lat coordinates |
-| TempSensorID | String   | |
-| RPMSSensorID | String   | |
+| TempSensorID | String   | ID of the Temperature sensor|
+| RPMSSensorID | String   | ID of the RPM sensor|
 
 4. Open "Indexes" tab and click the _+ Add Index_ button.  
 
@@ -46,7 +47,7 @@ Create ***Pumps*** Type.
 
 7. Set the Key to `PumpID` and click the _OK_ button.
 
-    ![Configure Pumps Type](../../imgs/Lab02/image1.png)
+    <img src="../../imgs/Lab02/image1.png" width=65%>  
 
 8. Click the _Save_ button to save the Type.
 
@@ -62,13 +63,13 @@ Create ***PumpStatus*** Type.
 
 3. Open the "Properties" tab of the `PumpStatus` Type and use the _+ Add Property_ button to create the following five properties.  
 
-| Name       | Data type |
-|------------|----------|
-| PumpID     | Integer  |
-| Temp       | Integer  |
-| RPMS       | Integer  |
-| Location   | GeoJSON  |
-| ReceivedAt | DateTime |
+| Name       | Data type |Note         |
+|------------|----------|-------------|
+| PumpID     | Integer  |ID of the Pump|
+| Temp       | Integer  |ID of the Temperature sensor|
+| RPMS       | Integer  |ID of the RPM sensor|
+| Location   | GeoJSON  |Lon/Lat coordinates |
+| ReceivedAt | DateTime |Timestamp when received|
 
 4. Open "Indexes" tab and click the _+ Add Index_ button.
 
@@ -78,7 +79,7 @@ Create ***PumpStatus*** Type.
 
 7. Set the Key to `PumpID` and click the _OK_ button.  
 
-    ![Configure PumpsStatus Type](../../imgs/Lab02/image2.png)
+    <img src="../../imgs/Lab02/image2.png" width=65%>  
 
 8. Click the _Save_ button to save the Type.  
 
@@ -86,25 +87,26 @@ This completes the creation of the Types. The two Types should now appear in the
 
 Now, the `PumpFailureDetection` Project has two new Types. To save the relationship, click the _Save_ button to the right of the Project name to save the Project.  
 
-＊ Saving a Type and saving a Project are different tasks. Right now, two Types have been created in the Namespace, but their relationship to the Project is not saved until the Project is saved.  
-
-  ![Display Types](../../imgs/Lab02/image3.png)
+＊ Saving a Type and saving a Project are different tasks. At this point, two Types have been created in the Namespace, but their relationship to the Project is not saved until the Project is saved.  
 
 
-## ***Step 3 （Register data）***
+<img src="../../imgs/Lab02/image3.png" width=30%>
+
+
+## ***Step 3 （Import master data）***
 
 Register the required data for each Type created.
 
-1. **Register data in Pumps Type**  
-Register master data in Pumps Type. This case, register the data with the procedure used when uploading multiple items of data at once.    
+1. **Import data in Pumps Type**  
+Import master data in Pumps Type. This case, import the data by bulk import.    
     1. Select "Projects" > "Import...", and open the "Import Projects" window. Change the "Select Import Type" from "Project" to "Data".  
-    2. Drag and drop the pre-distributed `Pumps.json`.    
+    2. Save  "[`Pumps.json`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/Pumps.json)" as a JSON file, and drag and drop it into there.      
     3. Click the _Import_ button.
 
 2.  **Confirm the registered data**  
-Confirm that the data is correctly registered in the `Pumps` Type. Open `Pumps` Type, click the "Show All Records" and check if the data is registered like the following image.  
+Confirm that the data is correctly imported in the `Pumps` Type. Open `Pumps` Type, click the "Show All Records" and check if the data is imported as shown below.  
 
-  ![Confirm the registered data](../../imgs/Lab02/image4.png)
+    <img src="../../imgs/Lab02/image4.png" width=65%>  
 
 ## ***▷Checkpoints***
 

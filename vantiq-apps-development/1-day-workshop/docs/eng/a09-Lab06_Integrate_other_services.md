@@ -26,6 +26,7 @@ Also, use "**Procedure**" to implement the function to send data. Using Procedur
   - [4.2: Source & Topic](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-2-sources-topics-master/)
   - [4.8: VAIL SQL](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-8-vail-sql-master/)
 
+
 ## ***Step 1 (Email)***
 
 The following is the procedure for creating a Source for Email and sending the Email when a pump failure is detected.
@@ -361,8 +362,3 @@ Up to here are the steps to send a message to Slack.
 
 -   VANTIQ allows to code in an original language called "**VAIL**", which looks like a combination of SQL and JavaScript.    
     ✔︎ As for the details, please refer to the [VAIL Reference Guide](https://dev.vantiq.co.jp/docs/system/rules/index.html).
-
-## Vantiq 1-day Workshop; Next Session    
-|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
-|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|11| Task in detect congestion app development|Lecture|Next Steps for the Vantiq 1-day Workshop| | [detect_congestion_app](a10-dev01_detect_congestion_app.md)|  

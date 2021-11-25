@@ -6,6 +6,12 @@ Detect suspicious persons in a large park using AI cameras, and notify the neare
 
 ➡️ Compare **location information of AI camera** that detected suspicious person and **location information of all security guards**, and then notify the security guard who is nearest to the suspicious person.  
 
+The sample Apps described in this article are [**here**](../../conf/ai-camera-demo). The followings are the direct links.  
+
+  - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/suspicious_person_detection.zip)
+  - [Data Generator](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/event_generator.zip)
+
+
 <img src="../../imgs/Vantiq_resources_introduction/slide2.png" width=70%>
 
 # Prerequisites
@@ -71,7 +77,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled.***
 ②　A Source receives data via various protocols.    
 ③　A Topic is an endpoint of REST API.    
 
-## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Enrich the data sent from AI cameras. 
+## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. Enrich the data sent from AI cameras.
 
 <img src="../../imgs/Vantiq_resources_introduction/slide9.png" width=70%>
 
@@ -94,7 +100,7 @@ If they do, AI camera needs to be reconfigured when it gets reinstalled.***
 “image”: "data:image/jpe...."
 }
 ```  
-④ Additional information used in ③, such as the locations are maintained in Type. 
+④ Additional information used in ③, such as the locations are maintained in Type.
 ``` sh
 {
 👉“camera_id”: "camera_001",

@@ -6,7 +6,7 @@ In this Lab, create an application that performs Complex Event Processing in rea
 
 ### * Overall view of App Builder
 
-![Overall view of App Builder](../../imgs/Lab04/image1.png)
+<img src="../../imgs/Lab04/image1.png" width=65%>  
 
 ### ①. The list of Activity patterns  
 * Activity pattern, which is a list of built-in functions prepared by VANTIQ.    
@@ -28,7 +28,7 @@ In this Lab, create an application that performs Complex Event Processing in rea
         1.  inboundResource: _sources_  
         2.  inboundResourceId: _TempMQTT_  　＊ Select from the dropdown menu
 
-![App Builder window](../../imgs/Lab04/image2_3.png)  
+    <img src="../../imgs/Lab04/image2_3.png" width=70%>  
 
 4. Drag and drop `EventStream` from "Flow Control" in the list of Activity Patterns on the left side of the window, and configure it as followings. ＊ Expand the window if the Development area is too small.  
     1.  Name: _RPMSStream_  
@@ -44,7 +44,7 @@ In this Lab, create an application that performs Complex Event Processing in rea
     1.  Click the each event stream and click the "_View Task Events_".    
     2.  Confirm that the `Temp` data (event) and the `RPMS` data (event) are appeared.  
 
-![View Task Events](../../imgs/Lab04/image4_5.png)  
+    <img src="../../imgs/Lab04/image4_5.png" width=60%>  
 &emsp;&emsp;&emsp;&emsp;&emsp;   ＊ "View Task Events" can also be appeared from the menu which is displayed by right-clicking on each task.
 
 ## ***Step 2（Attaching information by Enrich）***
@@ -62,7 +62,8 @@ Use **Enrich** to attach the `Pumps` Type information to the received events. Th
 
 After saving the application, click on the `EnrichTemp` task and confirm that data of `Pumps` Type is attached to the received `Temp` event in the "view. Also, if the Data Generator has stopped, run it again.
 
-![Confirm that Pumps Type data is attached](../../imgs/Lab04/image6.png)  
+<img src="../../imgs/Lab04/image6.png" width=60%>  
+
 ① Received `Temp` event  
 ② Attached `Pumps` Type data　　
 
@@ -87,9 +88,9 @@ Combine the events of two streams with **Join**.
 
 4. Save the Application, then click the `JoinEvents` Task and confirm the results of the events processed by the `JoinEvents` Task in the "View Task Events" section to see whether they look like the image following. If the Data Generator has stopped, please run it again.
 
-![Results of events processed by the JoinEvents task](../../imgs/Lab04/image7.png)  
-① Processed results for `EnrichTemp`  
-② Processed results for `EnrichRPMS`  
+    <img src="../../imgs/Lab04/image7.png" width=55%>  
+&emsp;&emsp;① Processed results for `EnrichTemp`  
+&emsp;&emsp;② Processed results for `EnrichRPMS`  
 
 ## ***Step 4（Modification by Transformation）***
 
@@ -101,21 +102,19 @@ Modify the event with **Transformation**.
 2. Configure the settings as followings.    
     1. Click the \<null> in Transformation to display the following list of properties.  
 
-|![list of properties](../../imgs/Lab04/image8.png)  |  
-|--------|  
+    <img src="../../imgs/Lab04/image8.png" width=55%>  
 
 &emsp;&emsp;&emsp;  ⅱ. Change the list of properties as shown in the above image to the one shown in the following image by deleting or entering manually.  
 
-|![configuration of properties](../../imgs/Lab04/image9.png) |  
-|---------|  
+&emsp;&emsp;<img src="../../imgs/Lab04/image9.png" width=55%>   
 
 &emsp;&emsp;&emsp;  ⅲ. Set "_PumpStatus_" in the _schema_.  
 
 
 3. Save the Application, then click the `TransformEvent` Task and confirm the results of the events processed by the `TransformEvent` task in the "View Task Events" section to see whether they look like the image following. If the Data Generator has stopped, please run it again.
 
-![Results of events processed by the TransformEvent Task](../../imgs/Lab04/image10.png)  
-↑ Duplicate content and other information has been removed, and the structure is now simple with only necessary properties.
+    <img src="../../imgs/Lab04/image10.png" width=60%>   
+&emsp;&emsp;↑ Duplicate content and other information has been removed, and the structure is now simple with only necessary properties.
 
 ## ***Step 5（Saving to Type with SaveToType）***
 
@@ -130,8 +129,9 @@ Save the event with **SaveToType**.
 
 3. After saving the Application, confirm the data in the `PumpStatus` Type and check if the data is saved as the image following (Open `PumpStatus` Type and click the "Show All Records"). If the Data Generator has stopped, please run it again.
 
-![Show All Records](../../imgs/Lab04/image11.png)  
-    ＊ PumpID from I to 5 is stored. The data stored in `PumpStatus` Type is stored by `Upsert`, so the number of data will not be more than the number of pumps.
+    <img src="../../imgs/Lab04/image11.png" width=60%>  
+
+&emsp;&emsp;＊ PumpID from 1 to 5 is stored. The data stored in `PumpStatus` Type is stored by `Upsert`, so the number of data will not be more than the number of pumps.
 
 ## ***Step 6（Anomaly detecting with Dwell）***
 
@@ -162,18 +162,17 @@ Use `SplitByGroup` to group events by the PumpID, and then use **Dwell** to dete
 
 10. It is detected when an event with a temperature of 200°C or higher and a RPM of 4000 times or higher is generated continuously for 20 seconds.
 
-![Detecting anomalies](../../imgs/Lab04/image12.png)
+    <img src="../../imgs/Lab04/image12.png" width=60%>   
 
 At this point, the project graph and App should have the elements shown in the image below, so please confirm.
 
 * Resource graph
 
-|![Resource graph](../../imgs/Lab04/image13new.png)|
-|-----------------------------------------------|
+<img src="../../imgs/Lab04/image13new.png" width=30%>  
 
 * PumpFailureDetection
 
-![PumpFailureDetection](../../imgs/Lab04/image14.png)
+<img src="../../imgs/Lab04/image14.png" width=65%>  
 
 ## ***▷Checkpoints***
 

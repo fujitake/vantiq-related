@@ -38,7 +38,7 @@
 
   Topic： "_/***your name***/pump/Temp_"
 
-  ＊ [Lab 01 でデータジェネレーター設定](./2-Lab01_Preparation.md#data_generator_setting)の **「TempSensorTopic」に入力した値と同じ**にします。また、topic名に**ダブルクォーテーションは含みません**。topic名の**前後に半角スペースが入らないよう**にしてください。**
+  ＊ [Lab 01 でデータジェネレーター設定](./2-Lab01_Preparation.md#data_generator_setting) の **「TempSensorTopic」に入力した値と同じ**にします。また、topic名に**ダブルクォーテーションは含みません**。topic名の**前後に半角スペースが入らないよう**にしてください。
 
 
 6. _変更の保存_ ボタンをクリックし、Source を保存します。  
