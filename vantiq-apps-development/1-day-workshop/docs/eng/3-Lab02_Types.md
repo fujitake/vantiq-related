@@ -104,7 +104,7 @@ Import master data in Pumps Type. This case, import the data by bulk import.
     3. Click the _Import_ button.
 
 2.  **Confirm the registered data**  
-Confirm that the data is correctly registered in the `Pumps` Type. Open `Pumps` Type, click the "Show All Records" and check if the data is registered like the following image.  
+Confirm that the data is correctly imported in the `Pumps` Type. Open `Pumps` Type, click the "Show All Records" and check if the data is imported as shown below.  
 
     <img src="../../imgs/Lab02/image4.png" width=65%>  
 
