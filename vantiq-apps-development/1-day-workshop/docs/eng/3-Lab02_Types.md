@@ -98,7 +98,7 @@ Now, the `PumpFailureDetection` Project has two new Types. To save the relations
 Register the required data for each Type created.
 
 1. **Import data in Pumps Type**  
-Register master data in Pumps Type. This case, register the data with the procedure used when uploading multiple items of data at once.    
+Import master data in Pumps Type. This case, import the data by bulk import.    
     1. Select "Projects" > "Import...", and open the "Import Projects" window. Change the "Select Import Type" from "Project" to "Data".  
     2. Save the contents of the pre-distributed "[`Pumps.json`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/Pumps.json)", create the JSON file, and drag and drop it into there.      
     3. Click the _Import_ button.
