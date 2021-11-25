@@ -1,6 +1,6 @@
 ## Troubleshooting
 
-This is a document about frequently encountered problems and how to deal with them.  
+This article explains the frequently encountered problems and how to troubleshoot them.  
 
 ### 1. **Application does not work.**
 
