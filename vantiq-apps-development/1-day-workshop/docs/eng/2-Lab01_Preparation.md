@@ -15,7 +15,7 @@ Log in to the [VANTIQ IDE](https://dev.vantiq.co.jp).
 
 ## ***Step 3（Import the Data Generator）***
 
-＊ Prepare the Data Generator to generate mock data which is simulate the data from the temperature sensors and the RPM sensors attached to multiple pumps respectively.
+＊ Prepare the Data Generator to generate mock data that simulate the temperature sensors and the RPM sensors attached to each of multiple pumps.
 
 1. Select "Projects" > "Import...", and open the "Import Projects" window.  
      Drag and drop the pre-distributed "[`TrainingDataGen.zip`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/TrainingDataGen.zip)" which is for the Data Generator.
