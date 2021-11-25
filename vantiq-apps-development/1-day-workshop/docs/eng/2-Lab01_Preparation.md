@@ -40,7 +40,7 @@ Log in to the [VANTIQ IDE](https://dev.vantiq.co.jp).
 
     <img src="../../imgs/Lab01/image02.png" width=60%>  
 
-5. "Server URI:" is set to a temporary value in advance, so reconfigure it to the URI of the MQTT Broker server which you prepared by yourself. Click the _OK_ button.
+5. "Server URI:" has preset  temporary value, so you need to reconfigure it to that of the MQTT Broker server which you prepared by yourself. Click the _OK_ button.
 
     <img src="../../imgs/Lab01/image03.png" width=60%>  
 
