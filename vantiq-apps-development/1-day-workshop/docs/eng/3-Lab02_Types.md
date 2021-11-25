@@ -100,7 +100,7 @@ Register the required data for each Type created.
 1. **Import data in Pumps Type**  
 Import master data in Pumps Type. This case, import the data by bulk import.    
     1. Select "Projects" > "Import...", and open the "Import Projects" window. Change the "Select Import Type" from "Project" to "Data".  
-    2. Save the contents of the pre-distributed "[`Pumps.json`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/Pumps.json)", create the JSON file, and drag and drop it into there.      
+    2. Save  "[`Pumps.json`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/Pumps.json)" as a JSON file, and drag and drop it into there.      
     3. Click the _Import_ button.
 
 2.  **Confirm the registered data**  
