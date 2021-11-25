@@ -80,7 +80,7 @@ Use the Data Generator to simulate the situation.
 
     TempSensor Topic： _/***your name***/pump/Temp_
 
-    ＊ In the _your name_ field, type your name or any other value that is **not identical to others**. Also, the Topic name should **not contain double quotation marks**. Please do **not include spaces before or after** the Topic name.  
+    ＊ In the _your name_ field, type your name **to make the topic name unique**. Also, make sure that the Topic name should **NOT** have enclosing extra spaces nor double quotations.  
 
 7. CLick the _Update Topics_ button.
 
