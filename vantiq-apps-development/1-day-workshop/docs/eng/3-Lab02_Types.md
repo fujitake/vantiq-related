@@ -87,7 +87,7 @@ This completes the creation of the Types. The two Types should now appear in the
 
 Now, the `PumpFailureDetection` Project has two new Types. To save the relationship, click the _Save_ button to the right of the Project name to save the Project.  
 
-＊ Saving a Type and saving a Project are different tasks. Right now, two Types have been created in the Namespace, but their relationship to the Project is not saved until the Project is saved.  
+＊ Saving a Type and saving a Project are different tasks. At this point, two Types have been created in the Namespace, but their relationship to the Project is not saved until the Project is saved.  
 
 
 <img src="../../imgs/Lab02/image3.png" width=30%>
