@@ -8,7 +8,7 @@ In Vantiq, some resources such as Source and Application have the status of `act
 
 ### 2. **Data cannot be delivered from the Data Generator to the MQTT broker, Data cannot be received by Source.**
 
-If the Topic name is wrong, it means that you are publishing or subscribing to a Topic not expected. Please confirm the followings: `not include spaces before or after the Topic name`, `capitalization is correct`, `no typos`.
+If the Topic name is wrong, then you are publishing or subscribing to an unintended Topic. Please note: `No spaces before or after the Topic name`, `Topic name is case sensitive`, `no typos`.
 
 ### 3. **During developing with App Builder, an error occurs.**
 
