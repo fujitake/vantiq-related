@@ -38,7 +38,7 @@ In this lab, create Sources to subscribe to data from an MQTT Broker. Also, in r
 
 Topic： "_/***your name***/pump/Temp_"
 
-＊ **Type the same value that was entered in "TempSensorTopic"** at [Lab 01 - Stap 5 (Configure the Data Generator)](./2-Lab01_Preparation.md#data_generator_setting). Also, the Topic name should **not contain double quotation marks**. Please do **not include spaces before or after** the Topic name.
+＊ **Type the same value that was entered in "TempSensorTopic"** at [Lab 01 - Stap 5 (Configure the Data Generator)](./2-Lab01_Preparation.md#data_generator_setting). Also, the Topic name should **not include enclosing double quotations nor extra spaces**. 
 
 
 6. Click the _Save_ button to save the Source.
