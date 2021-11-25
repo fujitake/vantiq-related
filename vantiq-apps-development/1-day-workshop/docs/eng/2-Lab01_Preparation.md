@@ -134,7 +134,7 @@ At the end of each Lab, there is the "**Checkpoints**" step. Please be sure to r
         ✔︎   **Temp** SensorTopic：　/***your name***/pump/**Temp**
 
 -   Whether the project that is opened is correct.
-    -   There will be two development Namespaces. One Namespace has the `TrainingDataGen` Project, which allows to review the Resources used by the Data Generator, and another Namespace has the `PumpFailureDetection` Project, which adds the Resources used to build the **Pump Failure Detection System** (currently empty). Work on the `PumpFailureDetection` Project from the next Lab.
+    -   There are two development Namespaces;  One should have the `TrainingDataGen` Project which contains those Resources used by the Data Generator, and the other should have the `PumpFailureDetection` Project to which Resources to build the **Pump Failure Detection System** (currently empty) will be added.  We will work on the `PumpFailureDetection` Project from the next Lab.
 
 ## Vantiq 1-day Workshop; Next Session    
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
