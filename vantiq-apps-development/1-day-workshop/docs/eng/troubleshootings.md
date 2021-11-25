@@ -16,6 +16,6 @@ Do a "View Task Events" on the task before the task where the error occurs and c
 
 ### 4. **How to restart the Generator**
 
-Confirm that the Source is set to active. Click "Launch" > "Run currentry saved Client in Client Launcher (RTC)" in "TrainingDataGeneratorClient" to open the Data Generator in a browser. Click the _Start Generator_ button. Data generation will start.  
+Confirm that the Source is set to active. Click "Launch" > "Run currentry saved Client in Client Launcher (RTC)" in "TrainingDataGeneratorClient" to open the Data Generator in a browser. Click the _Start Generator_ button. Data generation will restart.  
 
 ![RestartRTC](../../imgs/troubleshootings/Restart_Data.generator.gif)
