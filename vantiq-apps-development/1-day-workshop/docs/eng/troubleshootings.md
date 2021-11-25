@@ -4,7 +4,7 @@ This article explains the frequently encountered problems and how to troubleshoo
 
 ### 1. **Application does not work.**
 
-In Vantiq, there are settings of active status/inactive status for some resources such as Source and Application. If it is set to inactive, it will not work. In that case, please change it to active.  
+In Vantiq, some resources such as Source and Application have the status of `active` or `inactive`.  They don't work when set to inactive. Please change them to active.  
 
 ### 2. **Data cannot be delivered from the Data Generator to the MQTT broker, Data cannot be received by Source.**
 
