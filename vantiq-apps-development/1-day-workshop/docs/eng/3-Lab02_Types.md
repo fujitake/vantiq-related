@@ -93,7 +93,7 @@ Now, the `PumpFailureDetection` Project has two new Types. To save the relations
 <img src="../../imgs/Lab02/image3.png" width=30%>
 
 
-## ***Step 3 （Register data）***
+## ***Step 3 （Import master data）***
 
 Register the required data for each Type created.
 
