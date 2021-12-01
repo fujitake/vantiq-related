@@ -127,6 +127,11 @@ variable "vantiq_node_pool_node_count" {
   type = number
   default = 1
 }
+variable "vantiq_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for vantiq node pool"
+  type = bool
+  default = true
+}
 
 variable "mongodb_node_pool_vm_size" {
   description = "VM size for monbodb node pool"
@@ -138,6 +143,11 @@ variable "mongodb_node_pool_node_count" {
   type = number
   default = 1
 }
+variable "mongodb_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for mongodb node pool"
+  type = bool
+  default = true
+}
 variable "userdb_node_pool_vm_size" {
   description = "VM size for monbodb node pool"
   type = string
@@ -147,6 +157,11 @@ variable "userdb_node_pool_node_count" {
   description = "VM count for monbodb node pool"
   type = number
   default = 0
+}
+variable "userdb_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for userdb node pool"
+  type = bool
+  default = true
 }
 variable "grafana_node_pool_vm_size" {
   description = "VM size for grafana node pool"
@@ -158,6 +173,11 @@ variable "grafana_node_pool_node_count" {
   type = number
   default = 1
 }
+variable "grafana_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for grafana node pool"
+  type = bool
+  default = true
+}
 variable "keycloak_node_pool_vm_size" {
   description = "VM size for keycloak node pool"
   type = string
@@ -168,6 +188,11 @@ variable "keycloak_node_pool_node_count" {
   type = number
   default = 1
 }
+variable "keycloak_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for keycloak node pool"
+  type = bool
+  default = true
+}
 variable "metrics_node_pool_vm_size" {
   description = "VM size for metrics node pool"
   type = string
@@ -177,6 +202,11 @@ variable "metrics_node_pool_node_count" {
   description = "VM count for metrics node pool"
   type = number
   default = 1
+}
+variable "metrics_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for metrics node pool"
+  type = bool
+  default = true
 }
 
 variable "aks_node_subnet_id" {
