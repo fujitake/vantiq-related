@@ -48,6 +48,8 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
     name       = "vantiqnp"
     node_count = var.vantiq_node_pool_node_count
     vm_size    = var.vantiq_node_pool_vm_size
+    os_disk_type = var.vantiq_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+    os_disk_size_gb = var.vantiq_node_pool_node_ephemeral_os_disk ? 64 : null
     vnet_subnet_id = var.aks_node_subnet_id
     availability_zones = var.availability_zones
     node_labels = {
@@ -109,6 +111,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "mongodbnp" {
   name                  = "mongodbnp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
   vm_size               = var.mongodb_node_pool_vm_size
+  os_disk_type          = var.mongodb_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+  os_disk_size_gb       = var.mongodb_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.mongodb_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
   availability_zones    = var.availability_zones
@@ -125,6 +129,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "userdbnp" {
   name                  = "userdbnp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
   vm_size               = var.userdb_node_pool_vm_size
+  os_disk_type          = var.userdb_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+  os_disk_size_gb       = var.userdb_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.userdb_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
   availability_zones    = var.availability_zones
@@ -141,6 +147,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "keycloaknp" {
   name                  = "keycloaknp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
   vm_size               = var.keycloak_node_pool_vm_size
+  os_disk_type          = var.keycloak_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+  os_disk_size_gb       = var.keycloak_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.keycloak_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
   availability_zones    = var.availability_zones
@@ -157,6 +165,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "grafananp" {
   name                  = "grafananp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
   vm_size               = var.grafana_node_pool_vm_size
+  os_disk_type          = var.grafana_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+  os_disk_size_gb       = var.grafana_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.grafana_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
   availability_zones    = var.availability_zones
@@ -173,6 +183,8 @@ resource "azurerm_kubernetes_cluster_node_pool" "metricsnp" {
   name                  = "metricsnp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
   vm_size               = var.metrics_node_pool_vm_size
+  os_disk_type          = var.metrics_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+  os_disk_size_gb       = var.metrics_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.metrics_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
   availability_zones    = var.availability_zones

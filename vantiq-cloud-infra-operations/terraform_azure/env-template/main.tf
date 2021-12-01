@@ -21,13 +21,13 @@ provider "random" {
 terraform {
   required_providers {
     azurerm = {
-      version = "~>2.52.0"
+      version = "~>2.87.0"
     }
     azuread = {
-      version = "=1.0.0"
+      version = "=2.11.0"
     }
     random = {
-      version = "~>2.3.0"
+      version = "~>3.1.0"
     }
   }
 }
@@ -244,14 +244,20 @@ module "aks" {
   availability_zones = [1, 2, 3]
   vantiq_node_pool_vm_size = "Standard_F4s_v2"
   vantiq_node_pool_node_count = 3
+  vantiq_node_pool_node_ephemeral_os_disk = true
   mongodb_node_pool_vm_size = "Standard_E4s_v3"
   mongodb_node_pool_node_count = 3
+  mongodb_node_pool_node_ephemeral_os_disk = true
   userdb_node_pool_vm_size = "Standard_E4s_v3"
   userdb_node_pool_node_count = 0
+  userdb_node_pool_node_ephemeral_os_disk = true
   grafana_node_pool_vm_size = "Standard_E4s_v3"
   grafana_node_pool_node_count = 1
+  grafana_node_pool_node_ephemeral_os_disk = true
   keycloak_node_pool_vm_size = "Standard_B2S"
   keycloak_node_pool_node_count = 3
+  keycloak_node_pool_node_ephemeral_os_disk = false
   metrics_node_pool_vm_size = "Standard_F4s_v2"
   metrics_node_pool_node_count = 1
+  metrics_node_pool_node_ephemeral_os_disk = true
 }
