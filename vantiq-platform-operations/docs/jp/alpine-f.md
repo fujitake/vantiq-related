@@ -5,19 +5,19 @@
 ## 使用方法
 以下のコマンドでデプロイする。
 ```sh
-$ kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/alpine-f.yaml
+kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/alpine-f.yaml
 ```
 
 alpine-fのシェルに入る
 ```sh
-$ kubectl exec -n vantiqtools -it alpine-f -- ash
+kubectl exec -n vantiqtools -it alpine-f -- ash
 
 / #
 ```
 
 以下のコマンドでアンデプロイする。
 ```sh
-$ kubectl delete -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/alpine-f.yaml
+kubectl delete -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/alpine-f.yaml
 ```
 
 これ以下のコマンドは、alpine-fのシェルで実行できる。
@@ -82,5 +82,5 @@ keycloak=> \l  # DBをリストする
 ### Outbound通信時のGlobal IPを確認する
 つまり、Internet Gateway、NAT Gateway の Public IP アドレス
 ```sh
-$ curl https://ifconfig.me
+curl https://ifconfig.me
 ```
