@@ -82,5 +82,5 @@ keycloak=> \l  # DBをリストする
 ### Outbound通信時のGlobal IPを確認する
 つまり、Internet Gateway、NAT Gateway の Public IP アドレス
 ```sh
-$ curl ifconfig.me
+$ curl https://ifconfig.me
 ```
