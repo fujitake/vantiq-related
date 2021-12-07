@@ -214,6 +214,18 @@ Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが
     ロケール: ja-*-*
 
     ```
+### Minor Version Upgrade - Rollback<a id="minor_version_upgrade_rollback"></a>
+Vantiqの各コンポーネントはkubernetes上で稼働しているため、基本的には切り戻しのために古いバージョンのイメージを再デプロイすることになる。MongoDBのデータについてはバックアップ済みデータを用いてアップグレード作業開始前の状態にする。
+1. Vantiq pod のサービスを停止する (`metrics-collector` と `vision-analytics` は構成している場合のみ)。
+    ```sh
+    kubectl scale sts -n <namespace name> vantiq --replicas=0
+    kubectl scale sts -n <namespace name> metrics-collector --replicas=0
+    kubectl scale sts -n <namespace name> vision-analytics --replicas=0
+    ```
+1. アップグレード作業中に作成したMongodbバックアップ（step 7)を用いて作業前の状態に戻す。手順については[Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)を参照する。
+1. `deploy.yaml` の`vantiq.image.tag`をアップグレード前のバージョンに戻す。
+1. `deploy.yaml` の変更を適用する。 `./gradlew -Pcluster=<クラスタ名> deployVantiq`   
+
 
 
 ### Patch Version Upgrade<a id="patch_version_upgrade"></a>
@@ -251,6 +263,11 @@ DB Schema 拡張を伴わないため、Vantiq Pod のみの更新となる。
     ロケール: ja-*-*
 
     ```
+### Patch Version Upgrade - Rollback<a id="patch_version_upgrade_rollback"></a>
+Vantiqの各コンポーネントはkubernetes上で稼働しているため、基本的には切り戻しのために古いバージョンのイメージを再デプロイすることになる。
+1. `deploy.yaml` の`vantiq.image.tag`をアップグレード前のバージョンに戻す。
+1. `deploy.yaml` の変更を適用する。 `./gradlew -Pcluster=<クラスタ名> deployVantiq`   
+
 
 
 ### SSL 証明書を更新する<a id="renew_ssl_certificate"></a>
@@ -260,20 +277,36 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 1. SSL 証明書を取得する。
   - 顧客調達の場合、必要なリードタイムを考慮し、前もって証明書の更新を依頼する。
   - Vantiq 内部で非本番用の場合、[SSLなう](https://sslnow.ml/)などを使って、"Let's Encrypt" の証明書を取得してもよい。
-2.  SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間照明書がオリジナルの証明書のファイルにアペンドされていること)。
-3. 取得した証明書と秘密鍵 (それぞれ、`fullchain.crt`、`private.key` とする) を `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。
+2.  SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間証明書がオリジナルの証明書のファイルにアペンドされていること)。
+3. 取得した証明書と秘密鍵 (それぞれ、`fullchain.crt`、`private.key` とする) を `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
 4. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
 5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
 6. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`-n shared default-ssl-cert` が更新される。
 7. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
+### SSL 証明書を更新する - Rollback<a id="renew_ssl_certificate_rollback"></a>
+1. バックアップしておいた証明書と秘密鍵 (それぞれ、`fullchain.crt.yyyyMMdd`、`private.key.yyyyMMdd` とする) を `targetCluster/deploy/sensitive` の下にリネームして戻す。
+1. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
+1. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`-n shared default-ssl-cert` が更新される。
+1. ブラウザーでアクセスし、証明書が変わっていることを確認する。
+
+
 ### License ファイルを更新する<a id="renew_license_files"></a>
 
 1. Vantiq Support から License ファイル (それぞれ、`public.pem`、`license.key` とする) を取得する。
-2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。
+2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
 3. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
 4. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
 5. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
+
+### License ファイルを更新する - Rollback<a id="renew_license_files_rollback"></a>
+
+1. バックアップしておいた License ファイルを `targetCluster/deploy/sensitive` の下にリネームして戻す。
+1. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
+1. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
+
 
 
 
