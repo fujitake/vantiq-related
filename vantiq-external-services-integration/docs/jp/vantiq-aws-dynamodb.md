@@ -203,6 +203,38 @@ Procedureの実行で、疎通テストをする。
 ![picture20](../../imgs/vantiq-aws-dynamodb/picture20.png)
 
 
+### その他
+
+#### TTLを設定する場合
+DynamoDBの場合、レコードを一括で削除することができない。TTLを設定して定期的に不要なレコードを削除させる。
+以下のコード例は、現在日付から30日後のunix epoch timeを算出し、`ttl`列として追加している。 DynamoDB側で適宜TTL設定が必要。
+
+```vail
+var ttl = now().plusMillis(30 days)
+
+var msg = {
+  "TableName": "pump-status",
+  "Item": { 
+        "id": {
+          "S": toString(status.PumpID)
+        },
+        "timestamp": {
+          "S": status.ReceivedAt
+        },
+        "temp" : {
+          "N": status.Temp.toString()    // DynamoDB API only accepts String Literal
+        },
+        "rpms" : {
+          "N": status.RPMS.toString()    // DynamoDB API only accepts String Literal
+        },
+        "ttl" : {
+            "N": date(ttl, "date", "epochMilliseconds").toString() // for  periodically deleting records
+        }
+    }
+}
+```
+
+
  
 ## Reference
 •	https://blog.yuu26.com/api-gateway-dynamodb-json/
