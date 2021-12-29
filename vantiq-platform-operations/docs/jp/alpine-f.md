@@ -78,6 +78,21 @@ keycloak=> \l  # DBをリストする
 ```
 [PostgreSQLコマンドチートシート](https://qiita.com/Shitimi_613/items/bcd6a7f4134e6a8f0621)
 
+### Keycloak DBのDumpをす
+```
+/ # pg_dump -Fc -v --host=keycloakvantiqjpinternalprod.postgres.database.azure.com --username=keycloak@keycloakvantiqjpinternalprod.postgres
+.database.azure.com --password --dbname=keycloak -f keycloak.dump
+Password: 
+pg_dump: last built-in OID is 16383
+pg_dump: reading extensions
+pg_dump: identifying extension members
+pg_dump: reading schemas
+pg_dump: reading user-defined tables
+pg_dump: reading user-defined functions
+pg_dump: reading user-defined types
+pg_dump: reading procedural languages
+...
+```
 
 ### Outbound通信時のGlobal IPを確認する
 つまり、Internet Gateway、NAT Gateway の Public IP アドレス
