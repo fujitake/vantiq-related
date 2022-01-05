@@ -100,7 +100,7 @@ ssl.truststore.location=/tmp/kafka.client.truststore.jks
 #### testkafka-sasl configuration details
 Confirm the details of **testkafka-sasl** in CLI. Specify `--cluster-arn` and `--region` as per the instance actually created.
 ```sh
-$ aws kafka describe-cluster --region ap-southeast-1 \
+aws kafka describe-cluster --region ap-southeast-1 \
   --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-sasl/e2d7910e-2ea2-4e63-89f2-f8a61123dfb4-3
 ```
 returns the following details. Note down `ClusterInfo.ZookeeperConnectString`.
@@ -177,7 +177,7 @@ returns the following details. Note down `ClusterInfo.ZookeeperConnectString`.
 #### testkafka-sasl Create Topic
 In this example, create the topic `AWSKafkaTutorialTopic`.
 ```sh
-$ bin/kafka-topics.sh --create \
+bin/kafka-topics.sh --create \
   --zookeeper "z-1.testkafka-sasl.hs72it.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-2.testkafka-sasl.hs72it.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-3.testkafka-sasl.hs72it.c3.kafka.ap-southeast-1.amazonaws.com:2181" \
   --replication-factor 2 \
   --partitions 1 \
@@ -186,7 +186,7 @@ $ bin/kafka-topics.sh --create \
 
 Confirm the endopoint of the broker.
 ```sh
-$ aws kafka get-bootstrap-brokers \
+aws kafka get-bootstrap-brokers \
   --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-sasl/e2d7910e-2ea2-4e63-89f2-f8a61123dfb4-3 \
   --region ap-southeast-1
 ```
@@ -226,7 +226,7 @@ test message 44
 #### testkafka-noauth configuration details
 Confirm the details of **testestkafka-noauth** in CLI. Specify `--cluster-arn` and `--region` as per the instance actually created.
 ```sh
-$ aws kafka describe-cluster --region ap-southeast-1 \
+aws kafka describe-cluster --region ap-southeast-1 \
   --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-noauth/39e95242-cbc6-4da2-ba33-ded81636c661-3
 ```
 returns the following details. Note down `ClusterInfo.ZookeeperConnectString`.
@@ -303,13 +303,13 @@ returns the following details. Note down `ClusterInfo.ZookeeperConnectString`.
 ### testkafka-noauth - Create Topic
 In this example, create the topic `AWSKafkaTutorialTopic`.
 ```sh
-$ bin/kafka-topics.sh --create --zookeeper "z-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181" --replication-factor 2 --partitions 1 --topic AWSKafkaTutorialTopic
+bin/kafka-topics.sh --create --zookeeper "z-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181" --replication-factor 2 --partitions 1 --topic AWSKafkaTutorialTopic
 ```
 
 Confirm the endopoint of the broker.
 
 ```sh
-$ aws kafka get-bootstrap-brokers  --region ap-southeast-1 --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-noauth/39e95242-cbc6-4da2-ba33-ded81636c661-3
+aws kafka get-bootstrap-brokers  --region ap-southeast-1 --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-noauth/39e95242-cbc6-4da2-ba33-ded81636c661-3
 ```
 returns the following:
 ```json
@@ -323,7 +323,7 @@ returns the following:
 ### Testkafka-noauth  - Connection Test – Producer
 
 ```sh
-$ bin/kafka-console-producer.sh --broker-list "b-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.c:9092,b-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092" --topic AWSKafkaTutorialTopic
+bin/kafka-console-producer.sh --broker-list "b-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.c:9092,b-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092" --topic AWSKafkaTutorialTopic
 >test message 1
 >test message 23
 >test message 44
@@ -332,7 +332,7 @@ $ bin/kafka-console-producer.sh --broker-list "b-2.testkafka-noauth.foho0x.c3.ka
 
 ### Testkafka-noauth  - Connection Test – Consumer
 ```sh
-$ bin/kafka-console-consumer.sh --bootstrap-server "b-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092" --topic AWSKafkaTutorialTopic --from-beginning
+bin/kafka-console-consumer.sh --bootstrap-server "b-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092" --topic AWSKafkaTutorialTopic --from-beginning
 test message 1
 test message 23
 test message 44
