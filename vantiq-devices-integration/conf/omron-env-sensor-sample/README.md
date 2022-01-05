@@ -31,7 +31,7 @@
 4. 環境センサーをUSBポートに接続する
 5. 環境センサーのMacアドレスを確認する
 ```
-$ sudo hcitool lescan
+sudo hcitool lescan
 LE Scan ...
 C2:B7:E4:CC:FE:79 Rbt
 ※「Rbt」が環境センサーのMacアドレス
@@ -49,18 +49,18 @@ C2:B7:E4:CC:FE:79 Rbt
 7. Raspberry Piの任意のディレクトリにサンプルスクリプトを配置する
 8. bluepy(BLEデバイスを制御するPythonモジュール)をインストールする
 ```
-$ sudo apt install libglib2.0-dev
-$ pip install bluepy
+sudo apt install libglib2.0-dev
+pip install bluepy
 ```
 9. その他、サンプルスクリプトで使用しているモジュールでRaspberry Piにないものがあればインストールする
 ```
 例:
-$ pip install requests
+pip install requests
 ```
 10. サンプルスクリプトを実行し、データが送信されることを確認する
 ```
 例:
-$ python env_usb_observer.py
+python env_usb_observer.py
 Published Event: 2021/09/21 11:03:46
 {'pressure': 1005, 'noise': 42, 'temperature': 29, 'env_sensor_id': 'env_sensor1', 'etvoc': 3, 'light': 44, 'eco2': 422, 'humidity': 55}
 ```
