@@ -45,7 +45,7 @@ suspend: false
 With that, completed jobs older than three generations will be automatically deleted.  
 
 ```sh
-kubectl get pods -n internal
+$ kubectl get pods -n internal
 NAME                           READY   STATUS      RESTARTS   AGE
 metrics-collector-0            1/1     Running     6          81d
 mongobackup-1630195200-z8ztx   0/1     Completed   0          2d11h

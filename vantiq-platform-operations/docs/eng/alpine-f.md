@@ -24,7 +24,7 @@ The following commands are possible to execute in the alpine-f shell.
 ### Verify Name Resolution
 
 ```sh
-nslookup internal.vantiqjp.com
+$ nslookup internal.vantiqjp.com
 Server:		10.100.0.10
 Address:	10.100.0.10:53
 
@@ -38,7 +38,7 @@ Address: 20.194.148.153
 ### Verify reachability of access to Vantiq services and the repositories
 
 ```sh
-curl -visk https://internal.vantiqjp.com
+$ curl -visk https://internal.vantiqjp.com
 *   Trying 20.194.148.153:443...
 * TCP_NODELAY set
 * Connected to internal.vantiqjp.com (20.194.148.153) port 443 ('#0')
@@ -56,7 +56,7 @@ curl -visk https://internal.vantiqjp.com
 ### Check the Postgres connections
 
 ```sh
-psql --host=keycloak-postgresql.czjeauchlabl.ap-northeast-1.rds.amazonaws.com --username=keycloak --password --dbname=keycloak
+$ psql --host=keycloak-postgresql.czjeauchlabl.ap-northeast-1.rds.amazonaws.com --username=keycloak --password --dbname=keycloak
 Password:
 psql (12.2, server 11.10)
 SSL connection (protocol: TLSv1.2, cipher: ECDHE-RSA-AES256-GCM-SHA384, bits: 256, compression: off)

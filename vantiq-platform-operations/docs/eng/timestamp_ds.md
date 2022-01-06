@@ -24,7 +24,7 @@ brew install stern
 ```
 or
 ```sh
-wget https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
+$ wget https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64
 mv stern_linux_amd64 /usr/sbin
 chmod +x /usr/sbin/stern_linux_amd64
 ln /usr/sbin/stern_linux_amd64 /usr/sbin/stern
@@ -32,9 +32,9 @@ ln /usr/sbin/stern_linux_amd64 /usr/sbin/stern
 
 Deploy the DaemonSet of the tool.  
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/timestamp_ds.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/timestamp_ds.yaml
 
-kubectl get pods -n tools
+$ kubectl get pods -n tools
 NAME              READY   STATUS    RESTARTS   AGE
 timestamp-68tlt   1/1     Running   0          7s
 timestamp-97chb   1/1     Running   0          7s
@@ -52,7 +52,7 @@ timestamp-z8ww2   1/1     Running   0          7s
 Printing Timestamp. The following is an example of a normal timestamp.
 
 ```
-stern -n tools timestamp-*
+$ stern -n tools timestamp-*
 
 ...
 
