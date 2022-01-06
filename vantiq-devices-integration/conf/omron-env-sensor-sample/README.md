@@ -31,7 +31,7 @@
 4. 環境センサーをUSBポートに接続する
 5. 環境センサーのMacアドレスを確認する
 ```
-sudo hcitool lescan
+$ sudo hcitool lescan
 LE Scan ...
 C2:B7:E4:CC:FE:79 Rbt
 ※「Rbt」が環境センサーのMacアドレス
@@ -60,7 +60,7 @@ pip install requests
 10. サンプルスクリプトを実行し、データが送信されることを確認する
 ```
 例:
-python env_usb_observer.py
+$ python env_usb_observer.py
 Published Event: 2021/09/21 11:03:46
 {'pressure': 1005, 'noise': 42, 'temperature': 29, 'env_sensor_id': 'env_sensor1', 'etvoc': 3, 'light': 44, 'eco2': 422, 'humidity': 55}
 ```
