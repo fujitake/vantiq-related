@@ -29,7 +29,7 @@
 <a id="implement"></a>
 
 ## 1. データ送信処理実装方法
----
+
 <a id="implement-proc"></a>
 
 ### **1. Procedureでの実装**
@@ -130,7 +130,7 @@ PublishToSource Activityの設定では以下の画像のように送信先と�
 <a id="samples"></a>
 
 ## 2. 各Source別実装サンプル
----
+
 各Sourceごとに送信処理を実装したVAILのサンプルを紹介します。
 
 <a id="sample-remote"></a>
@@ -297,7 +297,7 @@ Sourceごとに必要とするキーは以下の通りです。
 <a id="notes"></a>
 
 ## 3. 注意点
----
+
 <a id="note-select-publish"></a>
 
 ### **1. SELECT文とPUBLISH文の使い分け**
@@ -350,7 +350,7 @@ REMOTE Sourceの`Server URI`の値をベースとして`path`の値が追加さ�
 ### **4. QoSとDelivery Mode**
 
 MQTT SourceにはDelivery ModeとQoSの設定項目があり、それぞれ`AT LEAST ONCE`、`AT MOST ONCE`というような値を持つ設定項目です(KAFKA SourceにはQoSの設定項目がなくAMQPには両方存在しません)。それぞれが何のQoSかは以下の通りです。
-|||
+|項目|内容|
 |-|-|
 |QoS|サブスクライブ時のブローカーとSource間のQoS|
 |Delivery Mode|Sourceがデータを受け取ってからVantiq内部（Appなど）にデータを渡す際のQoS|
