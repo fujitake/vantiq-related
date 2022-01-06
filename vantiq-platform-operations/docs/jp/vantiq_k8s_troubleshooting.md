@@ -237,7 +237,7 @@ Podの一覧でステータスを確認する。
 - `Age` -- Podが起動してからの経過時間
 
 ```bash
-$ kubectl get pod -A
+kubectl get pod -A
 
 NAMESPACE     NAME                                                READY   STATUS      RESTARTS   AGE
 app           metrics-collector-0                                 1/1     Running     1          6d18h
@@ -301,7 +301,7 @@ Podの一覧で詳細なステータスを確認する
 - `Node` -- Podが稼働しているワーカーノードの名前
 
 ```sh
-$ kubectl get pod -A -o wide
+kubectl get pod -A -o wide
 NAMESPACE     NAME                                                READY   STATUS      RESTARTS   AGE     IP              NODE                                 NOMINATED NODE   READINESS GATES
 app           metrics-collector-0                                 1/1     Running     1          6d18h   10.19.112.20    aks-vantiqnp-15823220-vmss000000     <none>           <none>
 app           mongobackup-1605657600-2rtlk                        0/1     Completed   0          2d9h    10.19.112.249   aks-grafananp-15823220-vmss000000    <none>           <none>
@@ -320,7 +320,7 @@ Podの詳細なステータスを確認する
 - `Events` -- Podの起動時のステータス、エラー理由など。リソース不足やディスクのマウント失敗時にはエラー理由がここに現れる。
 
 ```sh
-$ kubectl describe pod -n <namespace> vantiq-2
+kubectl describe pod -n <namespace> vantiq-2
 
 Name:         vantiq-2
 Namespace:    app
@@ -408,7 +408,7 @@ kubectl logs -n <namespace> <pod> -f
 ```
 
 ```sh
-$ kubectl logs -n app vantiq-0 -f
+kubectl logs -n app vantiq-0 -f
 
 2020-11-20T09:21:30.995 [hz._hzInstance_1_vantiq-server.InvocationMonitorThread] WARN  c.h.s.i.o.impl.Invocation - [10.19.112.127]:5701 [vantiq-server] [3.12.2] Retrying invocation: Invocation{op=com.hazelcast.internal.partition.operation.PartitionStateOperation{serviceName='hz:core:partitionService', identityHash=523698796, partitionId=-1, replicaIndex=0, callId=121243, invocationTime=1605864090994 (2020-11-20 09:21:30.994), waitTimeout=-1, callTimeout=60000}, tryCount=250, tryPauseMillis=500, invokeCount=210, callTimeoutMillis=60000, firstInvocationTimeMs=1605864019357, firstInvocationTime='2020-11-20 09:20:19.357', lastHeartbeatMillis=0, lastHeartbeatTime='1970-01-01 00:00:00.000', target=[10.19.112.86]:5701, pendingResponse={VOID}, backupsAcksExpected=0, backupsAcksReceived=0, connection=null}, Reason: com.hazelcast.spi.exception.RetryableIOException: Packet not sent to -> [10.19.112.86]:5701 over null
 2020-11-20T09:21:35.998 [hz._hzInstance_1_vantiq-server.InvocationMonitorThread] WARN  c.h.s.i.o.impl.Invocation - [10.19.112.127]:5701 [vantiq-server] [3.12.2] Retrying invocation: Invocation{op=com.hazelcast.internal.partition.operation.PartitionStateOperation{serviceName='hz:core:partitionService', identityHash=523698796, partitionId=-1, replicaIndex=0, callId=121253, invocationTime=1605864095998 (2020-11-20 09:21:35.998), waitTimeout=-1, callTimeout=60000}, tryCount=250, tryPauseMillis=500, invokeCount=220, callTimeoutMillis=60000, firstInvocationTimeMs=1605864019357, firstInvocationTime='2020-11-20 09:20:19.357', lastHeartbeatMillis=0, lastHeartbeatTime='1970-01-01 00:00:00.000', target=[10.19.112.86]:5701, pendingResponse={VOID}, backupsAcksExpected=0, backupsAcksReceived=0, connection=null}, Reason: com.hazelcast.spi.exception.RetryableIOException: Packet not sent to -> [10.19.112.86]:5701 over null
@@ -432,13 +432,13 @@ $ kubectl logs -n app vantiq-0 -f
 （例：vantiq-0、vantiq-1、vantiq-2がある場合、vantiq-2から調整される）
 
 ```sh
-$ kubectl scale sts -n <namespace> --replicas=<replica count>
+kubectl scale sts -n <namespace> --replicas=<replica count>
 ```
 ```sh
-$ kubectl scale sts -n app vantiq --replicas=2
+kubectl scale sts -n app vantiq --replicas=2
 statefulset.apps/vantiq scaled
 
-$ kubectl get pods -n app
+kubectl get pods -n app
 NAME                           READY   STATUS        RESTARTS   AGE
 metrics-collector-0            1/1     Running       1          6d19h
 mongobackup-1605657600-2rtlk   0/1     Completed     0          2d9h
@@ -457,13 +457,13 @@ vantiq-1                       1/1     Running       0          6d19h
 
 2. PodをDeleteする。Deleteされたpodは自動的に再度起動される。
 ```sh
-$ kubectl delete pod -n <namespace> <podname>
+kubectl delete pod -n <namespace> <podname>
 ```
 ```sh
-$ kubectl delete pod -n app vantiq-0
+kubectl delete pod -n app vantiq-0
 pod "vantiq-0" deleted
 
-$ kubectl get pods -n app
+kubectl get pods -n app
 NAME                           READY   STATUS      RESTARTS   AGE
 metrics-collector-0            1/1     Running     1          6d19h
 mongobackup-1605657600-2rtlk   0/1     Completed   0          2d10h
@@ -507,7 +507,7 @@ Nodeの一覧でステータスを確認する
 - `Version` -- NodeのAKSバージョン
 
 ```sh
-$ kubectl get nodes
+kubectl get nodes
 NAME                                 STATUS   ROLES   AGE   VERSION
 aks-grafananp-15823220-vmss000000    Ready    agent   22d   v1.16.15
 aks-keycloaknp-15823220-vmss000000   Ready    agent   22d   v1.16.15
@@ -531,7 +531,7 @@ Nodeの一覧で詳細なステータスを確認する
 - `External-IP` -- NodeのPublic IPもしくはFQDN
 
 ```sh
-$ kubectl get nodes -o wide
+kubectl get nodes -o wide
 NAME                                 STATUS   ROLES   AGE   VERSION    INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION      CONTAINER-RUNTIME
 aks-grafananp-15823220-vmss000000    Ready    agent   22d   v1.16.15   10.19.112.224   <none>        Ubuntu 16.04.7 LTS   4.15.0-1096-azure   docker://19.3.12
 aks-keycloaknp-15823220-vmss000000   Ready    agent   22d   v1.16.15   10.19.112.131   <none>        Ubuntu 16.04.7 LTS   4.15.0-1096-azure   docker://19.3.12
@@ -552,7 +552,7 @@ aks-vantiqnp-15823220-vmss000002     Ready    agent   22d   v1.16.15   10.19.112
 Nodeが稼働しているAZ、およびLabelを確認する
 
 ```sh
-$ kubectl get nodes -L failure-domain.beta.kubernetes.io/zone,vantiq.com/workload-preference
+kubectl get nodes -L failure-domain.beta.kubernetes.io/zone,vantiq.com/workload-preference
 NAME                                 STATUS   ROLES   AGE   VERSION    ZONE          WORKLOAD-PREFERENCE
 aks-grafananp-15823220-vmss000000    Ready    agent   22d   v1.16.15   japaneast-1   influxdb
 aks-keycloaknp-15823220-vmss000000   Ready    agent   22d   v1.16.15   japaneast-1   shared
@@ -578,10 +578,10 @@ Nodeの詳細なステータスを確認する
 -   `Allocated resources` -- 現在のリソースの割り当て状況。特にMemoryが枯渇すると、強制的にPodは終了されてしまう。
 
 ```sh
-$ kubectl describe node <node name>
+kubectl describe node <node name>
 ```
 ```sh
-$ kubectl describe node aks-vantiqnp-15823220-vmss000000
+kubectl describe node aks-vantiqnp-15823220-vmss000000
 Name:               aks-vantiqnp-15823220-vmss000000
 Roles:              agent
 Labels:             agentpool=vantiqnp
@@ -673,22 +673,22 @@ Events:                          <none>
 
 1.  `taint`を使い、Podを動かす先のNode以外をスケジュール不可にする
 ```sh
-$ kubectl taint nodes --all key=value:NoSchedule
-$ kubectl taint nodes <node name> key:NosSchedule-
+kubectl taint nodes --all key=value:NoSchedule
+kubectl taint nodes <node name> key:NosSchedule-
 ```
 
 2.  動かしたいPodを「[Podの再起動を行う](#podの再起動を行う)」  に従い再起動を行う。
 3.  Podが意図するNodeに移動したかを「[Podのステータスを確認する](#podのステータスを確認する)」 に従い、確認する。
 4.  Taintを解除する
 ```sh
-$ kubectl taint nodes --all key:NoSchedule-
+kubectl taint nodes --all key:NoSchedule-
 ```
 実施例： 2つの稼働中のPodを、別のNodeに再配置する（入れ替える）
 
 ![image18_1](../../imgs/vantiq_k8s_troubleshooting/18_1.png)
 
 ```sh
-$ kubectl get pods -n app -o wide
+kubectl get pods -n app -o wide
 NAME                           READY   STATUS      RESTARTS   AGE     IP              NODE                                
 👉metrics-collector-0            1/1     Running     0          38m     10.19.112.33    aks-vantiqnp-15823220-vmss000000    
 mongobackup-1605657600-2rtlk   0/1     Completed   0          2d13h   10.19.112.249   aks-grafananp-15823220-vmss000000   
@@ -707,7 +707,7 @@ vantiq-2                       1/1     Running     0          38m     10.19.112.
 `metrics-collector-0`のスケールを変更して、削除する。
 
 ```sh
-$ kubectl scale sts -n app metrics-collector --replicas=0
+kubectl scale sts -n app metrics-collector --replicas=0
 statefulset.apps/metrics-collector scaled
 ```
 
@@ -716,7 +716,7 @@ statefulset.apps/metrics-collector scaled
 移動先の`aks-vantiqnp-15823220-vmss000000`以外に`taint`を適用する
 
 ```sh
-$ kubectl taint nodes --all key=value:NoSchedule
+kubectl taint nodes --all key=value:NoSchedule
 node/aks-grafananp-15823220-vmss000000 tainted
 node/aks-keycloaknp-15823220-vmss000000 tainted
 node/aks-keycloaknp-15823220-vmss000001 tainted
@@ -732,14 +732,14 @@ node/aks-vantiqnp-15823220-vmss000000 tainted
 node/aks-vantiqnp-15823220-vmss000001 tainted
 node/aks-vantiqnp-15823220-vmss000002 tainted
 
-$ kubectl taint nodes aks-vantiqnp-15823220-vmss000000 key:NoSchedule-
+kubectl taint nodes aks-vantiqnp-15823220-vmss000000 key:NoSchedule-
 node/aks-vantiqnp-15823220-vmss000000 untainted
 ```
 
 移動する`vantiq-0`を再起動する（Podを削除すると、自動的に再起動する）
 
 ```sh
-$ kubectl delete pod -n app vantiq-0
+kubectl delete pod -n app vantiq-0
 pod "vantiq-0" deleted
 ```
 
@@ -748,7 +748,7 @@ pod "vantiq-0" deleted
 `metrics-collector-0`の移動先の`aks-metricsnp-15823220-vmss000000`以外に`taint`を適用する
 
 ```sh
-$ kubectl taint nodes --all key=value:NoSchedule
+kubectl taint nodes --all key=value:NoSchedule
 node/aks-vantiqnp-15823220-vmss000000 tainted
 Node aks-grafananp-15823220-vmss000000 already has key taint(s) with same effect(s) and --overwrite is false
 Node aks-keycloaknp-15823220-vmss000000 already has key taint(s) with same effect(s) and --overwrite is false
@@ -764,7 +764,7 @@ Node aks-userdbnp-15823220-vmss000002 already has key taint(s) with same effect(
 Node aks-vantiqnp-15823220-vmss000001 already has key taint(s) with same effect(s) and --overwrite is false
 Node aks-vantiqnp-15823220-vmss000002 already has key taint(s) with same effect(s) and --overwrite is false
 
-$ kubectl taint nodes aks-metricsnp-15823220-vmss000000 key:NoSchedule-
+kubectl taint nodes aks-metricsnp-15823220-vmss000000 key:NoSchedule-
 node/aks-metricsnp-15823220-vmss000000 untainted
 ```
 
@@ -773,7 +773,7 @@ node/aks-metricsnp-15823220-vmss000000 untainted
 ![image19_2](../../imgs/vantiq_k8s_troubleshooting/19_2.png)
 
 ```sh
-$ kubectl scale sts -n app metrics-collector --replicas=1
+kubectl scale sts -n app metrics-collector --replicas=1
 statefulset.apps/metrics-collector scaled
 NAME                           READY   STATUS      RESTARTS   AGE     IP              NODE                                
 👉metrics-collector-0            1/1     Running     0          53s     10.19.112.127   aks-metricsnp-15823220-vmss000000   
@@ -793,7 +793,7 @@ vantiq-2                       1/1     Running     0          82m     10.19.112.
 taintを解除する
 
 ```sh
-$ kubectl taint nodes --all key:NoSchedule-
+kubectl taint nodes --all key:NoSchedule-
 node/aks-grafananp-15823220-vmss000000 untainted
 node/aks-keycloaknp-15823220-vmss000000 untainted
 node/aks-keycloaknp-15823220-vmss000001 untainted
@@ -843,7 +843,7 @@ Podがあるべき場所に配置されていないと、以下の問題が発�
 Nodeが正しいZoneに配置されているか確認する
 
 ```sh
-$ kubectl get nodes -L failure-domain.beta.kubernetes.io/zone
+kubectl get nodes -L failure-domain.beta.kubernetes.io/zone
 NAME                                 STATUS   ROLES   AGE   VERSION    ZONE
 aks-grafananp-15823220-vmss000000    Ready    agent   25d   v1.16.15   japaneast-1
 aks-keycloaknp-15823220-vmss000000   Ready    agent   25d   v1.16.15   japaneast-1
@@ -863,7 +863,7 @@ aks-vantiqnp-15823220-vmss000002     Ready    agent   25d   v1.16.15   japaneast
 
 Podが正しいNodeに配置されているか確認する
 ```sh
-$ kubectl get pods -A -o wide
+kubectl get pods -A -o wide
 NAMESPACE     NAME                                                READY   STATUS      RESTARTS   AGE     IP              NODE                                 NOMINATED NODE   READINESS GATES
 app           metrics-collector-0                                 1/1     Running     0          2d18h   10.19.112.127   aks-metricsnp-15823220-vmss000000    <none>           <none>
 app           mongobackup-1605916800-2mchr                        0/1     Completed   0          2d8h    10.19.112.244   aks-grafananp-15823220-vmss000000    <none>           <none>
@@ -911,7 +911,7 @@ shared        telegraf-prom-6d6598f56b-dsf9n                      1/1     Runnin
 PodがClaimしているPVとPVが配置されているZoneを確認する
 
 ```sh
-$ kubectl get pv -L failure-domain.beta.kubernetes.io/zone
+kubectl get pv -L failure-domain.beta.kubernetes.io/zone
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                             STORAGECLASS   REASON   AGE   ZONE
 pvc-033fa5eb-e3ed-4e87-84b7-78dfe66a5d16   500Gi      RWO            Retain           Bound    app/datadir-userdb-2              vantiq-sc               9d    japaneast-2
 pvc-13d491a7-b4cf-4d0b-9f06-599a33b2d1ea   500Gi      RWO            Retain           Bound    app/datadir-mongodb-1             vantiq-sc               9d    japaneast-1
