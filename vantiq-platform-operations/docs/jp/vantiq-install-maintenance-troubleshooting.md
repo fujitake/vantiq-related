@@ -63,14 +63,14 @@ vantiq:
 
 `undeploy`と`deploy`を繰り返すと、新しいPVが作られ、古いPVに入った情報が見れなくなる。(status = `Released`)
 ```
-kubectl get pv
+$ kubectl get pv
 pvc-a6d5da12-7e3e-4a32-a5b3-bbbbbbbbbbbb   5Gi        RWO            Retain           Bound      shared/grafana                    vantiq-sc               5d21h
 pvc-ec37c469-782a-473f-a6f9-aaaaaaaaaaaa   5Gi        RWO            Retain           Released   shared/grafana                    vantiq-sc               247d
 ```
 #### リカバリー手順
 1. PV, PVCをマウントしているdeploy or stsのpodを削除する。
 ```
-kubectl scale deploy -n shared grafana --replicas=0
+$ kubectl scale deploy -n shared grafana --replicas=0
 deployment.apps/grafana scaled
 ```
 2. PVのclaimRefをクリアする -> PVのStatusが`Available`になり、再利用可。
@@ -120,7 +120,7 @@ volumes:
 ```
 6. PV, PVCをマウントしているdeploy or stsのpodを起動する。
 ```sh
-kubectl scale deploy -n shared grafana --replicas=1
+$ kubectl scale deploy -n shared grafana --replicas=1
 deployment.apps/grafana scaled
 ```
 
@@ -141,10 +141,10 @@ deployment.apps/grafana scaled
 
 ```sh
 # influx-0 の pod のシェルに入る
-kubectl exec -it influxdb-0 -n shared -- /bin/sh
+$ kubectl exec -it influxdb-0 -n shared -- /bin/sh
 
 # influx のシェルに入る
-influx
+$ influx
 Connected to http://localhost:8086 version 1.8.1
 InfluxDB shell version: 1.8.1
 
@@ -173,7 +173,7 @@ go_gc_duration_seconds
 メトリクスがない場合、telegraf 側でエラーが出ているか確認する。
 
 ```sh
-stern -n shared telegraf-* -s 1s
+$ stern -n shared telegraf-* -s 1s
 
 telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:35Z E! [inputs.prometheus] Unable to watch resources: kubernetes api: Failure 403 pods is forbidden: User "system:serviceaccount:shared:telegraf-prom" cannot watch resource "pods" in API group "" at the cluster scope
 telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:36Z E! [inputs.prometheus] Unable to watch resources: kubernetes api: Failure 403 pods is forbidden: User "system:serviceaccount:shared:telegraf-prom" cannot watch resource "pods" in API group "" at the cluster scope
@@ -500,7 +500,7 @@ shared         keycloak-2                                       0/1     CrashLoo
 初期インストール時によくある問題として、資格情報が正しく設定されてない可能性がある。`kubectl logs` で調べると、次のようなエラーが出ていることがある。
 
 ```
-kubectl logs -n shared keycloak-0 -f
+$ kubectl logs -n shared keycloak-0 -f
 Picked up JAVA_TOOL_OPTIONS: -XX:+UseContainerSupport -XX:MaxRAMPercentage=50.0
 Added 'keycloak' to '/opt/jboss/keycloak/standalone/configuration/keycloak-add-user.json', restart server to load user
 =========================================================================

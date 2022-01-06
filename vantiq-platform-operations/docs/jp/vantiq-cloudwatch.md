@@ -37,7 +37,7 @@ kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch
 
 #### デプロイされていることを確認
 ```sh
-kubectl get pods -n amazon-cloudwatch
+$ kubectl get pods -n amazon-cloudwatch
 NAME               READY   STATUS    RESTARTS   AGE
 fluent-bit-48nv6   1/1     Running   0          20s
 fluent-bit-4tnbc   1/1     Running   0          20s
@@ -76,7 +76,7 @@ kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch
 
 ####  サービスアカウントを確認する
 ```sh
-kubectl get sa -n amazon-cloudwatch
+$ kubectl get sa -n amazon-cloudwatch
 NAME               SECRETS   AGE
 cloudwatch-agent   1         119s
 default            1         31m
@@ -127,7 +127,7 @@ kubectl apply -f https://raw.githubusercontent.com/aws-samples/amazon-cloudwatch
 
 #### デプロイされていることを確認
 ```sh
-kubectl get pods -n amazon-cloudwatch
+$ kubectl get pods -n amazon-cloudwatch
 NAME                     READY   STATUS    RESTARTS   AGE
 cloudwatch-agent-4b2x9   1/1     Running   0          14s
 cloudwatch-agent-6wkq9   1/1     Running   0          14s

@@ -74,7 +74,7 @@ vantiq:
 
 ## mongodb backup jobの削除のタイミング
 
-`mongodbbackup`のcronjobの中に、`successfulJobsHistoryLimit: 3`　が設定さている。
+`mongodbbackup`のcronjobの中に、`successfulJobsHistoryLimit: 3`　が設定されている。
 
 ```sh
 kubectl get cj -n internal mongobackup -o yaml
@@ -93,7 +93,7 @@ suspend: false
 それにより、実行済みのJobは３世代以上は自動的に削除される。
 
 ```sh
-kubectl get pods -n internal
+$ kubectl get pods -n internal
 NAME                           READY   STATUS      RESTARTS   AGE
 metrics-collector-0            1/1     Running     6          81d
 mongobackup-1630195200-z8ztx   0/1     Completed   0          2d11h
