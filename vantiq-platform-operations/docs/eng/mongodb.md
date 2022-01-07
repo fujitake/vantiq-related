@@ -29,7 +29,7 @@ As a result, it gets `503 Service Temporary Unavailable`.
 In the CronJob of `mongodbbackup`, `successfulJobsHistoryLimit: 3` is configured.  
 
 ```sh
-$ kubectl get cj -n internal mongobackup -o yaml
+kubectl get cj -n internal mongobackup -o yaml
 ```
 ```yaml
 apiVersion: batch/v1beta1

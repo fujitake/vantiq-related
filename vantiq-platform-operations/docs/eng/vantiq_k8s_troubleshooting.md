@@ -432,7 +432,7 @@ There are two ways to reboot the Pod. Use them depending on the situation.
 (e.g., if vantiq-0, vantiq-1, and vantiq-2 are available, the adjustment is made starting from vantiq-2)
 
 ```sh
-$ kubectl scale sts -n <namespace> --replicas=<replica count>
+kubectl scale sts -n <namespace> --replicas=<replica count>
 ```
 ```sh
 $ kubectl scale sts -n app vantiq --replicas=2
@@ -457,7 +457,7 @@ vantiq-1                       1/1     Running       0          6d19h
 
 2. Delete the Pod. The deleted pod will be automatically restarted.
 ```sh
-$ kubectl delete pod -n <namespace> <podname>
+kubectl delete pod -n <namespace> <podname>
 ```
 ```sh
 $ kubectl delete pod -n app vantiq-0
@@ -578,7 +578,7 @@ Check the detailed status of the Node
 - `Allocated resources` -- Current resource allocation status. In particular, if Memory is exhausted, the Pod will be terminated forcibly.  
 
 ```sh
-$ kubectl describe node <node name>
+kubectl describe node <node name>
 ```
 ```sh
 $ kubectl describe node aks-vantiqnp-15823220-vmss000000
@@ -673,15 +673,15 @@ Do the following four steps as many times as necessary
 
 1.  Use `taint` to disable scheduling for all nodes except the one to which the pod will be run
 ```sh
-$ kubectl taint nodes --all key=value:NoSchedule
-$ kubectl taint nodes <node name> key:NosSchedule-
+kubectl taint nodes --all key=value:NoSchedule
+kubectl taint nodes <node name> key:NosSchedule-
 ```
 
 2.  Restart the desired pod according to "[Restart the Pod](#Restart-the-Pod)"
 3.  Check that the Pod has moved to the intended Node according to "[Check the Pod status](#Check-the-Pod-status)"  
 4.  Remove Taint
 ```sh
-$ kubectl taint nodes --all key:NoSchedule-
+kubectl taint nodes --all key:NoSchedule-
 ```
 Example: Relocate (replace) two working Pods to another Node
 

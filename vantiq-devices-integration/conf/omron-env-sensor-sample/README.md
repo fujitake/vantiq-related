@@ -49,13 +49,13 @@ C2:B7:E4:CC:FE:79 Rbt
 7. Raspberry Piの任意のディレクトリにサンプルスクリプトを配置する
 8. bluepy(BLEデバイスを制御するPythonモジュール)をインストールする
 ```
-$ sudo apt install libglib2.0-dev
-$ pip install bluepy
+sudo apt install libglib2.0-dev
+pip install bluepy
 ```
 9. その他、サンプルスクリプトで使用しているモジュールでRaspberry Piにないものがあればインストールする
 ```
 例:
-$ pip install requests
+pip install requests
 ```
 10. サンプルスクリプトを実行し、データが送信されることを確認する
 ```

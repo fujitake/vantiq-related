@@ -99,7 +99,7 @@ ssl.truststore.location=/tmp/kafka.client.truststore.jks
 #### testkafka-sasl configuration details / testkafka-saslの詳細を確認する
 **testkafka-sasl**の詳細をaws cliで確認します。これ以降、`--cluster-arn`, `--region`は作成したインスタンスに合わせ適宜設定します。
 ```sh
-$ aws kafka describe-cluster --region ap-southeast-1 \
+aws kafka describe-cluster --region ap-southeast-1 \
   --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-sasl/e2d7910e-2ea2-4e63-89f2-f8a61123dfb4-3
 ```
 上記コマンドを実行すると、以下が戻ります。`ClusterInfo.ZookeeperConnectString`を書き留めておきます。
@@ -176,7 +176,7 @@ $ aws kafka describe-cluster --region ap-southeast-1 \
 #### testkafka-sasl Create Topic / testkafka-saslにTopicを作成する
 この例では, `AWSKafkaTutorialTopic`という名前のTopicを作成します。
 ```sh
-$ bin/kafka-topics.sh --create \
+bin/kafka-topics.sh --create \
   --zookeeper "z-1.testkafka-sasl.hs72it.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-2.testkafka-sasl.hs72it.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-3.testkafka-sasl.hs72it.c3.kafka.ap-southeast-1.amazonaws.com:2181" \
   --replication-factor 2 \
   --partitions 1 \
@@ -185,7 +185,7 @@ $ bin/kafka-topics.sh --create \
 
 BrokerのEndpointを調べます。
 ```sh
-$ aws kafka get-bootstrap-brokers \
+aws kafka get-bootstrap-brokers \
   --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-sasl/e2d7910e-2ea2-4e63-89f2-f8a61123dfb4-3 \
   --region ap-southeast-1
 ```
@@ -225,7 +225,7 @@ test message 44
 #### testkafka-noauth configuration details / testkafka-noauthの詳細を確認する
 testkafka-noauthの詳細をaws cliで確認します。これ以降、`--cluster-arn`, `--region`は作成したインスタンスに合わせ適宜設定します。
 ```sh
-$ aws kafka describe-cluster --region ap-southeast-1 \
+aws kafka describe-cluster --region ap-southeast-1 \
   --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-noauth/39e95242-cbc6-4da2-ba33-ded81636c661-3
 ```
 上記コマンドを実行すると、以下が戻ります。`ClusterInfo.ZookeeperConnectString`を書き留めておきます。
@@ -302,13 +302,13 @@ $ aws kafka describe-cluster --region ap-southeast-1 \
 ### testkafka-noauth - Create Topic
 この例では, `AWSKafkaTutorialTopic`という名前のTopicを作成します。
 ```sh
-$ bin/kafka-topics.sh --create --zookeeper "z-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181" --replication-factor 2 --partitions 1 --topic AWSKafkaTutorialTopic
+bin/kafka-topics.sh --create --zookeeper "z-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181,z-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:2181" --replication-factor 2 --partitions 1 --topic AWSKafkaTutorialTopic
 ```
 
 BrokerのEndpointを調べます。
 
 ```sh
-$ aws kafka get-bootstrap-brokers  --region ap-southeast-1 --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-noauth/39e95242-cbc6-4da2-ba33-ded81636c661-3
+aws kafka get-bootstrap-brokers  --region ap-southeast-1 --cluster-arn arn:aws:kafka:ap-southeast-1:508174134249:cluster/testkafka-noauth/39e95242-cbc6-4da2-ba33-ded81636c661-3
 ```
 上記コマンドで、以下が戻ります。
 ```json

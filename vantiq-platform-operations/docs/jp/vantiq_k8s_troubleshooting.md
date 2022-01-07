@@ -432,7 +432,7 @@ $ kubectl logs -n app vantiq-0 -f
 （例：vantiq-0、vantiq-1、vantiq-2がある場合、vantiq-2から調整される）
 
 ```sh
-$ kubectl scale sts -n <namespace> --replicas=<replica count>
+kubectl scale sts -n <namespace> --replicas=<replica count>
 ```
 ```sh
 $ kubectl scale sts -n app vantiq --replicas=2
@@ -457,7 +457,7 @@ vantiq-1                       1/1     Running       0          6d19h
 
 2. PodをDeleteする。Deleteされたpodは自動的に再度起動される。
 ```sh
-$ kubectl delete pod -n <namespace> <podname>
+kubectl delete pod -n <namespace> <podname>
 ```
 ```sh
 $ kubectl delete pod -n app vantiq-0
@@ -578,7 +578,7 @@ Nodeの詳細なステータスを確認する
 -   `Allocated resources` -- 現在のリソースの割り当て状況。特にMemoryが枯渇すると、強制的にPodは終了されてしまう。
 
 ```sh
-$ kubectl describe node <node name>
+kubectl describe node <node name>
 ```
 ```sh
 $ kubectl describe node aks-vantiqnp-15823220-vmss000000
@@ -673,15 +673,15 @@ Events:                          <none>
 
 1.  `taint`を使い、Podを動かす先のNode以外をスケジュール不可にする
 ```sh
-$ kubectl taint nodes --all key=value:NoSchedule
-$ kubectl taint nodes <node name> key:NosSchedule-
+kubectl taint nodes --all key=value:NoSchedule
+kubectl taint nodes <node name> key:NosSchedule-
 ```
 
 2.  動かしたいPodを「[Podの再起動を行う](#podの再起動を行う)」  に従い再起動を行う。
 3.  Podが意図するNodeに移動したかを「[Podのステータスを確認する](#podのステータスを確認する)」 に従い、確認する。
 4.  Taintを解除する
 ```sh
-$ kubectl taint nodes --all key:NoSchedule-
+kubectl taint nodes --all key:NoSchedule-
 ```
 実施例： 2つの稼働中のPodを、別のNodeに再配置する（入れ替える）
 
@@ -739,7 +739,7 @@ node/aks-vantiqnp-15823220-vmss000000 untainted
 移動する`vantiq-0`を再起動する（Podを削除すると、自動的に再起動する）
 
 ```sh
-$ kubectl delete pod -n app vantiq-0
+kubectl delete pod -n app vantiq-0
 pod "vantiq-0" deleted
 ```
 
