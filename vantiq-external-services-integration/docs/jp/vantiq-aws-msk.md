@@ -322,7 +322,7 @@ aws kafka get-bootstrap-brokers  --region ap-southeast-1 --cluster-arn arn:aws:k
 ### Testkafka-noauth  - Connection Test – Producer / Producerの接続テスト
 
 ```sh
-bin/kafka-console-producer.sh --broker-list "b-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.c:9092,b-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092" --topic AWSKafkaTutorialTopic
+$ bin/kafka-console-producer.sh --broker-list "b-2.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.c:9092,b-1.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092,b-3.testkafka-noauth.foho0x.c3.kafka.ap-southeast-1.amazonaws.com:9092" --topic AWSKafkaTutorialTopic
 >test message 1
 >test message 23
 >test message 44
