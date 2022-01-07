@@ -47,6 +47,7 @@
 - [GCP Pub/Sub](docs/jp/vantiq-gcp-PubSub.md)
 
 ### その他の外部サービスとVantiqの接続
+- [Vantiqからのデータ送信方法まとめ](docs/jp/data-sending.md)
 - [REST API for Vantiq Topic (HTTPS, WebSocket)](../vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
 - [SendGrid](docs/jp/vantiq-sendgrid.md)
 - [Azure FaceAPI]()
