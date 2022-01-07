@@ -97,5 +97,5 @@ pg_dump: reading procedural languages
 ### Check the Global IP for Outbound communication
 Check the Public IP address of the Internet Gateway and the NAT Gateway etc.
 ```sh
-curl ifconfig.me
+curl https://ifconfig.me
 ```
