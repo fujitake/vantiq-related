@@ -117,15 +117,8 @@ Procedure ActivityでProcedureを呼び出す場合の違いとしては前タ�
 #### **3. Transformation + PublishToSource Activity**
 VAILの記述自体をしない場合は`PublishToSource` Activityを使用します。
 
-PublishToSource Activityの設定では以下の画像のように送信先として使用するSourceを設定します。
-
-<img src="../../imgs/data-sending/publishtosource-config.png" width="1000">
-
-送信先のTopicなど送信の際の設定がある場合は、`sourceConfig`にJSON形式で記述します。
-
-<img src="../../imgs/data-sending/source-config.png" width="500">
-
-また、例えば送信先にREMOTE Sourceを使う場合は、前述の通り送信内容を`body`プロパティのバリューに設定する必要があります。
+まず、PublishToSource Activityの前に`Transformation` Activityを使用し、Sourceの種類に合わせたメッセージに加工します。
+例えば送信先にREMOTE Sourceを使う場合は、送信したい内容を`body`プロパティのバリューとして設定する必要があります。（各Sourceがどの様なプロパティを必要とするかは後述します）
 
 ```json
 {
@@ -133,7 +126,7 @@ PublishToSource Activityの設定では以下の画像のように送信先と�
     "value": 100
 }
 ```
-上記のような内容で送信したい場合は、
+つまり、上記のような内容で送信したい場合は、
 ```json
 {
    "body": {
@@ -143,9 +136,17 @@ PublishToSource Activityの設定では以下の画像のように送信先と�
 }
 ```
 とする必要があります。
-このようにSourceの種類によってメッセージに必要なプロパティが異なるため、PublishToSource Activityの前にTransformation Activityで加工します。
+Transformation Activityを使用して以下の画像の様に設定することで実装できます。
 
 <img src="../../imgs/data-sending/publishtosource-app-sample.png" width="1000">
+
+次に、PublishToSource Activityの設定では以下の画像のように送信先として使用するSourceを設定します。
+
+<img src="../../imgs/data-sending/publishtosource-config.png" width="1000">
+
+送信先のTopicなど送信の際の設定がある場合は、`sourceConfig`にJSON形式で記述します。
+
+<img src="../../imgs/data-sending/source-config.png" width="500">
 
 PublishToSource Activityの出力は、以下のように送信時に使用した内容となります。
 ```json
