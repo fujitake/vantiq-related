@@ -42,7 +42,7 @@
 <tbody>
 <tr>
 <th>Source</th>
-<th>送信したい内容部分の形式</th>
+<th>メッセージの形式</th>
 <th>設定例</th>
 </tr>
 <tr>
