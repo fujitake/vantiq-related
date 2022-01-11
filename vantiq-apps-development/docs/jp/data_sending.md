@@ -273,7 +273,7 @@ PublishToSource Activityの設定では以下の画像のように送信先と�
 
 <img src="../../imgs/data-sending/source-config.png" width="500">
 
-また、送信先にREMOTE Sourceを使う場合は、前述の通り送信内容を`body`プロパティのバリューに設定する必要があります。
+また、例えば送信先にREMOTE Sourceを使う場合は、前述の通り送信内容を`body`プロパティのバリューに設定する必要があります。
 
 ```json
 {
@@ -281,7 +281,7 @@ PublishToSource Activityの設定では以下の画像のように送信先と�
     "value": 100
 }
 ```
-例えば、上記のような内容で送信したい場合は、
+上記のような内容で送信したい場合は、
 ```json
 {
    "body": {
