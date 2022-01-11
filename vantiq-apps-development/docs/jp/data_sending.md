@@ -229,7 +229,7 @@ PUBLISH { "body": event } TO SOURCE YourSource USING source_config
 </tbody>
 </table>
 
-このProcedureを`Procedure` Activityで呼び出すことでAppで使用することができます。
+実装したProcedureをAppやRuleから呼び出します。Appからは`Procedure` Activity`を使用して呼び出します。
 
 <a id="implement-ac-vail"></a>
 
