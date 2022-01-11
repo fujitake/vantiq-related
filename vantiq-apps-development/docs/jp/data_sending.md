@@ -14,7 +14,6 @@
     1. [KAFKA Source](#sample-kafka)
     1. [EMAIL Source](#sample-email)
     1. [SMS Source](#sample-sms)
-    1. [サマリ](#sample-summary)
 
 1. [注意点](#notes)
     1. [パスの設定（REMOTE）](#note-path)
