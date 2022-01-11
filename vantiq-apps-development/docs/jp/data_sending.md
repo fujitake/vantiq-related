@@ -256,7 +256,7 @@ PUBLISH { "body": event.value } TO SOURCE ExternalAPI USING source_config
 
 Procedure ActivityでProcedureを呼び出す場合の違いとしては前タスクの出力内容にアクセスする場合はeventではなく、`event.value`とする必要があります。また、このActivityが設定されたタスクの出力の内容も`event.value`となります。
 
-<img src="../../imgs/data-sending/vail-ac-output.png" width="500">
+<img src="../../imgs/data-sending/vail-ac-output.png" width="1000">
 
 <br>
 
