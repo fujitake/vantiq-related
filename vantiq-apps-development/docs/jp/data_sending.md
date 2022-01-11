@@ -334,7 +334,7 @@ PUBLISH { "body": data } TO SOURCE YourRemoteSource USING source_config
 
 パス、ヘッダー、クエリパラメータなどコンフィグの部分はそれぞれ`Sourceの定義自体に設定することができます`が実行の時点で上書きしたい場合などにVAIL側に記述します。
 
-また、REMOTE Sourceに限り`SELECT`文でPOSTすることができます。
+また、REMOTE Sourceに限り`SELECT`文でPOSTすることができます。PUBLISH文では、返り値はリクエストが成功したかどうかがtrue/falseで返るのみなのに対し、SELECT文はレスポンスメッセージを受け取り、後続の処理でステータスコードの条件判断などに使うことができます。
 ```js
 var data = {
     "id": 1,
