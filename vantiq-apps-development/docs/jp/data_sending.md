@@ -332,7 +332,7 @@ PUBLISH { "body": data } TO SOURCE YourRemoteSource USING source_config
 ```
 `PUBLISH { "body": <送信したい内容> } TO SOURCE <Source名> USING <パス、ヘッダー、クエリパラメータなどの設定>`が基本形になります。
 
-パス、ヘッダー、クエリパラメータなどコンフィグの部分はそれぞれ`Source自体に設定することができます`がリクエストの時点で上書きしたい場合などにVAIL側に記述します。
+パス、ヘッダー、クエリパラメータなどコンフィグの部分はそれぞれ`Sourceの定義自体に設定することができます`が実行の時点で上書きしたい場合などにVAIL側に記述します。
 
 また、REMOTE Sourceに限り`SELECT`文でPOSTすることができます。
 ```js
