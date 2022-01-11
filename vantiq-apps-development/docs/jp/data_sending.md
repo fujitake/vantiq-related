@@ -195,7 +195,7 @@ var source_config = {
 }
 PUBLISH { "body": event } TO SOURCE YourSource USING source_config
 ```
-このProcedureでは`YourSource`というSourceに設定されたエンドポイントに対して引数である`event`の内容をPOSTしています。
+このProcedureは`YourSource`というSourceに設定されたエンドポイントに対してProcedureの引数である`event`の内容をPUBLISHしています。
 
 この例で`送信したい内容`、`使用するSource`、`送信時に必要な設定`はそれぞれ以下のようになります。
 
