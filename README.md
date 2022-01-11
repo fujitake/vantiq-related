@@ -87,6 +87,7 @@ Vantiqアプリケーションの開発や運用に関するガイドや学習�
 - [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/1-day-workshop/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
+- [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
