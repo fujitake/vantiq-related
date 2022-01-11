@@ -87,9 +87,9 @@
 ```json
 {
     // 送信先のブローカーのTopic
-	"topic": "/your/topic",
+    "topic": "/your/topic",
     // 送信時のQoS
-	"qos": "AT_LEAST_ONCE"
+    "qos": "AT_LEAST_ONCE"
 }
 ```
 </td>
@@ -107,7 +107,7 @@
 ```json
 {
     // 送信先のブローカーのTopic
-	"topic": "your-topic"
+    "topic": "your-topic"
 }
 ```
 </td>
@@ -125,7 +125,7 @@
 ```json
 {
     // 送信先のブローカーのTopic
-	"topic": "your-topic"
+    "topic": "your-topic"
 }
 ```
 </td>
