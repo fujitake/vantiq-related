@@ -34,15 +34,15 @@
 
 いずれのパターンでも基本は同じで、以下の形式をそれぞれ別の方法で実装することになります。
 
-`PUBLISH <送信したい内容> TO SOURCE <使用するSource名> USING <送信時のコンフィグ>`
+`PUBLISH <メッセージ> TO SOURCE <使用するSource名> USING <送信時のコンフィグ>`
 
-また、使用するSourceの種類によって、`送信したい内容部分の形式`と`送信時のコンフィグの項目`が異なります。
+また、使用するSourceの種類によって、`メッセージの形式`と`送信時のコンフィグの項目`が異なります。
 
 <table>
 <tbody>
 <tr>
 <th>Source</th>
-<th>送信したい内容部分の形式</th>
+<th>メッセージの形式</th>
 <th>設定例</th>
 </tr>
 <tr>
@@ -195,7 +195,7 @@ var source_config = {
 }
 PUBLISH { "body": event } TO SOURCE YourSource USING source_config
 ```
-このProcedureでは`YourSource`というSourceに設定されたエンドポイントに対して引数である`event`の内容をPOSTしています。
+このProcedureは`YourSource`というSourceに設定されたエンドポイントに対してProcedureの引数である`event`の内容をPUBLISHしています。
 
 この例で`送信したい内容`、`使用するSource`、`送信時に必要な設定`はそれぞれ以下のようになります。
 
@@ -229,7 +229,7 @@ PUBLISH { "body": event } TO SOURCE YourSource USING source_config
 </tbody>
 </table>
 
-このProcedureを`Procedure` Activityで呼び出すことでAppで使用することができます。
+実装したProcedureをAppやRuleから呼び出します。Appからは`Procedure` Activity`を使用して呼び出します。
 
 <a id="implement-ac-vail"></a>
 
@@ -237,7 +237,7 @@ PUBLISH { "body": event } TO SOURCE YourSource USING source_config
 
 `VAIL` Activityを使用するとタスクに直接VAILを記述することができます。
 
-先ほどと同じように前のタスクの出力を、他システムへREST APIの実行によりPOSTする処理を記述する場合は以下のようになります。
+前述のRemote Sourceを用いたデータのPUBLISHする処理を記述する場合は以下のようになります。
 
 ```js
 var source_config = {
@@ -332,9 +332,9 @@ PUBLISH { "body": data } TO SOURCE YourRemoteSource USING source_config
 ```
 `PUBLISH { "body": <送信したい内容> } TO SOURCE <Source名> USING <パス、ヘッダー、クエリパラメータなどの設定>`が基本形になります。
 
-パス、ヘッダー、クエリパラメータなどコンフィグの部分はそれぞれ`Source自体に設定することができます`がリクエストの時点で上書きしたい場合などにVAIL側に記述します。
+パス、ヘッダー、クエリパラメータなどコンフィグの部分はそれぞれ`Sourceの定義自体に設定することができます`が実行の時点で上書きしたい場合などにVAIL側に記述します。
 
-また、REMOTE Sourceに限り`SELECT`文でPOSTすることができます。
+また、REMOTE Sourceに限り`SELECT`文でPOSTすることができます。PUBLISH文では、返り値はリクエストが成功したかどうかがtrue/falseで返るのみなのに対し、SELECT文はレスポンスメッセージを受け取り、後続の処理でステータスコードの条件判断などに使うことができます。
 ```js
 var data = {
     "id": 1,
@@ -364,7 +364,7 @@ PUBLISH文では、返り値はリクエストが成功したかどうかがtrue
 
 > PUBLISH文のメソッドをGETにしてリクエストをすることもできますが、返り値はtrue/falseにしかならないため、この実装をすることはほとんどありません。
 
-SELECT文でPOSTするProcedureをAppで呼び出して使用する場合の例は以下の通りです。
+AppからProcedureを呼び出し、Remote SourceでPublishするまでの流れは以下のようになります。
 
 ```js
 PROCEDURE post_data(event Object)
@@ -373,7 +373,10 @@ var response = SELECT FROM SOURCE ExternalAPI WITH path = path, method = "POST",
 
 <img src="../../imgs/data-sending/procedure-app-sample.png" width="1000">
 
-画像右側にAppがあり、`post_data_by_proc`というタスクで`post_data` Procedureを`Procedure Activity`を使って呼び出しています。
+1. `event`タスク（画面右側のApp）はイベントを処理し、出力を行う。
+2. `post_data_by_proc`タスクは、`post_data` Procedureを`Procedure Activity`を使って呼び出す。その際、`event`タスクの出力を引数`event`として渡す。
+3.  `post_data_by_proc`タスクは、SELECT文を使って外部サービスのAPIにPOSTを行う。（画面左上）
+4.  `post_data_by_proc`タスクの出力として、POSTのレスポンスのメッセージが表示される。（画面左下）。 SELECT文がProcedureの最終行のため、その処理結果がProcedureの戻り値となるため。 
 post_data Procedureの引数は`event`ですが、これには同Appの`event`タスクの出力が該当します。
 
 つまり、このAppではeventタスクの出力をPOSTしています。post_data_by_procタスクの出力（画面左下）はREST APIを実行した際のレスポンス内容が表示されています。
