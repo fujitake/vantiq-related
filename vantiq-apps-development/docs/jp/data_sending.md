@@ -184,7 +184,7 @@ HTMLメールの場合
 
 Procedureで送信処理を実装する方法です。そのProcedureをAppやRuleで呼び出し、データ送信を行います。
 
-例えば、他システムのAPIを実行してデータをPOSTする際は以下のようなProcedureを実装します。
+以下の例のProcedureは、Remote Sourceを用いて他システムのAPIに連携してデータをPUBLISHします。
 
 ```js
 PROCEDURE post_data(event Object)
