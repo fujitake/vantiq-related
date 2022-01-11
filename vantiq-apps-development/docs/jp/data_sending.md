@@ -373,7 +373,10 @@ var response = SELECT FROM SOURCE ExternalAPI WITH path = path, method = "POST",
 
 <img src="../../imgs/data-sending/procedure-app-sample.png" width="1000">
 
-画像右側にAppがあり、`post_data_by_proc`というタスクで`post_data` Procedureを`Procedure Activity`を使って呼び出しています。
+1. `event`タスク（画面右側のApp）はイベントを処理し、出力を行う。
+2. `post_data_by_proc`タスクは、`post_data` Procedureを`Procedure Activity`を使って呼び出す。その際、`event`タスクの出力を引数`event`として渡す。
+3.  `post_data_by_proc`タスクは、SELECT文を使って外部サービスのAPIにPOSTを行う。（画面左上）
+4.  `post_data_by_proc`タスクの出力として、POSTのレスポンスのメッセージが表示される。（画面左下）。 SELECT文がProcedureの最終行のため、その処理結果がProcedureの戻り値となるため。 
 post_data Procedureの引数は`event`ですが、これには同Appの`event`タスクの出力が該当します。
 
 つまり、このAppではeventタスクの出力をPOSTしています。post_data_by_procタスクの出力（画面左下）はREST APIを実行した際のレスポンス内容が表示されています。
