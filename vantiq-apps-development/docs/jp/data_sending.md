@@ -364,7 +364,7 @@ PUBLISH文では、返り値はリクエストが成功したかどうかがtrue
 
 > PUBLISH文のメソッドをGETにしてリクエストをすることもできますが、返り値はtrue/falseにしかならないため、この実装をすることはほとんどありません。
 
-SELECT文でPOSTするProcedureをAppで呼び出して使用する場合の例は以下の通りです。
+AppからProcedureを呼び出し、Remote SourceでPublishするまでの流れは以下のようになります。
 
 ```js
 PROCEDURE post_data(event Object)
