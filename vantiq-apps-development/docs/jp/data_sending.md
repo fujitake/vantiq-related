@@ -295,7 +295,7 @@ PublishToSource Activityの設定では以下の画像のように送信先と�
 
 <img src="../../imgs/data-sending/publishtosource-app-sample.png" width="1000">
 
-また、PublishToSource Activityの出力は、以下のように送信時に使用した内容となります。
+PublishToSource Activityの出力は、以下のように送信時に使用した内容となります。
 ```json
 {
    "body": {
@@ -364,7 +364,7 @@ PUBLISH文では、返り値はリクエストが成功したかどうかがtrue
 
 > PUBLISH文のメソッドをGETにしてリクエストをすることもできますが、返り値はtrue/falseにしかならないため、この実装をすることはほとんどありません。
 
-SELECT文でPOSTするProcedureをAppで呼び出して使用する例は以下の通りです。
+SELECT文でPOSTするProcedureをAppで呼び出して使用する場合の例は以下の通りです。
 
 ```js
 PROCEDURE post_data(event Object)
@@ -392,8 +392,8 @@ var data = {
     "value": 100
 }
 var source_config = {
-	"topic": "/your/topic",
-	"qos": "AT_LEAST_ONCE" // 指定しない場合は AT MOST ONCE
+    "topic": "/your/topic",
+    "qos": "AT_LEAST_ONCE" // 指定しない場合は AT MOST ONCE
 }
 PUBLISH { "message": data } TO SOURCE YourMqttSource USING source_config
 ```
@@ -414,7 +414,7 @@ var data = {
     "value": 100
 }
 var source_config = {
-	"topic": "your-topic"
+    "topic": "your-topic"
 }
 PUBLISH { "message": data } TO SOURCE YourAmqpBroker USING source_config
 ```
@@ -433,7 +433,7 @@ var data = {
     "value": 100
 }
 var source_config = {
-	"topic": "your-topic"
+    "topic": "your-topic"
 }
 PUBLISH { "key": partition_key, "value": stringify(data) } TO SOURCE YourKafkaBroker USING source_config
 ```
@@ -448,7 +448,11 @@ var to_address = "yamada@your-domain.co.jp"
 var from_address = "info@your-domain.com"
 var subject = "From Vantiq"
 var body = "<div>Hello!</div>"
-var source_config =  { "to": to_address, "from": from_address, "subject": subject }  
+var source_config = { 
+    "to": to_address,
+    "from": from_address,
+    "subject": subject 
+}  
 PUBLISH { "html": body } TO SOURCE YourMailServer USING source_config
 ```
 `PUBLISH { "html": <メールの本文> } TO SOURCE <Source名> USING { "to": <送信先のアドレス>, "from": <送信元のアドレス>, "subject": <メールの件名> }`が基本形になります。
@@ -463,7 +467,10 @@ PUBLISH { "html": body } TO SOURCE YourMailServer USING source_config
 ```js
 var phone_number = "+81xxxxxxxxxx‬"
 var body = "Hello!"
-PUBLISH { "body": body } TO SOURCE YourSmsSource USING { "to": phone_number }
+var source_config = { 
+    "to": phone_number
+}
+PUBLISH { "body": body } TO SOURCE YourSmsSource USING source_config
 ```
 `PUBLISH { "body": <SMSの本文> } TO SOURCE <Source名> USING { "to": <送信先の電話番号> }`の形式で送信します。`to`プロパティは配列にすることはできません。
 
