@@ -237,7 +237,7 @@ PUBLISH { "body": event } TO SOURCE YourSource USING source_config
 
 `VAIL` Activityを使用するとタスクに直接VAILを記述することができます。
 
-先ほどと同じように前のタスクの出力を、他システムへREST APIの実行によりPOSTする処理を記述する場合は以下のようになります。
+前述のRemote Sourceを用いたデータのPUBLISHする処理を記述する場合は以下のようになります。
 
 ```js
 var source_config = {
