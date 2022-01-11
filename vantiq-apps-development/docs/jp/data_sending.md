@@ -32,7 +32,137 @@
 2. VAIL Activityでの実装
 3. Transformation + PublishToSource Activityでの実装
 
-いずれのパターンでも基本は同じで、以下の形式をそれぞれ別の方法で実装することになります。
+<a id="implement-proc"></a>
+
+### **1. Procedureでの実装**
+
+以下の例のProcedureは、Remote Sourceを用いて他システムのAPIに連携してデータをPUBLISHします。
+
+```js
+PROCEDURE post_data(event Object)
+var source_config = {
+    "headers": {
+        "Authorization": "abcdefghijk..."
+    }
+}
+PUBLISH { "body": event } TO SOURCE YourSource USING source_config
+```
+このProcedureは`YourSource`というSourceに設定されたエンドポイントに対してProcedureの引数である`event`の内容をPUBLISHしています。
+
+この例で`メッセージ内容`、`使用するSource`、`送信時の設定`はそれぞれ以下のようになります。
+
+<table>
+<tbody>
+<tr>
+<th>項目</th>
+<th>内容</th>
+</tr>
+<tr>
+<td>送信したい内容</td>
+<td>event</td>
+</tr>
+<tr>
+<td>使用するSource</td>
+<td>YourSource</td>
+</tr>
+<tr>
+<td>送信時に必要な設定</td>
+<td>
+
+```json
+{
+    "headers": {
+        "Authorization": "abcdefghijk..."
+    }
+}
+```
+</td>
+</tr>
+</tbody>
+</table>
+
+実装したProcedureをAppやRuleから呼び出します。Appからは`Procedure` Activityを使用して呼び出します。
+
+<a id="implement-ac-vail"></a>
+
+#### **2. VAIL Activity**
+
+`VAIL` Activityを使用するとタスクに直接VAILを記述することができます。
+
+前述のRemote Sourceを用いたデータのPUBLISHする処理を記述する場合は以下のようになります。
+
+```js
+var source_config = {
+    "headers": {
+        "Authorization": "abcdefghijk..."
+    }
+}
+PUBLISH { "body": event.value } TO SOURCE ExternalAPI USING source_config
+```
+`ExternalAPI`はご自身のSource名に置き換えてください。
+
+<img src="../../imgs/data-sending/vail-ac-config-1.png" width="1000">
+
+記述したVAIL内で他のリソースを使用している場合はImportする必要があります。
+<img src="../../imgs/data-sending/vail-ac-config-2.png" width="1000">
+
+Procedure ActivityでProcedureを呼び出す場合の違いとしては前タスクの出力内容にアクセスする場合はeventではなく、`event.value`とする必要があります。また、このActivityが設定されたタスクの出力の内容も`event.value`となります。
+
+<img src="../../imgs/data-sending/vail-ac-output.png" width="1000">
+
+<br>
+
+<a id="implement-ac-pts"></a>
+
+#### **3. Transformation + PublishToSource Activity**
+VAILの記述自体をしない場合は`PublishToSource` Activityを使用します。
+
+PublishToSource Activityの設定では以下の画像のように送信先として使用するSourceを設定します。
+
+<img src="../../imgs/data-sending/publishtosource-config.png" width="1000">
+
+送信先のTopicなど送信の際の設定がある場合は、`sourceConfig`にJSON形式で記述します。
+
+<img src="../../imgs/data-sending/source-config.png" width="500">
+
+また、例えば送信先にREMOTE Sourceを使う場合は、前述の通り送信内容を`body`プロパティのバリューに設定する必要があります。
+
+```json
+{
+    "id": 1,
+    "value": 100
+}
+```
+上記のような内容で送信したい場合は、
+```json
+{
+   "body": {
+      "id": 1,
+      "value": 100
+   }
+}
+```
+とする必要があります。
+このようにSourceの種類によってメッセージに必要なプロパティが異なるため、PublishToSource Activityの前にTransformation Activityで加工します。
+
+<img src="../../imgs/data-sending/publishtosource-app-sample.png" width="1000">
+
+PublishToSource Activityの出力は、以下のように送信時に使用した内容となります。
+```json
+{
+   "body": {
+      "id": 1,
+      "value": 100
+   }
+}
+```
+<a id="samples"></a>
+
+## 2. 各Source別実装サンプル
+
+各Sourceごとに送信処理を実装したVAILのサンプルを紹介します。
+
+いずれのパターンでも以下の形式をベースとして実装します。
 
 `PUBLISH <メッセージ> TO SOURCE <使用するSource名> USING <送信時のコンフィグ>`
 
@@ -178,138 +308,6 @@ HTMLメールの場合
 </tbody>
 </table>
 
-<a id="implement-proc"></a>
-
-### **1. Procedureでの実装**
-
-Procedureで送信処理を実装する方法です。そのProcedureをAppやRuleで呼び出し、データ送信を行います。
-
-以下の例のProcedureは、Remote Sourceを用いて他システムのAPIに連携してデータをPUBLISHします。
-
-```js
-PROCEDURE post_data(event Object)
-var source_config = {
-    "headers": {
-        "Authorization": "abcdefghijk..."
-    }
-}
-PUBLISH { "body": event } TO SOURCE YourSource USING source_config
-```
-このProcedureは`YourSource`というSourceに設定されたエンドポイントに対してProcedureの引数である`event`の内容をPUBLISHしています。
-
-この例で`送信したい内容`、`使用するSource`、`送信時に必要な設定`はそれぞれ以下のようになります。
-
-<table>
-<tbody>
-<tr>
-<th>項目</th>
-<th>内容</th>
-</tr>
-<tr>
-<td>送信したい内容</td>
-<td>event</td>
-</tr>
-<tr>
-<td>使用するSource</td>
-<td>YourSource</td>
-</tr>
-<tr>
-<td>送信時に必要な設定</td>
-<td>
-
-```json
-{
-    "headers": {
-        "Authorization": "abcdefghijk..."
-    }
-}
-```
-</td>
-</tr>
-</tbody>
-</table>
-
-実装したProcedureをAppやRuleから呼び出します。Appからは`Procedure` Activity`を使用して呼び出します。
-
-<a id="implement-ac-vail"></a>
-
-#### **2. VAIL Activity**
-
-`VAIL` Activityを使用するとタスクに直接VAILを記述することができます。
-
-前述のRemote Sourceを用いたデータのPUBLISHする処理を記述する場合は以下のようになります。
-
-```js
-var source_config = {
-    "headers": {
-        "Authorization": "abcdefghijk..."
-    }
-}
-PUBLISH { "body": event.value } TO SOURCE ExternalAPI USING source_config
-```
-`ExternalAPI`はご自身のSource名に置き換えてください。
-
-<img src="../../imgs/data-sending/vail-ac-config-1.png" width="1000">
-
-記述したVAIL内で他のリソースを使用している場合はImportする必要があります。
-<img src="../../imgs/data-sending/vail-ac-config-2.png" width="1000">
-
-Procedure ActivityでProcedureを呼び出す場合の違いとしては前タスクの出力内容にアクセスする場合はeventではなく、`event.value`とする必要があります。また、このActivityが設定されたタスクの出力の内容も`event.value`となります。
-
-<img src="../../imgs/data-sending/vail-ac-output.png" width="1000">
-
-<br>
-
-<a id="implement-ac-pts"></a>
-
-#### **3. Transformation + PublishToSource Activity**
-VAILの記述自体をしない場合は`PublishToSource` Activityを使用します。また、Sourceの種類によって送信するデータに必要なプロパティが異なるため、前もってTransformation Activityで必要な形式に加工します。
-
-PublishToSource Activityの設定では以下の画像のように送信先として使用するSourceを設定します。
-
-<img src="../../imgs/data-sending/publishtosource-config.png" width="1000">
-
-送信先のTopicなど送信の際の設定がある場合は、`sourceConfig`にJSON形式で記述します。
-
-<img src="../../imgs/data-sending/source-config.png" width="500">
-
-また、例えば送信先にREMOTE Sourceを使う場合は、前述の通り送信内容を`body`プロパティのバリューに設定する必要があります。
-
-```json
-{
-    "id": 1,
-    "value": 100
-}
-```
-上記のような内容で送信したい場合は、
-```json
-{
-   "body": {
-      "id": 1,
-      "value": 100
-   }
-}
-```
-とする必要があります。
-そのため、PublishToSource Activityの前にTransformation Activityで加工しておきます。
-
-<img src="../../imgs/data-sending/publishtosource-app-sample.png" width="1000">
-
-PublishToSource Activityの出力は、以下のように送信時に使用した内容となります。
-```json
-{
-   "body": {
-      "id": 1,
-      "value": 100
-   }
-}
-```
-<a id="samples"></a>
-
-## 2. 各Source別実装サンプル
-
-各Sourceごとに送信処理を実装したVAILのサンプルを紹介します。
-
 <a id="sample-remote"></a>
 
 ### **1. REMOTE Source**
@@ -360,10 +358,6 @@ PUBLISH文とSELECT文の違いは以下の通りです。
 |PUBLISH|POST|true/false|
 |SELECT|GET|リクエスト結果のレスポンスの内容|
 
-PUBLISH文では、返り値はリクエストが成功したかどうかがtrue/falseで返るのみなのでレスポンスのステータスコードなどは分かりません。後続の処理でそういった内容が必要な場合はSELECT文を使用します。
-
-> PUBLISH文のメソッドをGETにしてリクエストをすることもできますが、返り値はtrue/falseにしかならないため、この実装をすることはほとんどありません。
-
 AppからProcedureを呼び出し、Remote SourceでPublishするまでの流れは以下のようになります。
 
 ```js
@@ -377,14 +371,6 @@ var response = SELECT FROM SOURCE ExternalAPI WITH path = path, method = "POST",
 2. `post_data_by_proc`タスクは、`post_data` Procedureを`Procedure Activity`を使って呼び出す。その際、`event`タスクの出力を引数`event`として渡す。
 3.  `post_data_by_proc`タスクは、SELECT文を使って外部サービスのAPIにPOSTを行う。（画面左上）
 4.  `post_data_by_proc`タスクの出力として、POSTのレスポンスのメッセージが表示される。（画面左下）。 SELECT文がProcedureの最終行のため、その処理結果がProcedureの戻り値となるため。 
-post_data Procedureの引数は`event`ですが、これには同Appの`event`タスクの出力が該当します。
-
-つまり、このAppではeventタスクの出力をPOSTしています。post_data_by_procタスクの出力（画面左下）はREST APIを実行した際のレスポンス内容が表示されています。
-
-これは、Procedureの最終行が以下のようにREST API実行時のレスポンスとなっているためです。
-```js
-var response = SELECT FROM SOURCE ExternalAPI WITH path = path, method = "POST", body = event
-```
 
 <a id="sample-mqtt"></a>
 
