@@ -49,13 +49,13 @@ C2:B7:E4:CC:FE:79 Rbt
 7. Place the sample script in any directory in the Raspberry Pi.  
 8. Install "bluepy" (which is a Python module to control BLE devices).  
 ```
-$ sudo apt install libglib2.0-dev
-$ pip install bluepy
+sudo apt install libglib2.0-dev
+pip install bluepy
 ```
 9. In addition, if there are any other modules used in the sample script that are not on the Raspberry Pi, install them.  
 ```
 e.g.
-$ pip install requests
+pip install requests
 ```
 10. Run the sample script and confirm that the data is sent.  
 ```

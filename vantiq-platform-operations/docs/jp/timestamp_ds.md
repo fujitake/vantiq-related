@@ -20,7 +20,7 @@ vantiqサーバーとkeycloakサーバーの間で認証処理を行っている
 
 [stern](https://github.com/wercker/stern/releases)（複数のpodのログを一度に出力するツール）をインストールする。環境ごとのbinaryは[ここ](https://github.com/wercker/stern/releases)を参照。
 ```sh
-$ brew install stern
+brew install stern
 ```
 or
 ```sh
@@ -95,5 +95,5 @@ timestamp-ldmmv timestamp Date is 2021-06-23T22:29:00.
 
 ツールのDaemonSetをアンデプロイする。
 ```sh
-$ kubectl delete -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/timestamp_ds.yaml
+kubectl delete -f https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-platform-operations/conf/tools/timestamp_ds.yaml
 ```
