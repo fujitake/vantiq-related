@@ -2,6 +2,7 @@
 Vantiq Platformの構築や運用に関するガイドや手順です。
 
 - [Vantiq Cloud 構築および保守 ](./docs/jp/vantiq-install-maintenance.md)
+- [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
 - [Vantiq Cloud 構築および保守におけるトラブルシューティング](./docs/jp/vantiq-install-maintenance-troubleshooting.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./docs/jp/vantiq_k8s_troubleshooting.md)
 - [ネットワーク構成デバッグツール](./docs/jp/alpine-f.md)

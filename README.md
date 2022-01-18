@@ -71,6 +71,7 @@ Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラ
 Vantiq Platformの構築や運用に関するガイドや手順です。
 
 - [Vantiq Cloud 構築および保守 ](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md)
+- [deploy.yamlのカスタマイズ構成](./vantiq-platform-operations/docs/jp/deploy_yaml_config.md)
 - [Vantiq Cloud 構築および保守におけるトラブルシューティング](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance-troubleshooting.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md)
 - [ネットワーク構成デバッグツール](./vantiq-platform-operations/docs/jp/alpine-f.md)
