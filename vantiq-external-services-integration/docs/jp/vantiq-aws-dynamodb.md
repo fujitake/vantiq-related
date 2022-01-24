@@ -233,7 +233,80 @@ var msg = {
     }
 }
 ```
+#### 汎用的なProcedureのサンプルコード
+テーブル名`tableName`, キー列`keyCol`, タイムスタンプ列`tsCol`, JSONオブジェクト`obj`, TTL時間（ミリ秒）`ttl`を渡すことで、汎用的に使用できるProcedureのサンプルコード
+DynamoDB側に、`id` = パーティションキー, `timestamp` = ソートキーでテーブルが作成されていることを想定。
 
+```vail
+PROCEDURE DynamoDB.insert(tableName String, keyCol String, tsCol String, obj Object, ttl Integer)
+ 
+// include required columns
+var record = {
+  "TableName": tableName,
+  "Item": { 
+        "id": {
+          "S": toString(obj[keyCol])
+        },
+        "timestamp": {
+          "S": toString(obj[tsCol])
+        },
+        "ttl" : {
+          "N": toString(date(now().plusMillis(ttl), "date", "epochMilliseconds"))    // for  periodically deleting records
+        }
+    }
+}
+
+// include other columns
+deleteKey(obj, keyCol)
+deleteKey(obj, tsCol)
+
+// populate items from obj
+record.Item = DynamoDB.convertToItem(obj, record.Item)
+
+PUBLISH { body: record } to SOURCE DynamoDBSource USING { method: "POST"}
+```
+```vail
+PROCEDURE DynamoDB.convertToItem(obj Object, item Object)
+
+for prop in obj {
+    if typeOf(prop.value) == "Integer" or typeOf(prop.value) == "Real" or typeOf(prop.value) == "Decimal"{
+        item[prop.key] = {"N": toString(prop.value) }
+    } 
+    else if typeOf(prop.value) == "String" or typeOf(prop.value) == "DateTime"{
+        item[prop.key] = {"S": toString(prop.value) }
+    } 
+    else if typeOf(prop.value) == "Boolean" {
+        item[prop.key] = {"BOOL": toString(prop.value) }
+    } 
+    else if typeOf(prop.value) == "GeoJSON" or typeOf(prop.value) == "Object"{
+        item[prop.key] = {"M": DynamoDB.convertToItem(prop.value, {} ) }
+    } 
+    else if typeOf(prop.value) == "List" {
+               
+        if typeOf(prop.value[0]) == "Integer" or typeOf(prop.value[0]) == "Real" 
+          or typeOf(prop.value[0]) == "Decimal"{            
+            var ns = []
+            for n in prop.value {
+                push(ns, toString(n)) 
+            }
+            item[prop.key] = {"NS": ns}
+        } 
+        else if typeOf(prop.value[0]) == "String"   {
+            item[prop.key] = {"SS": prop.value }
+        } 
+        else if typeOf(prop.value[0]) == "Object" or typeOf(prop.value[0]) == "List" 
+            or typeOf(prop.value[0]) == "GeoJSON" or typeOf(prop.value[0]) == "DateTime" {
+            var ss = []
+            for s in prop.value {
+                push(ss, stringify(s)) 
+            }
+            item[prop.key] = {"SS": ss}
+        } 
+    }
+}
+
+return item
+```
 
  
 ## Reference
