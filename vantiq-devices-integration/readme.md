@@ -90,3 +90,4 @@ C -->|Invoke| E
 
 ## デバイスの接続サンプルコード / Device Integration Sample Code<a id="device_sample"></a>
 - [オムロン環境センサー](./conf/omron-env-sensor-sample)/[Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md)
+- [SORACOM GPSマルチセンサー](./docs/jp/Vantiq_SoracomGPSMultiunit.md)
