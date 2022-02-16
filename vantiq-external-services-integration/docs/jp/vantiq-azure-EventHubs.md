@@ -4,7 +4,7 @@
 - [AMQP (Source) の接続方法](#AMQP)
 - [Kafka (Source) の接続方法](#KAFKA)
 - [プロトコル変換について](#TRNSPROT)
-- [Shared Access Key について](#SASKEY)
+- [Shared Access Key について](#SAKEY)
 - [サンプル プロジェクト](#EPROJ)
 
 <h2 id="createUser">1. ユーザー アカウントの作成方法 on Azure Event Hubs</h2>
@@ -51,7 +51,7 @@
 以下の項目を自分の環境に合わせて設定する。またこの Source は Publisher/Subscriber 共通で利用。
 |項目|内容|
 ---|---
-|① password|[Shared Access Key](#SASKEY)（主キー）|
+|① password|[Shared Access Key](#SAKEY)（主キー）|
 |② namespace name|名前空間の名前 e.g., connectingtest|
 |③ Event Hub Topics Name|e.g., eh_topic|
 |④ SharedAccessKeyName 名|e.g., RootManageSharedAccessKey (default) 本番では変更推奨|
@@ -121,8 +121,8 @@ VAIL を実行しその結果を受け取る（下図）
 |項目|内容|
 ---|---
 |①|名前空間の名前 e.g., connectingtest|
-|②|[Shared Access Key Name](#SASKEY)|
-|③|[Shared Access Key](#SASKEY)（主キー）|
+|②|[Shared Access Key Name](#SAKEY)|
+|③|[Shared Access Key](#SAKEY)（主キー）|
 - Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③;
 ### 3.2 VAIL 設定
 以下の項目を自分の環境に合わせて記入する
@@ -154,7 +154,7 @@ PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
 - しかし受信した JSON データの構造は以下の様になるので注意  
 <img src="../../imgs/vantiq-azure-EventHubs/azure_pchgjson.jpg" width="50%">
 
-<h2 id="SASKEY">5. Shared Acces Key について</h2>
+<h2 id="SAKEY">5. Shared Acces Key について</h2>
 
 1. Top Menu から「共通アクセスポリシー」を選択（下 左図）
 2. リストアップされたポリシーから使用するキーを選択 e.g., RootManageSharedAccessKey ← Default
