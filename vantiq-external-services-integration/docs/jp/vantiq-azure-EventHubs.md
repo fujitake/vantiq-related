@@ -4,8 +4,7 @@
 - [AMQP (Source) の接続方法](#AMQP)
 - [Kafka (Source) の接続方法](#KAFKA)
 - [プロトコル変換について](#TRNSPROT)
-- [Shared Access Key について](#SASKEY)
-- [SAS Token について](#SASTOKEN)
+- [Shared Access Key について](#SAKEY)
 - [サンプル プロジェクト](#EPROJ)
 
 <h2 id="createUser">1. ユーザー アカウントの作成方法 on Azure Event Hubs</h2>
@@ -52,7 +51,7 @@
 以下の項目を自分の環境に合わせて設定する。またこの Source は Publisher/Subscriber 共通で利用。
 |項目|内容|
 ---|---
-|① password|[SAS Token](#SASTOKEN)|
+|① password|[Shared Access Key](#SAKEY)（主キー）|
 |② namespace name|名前空間の名前 e.g., connectingtest|
 |③ Event Hub Topics Name|e.g., eh_topic|
 |④ SharedAccessKeyName 名|e.g., RootManageSharedAccessKey (default) 本番では変更推奨|
@@ -122,8 +121,8 @@ VAIL を実行しその結果を受け取る（下図）
 |項目|内容|
 ---|---
 |①|名前空間の名前 e.g., connectingtest|
-|②|[Shared Access Key Name](#SASKEY)|
-|③|[Shared Access Key](#SASKEY)（主キー）|
+|②|[Shared Access Key Name](#SAKEY)|
+|③|[Shared Access Key](#SAKEY)（主キー）|
 - Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③;
 ### 3.2 VAIL 設定
 以下の項目を自分の環境に合わせて記入する
@@ -155,7 +154,7 @@ PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
 - しかし受信した JSON データの構造は以下の様になるので注意  
 <img src="../../imgs/vantiq-azure-EventHubs/azure_pchgjson.jpg" width="50%">
 
-<h2 id="SASKEY">5. Shared Acces Key について</h2>
+<h2 id="SAKEY">5. Shared Acces Key について</h2>
 
 1. Top Menu から「共通アクセスポリシー」を選択（下 左図）
 2. リストアップされたポリシーから使用するキーを選択 e.g., RootManageSharedAccessKey ← Default
@@ -164,18 +163,6 @@ PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
 |<img src="../../imgs/vantiq-azure-EventHubs/azure_menu.jpg">|<img src="../../imgs/vantiq-azure-EventHubs/azure_pkey.jpg">|
 ---|---
 
-<h2 id="SASTOKEN">6. SAS Token について</h2>
-
-SAS Token は以下の URL から作成方法を参照できる
-- 参考URL: [SAS トークンの生成](https://docs.microsoft.com/ja-jp/rest/api/eventhub/generate-sas-token)
-
-以下の様な内容が出力される（&lt;&gt;部分は適宜読み替えること）
-<pre>
-Authorization: SharedAccessSignature sr=&lt;NAMESPACE NAME&gt;.servicebus.windows.net&sig=&lt;SHARED ACCESS KEY&gt;&se=&lt;TOKEN EXPIRY INSTANT&gt;&skn=&lt;SHARED KEY NAME&gt;
-</pre>
-
-### 共通パラメータとヘッダーについて
-- 参考URL: [Event Hubs サービス REST - 共通パラメーターとヘッダー](https://docs.microsoft.com/ja-jp/rest/api/eventhub/event-hubs-runtime-rest)
 
 <h2 id="EPROJ">サンプル プロジェクト on Vantiq IDE</h2>
 
