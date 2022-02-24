@@ -36,13 +36,6 @@ userdb:
     bucket: userdbbackup
 ```
 
-#### keycloak
-keycloakで既定ではなく、指定したバージョンのイメージを使用する。
-```yaml
-keycloak:
-  image:
-    tag: 15.0.1-1
-```
 
 
 #### metrics-collector
@@ -54,7 +47,7 @@ metricsCollector:
 ```
 
 ## 各コンポーネントのサーバーのリソース制限
-リソース要求と上限を制限することで、小さいNodeにスケジュールされるようにする。
+リソース要求と上限を制限することで、小さいNodeにスケジュールされるようにする.
 `cpu`と`memory`は稼働確認済みの参考値であり、推奨値や下限値ではない。適宜調整が必要。
 
 #### vantiq server
@@ -142,7 +135,7 @@ influxdb:
 
 #### mongodb
 
-ラベル名`vantiq.com/workload-preference`の値が`database`となっているNodeであり、かつ、`mongodb`,`vantiq`, `influxdb`などのラベルの他のpodと排他的になるよう、スケジュールする。
+ラベル名`vantiq.com/workload-preference`の値が`database`となっているNodeであり、かつ、`mongodb`,`vantiq`, `influxdb`などのラベルの他のpodと排他的になるよう、スケジュールする。
 
 ```yaml
 affinity: |
@@ -179,4 +172,21 @@ affinity: |
                 - influxdb-influxdb
                 - influxdb
         topologyKey: kubernetes.io/hostname
+```
+
+## コンポーネントのバージョン指定
+`vantiq_system_release`としてパッケージされている標準の構成のうち、特定のコンポーネントについて異なるバージョンを指定したい場合に使用する
+
+#### keycloak
+```yaml
+keycloak:
+  image:
+    tag: 15.0.1-1
+```
+
+#### telegraf-prom
+```yaml
+telegraf-prom:
+  image:
+    tag: telegraf:1.15.2-alpine
 ```
