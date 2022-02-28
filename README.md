@@ -2,28 +2,6 @@
 ## Purpose
 This repository is for sharing various technical guidance and instructions of Vantiq product.
 
-### [Vantiq Cloud Infrastructure related](./vantiq-cloud-infra-operations)
-Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
-- [AWS EKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_aws/readme_en.md)
-- [Azure AKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_azure/readme_en.md)
-- [kubernetes (EKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#eks_upgrade)    
-- [kubernetes (AKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#aks_upgrade)
-- [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
-- [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
-- [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
-
-
-### [Vantiq Platform related](./vantiq-platform-operations)
-Guides and procedures for building and operating the Vantiq Platform.
-- [Trouble Shooting Guide for Vantiq Cloud operations](./vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md)
-- [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
-- [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
-- [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
-- [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
-- [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
-
-
 ### [Vantiq Application Development related](./vantiq-apps-development)
 Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
@@ -48,6 +26,27 @@ Guidelines and sample code for integrating Vantiq with devices.
   - [fluentd](./vantiq-devices-integration/docs/eng/fluentd.md)
 - [Device connection samples](./vantiq-devices-integration/readme_en.md#device_sample)
 
+
+### [Vantiq Cloud Infrastructure related](./vantiq-cloud-infra-operations)
+Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
+- [AWS EKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_aws/readme_en.md)
+- [Azure AKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_azure/readme_en.md)
+- [kubernetes (EKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#eks_upgrade)    
+- [kubernetes (AKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#aks_upgrade)
+- [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
+- [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
+- [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
+
+
+### [Vantiq Platform Installation related](./vantiq-platform-operations)
+Guides and procedures for the Vantiq Platform Management Team on installing and operating the Vantiq Platform on cloud infrastructure.  
+- [Trouble Shooting Guide for Vantiq Cloud operations](./vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md)
+- [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
+- [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
+- [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
+- [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
+- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
+- [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
 
 
 ## 目的
