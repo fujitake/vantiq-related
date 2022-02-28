@@ -28,7 +28,7 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
 
       # only when any of the property is set, create a "load_balance_profile" block
       dynamic "load_balancer_profile" {
-        for_each = var.managed_outbound_ip_count != null || var.outbound_ip_prefix_ids != null || var.outbound_ip_address_ids != null ? list("1") : []
+        for_each = var.managed_outbound_ip_count != null || var.outbound_ip_prefix_ids != null || var.outbound_ip_address_ids != null ? tolist(["1"]) : []
         content {
           managed_outbound_ip_count = var.managed_outbound_ip_count
           outbound_ip_prefix_ids = var.outbound_ip_prefix_ids
@@ -60,14 +60,14 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
 
 
   dynamic "identity" {
-    for_each = var.create_service_principal == false ? list("1") : []
+    for_each = var.create_service_principal == false ? tolist(["1"]) : []
     content {
       type = "SystemAssigned"
     }
   }
 
   dynamic "service_principal" {
-    for_each = var.create_service_principal != false ? list("1") : []
+    for_each = var.create_service_principal != false ? tolist(["1"]) : []
     content {
       client_id     = azuread_application.aks.application_id
       client_secret = azuread_service_principal_password.aks.value
@@ -76,7 +76,7 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
 
   addon_profile {
     dynamic "oms_agent" {
-      for_each = var.loganalytics_enabled != null ? list("1") : []
+      for_each = var.loganalytics_enabled != null ? tolist(["1"]) : []
       content {
         enabled = var.loganalytics_enabled
         log_analytics_workspace_id = var.loganalytics_enabled == true ? azurerm_log_analytics_workspace.k8s[0].id : null

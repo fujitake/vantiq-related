@@ -9,12 +9,14 @@
 backupを有効化する。Backupの詳細は[k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools)（要権限）を参照。
 
 ```yaml
-mongodb:
-  backup:
-    enabled: true
-    provider: azure
-    schedule: "@daily"
-    bucket: mongodbbackup
+vantiq:
+...
+  mongodb:
+    backup:
+      enabled: true
+      provider: azure
+      schedule: "@daily"
+      bucket: mongodbbackup
 ```
 
 #### userdb
@@ -22,18 +24,21 @@ userdbを構成する。Vantiqで扱う永続データのうち、システム�
 
 ```yaml
 vantiq:
+...
   userdb:
     enabled: true
 ```
 Backupを有効化する場合
 ```yaml
-userdb:
-  enabled: true
-  backup:
+vantiq:
+...
+  userdb:
     enabled: true
-    provider: azure
-    schedule: "@daily"
-    bucket: userdbbackup
+    backup:
+      enabled: true
+      provider: azure
+      schedule: "@daily"
+      bucket: userdbbackup
 ```
 
 
@@ -42,8 +47,10 @@ userdb:
 `vantiq`サーバーからのメトリクス収集機能を`metrics-collector`として切り離し、本体の性能を向上させる。
 
 ```yaml
-metricsCollector:
-  enabled: true
+vantiq:
+...
+  metricsCollector:
+    enabled: true
 ```
 
 ## 各コンポーネントのサーバーのリソース制限
@@ -58,7 +65,7 @@ vantiq:
   resources:
     limits:
       cpu: 2
-      memory: 4Gi
+      memory: 3Gi
 
     requests:
       cpu: 1
@@ -67,17 +74,19 @@ vantiq:
 
 #### mongodb
 ```yaml
-mongodb:
+vantiq:
 ...
-  resources:
-    limits:
-      cpu: 2
-      memory: 4Gi
-    requests:
-      cpu: 0.5
-      memory: 2Gi
-  persistentVolume:
-    size: 50Gi
+  mongodb:
+  ...
+    resources:
+      limits:
+        cpu: 2
+        memory: 4Gi
+      requests:
+        cpu: 0.5
+        memory: 2Gi
+    persistentVolume:
+      size: 50Gi
 ```
 
 #### influxdb
@@ -99,16 +108,18 @@ influxdb:
 
 #### metrics-collector
 ```yaml
-metricsCollector:
+vantiq:
 ...
-  resources:
-    limits:
-      cpu: 1
-      memory: 3Gi
+  metricsCollector:
+  ...
+    resources:
+      limits:
+        cpu: 1
+        memory: 3Gi
 
-    requests:
-      cpu: 0.5
-      memory: 2Gi
+      requests:
+        cpu: 0.5
+        memory: 2Gi
 ```
 
 ## Affinityの設定
@@ -138,46 +149,51 @@ influxdb:
 ラベル名`vantiq.com/workload-preference`の値が`database`となっているNodeであり、かつ、`mongodb`,`vantiq`, `influxdb`などのラベルの他のpodと排他的になるよう、スケジュールする。
 
 ```yaml
-affinity: |
-  nodeAffinity:
-    {{- if eq .Values.workloadPreference "hard" }}
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: vantiq.com/workload-preference
-          operator: In
-          values:
-          - database
-    {{- else }}
-    preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 50
-      preference:
-        matchExpressions:
-        - key: vantiq.com/workload-preference
-          operator: In
-          values:
-          - database
-    {{- end }}
-  podAntiAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-            - key: app
+vantiq:
+...
+  mongodb:
+  ...
+    affinity: |
+      nodeAffinity:
+        {{- if eq .Values.workloadPreference "hard" }}
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: vantiq.com/workload-preference
               operator: In
               values:
-                - mongodb
-                - vantiq
-                - vision-analytics
-                - metrics-collector
-                - influxdb-influxdb
-                - influxdb
-        topologyKey: kubernetes.io/hostname
+              - database
+        {{- else }}
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 50
+          preference:
+            matchExpressions:
+            - key: vantiq.com/workload-preference
+              operator: In
+              values:
+              - database
+        {{- end }}
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - mongodb
+                    - vantiq
+                    - vision-analytics
+                    - metrics-collector
+                    - influxdb-influxdb
+                    - influxdb
+            topologyKey: kubernetes.io/hostname
 ```
 
 ## コンポーネントのバージョン指定
 `vantiq_system_release`としてパッケージされている標準の構成のうち、特定のコンポーネントについて異なるバージョンを指定したい場合に使用する
 
 #### keycloak
+
 ```yaml
 keycloak:
   image:
