@@ -25,6 +25,8 @@ InfluxDB を追加する時、URLを `http://influxdb-influxdb:8086` とした�
 #### Solution
 URL を`http://influxdb:8086`とする。
 
+#### Solution 2
+`Vantiq_system_version: 3.10.1`以降は、InfluxdbのUser/Passwordの設定が必要で入力値は`secrets.yaml`に記載した内容になる。
 
 # Azure で Backup の設定ができない<a id="unable_to_configure_backup_in_azure"></a>
 
