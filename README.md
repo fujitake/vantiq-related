@@ -54,8 +54,35 @@ Guidelines and sample code for integrating Vantiq with devices.
 
 このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
 
-### [Vantiqのクラウドインフラ関連](./vantiq-cloud-infra-operations)
-Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
+### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
+Vantiqアプリケーション開発チーム向けのアプリ開発や運用に関するガイドや学習マテリアルです。
+- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
+- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/1-day-workshop/docs/jp/Vantiq_resources_introduction.md)
+- [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
+- [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
+- [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)
+- [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+
+### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
+Vantiqアプリケーション開発チーム向けのVantiqと外部Webサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
+- [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
+- [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
+- [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
+- [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
+- [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
+- [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
+
+### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
+Vantiqアプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
+- [Edge~Vantiq構成 データ連携 ガイドライン](./vantiq-devices-integration/docs/jp/device-to-vantiq.md)
+- コネクターサンプル
+  - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
+  - [fluentd](./vantiq-devices-integration/docs/jp/fluentd.md)
+- [デバイスの接続サンプル](./vantiq-devices-integration/readme.md#device_sample)
+
+
+### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
+インフラチーム向けのVantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
 
 - [Terraform を使って AWS EKS を作成](./vantiq-cloud-infra-operations/terraform_aws/readme.md)
 - [Terraform を使って Azure AKS を作成](./vantiq-cloud-infra-operations/terraform_azure/readme.md)
@@ -67,8 +94,8 @@ Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラ
 
 
 
-### [Vantiqプラットフォーム関連](./vantiq-platform-operations)
-Vantiq Platformの構築や運用に関するガイドや手順です。
+### [Vantiqプラットフォームインストール関連](./vantiq-platform-operations)
+Vantiqプラットフォーム管理チーム向けのクラウドインフラ上へのVantiq Platformのインストールや運用に関するガイドや手順です。
 
 - [Vantiq Cloud 構築および保守 ](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md)
 - [deploy.yamlのカスタマイズ構成](./vantiq-platform-operations/docs/jp/deploy_yaml_config.md)
@@ -81,30 +108,3 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
-
-### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
-Vantiqアプリケーションの開発や運用に関するガイドや学習マテリアルです。
-- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
-- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/1-day-workshop/docs/jp/Vantiq_resources_introduction.md)
-- [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
-- [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
-- [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)
-- [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
-
-### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
-VantiqとクラウドWebサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
-- [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
-- [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
-- [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
-- [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
-- [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
-- [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
-
-
-### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
-Vantiqとデバイスを連携させるガイドラインやサンプルコードです。
-- [Edge~Vantiq構成 データ連携 ガイドライン](./vantiq-devices-integration/docs/jp/device-to-vantiq.md)
-- コネクターサンプル
-  - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
-  - [fluentd](./vantiq-devices-integration/docs/jp/fluentd.md)
-- [デバイスの接続サンプル](./vantiq-devices-integration/readme.md#device_sample)
