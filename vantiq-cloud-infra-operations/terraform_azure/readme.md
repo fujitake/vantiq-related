@@ -62,7 +62,7 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 
 ### terraformのバージョンについて
 - 0.13以上が必要
-- 確認済みバージョン: v0.14.9
+- 確認済みバージョン: v1.0.4
 
 ### クラスタ構築の設定値について
 各ディレクトリ(`env-prod`,`env-dev`,`env-template`)で環境ごとの設定値を設定し、クラスタ構築を行う。  
@@ -223,6 +223,11 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
   ```sh
   az aks get-credentials --resource-group {resouce group} --name {aks cluster name}
   ```
+
+6. `terraform output`ではsensitive項目は表示されない。以下のようにjsonを出力することで、sensitive項目値も取り出すことができる。
+```sh
+terraform output -json | jq '"rdb_postgres_admin_password:" + .rdb_postgres_admin_password.value'
+```
 
 ## Reference
 - [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)
