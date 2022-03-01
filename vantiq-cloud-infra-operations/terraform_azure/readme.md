@@ -62,7 +62,7 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 
 ### terraformのバージョンについて
 - 0.13以上が必要
-- 確認済みバージョン: v1.0.4
+- 確認済みバージョン: v1.1.5
 
 ### クラスタ構築の設定値について
 各ディレクトリ(`env-prod`,`env-dev`,`env-template`)で環境ごとの設定値を設定し、クラスタ構築を行う。  
