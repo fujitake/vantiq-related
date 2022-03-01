@@ -4,8 +4,7 @@
 - [How to connect using AMQP (Source)](#AMQP)
 - [How to connect using Kafka (Source)](#KAFKA)
 - [Information about Protocol Conversion](#TRNSPROT)
-- [Information about Shared Access Key](#SASKEY)
-- [Information about SAS Token](#SASTOKEN)
+- [Information about Shared Access Key](#SAKEY)
 - [Sample Project](#EPROJ)
 
 <h2 id="createUser">1. How to create a User Account  on Azure Event Hubs</h2>
@@ -52,7 +51,7 @@ Click "+ Event Hub" to the right of the search window (below figure) and fill in
 Modify the following items accordingly. This Source is also used for both Publisher and Subscriber.  
 |Items|Details|
 ---|---
-|① password|[SAS Token](#SASTOKEN)|
+|① password|[Shared Access Key](#SAKEY) (primary key)|
 |② namespace name|Namespace name. e.g., connectingtest|
 |③ Event Hub Topics Name|e.g., eh_topic|
 |④ SharedAccessKeyName name|e.g., RootManageSharedAccessKey (default) Change is recommended for production environments.|
@@ -122,8 +121,8 @@ Modify the following items accordingly.
 |Items|Details|
 ---|---
 |①|Namespace name. e.g., connectingtest|
-|②|[Shared Access Key Name](#SASKEY)|
-|③|[Shared Access Key](#SASKEY) (primary key)|
+|②|[Shared Access Key Name](#SAKEY)|
+|③|[Shared Access Key](#SAKEY) (primary key)|
 - Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③;
 ### 3.2 Configure VAIL
 Modify the following items accordingly.
@@ -155,7 +154,7 @@ PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
 - However, note that the structure of the received JSON data will look like the following.  
 <img src="../../imgs/vantiq-azure-EventHubs/azure_pchgjson.jpg" width="50%">
 
-<h2 id="SASKEY">5. Information about Shared Access Key</h2>
+<h2 id="SAKEY">5. Information about Shared Access Key</h2>
 
 1. Select _Shared access policies_ from Top Menu (below left figure)
 2. Select the key to use from the listed policy. e.g., RootManageSharedAccessKey ← Default
@@ -163,19 +162,6 @@ PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
 
 |<img src="../../imgs/vantiq-azure-EventHubs/azure_menu.jpg">|<img src="../../imgs/vantiq-azure-EventHubs/azure_pkey.jpg">|
 ---|---
-
-<h2 id="SASTOKEN">6. Information about SAS Token</h2>
-
-To generate a SAS Token, refer to the following URL.
-- Reference URL: [Generate SAS token](https://docs.microsoft.com/en-us/rest/api/eventhub/generate-sas-token)
-
-The following contents will be output (modify the &lt;&gt; parts accordingly).
-<pre>
-Authorization: SharedAccessSignature sr=&lt;NAMESPACE NAME&gt;.servicebus.windows.net&sig=&lt;SHARED ACCESS KEY&gt;&se=&lt;TOKEN EXPIRY INSTANT&gt;&skn=&lt;SHARED KEY NAME&gt;
-</pre>
-
-### Information about Common parameters and headers
-- Reference URL: [Event Hubs service REST - Common parameters and headers](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)
 
 <h2 id="EPROJ">Sample Project on Vantiq IDE</h2>
 

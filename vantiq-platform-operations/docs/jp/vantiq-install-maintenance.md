@@ -48,8 +48,8 @@
 
 1. 最新バージョンの k8sdeploy_tools を取得する。`git clone https://github.com/Vantiq/k8sdeploy_tools.git` _(要権限)_
 1. `k8sdeploy_tools` に移動する。
+1. `./gradlew configureClient`を実行する。（この手順はエラーになっても、`helm repo list`を実行してvantiq repoが取得できていればよい。。。）
 1. `.gradle/gradle.properties` の github の k8sdeploy にアクセスし、`username` と `password` を設定する。2段階認証を有効にしている場合、password は "personal access token" となる。
-1. `./gradlew configureClient`を実行し、vantiq の "helm chart repo" を取得する。
 1. `targetCluster`、`vantiqSystem` がないことを確認する。
 1. 次のコマンドを実行する。
    `./gradlew configureVantiqSystem`  
@@ -61,7 +61,7 @@
 1. 続けて `cluster.properties` に任意の設定を行う。下記は一例。
    - #`requiredRemote`=`false` のコメントアウトを外す
    - `provider`=`aws` (azure|alicloud|openstack|kubeadm)
-   - `vantiq_system_release`=`3.9.0` (SRE または Supportに要確認)
+   - `vantiq_system_release`=`3.9.0` ([k8sdeploy repo](https://github.com/Vantiq/k8sdeploy/releases)で確認できる。K8sバやVantiqバージョンとも依存しており、不明ならばSRE または Supportに要確認)
    - `deployment`=`development` (development はシングル構成、production はトリプルクラスタ構成)
    - `vantiq.installation`=`tkeksfuji7` (クラスタのホスト名になる)
 1. `~/.kube/config` を `kubeconfig` としてコピーし、必要な修正を実施する。  
@@ -76,8 +76,10 @@
 1. 次のコマンドを実行し、パスワード関連ファイルを生成する。
 	`./gradlew -Pcluster=<クラスタ名> generateSecrets`
 1. 次のコマンドを実行し、デプロイを実施する。
-	`./gradlew -Pcluster=<クラスタ名> deploy`  
-	正常に終わらない場合は、deploy.yaml、secrets.yaml の設定を確認する。必要に応じて `deploy` の代わりに、`deployNginx`、 `deployShared`、`deployVantiq` をそれぞれ個別に行う。
+  `./gradlew -Pcluster=<クラスタ名> deployNginx`  
+	`./gradlew -Pcluster=<クラスタ名> deployShared`  
+  `./gradlew -Pcluster=<クラスタ名> deployVantiq`  
+  まとめて実行する`deploy`コマンドもあるが、podが正しいnodeに配置されるか等、スモールステップで確認する方が無難である。正常に終わらない場合は、deploy.yaml、secrets.yaml の設定を確認する。
 1. 次のコマンドにて各種 pod が動作していることを確認する。
 	`kubectl get pod -A`
 1. Vantiq pod が動作している場合、次のコマンドにて出力される log 内から key を確認し保存する。  
@@ -89,7 +91,7 @@
   	2020-05-06T16:21:58.595 [vert.x-eventloop-thread-0] INFO  io.vantiq.startup - ******************************************************************
     ```
 1. 次のコマンドを実行し、各種 pod が適切な node に乗っていることを確認する。    
-	`kubectl describe nodes|egrep "^Name:|instance|mongo|vantiq|metrics|vision|influx|grafana|coredns|keycloak|nginx|telegraf|domain"`  
+	`kubectl describe nodes | egrep "^Name:|mongo-|vantiq-|metrics-|vision-|influx-|grafana-|coredns-|keycloak-|nginx-|telegraf-|zone"`  
 	適切なノードに乗っていない場合は、別途手順を確認する
     ```
   	kubectl taint nodes --all key=value:NoSchedule

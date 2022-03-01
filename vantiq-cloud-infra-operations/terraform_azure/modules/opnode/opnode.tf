@@ -60,7 +60,7 @@ resource "azurerm_linux_virtual_machine" "opnode-1" {
     admin_password = var.ssh_access_enabled ? null : var.opnode_password
 
     dynamic "admin_ssh_key" {
-      for_each = var.ssh_access_enabled ? list("1") : []
+      for_each = var.ssh_access_enabled ? tolist(["1"]) : []
       content {
         username = var.opnode_user_name
         public_key = file(var.ssh_public_key)

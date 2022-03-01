@@ -53,6 +53,7 @@ output "storage_vantiq_backup_container_name" {
 
 output "storage_primary_access_key" {
   value = module.storage.storage_primary_access_key
+  sensitive = true
 }
 
 output "storage_account_name" {
@@ -70,6 +71,7 @@ output "rdb_postgres_admin_user" {
 }
 output "rdb_postgres_admin_password" {
   value = module.rdb.postgres_admin_password
+  sensitive = true
 }
 output "rdb_postgres_db_name" {
   value = module.rdb.postgres_db_name
@@ -95,6 +97,7 @@ output "opnode_FQDN" {
 }
 output "opnode_customdata" {
   value = module.opnode.opnode_customdata
+  sensitive = true
 }
 
 ###
@@ -103,6 +106,7 @@ output "opnode_customdata" {
 
 output "aks_kube_config" {
   value = module.aks.aks_private_cluster_enabled ? "N/A" : module.aks.aks_kube_config
+  sensitive = true
 }
 
 output "aks_kubernetes_cluster_name" {
@@ -119,6 +123,7 @@ output "aks_service_principal_id" {
 
 output "aks_service_principal_password" {
   value = module.aks.aks_service_principal_password
+  sensitive = true
 }
 
 output "aks_api_endpoint_private_fqdn" {

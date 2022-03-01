@@ -62,7 +62,7 @@ Each module will create the following resources.
 
 ### Terraform version
 - 0.13 or higher is required
-- Verified Version: v0.14.9
+- Verified Version: v1.0.4
 
 ### Configuration values for cluster building
 Go to the directory for desired environment  (env-prod,env-dev,env-template) and set the configuration values to build the cluster.  
@@ -221,6 +221,11 @@ Go to the directory of each environment and execute the command.
 5. Get kubeconfig
   ```sh
   az aks get-credentials --resource-group {resouce group} --name {aks cluster name}
+  ```
+
+6. The sensitive parameter is not displayed in the `terraform output`. It is possible to retrieve the value of the sensitive parameter by outputting json as follows:  
+  ```sh
+  terraform output -json | jq '"rdb_postgres_admin_password:" + .rdb_postgres_admin_password.value'
   ```
 
 ## Reference
