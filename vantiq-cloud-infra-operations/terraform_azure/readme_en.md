@@ -62,7 +62,7 @@ Each module will create the following resources.
 
 ### Terraform version
 - 0.13 or higher is required
-- Verified Version: v1.0.4
+- Verified Version: v1.1.5
 
 ### Configuration values for cluster building
 Go to the directory for desired environment  (env-prod,env-dev,env-template) and set the configuration values to build the cluster.  
