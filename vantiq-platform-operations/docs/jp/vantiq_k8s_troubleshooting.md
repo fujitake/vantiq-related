@@ -674,7 +674,7 @@ Events:                          <none>
 1.  `taint`を使い、Podを動かす先のNode以外をスケジュール不可にする
 ```sh
 kubectl taint nodes --all key=value:NoSchedule
-kubectl taint nodes <node name> key:NosSchedule-
+kubectl taint nodes <node name> key:NoSchedule-
 ```
 
 2.  動かしたいPodを「[Podの再起動を行う](#podの再起動を行う)」  に従い再起動を行う。
