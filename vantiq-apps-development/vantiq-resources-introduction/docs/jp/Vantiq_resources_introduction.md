@@ -8,8 +8,8 @@
 
 この記事で説明しているサンプルアプリは [**こちら**](../../conf/ai-camera-demo) から取得できます。以下は直リンク。
 
-  - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/suspicious_person_detection.zip)
-  - [データジェネレーター](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/event_generator.zip)
+  - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/ai-camera-demo/suspicious_person_detection.zip)
+  - [データジェネレーター](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/ai-camera-demo/event_generator.zip)
 
 
 <img src="../../imgs/Vantiq_resources_introduction/slide2.png" width=70%>
