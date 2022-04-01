@@ -24,6 +24,7 @@
 今回ハンズオンで使用するプロジェクトをダウンロードします。([リンク](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/hands-on/suspicious_person_detection.zip))
 
 メニュー >> Projects >> インポート を開きます。
+
 ![](../../imgs/hands-on-lab/01_menu_project.png)
 
 projectのzipファイルをドラッグ&ドロップします。インポートを行い、画面をリロードします。
