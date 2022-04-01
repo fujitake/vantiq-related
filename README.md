@@ -5,7 +5,7 @@ This repository is for sharing various technical guidance and instructions of Va
 ### [Vantiq Application Development related](./vantiq-apps-development)
 Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
-- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/1-day-workshop/docs/eng/Vantiq_resources_introduction.md)
+- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/vantiq-resources-introduction/docs/eng/Vantiq_resources_introduction.md)
 - [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiq with External Services Integration](./vantiq-external-services-integration)
@@ -56,7 +56,7 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
 Vantiqアプリケーション開発チーム向けのアプリ開発や運用に関するガイドや学習マテリアルです。
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
-- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/1-day-workshop/docs/jp/Vantiq_resources_introduction.md)
+- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)

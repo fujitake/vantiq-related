@@ -73,10 +73,10 @@
 |From Name|転送元の姓名|
 |From Email Address|転送元のメール アドレス|
 |Reply To|返信先のメール アドレス|
-|Company Address|会社の住所|
+|Companyy Address|会社の住所|
 |City|市区町村|
-|Country|Japan|
-|Nickname|ニックネーム|
+|Country|Japan(+81)|
+|Nicname|ニックネーム|
 <img src="../../imgs/vantiq-sendgrid/sender.JPG">
 - 全て入力後「Create」ボタンをクリック
 
@@ -86,6 +86,7 @@
 <img src="../../imgs/vantiq-sendgrid/confirm.JPG">
 
 - 「Verify Single Sender」をクリック
+
 - 2 way 認証の画面が表示されるのでメッセージ通りに進める
 
 <h3 id="confirm">1.7. 確認画面の表示</h3>
@@ -124,6 +125,7 @@
 - 上記の作業から画面遷移した画面を残しておきたいので、以下の作業は別タブにて行う。
 - 左のメールから Settings>Tracking を選択（下 左図）
 - Open Tracking, Click Tracking の両方とも Disabled に変更 (下 右図)
+
 
 |メニュー選択|設定項目|
 ---|---

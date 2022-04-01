@@ -8,8 +8,8 @@ Detect suspicious persons in a large park using AI cameras, and notify the neare
 
 The sample Apps described in this article are [**here**](../../conf/ai-camera-demo). The followings are the direct links.  
 
-  - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/suspicious_person_detection.zip)
-  - [Data Generator](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/ai-camera-demo/event_generator.zip)
+  - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/ai-camera-demo/suspicious_person_detection.zip)
+  - [Data Generator](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/ai-camera-demo/event_generator.zip)
 
 
 <img src="../../imgs/Vantiq_resources_introduction/slide2.png" width=70%>
