@@ -10,17 +10,21 @@ Vantiq Cloud（dev.vantiq.co.jp)を開発環境としていたが、自社のク
 
 - Vantiq mobile
 - Vantiq Calatog
-- Node
+- デプロイ機能 (メニュー デプロイのリソース)
 - 開発者でないEnd User
 
 ## 手順
 
 ### 組織管理者 (Organization Admin)
 
+旧環境にて以下を行う。
 1. dev.vantiq.co.jpを使用中のユーザーを特定する。また、そのリストのうち、新環境に移行が必要なユーザーを特定する。
 1. dev.vantiq.co.jpを使用中のnamespaceを特定する。また、そのうち新環境に移行が必要なものと、それぞれの移行担当者をアサインする。
 1. 移行対象のユーザーとnamespaceについて、管理台帳で完了までステータスをトラックする。
-1. 1.で特定されたユーザーに新環境のOrganization Root Namespaceへの招待を送信する。
+
+新環境にて以下を行う。
+1. System Adminから新環境のOrganization Adminの招待を受ける。
+1. 前項1.で特定されたユーザーに新環境のOrganization Root Namespaceへの招待を送信する。
 1. すべてNamespace、リソースの移行が終わったらVantiq Supportへ依頼し、旧環境のOrganizationを削除する。
 
 #### チェックリスト
@@ -47,7 +51,7 @@ Vantiq Cloud（dev.vantiq.co.jp)を開発環境としていたが、自社のク
 #### チェックリスト
 - [ ] Namespace内のすべてプロジェクトをエクスポートしたか。(メニュー Projects >> プロジェクトの管理）
 - [ ] 必要なリソースがプロジェクトに含まれているか。（設定 >> すべてのResourcesの表示、 設定 >> 孤立したResourcesの表示」
-- [ ] 同じ環境 (dev.vantiq.co.jp) の他のNamespaceのリソースを参照しているものはあるか。（Remote Sourceで Server URIがdev.vantiq.co.jpがあるか。）
+- [ ] 同じ環境 (dev.vantiq.co.jp) の他のNamespaceのリソースを参照しているものはあるか。（Remote Sourceで Server URIが`dev.vantiq.co.jp`があるか。）
 - プロジェクトエクスポートに含まれないリソースや設定を参照しているか。
   - [ ] Secret (メニュー >> 管理 >> Advanced >> Secrets )
   - [ ] Access Token (メニュー >> 管理 >> Advanced >> Access Token )
