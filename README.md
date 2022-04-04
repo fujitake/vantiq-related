@@ -106,5 +106,5 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [grafana 関連](./vantiq-platform-operations/docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
-- [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-apps-migration.md)
+- [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
