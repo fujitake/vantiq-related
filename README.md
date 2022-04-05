@@ -70,6 +70,7 @@ Vantiqアプリケーション開発チーム向けのVantiqと外部Webサー�
 - [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
 - [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
 - [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
+- [API Gatewayと組み合わせたデザインパターン](./vantiq-external-services-integration/docs/jp/vantiq-apigw.md)
 
 ### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
 Vantiqアプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
@@ -106,4 +107,5 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [grafana 関連](./vantiq-platform-operations/docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
+- [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)

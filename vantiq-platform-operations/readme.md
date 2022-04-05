@@ -11,6 +11,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [grafana 関連](./docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./docs/jp/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./docs/jp/vantiq-cloudwatch.md)
+- [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
 
 

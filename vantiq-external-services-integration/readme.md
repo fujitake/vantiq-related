@@ -50,3 +50,4 @@
 - [REST API for Vantiq Topic (HTTPS, WebSocket)](../vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
 - [SendGrid](docs/jp/vantiq-sendgrid.md)
 - [Azure FaceAPI]()
+- [API Gatewayと組み合わせたデザインパターン](./docs/jp/vantiq-apigw.md)
