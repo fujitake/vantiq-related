@@ -53,13 +53,16 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 
 このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
 
-### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
+### [Vantiqアプリケーション開発関連](./vantiq-apps-development/vantiq-apps-development)
 Vantiqアプリケーション開発チーム向けのアプリ開発や運用に関するガイドや学習マテリアルです。
+- [Vantiqアカウント作成（開発者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-01_Prep_for_Account.md)
+- [Vantiqアカウント作成（組織管理者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-02_Prep_for_Dev_account.md)
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)
+- [Vantiqアプリ開発 逆引きリファレンス](./vantiq-apps-development/docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)

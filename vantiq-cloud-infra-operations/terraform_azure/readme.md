@@ -218,6 +218,15 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
   - 10分以上止まってしまうタスクがあったら、Ctrl + Cで止め、再度 3.を行う。
   - エラーが出る（tfstateファイルの状態と実際のリソースの状態の不整合）の場合、azure portalからエラーに該当するモジュールを削除し、再度3.を行う。
 
+  - 新規のサブスクリプションの作業の場合、以下のようなエラーとなる場合がある。
+
+  ```
+  Error: creating Cluster: (Managed Cluster Name "<k8s cluster name>" / Resource Group "<resource group name>"): containerservice.ManagedClustersClient#CreateOrUpdate: Failure sending request: StatusCode=409 -- Original Error: Code="MissingSubscriptionRegistration" Message="The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions." Details=[{"code":"MissingSubscriptionRegistration","message":"The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions.","target":"Microsoft.ContainerService"}]
+  ```
+
+  原因は、サブスクリプションに対してリソースプロバイダーが登録されていない。以下のリンクを参考に、`Microsoft.ContainerService`のプロバイダーを登録すること。
+  https://docs.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-cli
+
 
 5. kubeconfigを取得する
   ```sh
