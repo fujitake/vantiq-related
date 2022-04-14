@@ -132,7 +132,7 @@ Grafanaを使用する。
 - App Execution - App Builder `App`の処理状況
 ![](../../imgs/reverse-lookup/app-executions.png)
 - Procedure Execution - `Procedure`の処理状況
-![](../../imgs/reverse-lookup/Procedure-executions.png)
+![](../../imgs/reverse-lookup/procedure-executions.png)
 - Service Execution - `Service`内の`Procedure`の処理状況
 ![](../../imgs/reverse-lookup/service-executions.png)
 - Rule Execution - `Rule`の処理状況
