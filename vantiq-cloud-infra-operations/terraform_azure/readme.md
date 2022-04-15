@@ -131,6 +131,9 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 
 - VNETのIPを確保する。/22以上のサブネットが望ましい。Production構成だと1 nodeあたり30のIPをとるため、11 nodeの構成だと/24では足りない、ギリギリではない方が望ましい。
 
+- インストールに必要な情報をダウンロードするために、構築する環境からInternetへ通信できるようにしておく。特にファイアウォールにより閉域網を構成する場合。
+  - [Azure Globalに必要なFQDNとアプリケーションの規則](https://docs.microsoft.com/ja-jp/azure/aks/limit-egress-traffic#azure-global-required-fqdn--application-rules) - コンテナリポジトリ等に通信できないと、AKS構築が失敗する。
+  - Vantiq bastionノードがVantiqインストールに必要なソフトウェアのリポジトリへの通信が必要。すべてをホワイトリストすることは困難なので、一律許可しておくのが望ましい。
 
 ### パラメータの設定
 各tfファイルにて、環境に応じてパラメータを設定する。

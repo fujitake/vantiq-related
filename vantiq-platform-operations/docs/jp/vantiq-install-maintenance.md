@@ -131,13 +131,15 @@
      #上記ステップでログアウトした画面からはログインできないため、先のページ `https://<ドメイン名>/` に移動すること。
   	作成したユーザー名とパスワードでログインする。
    1. System admin の Grafana 設定を実施する    
-	    [Add Grafana dashboard for System users] に従い、設定を行う。
+	    [Add Grafana dashboard for System users](https://github.com/Vantiq/k8sdeploy_tools#add_grafana_dashboards)に従い、設定を行う。
 	    `k8sdeploy_tools/vantiqSystem/deploy/vantiq/dashboards` にあるファイルを設定する。
 	     インポートすべきファイルは、適切な Branch を選択する必要がある (vantiq_system_release を指定)
+       **それぞれのData Source設定する際、username: `vantiq_sysuser`, password: `secret4sysuser`とすること。**
       - InfluxDB Internal.json -> internals
       - MongoDB Monitoring Dashboard.json -> kubernetes
       - Organization Activitiy.json -> systemDB、kubernetes、vantiqServer
       - Vantiq Resources.json -> kubernetes、vantiqServer
+
    1. Source: `GenericEmailSender` を修正する  
 	      Search box に ”generic” と入力し、enter を押下する。 検索結果 Window が表示されるので、[system] にチェックをつけ、"GenericEmailSender" をクリックする。 適切な email server の設定を行い、[変更の保存] をクリックする  
    1. ノードのプロパティを更新する  
