@@ -23,7 +23,7 @@ resource "aws_db_instance" "keycloak-postgres" {
   engine                 = "postgres"
   engine_version         = var.postgres_engine_version
   instance_class         = var.db_instance_class
-  name                   = "keycloak"
+  db_name                = "keycloak"
   username               = "keycloak"
   password               = "Passw0rd"
   port                   = var.db_expose_port

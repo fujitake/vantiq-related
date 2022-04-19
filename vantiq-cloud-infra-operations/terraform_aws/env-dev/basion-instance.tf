@@ -14,6 +14,16 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+resource "aws_key_pair" "basion" {
+  key_name_prefix = "${local.cluster_name}-basion-"
+  public_key      = file(local.basion_access_ssh_key_name)
+  tags = {
+    KubernetesCluster = local.cluster_name
+    environment       = local.env_name
+    instance          = "basion"
+  }
+}
+
 ###
 ###  Basion EC2 Instance
 ###
@@ -21,7 +31,7 @@ resource "aws_instance" "basion" {
   ami                    = data.aws_ami.ubuntu.image_id
   vpc_security_group_ids = [aws_security_group.basion-ssh-allow.id]
   subnet_id              = module.vpc.public_subnet_ids[0]
-  key_name               = local.worker_access_ssh_key_name
+  key_name               = aws_key_pair.basion.key_name
   instance_type          = "t2.micro"
 
   tags = {
@@ -37,6 +47,11 @@ resource "aws_instance" "basion" {
 resource "aws_eip" "basion-access-ip" {
   instance = aws_instance.basion.id
   vpc      = true
+}
+
+resource "aws_eip_association" "basion" {
+  allocation_id = aws_eip.basion-access-ip.id
+  instance_id   = aws_instance.basion.id
 }
 
 ###

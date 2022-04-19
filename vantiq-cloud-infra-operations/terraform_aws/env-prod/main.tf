@@ -6,6 +6,7 @@ locals {
   env_name                   = "prod"
   region                     = "<INPUT-YOUR-REGION>"
   worker_access_ssh_key_name = "<INPUT-YOUR-SSH-KEY-NAME>"
+  basion_access_ssh_key_name = "<INPUT-YOUR-SSH-KEY-NAME>"
   keycloak_db_expose_port    = 5432
 }
 
@@ -19,7 +20,13 @@ terraform {
   backend "local" {
     path = "terraform.tfstate"
   }
-  required_version = ">= 0.12.6"
+  required_version = ">= 1.1.8"
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = ">= 4.10.0"
+    }
+  }
 }
 
 # Case by use S3 Bucket for terraform backend
@@ -92,57 +99,57 @@ module "eks" {
   keycloak_db_sg_id       = module.keycloak-db.keycloak_db_sg_id
 
   # The following is custom setting
-  cluster_version = "1.16"
+  cluster_version = "1.21"
 
   managed_node_group_config = {
     "VANTIQ" = {
       ami_type       = "AL2_x86_64"
       instance_types = ["c5.xlarge"] # c5.xlarge x 3
-      disk_size      = 20
+      disk_size      = 40
       scaling_config = {
         desired_size = 3
         max_size     = 6
-        min_size     = 1
+        min_size     = 0
       }
     },
     "MongoDB" = {
       ami_type       = "AL2_x86_64"
       instance_types = ["r5.xlarge"] # r5.xlarge x 3
-      disk_size      = 20
+      disk_size      = 40
       scaling_config = {
         desired_size = 3
         max_size     = 6
-        min_size     = 1
+        min_size     = 0
       }
     },
     "keycloak" = {
       ami_type       = "AL2_x86_64"
-      instance_types = ["t3.medium"] # t3.medium x 3
-      disk_size      = 20
+      instance_types = ["m5.large"] # m5.large x 3
+      disk_size      = 40
       scaling_config = {
         desired_size = 3
         max_size     = 6
-        min_size     = 1
+        min_size     = 0
       }
     },
     "grafana" = {
       ami_type       = "AL2_x86_64"
       instance_types = ["r5.xlarge"] # r5.xlarge x 1
-      disk_size      = 20
+      disk_size      = 40
       scaling_config = {
         desired_size = 1
         max_size     = 3
-        min_size     = 1
+        min_size     = 0
       }
     },
     "mertics" = {
       ami_type       = "AL2_x86_64"
-      instance_types = ["c5.xlarge"] # c5.xlarge x 1
-      disk_size      = 20
+      instance_types = ["m5.xlarge"] # m5.xlarge x 1
+      disk_size      = 40
       scaling_config = {
         desired_size = 1
         max_size     = 6
-        min_size     = 1
+        min_size     = 0
       }
     }
   }
@@ -166,5 +173,5 @@ module "keycloak-db" {
   db_instance_class       = "db.t3.medium"
   db_storage_size         = 100
   db_storage_type         = "gp2"
-  postgres_engine_version = "11.6"
+  postgres_engine_version = "12.7"
 }

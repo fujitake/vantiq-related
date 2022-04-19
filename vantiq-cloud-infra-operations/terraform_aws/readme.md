@@ -54,7 +54,8 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 ## 構築手順
 
 ### terraformのバージョンについて
-各moduleでfor_eachを利用しているためv0.12.6以降であること
+各moduleでfor_eachを利用しているためv0.12.6以降であること  
+確認済みバージョンはv1.1.8
 
 ### クラスタ構築の設定値について
 各ディレクトリ(`env-prod`,`env-dev`,`env-template`)で環境ごとの設定値を設定し、クラスタ構築を行う。  
@@ -93,7 +94,8 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 
 - locals  
   - `region`: 作成するリージョン  
-  - `worker_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定
+  - `worker_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定(Worker Nodeアクセス用)
+  - `basion_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定(踏み台サーバアクセス用)
 
 
 - terraform  
@@ -129,7 +131,7 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 また、マネージドノードグループのWorker Nodeは踏み台サーバからのSSHのみ許可される。
 
 - data `aws_ami` `ubuntu`  
-踏み台サーバに利用するAMIを取得
+踏み台サーバに利用するAMIを取得  
 
 
 - resource `aws_instance` `basion`  
@@ -140,6 +142,13 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 - keycloak DB(PostgreSQL)インスタンスのパスワード変更する。
 - 踏み台サーバへSCPなどを利用し、登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
 
+踏み台サーバにVantiqのインストールに必要なツールをインストールする際のサンプルスクリプトが「basion-setup-sample.sh」  
+実行する場合は踏み台サーバにスクリプトを転送し以下を実行  
+
+```sh
+$ chmod +x ./basion-setup-sample.sh
+$ sudo ./basion-setup-sample.sh
+```
 
 ### 構築/削除の実行
 各environmentのディレクトリに移動し、コマンドを実行する。
