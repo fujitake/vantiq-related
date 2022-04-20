@@ -3,7 +3,7 @@
 This instruction describes the steps for migrating a Vantiq Organization from one Vantiq Cloud to another.
 
 ## Scenario
-Vantiq Cloud (dev.vantiq.co.jp) was used as the Development environment, but the company will build a private Vantiq environment in its own cloud environment and migrate Organization, users, applications under development, etc.  
+One company is currently using Vantiq Cloud (dev.vantiq.co.jp)  as a development environment (As-Is), and is going to migrate the development space to a private Vantiq environment in its own cloud environment (To-Be), hence the need for migrating the Organization, its users, applications under development, etc.  
 
 ## Assumptions
 The following Modules and Resources are described on the assumption that they are not used and are not included in the steps (They should be added to the steps as needed).   
