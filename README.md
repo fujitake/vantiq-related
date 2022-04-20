@@ -46,6 +46,7 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
 - [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
+- [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
 
 
