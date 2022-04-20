@@ -60,4 +60,4 @@ Vantiq Cloud (dev.vantiq.co.jp) を開発環境としていたが、自社のク
   - [ ] Groups (メニュー >> 管理 >> Advanced >> Groups )
   - [ ] Catalog を持っているか (メニュー >> 管理 >> Advanced >> Catalog)
   - [ ] デプロイを使っていないか (メニュー >> デプロイ >> Configurations、Nodes、Node Configurations、Deployments、 Environments、Clusters)
-  - [ ] Org Root Namespace を Home とするユーザーが存在しないか (メニュー >> 管理 >> Users)
+  - [ ] 開発用Namespace を Home とするユーザーが存在しないか (メニュー >> 管理 >> Users)
