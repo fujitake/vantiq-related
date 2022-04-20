@@ -25,7 +25,7 @@ Vantiq Cloud (dev.vantiq.co.jp) を開発環境としていたが、自社のク
 新環境にて以下を行う。
 1. Organization Admin として、Organization Root Namespace への招待を受け、System Admin と Keycloak Admin の権限を取得する。    
 1. Organization Namespace と Keycloak のセキュリティ ポリシーを設定する。
-1. 対象ユーザーに、User (Developer) として Organization Root Namespace への招待を送信する。
+1. 対象ユーザーに、`User (Developer) `として Organization Root Namespace への招待を送信する。
 
 #### チェックリスト
 - [ ] すべての利用ユーザーが洗い出されていて、新しい Namespace に移行しているか。  
