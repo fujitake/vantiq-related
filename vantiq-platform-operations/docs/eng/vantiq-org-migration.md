@@ -1,6 +1,6 @@
 # Vantiq Organization Migration Guide
 
-This instruction describes the steps for migrating a Vantiq Organization between Vantiq Clouds.
+This instruction describes the steps for migrating a Vantiq Organization from one Vantiq Cloud to another.
 
 ## Scenario
 Vantiq Cloud (dev.vantiq.co.jp) was used as the Development environment, but the company will build a private Vantiq environment in its own cloud environment and migrate Organization, users, applications under development, etc.  
