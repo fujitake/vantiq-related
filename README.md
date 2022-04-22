@@ -71,6 +71,7 @@ Vantiqアプリケーション開発チーム向けのVantiqと外部Webサー�
 - [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
+- [Azure Cosmos DB](./vantiq-external-services-integration/docs/jp/vantiq-azure-CosmosDB.md)
 - [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
 - [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
 - [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)

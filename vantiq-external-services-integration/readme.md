@@ -32,6 +32,7 @@
 
 
 #### VantiqとAzureサービスの接続
+- [Cosmos DB](docs/jp/vantiq-azure-CosmosDB.md)
 - [EventHubs](docs/jp/vantiq-azure-EventHubs.md)
 - [デバイスからVantiqまで](../vantiq-devices-integration)
 
