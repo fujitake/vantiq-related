@@ -182,7 +182,7 @@ Procedureを実行すると以下のように作成したDocumentの一覧を取
 Vantiq未対応のリクエストのContent-Typeヘッダーが使えない。  
 Query DocumentsにはContent-Typeに「application/query+json」を指定しなければいけない。  
 bodyに以下のようなSQLクエリを指定してdocumentを取得できるが、Content-Typeヘッダーに「application/query+json」を指定する必要がある。  
-Vantiqでは未対応(指定してもapplication/jsonに置き換えられてしまう)のためエラーで取得できない。  
+Vantiqは`Content-Type: application/query+json`に対応していない。(2022/4/22現在）  
 
 ```json
 // サンプルのbody
@@ -198,78 +198,3 @@ Vantiqでは未対応(指定してもapplication/jsonに置き換えられてし
 ```
 
 参考: [Query Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/query-documents)
-
-
-以下のようにPostmanEchoを利用してリクエストを確認すると、application/query+jsonがapplication/jsonに置き換えられてしまっていることが確認できる。
-
-- 呼び出しProcedure
-```
-PROCEDURE queryDocument()
-
-var REQUEST_METHOD = "POST"
-var RESOURCE_TYPE = "docs"
-var RESOURCE_ID = "dbs/Vantiq/colls/sensors"
-var MASTER_KEY = "<INPUT-YOUR-COSMOSDB-PRIMARY-KEY>"
-
-var now = format("{0, date,EEE',' dd MMM yyyy HH:mm:ss 'GMT'}",now())
-
-var sig = getAuthorizationTokenUsingMasterKey(REQUEST_METHOD, RESOURCE_TYPE, RESOURCE_ID, now, MASTER_KEY)
-var token = "type=master&ver=1.0&sig=" + sig
-
-var body = {
-    "query": "SELECT * FROM Items c WHERE c.id = \"1\"",
-    "parameters": []
-}
-
-var header = {
-    "Accept": "application/json",
-    "Content-Type": "application/query+json",
-    "Authorization": token,
-    "x-ms-date": now,
-    "x-ms-version": "2018-12-31",
-    "x-ms-documentdb-isquery": "true" ,
-    "x-ms-documentdb-query-enablecrosspartition": "true"
-}
-
-var requestPath = "/" + RESOURCE_ID + "/docs"
-
-SELECT * FROM SOURCE PostmanEcho WITH method = REQUEST_METHOD, headers = header, body = body
-
-```
-
-- PostmanEchoからの返り値
-```json
-[
-   {
-      "args": {},
-      "data": {
-         "query": "SELECT * FROM Items c WHERE c.id = \"1\"",
-         "parameters": []
-      },
-      "files": {},
-      "form": {},
-      "headers": {
-         "x-forwarded-proto": "https",
-         "x-forwarded-port": "443",
-         "host": "postman-echo.com",
-         "x-amzn-trace-id": "Root=1-62612939-6f641ca5370035f613e4b2a1",
-         "content-length": "68",
-         "user-agent": "Vantiq/1.34.0-SNAPSHOT",
-         "accept": "application/json",
-         "authorization": "type=master&ver=1.0&sig=g+TKhF/oxSrH+msGZNYN2HQbCEELQo+muvDOR5CLsAo=",
-         "x-ms-date": "Thu, 21 Apr 2022 09:51:53 GMT",
-         "x-ms-version": "2018-12-31",
-         "x-ms-documentdb-isquery": "true",
-         "x-ms-documentdb-query-enablecrosspartition": "true",
-         "content-type": "application/json"
-      },
-      "json": {
-         "query": "SELECT * FROM Items c WHERE c.id = \"1\"",
-         "parameters": []
-      },
-      "url": "https://postman-echo.com/post"
-   }
-]
-
-```
-
