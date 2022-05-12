@@ -20,6 +20,7 @@
 - [Amazon MQ](docs/jp/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
+- [AWS IoT Core](docs/jp/vantiq-aws-iotcore.md)
 - [デバイスからVantiqまで](../vantiq-devices-integration)
 
 
