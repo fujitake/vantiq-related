@@ -21,7 +21,7 @@
 6. [外部サービスとの連携 (逆ジオコーディング) を追加する](#06_external_service)
 
 ### 1. Namespace にプロジェクトをインポートする<a id="01_project_import"></a>
-今回ハンズオンで使用するプロジェクトをダウンロードします。([リンク](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/hands-on/suspicious_person_detection.zip))
+今回ハンズオンで使用するプロジェクトをダウンロードします。（リンクはインストラクターが提供する）
 
 メニュー >> Projects >> インポート、を開きます。
 
