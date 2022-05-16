@@ -157,7 +157,7 @@ module "eks" {
 
 
 
-## Information about upgrading Vantiq
+# Information about upgrading Vantiq
 This section describes the points to keep in mind from the infrastructure administrator's point of view. (For the actual operation procedure, please refer to ["Vantiq version upgrade"](../../../vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md#minor_version_upgrade). &emsp;Sorry, Japanese only)  
 
 #### Vantiq Minor Upgrade
