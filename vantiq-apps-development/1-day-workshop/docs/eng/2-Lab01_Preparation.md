@@ -76,9 +76,9 @@ Use the Data Generator to simulate the situation.
 
 6. Type the Topic name for MQTT as the followings.  
 
-    RPMSSensor Topic： _/***your name***/pump/RPMS_
+    RPMSSensor Topic： "_/***your name***/pump/RPMS_"
 
-    TempSensor Topic： _/***your name***/pump/Temp_
+    TempSensor Topic： "_/***your name***/pump/Temp_"
 
     ＊ In the _your name_ field, type your name **to make the topic name unique**. Also, make sure that the Topic name should **NOT** have enclosing extra spaces nor double quotations.  
 
