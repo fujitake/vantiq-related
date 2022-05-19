@@ -203,6 +203,110 @@ Confirm that the insertion has been made.
 ![picture20](../../imgs/vantiq-aws-dynamodb/picture20.png)
 
 
+### Others
+
+#### For configuring TTL
+In the case of DynamoDB, records cannot be deleted in bulk. So it is necessary toconfigure the TTL to have unnecessary records deleted periodically.
+The following code example calculates the unix epoch time 30 days after the current date and adds it as a `ttl` column. It is necessary to configure the TTL accordingly on the DynamoDB side.
+
+```vail
+var ttl = now().plusMillis(30 days)
+
+var msg = {
+  "TableName": "pump-status",
+  "Item": { 
+        "id": {
+          "S": toString(status.PumpID)
+        },
+        "timestamp": {
+          "S": status.ReceivedAt
+        },
+        "temp" : {
+          "N": status.Temp.toString()    // DynamoDB API only accepts String Literal
+        },
+        "rpms" : {
+          "N": status.RPMS.toString()    // DynamoDB API only accepts String Literal
+        },
+        "ttl" : {
+            "N": date(ttl, "date", "epochMilliseconds").toString() // for  periodically deleting records
+        }
+    }
+}
+```
+#### Sample code for generic Procedure
+The following is the sample code for Procedure. It can be used for general purpose by passing the table name `tableName`, key column `keyCol`, timestamp column `tsCol`, JSON object `obj`, and TTL time (in milliseconds) `ttl`.
+It is assumed that the table is created on the DynamoDB side with `id` = Partition key, `timestamp` = Sort key.
+
+```vail
+PROCEDURE DynamoDB.insert(tableName String, keyCol String, tsCol String, obj Object, ttl Integer)
+ 
+// include required columns
+var record = {
+  "TableName": tableName,
+  "Item": { 
+        "id": {
+          "S": toString(obj[keyCol])
+        },
+        "timestamp": {
+          "S": toString(obj[tsCol])
+        },
+        "ttl" : {
+          "N": toString(date(now().plusMillis(ttl), "date", "epochMilliseconds"))    // for  periodically deleting records
+        }
+    }
+}
+
+// include other columns
+deleteKey(obj, keyCol)
+deleteKey(obj, tsCol)
+
+// populate items from obj
+record.Item = DynamoDB.convertToItem(obj, record.Item)
+
+PUBLISH { body: record } to SOURCE DynamoDBSource USING { method: "POST"}
+```
+```vail
+PROCEDURE DynamoDB.convertToItem(obj Object, item Object)
+
+for prop in obj {
+    if typeOf(prop.value) == "Integer" or typeOf(prop.value) == "Real" or typeOf(prop.value) == "Decimal"{
+        item[prop.key] = {"N": toString(prop.value) }
+    } 
+    else if typeOf(prop.value) == "String" or typeOf(prop.value) == "DateTime"{
+        item[prop.key] = {"S": toString(prop.value) }
+    } 
+    else if typeOf(prop.value) == "Boolean" {
+        item[prop.key] = {"BOOL": toString(prop.value) }
+    } 
+    else if typeOf(prop.value) == "GeoJSON" or typeOf(prop.value) == "Object"{
+        item[prop.key] = {"M": DynamoDB.convertToItem(prop.value, {} ) }
+    } 
+    else if typeOf(prop.value) == "List" {
+               
+        if typeOf(prop.value[0]) == "Integer" or typeOf(prop.value[0]) == "Real" 
+          or typeOf(prop.value[0]) == "Decimal"{            
+            var ns = []
+            for n in prop.value {
+                push(ns, toString(n)) 
+            }
+            item[prop.key] = {"NS": ns}
+        } 
+        else if typeOf(prop.value[0]) == "String"   {
+            item[prop.key] = {"SS": prop.value }
+        } 
+        else if typeOf(prop.value[0]) == "Object" or typeOf(prop.value[0]) == "List" 
+            or typeOf(prop.value[0]) == "GeoJSON" or typeOf(prop.value[0]) == "DateTime" {
+            var ss = []
+            for s in prop.value {
+                push(ss, stringify(s)) 
+            }
+            item[prop.key] = {"SS": ss}
+        } 
+    }
+}
+
+return item
+```
  
 ## Reference
 •	https://blog.yuu26.com/api-gateway-dynamodb-json/     _(Japanese)_
