@@ -54,7 +54,7 @@ Note: Since thsis is a single server option, further consideration is needed for
 ## Building procedure
 
 ### Terraform version
-Each module uses _for_each_, so it must be v0.12.6 or later.
+Each module uses _for_each_, so it must be v0.12.6 or later.  
 Verified Version: v1.1.8
 
 ### Configuration values for cluster building
