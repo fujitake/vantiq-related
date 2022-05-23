@@ -94,7 +94,7 @@ This calls three modules to create VPC, EKS, and RDS resources.
 
 - locals  
   - `region`: Region to create  
-  - `worker_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for worker node access).
+  - `worker_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for accessing the worker node).
   - `basion_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for Bastion server access).
 
 
