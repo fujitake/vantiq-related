@@ -206,7 +206,7 @@ Confirm that the insertion has been made.
 ### Others
 
 #### For configuring TTL
-In the case of DynamoDB, records cannot be deleted in bulk. So it is necessary toconfigure the TTL to have unnecessary records deleted periodically.
+In the case of DynamoDB, records cannot be deleted in bulk.  Set the TTL to have unnecessary records deleted periodically.
 The following code example calculates the unix epoch time 30 days after the current date and adds it as a `ttl` column. It is necessary to configure the TTL accordingly on the DynamoDB side.
 
 ```vail
