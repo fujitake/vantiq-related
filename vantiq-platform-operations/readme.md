@@ -1,6 +1,7 @@
 # Vantiqプラットフォーム関連
 Vantiq Platformの構築や運用に関するガイドや手順です。
 
+- [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
 - [Vantiq Cloud 構築および保守 ](./docs/jp/vantiq-install-maintenance.md)
 - [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
 - [Vantiq Cloud 構築および保守におけるトラブルシューティング](./docs/jp/vantiq-install-maintenance-troubleshooting.md)
