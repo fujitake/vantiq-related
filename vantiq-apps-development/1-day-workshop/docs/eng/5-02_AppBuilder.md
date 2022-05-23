@@ -277,7 +277,7 @@ Output of `Transformation`
 ## SplitByGroup
 
 * Split the stream by groups.
-* Used prior to activities that need to be handled by a specific group (not by event), such as `Dwell`, `ComputeStatistics`.
+* Used prior to activities that need to be handled by a specific group (not by event), such as `Dwell`, `ComputeStatistics`, `AccumulateState`.
 
 <img src="../../imgs/02_AppBuilder/slide17.png">
 

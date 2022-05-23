@@ -115,3 +115,4 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
 - [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
+- [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)

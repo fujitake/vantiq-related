@@ -7,7 +7,7 @@ Check if the infrastructure resource is shared or not. When it is shared, the re
 - [ ] Is not the Kubernetes cluster shared with other systems?  
 - [ ] Is not the keycloak server shared with other systems?  
 - [ ] Is not the Postgres server shared with other systems?   
-- [ ] Is not the Bastion server for working shared with other systems?  
+- [ ] Is not the Bastion host for working shared with other systems?  
 - [ ] Are not multiple Vantiq instances deployed in the same Kubernetes cluster (are they sharing a shared resource)?
 - [ ] Are VPC/VNET shared?  
 - [ ] Request the signature of confirmation from the customer.
@@ -46,7 +46,7 @@ Use k8sdeploy_tools, kubectl, AWS/Azure CLI, and Web console for the work. The w
 If all of the above are proprietary resources, it is acceptable to execute `terraform destroy` with the terraform definition used at build time. In anticipation of the work to be done during tear down, the followings are encouraged. In Azure, appropriate operation of resource groups, and in AWS, appropriate operation of grouping by tags.  
 
 - Delete or request the deletion of DNS records.  
-- Delete the Bastion server for working (in case it is not shared).  
+- Delete the Bastion host for working (in case it is not shared).  
 - Update the status of the cluster.  
   - SalesForce Asset Status  
   - k8sdeploy_cluster(_jp)

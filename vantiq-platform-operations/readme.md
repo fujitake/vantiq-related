@@ -13,6 +13,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [Vantiq Cloudwatch Logs](./docs/jp/vantiq-cloudwatch.md)
 - [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
+- [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
 
 
 ## Vantiqプラットフォームに関する保守項目一覧

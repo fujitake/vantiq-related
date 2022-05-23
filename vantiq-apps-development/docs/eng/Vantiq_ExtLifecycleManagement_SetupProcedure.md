@@ -302,7 +302,9 @@ Click the the Deploy button.
 
 ![DeployButton](../../imgs/lcm/image5.png)
 
-　Fill in the required fields and click the OK button.
+Fill in the required fields.
+In case you want to pull the image from a private repository, enter `quay-secret`, the docker-registry secret name which you have created in the previous step, into the [Image Pull Secret] field.
+Click the [OK] button.
 
 ![InputItems](../../imgs/lcm/image6.png)
 

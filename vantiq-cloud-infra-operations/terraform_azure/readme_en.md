@@ -118,7 +118,7 @@ The important configuration values are mainly the followings.
   ```
 
 - Create a key pair for instance access
-  - For Bastion node access
+  - For Bastion host access
   - For AKS worker node access
 
 
@@ -128,8 +128,12 @@ The important configuration values are mainly the followings.
   ```
   - Since we will be using Bs family, ESv3 family, and FSv2 family, increase from the default value of 10. (30~50 is enough)
 
+
 - Secure VNET IP range. The range of subnets should be greater than /22.  In case of Production configuration, the cluster will have to occupy 30 IPs per node so 11 nodes cannot be accommodated in /24.
 
+- Ensure that the build environment can reach the Internet in order to download the necessary files for installation. Especially if you are building one in a closed network with the firewall.
+  - [Azure Global required FQDN / application rules](https://docs.microsoft.com/en-us/azure/aks/limit-egress-traffic#azure-global-required-fqdn--application-rules) - AKS construction will fail if it cannot reach the container repository.
+  - The Vantiq Bastion host should be able to reach the software repositories required for the Vantiq installation. As it is difficult to whitelist all target repositories, it is recommended to allow all outbound connection.
 
 ### Setting parameters
 In each _tf_ file, set the parameters according to the environment.
@@ -157,11 +161,11 @@ Call and create five modules, namely VPC, AKS, RDB, Storage, OpNode resources.
 - module `rdb`  
 
 - module `opnode`  
-  - `opnode_host_name`: Host name of the Bastion node
-  - `opnode_user_name`: User name of the Bastion node
+  - `opnode_host_name`: Host name of the Bastion host
+  - `opnode_user_name`: User name of the Bastion host
   - `ssh_access_enabled`: Whether to use ssh key login or not
-  - `ssh_public_key` : Path of the Public key to connect to the Bastion node
-  - `public_ip_enabled`: Whether to give the Public IP to the Bastion node
+  - `ssh_public_key` : Path of the Public key to connect to the Bastion host
+  - `public_ip_enabled`: Whether to give the Public IP to the Bastion host
   - `ssh_private_key_aks_node`: Path to the private key for AKS worker node access
 
 - module `aks`
@@ -169,7 +173,7 @@ Call and create five modules, namely VPC, AKS, RDB, Storage, OpNode resources.
   ```sh
   az aks get-versions --location japaneast
   ```
-  - `private_cluster_enabled` - Whether to set AKS service endpoint as Private or not.**Note: Once built, this setting cannot be changed.**
+  - `private_cluster_enabled` - Whether to set AKS service endpoint as Private or not. **Note: Once built, this setting cannot be changed.**
   - `service_cidr` - cidr to reserve for Service
   - `admin_username` - User name of the AKS worker node
   - `ssh_key` - Path of the Public key for AKS worker node access
@@ -216,6 +220,15 @@ Go to the directory of each environment and execute the command.
 4. Recover if necessary
   - If a task is stuck for more than 10 minutes, stop it by pressing `Ctrl + C`, and perform step 3 again.
   - If an error occurs (inconsistency between the state of the _tfstate_ file and the actual state of the resource), delete the module that corresponds to the error from the azure portal, and then perform step 3 again.
+
+ - For new subscription work, the following error may occur.
+  
+  ```
+  Error: creating Cluster: (Managed Cluster Name "<k8s cluster name>" / Resource Group "<resource group name>"): containerservice.ManagedClustersClient#CreateOrUpdate: Failure sending request: StatusCode=409 -- Original Error: Code="MissingSubscriptionRegistration" Message="The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions." Details=[{"code":"MissingSubscriptionRegistration","message":"The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions.","target":"Microsoft.ContainerService"}]
+  ```
+
+  The cause is that the resource provider is not registered for the subscription. Refer to the following link to register a `Microsoft.ContainerService` provider.
+  https://docs.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-cli
 
 
 5. Get kubeconfig
