@@ -103,6 +103,7 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
 ### [Vantiqプラットフォームインストール関連](./vantiq-platform-operations)
 Vantiqプラットフォーム管理チーム向けのクラウドインフラ上へのVantiq Platformのインストールや運用に関するガイドや手順です。
 
+- [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)
 - [Vantiq Cloud 構築および保守 ](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md)
 - [deploy.yamlのカスタマイズ構成](./vantiq-platform-operations/docs/jp/deploy_yaml_config.md)
 - [Vantiq Cloud 構築および保守におけるトラブルシューティング](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance-troubleshooting.md)
