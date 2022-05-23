@@ -133,7 +133,7 @@ The important configuration values are mainly the followings.
 
 - Ensure that the build environment can reach the Internet in order to download the necessary files for installation. Especially if you are building one in a closed network with the firewall.
   - [Azure Global required FQDN / application rules](https://docs.microsoft.com/en-us/azure/aks/limit-egress-traffic#azure-global-required-fqdn--application-rules) - AKS construction will fail if it cannot reach the container repository.
-  - The Vantiq Bastion node should be able to communicate with the software repositories required for the Vantiq installation. Since it is difficult to register all of them in the whitelist, it is preferable to allow them uniformly.
+  - The Vantiq Bastion node should be able to reach the software repositories required for the Vantiq installation. As it is difficult to whitelist all target repositories, it is recommended to allow all outbound connection.
 
 ### Setting parameters
 In each _tf_ file, set the parameters according to the environment.
