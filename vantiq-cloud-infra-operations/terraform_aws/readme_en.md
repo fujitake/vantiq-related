@@ -142,7 +142,7 @@ Obtain an AMI to be used on the Bastion host.
 - Change the password of the keycloak DB (PostgreSQL) instance.
 - Transfer the registered SSH key to the Bastion host using SCP, etc., place it in an appropriate directory, and set the permissions.
 
-The sample script "basion-setup-sample.sh" is used to install the tools that are necessary to install Vantiq on a Bastion server.
+The sample script "basion-setup-sample.sh" is used to install the tools that are necessary to install Vantiq on a Bastion host.
 To run the script, transfer it to the Bastion server and execute the followings. 
 
 ```sh
