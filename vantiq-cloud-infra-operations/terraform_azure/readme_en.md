@@ -118,7 +118,7 @@ The important configuration values are mainly the followings.
   ```
 
 - Create a key pair for instance access
-  - For Bastion node access
+  - For Bastion host access
   - For AKS worker node access
 
 
@@ -133,7 +133,7 @@ The important configuration values are mainly the followings.
 
 - Ensure that the build environment can reach the Internet in order to download the necessary files for installation. Especially if you are building one in a closed network with the firewall.
   - [Azure Global required FQDN / application rules](https://docs.microsoft.com/en-us/azure/aks/limit-egress-traffic#azure-global-required-fqdn--application-rules) - AKS construction will fail if it cannot reach the container repository.
-  - The Vantiq Bastion node should be able to reach the software repositories required for the Vantiq installation. As it is difficult to whitelist all target repositories, it is recommended to allow all outbound connection.
+  - The Vantiq Bastion host should be able to reach the software repositories required for the Vantiq installation. As it is difficult to whitelist all target repositories, it is recommended to allow all outbound connection.
 
 ### Setting parameters
 In each _tf_ file, set the parameters according to the environment.
@@ -161,11 +161,11 @@ Call and create five modules, namely VPC, AKS, RDB, Storage, OpNode resources.
 - module `rdb`  
 
 - module `opnode`  
-  - `opnode_host_name`: Host name of the Bastion node
-  - `opnode_user_name`: User name of the Bastion node
+  - `opnode_host_name`: Host name of the Bastion host
+  - `opnode_user_name`: User name of the Bastion host
   - `ssh_access_enabled`: Whether to use ssh key login or not
-  - `ssh_public_key` : Path of the Public key to connect to the Bastion node
-  - `public_ip_enabled`: Whether to give the Public IP to the Bastion node
+  - `ssh_public_key` : Path of the Public key to connect to the Bastion host
+  - `public_ip_enabled`: Whether to give the Public IP to the Bastion host
   - `ssh_private_key_aks_node`: Path to the private key for AKS worker node access
 
 - module `aks`
