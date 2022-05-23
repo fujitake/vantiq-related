@@ -19,7 +19,7 @@ Quay.io に新規アカウントを作成する手順について記述します
 
 ### 3. RED HAT の画面において、[Sign in with Red Hat] を選択します
 
-![SignInRedHat](../../imgs/quay.io_account/SelectSignIn.jpg)
+<img src ="../../imgs/quay.io_account/SelectSignIn.jpg" width=50%>
 
 ### 4. [Register for a Red Hat account] を選択します
 
