@@ -131,7 +131,7 @@ The important configuration values are mainly the followings.
 
 - Secure VNET IP range. The range of subnets should be greater than /22.  In case of Production configuration, the cluster will have to occupy 30 IPs per node so 11 nodes cannot be accommodated in /24.
 
-- Ensure that the build environment can communicate to the Internet in order to download the information necessary for installation. Especially when a closed network is configured with a firewall.
+- Ensure that the build environment can reach the Internet in order to download the necessary files for installation. Especially if you are building one in a closed network with the firewall.
   - [Azure Global required FQDN / application rules](https://docs.microsoft.com/en-us/azure/aks/limit-egress-traffic#azure-global-required-fqdn--application-rules) - If communication with containers, repositories, etc. is not possible, AKS construction will fail.
   - The Vantiq Bastion node should be able to communicate with the software repositories required for the Vantiq installation. Since it is difficult to register all of them in the whitelist, it is preferable to allow them uniformly.
 
