@@ -239,7 +239,20 @@ Reference: https://stackoverflow.com/questions/53908848/kubernetes-pods-nodes-is
 AKS 1.19からコンテナランタイムが`dockerd`から`containerd`に切り替わったことにより、取得できるメトリクスが変わっている。それに合わせgrafana側のクエリを変更しなければいけない。
 `Vantiq Resource`と`MongoDB Monitoring Dashboard`が影響を受ける。
 
-##### Vantiq Resources - CPU utilization
+##### Vantiq Resources
+###### "Pod" Variable
+Dashboard settings > Variables  
+
+Old
+```sh
+show tag values with key = "io.kubernetes.pod.name" where component = 'vantiq-server' AND release =~ /^vantiq-$installation$/
+```
+To-Be
+```sh
+show tag values from "kubernetes_pod_container" with key="pod_name" where pod_name =~ /vantiq-/
+```
+
+###### CPU utilization
 Old
 ```sh:
 SELECT mean("usage_percent") AS "cpu usage" FROM "docker_container_cpu" WHERE ("io.kubernetes.pod.name" =~ /^$pod$/ AND "io.kubernetes.pod.namespace" =~ /^$installation$/ AND component = '' and container_name =~ /^k8s_vantiq_vantiq/) AND $timeFilter GROUP BY time($__interval), "io.kubernetes.pod.name" fill(none)
@@ -249,7 +262,34 @@ To-Be
 SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE (pod_name =~ /^$pod$/ AND namespace =~ /^$installation$/ and container_name =~ /^vantiq/) AND $timeFilter GROUP BY pod_name, time($__interval) fill(none)
 ```
 
+パネルの凡例の編集も行う。`Alias by`を以下のように編集する。  
+Old
+```sh
+[[tag_io.kubernetes.pod.name]]: $col
+```
+To-Be
+```sh
+$tag_pod_name: $col
+```
+
 ##### MongoDB Monitoring Dashboard
+###### "installation" and "Pod" Variable
+Old
+```sh
+# installation
+show tag values with key = "installation"
+# Pod
+show tag values with key = "io.kubernetes.pod.name" where "io.kubernetes.pod.name" =~ /^mongodb/ AND "io.kubernetes.pod.namespace" = '$installation'
+```
+To-Be
+```sh
+# installation
+show tag values with key = namespace
+# Pod
+show tag values from "kubernetes_pod_container" with key="pod_name" where pod_name =~ /mongodb-/
+```
+
+###### CPU utilization
 Old
 ```sh:
 SELECT mean("usage_percent") FROM "docker_container_cpu" WHERE ("io.kubernetes.pod.name" =~ /^$pod$/ AND "io.kubernetes.container.name" = 'mongodb' AND "io.kubernetes.pod.namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)
