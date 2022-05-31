@@ -1,5 +1,6 @@
 # Vantiqプラットフォーム関連
 Vantiq Platformの構築や運用に関するガイドや手順です。
+![](imgs/section-top/vantiq-intall-flow.png)
 
 - [Vantiq Cloud 構築および保守 ](./docs/jp/vantiq-install-maintenance.md)
 - [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
@@ -10,7 +11,6 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [mongodb 関連](./docs/jp/mongodb.md)
 - [grafana 関連](./docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./docs/jp/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./docs/jp/vantiq-cloudwatch.md)
 - [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
 - [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
@@ -30,12 +30,13 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 # Vantiq Platform related
 Guides and procedures for building and operating the Vantiq Platform.
 
+![](imgs/section-top/vantiq-intall-flow.png)
+
 - [Trouble Shooting Guide for Vantiq Cloud operations](./docs/eng/vantiq_k8s_troubleshooting.md)
 - [Network Configuration Debug Tool](.//docs/eng/alpine-f.md)
 - [Servers Time Synchronization Check Tool](./docs/eng/timestamp_ds.md)
 - [MongoDB related](./docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./docs/eng/vantiq-cloudwatch.md)  
 - [Migration of Vantiq Organization](./docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./docs/eng/vantiq-teardown.md)
 

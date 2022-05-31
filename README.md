@@ -36,6 +36,7 @@ Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes cluste
 - [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
 - [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
 - [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
+- [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/eng/vantiq-cloudwatch.md)  
 
 
 ### [Vantiq Platform Installation related](./vantiq-platform-operations)
@@ -45,7 +46,6 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 - [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
 - [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
 
@@ -97,6 +97,7 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
 - [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)
 - [閉域網構成における考慮事項 (AWS編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-aws.md)
 - [閉域網構成における考慮事項 (Azure編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-azure.md)
+- [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/jp/vantiq-cloudwatch.md)
 
 
 
@@ -112,7 +113,6 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [mongodb 関連](./vantiq-platform-operations/docs/jp/mongodb.md)
 - [grafana 関連](./vantiq-platform-operations/docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
 - [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
 - [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)
