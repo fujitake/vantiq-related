@@ -240,6 +240,15 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 ```sh
 terraform output -json | jq '"rdb_postgres_admin_password:" + .rdb_postgres_admin_password.value'
 ```
+### Vantiqプラットフォームインストール作業への引き継ぎ
+以下の設定を実施、および情報を後続の作業に引き継ぐ。
+
+- AKSクラスタ名
+- [AKSクラスタへのアクセス権の設定](#)（terraformの実行したazユーザー以外がVantiqプラットフォーム インストール作業を行う場合のみ）
+- Azure Storage Serviceへのエンドポイントおよびコンテナ名
+- keycloak DBのエンドポイント、および資格情報
+- 踏み台サーバのIPアドレス
+- 踏み台サーバへアクセスするためのユーザー名、ssh秘密鍵
 
 ## Reference
 - [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)

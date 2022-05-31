@@ -138,17 +138,6 @@ Note: シングル構成のため、RDSの構成は考慮が必要
   - `instance_type`: 踏み台サーバのインスタンスタイプ
 
 
-### 作成後作業
-- keycloak DB(PostgreSQL)インスタンスのパスワード変更する。
-- 踏み台サーバへSCPなどを利用し、登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
-
-踏み台サーバにVantiqのインストールに必要なツールをインストールする際のサンプルスクリプトが「basion-setup-sample.sh」  
-実行する場合は踏み台サーバにスクリプトを転送し以下を実行  
-
-```sh
-$ chmod +x ./basion-setup-sample.sh
-$ sudo ./basion-setup-sample.sh
-```
 
 ### 構築/削除の実行
 各environmentのディレクトリに移動し、コマンドを実行する。
@@ -175,15 +164,48 @@ $ terraform apply \
 $ terraform destroy \
   -var 'access_key=<YOUR-AWS-ACCESS_KEY>' \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
+
 ```
-## Notes
+
+### 構築後作業
+- keycloak DB(PostgreSQL)インスタンスのパスワード変更する。
+- 踏み台サーバへSCPなどを利用し、登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
+
+踏み台サーバにVantiqのインストールに必要なツールをインストールする際のサンプルスクリプトが「basion-setup-sample.sh」  
+実行する場合は踏み台サーバにスクリプトを転送し以下を実行  
+
+```sh
+$ chmod +x ./basion-setup-sample.sh
+$ sudo ./basion-setup-sample.sh
+```
+
+### Vantiqプラットフォームインストール作業への引き継ぎ
+以下の設定を実施、および情報を後続の作業に引き継ぐ。
+
+- EKSクラスタ名
+- [EKSクラスタへのアクセス権の設定](../docs/jp/aws_op_priviliges.md#EKSへのアクセス権の設定)（terraformの実行したIAMユーザー以外がVantiqプラットフォーム インストール作業を行う場合のみ）
+- S3 Storageのエンドポイント
+- keycloak DBのエンドポイント、および資格情報
+- 踏み台サーバのIPアドレス
+- 踏み台サーバへアクセスするためのユーザー名、ssh秘密鍵
+
+```bash
+# 構成情報の出力
+$ terraform output
+```
 - Terraform 0.15以降を使用するう場合、password項目をoutputするためには明示的にsensitive属性が必要です。
-```
+```tf
 "keycloak-db-admin-password" {
 ...
   sensitive = true
 }
 ```
+
+```bash
+# 構成情報のうち、sensitiveな情報の出力
+terraform output -json | jq '"keycloak-db-admin-password:" + .keycloak-db-admin-password.value'
+```
+
 
 ## Reference
 - [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)

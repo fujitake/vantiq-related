@@ -8,6 +8,7 @@
 
 # 目次
 
+  - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)
   - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
   - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
   - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい](#reuse_old_pv)
@@ -17,6 +18,27 @@
   - [Podが再起動を繰り返し、起動できない](#pod-cannot-start)  
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
   - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
+
+
+# Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
+
+1. vantiq サービスを scale=0 にする
+```
+kubectl scale sts -n xxxx vantiq --replicas=0
+```
+2. mongorestore を実行する
+```
+kubectl create job mongorestore --from=cronjob/mongorestore -n xxx
+```
+3. userdbrestore を実行する（userdb を使用する場合)
+```
+kubectl create job userdbrestore --from=cronjob/userdbrestore -n xxx
+```
+4. vantiq サービスのスケールを戻す
+```
+kubectl scale sts -n xxx vantiq --replicas=3
+```
+
 
 # Grafana Data Source を追加する時、エラーとなる<a id="error_when_adding_grafana_data_source"></a>
 InfluxDB を追加する時、URLを `http://influxdb-influxdb:8086` としたが、エラーとなる。  
