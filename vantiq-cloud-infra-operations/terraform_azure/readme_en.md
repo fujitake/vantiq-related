@@ -245,7 +245,7 @@ Perform the following setup and hand over the information to subsequent tasks.
 
 - Name of the AKS Cluster
 - [Setting up the Access rightd to AKS Cluster](#)  
-(Only when the Vantiq Platform Installation is performed by other than the az user who ran terraform.)
+(Required when the Vantiq Platform Installation tasks are to be performed by an az user other than the one who has executed terraform.)
 - Endpoint and Container name of the Azure Storage Service  
 - Endpoint and credential of the keycloak DB
 - IP address of the Bastion host IP
