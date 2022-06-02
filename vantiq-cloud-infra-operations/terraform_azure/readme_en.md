@@ -1,7 +1,7 @@
 [Japanese Version here](readme.md)
 
 # VANTIQ on AKS with Terraform
-The configuration of Azure Infrastructure to configure Vantiq Public facing Rrivate Cloud.
+The configuration of Azure Infrastructure to configure Vantiq Public facing Private Cloud.
 
 ## Configuration
 
@@ -222,7 +222,7 @@ Go to the directory of each environment and execute the command.
   - If an error occurs (inconsistency between the state of the _tfstate_ file and the actual state of the resource), delete the module that corresponds to the error from the azure portal, and then perform step 3 again.
 
  - For new subscription work, the following error may occur.
-  
+
   ```
   Error: creating Cluster: (Managed Cluster Name "<k8s cluster name>" / Resource Group "<resource group name>"): containerservice.ManagedClustersClient#CreateOrUpdate: Failure sending request: StatusCode=409 -- Original Error: Code="MissingSubscriptionRegistration" Message="The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions." Details=[{"code":"MissingSubscriptionRegistration","message":"The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions.","target":"Microsoft.ContainerService"}]
   ```
@@ -240,6 +240,17 @@ Go to the directory of each environment and execute the command.
   ```sh
   terraform output -json | jq '"rdb_postgres_admin_password:" + .rdb_postgres_admin_password.value'
   ```
+### Transfer to Vantiq Platform Installation tasks
+Perform the following setup and transfer the information to subsequent tasks.
+
+- Name of the AKS Cluster
+- [Setting up the Access rightd to AKS Cluster](#)  
+(Only when the Vantiq Platform Installation is performed by other than the az user who ran terraform.)
+- Endpoint and Container name of the Azure Storage Service  
+- Endpoint and credential of the keycloak DB
+- IP address of the Bastion host IP
+- User name and SSH private key for accessing the Bastion host
+
 
 ## Reference
   - [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)
