@@ -184,7 +184,7 @@ Perform the following setup and hand over the information to subsequent tasks.
 
 - Name of the EKS Cluster   
 - [Setting up the Access rights to EKS](../docs/eng/aws_op_priviliges.md#setting-up-the-access-rights-to-eks)  
-(Only when the Vantiq Platform Installation is performed by other than the IAM user who ran terraform.)
+(Required when the Vantiq Platform Installation tasks are to be performed by an IAM user other than the one who has executed terraform.)
 - Endpoint of the S3 Storage
 - Endpoint and credential of the keycloak DB
 - IP address of the Bastion host IP
