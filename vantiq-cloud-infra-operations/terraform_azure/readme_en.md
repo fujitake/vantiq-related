@@ -248,7 +248,7 @@ Perform the following setup and hand over the information to subsequent tasks.
 (Required when the Vantiq Platform Installation tasks are to be performed by an az user other than the one who has executed terraform.)
 - Endpoint and Container name of the Azure Storage Service  
 - Endpoint and credential of the keycloak DB
-- IP address of the Bastion host IP
+- IP address of the Bastion host
 - User name and SSH private key for accessing the Bastion host
 
 
