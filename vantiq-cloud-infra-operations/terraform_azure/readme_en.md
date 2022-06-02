@@ -240,7 +240,7 @@ Go to the directory of each environment and execute the command.
   ```sh
   terraform output -json | jq '"rdb_postgres_admin_password:" + .rdb_postgres_admin_password.value'
   ```
-### Transfer to Vantiq Platform Installation tasks
+### Handover to Vantiq Platform Installation tasks
 Perform the following setup and transfer the information to subsequent tasks.
 
 - Name of the AKS Cluster
