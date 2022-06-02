@@ -180,7 +180,7 @@ $ sudo ./basion-setup-sample.sh
 ```
 
 ### Handover to Vantiq Platform Installation tasks
-Perform the following setup and transfer the information to subsequent tasks.
+Perform the following setup and hand over the information to subsequent tasks.
 
 - Name of the EKS Cluster   
 - [Setting up the Access rights to EKS](../docs/eng/aws_op_priviliges.md#setting-up-the-access-rights-to-eks)  
