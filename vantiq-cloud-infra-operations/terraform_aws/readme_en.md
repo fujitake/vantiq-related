@@ -179,7 +179,7 @@ $ chmod +x ./basion-setup-sample.sh
 $ sudo ./basion-setup-sample.sh
 ```
 
-### Transfer to Vantiq Platform Installation tasks
+### Handover to Vantiq Platform Installation tasks
 Perform the following setup and transfer the information to subsequent tasks.
 
 - Name of the EKS Cluster   
