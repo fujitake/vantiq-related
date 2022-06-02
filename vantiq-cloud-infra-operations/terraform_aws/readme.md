@@ -122,7 +122,7 @@ Note: シングル構成のため、RDSの構成は考慮が必要
   - `db_storage_type`: DBインスタンスのディスク種類  
   - `postgres_engine_version`: PostgreSQLのバージョン  
 
-  ** DBのパスワードは「Passw0rd」で作成されるので、作成後変更**
+  **DBのパスワードは「Passw0rd」で作成されるので、作成後変更**
 
 
 #### basion-instance.tf  
@@ -193,7 +193,7 @@ $ sudo ./basion-setup-sample.sh
 # 構成情報の出力
 $ terraform output
 ```
-- Terraform 0.15以降を使用するう場合、password項目をoutputするためには明示的にsensitive属性が必要です。
+- Terraform 0.15以降を使用する場合、password項目をoutputするためには明示的にsensitive属性が必要です。
 ```tf
 "keycloak-db-admin-password" {
 ...
