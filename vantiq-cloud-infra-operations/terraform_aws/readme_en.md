@@ -195,17 +195,17 @@ Perform the following setup and transfer the information to subsequent tasks.
   $ terraform output
   ```
 - If you are using Terraform 0.15 or later, `sensitive` attribute is required to output sensitive field such as password.
-```tf
-"keycloak-db-admin-password" {
-...
-  sensitive = true
-}
-```
-
-  ```bash
-  # Output the sensitive information among the configuration information
-  terraform output -json | jq '"keycloak-db-admin-password:" + .keycloak-db-admin-password.value'
+  ```tf
+  "keycloak-db-admin-password" {
+  ...
+    sensitive = true
+  }
   ```
+
+    ```bash
+    # Output the sensitive information among the configuration information
+    terraform output -json | jq '"keycloak-db-admin-password:" + .keycloak-db-admin-password.value'
+    ```
 
 
 ## Reference
