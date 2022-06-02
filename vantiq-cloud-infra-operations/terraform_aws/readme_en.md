@@ -183,7 +183,7 @@ $ sudo ./basion-setup-sample.sh
 Perform the following setup and transfer the information to subsequent tasks.
 
 - Name of the EKS Cluster   
-- [Setting up the Access rights to EKS](../docs/eng/aws_op_priviliges.md#setting_up_the_sccess_rights_to_eks)  
+- [Setting up the Access rights to EKS](../docs/eng/aws_op_priviliges.md#setting-up-the-access-rights-to-eks)  
 (Only when the Vantiq Platform Installation is performed by other than the IAM user who ran terraform.)
 - Endpoint of the S3 Storage
 - Endpoint and credential of the keycloak DB
