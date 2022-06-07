@@ -19,65 +19,65 @@ Type には、データを格納するための Type である「**Standard**」
 
 ## ***Step 1***
 
-次からの作業は、`PumpFailureDetection` プロジェクトにおいて行います。
-すでに開いている場合は、ナビゲーション バーのプロジェクト名に `PumpFailureDetection` と表示されているはずです。
+次からの作業は、`PumpFailureDetection` Project において行います。
+すでに開いている場合は、ナビゲーション バーの Project 名に `PumpFailureDetection` と表示されているはずです。
 
-***Pumps*** Typeを作成します。  
+***Pumps*** Type を作成します。  
 
 ＊ `Pumps` Type はポンプのマスタデータを保存するために作成します。あとで受信するセンサーデータと組み合わせて使用します。
 
-1. 「追加」 > 「Type...」 > 「_＋新規Type_」 をクリックし、Type の新規作成画面を開きます。
+1. 「追加」 > 「Type...」 > 「_＋新規 Type_」 をクリックし、Type の新規作成画面を開きます。
 
-2. 名前に「Pumps」と入力し、ロール を 「standard」に設定して「_OK_」をクリックします。
+2. 名前に「Pumps」と入力し、Role を「standard」に設定して「_OK_」をクリックします。
 
-3. `Pumps` Typeの「Property」タブを開き「_+Propertyの追加_」から以下の４つのプロパティを作成します。
+3. `Pumps` Type の「Properties」タブを開き「_+ Property の追加_」から以下の 4つのプロパティを作成します。
 
 | 名前         | データ型 | 説明               |
 |--------------|----------|--------------------|
-| PumpID       | Integer  | ポンプのID         |
+| PumpID       | Integer  | ポンプの ID         |
 | Location     | GeoJSON  | 緯度経度の座標     |
-| TempSensorID | String   | 温度センサーのID   |
-| RPMSSensorID | String   | 回転数センサーのID |
+| TempSensorID | String   | 温度センサーの ID   |
+| RPMSSensorID | String   | 回転数センサーの ID |
 
-4. 「Index」タブを開き「_+Indexの追加_」をクリックします。
+4. 「Index」タブを開き「_+ Index の追加_」をクリックします。
 
-5. 「Is Index unique?」にチェックを入れ、Keyに「`PumpID`」を設定して「_OK_」をクリックします。
+5. 「Is Index unique?」にチェックを入れ、Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
 6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。
 
-7. Keyに「`PumpID`」を設定して「_OK_」をクリックします。
+7. Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
     <img src="../../imgs/Lab02/image1.png" width=65%>
 
-8. _変更の保存_ ボタンをクリックし、Typeを保存します。
+8. _変更の保存_ ボタンをクリックし、Type を保存します。
 
 ## ***Step 2***
 
-***PumpStatus*** Typeを作成します。
+***PumpStatus*** Type を作成します。
 
 ＊ ポンプの**現在の**ステータスを保持し、現在のポンプの状態をリアルタイムダッシュボードで表示するために利用します。
 
-1. 「追加」 > 「Type...」 > 「_＋新規Type_」 をクリックし、Type の新規作成画面を開きます。
+1. 「追加」 > 「Type...」 > 「_＋ 新規 Type_」 をクリックし、Type の新規作成画面を開きます。
 
-2. 名前に「PumpStatus」と入力し、ロール を 「standard」に設定して「_OK_」をクリックします。
+2. 名前に「PumpStatus」と入力し、Role を「standard」に設定して「_OK_」をクリックします。
 
-3. `PumpStatus` Typeの「Property」タブを開き「_+Propertyの追加_」から以下の5つのプロパティを作成します。
+3. `PumpStatus` Type の「Properties」タブを開き「_+ Property の追加_」から以下の 5つのプロパティを作成します。
 
 | 名前       | データ型 | 説明                   |
 |------------|----------|------------------------|
-| PumpID     | Integer  | ポンプのID             |
+| PumpID     | Integer  | ポンプの ID             |
 | Temp       | Integer  | 温度の値               |
 | RPMS       | Integer  | 回転数の値             |
 | Location   | GeoJSON  | 緯度経度の座標         |
 | ReceivedAt | DateTime | 受信したタイムスタンプ |
 
-4. 「Index」タブを開き「_+Indexの追加_」をクリックします。
+4. 「Index」タブを開き「_+ Index の追加_」をクリックします。
 
-5. 「Is Index unique?」にチェックを入れ、Keyに「`PumpID`」を設定して「_OK_」をクリックします。
+5. 「Is Index unique?」にチェックを入れ、Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。
+6. 「Natural Keys」タブを開き「_Key の設定_」をクリックします。
 
-7. Keyに「`PumpID`」を設定して「_OK_」をクリックします。
+7. Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
    <img src="../../imgs/Lab02/image2.png" width=65%>
 
@@ -99,7 +99,7 @@ Type には、データを格納するための Type である「**Standard**」
 
 1. **Pumps Type へのデータ登録**  
 Pumps Type にマスタデータを登録します。今回は複数件のデータをまとめてアップロードしたい場合に使用する手順でデータ登録を行います。  
-    1. 「プロジェクト」 > 「インポート...」 をクリックして「プロジェクトまたはデータのインポート」ウィンドウを開き、「Select Import Type」を「Projects」から「Data」に変更します。  
+    1. 「Projects」 > 「インポート...」 をクリックして「Project またはデータのインポート」ウィンドウを開き、「Select Import Type」を「Projects」から「Data」に変更します。  
     2. 事前に配布した「[`Pumps.json`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/Pumps.json)」の内容を保存し JSON ファイルを作成して、ドラッグ&ドロップします。  
     3. 「_インポート_」をクリックします。
 

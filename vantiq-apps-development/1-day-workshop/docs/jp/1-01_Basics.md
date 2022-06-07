@@ -3,11 +3,11 @@
 ## ナビゲーション バーについて
 
 ![ナビゲーション バーについて](../../imgs/01_Basics/slide2.png)  
-① プロジェクト関連プロジェクトの作成・保存・切り替えなどを行う  
-② リソースの追加  
+① Project 関連。Project の作成・保存・切り替えなどを行う  
+② Resource の追加  
 ③ 発生したエラーの一覧  
 ④ リファレンスなどの開発に関する情報  
-⑤ ネームスペース名。ネームスペースの切り替えはここから行う  
+⑤ Namespace 名。Namespace の切り替えはここから行う  
 ⑥ 自分のアカウント情報。自分のアカウントに関する情報の確認・編集や IDE 設定を行う  
 
 
@@ -27,39 +27,39 @@
 
 ![カスタムの例](../../imgs/01_Basics/slide5.png)
 
-## ネームスペースとプロジェクトの関係について
+## Namespace と Project の関係について
 
-各リソースはプロジェクトではなくネームスペースに保存されるため、ネームスペース内の各プロジェクトでネームスペース内の全てのリソースを使うことができます。
+各 Resource は Project ではなく Namespace に保存されるため、Namespace 内の各 Project で Namespace 内の全ての Resource を使うことができます。
 
-![ネームスペースとプロジェクトの関係について](../../imgs/01_Basics/slide6.png)
+![Namespace と Project の関係について](../../imgs/01_Basics/slide6.png)
 
-## プロジェクトの保存と各リソースの保存について
+## Project の保存と各 Resource の保存について
 
-* プロジェクトの保存
-  * プロジェクトのレイアウトの状態やそのプロジェクトでどのリソースを扱うのかを保存します。
+* Project の保存
+  * Project のレイアウトの状態やその Project でどの Resource を扱うのかを保存します。
   * 画面左上の緑の「 _保存_ 」をクリックして保存します。  
-![プロジェクトの保存](../../imgs/01_Basics/slide7_1.png)「PumpFailureDetection」というプロジェクト名で保存する。
+![Project の保存](../../imgs/01_Basics/slide7_1.png)「PumpFailureDetection」という Project 名で保存する。
 
-* 各リソースの保存
-  * Type や Source などの各リソースを作成するとネームスペースに保存されます。
-  * 各リソース編集ダイアログの _保存_ ボタンをクリックして保存します。  
-![各リソースの保存](../../imgs/01_Basics/slide7_2.png)
+* 各 Resource の保存
+  * Type や Source などの各 Resource を作成すると Namespace に保存されます。
+  * 各 Resource 編集ダイアログの _保存_ ボタンをクリックして保存します。  
+![各 Resource の保存](../../imgs/01_Basics/slide7_2.png)
 
-_＊ 例えば Type を新規作成してプロジェクトの保存をせずにブラウザをリロードしてしまうと、_  
-_プロジェクトの保存をしていないために Type がプロジェクトに追加されていない状態になります。_  
-_しかし、作成自体はされており、ネームスペースには保存されています。_
+_＊ 例えば Type を新規作成して Project の保存をせずにブラウザーをリロードしてしまうと、_  
+_Project の保存をしていないために Type が Project に追加されていない状態になります。_  
+_しかし、作成自体はされており、Namespace には保存されています。_
 
-## プロジェクトの自動保存について
+## Project の自動保存について
 
 自動保存の設定をしておくことで、不意な状況で変更内容が失われることを防ぎます。  
 画面右上の人型アイコンから IDE 設定ウィンドウを開いて設定します。
 
 <img src="../../imgs/01_Basics/slide8.png" width=80%>  
 
-## リソースの表示方法について
+## Resource の表示方法について
 
-画面左の「Project Contents」にプロジェクトに紐付くリソースが一覧で表示されます。  
-表示したいリソース名をクリックするとウィンドウが開きます。
+画面左の「Project Contents」に Project に紐付く Resource が一覧で表示されます。  
+表示したい Resource 名をクリックするとウィンドウが開きます。
 
 <img src="../../imgs/01_Basics/slide9.png" width=35%>  
 
@@ -94,4 +94,4 @@ AppBuilder において、ショートカットキーが使用できます。
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|2| 準備 (データジェネレータの設定)|Lab|データジェネレータの準備 |15|[Lab01_Preparation](2-Lab01_Preparation.md)|
+|2| 準備 (データジェネレーターの設定)|Lab|データジェネレーターの準備 |15|[Lab01_Preparation](2-Lab01_Preparation.md)|

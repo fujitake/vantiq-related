@@ -62,19 +62,19 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 
 ## ***Step 4 (作業用 Namespace の作成)***
 
-1. VANTIQ 開発環境にログインします。＊ 表示される次のような「新規プロジェクト」ウィンドウはキャンセルします。  
+1. VANTIQ 開発環境にログインします。＊ 表示される次のような「新規 Project」ウィンドウはキャンセルします。  
     <img src="../../imgs/00_Prep1/image7.png" width=45%>
 
 2. 画面上部の「管理」から「Namespace」をクリックします。  
     <img src="../../imgs/00_Prep1/image8.png" width=60%>
 
-3. 「+新規」よりNamespaceの新規作成画面を開きます。  
+3. 「+新規」より Namespace の新規作成画面を開きます。  
     <img src="../../imgs/00_Prep1/image9.png" width=55%>
 
 4. Namespace 名を入力し、右上の [変更の保存] ボタンをクリックします。Namespace 名は、システム全体でユニークである必要があります。  
     <img src="../../imgs/00_Prep1/image10.png" width=45%>
 
-5. 操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespaceの変更」ウィンドウを開き、変更したい Namespace を選択します。  
+5. 操作する Namespace を作成した Namespace に変更します。Namespace を変更するには、現在の Namespace 名をクリックして「Namespace の変更」ウィンドウを開き、変更したい Namespace を選択します。  
     <img src="../../imgs/00_Prep1/image11.png" width=70%>  
 
     ＊ 招待状の受信後に最初ログインした **○○○\_root/○○○\_home** などの Namespace は **Home Namespace** と呼ばれる組織用の Namespace のため、作成していただいた自分専用の Namespace に切り替えを行います。
@@ -82,7 +82,7 @@ Vantiq 1-day Workshop では VANTIQ operations (operations@vantiq.com) からの
 6. 開発環境を開くと次のような画面になります。  
     <img src="../../imgs/00_Prep1/image12.png" width=55%>
 
-7. 「Policies and Conditions」 の 2つの項目にチェックを入れて [OK] をクリックします。
+7. 「ポリシーと規約」の 2つの項目にチェックを入れて [OK] をクリックします。
 
-8. 以上でワークショップのための開発環境が整いました。 ＊「新規プロジェクト」ウィンドウはキャンセルしていただいて構いません。ワークショップでの実際の開発時には使用します。  
+8. 以上でワークショップのための開発環境が整いました。 ＊「新規 Project」ウィンドウはキャンセルしていただいて構いません。ワークショップでの実際の開発時には使用します。  
     <img src="../../imgs/00_Prep1/image13.png" width=70%>

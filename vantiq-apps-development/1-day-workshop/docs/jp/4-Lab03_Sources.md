@@ -26,19 +26,19 @@
 
 ## ***Step 1（Source の作成）***
 
-1. 「追加」 > 「Source...」 > 「_+新規Source_」から Source の新規作成画面を開きます。
+1. 「追加」 > 「Source...」 > 「_+ 新規 Source_」から Source の新規作成画面を開きます。
 
 2. Source 名に「TempMQTT」と入力します。
 
 3. Source の種類 を「MQTT」に設定します。
 
-4. 「Server URI」タブを開き「_+Server URI の追加_」をクリックし、[ご自身で事前に準備された MQTT Broker server の URI](./2-Lab01_Preparation.md#mqtt_broker_setting) を設定します。
+4. 「Server URI」タブを開き「_+ Server URI の追加_」をクリックし、[ご自身で事前に準備された MQTT Broker server の URI](./2-Lab01_Preparation.md#mqtt_broker_setting) を設定します。
 
-5. 「Topic」タブを開き「_+Topic の追加_」をクリックし、以下の Topic を設定します。
+5. 「Topic」タブを開き「_+ Topic の追加_」をクリックし、以下の Topic を設定します。
 
   Topic： "_/***your name***/pump/Temp_"
 
-  ＊ [Lab 01 でデータジェネレーター設定](./2-Lab01_Preparation.md#data_generator_setting) の **「TempSensorTopic」に入力した値と同じ**にします。また、topic名に**ダブルクォーテーションは含みません**。topic名の**前後に半角スペースが入らないよう**にしてください。
+  ＊ [Lab 01 でデータジェネレーター設定](./2-Lab01_Preparation.md#data_generator_setting) の **「TempSensorTopic」に入力した値と同じ**にします。また、topic 名に**ダブルクォーテーションは含みません**。topic 名の**前後に半角スペースが入らないよう**にしてください。
 
 
 6. _変更の保存_ ボタンをクリックし、Source を保存します。  
@@ -76,7 +76,7 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
     <img src="../../imgs/Lab03/image5.png" width=45%>
 
-3. 画面左のリソースペインの「Type」の箇所にある、作成した「`TempMQTTSchema`」を開き、自動で認識された型のうち、「Time」プロパティの型を「_DateTime_」に変更します。
+3. 画面左の [Project Contents] ペインの「Type」の箇所にある、作成した「`TempMQTTSchema`」を開き、自動で認識された型のうち、「Time」プロパティの型を「_DateTime_」に変更します。
 
    a. 「Properties」タブを開きます。
 
@@ -88,7 +88,7 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
    <img src="../../imgs/Lab03/image7.png" width=60%>
 
-4. 画面左のリソースペインの「Source」の箇所にある「`TempMQTT`」を開き、「Properties」タブの「Message Type」に「_TempMQTTSchema_」を設定し、Source を保存します。
+4. 画面左の [Project Contents] ペインの「Source」の箇所にある「`TempMQTT`」を開き、「Properties」タブの「Message Type」に「_TempMQTTSchema_」を設定し、Source を保存します。
 
    <img src="../../imgs/Lab03/image8.png" width=60%>
 
@@ -96,7 +96,7 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
 以上で、Schema の設定は終了です。
 
-ここまでの手順でプロジェクトには下の画像のような要素が存在しているはずですので、ご確認ください。  
+ここまでの手順で Project には下の画像のような要素が存在しているはずですので、ご確認ください。  
 
    <img src="../../imgs/Lab03/image9.png" width=28%>
 
