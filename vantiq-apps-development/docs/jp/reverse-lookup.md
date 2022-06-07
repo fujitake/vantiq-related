@@ -123,11 +123,11 @@ publish payload to TOPIC "/downstream/sensor/telemetry"
 
 
 ### デバッグしたい<a id="デバッグしたい"></a>
-View Task Events、Autopsy、Profiling などを活用します。
+[Task Events の表示]、Autopsy、Profiling などを活用します。
 [デバッグの流れ (デモを通してデバッグの基礎を学ぶ)](./debug_demo.md)
 
 ### イベントが高頻度すぎてバッジが更新しなくなったが、件数を確認したい<a id="イベントが高頻度すぎてバッジが更新しなくなったが件数を確認したい"></a>
-Grafana を使用する。
+Grafana を使用する。  
 管理 >> Grafana から、目的のダッシュボードを選択する。
 - App Execution - App Builder `App` の処理状況
 ![](../../imgs/reverse-lookup/app-executions.png)
