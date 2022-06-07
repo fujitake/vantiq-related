@@ -96,7 +96,7 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
 以上で、Schema の設定は終了です。
 
-ここまでの手順で Project には下の画像のような要素が存在しているはずですので、ご確認ください。  
+ここまでの手順で [Project Contents] ペインには下の画像のような要素が存在しているはずですので、ご確認ください。  
 
    <img src="../../imgs/Lab03/image9.png" width=28%>
 
