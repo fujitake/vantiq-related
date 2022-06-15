@@ -68,7 +68,7 @@ __５台分のポンプの__  __温度__   __と__   __回転数__  __のデー�
 |8|Q&A||質疑応答|15||
 |9|VANTIQ REST API|Lab|Vantiq 1-day Workshop の次のステップ| |[Lab05_VANTIQ_REST_API](a08-Lab05_VANTIQ_REST_API.md)|
 |10| 他サービスとの連携|Lab|Vantiq 1-day Workshop の次のステップ| |[Lab06_Integrate_other_services](a09-Lab06_Integrate_other_services.md)|
-|11| Vantiqのリソース全般の紹介||Reference||[実例を通して Vantiq のリソースを理解する](Vantiq_resources_introduction.md)|
+|11| Vantiqのリソース全般の紹介||Reference||[実例を通して Vantiq のリソースを理解する](../../../vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)|
 |12| 混雑検出アプリ開発課題|Lab|Vantiq 1-day Workshop の次のステップ| |[混雑検出課題アプリ](a10-dev01_detect_congestion_app.md)|
 
 

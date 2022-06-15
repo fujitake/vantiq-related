@@ -5,7 +5,7 @@ This repository is for sharing various technical guidance and instructions of Va
 ### [Vantiq Application Development related](./vantiq-apps-development)
 Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
-- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/1-day-workshop/docs/eng/Vantiq_resources_introduction.md)
+- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/vantiq-resources-introduction/docs/eng/Vantiq_resources_introduction.md)
 - [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiq with External Services Integration](./vantiq-external-services-integration)
@@ -36,6 +36,7 @@ Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes cluste
 - [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
 - [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
 - [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
+- [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/eng/vantiq-cloudwatch.md)  
 
 
 ### [Vantiq Platform Installation related](./vantiq-platform-operations)
@@ -45,7 +46,7 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 - [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/eng/vantiq-cloudwatch.md)  
+- [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
 
 
@@ -55,11 +56,14 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
 Vantiqアプリケーション開発チーム向けのアプリ開発や運用に関するガイドや学習マテリアルです。
+- [Vantiqアカウント作成（開発者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-01_Prep_for_Account.md)
+- [Vantiqアカウント作成（組織管理者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-02_Prep_for_Dev_account.md)
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
-- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/1-day-workshop/docs/jp/Vantiq_resources_introduction.md)
+- [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)
+- [Vantiqアプリ開発 逆引きリファレンス](./vantiq-apps-development/docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
@@ -67,9 +71,12 @@ Vantiqアプリケーション開発チーム向けのVantiqと外部Webサー�
 - [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
+- [AWS IoT Core](./vantiq-external-services-integration/docs/jp/vantiq-aws-iotcore.md)
+- [Azure Cosmos DB](./vantiq-external-services-integration/docs/jp/vantiq-azure-CosmosDB.md)
 - [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
 - [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
 - [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
+- [API Gatewayと組み合わせたデザインパターン](./vantiq-external-services-integration/docs/jp/vantiq-apigw.md)
 
 ### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
 Vantiqアプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
@@ -90,6 +97,7 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
 - [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)
 - [閉域網構成における考慮事項 (AWS編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-aws.md)
 - [閉域網構成における考慮事項 (Azure編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-azure.md)
+- [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/jp/vantiq-cloudwatch.md)
 
 
 
@@ -105,5 +113,6 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [mongodb 関連](./vantiq-platform-operations/docs/jp/mongodb.md)
 - [grafana 関連](./vantiq-platform-operations/docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
-- [Vantiq Cloudwatch Logs](./vantiq-platform-operations/docs/jp/vantiq-cloudwatch.md)
+- [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
+- [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)

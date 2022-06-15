@@ -8,14 +8,36 @@
 
 # 目次
 
+  - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)
   - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
   - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
   - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい](#reuse_old_pv)
   - [Grafana でメトリクスが表示されない](#metrics_not_showing_up_in_grafana)  
   - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった](#metrics_gone_after_vantiq_update)
   - [Keycloak pod が起動しない](#keycloak_pod_will_not_start)  
+  - [Podが再起動を繰り返し、起動できない](#pod-cannot-start)  
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
-  - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)  
+  - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
+
+
+# Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
+
+1. vantiq サービスを scale=0 にする
+```
+kubectl scale sts -n xxxx vantiq --replicas=0
+```
+2. mongorestore を実行する
+```
+kubectl create job mongorestore --from=cronjob/mongorestore -n xxx
+```
+3. userdbrestore を実行する（userdb を使用する場合)
+```
+kubectl create job userdbrestore --from=cronjob/userdbrestore -n xxx
+```
+4. vantiq サービスのスケールを戻す
+```
+kubectl scale sts -n xxx vantiq --replicas=3
+```
 
 
 # Grafana Data Source を追加する時、エラーとなる<a id="error_when_adding_grafana_data_source"></a>
@@ -183,7 +205,7 @@ telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:37Z E! [inputs.promethe
 telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:38Z E! [inputs.prometheus] Unable to watch resources: kubernetes api: Failure 403 pods is forbidden: User "system:serviceaccount:shared:telegraf-prom" cannot watch resource "pods" in API group "" at the cluster scope
 ```
 
-#### Solution
+#### Possible Solution 1
 AWS や Azure で、kubernetes クラスタの RBAC を有効にすると、デフォルトでは Cluster レベルの情報にアクセスする権限がない。`Service Account` を作成し、明示的に `telegraf` に対して権限をつける必要がある。
 
 ```sh
@@ -235,6 +257,69 @@ subjects:
 ```
 Reference: https://stackoverflow.com/questions/53908848/kubernetes-pods-nodes-is-forbidden/53909115
 
+#### Possible Solution 2
+AKS 1.19からコンテナランタイムが`dockerd`から`containerd`に切り替わったことにより、取得できるメトリクスが変わっている。それに合わせgrafana側のクエリを変更しなければいけない。
+`Vantiq Resource`と`MongoDB Monitoring Dashboard`が影響を受ける。
+
+##### Vantiq Resources
+###### "Pod" Variable
+Dashboard settings > Variables  
+
+Old
+```sh
+show tag values with key = "io.kubernetes.pod.name" where component = 'vantiq-server' AND release =~ /^vantiq-$installation$/
+```
+To-Be
+```sh
+show tag values from "kubernetes_pod_container" with key="pod_name" where pod_name =~ /vantiq-/
+```
+
+###### CPU utilization
+Old
+```sh:
+SELECT mean("usage_percent") AS "cpu usage" FROM "docker_container_cpu" WHERE ("io.kubernetes.pod.name" =~ /^$pod$/ AND "io.kubernetes.pod.namespace" =~ /^$installation$/ AND component = '' and container_name =~ /^k8s_vantiq_vantiq/) AND $timeFilter GROUP BY time($__interval), "io.kubernetes.pod.name" fill(none)
+```
+To-Be
+```sh:
+SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE (pod_name =~ /^$pod$/ AND namespace =~ /^$installation$/ and container_name =~ /^vantiq/) AND $timeFilter GROUP BY pod_name, time($__interval) fill(none)
+```
+
+パネルの凡例の編集も行う。`Alias by`を以下のように編集する。  
+Old
+```sh
+[[tag_io.kubernetes.pod.name]]: $col
+```
+To-Be
+```sh
+$tag_pod_name: $col
+```
+
+##### MongoDB Monitoring Dashboard
+###### "installation" and "Pod" Variable
+Old
+```sh
+# installation
+show tag values with key = "installation"
+# Pod
+show tag values with key = "io.kubernetes.pod.name" where "io.kubernetes.pod.name" =~ /^mongodb/ AND "io.kubernetes.pod.namespace" = '$installation'
+```
+To-Be
+```sh
+# installation
+show tag values with key = namespace
+# Pod
+show tag values from "kubernetes_pod_container" with key="pod_name" where pod_name =~ /mongodb-/
+```
+
+###### CPU utilization
+Old
+```sh:
+SELECT mean("usage_percent") FROM "docker_container_cpu" WHERE ("io.kubernetes.pod.name" =~ /^$pod$/ AND "io.kubernetes.container.name" = 'mongodb' AND "io.kubernetes.pod.namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)
+```
+To-Be
+```sh:
+SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE ("pod_name" =~ /^$pod$/ AND "container_name" = 'mongodb' AND "namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)
+```
 
 # VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった <a id="metrics_gone_after_vantiq_update"></a>
 
@@ -549,6 +634,52 @@ keycloak:
 #### その他
 [`alpine-f` ツール](./alpine-f.md) を使って、直接 Postgres に繋げてみて、問題を切り分ける。
 
+# Podが再起動を繰り返し、起動できない<a id="pod-cannot-start"></a>
+Podが以下のように`Readiness probe failed`により、Restartを繰り返してしまう場合。
+
+```sh
+$ kubectl describe pod -n shared grafana-7fcf76474b-wxhqf
+
+...
+Events:
+  Type     Reason                  Age                   From                     Message
+  ----     ------                  ----                  ----                     -------
+  Normal   Scheduled               11m                   default-scheduler        Successfully assigned shared/grafana-7fcf76474b-wxhqf to aks-keycloaknp-11492742-vmss000000
+  Normal   SuccessfulAttachVolume  11m                   attachdetach-controller  AttachVolume.Attach succeeded for volume "pvc-60e0ab5a-a211-4d27-bc78-5f5a9f5bc97e"
+  Normal   Pulling                 10m                   kubelet                  Pulling image "busybox:1.31.1"
+  Normal   Pulled                  10m                   kubelet                  Successfully pulled image "busybox:1.31.1" in 20.642042592s
+  Normal   Created                 10m                   kubelet                  Created container init-chown-data
+  Normal   Started                 10m                   kubelet                  Started container init-chown-data
+  Normal   Pulling                 10m                   kubelet                  Pulling image "grafana/grafana:8.1.8"
+  Normal   Pulled                  10m                   kubelet                  Successfully pulled image "grafana/grafana:8.1.8" in 12.858959459s
+  Normal   Created                 9m34s (x2 over 10m)   kubelet                  Created container grafana
+  Normal   Pulled                  9m34s                 kubelet                  Container image "grafana/grafana:8.1.8" already present on machine
+  Normal   Started                 9m33s (x2 over 10m)   kubelet                  Started container grafana
+  Warning  Unhealthy               8m57s (x14 over 10m)  kubelet                  Readiness probe failed: Get "http://192.168.14.69:3000/api/health": dial tcp 192.168.14.69:3000: connect: connection refused
+  Warning  BackOff                 52s (x24 over 8m43s)  kubelet                  Back-off restarting failed container
+
+```
+#### kubernetesワーカーノード間で通信ができているか
+Security Groupの設定ミス等で、同じsubnet内であっても通信ができていない可能性がある。
+[`alpine-f` ツール](./alpine-f.md) を使って、直接ワーカーノード内から通信の疎通状況を確認し、問題を切り分ける。
+
+#### Readiness Probeのタイムアウトまでの時間を長くする
+起動シーケンスが長くかかり、readiness probeやliveness probeが失敗し、強制終了されている可能性がある。その場合、起動が完了するまでprobeのチェックを遅らせる。
+例) grafana podの場合、`kubectl edit deploy -n shared grafana`で編集モードで、`livenessProbe.failureThreshold`、`readinessProbe.failureThreshold`、`readinessProbe.initialDelaySeconds`等の値を大きくする。
+```yaml
+...
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /api/health
+            port: 3000
+            scheme: HTTP
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+          initialDelaySeconds: 30
+...
+```
 
 # Vantiq IDE にログインしようとすると、エラーが出る<a id="error_when_trying_to_login_to_vantiq_ide"></a>
 

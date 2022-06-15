@@ -6,6 +6,7 @@ locals {
   env_name                   = "template"
   region                     = "<INPUT-YOUR-REGION>"
   worker_access_ssh_key_name = "<INPUT-YOUR-SSH-KEY-NAME>"
+  basion_access_ssh_key_name = "<INPUT-YOUR-SSH-KEY-NAME>"
   keycloak_db_expose_port    = 5432
 }
 
@@ -19,7 +20,13 @@ terraform {
   backend "local" {
     path = "terraform.tfstate"
   }
-  required_version = ">= 0.12.6"
+  required_version = ">= 1.1.8"
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = ">= 4.10.0"
+    }
+  }
 }
 
 # Case by use S3 Bucket for terraform backend
@@ -136,5 +143,5 @@ module "keycloak-db" {
   db_instance_class       = "db.t2.micro"
   db_storage_size         = 20
   db_storage_type         = "gp2"
-  postgres_engine_version = "11.6"
+  postgres_engine_version = "12.7"
 }

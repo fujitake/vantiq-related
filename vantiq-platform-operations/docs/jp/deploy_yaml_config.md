@@ -204,5 +204,5 @@ keycloak:
 ```yaml
 telegraf-prom:
   image:
-    tag: telegraf:1.15.2-alpine
+    tag: 1.15.2-alpine
 ```

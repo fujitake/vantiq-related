@@ -1,3 +1,14 @@
+
+resource "aws_key_pair" "worker" {
+  key_name_prefix = "${var.cluster_name}-eks-worker-"
+  public_key      = file(var.worker_access_ssh_key_name)
+  tags = {
+    KubernetesCluster = var.cluster_name
+    environment       = var.env_name
+    instance = "eks-worker"
+  }
+}
+
 ###
 ###  EKS Cluster
 ###
@@ -36,7 +47,7 @@ resource "aws_eks_node_group" "vantiq-nodegroup" {
   subnet_ids     = var.private_subnet_ids
 
   remote_access {
-    ec2_ssh_key               = var.worker_access_ssh_key_name
+    ec2_ssh_key               = aws_key_pair.worker.key_name
     source_security_group_ids = var.basion_ec2_sg_ids
   }
 

@@ -277,8 +277,7 @@ _＊ デバッグ > エラー > クエリの実行 からでもエラー一覧�
 ## SplitByGroup
 
 * グループごとにストリームを分割する
-* `Dwell`、`ComputeStatistics` などイベントごとではなく特定のグループごとに処理する必要があるアクティビティの前などで使用する
-* ストリームを分割する事で使用するリソースが分散するため負荷分散になる
+* `Dwell`、`ComputeStatistics`、`AccumulateState` などイベントごとではなく特定のグループごとに処理する必要があるアクティビティの前などで使用する
 
 <img src="../../imgs/02_AppBuilder/slide17.png">
 

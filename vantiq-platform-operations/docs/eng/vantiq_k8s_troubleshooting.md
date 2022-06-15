@@ -66,15 +66,15 @@ graph TB
     H -- Yes --> Y
     H -- No --> Z
 
-    click B "#check-for-announcements-about-infrastructure-failures"
-    click F "#confirm-the-correct-placement-of-the-pod"
-    click G "#relocate-the-pod"
-    click I "#Check-the-Node-status"
-    click J "#Check-the-Pod-status"
-    click L "#Restart-the-Pod"
-    click M "#check-grafana-and-error-logs"
-    click O "#request-a-response-from-the-application-maintenance-team"
-    click Z "#escalate-to-the-support-team"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#check-for-announcements-about-infrastructure-failures"
+    click F "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#confirm-the-correct-placement-of-the-pod"
+    click G "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#relocate-the-pod"
+    click I "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Check-the-Node-status"
+    click J "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Check-the-Pod-status"
+    click L "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Restart-the-Pod"
+    click M "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#check-grafana-and-error-logs"
+    click O "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#request-a-response-from-the-application-maintenance-team"
+    click Z "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#escalate-to-the-support-team"
 
 
 
@@ -113,13 +113,13 @@ graph TB
     I --> F
     H -- No --> Z
 
-    click D "#Check-the-Node-status"
-    click E "#Confirm-the-correct-placement-of-the-Pod"
-    click F "#Relocate-the-Pod"
-    click I "#Confirm-the-correct-placement-of-the-Pod"
-    click J "#Check-the-Pod-logs"
-    click K "#Restart-the-Pod"
-    click Z "#escalate-to-the-support-team"
+    click D "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Check-the-Node-status"
+    click E "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click F "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Relocate-the-Pod"
+    click I "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click J "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Check-the-Pod-logs"
+    click K "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Restart-the-Pod"
+    click Z "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#escalate-to-the-support-team"
 ```
 
 ## Case 3: Node reboot event detected
@@ -138,10 +138,10 @@ graph TB
     D -- Yes --> E
     D -- No --> Y
 
-    click A "#Check-the-Node-status"
-    click B "#check-for-announcements-about-infrastructure-failures"
-    click C "#Check-the-Pod-status"
-    click E "#Relocate-the-Pod"
+    click A "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Check-the-Node-status"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#check-for-announcements-about-infrastructure-failures"
+    click C "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Check-the-Pod-status"
+    click E "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Relocate-the-Pod"
 
 ```
 
@@ -174,9 +174,9 @@ graph TB
     I -- Yes --> Y
     I -- No or not scalable --> Z
 
-    click B "#Check-Grafana-and-Error-Logs"
-    click D "#Restart-the-Pod"
-    click Z "#escalate-to-the-support-team"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#check-grafana-and-error-logs"
+    click D "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Restart-the-Pod"
+    click Z "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#escalate-to-the-support-team"
 
 ```
 
@@ -209,10 +209,10 @@ graph TB
     H -- Yes --> I
     I --> J
 
-    click B "#Confirm-the-correct-placement-of-the-Pod"
-    click C "#Relocate-the-Pod"
-    click E "#request-a-response-from-the-application-maintenance-team"
-    click J "#Relocate-the-Pod"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click C "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Relocate-the-Pod"
+    click E "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#request-a-response-from-the-application-maintenance-team"
+    click J "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md#Relocate-the-Pod"
 
 ```
 

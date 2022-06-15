@@ -33,6 +33,8 @@ Refining Resources as needed.
     ]
 }
 ```
+
+## Setting up the Access rights for EKS  
 If the creator and the operator of the EKS clusters are different, the creator needs to set up Role Based Access Control for IAM.  
 
 aws-auth.yaml

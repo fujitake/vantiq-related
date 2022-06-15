@@ -32,9 +32,13 @@
 - `k8sdeploy_tools`、`k8sdeploy` リポジトリへのアクセス権限 (Vantiq Support より入手)
 - `k8sdeploy_clusters_jp` リポジトリへのアクセス権限 (JapanVirtualSRE より入手)
 - *quay.io* への vantiq リポジトリへのアクセス権限（Vantiq Support より入手)
+- SMTPサービスのエンドポイント、および資格情報
+- 踏み台サーバのIPアドレス、ユーザー名、ssh秘密鍵（本記事のこれ以降の作業は踏み台サーバ上で行うことを想定する。）
+- 作業対象のkubernetesクラスタへのアクセス権
 
 
 ### 事前準備 (作業環境)<a id="preparation_work_environment"></a>
+踏み台サーバ上で行うことを想定する。
 - java8 - Oracle or OpenJDK 最新バージョン
 - git
 - kubectl - 有効なバージョン (Cloud 側の K8s バージョン ± 1以内)
@@ -131,13 +135,15 @@
      #上記ステップでログアウトした画面からはログインできないため、先のページ `https://<ドメイン名>/` に移動すること。
   	作成したユーザー名とパスワードでログインする。
    1. System admin の Grafana 設定を実施する    
-	    [Add Grafana dashboard for System users] に従い、設定を行う。
+	    [Add Grafana dashboard for System users](https://github.com/Vantiq/k8sdeploy_tools#add_grafana_dashboards)に従い、設定を行う。
 	    `k8sdeploy_tools/vantiqSystem/deploy/vantiq/dashboards` にあるファイルを設定する。
 	     インポートすべきファイルは、適切な Branch を選択する必要がある (vantiq_system_release を指定)
+       **それぞれのData Source設定する際、username: `vantiq_sysuser`, password: `secret4sysuser`とすること。**
       - InfluxDB Internal.json -> internals
       - MongoDB Monitoring Dashboard.json -> kubernetes
       - Organization Activitiy.json -> systemDB、kubernetes、vantiqServer
       - Vantiq Resources.json -> kubernetes、vantiqServer
+
    1. Source: `GenericEmailSender` を修正する  
 	      Search box に ”generic” と入力し、enter を押下する。 検索結果 Window が表示されるので、[system] にチェックをつけ、"GenericEmailSender" をクリックする。 適切な email server の設定を行い、[変更の保存] をクリックする  
    1. ノードのプロパティを更新する  
@@ -224,7 +230,7 @@ Vantiqの各コンポーネントはkubernetes上で稼働しているため、�
     kubectl scale sts -n <namespace name> metrics-collector --replicas=0
     kubectl scale sts -n <namespace name> vision-analytics --replicas=0
     ```
-1. アップグレード作業中に作成したMongodbバックアップ（step 7)を用いて作業前の状態に戻す。手順については[Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)を参照する。
+1. アップグレード作業中に作成したMongodbバックアップ（step 7)を用いて作業前の状態に戻す。手順については[Vantiq MongoDB の回復をしたい](./vantiq-install-maintenance-troubleshooting.md#recovery_of_vantiq_mongoDB)を参照する。
 1. `deploy.yaml` の`vantiq.image.tag`をアップグレード前のバージョンに戻す。
 1. `deploy.yaml` の変更を適用する。 `./gradlew -Pcluster=<クラスタ名> deployVantiq`   
 
@@ -310,24 +316,4 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 1. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 
-
-
-### Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
-
-1. vantiq サービスを scale=0 にする
-```
-kubectl scale sts -n xxxx vantiq --replicas=0
-```
-2. mongorestore を実行する
-```
-kubectl create job mongorestore --from=cronjob/mongorestore -n xxx
-```
-3. userdbrestore を実行する（userdb を使用する場合)
-```
-kubectl create job userdbrestore --from=cronjob/userdbrestore -n xxx
-```
-4. vantiq サービスのスケールを戻す
-```
-kubectl scale sts -n xxx vantiq --replicas=3
-```
 Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.md _(要権限)_

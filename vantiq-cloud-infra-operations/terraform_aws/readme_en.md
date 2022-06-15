@@ -54,7 +54,8 @@ Note: Since thsis is a single server option, further consideration is needed for
 ## Building procedure
 
 ### Terraform version
-Each module uses _for_each_, so it must be v0.12.6 or later.
+Each module uses _for_each_, so it must be v0.12.6 or later.  
+Verified Version: v1.1.8
 
 ### Configuration values for cluster building
 Go to the desired environment directory (`env-prod`,`env-dev`,`env-template`) and set the configuration values and build the cluster.   
@@ -84,6 +85,7 @@ The important configuration paramters are as follows.
 
 - Secure VPC IP range. The range of subnets should be greater than /22.  In case of Production configuration, the cluster will have to occupy 30 IPs per node so 11 nodes cannot be accommodated in /24. Considering that subdivided public subnets, private subnets for each AZ are needed, securing ample IP ranges are crucial.
 
+
 ### Setting parameters
 In each _tf_ file, set the parameters according to the environment.
 
@@ -92,7 +94,8 @@ This calls three modules to create VPC, EKS, and RDS resources.
 
 - locals  
   - `region`: Region to create  
-  - `worker_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation.
+  - `worker_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for accessing the worker node).
+  - `basion_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for accessing the Bastion host).
 
 
 - terraform  
@@ -104,6 +107,7 @@ This calls three modules to create VPC, EKS, and RDS resources.
   - `vpc_cidr_block`: cidr of the VPC to create  
   - `public_subnet_config`: The config of the Public Subnet to creat. Each key object (such as az-0) is a Subnet.  
   - `private_subnet_config`: Similar to public_subnet_config, config for Private Subnet
+
 
 - module `eks`  
   - Create an EKS for Public access point  
@@ -134,9 +138,6 @@ Obtain an AMI to be used on the Bastion host.
   - `instance_type`: Instance type of the Bastion host
 
 
-### Post Creataion Tasks
-- Change the password of the keycloak DB (PostgreSQL) instance.
-- Transfer the registered SSH key to the Bastion host using SCP, etc., place it in an appropriate directory, and set the permissions.
 
 
 ### Execute Build/Delete
@@ -166,13 +167,46 @@ $ terraform destroy \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
 ```
 
-## Notes
-- If you are using Terraform 0.15 or later, `sensitive` attribute is required to output sensitive field such as password.
+### Post Building Tasks
+- Change the password of the keycloak DB (PostgreSQL) instance.
+- Transfer the registered SSH key to the Bastion host using SCP, etc., place it in an appropriate directory, and set the permissions.
+
+The sample script "basion-setup-sample.sh" is used to install the tools that are necessary to install Vantiq on a Bastion host.
+To run the script, transfer it to the Bastion server and execute the followings.
+
+```sh
+$ chmod +x ./basion-setup-sample.sh
+$ sudo ./basion-setup-sample.sh
 ```
-"keycloak-db-admin-password" {
-...
-  sensitive = true
-}
+
+### Handover to Vantiq Platform Installation tasks
+Perform the following setup and hand over the information to subsequent tasks.
+
+- Name of the EKS Cluster   
+- [Setting up the Access rights to EKS](../docs/eng/aws_op_priviliges.md#setting-up-the-access-rights-to-eks)  
+(Required when the Vantiq Platform Installation tasks are to be performed by an IAM user other than the one who has executed terraform.)
+- Endpoint of the S3 Storage
+- Endpoint and credential of the keycloak DB
+- IP address of the Bastion host
+- User name and SSH private key for accessing the Bastion host
+
+  ```bash
+  # Output the configuration information
+  $ terraform output
+  ```
+- If you are using Terraform 0.15 or later, `sensitive` attribute is required to output sensitive field such as password.
+  ```tf
+  "keycloak-db-admin-password" {
+  ...
+    sensitive = true
+  }
+  ```
+
+    ```bash
+    # Output the sensitive information among the configuration information
+    terraform output -json | jq '"keycloak-db-admin-password:" + .keycloak-db-admin-password.value'
+    ```
+
 
 ## Reference
 - [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)

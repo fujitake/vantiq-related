@@ -54,7 +54,8 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 ## 構築手順
 
 ### terraformのバージョンについて
-各moduleでfor_eachを利用しているためv0.12.6以降であること
+各moduleでfor_eachを利用しているためv0.12.6以降であること  
+確認済みバージョンはv1.1.8
 
 ### クラスタ構築の設定値について
 各ディレクトリ(`env-prod`,`env-dev`,`env-template`)で環境ごとの設定値を設定し、クラスタ構築を行う。  
@@ -93,7 +94,8 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 
 - locals  
   - `region`: 作成するリージョン  
-  - `worker_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定
+  - `worker_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定(Worker Nodeアクセス用)
+  - `basion_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定(踏み台サーバアクセス用)
 
 
 - terraform  
@@ -120,7 +122,7 @@ Note: シングル構成のため、RDSの構成は考慮が必要
   - `db_storage_type`: DBインスタンスのディスク種類  
   - `postgres_engine_version`: PostgreSQLのバージョン  
 
-  ** DBのパスワードは「Passw0rd」で作成されるので、作成後変更**
+  **DBのパスワードは「Passw0rd」で作成されるので、作成後変更**
 
 
 #### basion-instance.tf  
@@ -129,16 +131,12 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 また、マネージドノードグループのWorker Nodeは踏み台サーバからのSSHのみ許可される。
 
 - data `aws_ami` `ubuntu`  
-踏み台サーバに利用するAMIを取得
+踏み台サーバに利用するAMIを取得  
 
 
 - resource `aws_instance` `basion`  
   - `instance_type`: 踏み台サーバのインスタンスタイプ
 
-
-### 作成後作業
-- keycloak DB(PostgreSQL)インスタンスのパスワード変更する。
-- 踏み台サーバへSCPなどを利用し、登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
 
 
 ### 構築/削除の実行
@@ -166,15 +164,48 @@ $ terraform apply \
 $ terraform destroy \
   -var 'access_key=<YOUR-AWS-ACCESS_KEY>' \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
+
 ```
-## Notes
-- Terraform 0.15以降を使用するう場合、password項目をoutputするためには明示的にsensitive属性が必要です。
+
+### 構築後作業
+- keycloak DB(PostgreSQL)インスタンスのパスワード変更する。
+- 踏み台サーバへSCPなどを利用し、登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
+
+踏み台サーバにVantiqのインストールに必要なツールをインストールする際のサンプルスクリプトが「basion-setup-sample.sh」  
+実行する場合は踏み台サーバにスクリプトを転送し以下を実行  
+
+```sh
+$ chmod +x ./basion-setup-sample.sh
+$ sudo ./basion-setup-sample.sh
 ```
+
+### Vantiqプラットフォームインストール作業への引き継ぎ
+以下の設定を実施、および情報を後続の作業に引き継ぐ。
+
+- EKSクラスタ名
+- [EKSクラスタへのアクセス権の設定](../docs/jp/aws_op_priviliges.md#EKSへのアクセス権の設定)（terraformの実行したIAMユーザー以外がVantiqプラットフォーム インストール作業を行う場合のみ）
+- S3 Storageのエンドポイント
+- keycloak DBのエンドポイント、および資格情報
+- 踏み台サーバのIPアドレス
+- 踏み台サーバへアクセスするためのユーザー名、ssh秘密鍵
+
+```bash
+# 構成情報の出力
+$ terraform output
+```
+- Terraform 0.15以降を使用する場合、password項目をoutputするためには明示的にsensitive属性が必要です。
+```tf
 "keycloak-db-admin-password" {
 ...
   sensitive = true
 }
 ```
+
+```bash
+# 構成情報のうち、sensitiveな情報の出力
+terraform output -json | jq '"keycloak-db-admin-password:" + .keycloak-db-admin-password.value'
+```
+
 
 ## Reference
 - [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)

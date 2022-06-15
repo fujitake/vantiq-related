@@ -66,15 +66,15 @@ graph TB
     H -- Yes --> Y
     H -- No --> Z
 
-    click B "#インフラ障害についてのアナウンスを確認する"
-    click F "#podの正しい配置を確認する"
-    click G "#podの再配置を行う"
-    click I "#nodeのステータスを確認する"
-    click J "#podのステータスを確認する"
-    click L "#podの再起動を行う"
-    click M "#grafanaおよびエラーログを確認する"
-    click O "#アプリ保守チームへの対応を依頼する"
-    click Z "#supportチームへエスカレーションする"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-for-announcements-about-infrastructure-failures"
+    click F "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click G "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#relocate-the-pod"
+    click I "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-the-Node-status"
+    click J "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-the-Pod-status"
+    click L "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Restart-the-Pod"
+    click M "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#check-grafana-and-error-logs"
+    click O "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Request-a-response-from-the-Application-Maintenance-Team"
+    click Z "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#escalate-to-the-support-team"
 
 
 
@@ -113,13 +113,13 @@ graph TB
     I --> F
     H -- No --> Z
 
-    click D "#nodeのステータスを確認する"
-    click E "#podの正しい配置を確認する"
-    click F "#podの再配置を行う"
-    click I "#podの正しい配置を確認する"
-    click J "#podのログを確認する"
-    click K "#podの再起動を行う"
-    click Z "#supportチームへエスカレーションする"
+    click D "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-the-Node-status"
+    click E "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click F "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#relocate-the-pod"
+    click I "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click J "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-the-Pod-logs"
+    click K "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Restart-the-Pod"
+    click Z "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#escalate-to-the-support-team"
 ```
 
 ## Case 3: Nodeの再起動イベントを検出
@@ -138,10 +138,10 @@ graph TB
     D -- Yes --> E
     D -- No --> Y
 
-    click A "#nodeのステータスを確認する"
-    click B "#インフラ障害についてのアナウンスを確認する"
-    click C "#podのステータスを確認する"
-    click E "#podの再配置を行う"
+    click A "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-the-Node-status"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-for-announcements-about-infrastructure-failures"
+    click C "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Check-the-Pod-status"
+    click E "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#relocate-the-pod"
 
 ```
 
@@ -174,9 +174,9 @@ graph TB
     I -- Yes --> Y
     I -- No またはスケール不可 --> Z
 
-    click B "#grafanaおよびエラーログを確認する"
-    click D "#podの再起動を行う"
-    click Z "#supportチームへエスカレーションする"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#check-grafana-and-error-logs"
+    click D "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Restart-the-Pod"
+    click Z "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#escalate-to-the-support-team"
 
 ```
 
@@ -209,10 +209,10 @@ graph TB
     H -- Yes --> I
     I --> J
 
-    click B "#podの正しい配置を確認する"
-    click C "#podの再配置を行う"
-    click E "#アプリ保守チームへの対応を依頼する"
-    click J "#podの再配置を行う"
+    click B "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Confirm-the-correct-placement-of-the-Pod"
+    click C "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#relocate-the-pod"
+    click E "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#Request-a-response-from-the-Application-Maintenance-Team"
+    click J "https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md#relocate-the-pod"
 
 ```
 
@@ -220,7 +220,7 @@ graph TB
 
 フローチャートに記載したアクションについて、オペレーション方法を記載する。
 
-## Podのステータスを確認する
+## Podのステータスを確認する<a id="Check-the-Pod-status"></a>
 
 チェック項目
 - Podのステータス異常はないか（Running、Completed以外は異常）
@@ -395,7 +395,7 @@ Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
   Normal  Started    16s        kubelet, aks-vantiqnp-15823220-vmss000002  Started container load-model
 ```
 
-## Podのログを確認する
+## Podのログを確認する<a id="Check-the-Pod-logs"></a>
 
 チェック項目：
 - Podが稼働中 (Status = Running) にエラーが発生している場合、コンテナのログを確認してエラーの原因を探る。エラーメッセージやStackTraceがあれば内容を確認する。
@@ -423,7 +423,7 @@ $ kubectl logs -n app vantiq-0 -f
 (更新を追跡表示…)
 ```
 
-## Podの再起動を行う
+## Podの再起動を行う<a id="Restart-the-Pod"></a>
 
 対象のPodを再起動するまえに、「[Podのステータスを確認する](#podのステータスを確認する)」、「[Podのログを確認する](#podのログを確認する)」の内容を保全しておく。  
 二通りの方法で Pod を再起動させることができる。状況に応じて使い分ける。
@@ -489,7 +489,7 @@ vantiq-2                       1/1     Running     0          91s
 
 
 
-## Nodeのステータスを確認する
+## Nodeのステータスを確認する<a id="Check-the-Node-status"></a>
 
 チェック項目
 - Nodeの稼働ステータスに異常がないか（Ready以外は異常）。
@@ -667,17 +667,17 @@ ProviderID:                  azure:///subscriptions/72d94fef-e0df-4c3d-9732-da66
 Events:                          <none>
 ```
 
-## Podの再配置を行う
+## Podの再配置を行う<a id="relocate-the-pod"></a>
 
 以下の4ステップを必要な回数行う。
 
 1.  `taint`を使い、Podを動かす先のNode以外をスケジュール不可にする
 ```sh
 kubectl taint nodes --all key=value:NoSchedule
-kubectl taint nodes <node name> key:NosSchedule-
+kubectl taint nodes <node name> key:NoSchedule-
 ```
 
-2.  動かしたいPodを「[Podの再起動を行う](#podの再起動を行う)」  に従い再起動を行う。
+2.  動かしたいPodを「[Podの再起動を行う](#podの再起動を行う)」 に従い再起動を行う。
 3.  Podが意図するNodeに移動したかを「[Podのステータスを確認する](#podのステータスを確認する)」 に従い、確認する。
 4.  Taintを解除する
 ```sh
@@ -810,7 +810,7 @@ node/aks-vantiqnp-15823220-vmss000002 untainted
 error: taint "key:NoSchedule" not found
 ```
 
-## Podの正しい配置を確認する
+## Podの正しい配置を確認する<a id="Confirm-the-correct-placement-of-the-Pod"></a>
 
 チェック項目
 
@@ -925,7 +925,7 @@ pvc-f1fd088d-3704-465a-bba8-1c6eff6ae701   500Gi      RWO            Retain     
 ```
 
 
-## インフラ障害についてのアナウンスを確認する
+## インフラ障害についてのアナウンスを確認する<a id="Check-for-announcements-about-infrastructure-failures"></a>
 
 Infra障害のステータスを確認する。
 
@@ -938,7 +938,7 @@ Infra障害のステータスを確認する。
 - Nodeが可用性ゾーンに分散配置されていること（正しく稼働していればゾーンバランスが保たれるはず。）  
  <https://docs.microsoft.com/ja-jp/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-use-availability-zones#zone-balancing>
 
-## Grafanaおよびエラーログを確認する
+## Grafanaおよびエラーログを確認する<a id="check-grafana-and-error-logs"></a>
 
 VANTIQ PlatformのMonitorで、アラート・障害の要因について調べる。
 
@@ -971,7 +971,7 @@ seq  |  チェック項目 | 権限  |  是正アクション
 ![image2](../../imgs/vantiq_k8s_troubleshooting/image2.png)
 
 *version 1.31 の場合  
-[管理] → [Grafana] を選択する。(図は System Admin 権限の例)*
+[管理] → [Grafana] を選択する。(図は System Admin 権限の例)*  
 ![image2_31](../../imgs/vantiq_k8s_troubleshooting/image2_31.png)
 
 [Home] を選択する。
@@ -1075,7 +1075,7 @@ Organization Admin 権限の Dashboard
 
 ![image20](../../imgs/vantiq_k8s_troubleshooting/image20.png)
 
-## アプリ保守チームへの対応を依頼する
+## アプリ保守チームへの対応を依頼する<a id="Request-a-response-from-the-Application-Maintenance-Team"></a>
 
 アプリケーション保守チームに問題のあるアプリケーションに関する確認および問題の是正を依頼する。恒常的なデータ量増大によるものでなければ、アプリケーション側で解決を行う。
 
@@ -1124,7 +1124,7 @@ VANTIQ IDE のエラーペインにおいても確認できる。
 ![image26](../../imgs/vantiq_k8s_troubleshooting/image26.png)
 
 
-## Supportチームへエスカレーションする
+## Supportチームへエスカレーションする<a id="escalate-to-the-support-team"></a>
 
 VANTIQアプリケーションの問題については、以下のテンプレートに従う。
 

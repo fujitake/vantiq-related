@@ -42,8 +42,8 @@ C2:B7:E4:CC:FE:79 Rbt
     VANTIQ_ENDPOINT = 'https://dev.vantiq.co.jp/api/v1/resources/topics//devices/env'
     2. The Access Token created in the "Preparation in Vantiq IDE".  
     <br/>e.g.
-    VANTIQ_ACCESS_TOKEN = 'abcdefg12345...='
-    3.The MAC address of the Environment Sensor confirmed in Step 5.  
+    VANTIQ_ACCESS_TOKEN = 'abcdefg12345...='  
+    3. The MAC address of the Environment Sensor confirmed in Step 5.  
     <br/>e.g.
     ENV_SENSOR_MAC_ADDRESS = 'C2:B7:E4:CC:FE:79'
 7. Place the sample script in any directory in the Raspberry Pi.  

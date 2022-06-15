@@ -20,6 +20,7 @@
 - [Amazon MQ](docs/jp/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/jp/vantiq-aws-msk.md)
+- [AWS IoT Core](docs/jp/vantiq-aws-iotcore.md)
 - [デバイスからVantiqまで](../vantiq-devices-integration)
 
 
@@ -32,6 +33,7 @@
 
 
 #### VantiqとAzureサービスの接続
+- [Cosmos DB](docs/jp/vantiq-azure-CosmosDB.md)
 - [EventHubs](docs/jp/vantiq-azure-EventHubs.md)
 - [デバイスからVantiqまで](../vantiq-devices-integration)
 
@@ -50,3 +52,4 @@
 - [REST API for Vantiq Topic (HTTPS, WebSocket)](../vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
 - [SendGrid](docs/jp/vantiq-sendgrid.md)
 - [Azure FaceAPI]()
+- [API Gatewayと組み合わせたデザインパターン](./docs/jp/vantiq-apigw.md)

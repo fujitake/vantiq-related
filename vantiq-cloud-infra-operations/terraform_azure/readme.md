@@ -131,6 +131,9 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 
 - VNETのIPを確保する。/22以上のサブネットが望ましい。Production構成だと1 nodeあたり30のIPをとるため、11 nodeの構成だと/24では足りない、ギリギリではない方が望ましい。
 
+- インストールに必要な情報をダウンロードするために、構築する環境からInternetへ通信できるようにしておく。特にファイアウォールにより閉域網を構成する場合。
+  - [Azure Globalに必要なFQDNとアプリケーションの規則](https://docs.microsoft.com/ja-jp/azure/aks/limit-egress-traffic#azure-global-required-fqdn--application-rules) - コンテナリポジトリ等に通信できないと、AKS構築が失敗する。
+  - Vantiq bastionノードがVantiqインストールに必要なソフトウェアのリポジトリへの通信が必要。すべてをホワイトリストすることは困難なので、一律許可しておくのが望ましい。
 
 ### パラメータの設定
 各tfファイルにて、環境に応じてパラメータを設定する。
@@ -218,6 +221,15 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
   - 10分以上止まってしまうタスクがあったら、Ctrl + Cで止め、再度 3.を行う。
   - エラーが出る（tfstateファイルの状態と実際のリソースの状態の不整合）の場合、azure portalからエラーに該当するモジュールを削除し、再度3.を行う。
 
+  - 新規のサブスクリプションの作業の場合、以下のようなエラーとなる場合がある。
+
+  ```
+  Error: creating Cluster: (Managed Cluster Name "<k8s cluster name>" / Resource Group "<resource group name>"): containerservice.ManagedClustersClient#CreateOrUpdate: Failure sending request: StatusCode=409 -- Original Error: Code="MissingSubscriptionRegistration" Message="The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions." Details=[{"code":"MissingSubscriptionRegistration","message":"The subscription is not registered to use namespace 'Microsoft.ContainerService'. See https://aka.ms/rps-not-found for how to register subscriptions.","target":"Microsoft.ContainerService"}]
+  ```
+
+  原因は、サブスクリプションに対してリソースプロバイダーが登録されていない。以下のリンクを参考に、`Microsoft.ContainerService`のプロバイダーを登録すること。
+  https://docs.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-cli
+
 
 5. kubeconfigを取得する
   ```sh
@@ -228,6 +240,15 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 ```sh
 terraform output -json | jq '"rdb_postgres_admin_password:" + .rdb_postgres_admin_password.value'
 ```
+### Vantiqプラットフォームインストール作業への引き継ぎ
+以下の設定を実施、および情報を後続の作業に引き継ぐ。
+
+- AKSクラスタ名
+- [AKSクラスタへのアクセス権の設定](#)（terraformの実行したazユーザー以外がVantiqプラットフォーム インストール作業を行う場合のみ）
+- Azure Storage Serviceへのエンドポイントおよびコンテナ名
+- keycloak DBのエンドポイント、および資格情報
+- 踏み台サーバのIPアドレス
+- 踏み台サーバへアクセスするためのユーザー名、ssh秘密鍵
 
 ## Reference
 - [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)
