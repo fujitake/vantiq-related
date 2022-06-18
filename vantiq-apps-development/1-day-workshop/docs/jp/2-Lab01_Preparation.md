@@ -6,7 +6,7 @@
 
 ## ***Step 2***
 
-1. 「新規プロジェクト」ウィンドウが表示されるので、「新規 Vantiq Namespace」を選択し、Name に **データジェネレーター** 用の Namespace 名を入力して、「_続行_」をクリックします。  
+1. 「新規 Project」ウィンドウが表示されるので、「新規 Vantiq Namespace」を選択し、Name に **データジェネレーター** 用の Namespace 名を入力して、「_続行_」をクリックします。  
 <img src="../../imgs/Lab01/image0.png" width=70%>
 
 #### 参考
@@ -17,8 +17,8 @@
 
 ＊ 複数台のポンプにそれぞれ取り付けられた温度センサーと回転数センサーからのデータを擬似的に発生させるデータジェネレーターを準備します。
 
-1. 「プロジェクト」 > 「インポート...」 を開き、「プロジェクトまたはデータのインポート」ウィンドウを開きます。  
-     事前に配布したデータジェネレータの zip ファイル 「[`TrainingDataGen.zip`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/TrainingDataGen.zip)」をドラッグ&ドロップします。  
+1. 「Projects」 > 「インポート...」 を開き、「Project またはデータのインポート」ウィンドウを開きます。  
+     事前に配布したデータジェネレーターの zip ファイル 「[`TrainingDataGen.zip`](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/1-day-workshop/conf/TrainingDataGen.zip)」をドラッグ&ドロップします。  
 
     <img src="../../imgs/Lab01/image006.png" width=70%>
 
@@ -58,8 +58,8 @@
 
 <img src="../../imgs/Lab01/image7.png" width=80%>
 
-1. 「TrainingDataGeneratorClient」の「起動」 > 「_現在保存されているClientをClient Launcher(RTC)で実行_」をクリックし、データジェネレーターをブラウザで開きます。  
- ＊ 今回のように VANTIQ で開発されたクライアントは「**VANTIQ Client Launcher**」というアプリケーションで起動できます。
+1. 「TrainingDataGeneratorClient」の「起動」 > 「_現在保存されているClientをClient Launcher(RTC)で実行_」をクリックし、データジェネレーターをブラウザーで開きます。  
+ ＊ 今回のように VANTIQ で開発された Client は「**VANTIQ Client Launcher**」というアプリケーションで起動できます。
 
     ![RTC](../../imgs/Lab01/RTC.gif)  
 
@@ -80,7 +80,7 @@
 
     TempSensor Topic： "_/***your name***/pump/Temp_"
 
-    ＊ **_your name_** の箇所には会社名+お名前など**他人と重複しない**任意の値を入力してください。また、topic名に**ダブルクォーテーションは含みません**。topic名の**前後に半角スペースが入らないよう**にしてください。  
+    ＊ **_your name_** の箇所には会社名+お名前など**他人と重複しない**任意の値を入力してください。また、topic 名に**ダブルクォーテーションは含みません**。topic 名の**前後に半角スペースが入らないよう**にしてください。  
 
 7. _Update Topics_ ボタンをクリックします。
 
@@ -103,8 +103,8 @@
 
 4. ナビゲーション バーで、現在の Namespace 名をクリックし、「Namespace の変更」ダイアログを表示して、上記の手順で作成した Namespace に切り替えます。  
 
-1. 「新規プロジェクト」ウィンドウが表示されるので「空のプロジェクト」を選択し、「_続行_」をクリックします。  
-　　 ＊ 既にプロジェクトが存在する場合は表示されません。  
+1. 「新規 Project」ウィンドウが表示されるので「空の Project」を選択し、「_続行_」をクリックします。  
+　　 ＊ 既に Project が存在する場合は表示されません。  
 
     <img src="../../imgs/Lab01/image2.png" width=58%>
 
@@ -112,15 +112,15 @@
 
     <img src="../../imgs/Lab01/image3.png" width=80%>
 
-2. 「プロジェクト名」に 「**PumpFailureDetection**」と入力し、「_終了_」をクリックします。  
+2. 「Project Name」に 「**PumpFailureDetection**」と入力し、「_終了_」をクリックします。  
 
     <img src="../../imgs/Lab01/image4.png" width=68%>
 
-3. プロジェクト名に「`PumpFailureDetection`」と表示されていることを確認します。  
+3. Project 名に「`PumpFailureDetection`」と表示されていることを確認します。  
 
     <img src="../../imgs/Lab01/image5.png" width=90%>
 
-＊ ここまでの手順で、2つの Namespace にそれぞれ、`PumpFailureDetection` というプロジェクトと `TrainingDataGen` というプロジェクトが存在しているはずです。`PumpFailureDetection` プロジェクトを表示してください。
+＊ ここまでの手順で、2つの Namespace にそれぞれ、`PumpFailureDetection` という Project と `TrainingDataGen` という Project が存在しているはずです。`PumpFailureDetection` Project を表示してください。
 
  ＊ 以上で、ワークショップの準備は終了です。
 
@@ -133,8 +133,8 @@
         ✔︎   **RPMS** SensorTopic： /***your name***/pump/**RPMS**  
         ✔︎   **Temp** SensorTopic： /***your name***/pump/**Temp**
 
--   開いているプロジェクトが正しいか
-    -   皆様の環境には、2つの開発用 Namespace があるはずです。ある Namespace には、データジェネレーターで使用しているリソースを確認できる `TrainingDataGen` プロジェクトが、もうひとつの Namespace には、**ポンプ故障検知システム** を構築するために使用するリソースを追加していく `PumpFailureDetection` プロジェクト（今はまだ空の状態）が存在しています。次の Lab から `PumpFailureDetection` プロジェクトで作業を行います。
+-   開いている Project が正しいか
+    -   皆様の環境には、2つの開発用 Namespace があるはずです。ある Namespace には、データジェネレーターで使用している Resource を確認できる `TrainingDataGen` Project が、もうひとつの Namespace には、**ポンプ故障検知システム** を構築するために使用する Resource を追加していく `PumpFailureDetection` Project (今はまだ空の状態) が存在しています。次の Lab から `PumpFailureDetection` Project で作業を行います。
 
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |

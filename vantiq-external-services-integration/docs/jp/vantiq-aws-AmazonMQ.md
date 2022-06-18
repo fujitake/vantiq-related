@@ -3,15 +3,15 @@
 - [ユーザ- アカウントの作成方法](#createUser)
 - [AMQP (Source) の接続方法](#AMQP)
 - [MQTT (Source) の接続方法](#MQTT)
-- [サンプル プロジェクト](#EPROJ)
+- [サンプル Project](#EPROJ)
 
 <h2 id="createUser">1. ユーザー アカウントの作成方法 on Amazon MQ</h2>
 
 ### 1.1 Broker の作成
 作業手順  
-1. 「開始方法」ボタンを押下（下図 ①）  
-2. エンジンはデフォルトのまま（下図 ②）  
-3. デプロイモード（It depends.）ストレージタイプ（It depends.）を選択（下図 ③）
+1. 「開始方法」ボタンを押下 (下図 ①)  
+2. エンジンはデフォルトのまま (下図 ②)  
+3. デプロイモード (It depends.) ストレージタイプ (It depends.) を選択 (下図 ③)
 
 |項番|画像|
 ---|---
@@ -20,9 +20,9 @@
 |③|<img src="../../imgs/vantiq-aws-AmazonMQ/aws_dep_strage.jpg" width="80%">|
 
 作業手順  
-1. フローカー名（It depends）e.g., MQbroker（下図 ①）  
-2. ユーザー名（It depends）＆ パスワード（It depends）を入力（下図 ②）  
-3. その他はデフォルト。「ブローカーの作成」ボタンを押下（15分程度の時間がかかる）（下図 ③）
+1. フローカー名 (It depends) e.g., MQbroker (下図 ①)  
+2. ユーザー名 (It depends) ＆ パスワード (It depends) を入力 (下図 ②)  
+3. その他はデフォルト。「ブローカーの作成」ボタンを押下 (15分程度の時間がかかる) (下図 ③)
 4. ステータスが「実行中」になったことを確認する
 
 |項番|画像|
@@ -33,8 +33,8 @@
 |④|<img src="../../imgs/vantiq-aws-AmazonMQ/aws_running.jpg">|
 
 作業手順  
-1. 作成したブローカー名をクリック（下図 ①）
-2. 「詳細な手順」リンクをクリック（下図 ②）  
+1. 作成したブローカー名をクリック (下図 ①)
+2. 「詳細な手順」リンクをクリック (下図 ②)  
 
 |項番|画像|
 ---|---
@@ -56,7 +56,7 @@
 以下の項目を適宜書き換える
 |項番:項目|内容|
 ---|---
-|①: serverURIs|エンドポイントからコピー amqps://に変更（下図）|
+|①: serverURIs|エンドポイントからコピー amqps://に変更 (下図)|
 |②: topics|It depends. e.g., /outbound/1|
 |③: username|It depends|
 |④: password|It depends|
@@ -100,7 +100,7 @@ VAIL を実行して下記のような結果を得ることを確認
 ---|---
 |①: username|It depends|
 |②: password|It depends|
-|③: sreverURLs|エンドポイントからコピー: mqtts://に変更（下図）|
+|③: sreverURLs|エンドポイントからコピー: mqtts://に変更 (下図)|
 |④: topics|It depends. e.g., /mq_topic/1|
 ```
 {
@@ -138,6 +138,6 @@ VAIL を実行して下記のような結果を得ることを確認
 
 <img src="../../imgs/vantiq-aws-AmazonMQ/aws_mqtt_rslt.jpg">
 
-<h2 id="EPROJ">サンプル プロジェクト on Vantiq IDE</h2>
+<h2 id="EPROJ">サンプル Project on Vantiq IDE</h2>
 
 - [extConnAWS](../../conf/extConnAWS.zip)
