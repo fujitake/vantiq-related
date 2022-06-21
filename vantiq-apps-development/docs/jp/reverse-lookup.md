@@ -29,6 +29,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [ある位置情報を元に、最寄りのオブジェクトを検索したい](#ある位置情報を元に最寄りのオブジェクトを検索したい)
   - [アプリケーションを再利用したい](#アプリケーションを再利用したい)
   - [Type への書き込みでクレジットエラーが出るのを回避したい](#Typeへの書き込みでクレジットエラーが出るのを回避したい)
+  - [バイナリデータを処理したい](#binary_data_process)
 - [構成管理関連](#構成管理関連)
   - [作ったものをテンプレートとして配布したい](#作ったものをテンプレートとして配布したい)
   - [複数人で共同で作業したい](#複数人で共同で作業したい)
@@ -41,6 +42,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [アクセストークンを一元管理したい](#アクセストークンを一元管理したい)
   - [Namespace ごとに環境変数を使いたい](#Namespaceごとに環境変数を使いたい)
   - [Vantiq 上のログをファイルに出力したい](#Vantiq上のログをファイルに出力したい)
+  - [開発中のNamespaceに他のユーザーを招待したい](#invite_users_to_ns)
 
 
 ## Source 関連<a id="Source関連"></a>
@@ -256,6 +258,14 @@ if length(saveRecs) > 0 {
 }
 ```
 
+### バイナリデータを処理したい<a id="binary_data_process"></a>
+Vantiqでは、バイナリデータを入力データとして直接扱うことはできません。ただし、Base64等でエンコードした文字列を受けることはできます。
+(2022/6月、V1.33現在)
+
+バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
+https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents
+
+
 ## 構成管理関連<a id="構成管理関連"></a>
 
 ### 作ったものをテンプレートとして配布したい<a id="作ったものをテンプレートとして配布したい"></a>
@@ -321,3 +331,13 @@ Organization Admin はそれぞれの Namespace においてすべてのアク�
 - **ログ**:  メニュー [表示] >> [レコードの検索] >> Type で `system.logs` を選択 >> クエリの実行 >> ダウンロード
 - **監査ログ**: メニュー [表示] >> [レコードの検索] >>  Type で `system.audits` を選択 >> クエリの実行 >> ダウンロード
 - **エラーログ**: メニュー [表示] >> [レコードの検索] >> [System Type の表示] をチェック >> Type で `arsRuleSnapshot` を選択 >> クエリの実行 >> ダウンロード
+
+### 開発中のNamespaceに他のユーザーを招待したい<a id="invite_users_to_ns" </a>
+
+Namespaceの管理者（= Namespaceの作成者）は、***登録済み*** のユーザーを招待することができます。（未登録のユーザーを招待する場合、まずOrganization Adminに[ユーザー登録の招待](../../1-day-workshop/docs/jp/0-01_Prep_for_Account.md)を依頼してください。）
+
+メニュー [管理] >> Namespace >> Namespace一覧から対象を選択 >> "Manage Authorizations"をクリック >> "+ Userの認証"をクリック
+以下を設定の上、[招待を送信]ボタンを押下する。
+- Invite Destination: 招待するユーザーのメールアドレス
+- Invite Source: "Default"でよい
+- Priviledges: `User` / `Developer` - 開発者であれば`Developer`
