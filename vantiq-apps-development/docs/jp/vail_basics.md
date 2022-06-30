@@ -19,7 +19,7 @@ Vantiqアプリケーション開発時に使用する言語である`VAIL`の�
 
 
 // 変数の宣言方法
-var a // varを使います。 
+var a // varを使います。
 var b = 0 // 宣言と値の割り当てを同時に行うこともできます
 
 
@@ -70,7 +70,7 @@ var g = f / 2  // 4
 var h = b % a  // 1
 var i = c + " World " + a // Hello World 2
 a += 1 // 3
-b -= 1 // 2 
+b -= 1 // 2
 ```
 
 ## 比較
@@ -116,6 +116,26 @@ if (a > 11) {
     log.info("fuga")
 }
 ```
+***注意:*** VAILは論理演算子のショートカットを行わないことがあります。以下の例では右辺も評価されるため、エラーとなります。
+```vail
+var stack = ["first"]
+// stackの最後の2要素を比べて同じであればpopする
+if length(stack) > 1 && compare(stack[-2], stack[-1]) {
+    pop(stack)    
+}
+```
+以下の様に実装すると安全です。
+```vail
+var stack = ["first"]
+// stackの最後の2要素を比べて同じであればpopする
+if length(stack) > 1 {
+  if compare(stack[-2], stack[-1]) {
+      pop(stack)    
+  }
+}
+```
+参照: https://dev.vantiq.co.jp/docs/system/rules/index.html#logical-operators
+
 
 ## for文
 ```VAIL
@@ -160,7 +180,7 @@ var myArray = [1,2,3,"Apple","Peach"]
 var firstElement = myArray[0] // 1
 var lastElement = myArray[-1] // "Peach"
 myArray[10] = "Banana"
-return myArray 
+return myArray
 /*
 [
    1,
@@ -178,7 +198,7 @@ return myArray
 */
 ```
 
-## Try catch 
+## Try catch
 ```VAIL
 try {
     var a = toInteger("Hello") // エラーになるソースコード
@@ -210,9 +230,9 @@ VantiqではSELECT、INSERT、UPDATE、UPSERT、DELETEというSQLのような�
 
 >`members Type`
 
-| プロパティ | 型 | 必須 | ナチュラルキー |　インデックス | ユニーク | 
-| :---: | :---: | :---: | :---: | :---: | :---: | 
-| id | Integer | ◯ | ◯ | ◯ | ◯ | 
+| プロパティ | 型 | 必須 | ナチュラルキー |　インデックス | ユニーク |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+| id | Integer | ◯ | ◯ | ◯ | ◯ |
 | name | String | ◯ | - | - | - |
 | age | Integer | - | - | - | - |
 
@@ -319,7 +339,7 @@ WHERE句の条件に合致するレコードのみを取得します。
 ]
 ```
 
-#### 4. 該当するレコードが1件のみと予めわかっている場合の記述 
+#### 4. 該当するレコードが1件のみと予めわかっている場合の記述
 ```VAIL
 var member = SELECT ONE id, name FROM members WHERE id == 2
 ```
@@ -524,7 +544,7 @@ var data = {
     id: 1,
     value: "Hello"
 }
-PUBLISH { body: data } TO SOURCE ExternalAPI 
+PUBLISH { body: data } TO SOURCE ExternalAPI
 ```
 
 SELECT文の時のように設定値をVAIL側で持たせたい場合はWITH句ではなく`USING`句を使います。WITH句と記述方法が異なり、objectを使用します。USING句を使用せず、bodyと合わせて一つのObjectで書くこともできます。
