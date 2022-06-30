@@ -207,9 +207,9 @@ try {
     // tryブロック内の処理でエラーが発生した際に実行される
     log.info("Hello, catch: " + error)
 } finally {
-	/* tryブロック内の処理でのエラーが発生の有無に関わらず実行される
-		finallyブロックは無くてもOK
-   */
+    /* tryブロック内の処理でのエラーが発生の有無に関わらず実行される
+        finallyブロックは無くてもOK
+    */
     log.info("Hello, finally")
 }
 ```
@@ -580,7 +580,7 @@ var data = {
     value: "Hello"
 }
 var config = {
-	topic: "/test/event"
+    topic: "/test/event"
 }
 PUBLISH { message: data } TO SOURCE MqttBroker USING config
 //PUBLISH { topic: "/test/event", message: data } TO SOURCE MqttBroker
