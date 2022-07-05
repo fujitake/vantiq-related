@@ -30,6 +30,8 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [アプリケーションを再利用したい](#アプリケーションを再利用したい)
   - [Type への書き込みでクレジットエラーが出るのを回避したい](#Typeへの書き込みでクレジットエラーが出るのを回避したい)
   - [バイナリデータを処理したい](#binary_data_process)
+  - [日付に1ヶ月足したり引いたりしたい](#add_months)
+  - [フォーム送信でPOSTしたい](#form_submit)
 - [構成管理関連](#構成管理関連)
   - [作ったものをテンプレートとして配布したい](#作ったものをテンプレートとして配布したい)
   - [複数人で共同で作業したい](#複数人で共同で作業したい)
@@ -43,6 +45,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [Namespace ごとに環境変数を使いたい](#Namespaceごとに環境変数を使いたい)
   - [Vantiq 上のログをファイルに出力したい](#Vantiq上のログをファイルに出力したい)
   - [開発中のNamespaceに他のユーザーを招待したい](#invite_users_to_ns)
+  - [Vantiq ServerのGlobal IPを調べたい](#vantiq_global_ip)
 
 
 ## Source 関連<a id="Source関連"></a>
@@ -265,6 +268,52 @@ Vantiqでは、バイナリデータを入力データとして直接扱うこ�
 バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
 https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents
 
+### 日付に1ヶ月足したり引いたりしたい<a id="add_months"> </a>
+`<date>.plusMillis(interval)`を使用できますが、1ヶ月の足し算は月によって日数が異なるので、以下のサンプルでは直接月数を増減します。
+
+```vail
+PROCEDURE addMonths(date DateTime, plusMonth Integer)
+
+var year = getFullYear(date)
+var month = getMonth(date) + plusMonth
+var day = getDate(date)
+
+var plusYear = floor((month-1) /12)
+year = year + plusYear
+month = month + (plusYear * (-12))
+
+var monthStr = format("{0,number,0000}{1,number,00}{2,number,00}", year, month, day)
+var newDate = parseDate( monthStr, "yyyyMMdd")
+
+return newDate
+```
+
+### フォーム送信でPOSTしたい <a id="form_submit"></a>
+フォーム送信でPOSTするには、以下のパラメータのを設定します。
+- Content-Type: `application/x-www-form-urlencoded`
+
+`body`に、パラメータをx-www-form-urlencoded形式にエンコードした文字列をセットします。
+実装例:
+
+```vail
+var params = {
+   "client_id": "f20ba0ef-XXXXX-XXXXXXXX",
+   "scope": "https://digitaltwins.azure.net/.default",
+   "grant_type": "client_credentials",
+   "client_secret": "aB3zWGo1ZFuo1v16iFXXXXXXXXXXXXXXXx"
+}
+var body = to_x_www_form_urlencoded(params)
+```
+```vail
+PROCEDURE to_x_www_form_urlencoded(json Object)
+var retStr = ""
+for prop in json {
+    retStr = retStr + (length(retStr) > 0 ? "&" : "")
+	retStr = retStr + encodeUri(prop.key) + "=" + encodeUri(prop.value)
+}
+return retStr
+```
+
 
 ## 構成管理関連<a id="構成管理関連"></a>
 
@@ -332,12 +381,25 @@ Organization Admin はそれぞれの Namespace においてすべてのアク�
 - **監査ログ**: メニュー [表示] >> [レコードの検索] >>  Type で `system.audits` を選択 >> クエリの実行 >> ダウンロード
 - **エラーログ**: メニュー [表示] >> [レコードの検索] >> [System Type の表示] をチェック >> Type で `arsRuleSnapshot` を選択 >> クエリの実行 >> ダウンロード
 
-### 開発中のNamespaceに他のユーザーを招待したい<a id="invite_users_to_ns" </a>
+### 開発中のNamespaceに他のユーザーを招待したい<a id="invite_users_to_ns"> </a>
 
 Namespaceの管理者（= Namespaceの作成者）は、***登録済み*** のユーザーを招待することができます。（未登録のユーザーを招待する場合、まずOrganization Adminに[ユーザー登録の招待](../../1-day-workshop/docs/jp/0-01_Prep_for_Account.md)を依頼してください。）
 
-メニュー [管理] >> Namespace >> Namespace一覧から対象を選択 >> "Manage Authorizations"をクリック >> "+ Userの認証"をクリック
+メニュー [管理] >> Advanced >> 保留中の招待 >> New をクリックする。
 以下を設定の上、[招待を送信]ボタンを押下する。
 - Invite Destination: 招待するユーザーのメールアドレス
 - Invite Source: "Default"でよい
 - Priviledges: `User` / `Developer` - 開発者であれば`Developer`
+
+### Vantiq ServerのGlobal IPを調べたい<a id="vantiq_global_ip"> </a>
+
+Vantiq ServerのGlobal IP（Internet GatewayのGlobal IP)を以下の方法で調べることができます。
+
+1. 以下のSourceを作成する。
+   - name: `IfConfigSource`
+   - type: `REMOTE`
+   - url: `https://ifconfig.me`
+2. Procedureで以下を実行する
+  ```vail
+  var ip = select one from source IfConfigSource
+  ```
