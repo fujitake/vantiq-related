@@ -1,5 +1,5 @@
 ## PostgRESTのセットアップ手順
-- ここでは PostgREST の Dockerコンテナ を用いて、 PostgreSQL と Vantiq を接続します。
+- ここでは PostgREST の Dockerコンテナ を用いて、 PostgreSQL と Vantiq を接続します
 
 <br />
 
@@ -40,7 +40,7 @@ REMOTE Source の設定を行います。
 
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
 
-- 例では「Source Name」を「PostgREST_API」としています。
+- 例では「Source Name」を「PostgREST_API」としています
 
 <br />
 
@@ -48,14 +48,14 @@ REMOTE Source の設定を行います。
 
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
 
-- ポート番号は Docker run で指定したポート番号を入力します。
+- ポート番号は Docker run で指定したポート番号を入力します
 
 <br />
 
 <h2 id="db_operation">2. データベース操作</h2>
 サンプルコードに記載されているDBの構造は下記の通りです。
 
-※エンドポイントはテーブル名になります。
+※エンドポイントはテーブル名になります
 
 - テーブル名：books
 - PRIMARY KEY：isbn
@@ -82,7 +82,7 @@ var headers = {
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers
 ```
 
-- なお、GET メソッドの場合は、method の省略が可能です。
+- なお、GET メソッドの場合は、method の省略が可能です
 
 <br />
 
@@ -127,7 +127,7 @@ var body = {
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, body = body
 ```
 
-- なお、body が存在し、POST メソッドの場合は、method の省略が可能です。
+- なお、body が存在し、POST メソッドの場合は、method の省略が可能です
 
 <br />
 
@@ -152,8 +152,8 @@ var body = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, query = query, body = body
 ```
-- WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります。
-- PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります。
+- WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります
+- PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります
 
 <br />
 
