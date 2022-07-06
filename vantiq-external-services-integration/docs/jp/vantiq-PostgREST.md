@@ -42,7 +42,7 @@ REMOTE Source の設定を行います。
 <br />
 
 2. 「Properties」タブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
-- ポート番号は Docker run で指定したポート番号を入力します。
+ポート番号は Docker run で指定したポート番号を入力します。
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
 
 <br />
@@ -73,7 +73,7 @@ var headers = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers
 ```
-- なお、GET メソッドの場合は、method の省略が可能です。
+なお、GET メソッドの場合は、method の省略が可能です。
 
 response
 ```JSON
@@ -115,7 +115,7 @@ var body = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, body = body
 ```
-- なお、body が存在し、POST メソッドの場合は、method の省略が可能です。
+なお、body が存在し、POST メソッドの場合は、method の省略が可能です。
 
 <br />
 
