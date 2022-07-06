@@ -1,7 +1,7 @@
 ## PostgRESTのセットアップ手順
 - ここでは PostgREST の Dockerコンテナ を用いて、 PostgreSQL と Vantiq を接続します。
 
-
+<br />
 
 ## Table Of Contents
 - [PostgRESTのインストール](#install)
@@ -13,7 +13,7 @@
   - [UPDATE文](#update)
   - [DELETE文](#delete)
 
-
+<br />
 
 <h2 id="install">1. PostgREST のインストール</h2>
 <h3 id="docker_run">1.1. Docker コマンドの実行</h3>
@@ -29,20 +29,23 @@ docker run --rm --net=host -p 3000:3000 \
     postgrest/postgrest
 ```
 
+<br />
 
 <h3 id="source">1.2. Source の設定</h3>
 
 REMOTE Source の設定を行います。
 
 1. 「General」タブを開き、「Source Name」に任意の名前を入力し、「Source Type」を「REMOTE」に設定します。
- - 例では「Source Name」を「PostgREST_API」としています。
+- 例では「Source Name」を「PostgREST_API」としています。
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
+
+<br />
 
 2. 「Properties」タブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
 - ポート番号は Docker run で指定したポート番号を入力します。
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
 
-
+<br />
 
 <h2 id="db_operation">2. データベース操作</h2>
 サンプルコードに記載されているDBの構造は下記の通りです。
@@ -55,6 +58,7 @@ PRIMARY KEY：isbn
 |2|神様のメモ帳2|978-4-8402-3888-5|
 |3|神様のメモ帳３|978-4-04-867097-5|
 
+<br />
 
 <h3 id="select">2.1. SELECT文</h3>
 
@@ -92,6 +96,7 @@ response
 ]
 ```
 
+<br />
 
 <h3 id="insert">2.2. INSERT文</h3>
 
@@ -112,6 +117,7 @@ var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = m
 ```
 - なお、body が存在し、POST メソッドの場合は、method の省略が可能です。
 
+<br />
 
 <h3 id="update">2.3. UPDATE文</h3>
 
@@ -137,6 +143,7 @@ var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = m
 - WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります。
 - PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります。
 
+<br />
 
 <h3 id="delete">2.4. DELETE文</h3>
 
