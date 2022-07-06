@@ -19,6 +19,7 @@
 <h3 id="docker_run">1.1. Docker コマンドの実行</h3>
 
 PostgRESTのサイトを元に Docker run コマンドを実行します。
+
 - [PostgREST](https://postgrest.org/en/stable/install.html#docker)
 
 ```Shell
@@ -36,22 +37,27 @@ docker run --rm --net=host -p 3000:3000 \
 REMOTE Source の設定を行います。
 
 1. 「General」タブを開き、「Source Name」に任意の名前を入力し、「Source Type」を「REMOTE」に設定します。
-- 例では「Source Name」を「PostgREST_API」としています。
+
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
+
+- 例では「Source Name」を「PostgREST_API」としています。
 
 <br />
 
 2. 「Properties」タブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
-ポート番号は Docker run で指定したポート番号を入力します。
+
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
+
+- ポート番号は Docker run で指定したポート番号を入力します。
 
 <br />
 
 <h2 id="db_operation">2. データベース操作</h2>
 サンプルコードに記載されているDBの構造は下記の通りです。
 
-テーブル名：books
-PRIMARY KEY：isbn
+- テーブル名：books
+- PRIMARY KEY：isbn
+
 |id|name|isbn|
 |:---:|:---|:---|
 |1|神様のメモ帳|978-4-8402-3691-1|
@@ -73,7 +79,10 @@ var headers = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers
 ```
-なお、GET メソッドの場合は、method の省略が可能です。
+
+- なお、GET メソッドの場合は、method の省略が可能です。
+
+<br />
 
 response
 ```JSON
@@ -115,7 +124,8 @@ var body = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, body = body
 ```
-なお、body が存在し、POST メソッドの場合は、method の省略が可能です。
+
+- なお、body が存在し、POST メソッドの場合は、method の省略が可能です。
 
 <br />
 
