@@ -53,3 +53,4 @@
 - [SendGrid](docs/jp/vantiq-sendgrid.md)
 - [Azure FaceAPI]()
 - [API Gatewayと組み合わせたデザインパターン](./docs/jp/vantiq-apigw.md)
+- [PostgREST](./docs/jp/vantiq-PostgREST.md)
