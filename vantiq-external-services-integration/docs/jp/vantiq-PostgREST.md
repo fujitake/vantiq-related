@@ -1,4 +1,4 @@
-## PostgRESTセットアップ手順
+## PostgRESTのセットアップ手順
 - ここでは PostgREST の Dockerコンテナ を用いて、 PostgreSQL と Vantiq を接続します。
 
 
@@ -34,11 +34,11 @@ docker run --rm --net=host -p 3000:3000 \
 
 REMOTE Source の設定を行います。
 
-1. 「General」のタブを開き、「Source Name」に任意の名前を入力し、「Source Type」を「REMOTE」に設定します。
-- 例では「Source Name」を「PostgREST_API」としています。
+1. 「General」タブを開き、「Source Name」に任意の名前を入力し、「Source Type」を「REMOTE」に設定します。
+ - 例では「Source Name」を「PostgREST_API」としています。
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
 
-2. 「Properties」のタブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
+2. 「Properties」タブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
 - ポート番号は Docker run で指定したポート番号を入力します。
 <img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
 
