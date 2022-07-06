@@ -55,6 +55,8 @@ REMOTE Source の設定を行います。
 <h2 id="db_operation">2. データベース操作</h2>
 サンプルコードに記載されているDBの構造は下記の通りです。
 
+※エンドポイントはテーブル名になります。
+
 - テーブル名：books
 - PRIMARY KEY：isbn
 
