@@ -4,6 +4,8 @@
 <br />
 
 ## Table Of Contents
+- [PostgreSQLサーバーの準備](#postgresql)
+  - [Azure Database for PostgreSQL](#azure_db)
 - [PostgRESTのインストール](#install)
   - [Dockerコマンドの実行](#docker_run)
   - [Sourceの設定](#source)
@@ -15,8 +17,25 @@
 
 <br />
 
-<h2 id="install">1. PostgREST のインストール</h2>
-<h3 id="docker_run">1.1. Docker コマンドの実行</h3>
+<h2 id="install">1. PostgreSQL サーバーの準備</h2>
+
+PostgREST を利用するための PostgreSQL サーバーの準備を行います。
+既存の PostgreSQL サーバーを利用しても構いません。
+今回は簡易的に構築するために、Microsoft Azure サービスの Azure Database for PostgreSQL を利用します。
+使用する Azure データベースは「フレキシブル サーバー」を利用します。（他のデータベースでも構いません）
+
+PostgreSQLの構成は下記の画像を参考にしてください。
+
+<img src="../../imgs\vantiq-PostgREST\PostgrSQL_Server.png">
+
+<br />
+
+<h3 id="docker_run">1.1. Azure Database for PostgreSQL</h3>
+
+<br />
+
+<h2 id="install">2. PostgREST のインストール</h2>
+<h3 id="docker_run">2.1. Docker コマンドの実行</h3>
 
 PostgRESTのサイトを元に Docker run コマンドを実行します。
 
@@ -32,7 +51,7 @@ docker run --rm --net=host -p 3000:3000 \
 
 <br />
 
-<h3 id="source">1.2. Source の設定</h3>
+<h3 id="source">2.2. Source の設定</h3>
 
 REMOTE Source の設定を行います。
 
@@ -52,7 +71,7 @@ REMOTE Source の設定を行います。
 
 <br />
 
-<h2 id="db_operation">2. データベース操作</h2>
+<h2 id="db_operation">3. データベース操作</h2>
 サンプルコードに記載されているDBの構造は下記の通りです。
 
 ※エンドポイントはテーブル名になります
@@ -68,7 +87,7 @@ REMOTE Source の設定を行います。
 
 <br />
 
-<h3 id="select">2.1. SELECT文</h3>
+<h3 id="select">3.1. SELECT文</h3>
 
 ```JavaScript
 PROCEDURE select()
@@ -109,7 +128,7 @@ response
 
 <br />
 
-<h3 id="insert">2.2. INSERT文</h3>
+<h3 id="insert">3.2. INSERT文</h3>
 
 ```JavaScript
 PROCEDURE insert()
@@ -131,7 +150,7 @@ var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = m
 
 <br />
 
-<h3 id="update">2.3. UPDATE文</h3>
+<h3 id="update">3.3. UPDATE文</h3>
 
 ```JavaScript
 PROCEDURE update()
@@ -157,7 +176,7 @@ var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = m
 
 <br />
 
-<h3 id="delete">2.4. DELETE文</h3>
+<h3 id="delete">3.4. DELETE文</h3>
 
 ```JavaScript
 PROCEDURE delete()
