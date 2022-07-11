@@ -20,17 +20,20 @@
 <h2 id="install">1. PostgreSQL サーバーの準備</h2>
 
 PostgREST を利用するための PostgreSQL サーバーの準備を行います。
+
 既存の PostgreSQL サーバーを利用しても構いません。
+
+<br />
+
+<h3 id="docker_run">1.1. Azure Database for PostgreSQL</h3>
+
 今回は簡易的に構築するために、Microsoft Azure サービスの Azure Database for PostgreSQL を利用します。
+
 使用する Azure データベースは「フレキシブル サーバー」を利用します。（他のデータベースでも構いません）
 
 PostgreSQLの構成は下記の画像を参考にしてください。
 
 <img src="../../imgs\vantiq-PostgREST\PostgrSQL_Server.png">
-
-<br />
-
-<h3 id="docker_run">1.1. Azure Database for PostgreSQL</h3>
 
 <br />
 
