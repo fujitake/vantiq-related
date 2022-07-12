@@ -62,17 +62,17 @@ REMOTE Source の設定を行います。
 
 1. 「General」タブを開き、「Source Name」に任意の名前を入力し、「Source Type」を「REMOTE」に設定します。
 
-<img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
+ - 例では「Source Name」を「PostgREST_API」としています
 
-- 例では「Source Name」を「PostgREST_API」としています
+<img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
 
 <br />
 
 2. 「Properties」タブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
 
-<img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
+ - ポート番号は Docker run で指定したポート番号を入力します
 
-- ポート番号は Docker run で指定したポート番号を入力します
+<img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
 
 <br />
 
