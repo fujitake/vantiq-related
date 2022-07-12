@@ -17,7 +17,7 @@
 
 <br />
 
-<h2 id="install">1. PostgreSQL サーバーの準備</h2>
+<h2 id="postgresql">1. PostgreSQL サーバーの準備</h2>
 
 PostgREST を利用するための PostgreSQL サーバーの準備を行います。
 
@@ -25,7 +25,7 @@ PostgREST を利用するための PostgreSQL サーバーの準備を行いま�
 
 <br />
 
-<h3 id="docker_run">1.1. Azure Database for PostgreSQL</h3>
+<h3 id="azure_db">1.1. Azure Database for PostgreSQL</h3>
 
 今回は簡易的に構築するために、Microsoft Azure サービスの Azure Database for PostgreSQL を利用します。
 
