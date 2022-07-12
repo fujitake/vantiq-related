@@ -29,9 +29,11 @@ PostgREST を利用するための PostgreSQL サーバーの準備を行いま�
 
 今回は簡易的に構築するために、Microsoft Azure サービスの Azure Database for PostgreSQL を利用します。
 
-- 使用する Azure データベースは「フレキシブル サーバー」を利用します。（他のデータベースでも構いません）
+使用する Azure データベースは「フレキシブル サーバー」を利用します。（他のデータベースでも構いません）
 
 - PostgreSQLの構成は下記の画像を参考にしてください。
+
+<br />
 
 <img src="../../imgs\vantiq-PostgREST\PostgrSQL_Server.png">
 
