@@ -107,7 +107,7 @@ var headers = {
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers
 ```
 
-- なお、GET メソッドの場合は、method の省略が可能です
+※GET メソッドの場合は、method の省略が可能です
 
 <br />
 
@@ -152,7 +152,7 @@ var body = {
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, body = body
 ```
 
-- なお、body が存在し、POST メソッドの場合は、method の省略が可能です
+※body が存在し、POST メソッドの場合は、method の省略が可能です
 
 <br />
 
@@ -177,8 +177,10 @@ var body = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, query = query, body = body
 ```
-- WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります
-- PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります
+
+※WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります
+
+※PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります
 
 <br />
 
