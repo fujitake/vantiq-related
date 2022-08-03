@@ -1,3 +1,12 @@
+locals {
+  node_labels = {
+    "VANTIQ"   = "compute",
+    "MongoDB"  = "database",
+    "keycloak" = "shared",
+    "grafana"  = "influxdb",
+    "mertics"  = "compute"
+  }
+}
 
 resource "aws_key_pair" "worker" {
   key_name_prefix = "${var.cluster_name}-eks-worker-"
@@ -5,7 +14,7 @@ resource "aws_key_pair" "worker" {
   tags = {
     KubernetesCluster = var.cluster_name
     environment       = var.env_name
-    instance = "eks-worker"
+    instance          = "eks-worker"
   }
 }
 
@@ -55,6 +64,10 @@ resource "aws_eks_node_group" "vantiq-nodegroup" {
     desired_size = each.value.scaling_config.desired_size
     max_size     = each.value.scaling_config.max_size
     min_size     = each.value.scaling_config.min_size
+  }
+
+  labels = {
+    "vantiq.com/workload-preference" = local.node_labels[each.key]
   }
 
   lifecycle {
