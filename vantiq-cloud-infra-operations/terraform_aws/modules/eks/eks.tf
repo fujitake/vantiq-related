@@ -5,7 +5,7 @@ resource "aws_key_pair" "worker" {
   tags = {
     KubernetesCluster = var.cluster_name
     environment       = var.env_name
-    instance = "eks-worker"
+    instance          = "eks-worker"
   }
 }
 
