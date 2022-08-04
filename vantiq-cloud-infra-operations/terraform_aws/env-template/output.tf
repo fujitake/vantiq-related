@@ -30,7 +30,7 @@ output "keycloak-db-admin-user" {
   value = module.keycloak-db.postgres_admin_user
 }
 output "keycloak-db-admin-password" {
-  value = module.keycloak-db.postgres_admin_password
+  value     = module.keycloak-db.postgres_admin_password
   sensitive = true
 }
 output "keycloak-db_name" {
