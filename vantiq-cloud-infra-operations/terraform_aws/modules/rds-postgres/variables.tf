@@ -40,6 +40,25 @@ variable "db_instance_class" {
   default     = null
 }
 
+variable "db_name" {
+  description = "keycloak db name"
+  type        = string
+  default     = null
+}
+
+variable "db_username" {
+  description = "keycloak db user name"
+  type        = string
+  default     = null
+}
+
+variable "db_password" {
+  description = "keycloak db password"
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
 variable "db_storage_size" {
   description = "keycloak db storage size"
   type        = number

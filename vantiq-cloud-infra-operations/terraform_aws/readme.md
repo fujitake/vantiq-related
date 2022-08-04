@@ -25,6 +25,7 @@ Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプ�
 │   └── variables.tf
 └── modules
     ├── eks
+    ├── opnode
     ├── rds-postgres
     └── vpc
 ```
@@ -50,6 +51,15 @@ Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプ�
 - **RDS Instance**
 - **Security Group**  
 Note: シングル構成のため、RDSの構成は考慮が必要
+
+### opnode
+- **EC2**  
+- **Key Pair**  
+  EC2へSSHアクセスするために、ローカルのPublic Keyを登録する  
+- **Security Group**  
+  SSHアクセスを許可する  
+- **Elastic IP**  
+  EC2にアタッチする
 
 ## 構築手順
 
@@ -79,7 +89,7 @@ Note: シングル構成のため、RDSの構成は考慮が必要
   # S3 Bucketのバージョニング設定確認
   aws s3api get-bucket-versioning --bucket <Bucket名>
   ```
-- インスタンスアクセス用のSSHキーの作成・登録する
+- インスタンスアクセス/EKSのWorker Node用のSSHキーの作成・登録する
 - [このサイト](https://aws.amazon.com/jp/blogs/news/vcpu-based-on-demand-instance-limits-are-now-available-in-amazon-ec2/
 )を参考にアカウントで使用できるVCPUのクオータを緩和申請する。2020/06時点では、c5,r5,t3,m5といったインスタンスは「Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances」といった形でまとめられているため、必要数に応じて適用されている値からvcpuのクォータを挙げる。
 
@@ -93,9 +103,12 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 3つのmoduleを呼び出し、VPC・EKS・RDSのリソースを作成  
 
 - locals  
+  - `cluster_version`: EKSのバージョンを指定  
+  - `basion_kubectl_version`: 踏み台サーバへインストールするkubectlのバージョンを指定    
   - `region`: 作成するリージョン  
-  - `worker_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定(Worker Nodeアクセス用)
-  - `basion_access_ssh_key_name`: 事前準備事項で作成したSSHキーの名前を指定(踏み台サーバアクセス用)
+  - `worker_access_private_key`: 事前準備事項で作成したSSHキー(秘密鍵)のファイル名(Worker Nodeアクセス用に踏み台サーバへアップロード)
+  - `worker_access_public_key_name`: 事前準備事項で作成したSSHキー(公開鍵)のファイル名を指定(Worker Nodeアクセス用)
+  - `basion_access_public_key_name`: 事前準備事項で作成したSSHキー(公開鍵)のファイル名を指定(踏み台サーバアクセス用)
 
 
 - terraform  
@@ -111,33 +124,26 @@ Note: シングル構成のため、RDSの構成は考慮が必要
 
 - module `eks`  
   - PublicアクセスポイントのEKSを作成  
-  - `cluster_version`: EKSのバージョンを指定  
   - `managed_node_group_config`: マネージドノードグループの設定で、各キーのオブジェクト(VNATIQなど)が1つのマネージドノードグループ  
 
 
 - module `keycloak-db`  
   - PrivateエンドポイントのDBインスタンスを作成(Private Subnet内のいずれかのAZへシングル構成で作成)  
+  - `db_name`: DBの名前    
+  - `db_username`: DBのユーザ名      
+  - `db_password`: 上記DBユーザのパスワード  
+    **「password1234」で記載済みなので、必ず変更**  
   - `db_instance_class`: DBインスタンスのインスタンスサイズ  
   - `db_storage_size`: DBインスタンスのディスクサイズ  
   - `db_storage_type`: DBインスタンスのディスク種類  
   - `postgres_engine_version`: PostgreSQLのバージョン  
 
-  **DBのパスワードは「Passw0rd」で作成されるので、作成後変更**
-
-
-#### basion-instance.tf  
-踏み台サーバ用EC2インスタンスを作成する。
-事前準備事項で作成したSSHキーを利用したアクセスを許可を設定する。
-また、マネージドノードグループのWorker Nodeは踏み台サーバからのSSHのみ許可される。
-
-- data `aws_ami` `ubuntu`  
-踏み台サーバに利用するAMIを取得  
-
-
-- resource `aws_instance` `basion`  
+- module `opnode`  
+  - 作業用の踏み台サーバを作成  
+  - 事前準備事項で作成したSSHキーを利用したアクセスを許可  
+  - マネージドノードグループのWorker Nodeは踏み台サーバからのSSHのみ許可される    
   - `instance_type`: 踏み台サーバのインスタンスタイプ
-
-
+  
 
 ### 構築/削除の実行
 各environmentのディレクトリに移動し、コマンドを実行する。
@@ -167,17 +173,17 @@ $ terraform destroy \
 
 ```
 
-### 構築後作業
-- keycloak DB(PostgreSQL)インスタンスのパスワード変更する。
-- 踏み台サーバへSCPなどを利用し、登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
+### 構築後作業(構築時に踏み台サーバを利用しない場合)
 
-踏み台サーバにVantiqのインストールに必要なツールをインストールする際のサンプルスクリプトが「basion-setup-sample.sh」  
-実行する場合は踏み台サーバにスクリプトを転送し以下を実行  
+Vantiqのインストールに必要なツールをインストールする際のサンプルスクリプトが「basion-setup-sample.sh」  
+実行する場合は対象の端末にスクリプトを転送し以下を実行。(SSHアクセスなどは適宜設定)  
 
 ```sh
 $ chmod +x ./basion-setup-sample.sh
 $ sudo ./basion-setup-sample.sh
 ```
+
+Worker Nodeや登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
 
 ### Vantiqプラットフォームインストール作業への引き継ぎ
 以下の設定を実施、および情報を後続の作業に引き継ぐ。

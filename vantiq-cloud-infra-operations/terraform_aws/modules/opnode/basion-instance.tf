@@ -14,12 +14,20 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+data "template_file" "basion" {
+  template = file("${path.module}/basion-userdata.sh.tpl")
+  vars = {
+    basion_kubectl_version    = var.basion_kubectl_version
+    worker_access_private_key = file(var.worker_access_private_key)
+  }
+}
+
 resource "aws_key_pair" "basion" {
-  key_name_prefix = "${local.cluster_name}-basion-"
-  public_key      = file(local.basion_access_ssh_key_name)
+  key_name_prefix = "${var.cluster_name}-basion-"
+  public_key      = file(var.basion_access_public_key_name)
   tags = {
-    KubernetesCluster = local.cluster_name
-    environment       = local.env_name
+    KubernetesCluster = var.cluster_name
+    environment       = var.env_name
     instance          = "basion"
   }
 }
@@ -30,14 +38,15 @@ resource "aws_key_pair" "basion" {
 resource "aws_instance" "basion" {
   ami                    = data.aws_ami.ubuntu.image_id
   vpc_security_group_ids = [aws_security_group.basion-ssh-allow.id]
-  subnet_id              = module.vpc.public_subnet_ids[0]
+  subnet_id              = var.basion_subnet_id
   key_name               = aws_key_pair.basion.key_name
-  instance_type          = "t2.micro"
+  instance_type = var.basion_instance_type
+  user_data     = data.template_file.basion.rendered
 
   tags = {
-    Name              = "${local.env_name}-basion-instance-for-${local.cluster_name}"
-    KubernetesCluster = local.cluster_name
-    environment       = local.env_name
+    Name              = "${var.env_name}-basion-instance-for-${var.cluster_name}"
+    KubernetesCluster = var.cluster_name
+    environment       = var.env_name
   }
 }
 
@@ -58,8 +67,8 @@ resource "aws_eip_association" "basion" {
 ###  Security Group to attach basion instance
 ###
 resource "aws_security_group" "basion-ssh-allow" {
-  name   = "${local.env_name}-basion-ssh-allow-${local.cluster_name}"
-  vpc_id = module.vpc.vpc_id
+  name   = "${var.env_name}-basion-ssh-allow-${var.cluster_name}"
+  vpc_id = var.basion_vpc_id
 
   ingress {
     from_port = 22
