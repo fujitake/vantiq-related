@@ -77,6 +77,7 @@ Vantiqアプリケーション開発チーム向けのVantiqと外部Webサー�
 - [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
 - [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
 - [API Gatewayと組み合わせたデザインパターン](./vantiq-external-services-integration/docs/jp/vantiq-apigw.md)
+- [PostgREST](./vantiq-external-services-integration/docs/jp/vantiq-PostgREST.md)
 
 ### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
 Vantiqアプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。

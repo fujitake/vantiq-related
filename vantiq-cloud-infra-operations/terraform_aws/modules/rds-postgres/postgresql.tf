@@ -1,4 +1,17 @@
 ###
+### DB Password
+###
+resource "random_password" "db_password" {
+  length           = 16
+  special          = true
+  override_special = "!#$%&*()-_=+[]{}<>:?"
+}
+
+locals {
+  db_password = var.db_password != null ? var.db_password : random_password.db_password.result
+}
+
+###
 ###  keycloak RDS subnet group
 ###
 resource "aws_db_subnet_group" "keycloak" {
@@ -23,15 +36,16 @@ resource "aws_db_instance" "keycloak-postgres" {
   engine                 = "postgres"
   engine_version         = var.postgres_engine_version
   instance_class         = var.db_instance_class
-  db_name                = "keycloak"
-  username               = "keycloak"
-  password               = "Passw0rd"
+  db_name                = var.db_name
+  username               = var.db_username
+  password               = local.db_password
   port                   = var.db_expose_port
   publicly_accessible    = false
   db_subnet_group_name   = aws_db_subnet_group.keycloak.id
   vpc_security_group_ids = [aws_security_group.keycloak.id]
   skip_final_snapshot    = true
   # final_snapshot_identifier = "keycloak-postgresql-final"
+  auto_minor_version_upgrade = false
 
   lifecycle {
     ignore_changes = [password]
