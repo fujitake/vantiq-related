@@ -26,7 +26,7 @@ Quay.io に新規アカウントを作成する手順について記述します
 ![RegisterRedHat](../../imgs/quay.io_account/SelectRegister.jpg)
 
 ### 5. すべての項目を入力し、[NEXT] を選択します
-- ここで指定するユーザー名には Vantiq Supportチームがお客様を識別できるよう、__"お客様会社名_admin"__ とご登録ください。
+- **Note:** ここで指定するユーザー名には Vantiq Supportチームがお客様を識別できるよう、__"お客様会社名_admin"__ とご登録ください。
 ![RegisterInfo](../../imgs/quay.io_account/RegisterInfo.jpg)  
 
 ### 6. 必須の項目を入力し、チェックボックにチェックをいれて、[CREATE MY ACCOUNT] を選択します
@@ -52,3 +52,8 @@ Quay.io に新規アカウントを作成する手順について記述します
 ### 11. Username をクリックすると、Sign out などができます
 
 ![Signout](../../imgs/quay.io_account/SignedIn1.jpg)  
+
+### 12. Vantiq のチームへの招待を承諾してください
+- 作成されたアカウントに対して Vantiq Supportチームが権限を付けます。追って招待メールが送られるので、案内に従い **Join Team** してください。
+
+![JoinTeam](../../imgs/quay.io_account/JoinTeam.png)  
