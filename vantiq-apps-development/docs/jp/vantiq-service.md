@@ -122,7 +122,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 ![service-builder.png](../../imgs/vantiq-service/service-builder.png)
 
 ### 他のモジュール、外部サービスとの統合
-- Serviceの外部から、Service+ストリーム名でイベントを受けたり渡したりできる。
+- Serviceの外部から、Service + インタフェース名でイベントを受けたり渡したりできる。
 
 ![service-integration.png](../../imgs/vantiq-service/service-integration.png)
 
