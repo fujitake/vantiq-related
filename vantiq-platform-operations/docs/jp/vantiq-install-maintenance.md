@@ -30,7 +30,7 @@
    既存の zone であれば、15分程度で有効になる(実際には数分で有効になるはず)  
    新規の zone であれば、最大 48時間程度かかることになる  
 - `k8sdeploy_tools`、`k8sdeploy` リポジトリへのアクセス権限 (Vantiq Support より入手)
-- `k8sdeploy_clusters_jp` リポジトリへのアクセス権限 (JapanVirtualSRE より入手)
+- `k8sdeploy_clusters_jp` リポジトリへのアクセス権限 (JapanVirtualSRE より入手。Vantiq社内管理の場合のみ。)
 - *quay.io* への vantiq リポジトリへのアクセス権限（Vantiq Support より入手)
 - SMTPサービスのエンドポイント、および資格情報
 - 踏み台サーバのIPアドレス、ユーザー名、ssh秘密鍵（本記事のこれ以降の作業は踏み台サーバ上で行うことを想定する。）
