@@ -2,7 +2,7 @@
 
 ## Vantiq Serviceとは
 
-- 関連した機能の実装をまとめて __カプセル化__ し、より高度な機能を持ち、かつ __高性能__ かつ __高スケーラビリティ__ なアプリケーションを作成するモジュール単位です。
+- 関連した機能の実装をまとめて __カプセル化__ し、より __高スループット__ かつ __高スケーラビリティ__ なアプリケーションを作成するモジュール単位です。
 - 以下の5つの主要な要素があります。
   - __Procedure__ - 同期処理
   - __Inbound__ – 非同期のイベント入力
@@ -10,7 +10,7 @@
   - __イベントハンドラ__ – 非同期の処理ロジック
   - __State__ - インメモリで状態を保持する変数
 
-![](../../imgs/vantiq-service/vantiq-service.png)
+<img src="../../imgs/vantiq-service/vantiq-service.png" width=50%>
 
 #### Procedure
 - Procedure をカプセル化し、同期処理のインタフェースを定義する
@@ -20,7 +20,7 @@
 
 #### Inbound / Outbound
 - ストリーム入出力 (Inbound/Outbound) のインタフェースを定義する
-- Serviceの外部から、`Service` + `ストリーム名` でイベントを受けたり渡したりできる。
+- Serviceの外部から、`Service` + `インターフェース名` でイベントストリームを受けたり渡したりできる。
 
 #### イベントハンドラ
 - 2通りのイベントハンドラーを用いて非同期イベント処理を実装する。
@@ -42,7 +42,7 @@ INBOUND, OUTBOUND   |  Topic
 Visual Event Handler   |  App
 VAIL Event Handler   |  Rule
 Procedure  |  Procedure
-State  |  一時保存用途としてのType
+State  |  一時保存用途としてのType (クエリは使用不可)
 
 
 ## Stateful Serviceとは

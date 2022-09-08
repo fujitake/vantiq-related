@@ -32,7 +32,10 @@
 
 ## 入力編
 
+---
 ### Polling-To-Stream <a id="polling-to-stream"></a>
+
+<img src="../../imgs/reusable-design-patterns/polling-to-stream.png" width=50%>
 
 **Overview**
 - 定期的にPollingしたデータ（ファイル）を個々のレコードに分割して、イベントストリームとして出力する。
@@ -51,9 +54,12 @@
 **Sample Project**
 - [PollingToStream.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/PollingToStream.zip)
 
-![polling-to-stream.png](../../imgs/reusable-design-patterns/polling-to-stream.png)
+---
 
 ### Observer <a id="observer"></a>
+
+<img src="../../imgs/reusable-design-patterns/observer.png" width=50%>
+
 
 **Overview**
 - 緩やかに変化する入力したデータをVantiq上でメモリに保持して定点観測し、差異が発生した時にイベントとして発出する。
@@ -74,9 +80,12 @@
 **Sample Project**
 - [Observer.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/Observer.zip)
 
-![observer.png](../../imgs/reusable-design-patterns/observer.png)
+---
 
 ### Async API <a id="async-api"></a>
+
+<img src="../../imgs/reusable-design-patterns/async-api.png" width=50%>
+
 **Overview**
 - 外部システムからService Procedureを同期呼び出し (Request / Response) しながら、派生イベントにより非同期処理を行う
 
@@ -95,9 +104,11 @@
 **Sample Project**
 - [AsyncAPI.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/AsyncAPI.zip)
 
-![async-api.png](../../imgs/reusable-design-patterns/async-api.png)
+---
 
 ### Cached Remote API <a id="cached-remote-api"></a>
+
+<img src="../../imgs/reusable-design-patterns/cached-remote-api.png" width=50%>
 
 **Overview**
 - 緩やかに変化する大きな参照データに対するREST APIのクエリ結果をキャッシュし、同一のパラメータの呼び出しをキャッシュから返す
@@ -116,9 +127,12 @@
 **Sample Project**
 - [CachedRemoteAPI.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/CachedRemoteAPI.zip)
 
-![cached-remote-api.png](../../imgs/reusable-design-patterns/cached-remote-api.png)
+
+---
 
 ### In-Memory Master <a id="in-memory-master"></a>
+<img src="../../imgs/reusable-design-patterns/in-memory-master.png" width=50%>
+
 **Overview**
 - 外部からロードするマスタデータ（またはそれに準ずる参照系データ）をTypeではなくインメモリのStateで保持する。 Stateは、hash検索のみ可能なので、検索に使う列の数の分キャッシュが必要になる。
 - ロードする時点で複数のマスターレコードを集約しておくことで、より高速化する。（Composite Entityパターンとの併用）
@@ -137,9 +151,11 @@
 **Sample Project**
 - [InMemoryMaster.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/InMemoryMaster.zip)
 
-![in-memory-master.png](../../imgs/reusable-design-patterns/in-memory-master.png)
+---
 
 ### Echo Back <a id="echo-back"></a>
+<img src="../../imgs/reusable-design-patterns/echo-back.png" width=50%>
+
 **Overview**
 - BrokerやREST API等を通じて入力したデータをそのままの形で外部向けのBrokerに返す。
 
@@ -155,9 +171,11 @@
 **Sample Project**
 - [EchoBack.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/EchoBack.zip)
 
-![echo-back.png](../../imgs/reusable-design-patterns/echo-back.png)
+---
 
 ### Loopwhile Batch <a id="loopwhile-batch"></a>
+<img src="../../imgs/reusable-design-patterns/loopwhile-batch.png" width=50%>
+
 **Overview**
 - あらかじめ小さく（Vantiqでタイムアウトしない、過負荷にならない程度）分割したバッチのリスト（ファイルリスト、テーブルのサブセット等）を入力し、LoopWhileで順次バッチ実行を行い、実行ごとにステータスを記録する。
 - 途中で失敗した場合、記録された進捗ステータスに基づき、全体、もしくは途中から再開させる。
@@ -178,12 +196,16 @@
 - [LoopWhileBatch.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/LoopWhileBatch.zip)
 
 
-![loopwhile-batch.png](../../imgs/reusable-design-patterns/loopwhile-batch.png)
-
+---
 
 ## App 編
 
+---
+
 ### Composite Entity <a id="composite-entity"></a>
+
+<img src="../../imgs/reusable-design-patterns/composite-entity.png" width=50%>
+
 **Overview**
 - 複数のエンティティをまとめた複合エンティティで処理を行う
 
@@ -201,9 +223,11 @@
 **Sample Project**
 - N/A
 
-![composite-entity.png](../../imgs/reusable-design-patterns/composite-entity.png)
+---
 
 ### Transpose <a id="transpose"></a>
+
+<img src="../../imgs/reusable-design-patterns/transpose.png" width=50%>
 
 **Overview**
 - AccumulateState タスクを用いて、共通のIDを持つ3つ以上のストリームのプロパティを横並びに入力タイミングに依らない統合をする。
@@ -240,10 +264,12 @@ if (event.humidity) {
 **Sample Project**
 - [Transpose.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/Transpose.zip)
 
-
-![transpose.png](../../imgs/reusable-design-patterns/transpose.png)
+---
 
 ### Adapter <a id="adapter"></a>
+
+<img src="../../imgs/reusable-design-patterns/async-api.png" width=50%>
+
 **Overview**
 - Serviceのインタフェースに入力ストリームの形式を合わせる。
 - Service Inbound, Service Outbound, Service Procedureとの接続時に適宜 Transform したり、Procedure でラップすること。
@@ -262,7 +288,12 @@ if (event.humidity) {
 
 ![adapter.png](../../imgs/reusable-design-patterns/adapter.png)
 
+---
+
 ### Decorator <a id="decorator"></a>
+
+<img src="../../imgs/reusable-design-patterns/decorator.png" width=50%>
+
 **Overview**
 - 入力ストリームに複数のデータソースを統合しながら段階的に情報を付加していく。
 - In-Memory Masterパターン、Cached Remote API、Cached Enrich と併用して効率化する。
@@ -281,12 +312,16 @@ if (event.humidity) {
 **Sample Project**
 - N/A
 
-![decorator.png](../../imgs/reusable-design-patterns/decorator.png)
-
+---
 
 ## 出力編
 
+---
+
 ### Stream-To-Bulk <a id="stream-to-bulk"></a>
+
+<img src="../../imgs/reusable-design-patterns/stream-to-bulk.png" width=50%>
+
 **Overview**
 - ストリームデータをメモリ上に蓄積し、一定時間、もしくは一定数レコードが溜まった時点でまとめてDBに書き出す。
 - Insert, Remote Sourceで外部API連携する処理に適用可能。
@@ -306,9 +341,12 @@ if (event.humidity) {
 - [StreamToBulkInsert.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/StreamToBulkInsert.zip)
 
 
-![stream-to-bulk.png](../../imgs/reusable-design-patterns/stream-to-bulk.png)
+---
 
 ### External Datasink <a id="external-datasink"></a>
+
+<img src="../../imgs/reusable-design-patterns/external-datasink.png" width=50%>
+
 **Overview**
 - Vantiqアプリケーションで処理したデータを蓄積のため、外部に連携する。
 - 連携先としてRDB、時系列DBなど
@@ -326,10 +364,12 @@ if (event.humidity) {
 **Sample Project**
 - N/A
 
-
-![external-datasink.png](../../imgs/reusable-design-patterns/external-datasink.png)
+---
 
 ### WebSocket <a id="websocket"></a>
+
+<img src="../../imgs/reusable-design-patterns/websocket.png" width=50%>
+
 **Overview**
 - Vantiq Topicに出力したストリームデータをクライアントアプリからWebSocketで取りに来る
 
@@ -346,9 +386,11 @@ if (event.humidity) {
 - [websocket_client.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/websocket_client.zip)
 - [WebSocket_Server.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/WebSocket_Server.zip)
 
-![websocket.png](../../imgs/reusable-design-patterns/websocket.png)
+---
 
 ### Journal <a id="journal"></a>
+<img src="../../imgs/reusable-design-patterns/journal.png" width=50%>
+
 **Overview**
 - インメモリのキャッシュに更新を行い、更新情報についてはJournalを保持し、一定のタイミングでPersistする。
 
@@ -364,10 +406,12 @@ if (event.humidity) {
 **Sample Project**
 - N/A
 
-
-![journal.png](../../imgs/reusable-design-patterns/journal.png)
+---
 
 ### Smooth Remote Service <a id="smooth-remote-service"></a>
+
+<img src="../../imgs/reusable-design-patterns/smooth-remote-service.png" width=50%>
+
 **Overview**
 - Remote Sourceで外部サービスを呼び出す部分をバッファし、一定時間あたりの呼び出し数を制御する。
 
@@ -383,4 +427,4 @@ if (event.humidity) {
 **Sample Project**
 - [SmoothRemoteService.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/SmoothRemoteService.zip)
 
-![smooth-remote-service.png](../../imgs/reusable-design-patterns/smooth-remote-service.png)
+---
