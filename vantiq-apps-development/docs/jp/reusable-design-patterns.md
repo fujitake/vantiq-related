@@ -286,8 +286,6 @@ if (event.humidity) {
 **Sample Project**
 - N/A
 
-![adapter.png](../../imgs/reusable-design-patterns/adapter.png)
-
 ---
 
 ### Decorator <a id="decorator"></a>
