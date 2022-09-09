@@ -32,7 +32,7 @@
 
 ## 入力編
 
----
+
 ### Polling-To-Stream <a id="polling-to-stream"></a>
 
 <img src="../../imgs/reusable-design-patterns/polling-to-stream.png" width=50%>
@@ -200,7 +200,7 @@
 
 ## App 編
 
----
+
 
 ### Composite Entity <a id="composite-entity"></a>
 
@@ -231,9 +231,10 @@
 
 **Overview**
 - AccumulateState タスクを用いて、共通のIDを持つ3つ以上のストリームのプロパティを横並びに入力タイミングに依らない統合をする。
+- 起動開始直後などで、 AccumulateState タスクが不完全なプロパティのデータを発出するが、必要に応じて Filter をする。
 
 **Motivation**
-- Joinによるストリーム統合は、どちらか出力イベントがどちらか一方のタイミングに依存する。
+- Joinタスクによるストリーム統合はどちらか出力イベントがどちらか一方のタイミングに依存してしまうため、タイミングに依存しない結合をしたい。
 
 **Usage**
 - さまざまなストリームの統合
@@ -314,7 +315,7 @@ if (event.humidity) {
 
 ## 出力編
 
----
+
 
 ### Stream-To-Bulk <a id="stream-to-bulk"></a>
 
