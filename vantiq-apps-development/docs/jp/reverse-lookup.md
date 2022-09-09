@@ -153,33 +153,7 @@ Grafana を使用する。
 ### 3つ以上のストリームデータを効率よく結合したい<a id="3つ以上のストリームデータを効率よく結合したい"></a>
 以下のいずれかの方法で実装します。
 - [`join`](https://dev.vantiq.co.jp/docs/system/apps/index.html#join) を使います。
-- `AccumulateState` を使い、一連のイベントのプロパティを同一イベントにトランスポーズします。
-![](../../imgs/reverse-lookup/join-accumulatestate.png)
-
-`AccumulateState` タスクの中で、`state` 変数は前回の処理の状態を保持しています。新たな入力である `event` 変数と合わせるように処理します。
-```vail
-if (!state) {
-    // if this is the first time, initialize it.
-    state = {
-        machineID : "",
-        temp: 0.0,
-        humidity: 0.0,
-        controlCode : "0"        
-    }
-}
-
-if (event.controlCode) {
-    state.controlCode = event.controlCode
-}
-if (event.temp) {
-    state.temp = event.temp
-}
-if (event.humidity) {
-    state.humidity = event.humidity
-}
-state.timestamp = event.timestamp
-state.machineID = event.machineID
-```
+- `AccumulateState` を使い、一連のイベントのプロパティを同一イベントにトランスポーズします。（参考： [Transpose パターン](./reusable-design-patterns.md#transpose))
 
 
 ### イベントに紐づけるマスターデータの欠損を、任意の内容のエラーでログ用の DB に送信して残したい<a id="イベントに紐づけるマスタデータの欠損を任意の内容のエラーでログ用のDBに送信して残したい"></a>
