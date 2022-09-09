@@ -55,15 +55,3 @@ variable "basion_ec2_sg_ids" {
   type        = list(string)
   default     = null
 }
-
-variable "keycloak_db_expose_port" {
-  description = "keycloak db expose port"
-  type        = number
-  default     = null
-}
-
-variable "keycloak_db_sg_id" {
-  description = "Security Group ID attached keycloak db instance"
-  type        = string
-  default     = null
-}

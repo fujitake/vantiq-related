@@ -104,9 +104,6 @@ module "eks" {
   worker_access_ssh_key_name = local.worker_access_public_key_name
   basion_ec2_sg_ids          = [module.opnode.basion_ssh_allow_sg_id]
 
-  keycloak_db_expose_port = local.keycloak_db_expose_port
-  keycloak_db_sg_id       = module.keycloak-db.keycloak_db_sg_id
-
   # The following is custom setting
   cluster_version = local.cluster_version
 
