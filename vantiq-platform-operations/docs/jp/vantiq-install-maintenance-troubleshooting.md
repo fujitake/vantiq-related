@@ -18,6 +18,7 @@
   - [Podが再起動を繰り返し、起動できない](#pod-cannot-start)  
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
   - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
+  - [ライセンスの有効期限を確認したい](#check-license-expiration)
 
 
 # Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
@@ -729,3 +730,10 @@ Vantiq のデプロイからやり直す必要がある
 - `undeplyVantiq` を実施
 - `MongoDB` の `pv` と `pvc` を削除
 - `deployVantiq` を実施
+
+# ライセンスの有効期限を確認したい <a id="check-license-expiration"></a>
+
+System Admin でログイン >> メニュー右上のユーザーアイコン >> About と進むと、ライセンス有効期限が表示されます。
+
+<img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
+
