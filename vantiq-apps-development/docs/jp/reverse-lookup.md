@@ -237,10 +237,24 @@ if length(saveRecs) > 0 {
 ```
 
 ### バイナリデータを処理したい<a id="binary_data_process"></a>
-Vantiqでは、バイナリデータを入力データとして直接扱うことはできません。ただし、Base64等でエンコードした文字列を受けることはできます。
-(2022/6月、V1.33現在)
 
-バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
+Vantiqは バイナリーデータの入力はできません。
+Base64等でエンコードした文字列を受けることはできます。
+また制限がありますが、文字列からbyte配列を抽出し、処理を行うことができます。 (V1.34以降）
+
+```vail
+procedure printBase64( encodedValue String )
+// encodedValue is base64 encoded like "AXXXXXXXXXXXXXXXXXXw=="
+
+var decodedValue = Decode.base64Raw(encodedValue)
+var bytes = decodedValue.getBytes()
+
+for (i in range(0, bytes.length())) {
+    log.info("Byte value {}:{}", [i, bytes[i].intValue()])
+}
+```
+
+また、バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
 https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents
 
 ### 日付に1ヶ月足したり引いたりしたい<a id="add_months"> </a>
