@@ -33,6 +33,7 @@
 - `k8sdeploy_clusters_jp` リポジトリへのアクセス権限 (JapanVirtualSRE より入手。Vantiq社内管理の場合のみ。)
 - *quay.io* への vantiq リポジトリへのアクセス権限（Vantiq Support より入手)
 - SMTPサービスのエンドポイント、および資格情報
+- APNs認証キー、FCM用アクセストークン（iOS, AndroidのVantiq Mobileを使用する場合のみ）
 - 踏み台サーバのIPアドレス、ユーザー名、ssh秘密鍵（本記事のこれ以降の作業は踏み台サーバ上で行うことを想定する。）
 - 作業対象のkubernetesクラスタへのアクセス権
 
