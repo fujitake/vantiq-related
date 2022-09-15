@@ -154,7 +154,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "grafananp" {
   os_disk_size_gb       = var.grafana_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.grafana_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
-  availability_zones    = var.availability_zones
+  availability_zones    = [var.availability_zones[0]]
   tags                  = var.tags
 
   node_labels = {
@@ -172,7 +172,7 @@ resource "azurerm_kubernetes_cluster_node_pool" "metricsnp" {
   os_disk_size_gb       = var.metrics_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.metrics_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
-  availability_zones    = var.availability_zones
+  availability_zones    = [var.availability_zones[0]]
   tags                  = var.tags
 
   node_labels = {

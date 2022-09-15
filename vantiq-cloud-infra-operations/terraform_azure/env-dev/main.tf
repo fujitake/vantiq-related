@@ -261,8 +261,7 @@ module "aks" {
   # "Standard_E4s_v3" (4vCPU + 32GiB) - equivalent to R5.xlarge
   # "Standard_B2S" (2vCPU + 4GiB)- equivalent to T3.medium
   # "Standard_E2_v3" (4vCPU + 32GiB) -  equivalent to M5.large
-  # availability_zones = [1, 2, 3]
-  availability_zones = [3]
+  availability_zones = [1]
   vantiq_node_pool_vm_size = "Standard_F4s_v2"
   vantiq_node_pool_node_count = 1
   vantiq_node_pool_node_ephemeral_os_disk = true
