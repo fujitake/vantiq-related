@@ -45,15 +45,15 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
   }
 
   default_node_pool {
-    name       = "vantiqnp"
-    node_count = var.vantiq_node_pool_node_count
-    vm_size    = var.vantiq_node_pool_vm_size
-    os_disk_type = var.vantiq_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
-    os_disk_size_gb = var.vantiq_node_pool_node_ephemeral_os_disk ? 64 : null
+    name       = "keycloaknp"
+    node_count = var.keycloak_node_pool_node_count
+    vm_size    = var.keycloak_node_pool_vm_size
+    os_disk_type = var.keycloak_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+    os_disk_size_gb = var.keycloak_node_pool_node_ephemeral_os_disk ? 64 : null
     vnet_subnet_id = var.aks_node_subnet_id
     availability_zones = var.availability_zones
     node_labels = {
-      "vantiq.com/workload-preference" = "compute"
+      "vantiq.com/workload-preference" = "shared"
     }
     orchestrator_version = var.kubernetes_version
   }
@@ -89,12 +89,14 @@ resource "azurerm_kubernetes_cluster" "aks-vantiq" {
   tags = var.tags
 }
 
-/*
+
 resource "azurerm_kubernetes_cluster_node_pool" "vantiqnp" {
-  count = var.mongodb_node_pool_node_count == 0 ? 0 : 1
+  count = var.vantiq_node_pool_node_count == 0 ? 0 : 1
   name                  = "vantiqnp"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
   vm_size               = var.vantiq_node_pool_vm_size
+  os_disk_type = var.vantiq_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
+  os_disk_size_gb = var.vantiq_node_pool_node_ephemeral_os_disk ? 64 : null
   node_count            = var.vantiq_node_pool_node_count
   vnet_subnet_id        = var.aks_node_subnet_id
   availability_zones    = var.availability_zones
@@ -103,8 +105,9 @@ resource "azurerm_kubernetes_cluster_node_pool" "vantiqnp" {
   node_labels = {
     "vantiq.com/workload-preference" = "compute"
   }
+  orchestrator_version = var.kubernetes_version
 }
-*/
+
 
 resource "azurerm_kubernetes_cluster_node_pool" "mongodbnp" {
   count = var.mongodb_node_pool_node_count == 0 ? 0 : 1
@@ -138,24 +141,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "userdbnp" {
 
   node_labels = {
     "vantiq.com/workload-preference" = "userdb"
-  }
-  orchestrator_version = var.kubernetes_version
-}
-
-resource "azurerm_kubernetes_cluster_node_pool" "keycloaknp" {
-  count = var.keycloak_node_pool_node_count == 0 ? 0 : 1
-  name                  = "keycloaknp"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.aks-vantiq.id
-  vm_size               = var.keycloak_node_pool_vm_size
-  os_disk_type          = var.keycloak_node_pool_node_ephemeral_os_disk ? "Ephemeral" : null
-  os_disk_size_gb       = var.keycloak_node_pool_node_ephemeral_os_disk ? 64 : null
-  node_count            = var.keycloak_node_pool_node_count
-  vnet_subnet_id        = var.aks_node_subnet_id
-  availability_zones    = var.availability_zones
-  tags                  = var.tags
-
-  node_labels = {
-    "vantiq.com/workload-preference" = "shared"
   }
   orchestrator_version = var.kubernetes_version
 }

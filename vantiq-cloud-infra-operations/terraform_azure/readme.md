@@ -177,6 +177,7 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
   - `service_cidr` - Service用に確保するcidr
   - `admin_username` - AKSワーカーノードのユーザー名
   - `ssh_key` - AKSワーカーノードアクセス用のpublic keyのパス
+  - `availability_zones` - 各Nodepool共通のワーカーノードを作成するzoneのリストでenv-devの場合nodepoolのVMが１台のみのため、特定のzoneにデプロイするために指定する
   - `xxx_node_pool_vm_size`: `vantiq`, `mongo`, `userdb`, `grafana`, `keycloak`, `metrics`の各nodepoolのVMサイズを指定する
   - `xxx_node_pool_node_count`: `vantiq`, `mongo`, `userdb`, `grafana`, `keycloak`, `metrics`の各nodepoolのVM数を指定する
 
