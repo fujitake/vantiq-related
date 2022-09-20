@@ -123,6 +123,7 @@ publish payload to TOPIC "/downstream/sensor/telemetry"
 
 ### Sorceを変数に置き換えたい<a id="Sorceを変数に置き換えたい"></a>
 Sorceを変数に置き換えたい場合は、変数名に`@`をつけて使用します。
+
 ※SELECT文でもPUBLISH文でも利用できます。
 
 ```vail

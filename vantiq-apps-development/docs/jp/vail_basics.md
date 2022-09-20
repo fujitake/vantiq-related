@@ -596,7 +596,9 @@ PUBLISH { message: data } TO SOURCE MqttBroker USING config
 #### Sorceを変数に置き換える場合
 
 Sorceを変数に置き換える場合は、下記のように変数名に`@`をつけて使用します。
+
 これは、SELECT文でもPUBLISH文でも利用できます。
+
 ※下記の例ではSource名を`ExternalAPI`としています。
 
 ```VAIL
