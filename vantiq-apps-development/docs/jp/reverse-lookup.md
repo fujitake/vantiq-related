@@ -8,6 +8,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [ひとつの Source の定義でさまざまな Web サービスを呼び分けしたい](#ひとつのSourceの定義でさまざまなWebサービスを呼び分けしたい)
   - [CSV ファイルを入力したい](#CSVファイルを入力したい)
   - [複数の Topic をまとめてサブスクライブしたい](#複数のトピックをまとめてサブスクライブしたい)
+  - [Sorceを変数に置き換えたい](#Sorceを変数に置き換えたい)
 - [アプリケーション実装関連](#アプリケーション実装関連)
   - [前後のイベント情報を蓄積して処理したい](#前後のイベント情報を蓄積して処理したい)
   - [デバッグしたい](#デバッグしたい)
@@ -119,6 +120,24 @@ payload.topicname = msg.topic
 
 publish payload to TOPIC "/downstream/sensor/telemetry"
 ```
+
+### Sorceを変数に置き換えたい<a id="Sorceを変数に置き換えたい"></a>
+Sorceを変数に置き換えたい場合は、変数名に`@`をつけて使用します。
+※SELECT文でもPUBLISH文でも利用できます。
+
+```vail
+var sourceName = "ExternalAPI"
+var response = SELECT FROM SOURCE @sourceName
+```
+
+```vail
+PROCEDURE getUsers(sourceName String)
+var response = SELECT FROM SOURCE @sourceName
+return response
+```
+
+[VAIL Reference Guide ： Variable References](https://dev.vantiq.com/docs/system/rules/index.html#variable-references)
+
 
 ## アプリケーション実装関連<a id="アプリケーション実装関連"></a>
 

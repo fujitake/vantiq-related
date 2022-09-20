@@ -588,3 +588,29 @@ PUBLISH { message: data } TO SOURCE MqttBroker USING config
 送信先となる`topic`の設定が必要となります。
 
 注意点はHTTPの時と同様に`{ message: data }`の部分です。HTTPでは`body`がkeyとなる必要がありますが、`MQTTとAMQP`の場合は`message`、`Kafka`の場合は`value`がkeyとなる必要があります。
+
+
+
+### 備考
+
+#### Sorceを変数に置き換える場合
+
+Sorceを変数に置き換える場合は、下記のように変数名に`@`をつけて使用します。
+これは、SELECT文でもPUBLISH文でも利用できます。
+※下記の例ではSource名を`ExternalAPI`としています。
+
+```VAIL
+var sourceName = "ExternalAPI"
+var response = SELECT FROM SOURCE @sourceName
+```
+
+Procedureで引数を受け取る場合は下記のようになります。
+
+```VAIL
+PROCEDURE getUsers(sourceName String)
+var response = SELECT FROM SOURCE @sourceName
+return response
+```
+
+[VAIL Reference Guide ： Variable References](https://dev.vantiq.com/docs/system/rules/index.html#variable-references)
+
