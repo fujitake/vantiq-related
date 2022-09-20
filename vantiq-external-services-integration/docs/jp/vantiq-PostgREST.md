@@ -17,7 +17,7 @@
 
 <br />
 
-<h2 id="install">1. PostgreSQL サーバーの準備</h2>
+<h2 id="postgresql">1. PostgreSQL サーバーの準備</h2>
 
 PostgREST を利用するための PostgreSQL サーバーの準備を行います。
 
@@ -25,13 +25,15 @@ PostgREST を利用するための PostgreSQL サーバーの準備を行いま�
 
 <br />
 
-<h3 id="docker_run">1.1. Azure Database for PostgreSQL</h3>
+<h3 id="azure_db">1.1. Azure Database for PostgreSQL</h3>
 
 今回は簡易的に構築するために、Microsoft Azure サービスの Azure Database for PostgreSQL を利用します。
 
 使用する Azure データベースは「フレキシブル サーバー」を利用します。（他のデータベースでも構いません）
 
-PostgreSQLの構成は下記の画像を参考にしてください。
+※PostgreSQLの構成は下記の画像を参考にしてください。
+
+<br />
 
 <img src="../../imgs\vantiq-PostgREST\PostgrSQL_Server.png">
 
@@ -60,24 +62,23 @@ REMOTE Source の設定を行います。
 
 1. 「General」タブを開き、「Source Name」に任意の名前を入力し、「Source Type」を「REMOTE」に設定します。
 
-<img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
+   - 例では「Source Name」を「PostgREST_API」としています
 
-- 例では「Source Name」を「PostgREST_API」としています
+<img src="../../imgs\vantiq-PostgREST\PostgREST_API_General.png">
 
 <br />
 
 2. 「Properties」タブを開き、「Server URI」に PostgREST の URI を入力し、保存します。
 
-<img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
+   - ポート番号は Docker run で指定したポート番号を入力します
 
-- ポート番号は Docker run で指定したポート番号を入力します
+<img src="../../imgs\vantiq-PostgREST\PostgREST_API_Properties.png">
 
 <br />
 
 <h2 id="db_operation">3. データベース操作</h2>
-サンプルコードに記載されているDBの構造は下記の通りです。
 
-※エンドポイントはテーブル名になります
+サンプルコードに記載されているDBの構造は下記の通りです。
 
 - テーブル名：books
 - PRIMARY KEY：isbn
@@ -87,6 +88,8 @@ REMOTE Source の設定を行います。
 |1|サンプルブック|978-4-8402-3691-1|
 |2|サンプルブック2|978-4-8402-3888-5|
 |3|サンプルブック３|978-4-04-867097-5|
+
+※テーブル名がエンドポイントになります
 
 <br />
 
@@ -104,7 +107,7 @@ var headers = {
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers
 ```
 
-- なお、GET メソッドの場合は、method の省略が可能です
+※GET メソッドの場合は、method の省略が可能です
 
 <br />
 
@@ -149,7 +152,7 @@ var body = {
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, body = body
 ```
 
-- なお、body が存在し、POST メソッドの場合は、method の省略が可能です
+※body が存在し、POST メソッドの場合は、method の省略が可能です
 
 <br />
 
@@ -174,8 +177,10 @@ var body = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, query = query, body = body
 ```
-- WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります
-- PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります
+
+※WEHER句で PRIMARY KEY が設定されているカラムを指定する必要があります
+
+※PRIMARY KEY が設定されているカラムを含め、すべてのカラムを request body で指定する必要があります
 
 <br />
 
@@ -195,3 +200,4 @@ var query = {
 
 var response = SELECT ONE FROM SOURCE PostgREST_API WITH path = path, method = method, headers = headers, query = query
 ```
+

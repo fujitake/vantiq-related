@@ -2,12 +2,15 @@
 ###  common config(Custom setting)
 ###
 locals {
-  cluster_name               = "vantiq_cluster"
-  env_name                   = "prod"
-  region                     = "<INPUT-YOUR-REGION>"
-  worker_access_ssh_key_name = "<INPUT-YOUR-SSH-KEY-NAME>"
-  basion_access_ssh_key_name = "<INPUT-YOUR-SSH-KEY-NAME>"
-  keycloak_db_expose_port    = 5432
+  cluster_name                  = "vantiq_cluster"
+  cluster_version               = "1.21"
+  basion_kubectl_version        = "1.21.14"
+  env_name                      = "prod"
+  region                        = "<INPUT-YOUR-REGION>"
+  worker_access_private_key     = "<INPUT-YOUR-SSH-PRIVATE-KEY-FILE-NAME>"
+  worker_access_public_key_name = "<INPUT-YOUR-SSH-PUBLIC-KEY-FILE-NAME>"
+  basion_access_public_key_name = "<INPUT-YOUR-SSH-PUBLIC-KEY-FILE-NAME>"
+  keycloak_db_expose_port       = 5432
 }
 
 provider "aws" {
@@ -23,7 +26,7 @@ terraform {
   required_version = ">= 1.1.8"
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = ">= 4.10.0"
     }
   }
@@ -36,7 +39,13 @@ terraform {
 #     key    = "tfstate/prod"
 #     region = "<INPUT-YOUR-REGION>"
 #   }
-#   required_version = ">= 0.12.6"
+#   required_version = ">= 1.1.8"
+#   required_providers {
+#     aws = {
+#       source = "hashicorp/aws"
+#       version = ">= 4.10.0"
+#     }
+#   }
 # }
 
 
@@ -92,14 +101,11 @@ module "eks" {
   public_subnet_ids  = module.vpc.public_subnet_ids
   private_subnet_ids = module.vpc.private_subnet_ids
 
-  worker_access_ssh_key_name = local.worker_access_ssh_key_name
-  basion_ec2_sg_ids          = [aws_security_group.basion-ssh-allow.id]
-
-  keycloak_db_expose_port = local.keycloak_db_expose_port
-  keycloak_db_sg_id       = module.keycloak-db.keycloak_db_sg_id
+  worker_access_ssh_key_name = local.worker_access_public_key_name
+  basion_ec2_sg_ids          = [module.opnode.basion_ssh_allow_sg_id]
 
   # The following is custom setting
-  cluster_version = "1.21"
+  cluster_version = local.cluster_version
 
   managed_node_group_config = {
     "VANTIQ" = {
@@ -138,7 +144,7 @@ module "eks" {
       disk_size      = 40
       scaling_config = {
         desired_size = 1
-        max_size     = 3
+        max_size     = 6
         min_size     = 0
       }
     },
@@ -164,6 +170,9 @@ module "keycloak-db" {
   db_vpc_id      = module.vpc.vpc_id
   db_subnet_ids  = module.vpc.private_subnet_ids
   db_expose_port = local.keycloak_db_expose_port
+  db_name        = "keycloak"
+  db_username    = "keycloak"
+  db_password    = "password1234"
 
   #  Change this Security Group, if use Self Managed Node Group
   #  This value is managed node group
@@ -174,4 +183,20 @@ module "keycloak-db" {
   db_storage_size         = 100
   db_storage_type         = "gp2"
   postgres_engine_version = "12.7"
+}
+
+
+module "opnode" {
+  source       = "../modules/opnode"
+  cluster_name = local.cluster_name
+  env_name     = local.env_name
+
+  basion_kubectl_version = local.basion_kubectl_version
+
+  basion_vpc_id        = module.vpc.vpc_id
+  basion_subnet_id     = module.vpc.public_subnet_ids[0]
+  basion_instance_type = "t2.micro"
+
+  worker_access_private_key     = local.worker_access_private_key
+  basion_access_public_key_name = local.basion_access_public_key_name
 }

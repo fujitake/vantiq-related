@@ -32,6 +32,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [バイナリデータを処理したい](#binary_data_process)
   - [日付に1ヶ月足したり引いたりしたい](#add_months)
   - [フォーム送信でPOSTしたい](#form_submit)
+  - [XMLを処理したい](#handle_xml)
 - [構成管理関連](#構成管理関連)
   - [作ったものをテンプレートとして配布したい](#作ったものをテンプレートとして配布したい)
   - [複数人で共同で作業したい](#複数人で共同で作業したい)
@@ -152,33 +153,7 @@ Grafana を使用する。
 ### 3つ以上のストリームデータを効率よく結合したい<a id="3つ以上のストリームデータを効率よく結合したい"></a>
 以下のいずれかの方法で実装します。
 - [`join`](https://dev.vantiq.co.jp/docs/system/apps/index.html#join) を使います。
-- `AccumulateState` を使い、一連のイベントのプロパティを同一イベントにトランスポーズします。
-![](../../imgs/reverse-lookup/join-accumulatestate.png)
-
-`AccumulateState` タスクの中で、`state` 変数は前回の処理の状態を保持しています。新たな入力である `event` 変数と合わせるように処理します。
-```vail
-if (!state) {
-    // if this is the first time, initialize it.
-    state = {
-        machineID : "",
-        temp: 0.0,
-        humidity: 0.0,
-        controlCode : "0"        
-    }
-}
-
-if (event.controlCode) {
-    state.controlCode = event.controlCode
-}
-if (event.temp) {
-    state.temp = event.temp
-}
-if (event.humidity) {
-    state.humidity = event.humidity
-}
-state.timestamp = event.timestamp
-state.machineID = event.machineID
-```
+- `AccumulateState` を使い、一連のイベントのプロパティを同一イベントにトランスポーズします。（参考： [Transpose パターン](./reusable-design-patterns.md#transpose))
 
 
 ### イベントに紐づけるマスターデータの欠損を、任意の内容のエラーでログ用の DB に送信して残したい<a id="イベントに紐づけるマスタデータの欠損を任意の内容のエラーでログ用のDBに送信して残したい"></a>
@@ -262,10 +237,24 @@ if length(saveRecs) > 0 {
 ```
 
 ### バイナリデータを処理したい<a id="binary_data_process"></a>
-Vantiqでは、バイナリデータを入力データとして直接扱うことはできません。ただし、Base64等でエンコードした文字列を受けることはできます。
-(2022/6月、V1.33現在)
 
-バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
+Vantiqは バイナリーデータの入力はできません。
+Base64等でエンコードした文字列を受けることはできます。
+また制限がありますが、文字列からbyte配列を抽出し、処理を行うことができます。 (V1.34以降）
+
+```vail
+procedure printBase64( encodedValue String )
+// encodedValue is base64 encoded like "AXXXXXXXXXXXXXXXXXXw=="
+
+var decodedValue = Decode.base64Raw(encodedValue)
+var bytes = decodedValue.getBytes()
+
+for (i in range(0, bytes.length())) {
+    log.info("Byte value {}:{}", [i, bytes[i].intValue()])
+}
+```
+
+また、バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
 https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents
 
 ### 日付に1ヶ月足したり引いたりしたい<a id="add_months"> </a>
@@ -312,6 +301,145 @@ for prop in json {
 	retStr = retStr + encodeUri(prop.key) + "=" + encodeUri(prop.value)
 }
 return retStr
+```
+
+### XMLを処理したい<a id="handle_xml"></a>
+
+VantiqでXML形式のデータを処理する場合はBuilt-inのProcedureである[parseXml(str)](https://dev.vantiq.co.jp/docs/system/rules/index.html#content-parsing-procedures)を使用します。
+
+引数にはString型のデータが必要ですのでXMLのデータは文字列に変換されている必要があります。
+
+XMLデータをTopicで受信し、App（Procedure Activity）で処理するケースを考えてみます。
+
+まずTopicに対して送信する際、XMLデータは文字列になっている必要があります。エスケープして文字列に変換し、使用します。
+
+**文字列に変換前**
+```xml
+<slideshow title="Sample Slide Show" date="Date of publication" author="Yours Truly">
+  <!--  TITLE SLIDE  -->
+  <slide type="all">
+    <title>Wake up to WonderWidgets!</title>
+  </slide>
+  <!--  OVERVIEW  -->
+  <slide type="all">
+    <title>Overview</title>
+    <item> Why <em>WonderWidgets</em> are great </item>
+    <item/>
+    <item> Who <em>buys</em> WonderWidgets </item>
+  </slide>
+</slideshow>
+```
+[XML引用元](http://httpbin.org/xml)
+
+**文字列に変換後**
+```xml
+"<slideshow date=\"Date of publication\" author=\"Yours Truly\" title=\"Sample Slide Show\">\n <slide type=\"all\">\n <title>Wake up to WonderWidgets!</title>\n </slide>\n <slide type=\"all\">\n <title>Overview</title>\n <item>Why <em>WonderWidgets</em> are great</item>\n <item/>\n <item>Who <em>buys</em> WonderWidgets</item>\n </slide>\n</slideshow>\n"
+```
+
+TopicにPOSTする際、curlの場合は以下のようになります。
+```sh
+curl --request POST 'https://<your vantiq FQDN>/api/v1/resources/topics/<your topic name>' \
+--header 'Authorization: Bearer <your access token>' \
+--header 'Content-Type: application/json' \
+--data-raw '"<slideshow date=\"Date of publication\" author=\"Yours Truly\" title=\"Sample Slide Show\">\n <slide type=\"all\">\n <title>Wake up to WonderWidgets!</title>\n </slide>\n <slide type=\"all\">\n <title>Overview</title>\n <item>Why <em>WonderWidgets</em> are great</item>\n <item/>\n <item>Who <em>buys</em> WonderWidgets</item>\n </slide>\n</slideshow>\n"'
+```
+> Content-Typeはtext/plainではなく、application/jsonであることに注意してください
+
+次にVantiq側のAppで呼び出すProcedureの実装を考えていきます。
+以下のProcedureの引数である`event`に先のcurlコマンドでPOSTした文字列に変換したxmlが格納されています。
+```js
+PROCEDURE App.getXmlValues(event)
+var original_data_type = typeOf(event)
+// String
+```
+文字列をPOSTしているので、データ型はStringとなります。
+
+`parseXml(str)`を使用できる状態ですので、parseXmlと以降のXMLの各要素へのアクセス方法のサンプルを確認してみましょう。
+```js
+PROCEDURE App.getXmlValues(event)
+var original_data_type = typeOf(event)
+var xml_object = parseXml(event)
+
+// nodeの名前
+var node_name = xml_object.name()
+
+// 属性を取得
+var slide1_type = xml_object.slide[0]["@type"].text()
+
+// 値を取得
+var slide1_title = xml_object.slide[0].title.text()
+var slide2_title = xml_object.slide[1].title.text()
+var slide2_item1 = xml_object.slide[1].item[0].text()
+
+// slide 1つ目、2つ目のtitleを同時に取得
+var slide1_2_title = xml_object.slide.title.text()
+
+// 子要素の値をまとめて取得
+var children_text = xml_object.children().text()
+
+var result = {
+    original_data_type: original_data_type,
+    node_name: node_name,
+    slide1_type: slide1_type,
+    slide1_title: slide1_title,
+    slide2_title: slide2_title,
+    slide2_item1: slide2_item1,
+    slide1_2_title: slide1_2_title,
+    children_text: children_text
+}
+```
+このProcedureの返り値は以下のようになります。
+```json
+{
+   "original_data_type": "String",
+   "node_name": "slideshow",
+   "slide1_type": "all",
+   "slide1_title": "Wake up to WonderWidgets!",
+   "slide2_title": "Overview",
+   "slide2_item1": "Why WonderWidgets are great",
+   "slide1_2_title": "Wake up to WonderWidgets!Overview",
+   "children_text": "Wake up to WonderWidgets!OverviewWhy WonderWidgets are greatWho buys WonderWidgets"
+}
+```
+
+元のXMLと見比べると指定した要素にアクセスできていることがわかります。
+```xml
+<slideshow title="Sample Slide Show" date="Date of publication" author="Yours Truly">
+  <!--  TITLE SLIDE  -->
+  <slide type="all">
+    <title>Wake up to WonderWidgets!</title>
+  </slide>
+  <!--  OVERVIEW  -->
+  <slide type="all">
+    <title>Overview</title>
+    <item> Why <em>WonderWidgets</em> are great </item>
+    <item/>
+    <item> Who <em>buys</em> WonderWidgets </item>
+  </slide>
+</slideshow>
+```
+
+Procedureの中で`name(), text(), children()`などVantiqのリファレンスに記載のない関数が登場しています。
+こちらはVantiqの関数ではなく、[Groovy GPath](https://groovy-lang.org/processing-xml.html#_gpath)により提供されるものです。parseXmlで提供されるオブジェクトはGPathのルールで操作することができます。
+
+#### 補足情報:XMLを返すエンドポイントを設定したREMOTE Source
+以下の設定値を持つREMOTE Sourceの場合、parseXmlを使用する必要がありません。
+```json
+{
+    "passwordType": "string",
+    "pollingInterval": 0,
+    "uri": "http://httpbin.org/xml", ← XMLを返すエンドポイント
+    "query": {},
+    "requestDefaults": {}
+}
+```
+
+```js
+var xml_object = SELECT ONE FROM SOURCE xmlSource
+// parseXmlを使用しておりませんが自動でオブジェクトに変換されています。
+// GPathでアクセスできます。
+var node_name = xml_object.name()
+// "slideshow"
 ```
 
 
