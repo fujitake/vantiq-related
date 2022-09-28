@@ -177,6 +177,7 @@ Call and create five modules, namely VPC, AKS, RDB, Storage, OpNode resources.
   - `service_cidr` - cidr to reserve for Service
   - `admin_username` - User name of the AKS worker node
   - `ssh_key` - Path of the Public key for AKS worker node access
+  - `availability_zones` - In the case of env-dev in the list of zones that create a common worker node for each Nodepool, there is only one VM in the nodepool. Therefore, specify to deploy to a specific zone.
   - `xxx_node_pool_vm_size`: Specify the VM size of each nodepool in `vantiq`, `mongo`, `userdb`, `grafana`, `keycloak`, `metrics`
   - `xxx_node_pool_node_count`: Specify the number of VM for each nodepool in `vantiq`, `mongo`, `userdb`, `grafana`, `keycloak`, `metrics`
 
