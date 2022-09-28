@@ -39,6 +39,12 @@ __Objective\.__
   * _→_  _Faster processing\, improved scalability_
 * Wrapping Source with Service ensures modularity while adding functionality transparently\.
 
+### Notes on implementation
+- Some design patterns depend on features in [Version 1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/). Importing into earlier versions may result in compile errors or may not function as expected.
+  - [Map type in Stateful Service](https://dev.vantiq.co.jp/docs/system/rules/index.html#map) - Replaced the use of Object types in Stateful Service
+  - Automatic Smoothing – Automatically buffer events that flow excessively through the application
+  - [LoopWhile](https://dev.vantiq.co.jp/docs/system/apps/index.html#loop-while) – Sequential execution of a series of processes across multiple tasks
+
 ## input section
 
 ### Polling-To-Stream Pattern<a id="polling-to-stream"></a>
@@ -202,8 +208,34 @@ __Usage__
 
 - For integration test with external systems
 
+**Note**
+- N/A
+
 **Sample Project**
 - [EchoBack.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/EchoBack.zip)
+
+---
+### Loopwhile Batch <a id="loopwhile-batch"></a>
+<img src="../../imgs/reusable-design-patterns/loopwhile-batch.png" width=50%>
+
+**Overview**
+- Enter a list of batches (file list, table subset, etc.) divided into smaller batches (not timed out by Vantiq, not overloaded) in advance, execute the batches sequentially in LoopWhile, and record the status of each execution.
+- If it fails in the middle of the process, it is restarted in its entirety or in the middle of the process based on the recorded progress status.
+- Use with the Async Procedure pattern, the Polling-To-Stream pattern, etc.
+
+**Motivation**
+- Ensure processing that requires a large amount of input
+- To improve operational efficiency based on the assumption that errors occur with a certain probability
+
+**Usage**
+- Data integration
+- Machine Learning data pre-processing
+
+**Note**
+- N/A
+
+**Sample Project**
+- [LoopWhileBatch.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/LoopWhileBatch.zip)
 
 ---
 ## App Edition
@@ -227,6 +259,12 @@ __Usage__
 - Optimal representation of relationships in NoSQL
 
 - As a data structure for UI display
+
+**Note**
+- N/A
+
+**Sample Project**
+- N/A
 
 ---
 
@@ -296,6 +334,9 @@ __Usage__
 
 - This example is an Adapter for Service Inbound\. A similar pattern can be used for the Service Outbound and Service Procedure interfaces\.
 
+**Sample Project**
+- N/A
+
 ---
 
 ### Decorator Pattern<a id="decorator"></a>
@@ -321,6 +362,9 @@ __Usage__
 - _SomeService.Get()_ - Service Procedure returns a record for given a Key.
 - _SomeService_, _SomeService2_ Task - Call Service Procedure to "__Attach Return Value to Return Property"__\.
 - _Sink_ - If the data is for analysis\, it better be sent to outside Vantiq via Broker\, etc\.
+
+**Sample Project**
+- N/A
 
 ---
 
@@ -349,6 +393,9 @@ __Usage__
 
 - Efficient export toRemote Source
 
+**Note**
+- N/A
+
 **Sample Project**
 - [StreamToBulkInsert.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/StreamToBulkInsert.zip)
 
@@ -374,6 +421,12 @@ __Usage__
 
 - Accumulation of visualization dashboards\, reporting\, and data analytics platform
 
+**Note**
+- N/A
+
+**Sample Project**
+- N/A
+
 ---
 
 ### WebSocket Pattern<a id="websocket"></a>
@@ -391,6 +444,9 @@ __Motivation__
 __Usage__
 
 - Update map information \(for location tracking\) to the WebClient
+
+**Note**
+- N/A
 
 **Sample Project**
 - [websocket_client.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/websocket_client.zip)
@@ -416,5 +472,28 @@ __Usage__
 
 **Note**
 - _ScheduledProc_ - Write in Scheduled Procedure in Service
+
+**Sample Project**
+- N/A
+
+---
+### Smooth Remote Service <a id="smooth-remote-service"></a>
+
+<img src="../../imgs/reusable-design-patterns/smooth-remote-service.png" width=50%>
+
+**Overview**
+- Buffer the portion of the Remote Source that calls external services and control the number of calls per fixed time.
+
+**Motivation**
+- If Vantiq processing is too fast for an external service, control the call on the Vantiq side so that it does not result in an error.
+
+**Usage**
+- Use external services that have an API call limit per hour
+
+**Note**
+- N/A
+
+**Sample Project**
+- [SmoothRemoteService.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/SmoothRemoteService.zip)
 
 ---
