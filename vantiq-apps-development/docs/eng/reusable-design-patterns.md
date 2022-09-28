@@ -45,7 +45,7 @@ __Objective\.__
   - Automatic Smoothing – Automatically buffer events that flow excessively through the application
   - [LoopWhile](https://dev.vantiq.co.jp/docs/system/apps/index.html#loop-while) – Sequential execution of a series of processes across multiple tasks
 
-## input section
+## Input section
 
 ### Polling-To-Stream Pattern<a id="polling-to-stream"></a>
 
