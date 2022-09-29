@@ -42,7 +42,7 @@ The Azure database to be used is "Flexible Server" (other databases are also acc
 <h2 id="install">2. Installation of PostgREST</h2>
 <h3 id="docker_run">2.1. Executing Docker commands</h3>
 
-Run the `docker run` command according to the PostgREST site.
+Run the `docker run` command, referring to the PostgREST site.
 
 - [PostgREST](https://postgrest.org/en/stable/install.html#docker)
 
