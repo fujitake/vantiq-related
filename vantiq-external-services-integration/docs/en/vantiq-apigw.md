@@ -59,8 +59,7 @@ flowchart LR
 - Can manage authentication in an integrated manner with API Gateway.  
 
 ### Convert Data Format
-Convert and pass data in formats not supported by Vantiq  
-e.g）
+Convert and pass data in formats not supported by Vantiq.  e.g） 
 - Image (binary) → Convert to Base64 or save to external storage and obtain image URL
 - Rewrite Content-Type
 
