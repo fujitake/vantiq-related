@@ -3,7 +3,7 @@
 ### For Instructors
 - Trainees should have already been invited to Vantiq.
 - `event_generator` should be running in the instructor's environment.
-- Refer [here](https://vantiq.sharepoint.com/:f:/s/jp-tech/EvUXuLjTXnNKqCaJ0e5QapIBrkWoLn-rR1cj2jO-kruZaw?e=h5IUQP) for the current configuration.
+- Refer to [here](https://vantiq.sharepoint.com/:f:/s/jp-tech/EvUXuLjTXnNKqCaJ0e5QapIBrkWoLn-rR1cj2jO-kruZaw?e=h5IUQP) for the current configuration.
 
 ### For Trainees
 - Vantiq user registration should be completed.
@@ -21,13 +21,13 @@
 6. [Add collaboration with an external service (reverse geocoding)](#06_external_service)
 
 ### 1. Import Project into Namespace<a id="01_project_import"></a>
-Download the Project that will be used in this Hands-on Assignment (Link will be provided by the Instructor).  
+Download the Project that will be used in this Hands-on Assignment (the link will be provided by the Instructor).  
 
 Go to [Navigation bar] >> [Projects] >> [Import].
 
 ![](../../imgs/hands-on-lab/01_menu_project.png)
 
-Drag and drop the Project zip file. Then, Import and reload the screen.
+Drag and drop the Project zip file. Then, import and reload the screen.
 ![](../../imgs/hands-on-lab/01_project_zip_dragged.png)
 
 Project has been imported.
@@ -45,11 +45,11 @@ Of the above, follow the data flowing from `GuardMQTT`, which sends Guard locati
 ![](../../imgs/hands-on-lab/02_view_task_events_1.png)
 1. You can observe the data flowing through `GuadMQTT`.
 ![](../../imgs/hands-on-lab/02_view_task_events_2.png)
-1. Clicking on one of them will display the details and show that the data is in JSON format. It represents the location of the security guard.
+1. Clicking on one of them will display the details and show that the data is in JSON format. It represents the location of the security guard.  
 ![](../../imgs/hands-on-lab/02_view_task_events_3.png)
 
 ### 3. Check the data processing step by step<a id="03_view_task_events"></a>
-As for the `EnrichGuard` and `TransformGuard`, perform [View Task Events] as in the previous section.  
+As for the `EnrichGuard` and `TransformGuard`, execute [View Task Events] as in the previous section.  
 
 1. `EnrichGuard` queries the security guard master (`guards` Type) and adds (Enrich) the security guard information whose `guard_id` matches. Compared to the previous step, notice that the `guards` property has been added.  
 ![](../../imgs/hands-on-lab/03_view_task_events_1.png)
@@ -76,7 +76,7 @@ As for the `EnrichGuard` and `TransformGuard`, perform [View Task Events] as in 
 1. Although the data flowed, the `SendEmail` is red. This indicates that an error occurred at that step. The cause is that the `email` appended by `FindNearestGuard` is not valid, so sending the email failed.    
    <img src="../../imgs/hands-on-lab/04_email_error.png" width=70%>
 
-1. Modify the Type of the security guard master that is the origin of the `email` data.  It is possible to edit the Type directly, but for this exercise, modify it from the dedicated Client. Select `MonitorClient` from the Client in [Project Contents].   
+1. Modify the Type of the security guard master that is the origin of the `email` data.  It is possible to edit the Type directly, but for this assignment, modify it from the dedicated Client. Select `MonitorClient` from the Client in [Project Contents].   
    <img src="../../imgs/hands-on-lab/04_monitor_client_select.png" width=40%>
 
 1. Go to [Launch] >> [Run currently saved Client in Client Launcher(RTC)].  
@@ -99,14 +99,14 @@ As for the `EnrichGuard` and `TransformGuard`, perform [View Task Events] as in 
 1. Click `AiCameraAdhoc` in the App Builder and check Configuration. Here is the configuration: `InputResource`: `topics`, `inboundResourced`: `/cameras/suspicous_person`. It is possible to take data from internal events with the configured topic name.  
 ![ ](../../imgs/hands-on-lab/05_topic_input_stream.png)
 
-1. Select `generateAdhocEvent` from Procedure in [Project Contents].  This procedure will create a simulated event (JSON data) and PUBLISH it to the Topic `/cameras/suspicious_person`. Execute the Procedure using the blue arrow button in the upper left corner.  
+1. Select `generateAdhocEvent` from Procedure in [Project Contents]. This procedure will create a simulated event (JSON data) and PUBLISH it to the Topic `/cameras/suspicious_person`. Execute the Procedure using the blue arrow button in the upper left corner.  
 ![](../../imgs/hands-on-lab/05_procedure.png)
 
 1. Once the Procedure is executed, `AiCameraAdhoc` will receive the event and process it.  
 ![](../../imgs/hands-on-lab/05_procedure_executed.png)
 
 ### 6. Add collaboration with an external service (reverse geocoding)<a id="06_external_service"></a>
-Reverse geocoding is a service that converts latitude and longitude into addresses.Collaborate with an external reverse geocoding service.  
+Reverse geocoding is a service that converts latitude and longitude into addresses. Collaborate with an external reverse geocoding service.  
 
 1. The Procedure `reverseGeoCoding` calls an external service and returns the latitude and longitude as an address. Note that it takes latitude and longitude as arguments and returns a string (address).  
 ![](../../imgs/hands-on-lab/06_reverseGeocoding_procedure.png)
@@ -123,5 +123,5 @@ Reverse geocoding is a service that converts latitude and longitude into address
 1. Save the changes using the [Save Changes] icon in the upper right corner of the App Builder's pane. Right-click on the added Transformation and select [View Task Events].  
 ![](../../imgs/hands-on-lab/06_view_task_event.png)  
 
-1. Run `generateAdhocEvent` (or make `AiCameraMqttBroker` Active). Observing the event as it passes through Transformation, notice the addition of the `address` retrieved from the reverse geocoding service.  
+1. Exexute `generateAdhocEvent` (or make `AiCameraMqttBroker` Active). Observing the event as it passes through Transformation, notice the addition of the `address` retrieved from the reverse geocoding service.  
 ![](../../imgs/hands-on-lab/06_address_added.png)
