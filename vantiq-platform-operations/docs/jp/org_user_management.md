@@ -1,4 +1,4 @@
-# Vantiq Organization, Namespace, User の管理
+# Vantiq Organization, Namespace, User Role の関係
 
 ### Namespace とは
 - Namespace は開発リソースを排他的に分離することを保証します。
