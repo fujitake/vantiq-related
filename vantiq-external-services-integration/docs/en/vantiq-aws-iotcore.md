@@ -448,7 +448,7 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 
 ```
 
-Once executed, a list of "things" can be retrieved as follows.    
+Once executed, a list of "Things" can be retrieved as follows.    
 ```json
 [
    {
@@ -520,7 +520,7 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 
 ```
 
-Specify `tempSensor1` which is the name of the created "Thing", in the thing_name argument. Then execute it, the details of "Thing" can be retrieved as follows.  
+Specify `tempSensor1` which is the name of the created "Thing" into the thing_name argument. Then execute it, the details of "Thing" can be retrieved as follows.  
 ```json
 [
    {
@@ -585,7 +585,7 @@ var path = "/things/" + thing_name + "/shadow?name=" + shadow_name
 SELECT FROM SOURCE AWSIoTCoreDeviceShadow WITH method = "GET", path = path, headers = headers
 ```
 
-Specify `tempSensor1` which is the name of the created "Thing", in the thing_name argument, and specify `fun_switch` in the shadow__name argument. Then execute it, the properties of "Thing" can be retrieved as follows.    
+Specify `tempSensor1` which is the name of the created "Thing" into the thing_name argument, and specify `fun_switch` into the shadow__name argument. Then execute it, the properties of "Thing" can be retrieved as follows.    
 
 ```json
 [
@@ -675,7 +675,7 @@ SELECT FROM SOURCE AWSIoTCoreDeviceShadow WITH method = "POST", path = path, hea
 
 ```
 
-Execute the `Test Data Receipt` of the AWSIoTMQTT Source which has been created, and specify `tempSensor1` which is the name of the "Thing" created, into thing_name argument, and specify `fun_switch` into the shadow_name argument. Once  execute it, the following response is returned.　　
+Execute the `Test Data Receipt` of the AWSIoTMQTT Source which has been created, and specify `tempSensor1` which is the name of the "Thing" created into thing_name argument, and specify `fun_switch` into the shadow_name argument. Once  execute it, the following response is returned.　　
 
 ```json
 [
@@ -794,7 +794,7 @@ Publish publish_ev TO TOPIC "/tempsensor/fun_switch/update"
 
 ```
 
-After creating the Rule, specify `tempSensor1` which is the name of the created "Things" in the thing_name argument, and specify `fun_switch` into the shadow_name argument. Execute it.    
+After creating the Rule, specify `tempSensor1` which is the name of the created "Things" into the thing_name argument, and specify `fun_switch` into the shadow_name argument. Execute it.    
 It can be confirmed that the following data is published to /tempsensor/fun_switch/update Topic.  
 
 ```json
