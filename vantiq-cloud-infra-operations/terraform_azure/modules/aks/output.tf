@@ -55,11 +55,11 @@ output "aks_linux_ssh_key" {
 }
 
 output "aks_nodegroup_vantiq_vm_size" {
-  value = azurerm_kubernetes_cluster.aks-vantiq.default_node_pool[0].vm_size
+  value = var.vantiq_node_pool_node_count == 0 ? "N/A" : azurerm_kubernetes_cluster_node_pool.vantiqnp[0].vm_size
 }
 
 output "aks_nodegroup_vantiq_node_count" {
-  value = azurerm_kubernetes_cluster.aks-vantiq.default_node_pool[0].node_count
+  value = var.vantiq_node_pool_node_count == 0 ? 0 : azurerm_kubernetes_cluster_node_pool.vantiqnp[0].node_count
 }
 
 output "aks_nodegroup_mongodb_vm_size" {
@@ -71,11 +71,11 @@ output "aks_nodegroup_mongodb_node_count" {
 }
 
 output "aks_nodegroup_keycloak_vm_size" {
-  value = var.keycloak_node_pool_node_count == 0 ? "N/A" : azurerm_kubernetes_cluster_node_pool.keycloaknp[0].vm_size
+  value = azurerm_kubernetes_cluster.aks-vantiq.default_node_pool[0].vm_size
 }
 
 output "aks_nodegroup_keycloak_node_count" {
-  value = var.keycloak_node_pool_node_count == 0 ? 0 : azurerm_kubernetes_cluster_node_pool.keycloaknp[0].node_count
+  value = azurerm_kubernetes_cluster.aks-vantiq.default_node_pool[0].node_count
 }
 
 output "aks_nodegroup_grafana_vm_size" {

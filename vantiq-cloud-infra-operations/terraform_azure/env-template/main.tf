@@ -204,7 +204,7 @@ module "aks" {
   depends_on = [module.vpc]
 
   # kubernetes version
-  kubernetes_version = "1.19.11"
+  kubernetes_version = "1.22.11"
 
   # enable private cluster
   private_cluster_enabled = false
