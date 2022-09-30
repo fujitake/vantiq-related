@@ -22,7 +22,7 @@ Cosmos DBの作成ができたら「コンテナーの追加」からコンテ�
   - sensors
 - Partition key
   - /sensor_id
- 
+
 OKボタンをクリックしコンテナを作成する。
 
 ## URIとkeyの取得
@@ -200,7 +200,7 @@ Procedureを実行すると以下のように作成したdocumentの一覧を取
 
 クエリを利用したdocumentの取得を行うProcedureを作成する。
 
-参考: [Query Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/query-documents) 
+参考: [Query Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/query-documents)
 
 ```
 PROCEDURE queryDocument()
@@ -270,5 +270,5 @@ Procedureを実行すると以下のようなにクエリに該当するdocument
 **補足:**    
 Vantiqはapplication/query+jsonのContent-Typeに対応していない。(2022/4/25現在）  
 そのため、上記の実装では以下を行っている。
-- SELECT分のcontentTyeパラメータで"**application/query+json**"を渡す
+- SELECT文のcontentTyeパラメータで"**application/query+json**"を渡す
 - application/query+jsonの場合、**bodyをJSONと認識しないので、stringify()でString化**する
