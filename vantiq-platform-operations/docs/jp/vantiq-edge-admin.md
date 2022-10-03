@@ -96,7 +96,7 @@ Organization Adminとして、以下のタスクを行います。
 
 1. 有効日付が更新されたライセンス (`license.key`, `public.pem`) を取得する。
 2. `componse.yaml` が配置されているディレクトリに移動する。
-3. 以下のコマンドを実行して、Vantiq Edgeを停止 `docker compose down``
+3. 以下のコマンドを実行して、Vantiq Edgeを停止 `docker compose down`
 4. `config/license.key`, `config/public.pem`をそれぞれ新しいものに置き換える。
 5. 以下のコマンドを実行して、Vantiq Edgeを起動 `docker compose up -d`
 6. (少し起動完了まで待ち) 以下にWebブラウザ経由でアクセスできることを確認 `http://<Vantiq Edgeホスト>:8080/ui/ide/index.html`
