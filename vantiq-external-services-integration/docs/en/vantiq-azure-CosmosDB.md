@@ -10,7 +10,7 @@ In this document, describe how to do the following from Vantiq's Procedures to C
 Vantiq Server v1.34 or higher is required  
 
 # Configuration of Cosmos DB
-This procedure describes how to collaborate with the Cosmos DB API when it is created with **core "SQL "**.  
+This procedure describes how to collaborate with the Cosmos DB API when it is created with **core "SQL"**.  
 If created by selecting other APIs, refer to the respective references and modify as necessary.  
 
 Once Cosmos DB created, create a container from [New Container]. The settings are the followings.  
