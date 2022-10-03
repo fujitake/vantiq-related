@@ -153,12 +153,11 @@ ConfigのJsonは以下のようになるでしょう。
     "passwordType": "string",
     "oauthSourceName": "<使用するOAuth Source 名>"
 }
-
+```
 **Note**
 Twitter APIのClient Credential flowでは、API KeyとAPI Key Secretを使用します。利用するAPIの仕様に合わせ変更してください。
 
 
-```
 ![RemoteSourceClientCredential](../../imgs/remote-source-oauth/image5.png)
 
 
