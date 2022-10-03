@@ -39,6 +39,23 @@ __Objective\.__
   * _→_  _Faster processing\, improved scalability_
 * Wrapping Source with Service ensures modularity while adding functionality transparently\.
 
+  - [Polling-To-Stream Pattern](#polling-to-stream)
+  - [Observer Pattern](#observer)  
+  - [Async API Pattern](#async-api)
+  - [Cached Remote API Pattern](#cached-remote-api)
+  - [In-Memory Master Pattern](#in-memory-master)  
+  - [Echo Back Pattern](#echo-back)
+  - [Loopwhile Batch Pattern](#loopwhile-batch)  
+  - [Composite Entity Pattern](#composite-entity)  
+  - [Transpose Pattern](#transpose)  
+  - [Adapter/Bridge Pattern](#adapter)   
+  - [Decorator Pattern](#decorator)
+  - [Stream-To-Bulk Pattern](#stream-to-bulk)
+  - [External Datasink Pattern](#external-datasink)
+  - [Websocket Pattern](#websocket)
+  - [Journal Pattern](#journal)
+  - [Smooth Remote Service Pattern](#smooth-remote-service)
+
 ### Notes on implementation
 - Some design patterns depend on features in [Version 1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/). Importing into earlier versions may result in compile errors or may not function as expected.
   - [Map type in Stateful Service](https://dev.vantiq.co.jp/docs/system/rules/index.html#map) - Replaced the use of Object types in Stateful Service
@@ -312,9 +329,9 @@ if (event.humidity) {
 
 ---
 
-### Adapter Pattern<a id="adapter"></a>
+### Adapter / Bridge Pattern<a id="adapter"></a>
 
-<img src="../../imgs/reusable-design-patterns/async-api.png" width=50%>
+<img src="../../imgs/reusable-design-patterns/adapter.png" width=50%>
 
 __Overview__
 
