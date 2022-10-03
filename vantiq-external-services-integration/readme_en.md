@@ -20,6 +20,7 @@ Part 2 (Configure IoT Core)
 - [Amazon MQ](docs/en/vantiq-aws-AmazonMQ.md)
 - [DynamoDB](docs/en/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](docs/en/vantiq-aws-msk.md)
+- [AWS IoT Core](docs/en/vantiq-aws-iotcore.md)
 - [From Devices to Vantiq](../vantiq-devices-integration/readme_en.md)
 
 
@@ -31,7 +32,8 @@ Part 2 (Configure IoT Hub)
 ![azure2](imgs/overall-architecture/azure2_en.png)
 
 
-#### Connect Vantiq to Azure Service
+#### Connect Vantiq to Azure Service  
+- [Cosmos DB](docs/en/vantiq-azure-CosmosDB.md)
 - [EventHubs](docs/en/vantiq-azure-EventHubs.md)
 - [From Devices to Vantiq](../vantiq-devices-integration/readme_en.md)
 
@@ -49,4 +51,6 @@ Part 2 (Configure IoT Hub)
 ### Connect other External Services to Vantiq
 - [REST API for Vantiq Topic (HTTPS, WebSocket)](../vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample)
 - [SendGrid](docs/en/vantiq-sendgrid.md)
-- [Azure FaceAPI]()
+- [Azure FaceAPI]()  
+- [Design Patterns Combined with API Gateway](./docs/en/vantiq-apigw.md)
+- [PostgREST](./docs/en/vantiq-PostgREST.md)
