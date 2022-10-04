@@ -14,7 +14,8 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
 - [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
-
+- [Vantiq Organization, Namespace, User Role の関係](./vantiq-platform-operations/docs/jp/org_user_management.md)
+- [Vantiq Edge Admin タスク](./vantiq-platform-operations/docs/jp/vantiq-edge-admin.md)
 
 ## Vantiqプラットフォームに関する保守項目一覧
 
@@ -32,6 +33,8 @@ Guides and procedures for building and operating the Vantiq Platform.
 
 ![](imgs/section-top/vantiq-intall-flow.png)
 
+- [Customized configuration of deploy.yaml](./docs/eng/deploy_yaml_config.md)
+- [Trouble Shooting Guide for Vantiq Cloud install and maintenance](./docs/eng/vantiq-install-maintenance-troubleshooting.md)
 - [Trouble Shooting Guide for Vantiq Cloud operations](./docs/eng/vantiq_k8s_troubleshooting.md)
 - [Network Configuration Debug Tool](.//docs/eng/alpine-f.md)
 - [Servers Time Synchronization Check Tool](./docs/eng/timestamp_ds.md)
@@ -39,7 +42,7 @@ Guides and procedures for building and operating the Vantiq Platform.
 - [Procedure for generating a CSR for a server certificate](./docs/eng/prepare_csr4rsasslcert.md)
 - [Migration of Vantiq Organization](./docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./docs/eng/vantiq-teardown.md)
-
+- [How to create a new Quay.io account](./docs/eng/create_quay.io_account.md)
 
 ## List of maintenance items for the Vantiq platform
 
