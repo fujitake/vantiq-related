@@ -71,7 +71,7 @@ e.g)
 export AZURE_STORAGE_ACCOUNT=vantiqbackupstorage
 export AZURE_STORAGE_KEY=XXXXXXX7CGqYriw9X3jwojPiHlc/3Jjhn3/MIEKYAJq0KwJZ9fd6zf9nMNt0DmIJcYfqaGmaM1isY3tayXXXXXXX==
 ```
-Add the following under the `vantiq` key in `deploy.yaml`. <bucket name> is optional.  
+Add the following under the `vantiq` key in `deploy.yaml`. \<bucket name\> is optional.  
 
 ```yaml
 vantiq:
@@ -553,8 +553,8 @@ source /tmp/grafana-insert-less-migration-log.sql
 5. Import the system admin dashboard again from JSON.  
 The import of dashboards for the namespace admin and organization admin is completed up to this point, but some dashboards for the system admin have failed. Import them again.  
     - Organization Activity
-    - InfluxDB Internals  
-That is all.  
+    - InfluxDB Internals   
+ 
 
 #### Remarks on Recovery Procedures  
 - The `migration_log` seems to record table schema updates. Therefore, deleting the data in this table, it will cause an error when it will try to apply unnecessary schema changes at the next startup. So, the data in this table should not be changed.
