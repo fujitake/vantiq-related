@@ -14,8 +14,8 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
 - [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
-- [Vantiq Organization, Namespace, User Role の関係](./vantiq-platform-operations/docs/jp/org_user_management.md)
-- [Vantiq Edge Admin タスク](./vantiq-platform-operations/docs/jp/vantiq-edge-admin.md)
+- [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
+- [Vantiq Edge Admin タスク](./docs/jp/vantiq-edge-admin.md)  
 
 ## Vantiqプラットフォームに関する保守項目一覧
 
