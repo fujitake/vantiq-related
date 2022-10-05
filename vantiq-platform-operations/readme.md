@@ -43,6 +43,7 @@ Guides and procedures for building and operating the Vantiq Platform.
 - [Migration of Vantiq Organization](./docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./docs/eng/vantiq-teardown.md)
 - [How to create a new Quay.io account](./docs/eng/create_quay.io_account.md)
+- [Relationship between Vantiq Organization, Namespace and User Role](./docs/eng/org_user_management.md)
 
 ## List of maintenance items for the Vantiq platform
 
