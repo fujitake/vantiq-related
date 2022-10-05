@@ -11,13 +11,13 @@
   - **System NS** – Manage resources related to the whole Vantiq cluster  
   - **Organization Root NS** – Manage Organization (tenants)   
   - **Developer NS** – Developers develop applications (create development resources)  
-  - **Application NS** – Operators manage application users, deploy and operate applications  
-- Note: The Namespace type is not displayed to users.  
+  - **Application NS** – Operators manage application Users, deploy and operate applications  
+- Note: The Namespace type is not displayed to Users.  
 
 <img src="../../imgs/org-user-management/namespace-hierarchy.png" width="50%"/>
 
 ### Relationship between Role types and Namespace
-- Each Namespace type has its own defined Role, and users can perform operations by being assigned to a Role.  
+- Each Namespace type has its own defined Role, and Users can perform operations by being assigned to a Role.  
 
 Types of NS | Role | Main Responsibilities | Create new Users | Create new NS | Create Development Resources
 --|---|---|---|---|--
