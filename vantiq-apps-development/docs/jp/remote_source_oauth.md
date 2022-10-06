@@ -30,7 +30,6 @@ Vantiq 1.34より追加された機能 `OAuth Source` の設定手順及び動�
 必要な情報は以下の通りです。
 - API Key
 - API Key Secret
-- Bearer Token
 - Client ID
 - Client Secret
 
@@ -42,7 +41,14 @@ Remote Sourceに指定するRESTサービスによっては、有効期限の短
 
 期限の切れたアクセストークンを手動で更新するのではなく、有効なアクセストークンを再取得するための専用のSourceを作成することができるようになりました。これが `OAuth Source` です。
 
-Remote Source に、OAuth Sourceからアクセストークンを取得するように設定すると、以下の流れでアクセストークンを取得し、Remote Source でAPIリクエストを行います。
+詳細については、[公式のリファレンス](https://dev.vantiq.co.jp/docs/system/sources/remote/index.html#fetching-access-tokens-on-demand)を参照してください。
+
+Remote Source にOAuth Sourceからアクセストークンを取得するように設定するには、2つのSourceを作成する必要があります。
+- OAuth 認可サーバーのエンドポイントを定義する Remote Source(OAuth Source)
+- 実際に利用するRESTサービスのエンドポイントを定義する Remote Source (本体）
+
+本体のRemote Source のOAuth Propertiesで作成したOAuth Sourceを設定すると、以下の流れでアクセストークンを取得しでAPIリクエストを行います。
+
 1. 有効なトークンかどうか確認する（期限切れでないことも含む） 
 2. 有効でない場合、OAuth Sourceを呼び出して新しいトークンを取得する
 3. 新しいトークンを使用して Remote Source でAPIリクエストを行う
