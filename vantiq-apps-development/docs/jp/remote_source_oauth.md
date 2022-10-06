@@ -35,7 +35,7 @@ Vantiq 1.34より追加された機能 `OAuth Source` の設定手順及び動�
 - Client Secret
 
 
-[こちら](https://developer.twitter.com/en/docs/authentication/oauth-2-0/user-access-token) を参照し、アクセス トークンとリフレッシュ トークンをします。この手順で取得したリフレッシュトークンを後で利用します。
+[こちら](https://developer.twitter.com/en/docs/authentication/oauth-2-0/user-access-token)  のStep 1 ~ 3を参照し、アクセス トークンとリフレッシュ トークンを取得します。この手順で取得したリフレッシュトークンを後で利用します。
 
 # Remote Source とOAuth Source の概要<a id="overview"></a>  
 Remote Sourceに指定するRESTサービスによっては、有効期限の短いアクセストークンを利用しなければならない場合があります。
