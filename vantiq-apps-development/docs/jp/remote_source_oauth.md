@@ -25,7 +25,7 @@ Vantiq 1.34より追加された機能 `OAuth Source` の設定手順及び動�
 以下の記事を参照し、Twitter Developer Apps の登録、API Key等必要な情報の取得を行ってください。
 
 - [Twitter Developer Apps](https://developer.twitter.com/en/docs/apps/overview)
-[OAuth 2.0](https://developer.twitter.com/en/docs/authentication/oauth-2-0)
+- [OAuth 2.0](https://developer.twitter.com/en/docs/authentication/oauth-2-0)
 
 必要な情報は以下の通りです。
 - API Key
