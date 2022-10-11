@@ -45,7 +45,7 @@ flowchart LR
 ```
 
 ### Keep the devices and Vantiq loosely coupled
-e.g）Devices are difficult to update once installed (tokens, URLs, etc.). On the other hand, endpoints on the Vantiq side have the possibility to change. API Gateway makes the API layer abstract and centrally manages security.  
+e.g.）Devices are difficult to update once installed (tokens, URLs, etc.). On the other hand, endpoints on the Vantiq side can change. API Gateway makes the API layer abstract and centrally manages security.  
 
 ```mermaid
 flowchart LR
