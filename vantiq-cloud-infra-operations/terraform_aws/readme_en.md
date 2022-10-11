@@ -141,7 +141,7 @@ This calls three modules to create VPC, EKS, and RDS resources.
 - module `opnode`  
   - Create the Bastion host for working.  
   - Set up permissions for access using the SSH key created in the Preparation.  
-  - The Worker Node of the Managed Node Group is only allowed to use SSH from the Bastion host.    
+  - The Worker Node of the Managed Node Group is only accessible via SSH from the Bastion host.    
   - `instance_type`: Instance type of the Bastion host
 
 
