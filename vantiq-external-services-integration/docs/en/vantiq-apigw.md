@@ -9,7 +9,7 @@
 
 
 ## Examples of Services that Vantiq cannot Collaborate directly with
-Vantiq cannot directly collaborate with services in the followings, so utilize the API Gateway.
+In the following cases, Vantiq cannot directly connect with services in the followings, so API Gateway is configured.
 - Cannot reach in terms of network (connection from Vantiq on public network to service endpoints on private network).  
 - Except for protocols supported by Vantiq (REST, WebSocket, MQTT, AMQP, Kafka, SMTP and so on) require a connection.   
 - Return a response other than the Content-Type supported by Vantiq (application/json, text/csv and so on）in the REST API.  
