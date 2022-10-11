@@ -6,7 +6,7 @@
 - Refer to [here](https://vantiq.sharepoint.com/:f:/s/jp-tech/EvUXuLjTXnNKqCaJ0e5QapIBrkWoLn-rR1cj2jO-kruZaw?e=h5IUQP) for the current configuration.
 
 ### For Trainees
-- Vantiq user registration should be completed.
+- Vantiq user registration should have been completed.
 - Vantiq development Namespace should have been created.
 
 ![](../../imgs/hands-on-lab/01_before_project_import.png)
