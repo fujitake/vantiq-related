@@ -1,5 +1,6 @@
 # Introduction
-Describe how to collaborate with AWS IoT APIs directly from Vantiq.    
+This article describes how to collaborate with AWS IoT APIs directly from Vantiq.    
+
 From Vantiq, the following collaborations are possible.    
 
 - Receive data (telemetry) from Vantiq to devices    
