@@ -28,7 +28,7 @@ Developer NS  | Developer  | - Development and Maintenance | No  | **Yes**  | **
 Application NS  | NS Admin  | - Operate Application <br /> - Manage End Users | **Yes** | No | No
 Application NS  | User  | - Use Application | No | No | No
 
-- (1) Can invite System Admin newly. Also, can invite Organization Admin newly when creating Organization.  
+- (1) Can invite System Admin newly. Also, can invite Organization Admin newly when creating an Organization.  
 - (2) Only Organization Root NS can be created.  
 - (3) Can be created but not recommended.  
 
