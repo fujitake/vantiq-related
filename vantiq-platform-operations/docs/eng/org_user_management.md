@@ -33,7 +33,7 @@ Application NS  | User  | - Use Application | No | No | No
 - (3) Can be created but not recommended.  
 
 ### Invite to Namespace
-- Authorized user can be given access to the NS by sending invitation E-mail.
+- Authorized user can grant access to the NS by sending invitation E-mail.
 
 #### Invite a new User
 - Administer >> Users >> New  
