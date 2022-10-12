@@ -30,7 +30,8 @@ Vantiq Server v1.33 or higher is required
 ## Configuration of IoT Core
 Prepare the Access key and the Secret key for your account to run AWS IoT Core REST API from Vantiq.  
 
-## Creating "Things" for Vantiq assignment  
+## Creating "Things" to be assigned to Vantiq 
+
 Create "Things" with the AWS console for assignment to Vantiq in order to make a connection from Vantiq to AWS IoT Core's MQTT.    
 Go to AWS IoT > Manage > Things, and create "Things" as the followings.    
 - Specify the property of a "Thing"  
