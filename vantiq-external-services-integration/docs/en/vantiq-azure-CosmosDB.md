@@ -29,7 +29,8 @@ Click [OK] button to create the container.
 ## Get the value of URI and Key
 
 Get the both URI and Key from **Settings > Keys** to use the API.    
-Make a note of the value of both **URI** and **Primary Key**.  
+Note the value of both **URI** and **Primary Key**.  
+
 
 
 # Create Vantiq Resources
