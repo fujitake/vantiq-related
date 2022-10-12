@@ -1,5 +1,6 @@
 # Introduction
-Describe how to collaborate with Azure Cosmos DB APIs directly from Vantiq.  
+This article describes collaborating with Azure Cosmos DB APIs directly from Vantiq.  
+
 In this document, describe how to do the following from Vantiq's Procedures to Cosmos DB.  
 - Create Documents (data records)  
 - Retrieve a list of Documents  
