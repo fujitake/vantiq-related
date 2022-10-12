@@ -4,7 +4,7 @@ This article describes the procedure for creating a new account on Quay.io.
 
 ## How to create a new Quay.io account  
 
-  It is possible to sing in to Quay.io with a RED HAT account.       
+  You can sign in to Quay.io with a RED HAT account.       
   Here are the procedures for creating a new one.    
 
 ## Go to https://quay.io/
