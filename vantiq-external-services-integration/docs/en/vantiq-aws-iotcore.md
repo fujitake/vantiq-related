@@ -16,7 +16,8 @@ From Vantiq, the following collaborations are possible.
   Device Shadow supports HTTPS | MQTT, both of which are supported by Vantiq.  
 
 
-In this document, describe how to do the following from Vantiq's Procedures.  
+This document describes how to do the following from Vantiq's Procedures.  
+
 - Retrieve a list of "Things"  
 - Retrieve details (Registry, Properties) of "Things"  
 - Retrieve properties (Control Support, Device Shadow) of "Things"  
