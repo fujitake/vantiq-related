@@ -91,7 +91,7 @@ Application NS  | User  | - Use Application | No | No | No
 <img src="../../imgs/org-user-management/home-namespace.png" width="50%"/>
 
 
-- **Current Namespace** – The Namespace which is currently working.  
+- **Current Namespace** – The Namespace where the work is currently taking place.  
 
 <img src="../../imgs/org-user-management/current-namespace.png" width="50%"/>
 
