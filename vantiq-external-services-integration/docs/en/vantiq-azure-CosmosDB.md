@@ -144,7 +144,8 @@ Executing the Procedure, the following results are returned.
 ]
 ```
 
-From Azure Portal, it is also possible to confirm that the above document is stored in the Items of the sensors container that was created.  
+From Azure Portal, it is also possible to confirm that the above document is stored in the Items of the sensors container.  
+
 
 ### Retrieve Documents  
 
