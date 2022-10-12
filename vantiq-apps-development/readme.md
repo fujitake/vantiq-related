@@ -17,4 +17,5 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./1-day-workshop/docs/eng/readme.md)
 - [Understanding Vantiq Resources through real-world example](./vantiq-resources-introduction/docs/eng/Vantiq_resources_introduction.md)
+- [Reusable application design patterns](./docs/eng/reusable-design-patterns.md)
 - [Set up Vantiq External Lifecycle Management](./docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)

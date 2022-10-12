@@ -25,6 +25,7 @@ The simplest configuration of AWS Infrastructure to configure Public facing Priv
 │   └── variables.tf
 └── modules
     ├── eks
+    ├── opnode
     ├── rds-postgres
     └── vpc
 ```
@@ -49,7 +50,16 @@ Each module will create the following resources.
 - **DB Subnet Group**
 - **RDS Instance**
 - **Security Group**  
-Note: Since thsis is a single server option, further consideration is needed for production RDS configuration.
+Note: Since this is a single server option, further consideration is needed for production RDS configuration.
+
+### opnode
+- **EC2**  
+- **Key Pair**  
+  Register a local Public Key for SSH access to EC2  
+- **Security Group**  
+  Allow SSH access  
+- **Elastic IP**  
+  Attach to EC2
 
 ## Building procedure
 
@@ -79,7 +89,7 @@ The important configuration paramters are as follows.
   # Get the vesioning information of an S3 Bucket
   aws s3api get-bucket-versioning --bucket <Bucket name>
   ```
-- Create and register an SSH key for instance access.
+- Create and register an SSH key of Worker Node for EKS/instance access.
 - Refer to [this page written in Japanese](https://aws.amazon.com/jp/blogs/news/vcpu-based-on-demand-instance-limits-are-now-available-in-amazon-ec2/) to apply for increasing of the VCPU quota available for your account. As of June, 2020, instances such as c5, r5, t3, and m5 are grouped together as "Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances", so increase the vcpu quota from the value applied according to the required number.  
 \* For English, please refer to [this page.](https://docs.amazonaws.cn/en_us/AWSEC2/latest/WindowsGuide/ec2-on-demand-instances.html)
 
@@ -93,9 +103,12 @@ In each _tf_ file, set the parameters according to the environment.
 This calls three modules to create VPC, EKS, and RDS resources.  
 
 - locals  
+- `cluster_version`: Specify the EKS version    
+- `basion_kubectl_version`: Specify the kubectl version to be installed on the Bastin host.  
   - `region`: Region to create  
-  - `worker_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for accessing the worker node).
-  - `basion_access_ssh_key_name`: Specify the name of the SSH key created in the Preparation (for accessing the Bastion host).
+  - `worker_access_private_key`: Specify the name of the SSH key (Private key) created in the Preparation (for uploading to the Bastion host to access the worker node).
+  - `worker_access_public_key_name`: Specify the name of the SSH key (Public key) created in the Preparation (for accessing the worker node).
+  - `basion_access_public_key_name`: Specify the name of the SSH key (Public key) created in the Preparation (for accessing the Bastion host).
 
 
 - terraform  
@@ -110,34 +123,26 @@ This calls three modules to create VPC, EKS, and RDS resources.
 
 
 - module `eks`  
-  - Create an EKS for Public access point  
-  - `cluster_version`: The version of the EKS  
+  - Create an EKS for Public access point   
   - `managed_node_group_config`: The config of a Managed Node Group. One Managed Node Group for each key object (e.g. VNATIQ).  
 
 
 - module `keycloak-db`  
   - Create a DB instance for the Private endpoint (created in a single node configuration in one of the AZs in the Private Subnet).  
+  - `db_name`: Name of DB      
+  - `db_username`: User name of DB      
+  - `db_password`: Password for the above DB user    
+    **Already mentioned in "password1234", so be sure to change it.**  
   - `db_instance_class`: Instance size of the DB instance  
   - `db_storage_size`: Desk size of the DB instance  
   - `db_storage_type`: Disk type of the DB instance  
   - `postgres_engine_version`: The version of PostgreSQL  
 
-  **The DB password is created as "Passw0rd", so change it after creation.**
-
-
-#### basion-instance.tf  
-Create an EC2 instance for the Bastion host.
-Set up permissions for access using the SSH key created in the Preparation.
-The Worker Node of the Managed Node Group is only allowed to use SSH from the Bastion host.
-
-- data `aws_ami` `ubuntu`  
-Obtain an AMI to be used on the Bastion host.
-
-
-- resource `aws_instance` `basion`  
+- module `opnode`  
+  - Create the Bastion host for working.  
+  - Set up permissions for access using the SSH key created in the Preparation.  
+  - The Worker Node of the Managed Node Group is only accessible via SSH from the Bastion host.    
   - `instance_type`: Instance type of the Bastion host
-
-
 
 
 ### Execute Build/Delete
@@ -167,17 +172,18 @@ $ terraform destroy \
   -var 'secret_key=<YOUR-AWS-SECRET_KEY>'
 ```
 
-### Post Building Tasks
-- Change the password of the keycloak DB (PostgreSQL) instance.
-- Transfer the registered SSH key to the Bastion host using SCP, etc., place it in an appropriate directory, and set the permissions.
 
-The sample script "basion-setup-sample.sh" is used to install the tools that are necessary to install Vantiq on a Bastion host.
-To run the script, transfer it to the Bastion server and execute the followings.
+### Post Building Tasks (Building without the Bastion host)
+
+The sample script "basion-setup-sample.sh" is used to install the tools that are necessary to install Vantiq.
+To run the script, transfer it to the target terminal and execute the followings (SSH access, etc. can be configured as needed).
 
 ```sh
 $ chmod +x ./basion-setup-sample.sh
 $ sudo ./basion-setup-sample.sh
 ```
+
+Transfer the Worker Node and registered SSH key, place them in an appropriate directory, and set permissions.
 
 ### Handover to Vantiq Platform Installation tasks
 Perform the following setup and hand over the information to subsequent tasks.

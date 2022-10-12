@@ -1,53 +1,55 @@
-# はじめに
-Vantiqから直接Azure CosmosDBのAPIと連携する方法を説明する。  
-VantiqのProcedureからCosmosDBへ
-- document(データレコード)の作成
-- document一覧の取得
-- クエリーを利用し特定のdocumentを取得  
+# Introduction
+This article describes collaborating with Azure Cosmos DB APIs directly from Vantiq.  
 
-を行う方法を説明する。
+This document describes how to do the following from Vantiq's Procedures to Cosmos DB.  
 
-## 動作条件
-Vantiq Server v1.34以降
+- Create Documents (data records)  
+- Retrieve a list of Documents  
+- Retrieve the specific documents with a query   
 
-# CosmosDB の構成
-本手順ではCosmos DBのAPIを **コア「SQL」** で作成した場合の連携方法を説明する。  
-他のAPIを選択して作成した場合は各リファレンスを参照して必要に応じて変更。
 
-Cosmos DBの作成ができたら「コンテナーの追加」からコンテナーを作成する。設定は以下の通り。
+## Prerequisites
+Vantiq Server v1.34 or higher is required  
+
+# Configuration of Cosmos DB
+This procedure describes how to collaborate with the Cosmos DB API when it is created with **core "SQL"**.  
+If created by selecting other APIs, refer to the respective references and modify as necessary.  
+
+Once Cosmos DB created, create a container from [New Container]. The settings are the followings.  
 - Database id  
-  - 「Create New」を選択し以下を入力
+  - Select "Create new" and provide the following.  
     - Vantiq
 - Container id  
   - sensors
 - Partition key
   - /sensor_id
 
-OKボタンをクリックしコンテナを作成する。
+Click [OK] button to create the container.  
 
-## URIとkeyの取得
+## Get the value of URI and Key
 
-APIを利用するためにURIとkeyを **設定 > キー** から取得する。  
-**URI** と **プライマリキー** の値をひかえておく。
+Get the both URI and Key from **Settings > Keys** to use the API.    
+Note the value of both **URI** and **Primary Key**.  
 
 
-# Vantiq リソースの作成
 
-## Sourceの作成
-以下のSourceを作成する。
+# Create Vantiq Resources
+
+## Create Source
+Create the Source with the following settings.  
 - Source Name
   - CosmosDB
 - Source Type
   - REMOTE
 - Server URI
-  - 確認したCosmosDBのURI
+  - Confirmed Cosmos DB URI
 
-## Procedureの作成
+## Create Procedures
 
-### API呼び出しに必要なハッシュ値計算
+### Calculate hash values required for API calls
 
-Azure CosmosDB のAPI呼び出しにはAuthorizationヘッダーにハッシュ値を計算したシグネチャを含めなければいけないため、その値を生成するProcedureを作成しておく。  
-生成方法の詳細は[Access control in the Azure Cosmos DB SQL API - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/access-control-on-cosmosdb-resources)を参照。
+Since API calls to Azure Cosmos DB should include the signature with a calculated hash value in the Authorization header, the Procedure should be created to generate that value.  
+As for the details of generation method, refer to [Access control in the Azure Cosmos DB SQL API - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/access-control-on-cosmosdb-resources).  
 
 
 ```
@@ -73,20 +75,21 @@ return token
 
 ```
 
-こちらのProcedureを以下のAPI呼び出しを行うProcedure内で呼び出していく。
+This Procedure will be called within the Procedure that makes the following API call.  
 
-### documentを作成
+### Create Document
 
-documentの作成(CosmosDBへレコードの登録)を行うProcedureを作成する。  
-参考: [Create Document - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/create-a-document)  
+Create the Procedure that creates a Document (registers records to Cosmos DB).  
+Reference: [Create Document - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/create-a-document)  
 
-CosmosDBへのdocumentの作成には重複しないIDを指定する必要がある。  
-以下の例ではdocumentを登録する際に必要なIDを{センサーID}_{UNIX時間}として生成している。  
+It is necessary to specify an ID that is unique when creating a document in CosmosDB.    
 
-**注意:**  
-リファレンスにはidが自動作成される表記があるが、それはSDKの場合のみであり、**REST APIを直接利用する場合は該当しない**模様  
-=> idを生成する処理が必要  
-参照: [No ID supplied on POST = One of the specified inputs is invalid](https://social.msdn.microsoft.com/Forums/en-US/743f610b-ee53-4461-8d0e-108d72c8dd6c/no-id-supplied-on-post-one-of-the-specified-inputs-is-invalid?forum=azurecosmosdb)
+In the following example, the ID required for registering a document is generated as {sensor ID}_{UNIX time}.    
+
+**Caution:**  
+The reference says that the id is automatically created, but that is only for the SDK, **not for direct use of the REST API**.  
+=> Need process to generate id.    
+Reference: [No ID supplied on POST = One of the specified inputs is invalid](https://social.msdn.microsoft.com/Forums/en-US/743f610b-ee53-4461-8d0e-108d72c8dd6c/no-id-supplied-on-post-one-of-the-specified-inputs-is-invalid?forum=azurecosmosdb)
 
 ```
 PROCEDURE createDocument()
@@ -125,7 +128,8 @@ SELECT * FROM SOURCE CosmosDB WITH method = REQUEST_METHOD, headers = header, bo
 
 ```
 
-Procedureを実行すると以下のような結果が返ってくる。
+Executing the Procedure, the following results are returned.  
+
 ```json
 [
    {
@@ -141,12 +145,13 @@ Procedureを実行すると以下のような結果が返ってくる。
 ]
 ```
 
-Azure Portalからも作成したsensorsコンテナーのItemsに上記documentが格納されていることを確認できる。
+From Azure Portal, it is also possible to confirm that the above document is stored in the Items of the sensors container.  
 
-### documentを取得
 
-documentの一覧を取得するProcedureを作成する。  
-参考: [List Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/list-documents)  
+### Retrieve Documents  
+
+Create the Procedure to retrieve a list of Documents.    
+Reference: [List Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/list-documents)  
 
 ```
 PROCEDURE listDocuments()
@@ -172,7 +177,7 @@ SELECT * FROM SOURCE CosmosDB WITH method = REQUEST_METHOD, headers = header, pa
 
 ```
 
-Procedureを実行すると以下のように作成したdocumentの一覧を取得できる。
+Once execute the Procedure, it is possible to get the document like the following.
 
 ```json
 [
@@ -196,11 +201,11 @@ Procedureを実行すると以下のように作成したdocumentの一覧を取
 ```
 
 
-### クエリを利用して特定のdocumentを取得
+### Retrieve the specific documents with a query  
 
-クエリを利用したdocumentの取得を行うProcedureを作成する。
+Create the Procedure to retrieve the specific documents with a query.  
 
-参考: [Query Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/query-documents)
+Reference: [Query Documents - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/query-documents)
 
 ```
 PROCEDURE queryDocument()
@@ -234,7 +239,7 @@ SELECT * FROM SOURCE CosmosDB WITH method = REQUEST_METHOD, headers = header, bo
 
 ```
 
-Procedureを実行すると以下のようなにクエリに該当するdocumentを取得できる。  
+Once execute the Procedure, it is possible to get the document corresponding to the query like the following.  
 
 ```json
 [
@@ -267,8 +272,8 @@ Procedureを実行すると以下のようなにクエリに該当するdocument
 ]
 ```
 
-**補足:**    
-Vantiqはapplication/query+jsonのContent-Typeに対応していない。(2022/4/25現在）  
-そのため、上記の実装では以下を行っている。
-- SELECT文のcontentTyeパラメータで"**application/query+json**"を渡す
-- application/query+jsonの場合、**bodyをJSONと認識しないので、stringify()でString化**する
+**Remarks:**    
+Vantiq does not support Content-Type of application/query+json (as of 4/25/2022).    
+Therefore, the above implementation does the followings.  
+- Pass "**application/query+json**" as the contentTye parameter of the SELECT statement.  
+- With application/query+json, **body is not recognized as JSON, so convert it to a String with stringify()**.
