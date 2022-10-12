@@ -20,7 +20,8 @@ This document describes how to do the following from Vantiq's Procedures.
 
 - Retrieve a list of "Things"  
 - Retrieve details (Registry, Properties) of "Things"  
-- Retrieve properties (Control Support, Device Shadow) of "Things"  
+- Retrieve properties (Control Signal, Device Shadow) of "Things"  
+
 - Update properties of "Things" (POST to Device Shadow)  
 
 ## Prerequisites
