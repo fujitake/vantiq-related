@@ -54,9 +54,8 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
 - [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
-- [Information about tearing down the Vantiq cluster](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
-- [How to create a new Quay.io account](./vantiq-platform-operations/docs/eng/create_quay.io_account.md)
 - [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
+- [How to create a new Quay.io account](./vantiq-platform-operations/docs/eng/create_quay.io_account.md)
 - [Relationship between Vantiq Organization, Namespace and User Role](./vantiq-platform-operations/docs/eng/org_user_management.md)
 
 ## 目的
