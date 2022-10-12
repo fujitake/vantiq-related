@@ -13,7 +13,8 @@ From Vantiq, the following collaborations are possible.
 - Transmit properties (Control Signal)    
 
   Use Device Shadow.  
-  Device Shadow supports HTTPS | MQTT, both of which are possible from Vantiq.  
+  Device Shadow supports HTTPS | MQTT, both of which are supported by Vantiq.  
+
 
 In this document, describe how to do the following from Vantiq's Procedures.  
 - Retrieve a list of "Things"  
