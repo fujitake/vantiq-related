@@ -189,7 +189,7 @@ vantiq:
 ```
 
 ## Version specification of components  
-Use to specify a different version for a particular component in the standard configuration packaged as `vantiq_system_release`.  
+Use to specify a different version for a particular component other than the standard configuration packaged as `vantiq_system_release`.  
 
 #### keycloak
 
