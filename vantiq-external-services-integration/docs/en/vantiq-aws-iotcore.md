@@ -32,7 +32,8 @@ Prepare the Access key and the Secret key for your account to run AWS IoT Core R
 
 ## Creating "Things" to be assigned to Vantiq 
 
-Create "Things" with the AWS console for assignment to Vantiq in order to make a connection from Vantiq to AWS IoT Core's MQTT.    
+Create "Things" with the AWS console to be assigned to Vantiq in order to make a connection from Vantiq to AWS IoT Core's MQTT.    
+
 Go to AWS IoT > Manage > Things, and create "Things" as the followings.    
 - Specify the property of a "Thing"  
   - The name of a "Thing"  
