@@ -23,6 +23,23 @@
 
 # デザインパターン例
 
+  - [Polling-To-Stream パターン](#polling-to-stream)
+  - [Observer パターン](#observer)  
+  - [Async API パターン](#async-api)
+  - [Cached Remote API パターン](#cached-remote-api)
+  - [In-Memory Master パターン](#in-memory-master)  
+  - [Echo Back パターン](#echo-back)
+  - [Loopwhile Batch パターン](#loopwhile-batch)  
+  - [Composite Entity パターン](#composite-entity)  
+  - [Transpose パターン](#transpose)  
+  - [Adapter/Bridge パターン](#adapter)   
+  - [Decorator パターン](#decorator)
+  - [Stream-To-Bulk パターン](#stream-to-bulk)
+  - [External Datasink パターン](#external-datasink)
+  - [Websocket パターン](#websocket)
+  - [Journal パターン](#journal)
+  - [Smooth Remote Service パターン](#smooth-remote-service)
+
 ### 実装に関する注意点
 - いくつかのデザインパターンは[バージョン1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/)の機能に依存しています。それ以前のバージョンにインポートするとコンパイルエラーとなったり、想定通り機能しない可能性があります。
   - [Stateful ServiceにおけるMap型](https://dev.vantiq.co.jp/docs/system/rules/index.html#map) - Stateful Serviceにて従来Object型を使用していたものが置き換えられた
@@ -267,9 +284,9 @@ if (event.humidity) {
 
 ---
 
-### Adapter <a id="adapter"></a>
+### Adapter / Bridge <a id="adapter"></a>
 
-<img src="../../imgs/reusable-design-patterns/async-api.png" width=50%>
+<img src="../../imgs/reusable-design-patterns/adapter.png" width=50%>
 
 **Overview**
 - Serviceのインタフェースに入力ストリームの形式を合わせる。
