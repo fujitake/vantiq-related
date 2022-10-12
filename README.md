@@ -54,7 +54,7 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 - [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
 - [How to create a new Quay.io account](./vantiq-platform-operations/docs/eng/create_quay.io_account.md)
 - [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
-- [Relationship between Vantiq Organization, Namespace and User Role](./ vantiq-platform-operations/docs/eng/org_user_management.md)
+- [Relationship between Vantiq Organization, Namespace and User Role](./vantiq-platform-operations/docs/eng/org_user_management.md)
 
 ## 目的
 
