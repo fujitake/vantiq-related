@@ -10,7 +10,8 @@ From Vantiq, the following collaborations are possible.
   Can only be operated from AWS Console | CLI | IoT API.    
   Can be done by calling AWS IoT API.    
 
-- Transmission of properties (Control Support)    
+- Transmit properties (Control Signal)    
+
   Use Device Shadow.  
   Device Shadow supports HTTPS | MQTT, both of which are possible from Vantiq.  
 
