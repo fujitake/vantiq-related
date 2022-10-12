@@ -82,7 +82,8 @@ This Procedure will be called within the Procedure that makes the following API 
 Create the Procedure that creates a Document (registers records to Cosmos DB).  
 Reference: [Create Document - Azure Cosmos DB REST API | Microsoft Docs](https://docs.microsoft.com/en-us/rest/api/cosmos-db/create-a-document)  
 
-It is necessary to specify an ID that does not duplicate when creating a document to CosmosDB.    
+It is necessary to specify an ID that is unique when creating a document in CosmosDB.    
+
 In the following example, the ID required for registering a document is generated as {sensor ID}_{UNIX time}.    
 
 **Caution:**  
