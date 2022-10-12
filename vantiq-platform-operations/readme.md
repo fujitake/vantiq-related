@@ -33,7 +33,7 @@ Guides and procedures for building and operating the Vantiq Platform.
 
 ![](imgs/section-top/vantiq-intall-flow.png)
 
-- [Customized configuration of deploy.yaml](./docs/eng/deploy_yaml_config.md)
+- [Custom configuration of deploy.yaml](./docs/eng/deploy_yaml_config.md)
 - [Trouble Shooting Guide for Vantiq Cloud install and maintenance](./docs/eng/vantiq-install-maintenance-troubleshooting.md)
 - [Trouble Shooting Guide for Vantiq Cloud operations](./docs/eng/vantiq_k8s_troubleshooting.md)
 - [Network Configuration Debug Tool](.//docs/eng/alpine-f.md)
