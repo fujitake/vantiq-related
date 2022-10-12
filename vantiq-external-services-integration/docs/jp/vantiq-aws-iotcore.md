@@ -9,14 +9,14 @@ Vantiqからは以下のような連携が可能である。
   AWS Console | CLI | IoT API からのみ操作可能  
   AWS IoT API を呼び出すことで可能  
 
-- プロパティ(制御支持）の送信  
+- プロパティ(制御指示）の送信  
   Device Shadowを利用する。  
   Device Shadow は HTTPS | MQTTをサポートしていて、Vantiqからはどちらも可能。  
   
 本手順ではVantiqのProcedureから以下を行う方法について説明する。  
 - 「モノ」の一覧取得
 - 「モノ」の詳細(Registry、プロパティ)取得
-- 「モノ」のプロパティ(制御支持、Device Shadow)の取得
+- 「モノ」のプロパティ(制御指示、Device Shadow)の取得
 - 「モノ」のプロパティの変更(Device ShadowへのPOST)
 
 ## 動作条件
@@ -537,7 +537,7 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 ]
 ```
 
-## 「モノ」のプロパティ(制御支持 - Device Shadow)の取得を行うProcedureの作成
+## 「モノ」のプロパティ(制御指示 - Device Shadow)の取得を行うProcedureの作成
 AWS IoT Device Shadow では HTTPS/MQTTの両方をサポートしている。  
 MQTTの場合はすでに作成してある AWSIoTMQTT で名前付き Shadow の Topic を指定しているため、Shadow で更新が行われた場合そのデータが Source によって取得される。  
 

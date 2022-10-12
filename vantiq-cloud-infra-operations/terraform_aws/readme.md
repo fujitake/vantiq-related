@@ -183,7 +183,7 @@ $ chmod +x ./basion-setup-sample.sh
 $ sudo ./basion-setup-sample.sh
 ```
 
-Worker Nodeや登録したSSHキーを転送し適切なディレクトリに置き、パーミッションの設定を行う。
+Worker Nodeに登録したSSHキーを端末に転送し、適切なディレクトリに配置・パーミッションの設定を行う。  
 
 ### Vantiqプラットフォームインストール作業への引き継ぎ
 以下の設定を実施、および情報を後続の作業に引き継ぐ。
