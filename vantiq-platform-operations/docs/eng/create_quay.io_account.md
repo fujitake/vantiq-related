@@ -1,6 +1,6 @@
 ## About this document
 
-Describes the procedure for creating a new account on Quay.io.  
+This article describes the procedure for creating a new account on Quay.io.  
 
 ## How to create a new Quay.io account  
 
