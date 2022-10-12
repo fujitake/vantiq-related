@@ -86,7 +86,7 @@ Application NS  | User  | - Use Application | No | No | No
 
 ### Home Namespace and Current Namespace
 
-- **Home Namespace** - This is the Namespace when the user's account is created (when the user is invited to NS for the first time) and user information is managed in the Home Namespace. It cannot be changed.  
+- **Home Namespace** - This is the Namespace where the user's account is created (when the user is invited to NS for the first time), and user information is maintained in the Home Namespace. It cannot be changed.  
 
 <img src="../../imgs/org-user-management/home-namespace.png" width="50%"/>
 
