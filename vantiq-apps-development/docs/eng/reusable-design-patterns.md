@@ -45,11 +45,13 @@ __Objective\.__
   - [Cached Remote API Pattern](#cached-remote-api)
   - [In-Memory Master Pattern](#in-memory-master)  
   - [Echo Back Pattern](#echo-back)
-  - [Loopwhile Batch Pattern](#loopwhile-batch)  
+  - [Loopwhile Batch Pattern](#loopwhile-batch)
+  - [Memento Pattern](#memento)
   - [Composite Entity Pattern](#composite-entity)  
   - [Transpose Pattern](#transpose)  
   - [Adapter/Bridge Pattern](#adapter)   
-  - [Decorator Pattern](#decorator)
+  - [Lookup Pattern](#lookup)
+  - [Upsert State Pattern](#upsert-state)
   - [Stream-To-Bulk Pattern](#stream-to-bulk)
   - [External Datasink Pattern](#external-datasink)
   - [Websocket Pattern](#websocket)
@@ -255,6 +257,31 @@ __Usage__
 - [LoopWhileBatch.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/LoopWhileBatch.zip)
 
 ---
+### Memento <a id="memento"></a>
+<img src="../../imgs/reusable-design-patterns/memento.png" width=50%>
+
+**Overview**
+- Label and persist files, data sets, etc. (daily history, etc.) and restore them when needed.
+- Even large data sets (e.g., JSON with tens of thousands of records, etc.) are persisted as a single record.
+- Set the expiration date and maximum storage capacity in the destination table (Type) as appropriate. (e.g., 7 days)
+
+
+**Motivation**
+-  The logic to be processed requires input data several generations old, and we want to call it very fast.
+- To ensure reproducibility of processing results, we want to preserve several generations of input data regardless of the server's operating status.
+
+
+**Usage**
+- Processes involving comparisons with long-term historical data with a large number of records.
+
+**Note**
+- _Load_ - Implement the process of restoring to State at the caller side (Upsert State)
+
+
+**Sample Project**
+- [Memento.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/Memento.zip)
+
+---
 ## App Edition
 
 ### Composite Entity Pattern<a id="composite-entity"></a>
@@ -306,22 +333,17 @@ __Usage__
 ```vail
 if (!state) {
     // if this is the first time, initialize it.
-    state = {
-        machineID : "",
-        temp: 0.0,
-        humidity: 0.0,
-        controlCode : "0"        
+    state = {     
     }
 }
 
-if (event.controlCode) {
-    state.controlCode = event.controlCode
-}
-if (event.temp) {
-    state.temp = event.temp
-}
-if (event.humidity) {
-    state.humidity = event.humidity
+// copy properties if present
+state.controlCode = event.controlCode ? event.controlCode : state.controlCode
+state.temp        = event.temp ? event.temp : state.temp
+state.humidity    = event.humidity ? event.humidity : state.humidity
+
+state.timestamp = event.timestamp
+state.machineID = event.machineID
 ```
 
 **Sample Project**
@@ -356,7 +378,7 @@ __Usage__
 
 ---
 
-### Decorator Pattern<a id="decorator"></a>
+### Lookup Pattern<a id="lookup"></a>
 
 <img src="../../imgs/reusable-design-patterns/decorator.png" width=50%>
 
@@ -382,6 +404,44 @@ __Usage__
 
 **Sample Project**
 - N/A
+
+---
+### Upsert State <a id="upsert-state"></a>
+
+<img src="../../imgs/reusable-design-patterns/upsert-state.png" width=50%>
+
+**Overview**
+- Integrate records with different data sources having the same key on the Service State.
+- When integrating multiple data which come in asynchronously, an event is emitted if necessary.
+- If the input is an array, it is processed in bulk.
+-
+**Motivation**
+- Efficiently integrate data sources that are input asynchronously in batches.
+
+**Usage**
+- Data Integration
+
+**Note**
+- _UpsertState()_ - Binds the properties to an object of the same key held by State.
+  ```vail
+  package jp.co.vantiq.designpattern.upsertstate
+  PROCEDURE JoinXXXData.upsertState(keyName String, obj Object, propName String)
+
+  var key = event[keyName]
+  joinedState.compute(key, (pKey, value) => {
+      if (value == null) {
+          value = {}
+      }
+      value[propName] = obj
+      return value
+  })
+  return true
+  ```
+- _BulkUpsertState_ -UpsertState() is performed on each element of the array.
+
+
+**Sample Project**
+- [UpsertState.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/UpsertState.zip)
 
 ---
 
