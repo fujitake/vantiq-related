@@ -34,6 +34,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [日付に1ヶ月足したり引いたりしたい](#add_months)
   - [フォーム送信でPOSTしたい](#form_submit)
   - [XMLを処理したい](#handle_xml)
+  - [Objectをループさせて、keyとvalueをそれぞれ取得したい](#object_loop)
 - [構成管理関連](#構成管理関連)
   - [作ったものをテンプレートとして配布したい](#作ったものをテンプレートとして配布したい)
   - [複数人で共同で作業したい](#複数人で共同で作業したい)
@@ -442,6 +443,45 @@ var result = {
 
 Procedureの中で`name(), text(), children()`などVantiqのリファレンスに記載のない関数が登場しています。
 こちらはVantiqの関数ではなく、[Groovy GPath](https://groovy-lang.org/processing-xml.html#_gpath)により提供されるものです。parseXmlで提供されるオブジェクトはGPathのルールで操作することができます。
+
+
+### Objectをループさせて、keyとvalueをそれぞれ取得したい <a id="object_loop"></a>
+Objectをループさせ、Objectの `key` と `value` を取得するには次のようにします。
+
+Objectのkey は `.key` で、Objectのvalue は `.value` でアクセスできます。
+
+```vail
+PROCEDURE ObjectLoop()
+var obj = {
+    id: 33
+    , name: "Creeper"
+    , nickname: "Takumi"
+    , height: 1.8
+    , width: 0.6
+}
+for(kv in obj){
+    var key = kv.key
+    var value = kv.value
+    log.info("key:" + key + ", " + "value:" + value)
+}
+return null
+```
+
+例：Objectの中からvalueがnull以外のものを返すProcedure
+
+```vail
+PROCEDURE ExcludeNull(obj Object REQUIRED): Object
+
+var newObj = {}
+for(kv in obj){
+    if(kv.value != null){
+        newObj[kv.key] = kv.value
+    }
+}
+
+return newObj
+```
+
 
 #### 補足情報:XMLを返すエンドポイントを設定したREMOTE Source
 以下の設定値を持つREMOTE Sourceの場合、parseXmlを使用する必要がありません。
