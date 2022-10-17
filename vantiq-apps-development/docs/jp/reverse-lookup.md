@@ -444,6 +444,25 @@ var result = {
 Procedureの中で`name(), text(), children()`などVantiqのリファレンスに記載のない関数が登場しています。
 こちらはVantiqの関数ではなく、[Groovy GPath](https://groovy-lang.org/processing-xml.html#_gpath)により提供されるものです。parseXmlで提供されるオブジェクトはGPathのルールで操作することができます。
 
+#### 補足情報:XMLを返すエンドポイントを設定したREMOTE Source
+以下の設定値を持つREMOTE Sourceの場合、parseXmlを使用する必要がありません。
+```json
+{
+    "passwordType": "string",
+    "pollingInterval": 0,
+    "uri": "http://httpbin.org/xml", ← XMLを返すエンドポイント
+    "query": {},
+    "requestDefaults": {}
+}
+```
+
+```js
+var xml_object = SELECT ONE FROM SOURCE xmlSource
+// parseXmlを使用しておりませんが自動でオブジェクトに変換されています。
+// GPathでアクセスできます。
+var node_name = xml_object.name()
+// "slideshow"
+```
 
 ### Objectをループさせて、keyとvalueをそれぞれ取得したい <a id="object_loop"></a>
 Objectをループさせ、Objectの `key` と `value` を取得するには次のようにします。
@@ -482,26 +501,6 @@ for(kv in obj){
 return newObj
 ```
 
-
-#### 補足情報:XMLを返すエンドポイントを設定したREMOTE Source
-以下の設定値を持つREMOTE Sourceの場合、parseXmlを使用する必要がありません。
-```json
-{
-    "passwordType": "string",
-    "pollingInterval": 0,
-    "uri": "http://httpbin.org/xml", ← XMLを返すエンドポイント
-    "query": {},
-    "requestDefaults": {}
-}
-```
-
-```js
-var xml_object = SELECT ONE FROM SOURCE xmlSource
-// parseXmlを使用しておりませんが自動でオブジェクトに変換されています。
-// GPathでアクセスできます。
-var node_name = xml_object.name()
-// "slideshow"
-```
 ## 構成管理関連<a id="構成管理関連"></a>
 
 ### 作ったものをテンプレートとして配布したい<a id="作ったものをテンプレートとして配布したい"></a>
