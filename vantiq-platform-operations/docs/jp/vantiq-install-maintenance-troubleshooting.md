@@ -19,6 +19,7 @@
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
   - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
   - [ライセンスの有効期限を確認したい](#check-license-expiration)
+  - [vantiq podが起動しない](#vantiq_pod_will_not_start)
 
 
 # Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
@@ -737,3 +738,15 @@ System Admin でログイン >> メニュー右上のユーザーアイコン >>
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
 
+# Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
+
+### keycloak-initでFailedとなる
+
+`keycloak-init` init containerで失敗している理由を調べるため、当該コンテナログを出力する。
+```sh
+ubuntu@ip-172-50-0-246:~$ kubectl logs -n dev vantig-0 -c keycloak-init -f
+Logging into http://keycloak-http.shared.svc.cluster.local/auth as user keycloak of realm master
+HTTPS required [invalid request]
+```
+上記の場合、エラーメッセージとして `HTTPS required [invalid request]`と出ていた。これの原因は、Kubernetesのワーカーノードに割り当てられたIPレンジがグローバルIPアドレスとなっているため、プライベートIPからのアドレスを想定しているkeycloakサーバーに拒絶されている。
+よって、kubernetesクラスタを構成し直す必要がある。
