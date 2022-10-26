@@ -8,7 +8,7 @@ Vantiq Extension Source を利用する際などに必要になる Vantiq CLI �
   - [環境変数への追加](#add-path)
   - [動作確認](#cli-test)
 - [Profile](#profile)
-  - [profileファイルの作成](#create-profile")
+  - [profileファイルの作成](#create-profile)
   - [profileの編集](#edit-profile)
 
 ## インストール<a id="install"></a>
