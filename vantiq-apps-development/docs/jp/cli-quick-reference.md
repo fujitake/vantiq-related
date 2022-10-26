@@ -1,4 +1,4 @@
-# CLI クイックリファレンス
+# VANTIQ CLI クイックリファレンス
 
 Vantiq Extension Source を利用する際などに必要になる Vantiq CLI の利用方法について説明します。
 
