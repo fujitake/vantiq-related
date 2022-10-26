@@ -14,7 +14,7 @@ Vantiq Extension Source を利用する際などに必要になる Vantiq CLI �
 ## インストール<a id="install"></a>
 インストーラーを利用したインストールは不要で、zipファイルの展開と環境変数への追加のみで利用できます。
 
-### ダウンロード<a id="download"></a>
+### ダウンロード<a id="zip-download"></a>
 
 1. まずはじめに VANTIQ CLI をダウンロードします。  
 → [vantiq.zip](https://dev.vantiq.com/downloads/vantiq.zip)
