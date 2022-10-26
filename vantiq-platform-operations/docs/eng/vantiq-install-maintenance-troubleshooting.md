@@ -1,61 +1,59 @@
-# はじめに
+# Introduction
 
-本記事では VANTIQ 保守作業において、[k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools) _(要権限)_ に関連し、構築時のトラブルシューティング方法や事例について記載する。
+This document describes troubleshooting during build and examples related to [k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools) _(permissions required)_ in VANTIQ maintenance work.  
 
-## 前提
+## Prerequisites
 
-- Kubectl ツールを使って k8s クラスタを操作する環境へのアクセスがあること
+- Must have access to an environment that uses Kubectl tools to operate the k8s cluster.  
 
-# 目次
+# Table Of Contents
 
-  - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)
-  - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
-  - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
-  - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい](#reuse_old_pv)
-  - [Grafana でメトリクスが表示されない](#metrics_not_showing_up_in_grafana)  
-  - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった](#metrics_gone_after_vantiq_update)
-  - [Keycloak pod が起動しない](#keycloak_pod_will_not_start)  
-  - [Podが再起動を繰り返し、起動できない](#pod-cannot-start)  
-  - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
-  - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
-  - [ライセンスの有効期限を確認したい](#check-license-expiration)
-  - [vantiq podが起動しない](#vantiq_pod_will_not_start)
+  - [How to recover Vantiq MongoDB](#recovery_of_vantiq_mongoDB)
+  - [When adding a Grafana Data Source, an error occurs](#error_when_adding_grafana_data_source)  
+  - [Unable to configure Backup in Azure](#unable_to_configure_backup_in_azure)
+  - [Repeating undeploy and deploy made PV Release. How to reuse Old PV](#reuse_old_pv)
+  - [Metrics not displayed in Grafana](#metrics_not_showing_up_in_grafana)  
+  - [When updating Vantiq version, all Dashboard in Grafana is disappeared](#metrics_gone_after_vantiq_update)
+  - [Keycloak pod would not start](#keycloak_pod_will_not_start)  
+  - [Pod repeatedly restarts and cannot start](#pod-cannot-start)  
+  - [Error when trying to login to Vantiq IDE](#error_when_trying_to_login_to_vantiq_ide)  
+  - [Lost or expired key for System Admin](#lost_or_expired_key_for_system_admin)   
+  - [How to check license expiration date](#check-license-expiration)
 
 
-# Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
+# How to recover Vantiq MongoDB<a id="recovery_of_vantiq_mongoDB"></a>
 
-1. vantiq サービスを scale=0 にする
+1. Set vantiq service to scale=0  
 ```
 kubectl scale sts -n xxxx vantiq --replicas=0
 ```
-2. mongorestore を実行する
+2. Execute mongorestore  
 ```
 kubectl create job mongorestore --from=cronjob/mongorestore -n xxx
 ```
-3. userdbrestore を実行する（userdb を使用する場合)
+3. Execute userdbrestore（if using userdb)
 ```
 kubectl create job userdbrestore --from=cronjob/userdbrestore -n xxx
 ```
-4. vantiq サービスのスケールを戻す
+4. Restore vantiq service scale value  
 ```
 kubectl scale sts -n xxx vantiq --replicas=3
 ```
 
 
-# Grafana Data Source を追加する時、エラーとなる<a id="error_when_adding_grafana_data_source"></a>
-InfluxDB を追加する時、URLを `http://influxdb-influxdb:8086` としたが、エラーとなる。  
+# When adding a Grafana Data Source, an error occurs<a id="error_when_adding_grafana_data_source"></a>
+When adding InfluxDB, set the URL to `http://influxdb-influxdb:8086`, causing an error.      
 ![Screen Shot 2021-08-30 at 21.08.54](../../imgs/vantiq-install-maintenance/datasource_influxdb_error.png)
 
 #### Solution
-URL を`http://influxdb:8086`とする。
+Set the URL to `http://influxdb:8086`.  
 
 #### Solution 2
-`Vantiq_system_version: 3.10.1`以降は、InfluxdbのUser/Passwordの設定が必要で入力値は`secrets.yaml`に記載した内容になる。
+After `Vantiq_system_version: 3.10.1`, it is required to set User/Password of Influxdb, and the input value is the contents described in `secrets.yaml`.  
 
-# Azure で Backup の設定ができない<a id="unable_to_configure_backup_in_azure"></a>
+# Unable to configure Backup in Azure<a id="unable_to_configure_backup_in_azure"></a>
 
-mongodb backup を設定する追加の手順 (Azure)。
-`secrets.yaml` の `vantiq` キーの下に、次の設定を追加 (またはコメントアウト) する。
+Additional procedures to configure mongodb backup (Azure). Add (or comment out) the following settings under the `vantiq` key in `secrets.yaml`.  
 
 ```yaml
 vantig:
@@ -63,17 +61,17 @@ vantig:
     files:
       credentials: deploy/sensitive/azure_storage_credentials.txt
 ```
-`deploy/sensitive` の下に、`azure_store_credentials.txt` を作成し、次の設定を追加する。
+Create `azure_store_credentials.txt` under `deploy/sensitive` and add the following settings.  
 ```
-export AZURE_STORAGE_ACCOUNT=<ストレージアカウント名>
-export AZURE_STORAGE_KEY=<ストレージキー>
+export AZURE_STORAGE_ACCOUNT=<Storage account name>
+export AZURE_STORAGE_KEY=<Storage key>
 ```
-例)
+e.g)  
 ```
 export AZURE_STORAGE_ACCOUNT=vantiqbackupstorage
 export AZURE_STORAGE_KEY=XXXXXXX7CGqYriw9X3jwojPiHlc/3Jjhn3/MIEKYAJq0KwJZ9fd6zf9nMNt0DmIJcYfqaGmaM1isY3tayXXXXXXX==
 ```
-`deploy.yaml` の `vantiq` のキーの下に、次を追加する。<bucket名> は任意。
+Add the following under the `vantiq` key in `deploy.yaml`. \<bucket name\> is optional.  
 
 ```yaml
 vantiq:
@@ -82,28 +80,28 @@ vantiq:
     enabled: true
     provider: azure
     schedule: "@daily"
-    bucket: <bucket名>
+    bucket: <bucket name>
 ```
 
-# undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。<a id="reuse_old_pv"></a>
+# Repeating undeploy and deploy made PV Release. How to reuse Old PV<a id="reuse_old_pv"></a>
 
-`undeploy`と`deploy`を繰り返すと、新しいPVが作られ、古いPVに入った情報が見れなくなる。(status = `Released`)
+Repeating `undeploy` and `deploy` will create a new PV and the information in the previous PV will no longer be visible. (status = `Released`)  
 ```
 $ kubectl get pv
 pvc-a6d5da12-7e3e-4a32-a5b3-bbbbbbbbbbbb   5Gi        RWO            Retain           Bound      shared/grafana                    vantiq-sc               5d21h
 pvc-ec37c469-782a-473f-a6f9-aaaaaaaaaaaa   5Gi        RWO            Retain           Released   shared/grafana                    vantiq-sc               247d
 ```
-#### リカバリー手順
-1. PV, PVCをマウントしているdeploy or stsのpodを削除する。
+#### Recovery procedures  
+1. Delete the pod of the deploy or sts that mounts the PV, PVC.  
 ```
 $ kubectl scale deploy -n shared grafana --replicas=0
 deployment.apps/grafana scaled
 ```
-2. PVのclaimRefをクリアする -> PVのStatusが`Available`になり、再利用可。
+2. Clear the claimRef of the PV. -> Status of the PV becomes `Available` and it becomes reusable.  
 ```
 kubectl patch pv pvc-ec37c469-782a-473f-a6f9-aaaaaaaaaaaa -p '{"spec":{"claimRef": null}}'
 ```
-3. PVを要求するPVCを作成する。 PVCはimmutableなのでeditできない。そのため、Volumeを入れ替えたい場合は別途PVCを再作成する。
+3. Create a PVC claiming a PV. PVCs are immutable and so cannot be edited. Therefore, it is necessary to re-create the PVC separately when replacing the volume.  
 
 ```sh
 vi old-grafana-pvc.yaml
@@ -124,11 +122,11 @@ spec:
   storageClassName: vantiq-sc
   volumeMode: Filesystem
 ```
-4. PVCを適用する。
+4. Apply the PVC.  
 ```sh
 kubectl apply -f old-grafana-pvc.yaml
 ```
-5. deployment or statefulsetのPVCの参照部分を書き換える。 (`claimName`の部分）
+5. Rewrite the reference part of the PVC in the deployment or statefulset (It is the `claimName` part).
 ```sh
 kubectl edit deploy -n shared grafanna
 ```
@@ -144,41 +142,41 @@ volumes:
     claimName: old-grafana-pv
 ...
 ```
-6. PV, PVCをマウントしているdeploy or stsのpodを起動する。
+6. Launch the pod of deploy or sts that mounts PV, PVC.  
 ```sh
 $ kubectl scale deploy -n shared grafana --replicas=1
 deployment.apps/grafana scaled
 ```
 
-#### リカバリーに関する留意事項
-- 上記の例においてgrafanaとgrafanadbは依存関係があり、同じnodeでないと起動しない。つまり、grafana, grafanadbのPVが同じAZにある必要がある。PVを意図したAZに再度作成するために、既存のPVCを削除しなければならない場合もある。
-- PVやPVCを消してしまったら、必要な特定のモジュールのみデプロイし直すこともできる。例えばGrafanaDB
+#### Note on Recovery  
+- In the above example, grafana and grafanadb have a dependency and will not start unless they are on the same node. In other words, the PVs of grafana and grafanadb should be in the same AZ. The existing PVCs may have to be deleted in order to re-create the PVs in the intended AZ.  
+- When deleting PVs and PVCs, only the specific modules that are needed can be deployed again. For example, GrafanaDB
 ```sh
 ./gradlew -Pcluster=vantiq-vantiqjp-internal deployGrafanaDB
 ```
 
-# Grafana でメトリクスが表示されない<a id="metrics_not_showing_up_in_grafana"></a>
-`Vantiq Resources` の `Request rate`、`Request duration` が表示されない。`MongoDB Monitoring Dashboard` が表示されない。
+# Metrics not displayed in Grafana<a id="metrics_not_showing_up_in_grafana"></a>
+The `Request rate` and `Request duration` in `Vantiq Resources` are not displayed. `MongoDB Monitoring Dashboard` is not displayed.  
 ![Screen Shot 2021-08-30 at 21.31.17](../../imgs/vantiq-install-maintenance/grafana_not_showing.png)
 
 
-#### InfluxDB にメトリクスが存在するか診断する
-データが表示されていないパネルのクエリを調べると、`kubernetes` データベースの `nginx_ingress_controller_requests` が使われているが、これが InfluxDB にあるか確認する。
+#### Diagnose if metrics exist in InfluxDB  
+Examine the query in the panel where data is not displayed, it uses `nginx_ingress_controller_requests` from the `kubernetes` database. Check to see if this exists in InfluxDB.  
 
 ```sh
-# influx-0 の pod のシェルに入る
+# Enter the shell of the influx-0 pod  
 $ kubectl exec -it influxdb-0 -n shared -- /bin/sh
 
-# influx のシェルに入る
+# Enter the shell of the influx  
 $ influx
 Connected to http://localhost:8086 version 1.8.1
 InfluxDB shell version: 1.8.1
 
-# データベースの切り替え
+# Switch the databases  
 > use kubernetes
 Using database kubernetes
 
-# 保存されているメトリクスを確認
+# Confirm the stored metrics  
 > show measurements
 name: measurements
 name
@@ -195,8 +193,8 @@ go_gc_duration_seconds
 ...
 ```
 
-#### telegraf でエラーが出ているか診断する
-メトリクスがない場合、telegraf 側でエラーが出ているか確認する。
+#### Examine if there is an error in telegraf  
+Confirm that there is an error on the telegraf side if there are no metrics.  
 
 ```sh
 $ stern -n shared telegraf-* -s 1s
@@ -208,7 +206,7 @@ telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:38Z E! [inputs.promethe
 ```
 
 #### Possible Solution 1
-AWS や Azure で、kubernetes クラスタの RBAC を有効にすると、デフォルトでは Cluster レベルの情報にアクセスする権限がない。`Service Account` を作成し、明示的に `telegraf` に対して権限をつける必要がある。
+There is no permission to access Cluster level information by default when RBAC is enabled of a kubernetes cluster in AWS or Azure. Create a `Service Account` and explicitly authorize it for `telegraf`.  
 
 ```sh
 kubectl apply -f k8s-additional-roles.yaml
@@ -260,8 +258,7 @@ subjects:
 Reference: https://stackoverflow.com/questions/53908848/kubernetes-pods-nodes-is-forbidden/53909115
 
 #### Possible Solution 2
-AKS 1.19からコンテナランタイムが`dockerd`から`containerd`に切り替わったことにより、取得できるメトリクスが変わっている。それに合わせgrafana側のクエリを変更しなければいけない。
-`Vantiq Resource`と`MongoDB Monitoring Dashboard`が影響を受ける。
+Metrics that can be obtained have changed since the container runtime was switched from `dockerd` to `containerd` from AKS 1.19. The queries on the grafana side should be changed accordingly. This affects `Vantiq Resource` and `MongoDB Monitoring Dashboard`.  
 
 ##### Vantiq Resources
 ###### "Pod" Variable
@@ -286,7 +283,7 @@ To-Be
 SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE (pod_name =~ /^$pod$/ AND namespace =~ /^$installation$/ and container_name =~ /^vantiq/) AND $timeFilter GROUP BY pod_name, time($__interval) fill(none)
 ```
 
-パネルの凡例の編集も行う。`Alias by`を以下のように編集する。  
+Also edit the legends of the panels. Modify the `Alias by` as the following.    
 Old
 ```sh
 [[tag_io.kubernetes.pod.name]]: $col
@@ -323,10 +320,10 @@ To-Be
 SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE ("pod_name" =~ /^$pod$/ AND "container_name" = 'mongodb' AND "namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)
 ```
 
-# VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった <a id="metrics_gone_after_vantiq_update"></a>
+# When updating Vantiq version, all Dashboard in Grafana is disappeared<a id="metrics_gone_after_vantiq_update"></a>
 
-#### 診断：データベースmysqlが正しく設定されているか確認する
-`deploy.yaml`の設定が正しくないと、正しく設定値がgrafana起動時に参照されず、grafanaの既定値であるsqlite3になっている可能性がある。`grafana` configmapの`grafana.ini`項目中の、`[database]`以下の状態を確認する。
+#### Examine: Confirm that the database mysql is set up correctly  
+When the settings in `deploy.yaml` are incorrect, the settings are not referenced correctly when grafana starts, and may be set to sqlite3, which is grafana's default value. Confirm the status under `[database]` in the `grafana.ini` entry in the `grafana` configmap.  
 
 ```bash
 kubectl get cm -n shared grafana
@@ -358,17 +355,17 @@ enable_login_token = true
 enabled = true
 header_name = X-WEBAUTH-USER
 header_property = username
-[database] # このセクションにmysqlが正しく設定されていない
+[database] # mysql is not set correctly in this section
 [grafana_net]
 ```
-正しくはこうなるはず。
+The correct setting is the following.  
 ```
 [database]
 host = grafanadb-mysql:3306
-type = mysql     # ここが mysql になっている事を確認
+type = mysql     # Make sure this section is set to mysql
 user = grafana
 ```
-`grafana-mysql` podのmysqlに入り、テーブルが正しく作成されているか確認する。
+`grafana-mysql` Enter the mysql in the pod and confirm that the tables have been created correctly.  
 
 ```bash
 kubectl get po -n shared
@@ -376,7 +373,7 @@ kubectl get po -n shared
 ```
 NAME                                             READY   STATUS             RESTARTS   AGE
 grafana-yyyyyyyyy-bbbbbb                         1/1     Running            0          3d18h
-grafanadb-mysql-xxxxxxxxx-aaaaaa                 1/1     Running            0          3d18h # これが Pod 名称
+grafanadb-mysql-xxxxxxxxx-aaaaaa                 1/1     Running            0          3d18h # Here is the Pod name
 influxdb-0                                       1/1     Running            0          3d18h
 ingress-nginx-controller-6568c69569-ncmhs        1/1     Running            0          13d
 ```
@@ -410,12 +407,12 @@ mysql> show databases;
 mysql> use grafana;
 Database changed
 mysql> show tables;
-Empty set (0.00 sec) # テーブルが存在しない
+Empty set (0.00 sec) # The table dose not exist
 ```
 
-#### リカバリー: sqlite3からmysqlへのデータ移行を行う
-（これ以降の作業は、mysqlシェルと作業端末のシェルで並行に行うので、ターミナルを2つ用意しておくとよい）
-1. `deploy.yaml`の設定を正しくする。`grafana.ini`以下をブランクで残すと既定値がブランクで上書きされてしまう。以下の例では`grafana.ini`自体をコメントアウトする。
+#### Recovery: Do data migration from sqlite3 to mysql  
+（The following work will be done in parallel in the mysql shell and in the shell of the working terminal, so it is recommended to prepare two terminals.）  
+1. Correct settings in `deploy.yaml`. When leaving under `grafana.ini` blank, the default value will be overwritten with blanks. The following example comments out `grafana.ini` itself.  
 ```yaml
 grafanadb:
   persistence:
@@ -430,7 +427,7 @@ grafana:
       # The value here must match the value chosen for the MySQL database password.
 #      password: <must match grafanadb.mysqlPassword>
 ```
-2. `./gradlew -Pcluster=<cluster name> deployShared`で、grafana podを更新する。-> grafanaのdatabaseがmysqlに切り替わり、初期化によりmysqlにテーブルが作成されていることを確認する。
+2. Update grafana pod with `./gradlew -Pcluster=<cluster name> deployShared`. -> Confirm that grafana database is switched to mysql and the table is created in mysql by initialization.  
 ```
 mysql> show tables;
 +----------------------------+
@@ -480,32 +477,32 @@ mysql> show tables;
 | user_auth_token            |
 +----------------------------+
 ```
-3. sqlite3 からデータをダンプする。`grafana-insert-less-migration.sql`がダンプされたデータ。
+3. Dump data from sqlite3. The `grafana-insert-less-migration.sql` is the dumped data.  
 
 ```bash
-# 作業端末にsqlite3をインストールする
+# Install sqlite3 on the work terminal
 sudo apt install sqlite3
 
-# 既存のデータをgrafana podからローカルにコピーする
+# Copy existing data from grafana pod to local
 kubectl cp -n shared grafana-yyyyyyyyy-bbbbbb:/var/lib/grafana/grafana.db ./grafana.db
 
-# SQL文の形式でダンプする
+# Dump the data in the SQL statement format
 sqlite3 grafana.db .dump > grafana.sql
 
-# SQL文のうち、INSERT文のみ抽出する、またその際、migration_logテーブルデータを省く（なぜかは後述）
+# Extract only INSERT statements from the SQL statements, omitting migration_log table data (for reasons to be explained later)  
 cat grafana.sql  sed -n '/INSERT/p' > grafana-insert.sql
 cat grafana-insert.sql | sed '/migration_log/d' > grafana-insert-less-migration.sql
 ```
-4. ダンプしたデータをmysqlにデータを投入する
+4. Put the dumped data into mysql.  
 ```bash
-# grafana-mysql podにデータをコピーする
+# Copy data to grafana-mysql pod
 kubectl cp grafana-insert-less-migration-log.sql -n shared grafanadb-mysql-xxxxxxxxx-aaaaaa:/tmp/
 ```
-mysqlシェルから作業
+Work within the mysql shell  
 ```sql
--- テーブルのレコードをすべて削除するスクリプトを作る。migration_logを除く。
+-- Create a script to delete all records in a table, except migration_log
 SELECT CONCAT ('DELETE FROM `', table_name, '`;') as statement from information_schema.tables where table_schema ='grafana' and table_name != 'migration_log';
--- スクリプトを適用する
+-- Apply the script
 DELETE FROM `alert`;                      
 DELETE FROM `alert_configuration`;        
 DELETE FROM `alert_instance`;             
@@ -547,37 +544,37 @@ DELETE FROM `test_data`;
 DELETE FROM `user`;                       
 DELETE FROM `user_auth`;                  
 DELETE FROM `user_auth_token`;
--- INSERT文を適用する
+-- Apply INSERT statement
 source /tmp/grafana-insert-less-migration-log.sql
 ```
 
-- いくつかのINSERTが失敗する。古いバージョンとスキーマが一致しないことが原因。Insertのエラーはここでは無視する。
+- Some INSERTs may fail. The reason is that the schema does not match the older version. INSERT errors should be ignored here.  
 
-5. system adminのdashboardをjsonから再度インポートする
-ここまでの作業で、namespace admin用とorganization admin用のdashboardのインポートが完成するが、system adminのいくつかのdashboardについて失敗している。それらについて再度インポートする。
+5. Import the system admin dashboard again from JSON.  
+The import of dashboards for the namespace admin and organization admin is completed up to this point, but some dashboards for the system admin have failed. Import them again.  
     - Organization Activity
-    - InfluxDB Internals
-以上。
+    - InfluxDB Internals   
+ 
 
-#### リカバリー手順について補足
-- `migration_log`はテーブルスキーマの更新を記録しているらしく、このテーブルのデータを消すと次回の起動時に不要なスキーマ変更を適用しようとしてエラーになる。そのため、このテーブルのデータは変更しない。
-- リカバリー作業の途中で失敗した場合、mysqlのテーブルを全削除し、手順2からやり直せばよい。
+#### Remarks on Recovery Procedures  
+- The `migration_log` seems to record table schema updates. Therefore, deleting the data in this table, it will cause an error when it will try to apply unnecessary schema changes at the next startup. So, the data in this table should not be changed.
+- When the recovery process fails during the recovery process, delete all mysql tables and start over from step 2.  
 
 ```sql
--- DROP文を生成
+-- Generate DROP statement  
 SELECT CONCAT('DROP TABLE ',
   GROUP_CONCAT(CONCAT('`', table_name, '`')), ';') AS statement
   FROM information_schema.tables
   WHERE table_schema = '<table schema name>';
 ```
-- grafana podを再起動
+- Restart grafana pod  
 ```sh
 kubectl rollout restart deploy -n shared grafana
 ```
 
-# Keycloak pod が起動しない<a id="keycloak_pod_will_not_start"></a>
+# Keycloak pod would not start<a id="keycloak_pod_will_not_start"></a>
 
-Keycloak が短い周期でエラーとなり、起動しない。
+Keycloak fails for a short period of time and would not start.  
 ```
 shared         keycloak-0                                       0/1     Error                        2          107s
 shared         keycloak-1                                       0/1     Error                        2          113s
@@ -586,7 +583,8 @@ shared         keycloak-0                                       0/1     CrashLoo
 shared         keycloak-1                                       0/1     CrashLoopBackOff             2          118s
 shared         keycloak-2                                       0/1     CrashLoopBackOff             2          113s
 ```
-初期インストール時によくある問題として、資格情報が正しく設定されてない可能性がある。`kubectl logs` で調べると、次のようなエラーが出ていることがある。
+As a common problem during initial installation, the credentials may not be set correctly.
+Examine the `kubectl logs` and the following error message may appear.  
 
 ```
 $ kubectl logs -n shared keycloak-0 -f
@@ -613,8 +611,8 @@ Caused by: org.postgresql.util.PSQLException: FATAL: password authentication fai
 	at org.postgresql.jdbc@42.2.5//org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192)
 ```
 
-#### Azure Database for PostgreSQL が起動せずエラーになる場合
-Azure Database for PostgreSQL の場合、`keycloak.keycloak.persistence` の下に、`dbHost` と `dbUser` をそれぞれ設定する必要がある。
+#### When Azure Database for PostgreSQL would not start and causes an error  
+For Azure Database for PostgreSQL, it is required to set `dbHost` and `dbUser` under `keycloak.keycloak.persistence`, respectively.
 
 ```yaml
 keycloak:
@@ -633,11 +631,11 @@ keycloak:
       dbUser: keycloak@keycloakvantiqjpinternalprod
 ```
 
-#### その他
-[`alpine-f` ツール](./alpine-f.md) を使って、直接 Postgres に繋げてみて、問題を切り分ける。
+#### Other
+Connect directly to Postgres with the [`alpine-f` Tool](./alpine-f.md), and isolate the problem.  
 
-# Podが再起動を繰り返し、起動できない<a id="pod-cannot-start"></a>
-Podが以下のように`Readiness probe failed`により、Restartを繰り返してしまう場合。
+# Pod repeatedly restarts and cannot start.<a id="pod-cannot-start"></a>
+When a Pod repeatedly Restarts because of `Readiness probe failed` like the following.  
 
 ```sh
 $ kubectl describe pod -n shared grafana-7fcf76474b-wxhqf
@@ -661,13 +659,13 @@ Events:
   Warning  BackOff                 52s (x24 over 8m43s)  kubelet                  Back-off restarting failed container
 
 ```
-#### kubernetesワーカーノード間で通信ができているか
-Security Groupの設定ミス等で、同じsubnet内であっても通信ができていない可能性がある。
-[`alpine-f` ツール](./alpine-f.md) を使って、直接ワーカーノード内から通信の疎通状況を確認し、問題を切り分ける。
+#### Communication between kubernetes worker nodes is working or not
+There is a possibility that communication is not possible even within the same subnet due to misconfiguration of Security Group, etc. Confirm the communication status directly from the worker node with the [`alpine-f` Tool](./alpine-f.md), and isolate the problem.
 
-#### Readiness Probeのタイムアウトまでの時間を長くする
-起動シーケンスが長くかかり、readiness probeやliveness probeが失敗し、強制終了されている可能性がある。その場合、起動が完了するまでprobeのチェックを遅らせる。
-例) grafana podの場合、`kubectl edit deploy -n shared grafana`で編集モードで、`livenessProbe.failureThreshold`、`readinessProbe.failureThreshold`、`readinessProbe.initialDelaySeconds`等の値を大きくする。
+
+#### Increase the time before the Readiness Probe timeout
+It is possible that the startup sequence took so long that the readiness probe or liveness probe failed and the system was forced to terminate. In that case, delay the probe check until the startup is complete.  
+e.g) For grafana pod, in edit mode with `kubectl edit deploy -n shared grafana`, increase the values of `livenessProbe.failureThreshold`, `readinessProbe.failureThreshold`, ` readinessProbe.initialDelaySeconds`, etc.  
 ```yaml
 ...
         readinessProbe:
@@ -683,18 +681,18 @@ Security Groupの設定ミス等で、同じsubnet内であっても通信がで
 ...
 ```
 
-# Vantiq IDE にログインしようとすると、エラーが出る<a id="error_when_trying_to_login_to_vantiq_ide"></a>
+# Error when trying to login to Vantiq IDE<a id="error_when_trying_to_login_to_vantiq_ide"></a>
 
-エラーが出てログインできない。
+Cannot login due to an error.  
 ```
 {"code":"io.vantiq.server.error","message":"Failed to complete authentication code flow. Please contact your Vantiq administrator and have them confirm the health/configuration of the OAuth server. Request failed due to exception: javax.net.ssl.SSLHandshakeException: Failed to create SSL connection","params":[]}
 ```
 
-Vantiq pod と keycloak 間で認証の通信がうまく行っていないことが原因である。
+The reason is that the authentication communication between the Vantiq pod and keycloak is not working.  
 
-#### SSL 証明書が有効かどうか診断する
+#### Examine if the SSL certificate is valid  
 
-デフォルトでは自己署名の証明書 (self-signed certificate) を信頼しない。開発環境などで一時的に自己署名の証明書を使用する場合は、明示的に指定する。
+Self-signed certificates are not trusted by default. For temporary use of self-signed certificates, such as in a development environment, specify this explicitly.  
 
 ```yaml
 nginx:
@@ -706,47 +704,33 @@ nginx:
       selfSigned: true
 ```
 
-#### サーバー間の時刻同期ができてきるか診断する
+#### Examine if time synchronization between servers has been established
 
-サーバー間で時刻同期ができていないと、pod 間 の token が無効と見なされてエラーとなる。閉域網で構成する際、時刻同期サービスへ通信ができないと時刻はズレる。
-[時刻同期確認ツール](./timestamp_ds.md) を使用し、サーバー間で時刻が同期されているかを確認する。
+Without time synchronization between servers, the token between pods will be considered invalid and it will cause an error. When configured in a closed network, the time will be out of sync if there is no communication to the time synchronization service. Confirm that the time is synchronized between the servers by using the [Servers Time Synchronization Check Tool](./timestamp_ds.md).  
 
 
-### Vantiq IDEにログインしようとするとエラーメッセージが出てループする
+### When trying to log into Vantiq IDE, an error message appears and loops
 
 ![login_error_keycloak](../../imgs/vantiq-install-maintenance/login_error_keycloak.gif)
 
-Keycloakにfront-end URLが設定されていないため。
-Keycloakの`Frontend URL`を設定する。
-1. 対象のRealmの Realm Settings -> Generalタブ に移動する
-1. Frontend URLに`https://<ドメイン名>/auth/`と設定する
+Due to Front-end URL is not set in Keycloak.
+Set `Frontend URL` in Keycloak.  
+1. Go to the Realm Settings -> General tab of the target Realm.  
+1. Set Frontend URL to `https://<Domain name>/auth/`.  
 
 
-# System Admin 用の key を紛失した、期限切れになった<a id="lost_or_expired_key_for_system_admin"></a>
+# Lost or expired key for System Admin<a id="lost_or_expired_key_for_system_admin"></a>
 
-System Admin 用 の key は Vantiq pod の再起動時や、48時間で失効するので、DNS レコード登録等の作業で手間取ると初回のログインができなくなる。
+The key for System Admin will expire when the Vantiq pod is restarted or after 48 hours, it will not be able to log in for the first time if taking time to register DNS records or other tasks.  
 
-Vantiq のデプロイからやり直す必要がある
+It needs to start over with the Vantiq deployment.  
 
-- `undeplyVantiq` を実施
-- `MongoDB` の `pv` と `pvc` を削除
-- `deployVantiq` を実施
+- Execute `undeplyVantiq`
+- Delete both `pv` and `pvc` of the `MongoDB`
+- Execute `deployVantiq`
 
-# ライセンスの有効期限を確認したい <a id="check-license-expiration"></a>
+# How to check license expiration date<a id="check-license-expiration"></a>
 
-System Admin でログイン >> メニュー右上のユーザーアイコン >> About と進むと、ライセンス有効期限が表示されます。
+Login with System Admin and go to >> User icon in the upper right corner of the menu >> About, License expiration date is displayed.  
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
-
-# Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
-
-### keycloak-initでFailedとなる
-
-`keycloak-init` init containerで失敗している理由を調べるため、当該コンテナログを出力する。
-```sh
-ubuntu@ip-172-50-0-246:~$ kubectl logs -n dev vantig-0 -c keycloak-init -f
-Logging into http://keycloak-http.shared.svc.cluster.local/auth as user keycloak of realm master
-HTTPS required [invalid request]
-```
-上記の場合、エラーメッセージとして `HTTPS required [invalid request]`と出ていた。これの原因は、Kubernetesのワーカーノードに割り当てられたIPレンジがグローバルIPアドレスとなっているため、プライベートIPからのアドレスを想定しているkeycloakサーバーに拒絶されている。
-よって、kubernetesクラスタを構成し直す必要がある。

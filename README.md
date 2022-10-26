@@ -5,7 +5,8 @@ This repository is for sharing various technical guidance and instructions of Va
 ### [Vantiq Application Development related](./vantiq-apps-development)
 Guides and learning materials for developing and operating Vantiq Applications.
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
-- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/vantiq-resources-introduction/docs/eng/Vantiq_resources_introduction.md)
+- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/vantiq-resources-introduction/docs/eng/Vantiq_resources_introduction.md)  
+- [Reusable application design patterns](./vantiq-apps-development/docs/eng/reusable-design-patterns.md)
 - [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 
 ### [Vantiq with External Services Integration](./vantiq-external-services-integration)
@@ -13,9 +14,13 @@ Guides and procedures for integrating Vantiq with cloud web services, brokers, a
 - [Amazon MQ](./vantiq-external-services-integration/docs/en/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/en/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/en/vantiq-aws-msk.md)
+- [AWS IoT Core](./vantiq-external-services-integration/docs/en/vantiq-aws-iotcore.md)
+- [Azure Cosmos DB](./vantiq-external-services-integration/docs/en/vantiq-azure-CosmosDB.md)
 - [Azure Event Hubs](./vantiq-external-services-integration/docs/en/vantiq-azure-EventHubs.md)
 - [GCP Pub/Sub](./vantiq-external-services-integration/docs/en/vantiq-gcp-PubSub.md)
-- [SendGrid](./vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)
+- [SendGrid](./vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)  
+- [Design Patterns Combined with API Gateway](./vantiq-external-services-integration/docs/en/vantiq-apigw.md)
+- [How to setup PostgREST](./vantiq-external-services-integration/docs/en/vantiq-PostgREST.md)
 
 
 ### [Vantiq with Devices Integration](./vantiq-devices-integration)
@@ -42,13 +47,16 @@ Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes cluste
 ### [Vantiq Platform Installation related](./vantiq-platform-operations)
 Guides and procedures for the Vantiq Platform Management Team on installing and operating the Vantiq Platform on cloud infrastructure.  
 - [Trouble Shooting Guide for Vantiq Cloud operations](./vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md)
+- [Custom configuration of deploy.yaml](./vantiq-platform-operations/docs/eng/deploy_yaml_config.md)
+- [Trouble Shooting Guide for Vantiq Cloud install and maintenance](./vantiq-platform-operations/docs/eng/vantiq-install-maintenance-troubleshooting.md)
 - [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
 - [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
 - [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
 - [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
 - [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
 - [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
-
+- [How to create a new Quay.io account](./vantiq-platform-operations/docs/eng/create_quay.io_account.md)
+- [Relationship between Vantiq Organization, Namespace and User Role](./vantiq-platform-operations/docs/eng/org_user_management.md)
 
 ## 目的
 
@@ -119,3 +127,5 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
 - [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
 - [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)
+- [Vantiq Organization, Namespace, User Role の関係](./vantiq-platform-operations/docs/jp/org_user_management.md)
+- [Vantiq Edge Admin タスク](./vantiq-platform-operations/docs/jp/vantiq-edge-admin.md)

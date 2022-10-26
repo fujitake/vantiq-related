@@ -34,6 +34,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [日付に1ヶ月足したり引いたりしたい](#add_months)
   - [フォーム送信でPOSTしたい](#form_submit)
   - [XMLを処理したい](#handle_xml)
+  - [Objectをループさせて、keyとvalueをそれぞれ取得したい](#object_loop)
 - [構成管理関連](#構成管理関連)
   - [作ったものをテンプレートとして配布したい](#作ったものをテンプレートとして配布したい)
   - [複数人で共同で作業したい](#複数人で共同で作業したい)
@@ -48,6 +49,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [Vantiq 上のログをファイルに出力したい](#Vantiq上のログをファイルに出力したい)
   - [開発中のNamespaceに他のユーザーを招待したい](#invite_users_to_ns)
   - [Vantiq ServerのGlobal IPを調べたい](#vantiq_global_ip)
+  - [発生したVantiqアプリケーションのエラーを把握したい](#error_notify)
 
 
 ## Source 関連<a id="Source関連"></a>
@@ -462,6 +464,42 @@ var node_name = xml_object.name()
 // "slideshow"
 ```
 
+### Objectをループさせて、keyとvalueをそれぞれ取得したい <a id="object_loop"></a>
+Objectをループさせ、Objectの `key` と `value` を取得するには次のようにします。
+
+Objectのkey は `.key` で、Objectのvalue は `.value` でアクセスできます。
+
+```vail
+PROCEDURE ObjectLoop()
+var obj = {
+    id: 33
+    , name: "Creeper"
+    , nickname: "Takumi"
+    , height: 1.8
+    , width: 0.6
+}
+for(kv in obj){
+    var key = kv.key
+    var value = kv.value
+    log.info("key:" + key + ", " + "value:" + value)
+}
+return null
+```
+
+例：Objectの中からvalueがnull以外のものを返すProcedure
+
+```vail
+PROCEDURE ExcludeNull(obj Object REQUIRED): Object
+
+var newObj = {}
+for(kv in obj){
+    if(kv.value != null){
+        newObj[kv.key] = kv.value
+    }
+}
+
+return newObj
+```
 
 ## 構成管理関連<a id="構成管理関連"></a>
 
@@ -551,3 +589,47 @@ Vantiq ServerのGlobal IP（Internet GatewayのGlobal IP)を以下の方法で�
   ```vail
   var ip = select one from source IfConfigSource
   ```
+
+### 発生したVantiqアプリケーションのエラーを把握したい<a id="error_notify"></a>
+Vantiq アプリケーションでは通常、[IDE上](https://dev.vantiq.co.jp/docs/system/ide/index.html#unseen-errors)でエラー発生の状態を確認します。
+
+![](../../imgs/app-error/image1.png)
+
+しかしながら、Vantiq IDEへのログインや操作自体がサーバへの負荷を高め、稼働中の処理に影響を及ぼすことも考えられます。
+また、アプリケーションのエラー監視という観点では、運用者が自発的にIDEからエラーの発生状況を把握するのではなく、エラーが発生した際に通知を受け取ることが望ましいと考えられます。
+
+一つの方法として、以下のようなProcedure を作成し、[定期的に実行する](#定期的に動く処理を実装したい)定期的に実行することで、エラーの発生状況を把握することができます。
+
+```vail
+PROCEDURE NotifyAppError()
+
+var errorLogs = SELECT * FROM ArsRuleSnapshot
+WHERE hasBeenSeen == false
+
+var targetNamespace = Context.namespace() 
+var targetEnv = Context.serverUri() 
+
+// 送信先メールアドレス
+var toAddress = "sysadmin@exanple.com"
+// 送信元メールアドレス
+var fromAddress = "notify@exanple.com"
+// 送信内容
+var subject = "【VANTIQ Nitification】 Some errors are occurring in your namespace"
+var body = "<p>Some errors are occurring in your namespace.</p>"
+body += "<p>Please login to Vantiq IDE and check the error message.</p>"
+
+body += "<div  style = \"border: solid 3px #000\">" + "Server URL: " + targetEnv + "<br>"
+body += "Namespace: " + targetNamespace +  "<br>"
+body += "Error Count: " + length(errorLogs) + "</div>"
+
+
+
+// 送信
+PUBLISH { html: body } TO SOURCE AppErrorNotifyEmailServer USING { from: fromAddress, to: toAddress, subject: subject } 
+```
+
+`ScheduledEvent` で定期的にイベントを発生させ、上記のProcedure を実行します。
+![](../../imgs/app-error/image2.png)
+
+サンプルのProcedureでは、`AppErrorNotifyEmailServer` というSourceを作成し、メール送信を行っています。
+必要に応じSourceを変更することで、SlackやMicrosoft Teamsへの通知なども実現できます。

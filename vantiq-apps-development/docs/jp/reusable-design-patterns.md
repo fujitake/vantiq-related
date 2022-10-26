@@ -23,6 +23,25 @@
 
 # デザインパターン例
 
+  - [Polling-To-Stream パターン](#polling-to-stream)
+  - [Observer パターン](#observer)  
+  - [Async API パターン](#async-api)
+  - [Cached Remote API パターン](#cached-remote-api)
+  - [In-Memory Master パターン](#in-memory-master)  
+  - [Echo Back パターン](#echo-back)
+  - [Loopwhile Batch パターン](#loopwhile-batch)  
+  - [Memento パターン](#memento)
+  - [Composite Entity パターン](#composite-entity)  
+  - [Transpose パターン](#transpose)  
+  - [Adapter/Bridge パターン](#adapter)   
+  - [Lookup パターン](#lookup)
+  - [Upsert State パターン](#upsert-state)
+  - [Stream-To-Bulk パターン](#stream-to-bulk)
+  - [External Datasink パターン](#external-datasink)
+  - [Websocket パターン](#websocket)
+  - [Journal パターン](#journal)
+  - [Smooth Remote Service パターン](#smooth-remote-service)
+
 ### 実装に関する注意点
 - いくつかのデザインパターンは[バージョン1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/)の機能に依存しています。それ以前のバージョンにインポートするとコンパイルエラーとなったり、想定通り機能しない可能性があります。
   - [Stateful ServiceにおけるMap型](https://dev.vantiq.co.jp/docs/system/rules/index.html#map) - Stateful Serviceにて従来Object型を使用していたものが置き換えられた
@@ -136,6 +155,7 @@
 **Overview**
 - 外部からロードするマスタデータ（またはそれに準ずる参照系データ）をTypeではなくインメモリのStateで保持する。 Stateは、hash検索のみ可能なので、検索に使う列の数の分キャッシュが必要になる。
 - ロードする時点で複数のマスターレコードを集約しておくことで、より高速化する。（Composite Entityパターンとの併用）
+- Upsert Stateパターンと併用
 
 **Motivation**
 - データ統合、エンリッチ処理の高速化。
@@ -195,6 +215,30 @@
 **Sample Project**
 - [LoopWhileBatch.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/LoopWhileBatch.zip)
 
+---
+### Memento <a id="memento"></a>
+<img src="../../imgs/reusable-design-patterns/memento.png" width=50%>
+
+**Overview**
+- ファイルやデータセット等（日次の履歴など）をラベルを付けて永続化してき、必要な時に復元する。
+- 大きなデータセット（例：数万レコードのJSON等）であっても1レコードとして永続化する。
+- 保存先のテーブル（Type）には適宜、有効期限や保存容量の上限を設定しておく。（7日など）
+
+
+**Motivation**
+- 処理するロジックに数世代前の入力データが必要で、それを高速に呼び出したい。
+- 処理結果に再現性を持たせるために、サーバーの稼働状態によらず数世代分の入力データを保全したい。
+
+
+**Usage**
+- レコード数の多い長期的な過去データとの比較を伴う処理
+
+**Note**
+- _Load_ - 呼び出し側でStateに復元する処理を記述する（Upsert State)
+
+
+**Sample Project**
+- [Memento.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/Memento.zip)
 
 ---
 
@@ -244,22 +288,17 @@
 ```vail
 if (!state) {
     // if this is the first time, initialize it.
-    state = {
-        machineID : "",
-        temp: 0.0,
-        humidity: 0.0,
-        controlCode : "0"        
+    state = {     
     }
 }
 
-if (event.controlCode) {
-    state.controlCode = event.controlCode
-}
-if (event.temp) {
-    state.temp = event.temp
-}
-if (event.humidity) {
-    state.humidity = event.humidity
+// copy properties if present
+state.controlCode = event.controlCode ? event.controlCode : state.controlCode
+state.temp        = event.temp ? event.temp : state.temp
+state.humidity    = event.humidity ? event.humidity : state.humidity
+
+state.timestamp = event.timestamp
+state.machineID = event.machineID
 ```
 
 **Sample Project**
@@ -267,9 +306,9 @@ if (event.humidity) {
 
 ---
 
-### Adapter <a id="adapter"></a>
+### Adapter / Bridge <a id="adapter"></a>
 
-<img src="../../imgs/reusable-design-patterns/async-api.png" width=50%>
+<img src="../../imgs/reusable-design-patterns/adapter.png" width=50%>
 
 **Overview**
 - Serviceのインタフェースに入力ストリームの形式を合わせる。
@@ -289,7 +328,7 @@ if (event.humidity) {
 
 ---
 
-### Decorator <a id="decorator"></a>
+### Lookup <a id="lookup"></a>
 
 <img src="../../imgs/reusable-design-patterns/decorator.png" width=50%>
 
@@ -305,11 +344,49 @@ if (event.humidity) {
 
 **Note**
 - _SomeService.Get()_ - Keyに対するレコードを返す
-- _SomeService_, _SomeService2_ タスク - Service Procedureを呼び出し、`Attach Return Value to Return Property`とする
+- _SomeService_, _SomeService2_ タスク - Service Procedureを呼び出し、`Attach Return Value to Return Property`とする。もしくは、`Transformation`でpropertyを追加する。
 - _Sink_ - 分析用データであれば Brokerなど通じてVantiq外に連携する
 
 **Sample Project**
 - N/A
+
+---
+### Upsert State <a id="upsert-state"></a>
+
+<img src="../../imgs/reusable-design-patterns/upsert-state.png" width=50%>
+
+**Overview**
+- Service State上で同一キーを持つデータソースが異なるレコードを統合する。
+- 複数のデータを非同期に統合する場合は統合が完了した際に必要であればイベントを発出する。
+- 入力が配列であればバルクで処理する。
+
+**Motivation**
+- バッチで非同期に入力されるデータソース同士を効率よく統合する。
+
+**Usage**
+- データ統合
+
+**Note**
+- _UpsertState()_ - Stateが保持する同一keyのオブジェクトにプロパティを結合する。
+  ```vail
+  package jp.co.vantiq.designpattern.upsertstate
+  PROCEDURE JoinXXXData.upsertState(keyName String, obj Object, propName String)
+
+  var key = event[keyName]
+  joinedState.compute(key, (pKey, value) => {
+      if (value == null) {
+          value = {}
+      }
+      value[propName] = obj
+      return value
+  })
+  return true
+  ```
+- _BulkUpsertState_ - 配列のそれぞれの要素に対して、UpsertState()を実行する。
+
+
+**Sample Project**
+- [UpsertState.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/UpsertState.zip)
 
 ---
 

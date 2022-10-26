@@ -1,41 +1,48 @@
-# はじめに
-Vantiqから直接AWS IoTのAPIと連携する方法を説明する。  
-Vantiqからは以下のような連携が可能である。  
+# Introduction
+This article describes how to collaborate with AWS IoT APIs directly from Vantiq.    
 
-- デバイスとのデータ(テレメトリー)の受信  
-  MQTT Sourceに相互認証の設定入れ込むことで AWS IoT Core の MQTT に対して Pub/Sub 可能  
-    
-- プロパティ値(Registry)の読み書き  
-  AWS Console | CLI | IoT API からのみ操作可能  
-  AWS IoT API を呼び出すことで可能  
+From Vantiq, the following collaborations are possible.    
 
-- プロパティ(制御指示）の送信  
-  Device Shadowを利用する。  
-  Device Shadow は HTTPS | MQTTをサポートしていて、Vantiqからはどちらも可能。  
-  
-本手順ではVantiqのProcedureから以下を行う方法について説明する。  
-- 「モノ」の一覧取得
-- 「モノ」の詳細(Registry、プロパティ)取得
-- 「モノ」のプロパティ(制御指示、Device Shadow)の取得
-- 「モノ」のプロパティの変更(Device ShadowへのPOST)
+- Receive data (telemetry) from Vantiq to devices    
+  Can Pub/Sub to MQTT on AWS IoT Core by setting mutual authentication in MQTT Source.  
 
-## 動作条件
-Vantiq Server v1.33以降
+- Read/write property values (Registry)    
+  Can only be operated from AWS Console | CLI | IoT API.    
+  Can be done by calling AWS IoT API.    
 
-# IoT Core の構成
-Vantiq から AWS IoT Core のREST APIを実行するためにアカウントの Access key と Secret key を用意しておく。
+- Transmit properties (Control Signal)    
 
-## Vantiq割り当て用の「モノ」の作成  
-Vantiq から AWS IoT Core の MQTT と接続を行うために、Vantiqに割り当てる用の「モノ」をAWSコンソールから作成する。  
-AWS IoTの 管理 > モノ から「モノ」を以下のように作成する。  
-- モノのプロパティを指定
-  - モノの名前  
+  Use Device Shadow.  
+  Device Shadow supports HTTPS | MQTT, both of which are supported by Vantiq.  
+
+
+This document describes how to do the following from Vantiq's Procedures.  
+
+- Retrieve a list of "Things"  
+- Retrieve details (Registry, Properties) of "Things"  
+- Retrieve properties (Control Signal, Device Shadow) of "Things"  
+
+- Update properties of "Things" (POST to Device Shadow)  
+
+## Prerequisites
+Vantiq Server v1.33 or higher is required
+
+## Configuration of IoT Core
+Prepare the Access key and the Secret key for your account to run AWS IoT Core REST API from Vantiq.  
+
+## Creating "Things" to be assigned to Vantiq 
+
+Create "Things" with the AWS console to be assigned to Vantiq in order to make a connection from Vantiq to AWS IoT Core's MQTT.    
+
+Go to AWS IoT > Manage > Things, and create "Things" as the followings.    
+- Specify the property of a "Thing"  
+  - The name of a "Thing"  
     `vantiq`
-- デバイス証明書を設定  
+- Configure the device certificate    
   `新しい証明書を自動生成`  
-    => 証明書と鍵ファイル、CAの証明書ファイルをダウンロードしておく
-- 証明書にポリシーをアタッチ  
-  以下のようなポリシーを作成し、アタッチ  
+    => Download certificate and key files and CA certificate file beforehand.  
+- Attach the policy to the certificate    
+  Create the following policy and attach.      
     ```json
     {
       "Version": "2012-10-17",
@@ -49,43 +56,42 @@ AWS IoTの 管理 > モノ から「モノ」を以下のように作成する�
     }
     ```
 
-※上記ポリシーはすべてを許可しているが、本来は必要な権限のみ与えるようにすること。
+※ The above policy allows everything, but should essentially grant only the necessary permissions.  
 
-`1つのモノを作成`を選択
+Select `Create a single thing`
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-1.png)
 
-Device Shadowはデフォルトの`シャドウがありません`を選択
+For Device Shadow, select the default `シャドウがありません`  
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-2.png)
 
-`新しい証明書を自動生成(推奨)`を選択
+Select `新しい証明書を自動生成(推奨)`  
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-3.png)
 
-ポリシーは`ポリシーを作成`をクリックし以下のような画面に遷移するのでそこで作成する。  
-ポリシー名は任意(画像の例では`test-allow-all`で作成)。作成後、元の画面に戻り作成したポリシー名のチェックボックスにチェックを入れる。
+For policy, click `Create a policy` and move to the following screen. Create it there.    
+The policy name can be any (`test-allow-all` in the image example). After creation, return to the original screen and check the checkbox for the policy name created.  
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-4.png)
 
-## テスト用の「モノ」の作成
-AWSコンソールから同様に作成する。  
-- モノのプロパティを指定
-  - モノの名前  
+## Create a "Thing" for testing  
+Create with the AWS console in the same way.    
+- Specify the property of a "Thing"  
+  - The name of a "Thing"    
     `tempSensor1`
   - Device Shadow
-    - `名前付きシャドウ`を選択
-    - シャドウ名  
+    - Select `名前付きシャドウ`  
+    - The name of the Device Shadow    
       `fun_switch`
-- デバイス証明書を設定  
+-  Configure the device certificate     
   `新しい証明書を自動生成`    
-    => 証明書と鍵ファイルをダウンロードしておく
-- 証明書にポリシーをアタッチ  
-  テスト用のためモノ「Vantiq」で作成したポリシーをアタッチ  
+    => Download certificate and key files beforehand.  
+- Attach the policy to the certificate    
+  Attach the policy created by "Thing" "Vantiq" since it is for testing.    
 
-Device Shadowでは`名前付きシャドウ`を選択し、シャドウ名を入力する。
+In Device Shadow, select `名前付きシャドウ` and provide a Shadow name.  
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-5.png)
-    
-# JKSファイルの作成
-Vantiq のMQTT SourceからAWS IoT Core の MQTT へ接続する際にサーバ/クライアント証明を行うためにJKSファイルを作成する。  
-作業環境には java(keytoolコマンド), openssl がインストールされている必要があり、本手順では以下のバージョンで確認を行った。   
-参考:  
+
+## Create a JKS file  
+Create a JKS file for server/client proofing when connecting from Vantiq's MQTT Source to AWS IoT Core's MQTT. The work environment must have java (keytool command) and openssl installed, and confirmed with the following versions in this procedure.       
+References (Japanese):  
 [はまりやすい難所！ 証明書ファイル（jksファイル）の作成方法 | 株式会社AMG Solution](https://amg-solution.jp/blog/13884)   
 [Javaのkeytoolのキーストア（JKS）からPEM形式の証明書、秘密鍵に変換する方法 - Qiita](https://qiita.com/yasushi-jp/items/4aa690fbde11841686e5)  
 
@@ -99,104 +105,104 @@ $ openssl version
 OpenSSL 1.1.1f  31 Mar 2020
 ```
 
-## truststore ファイルの作成
+## Create a truststore file
 
-以下のコマンドでtruststoreファイルを作成する。コマンド実行時にパスワードを設定する必要が有るので任意のパスワードを設定する。  
-**JKSファイルに設定したパスワードはMQTT Sourceに設定する必要が有るためメモしておくこと。**  
-実行後「Trust this certificate?[no]: 」と入力を求められるため、yesを入力する。
+Create a truststore file with the following command. Set any password as it is necessary to set a password when executing the command.    
+**Make a note of the password that is set in the JKS file, as it needs to be set in the MQTT Source.**  
+After execution, it asks "Trust this certificate?[no]:". Enter "yes".
 
 ```bash
-# JKSファイルの生成(生成されるファイルの名前はmyTrustStore.jks)
-$ keytool -import -storetype JKS -keystore myTrustStore.jks -storepass <任意のパスワード> -alias <任意のエイリアス名> -file <CA証明書ファイル>
+# Generate the JKS file (the generated file name is "myTrustStore.jks")
+$ keytool -import -storetype JKS -keystore myTrustStore.jks -storepass <any password> -alias <any alias name> -file <CA certificate file>
 
-# JKSファイルの内容の確認
-$ keytool -list -v -keystore myTrustStore.jks -storetype JKS -storepass <JKSファイルに設定したパスワード>
+# Check the contents of the JKS file  
+$ keytool -list -v -keystore myTrustStore.jks -storetype JKS -storepass <Password set in the JKS file>
 
 ```
 
-## keystore ファイルの作成
-ダウンロードしておいた「モノ」の証明書と秘密鍵ファイルを openssl コマンドでPKCS12形式のファイルに変換後、keytool コマンドでJKSファイルに変換する。  
-パスワードはそれぞれ任意のものを設定すること。  
-**JKSファイルに設定したパスワードはMQTT Sourceに設定する必要が有るためメモしておくこと。**  
+## Create a keystore file  
+After converting the downloaded both the certificate and the private key file of the "Thing" to a PKCS12 format file wiht the openssl command, convert it to a JKS file with the keytool command.  
+Password should be set any one for each.    
+**Make a note of the password that is set in the JKS file, as it needs to be set in the MQTT Source.**  
 
 ```bash
-# PKCS12ファイルの生成(生成されるファイルの名前はkeystore.p12)
-$ openssl pkcs12 -export -in <モノの証明書(xxx-certificate.pem.crt)> --name vantiq -inkey <モノの秘密鍵(xxx-private.pem.key)> -out keystore.p12 -passout pass:<任意のパスワード>
+# Generate the PKCS12 file (the generated file name is "keystore.p12")  
+$ openssl pkcs12 -export -in <Certificate of the "Thing" (xxx-certificate.pem.crt)> --name vantiq -inkey <Private key of the "Thing" (xxx-private.pem.key)> -out keystore.p12 -passout pass:<any password>
 
-# JKSファイルの生成(生成されるファイルの名前はkeystore.jks)
-$ keytool -importkeystore -srckeystore keystore.p12 -srcstoretype PKCS12 -srcstorepass <PKCSファイル生成時に設定したパスワード> -destkeystore keystore.jks -deststoretype JKS -deststorepass <JKSファイルに設定する任意のパスワード> -destkeypass <JKSファイルに設定する任意のパスワード>
+# Generate the JKS file (the generated file name is "keystore.jks")  
+$ keytool -importkeystore -srckeystore keystore.p12 -srcstoretype PKCS12 -srcstorepass <Password set in the PKCS file> -destkeystore keystore.jks -deststoretype JKS -deststorepass <Any password to be set for the JKS file> -destkeypass <Any password to be set for the JKS file>
 
-# JKSファイルの内容の確認
-$ keytool -list -v -keystore keystore.jks -storetype JKS -storepass <JKSファイルに設定したパスワード>
+# Check the contents of the JKS file  
+$ keytool -list -v -keystore keystore.jks -storetype JKS -storepass <Password set in the JKS file>
 
 ```
 
-# Vantiq リソースの作成
+# Create Vantiq Resources  
 
-## Secretsの登録
-以下の4つのSecretを登録する。  
+## Register Secrets  
+Register the following four Secret.    
 
 - SourceTrustStore  
-  以下のコマンドで出力されるtruststoreファイルのbase64エンコードした値を指定  
+  Specify the base64-encoded value of the truststore file returned by the following command.    
   ```bash
   $ cat myTrustStore.jks | base64 | tr -d "\n" ; echo
   ```
 
 - SourceTrustStorePassword  
-  myTrustStore.jksに設定したパスワード  
+  Password set in the myTrustStore.jks    
 
 - SourceKeyStore  
-  以下のコマンドで出力されるkeystoreファイルのbase64エンコードした値を指定
+  Specify the base64-encoded value of the keystore file returned by the following command.  
   ```bash
   $ cat keystore.jks | base64 | tr -d "\n" ; echo
   ```
 
 - SourceKeyStorePassword  
-  keystore.jksに設定したパスワード
+  Password set in the keystore.jks  
 
-## Sourceの作成
+## Create Sources
 
-**デバイス接続エンドポイント**は 以下のようにAWS コンソールの **AWS IoT > 設定** のデバイスデータエンドポイント欄から確認できる。  
-Source や Procedure の作成時に必要なためひかえておく。
+The **デバイス接続エンドポイント** can be found in the Device Data Endpoints column of the **AWS IoT > Settings** in the AWS console as the following.      
+Make a note of it, as it is necessary for creating Sources and Procedures.  
 
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-6.png)
 
 
-### Remote Sourceの作成
-以下の2種類作成する。
+### Create Remote Sources  
+Create the following two types.  
 
 - Source Name  
   `AWSIoTAPI`
 - Server URI  
   `https://iot.us-west-2.amazonaws.com`  
-    ※上記はus-west-2の場合。  
-    別リージョンの場合は[AWS IoT Core endpoints and quotas - AWS General Reference](https://docs.aws.amazon.com/general/latest/gr/iot-core.html#iot-core-control-plane-endpoints)を参照
+    ※ The above is for us-west-2.    
+    For other regions, refer to [AWS IoT Core endpoints and quotas - AWS General Reference](https://docs.aws.amazon.com/general/latest/gr/iot-core.html#iot-core-control-plane-endpoints).  
 
 - Source Name  
   `AWSIoTCoreDeviceShadow`
 - Server URI  
-  `https://<デバイス接続エンドポイント>`
+  `https://<Device Connection Endpoint>`
 
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-7.png)
 
-### MQTT Sourceの作成
-  
-topics にはすべての「モノ」の名前付き shadow の更新が行われた際の発行先を指定している。  
-本手順では Device Shadow の利用を行うことを想定している。  
-ただし、Device Shadow は AWS IoT Core の MQTT の一部の Topic を予約済みとして利用しているため、作成した Source で AWS IoT Core の MQTT へのPub/Subが可能である。  
-[予約済みトピック - AWS IoT Core](https://docs.aws.amazon.com/ja_jp/iot/latest/developerguide/reserved-topics.html)
+### Create MQTT Source
 
-実利用の際には topics 設計等にあわせて Source の分割などを行うこと。  
-参考: [AWS IoT Core の MQTT トピックの設計](https://d1.awsstatic.com/whitepapers/ja_JP/Designing_MQTT_Topics_for_AWS_IoT_Core.pdf)
+Specify in topic the publication destination for all "Things" named shadows when they are updated.    
+Use of Device Shadow is assumed in this procedure.  
+However, since Device Shadow uses some Topics of AWS IoT Core's MQTT as reserved, it is possible to Pub/Sub to AWS IoT Core's MQTT with the created Source.  
+[Reserved topics - AWS IoT Core](https://docs.aws.amazon.com/iot/latest/developerguide/reserved-topics.html)
+
+In actual use, the Source should be divided according to the topic design, etc.  
+Reference (Japanese): [AWS IoT Core の MQTT トピックの設計](https://d1.awsstatic.com/whitepapers/ja_JP/Designing_MQTT_Topics_for_AWS_IoT_Core.pdf)
 
 
-以下の Source を作成する。
+Create the following Source.  
 
 - Source Name  
   `AWSIoTMQTT`
 - Source Type  
   `MQTT`
-- Config(Properties > ConfigをJSONとして編集)
+- Config(Properties > Edit Config as JSON)  
 ```json
 {
     "contentType": "application/json",
@@ -206,7 +212,7 @@ topics にはすべての「モノ」の名前付き shadow の更新が行わ�
     "cleanSession": true,
     "maxInflight": 10,
     "serverURIs": [
-        "mqtts://<デバイス接続エンドポイント>:8883"
+        "mqtts://<Device Connection Endpoint>:8883"
     ],
     "topics": [
         "$aws/things/+/shadow/name/+/update/documents"
@@ -222,13 +228,13 @@ topics にはすべての「モノ」の名前付き shadow の更新が行わ�
 }
 ```
 
-以下のような Source を作成できる。
+Create the Source like the following.  
 ![](../../imgs/vantiq-aws-iotcore/aws-iotcore-8.png)
 
-## AWS API 呼び出しに必要なSig v4処理およびheader作成Procedureの作成
-署名についての詳細は[Signing AWS requests with Signature Version 4 - AWS General Reference](https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html)を参照  
+## Create Procedures for Sig v4 processing and header creation required for AWS API calls  
+As for the details of Signature, refer to [Signing AWS requests with Signature Version 4 - AWS General Reference](https://docs.aws.amazon.com/general/latest/gr/sigv4_signing.html).  
 
-- 署名に必要な2進、16進数変換 Procedure
+- Procedure to convert binary and hexadecimal numbers required for signatures.  
 ```
 PROCEDURE AWSAPIUtils.dec2sbin(dec Integer)
 if (dec < -128 || dec > 127) {
@@ -289,7 +295,7 @@ for (i in range(0, length(bin), 4)) {
 return result
 ```
 
-- 署名 Procedure
+- Signature Procedure  
 ```
 PROCEDURE AWSAPIUtils.genSignatureVer4AWS(access_key, date, region, service_name, str_to_sign)
 
@@ -309,7 +315,7 @@ for (i in range(0, bytes.length())) {
 return signature.toLowerCase()
 ```
 
-- API 呼び出しに必要なヘッダ作成 Procedure で上記3つの Procedure を処理の中で呼び出している
+- Call the above three Procedures in the process in Procedure to create the headers required for API calls.  
 ```
 PROCEDURE AWSAPIUtils.genAWSAPIHeaders(task1, task2, task3, task4)
 // Parameters
@@ -400,12 +406,12 @@ if(task1.payload != ""){
 return headers
 ```
 
-作成した AWSAPIUtils.genAWSAPIHeaders Procedure を AWS API を呼び出す Procedure内で利用していく。
+Using the created AWSAPIUtils.genAWSAPIHeaders Procedure in a Procedure that calls the AWS API.  
 
-## 「モノ」の一覧取得を行うProcedureの作成
+## Crate the Procedure to retrieve a list of "Things"  
 
-登録してある「モノ」の一覧を取得する場合は AWS IoT API を呼び出す。  
-参照: [ListThings - AWS IoT](https://docs.aws.amazon.com/iot/latest/apireference/API_ListThings.html)
+To retrieve a list of registered "Things", call the AWS IoT API.  
+Reference: [ListThings - AWS IoT](https://docs.aws.amazon.com/iot/latest/apireference/API_ListThings.html)
 
 ```
 PROCEDURE AWSIoTAPI.listThingsIoTCore()
@@ -449,7 +455,7 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 
 ```
 
-実行すると以下のように「モノ」の一覧を取得できる。
+Once executed, a list of "Things" can be retrieved as follows.    
 ```json
 [
    {
@@ -474,10 +480,10 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 ]
 ```
 
-## 「モノ」の詳細(Registry、プロパティ)取得を行うProcedureの作成
+## Create the Procedure to retrieve details (Registry, Properties) of "Things"  
 
-この場合もAWS IoT API で取得することができる。  
-参照: [DescribeThing - AWS IoT](https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeThing.html)
+This can also be retrieved with the AWS IoT API.    
+Reference: [DescribeThing - AWS IoT](https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeThing.html)
 
 ```
 PROCEDURE  AWSIoTAPI.describeThingIoTCore(thing_name)
@@ -521,7 +527,7 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 
 ```
 
-引数の thing_name に作成した「モノ」の名前である `tempSensor1` を指定して実行すると以下のように取得できる。
+Specify `tempSensor1` which is the name of the created "Thing" into the thing_name argument. Then execute it, the details of "Thing" can be retrieved as follows.  
 ```json
 [
    {
@@ -537,13 +543,13 @@ SELECT FROM SOURCE AWSIoTAPI WITH method = "GET", path = path, headers = headers
 ]
 ```
 
-## 「モノ」のプロパティ(制御指示 - Device Shadow)の取得を行うProcedureの作成
-AWS IoT Device Shadow では HTTPS/MQTTの両方をサポートしている。  
-MQTTの場合はすでに作成してある AWSIoTMQTT で名前付き Shadow の Topic を指定しているため、Shadow で更新が行われた場合そのデータが Source によって取得される。  
+## Create the Procedure to retrieve properties (Control Support, Device Shadow) of "Things"  
+AWS IoT Device Shadow supports both HTTPS/MQTT.   
+For MQTT, since a named Shadow Topic is specified in AWSIoTMQTT that has already been created, when the Shadow is updated, the data is retrieved by Source.  
 
-Device Shadow の Topic についての詳細は[Device Shadow MQTT topics - AWS IoT Core](https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-mqtt.html)を参照  
+As for the details of Device Shadow's Topic, refer to [Device Shadow MQTT topics - AWS IoT Core](https://docs.aws.amazon.com/iot/latest/developerguide/device-shadow-mqtt.html).  
 
-ここでは HTTPS で「モノ」の Shadow の状態を取得する Procedure を作成する。
+Here create the Procedure to retrieve the Shadow status of "Thing" via HTTPS.  
 
 ```
 PROCEDURE AWSIoTAPI.getThingShadowIoTCore(thing_name, shadow_name)
@@ -551,7 +557,7 @@ PROCEDURE AWSIoTAPI.getThingShadowIoTCore(thing_name, shadow_name)
 var ACCESS_KEY = "<YOUR-AWS-ACCESS-KEY>"
 var SECRET_KEY = "<YOUR-AWS-SECRET-KEY>"
 var REGION = "us-west-2"
-var HOST = "<デバイス接続エンドポイント>"
+var HOST = "<Device Connection Endpoint>"
 
 var date = now()
 var amzdate = format("{0, date,yyyyMMdd'T'HHmmss'Z'}",date)
@@ -581,12 +587,12 @@ var task4 = {
 }
 
 var headers = AWSAPIUtils.genAWSAPIHeaders(task1, task2, task3, task4)
-var path = "/things/" + thing_name + "/shadow?name=" + shadow_name 
+var path = "/things/" + thing_name + "/shadow?name=" + shadow_name
 
 SELECT FROM SOURCE AWSIoTCoreDeviceShadow WITH method = "GET", path = path, headers = headers
 ```
 
-引数の thing_name に作成した「モノ」の名前である `tempSensor1` を、shadow_name に `fun_switch` を指定して実行すると以下のように取得できる。
+Specify `tempSensor1` which is the name of the created "Thing" into the thing_name argument, and specify `fun_switch` into the shadow__name argument. Then execute it, the properties of "Thing" can be retrieved as follows.    
 
 ```json
 [
@@ -617,10 +623,10 @@ SELECT FROM SOURCE AWSIoTCoreDeviceShadow WITH method = "GET", path = path, head
 ]
 ```
 
-## 「モノ」のプロパティの変更(Device ShadowへのPOST)を行うProcedureの作成
-こちらに関してもAWS IoT Device Shadow では HTTPS/MQTT の両方をサポートしている。  
-MQTT の場合はすでに作成してある AWSIoTMQTT で update topic に対して Publish を行うことで更新を行うことができる。
-ここでは HTTPS で「モノ」の Shadow の状態を更新する Procedure を作成する。
+## Create the Procedure to update properties of "Things" (POST to Device Shadow)  
+As for this one, AWS IoT Device Shadow supports both HTTPS/MQTT.   
+For MQTT, updates can be performed by Publishing to an update topic in AWSIoTMQTT that has already been created.  
+Here create the Procedure to update the Shadow status of the "Things" via HTTPS.  
 
 
 ```
@@ -629,7 +635,7 @@ PROCEDURE AWSIoTAPI.updateThingShadowIoTCore(thing_name, shadow_name)
 var ACCESS_KEY = "<YOUR-AWS-ACCESS-KEY>"
 var SECRET_KEY = "<YOUR-AWS-SECRET-KEY>"
 var REGION = "us-west-2"
-var HOST = "<デバイス接続エンドポイント>"
+var HOST = "<Device Connection Endpoint>"
 
 var body = {
   "state": {
@@ -670,13 +676,13 @@ var task4 = {
 }
 
 var headers = AWSAPIUtils.genAWSAPIHeaders(task1, task2, task3, task4)
-var path = "/things/" + thing_name + "/shadow?name=" + shadow_name 
+var path = "/things/" + thing_name + "/shadow?name=" + shadow_name
 
 SELECT FROM SOURCE AWSIoTCoreDeviceShadow WITH method = "POST", path = path, headers = headers, body = body
 
 ```
 
-作成してある AWSIoTMQTT Source の `データの受信テスト`を起動しておき、引数の thing_name に作成した「モノ」の名前である`tempSensor1` を、shadow_name に `fun_switch` を指定して実行すると以下のようなレスポンスが返ってくる。
+Execute the `Test Data Receipt` of the AWSIoTMQTT Source which has been created, and specify `tempSensor1` which is the name of the "Thing" created into thing_name argument, and specify `fun_switch` into the shadow_name argument. Once  execute it, the following response is returned.　　
 
 ```json
 [
@@ -707,7 +713,7 @@ SELECT FROM SOURCE AWSIoTCoreDeviceShadow WITH method = "POST", path = path, hea
 ]
 ```
 
-Shadow が更新されたため、AWSIoTMQTT Source は以下のようなメッセージを受信していることが確認できる。
+Since the Shadow has been updated, it is possible to confirm that the following message is received at AWSIoTMQTT Source.  
 
 ```json
 {
@@ -769,10 +775,10 @@ Shadow が更新されたため、AWSIoTMQTT Source は以下のようなメッ�
 }
 ```
 
-## Shadow の更新を検知し、「モノ」の詳細を付与する
-作成した Source と Procedure を組み合わせて、Shadow の更新をトリガーに更新データに対して「モノ」の詳細情報を付与したイベントの作成を行う Rule を作成してみる。  
+## Detect the Shadow update and attach the details of the "Things"  
+Combining the created Source and Procedure, create a Rule that triggers the update of Shadow and creates an event attached with the detailed information of "Things" for the updated data.    
 
-データ確認用に/tempsensor/fun_switch/update Topic を作成しておく。
+Create /tempsensor/fun_switch/update Topic for data confirmation.  
 
 ```
 RULE OnDeviceShadowUpdate
@@ -791,13 +797,12 @@ var publish_ev = {
     "thing_details": thing_details[0]
 }
 
-Publish publish_ev TO TOPIC "/tempsensor/fun_switch/update" 
+Publish publish_ev TO TOPIC "/tempsensor/fun_switch/update"
 
 ```
 
-Rule作成後、AWSIoTAPI.updateThingShadowIoTCore Procedure を引数の thing_name に作成した「モノ」の名前である `tempSensor1` を、shadow_name に `fun_switch` を指定して実行する。  
-/tempsensor/fun_switch/update Topic に下記のようなデータが Publish されることが確認できる。  
-
+After creating the Rule, specify `tempSensor1` which is the name of the created "Things" into the thing_name argument, and specify `fun_switch` into the shadow_name argument. Execute it.    
+It can be confirmed that the following data is published to /tempsensor/fun_switch/update Topic.  
 
 ```json
 {
