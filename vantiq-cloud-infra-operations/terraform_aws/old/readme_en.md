@@ -1,3 +1,5 @@
+**※This is deprecated and maintenance has been suspended.**
+
 [Japanese Version here](readme.md)
 
 # VANTIQ on EKS with Terraform
