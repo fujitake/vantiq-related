@@ -1,13 +1,3 @@
-locals {
-  node_labels = {
-    "VANTIQ"   = "compute",
-    "MongoDB"  = "database",
-    "keycloak" = "shared",
-    "grafana"  = "influxdb",
-    "mertics"  = "compute"
-  }
-}
-
 resource "aws_key_pair" "worker" {
   key_name_prefix = "${var.cluster_name}-eks-worker-"
   public_key      = file(var.worker_access_ssh_key_name)
@@ -66,11 +56,7 @@ resource "aws_eks_node_group" "vantiq-nodegroup" {
   }
 
   labels = {
-    "vantiq.com/workload-preference" = local.node_labels[each.key]
-  }
-
-  lifecycle {
-    ignore_changes = [scaling_config]
+    "vantiq.com/workload-preference" = each.value.node_workload_label
   }
 
   depends_on = [
@@ -85,8 +71,8 @@ resource "aws_eks_node_group" "vantiq-nodegroup" {
 ###  IAM Role( for Master(EKS) attach)
 ###
 resource "aws_iam_role" "eks-cluster-role" {
-  name = "vantiq-eks-cluster-role"
-  path = "/"
+  name               = "${var.cluster_name}-vantiq-eks-cluster-role"
+  path               = "/"
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
@@ -117,8 +103,8 @@ resource "aws_iam_role_policy_attachment" "eks-service-policy" {
 ### IAM Role(fot Worker Node)
 ###
 resource "aws_iam_role" "eks-worker-node-role" {
-  name = "vantiq-eks-worker-node-role"
-  path = "/"
+  name               = "${var.cluster_name}-vantiq-eks-worker-node-role"
+  path               = "/"
   assume_role_policy = <<POLICY
 {
   "Version": "2012-10-17",
