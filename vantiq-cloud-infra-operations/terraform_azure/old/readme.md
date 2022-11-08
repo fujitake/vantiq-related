@@ -1,3 +1,5 @@
+**※こちらは非推奨のため、メンテナンスは停止しています。**
+
 [English Version here](readme_en.md)
 
 # VANTIQ on AKS with Terraform

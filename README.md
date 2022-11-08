@@ -101,9 +101,10 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
 ### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
 インフラチーム向けのVantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
 
-- [ **(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_aws/old/readme.md)
 - [Terraform を使って AWS EKS を作成(state分割バージョン) - 202210新規追加](./vantiq-cloud-infra-operations/terraform_aws/new/readme.md)
-- [Terraform を使って Azure AKS を作成](./vantiq-cloud-infra-operations/terraform_azure/readme.md)
+- [Terraform を使って Azure AKS を作成(state分割バージョン) - 202211新規追加](./vantiq-cloud-infra-operations/terraform_azure/new/readme.md)
+- [ **(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_aws/old/readme.md)
+- [ **(deprecated)** Terraform を使って Azure AKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_azure/old/readme.md)
 - [kubernetes（EKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#eks_upgrade)    
 - [kubernetes（AKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#aks_upgrade)
 - [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)
