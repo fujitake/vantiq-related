@@ -124,5 +124,5 @@ user1 {
 - トークンの作成方法は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/a08-Lab05_VANTIQ_REST_API.md#user-content-step-1%E5%A4%96%E9%83%A8%E3%81%8B%E3%82%89-vantiq-%E3%81%AE-type-%E3%81%B8%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E7%99%BB%E9%8C%B2%E5%8F%96%E5%BE%97%E6%9B%B4%E6%96%B0%E5%89%8A%E9%99%A4%E3%82%92%E8%A1%8C%E3%81%86) を参照してください。
 
 #### 【その他】
-CLI Reference を参照してください。  
+CLI Reference の Profile の項目を参照してください。  
 → [CLI Reference](https://dev.vantiq.com/docs/system/cli/index.html#profile)
