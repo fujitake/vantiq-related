@@ -1,0 +1,10 @@
+{
+  "ars_relationships" : [ ],
+  "name" : "apps.BoxSorter.PartitionedAppState",
+  "properties" : {
+    "AttachConditionState" : {
+      "type" : "Map"
+    }
+  },
+  "role" : "schema"
+}

@@ -1,0 +1,197 @@
+{
+  "active" : true,
+  "appType" : true,
+  "ars_properties" : {
+    "dataVersion" : 5,
+    "graph" : {
+      "lastZoomRequest" : 3,
+      "scale" : 1.0257661801285962,
+      "translate" : [ 303.8191204768386, 64.16731590557094 ]
+    },
+    "groupSettings" : {
+      "appGroupOpenHash" : { },
+      "ctGroupOpenHash" : {
+        "actions" : true,
+        "mobile" : true
+      },
+      "ctServiceOpen" : false,
+      "serviceGroupOpenHash" : { }
+    }
+  },
+  "ars_relationships" : [ ],
+  "assembly" : {
+    "AttachCondition" : {
+      "configuration" : {
+        "associatedType" : "sorting_condition",
+        "childStreams" : [ "TransformForMqtt" ],
+        "foreignKeys" : [ {
+          "type" : "Property",
+          "value" : "code"
+        } ],
+        "groupByProperty" : "",
+        "groupByWindow" : null,
+        "parentStreams" : [ "SplitByCode" ],
+        "refreshInterval" : "1 day"
+      },
+      "downstreamReferences" : { },
+      "name" : "AttachCondition",
+      "pattern" : "CachedEnrich",
+      "patternVersion" : 1,
+      "uuid" : "e4f8397e-ce31-43f5-8ff6-e503063b45ee"
+    },
+    "ExtractToKanagawa" : {
+      "configuration" : {
+        "childStreams" : [ "PublishToKanagawa" ],
+        "condition" : "event.message.sorting_condition.center_id == 2",
+        "imports" : null,
+        "outboundResource" : null,
+        "outboundResourceConfig" : null,
+        "outboundResourceId" : null,
+        "parentStreams" : [ "TransformForMqtt" ],
+        "upsert" : false
+      },
+      "downstreamReferences" : { },
+      "pattern" : "Filter",
+      "patternVersion" : 1,
+      "uuid" : "54696c17-c635-496f-8c5a-bb5788e962e6"
+    },
+    "ExtractToSaitama" : {
+      "configuration" : {
+        "childStreams" : [ "PublishToSaitama" ],
+        "condition" : "event.message.sorting_condition.center_id == 3",
+        "imports" : null,
+        "outboundResource" : null,
+        "outboundResourceConfig" : null,
+        "outboundResourceId" : null,
+        "parentStreams" : [ "TransformForMqtt" ],
+        "upsert" : false
+      },
+      "downstreamReferences" : { },
+      "pattern" : "Filter",
+      "patternVersion" : 1,
+      "uuid" : "f63c3d6e-7ee6-4272-9199-42dc41cdacb1"
+    },
+    "ExtractToTokyo" : {
+      "configuration" : {
+        "childStreams" : [ "PublishToTokyo" ],
+        "condition" : "event.message.sorting_condition.center_id == 1",
+        "imports" : null,
+        "outboundResource" : null,
+        "outboundResourceConfig" : null,
+        "outboundResourceId" : null,
+        "parentStreams" : [ "TransformForMqtt" ],
+        "upsert" : false
+      },
+      "downstreamReferences" : { },
+      "pattern" : "Filter",
+      "patternVersion" : 1,
+      "uuid" : "b4fa287d-c639-4727-81b9-d71ac6062955"
+    },
+    "PublishToKanagawa" : {
+      "configuration" : {
+        "childStreams" : null,
+        "parentStreams" : [ "ExtractToKanagawa" ],
+        "source" : "SortingResultMqtt",
+        "sourceConfig" : {
+          "topic" : "/center/kanagawa"
+        }
+      },
+      "downstreamReferences" : { },
+      "pattern" : "PublishToSource",
+      "patternVersion" : 1,
+      "uuid" : "ef042a8a-ef03-4e62-9d4c-1d89ec1e570b"
+    },
+    "PublishToSaitama" : {
+      "configuration" : {
+        "childStreams" : null,
+        "parentStreams" : [ "ExtractToSaitama" ],
+        "source" : "SortingResultMqtt",
+        "sourceConfig" : {
+          "topic" : "/center/saitama"
+        }
+      },
+      "downstreamReferences" : { },
+      "pattern" : "PublishToSource",
+      "patternVersion" : 1,
+      "uuid" : "d2064924-f98c-44a5-8281-a00e67e4bc07"
+    },
+    "PublishToTokyo" : {
+      "configuration" : {
+        "childStreams" : [ ],
+        "parentStreams" : [ "ExtractToTokyo" ],
+        "source" : "SortingResultMqtt",
+        "sourceConfig" : {
+          "topic" : "/center/tokyo"
+        }
+      },
+      "downstreamReferences" : { },
+      "pattern" : "PublishToSource",
+      "patternVersion" : 1,
+      "uuid" : "c672eab9-5854-40e8-85b8-f9904aea3449"
+    },
+    "ReceiveBoxInfo" : {
+      "configuration" : {
+        "childStreams" : [ "SplitByCode" ],
+        "condition" : "",
+        "eventTypeName" : null,
+        "inboundResource" : "sources",
+        "inboundResourceId" : "BoxInfoMqtt",
+        "op" : null,
+        "outboundResource" : null,
+        "outboundResourceConfig" : null,
+        "outboundResourceId" : null,
+        "parentStreams" : [ ],
+        "schema" : null,
+        "upsert" : false
+      },
+      "downstreamReferences" : { },
+      "pattern" : "EventStream",
+      "patternVersion" : 1,
+      "uuid" : "120548cc-f4c2-4f02-8c76-b720cc241307"
+    },
+    "SplitByCode" : {
+      "configuration" : {
+        "childStreams" : [ "AttachCondition" ],
+        "groupBy" : "event.code",
+        "groupByWindow" : null,
+        "imports" : null,
+        "maxOpenGroups" : null,
+        "parentStreams" : [ "ReceiveBoxInfo" ]
+      },
+      "downstreamReferences" : { },
+      "pattern" : "SplitByGroup",
+      "patternVersion" : 1,
+      "uuid" : "74b50d89-4398-4612-8df9-e20196004243"
+    },
+    "TransformForMqtt" : {
+      "configuration" : {
+        "childStreams" : [ "ExtractToTokyo", "ExtractToKanagawa", "ExtractToSaitama" ],
+        "imports" : null,
+        "outboundResource" : null,
+        "outboundResourceConfig" : null,
+        "outboundResourceId" : null,
+        "parentStreams" : [ "AttachCondition" ],
+        "schema" : null,
+        "transformInPlace" : false,
+        "transformation" : {
+          "message" : {
+            "expression" : "event",
+            "type" : "expression"
+          }
+        },
+        "upsert" : false
+      },
+      "downstreamReferences" : { },
+      "pattern" : "Transformation",
+      "patternVersion" : 1,
+      "uuid" : "cb3b3aa9-f91a-4707-8285-e84908bfb777"
+    }
+  },
+  "collaboratorRoles" : [ ],
+  "disableBadging" : false,
+  "entityRoles" : [ ],
+  "isComponent" : false,
+  "isEventHandler" : false,
+  "keyTypes" : [ "system.collaborations" ],
+  "name" : "BoxSorter"
+}

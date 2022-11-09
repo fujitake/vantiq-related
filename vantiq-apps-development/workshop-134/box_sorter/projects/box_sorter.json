@@ -1,0 +1,274 @@
+{
+  "ars_relationships" : [ ],
+  "links" : [ {
+    "source" : "app/BoxSorter",
+    "target" : "type/sorting_condition"
+  }, {
+    "source" : "app/BoxSorter",
+    "target" : "source/SortingResultMqtt"
+  }, {
+    "source" : "source/SortingResultMqtt",
+    "target" : "services/apps.services.BoxSorter"
+  }, {
+    "source" : "services/apps.services.BoxSorter",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateReset"
+  }, {
+    "source" : "services/apps.services.BoxSorter",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateUpdateForEvent"
+  }, {
+    "source" : "services/apps.services.BoxSorter",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateGet"
+  }, {
+    "source" : "services/apps.services.BoxSorter",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateGetForEvent"
+  }, {
+    "source" : "services/apps.services.BoxSorter",
+    "target" : "type/apps.BoxSorter.PartitionedAppState"
+  }, {
+    "source" : "app/BoxSorter",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateGetForEvent"
+  }, {
+    "source" : "app/BoxSorter",
+    "target" : "services/apps.services.BoxSorter"
+  }, {
+    "source" : "services/apps.services.BoxSorter",
+    "target" : "app/BoxSorter"
+  }, {
+    "source" : "procedure/apps.services.BoxSorter.AttachConditionStateGetForEvent",
+    "target" : "services/apps.services.BoxSorter"
+  }, {
+    "source" : "procedure/apps.services.BoxSorter.AttachConditionStateGetForEvent",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateUpdateForEvent"
+  }, {
+    "source" : "procedure/apps.services.BoxSorter.AttachConditionStateUpdateForEvent",
+    "target" : "services/apps.services.BoxSorter"
+  }, {
+    "source" : "procedure/apps.services.BoxSorter.AttachConditionStateUpdateForEvent",
+    "target" : "type/sorting_condition"
+  }, {
+    "source" : "procedure/apps.services.BoxSorter.AttachConditionStateReset",
+    "target" : "services/apps.services.BoxSorter"
+  }, {
+    "source" : "procedure/apps.services.BoxSorter.AttachConditionStateGet",
+    "target" : "services/apps.services.BoxSorter"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.ReceiveBoxInfo",
+    "target" : "topic//apps.BoxSorter/debug"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.ReceiveBoxInfo",
+    "target" : "eventstream/apps.BoxSorter.SplitByCode"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.SplitByCode",
+    "target" : "topic//apps.BoxSorter/debug"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.AttachCondition",
+    "target" : "type/sorting_condition"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.AttachCondition",
+    "target" : "topic//apps.BoxSorter/debug"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.AttachCondition",
+    "target" : "procedure/apps.services.BoxSorter.AttachConditionStateGetForEvent"
+  }, {
+    "source" : "eventstream/apps.BoxSorter.SplitByCode",
+    "target" : "eventstream/apps.BoxSorter.AttachCondition"
+  }, {
+    "source" : "source/BoxInfoMqtt",
+    "target" : "app/BoxSorter"
+  }, {
+    "source" : "source/BoxInfoMqtt",
+    "target" : "services/apps.services.BoxSorter"
+  } ],
+  "name" : "box_sorter",
+  "options" : {
+    "description" : "",
+    "dockCollapsed" : {
+      "bottom" : true,
+      "left" : false,
+      "right" : false,
+      "top" : false,
+      "viewtabs" : false
+    },
+    "dockDimensions" : {
+      "bottom" : 200,
+      "debug" : [ 0, 0, 0 ],
+      "left" : 248,
+      "right" : 220,
+      "top" : 0,
+      "viewtabs" : 0
+    },
+    "exclusionList" : [ "app/BoxSorter_sample", "procedure/publishTestEvent", "source/IncomingMqtt", "source/InflowMqtt", "type/sort_condition_sample" ],
+    "filterBitArray" : "ffffffffffffffffffffffffffffffff",
+    "isModeloProject" : true,
+    "layoutStyle" : "custom",
+    "openFolders" : [ "VIEWROOT/apps", "app", "source", "system", "type" ],
+    "rootViewFlavor" : 5,
+    "showGrid" : true,
+    "type" : "dev",
+    "v" : 5,
+    "viewUUID" : "MAINVIEW"
+  },
+  "resources" : [ {
+    "label" : "/apps.BoxSorter/debug",
+    "name" : "/apps.BoxSorter/debug",
+    "resourceReference" : "/topics//apps.BoxSorter/debug",
+    "type" : 10
+  }, {
+    "label" : "BoxInfoMqtt",
+    "name" : "BoxInfoMqtt",
+    "resourceReference" : "/sources/BoxInfoMqtt",
+    "timestamp" : "2022-11-04T08:37:54.462Z",
+    "type" : 4
+  }, {
+    "label" : "BoxSorter",
+    "name" : "BoxSorter",
+    "resourceReference" : "/collaborationtypes/BoxSorter",
+    "timestamp" : "2022-11-09T01:25:37.413Z",
+    "type" : 12
+  }, {
+    "label" : "SortingResultMqtt",
+    "name" : "SortingResultMqtt",
+    "resourceReference" : "/sources/SortingResultMqtt",
+    "timestamp" : "2022-11-02T08:39:01.903Z",
+    "type" : 4
+  }, {
+    "label" : "apps.BoxSorter.AttachCondition",
+    "name" : "apps.BoxSorter.AttachCondition",
+    "resourceReference" : "/system.eventstreams/apps.BoxSorter.AttachCondition",
+    "timestamp" : "2022-11-09T01:25:39.852Z",
+    "type" : 14
+  }, {
+    "label" : "apps.BoxSorter.PartitionedAppState",
+    "name" : "apps.BoxSorter.PartitionedAppState",
+    "resourceReference" : "/types/apps.BoxSorter.PartitionedAppState",
+    "timestamp" : "2022-11-04T04:05:18.918Z",
+    "type" : 1
+  }, {
+    "label" : "apps.BoxSorter.ReceiveBoxInfo",
+    "name" : "apps.BoxSorter.ReceiveBoxInfo",
+    "resourceReference" : "/system.eventstreams/apps.BoxSorter.ReceiveBoxInfo",
+    "timestamp" : "2022-11-09T01:25:38.793Z",
+    "type" : 14
+  }, {
+    "label" : "apps.BoxSorter.SplitByCode",
+    "name" : "apps.BoxSorter.SplitByCode",
+    "resourceReference" : "/system.eventstreams/apps.BoxSorter.SplitByCode",
+    "timestamp" : "2022-11-09T01:25:38.446Z",
+    "type" : 14
+  }, {
+    "label" : "apps.services.BoxSorter",
+    "name" : "apps.services.BoxSorter",
+    "resourceReference" : "/system.services/apps.services.BoxSorter",
+    "timestamp" : "2022-11-08T06:59:26.500Z",
+    "type" : 63
+  }, {
+    "label" : "apps.services.BoxSorter.AttachConditionStateGet",
+    "name" : "apps.services.BoxSorter.AttachConditionStateGet",
+    "packageName" : "apps.services",
+    "procedureName" : "AttachConditionStateGet",
+    "resourceReference" : "/procedures/apps.services.BoxSorter.AttachConditionStateGet",
+    "serviceName" : "BoxSorter",
+    "timestamp" : "2022-11-04T08:38:10.750Z",
+    "type" : 3
+  }, {
+    "label" : "apps.services.BoxSorter.AttachConditionStateGetForEvent",
+    "name" : "apps.services.BoxSorter.AttachConditionStateGetForEvent",
+    "packageName" : "apps.services",
+    "procedureName" : "AttachConditionStateGetForEvent",
+    "resourceReference" : "/procedures/apps.services.BoxSorter.AttachConditionStateGetForEvent",
+    "serviceName" : "BoxSorter",
+    "timestamp" : "2022-11-04T08:38:10.200Z",
+    "type" : 3
+  }, {
+    "label" : "apps.services.BoxSorter.AttachConditionStateReset",
+    "name" : "apps.services.BoxSorter.AttachConditionStateReset",
+    "packageName" : "apps.services",
+    "procedureName" : "AttachConditionStateReset",
+    "resourceReference" : "/procedures/apps.services.BoxSorter.AttachConditionStateReset",
+    "serviceName" : "BoxSorter",
+    "timestamp" : "2022-11-04T08:38:10.963Z",
+    "type" : 3
+  }, {
+    "label" : "apps.services.BoxSorter.AttachConditionStateUpdateForEvent",
+    "name" : "apps.services.BoxSorter.AttachConditionStateUpdateForEvent",
+    "packageName" : "apps.services",
+    "procedureName" : "AttachConditionStateUpdateForEvent",
+    "resourceReference" : "/procedures/apps.services.BoxSorter.AttachConditionStateUpdateForEvent",
+    "serviceName" : "BoxSorter",
+    "timestamp" : "2022-11-04T08:38:10.491Z",
+    "type" : 3
+  }, {
+    "label" : "sorting_condition",
+    "name" : "sorting_condition",
+    "resourceReference" : "/types/sorting_condition",
+    "timestamp" : "2022-11-02T06:40:29.750Z",
+    "type" : 1
+  }, {
+    "label" : "system.ActivityPattern",
+    "name" : "system.ActivityPattern",
+    "resourceReference" : "/system.services/system.ActivityPattern",
+    "timestamp" : "2022-07-25T02:36:48.912Z",
+    "type" : 63
+  }, {
+    "label" : "system.ActivityPattern.generateCachedEnrichActivityPattern",
+    "name" : "system.ActivityPattern.generateCachedEnrichActivityPattern",
+    "packageName" : "system",
+    "procedureName" : "generateCachedEnrichActivityPattern",
+    "resourceReference" : "/procedures/system.ActivityPattern.generateCachedEnrichActivityPattern",
+    "serviceName" : "ActivityPattern",
+    "timestamp" : "2022-07-25T02:36:58.590Z",
+    "type" : 3
+  }, {
+    "label" : "system.ActivityPattern.generateSplitByGroupActivityPattern",
+    "name" : "system.ActivityPattern.generateSplitByGroupActivityPattern",
+    "packageName" : "system",
+    "procedureName" : "generateSplitByGroupActivityPattern",
+    "resourceReference" : "/procedures/system.ActivityPattern.generateSplitByGroupActivityPattern",
+    "serviceName" : "ActivityPattern",
+    "timestamp" : "2022-10-11T06:05:39.822Z",
+    "type" : 3
+  }, {
+    "label" : "system.ActivityPattern.splitByGroupValidateChildren",
+    "name" : "system.ActivityPattern.splitByGroupValidateChildren",
+    "packageName" : "system",
+    "procedureName" : "splitByGroupValidateChildren",
+    "resourceReference" : "/procedures/system.ActivityPattern.splitByGroupValidateChildren",
+    "serviceName" : "ActivityPattern",
+    "timestamp" : "2022-07-25T02:36:52.946Z",
+    "type" : 3
+  }, {
+    "label" : "system.Utils",
+    "name" : "system.Utils",
+    "resourceReference" : "/system.services/system.Utils",
+    "timestamp" : "2022-07-25T02:37:29.090Z",
+    "type" : 63
+  }, {
+    "label" : "system.Utils.getType",
+    "name" : "system.Utils.getType",
+    "packageName" : "system",
+    "procedureName" : "getType",
+    "resourceReference" : "/procedures/system.Utils.getType",
+    "serviceName" : "Utils",
+    "timestamp" : "2022-07-25T02:37:36.916Z",
+    "type" : 3
+  } ],
+  "tools" : [ {
+    "isPinned" : false,
+    "name" : "Errors",
+    "type" : 13
+  }, {
+    "dockLocation" : "top",
+    "isPinned" : false,
+    "name" : "Inactive Panes",
+    "type" : 99
+  }, {
+    "isPinned" : false,
+    "name" : "Project Contents",
+    "type" : 2
+  } ],
+  "type" : "dev",
+  "views" : [ {
+    "name" : "Project Contents",
+    "projectToolKeys" : [ "errorviewer/Errors", "tiledock/Inactive Panes", "list/Project Contents" ]
+  } ]
+}

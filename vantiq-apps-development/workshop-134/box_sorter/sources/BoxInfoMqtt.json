@@ -1,0 +1,21 @@
+{
+  "activationConstraint" : "",
+  "active" : true,
+  "ars_properties" : null,
+  "ars_relationships" : [ ],
+  "config" : {
+    "cleanSession" : true,
+    "connectionTimeout" : 15,
+    "contentType" : "application/json",
+    "keepAliveInterval" : 15,
+    "maxInflight" : 10,
+    "passwordType" : "string",
+    "qos" : "AT_LEAST_ONCE",
+    "serverURIs" : [ "mqtt://public.vantiq.com:1883" ],
+    "topics" : [ "/workshop/jp/yourname/boxinfo" ]
+  },
+  "messageType" : null,
+  "mockProcedures" : { },
+  "name" : "BoxInfoMqtt",
+  "type" : "MQTT"
+}
