@@ -64,13 +64,14 @@ Organization Adminとして、以下のタスクを行います。
    2. _First Name_
    3. _Last Name_
    4. _Email_
-   5. _Password_
+   5. _Password_ - 管理者が設定する暫定のパスワード
    <img src="../../imgs/vantiq-edge-admin/new-user.png" width="50%" />
 
 6. New User ペインの右側の Authorization にある鉛筆のアイコンをクリックし、Edit Namespace Authorization ダイアログを開きます。
-7. Privlige を設定します。 新規ユーザーが一般ユーザーであれば、`User (Developer)`, 管理者であれば `Organization Admin`とします。
+7. Privilege を設定します。 新規ユーザーが一般ユーザーであれば、`User (Developer)`, 管理者であれば `Organization Admin`とします。
 <img src="../../imgs/vantiq-edge-admin/edit-namespace-auth.png" width="50%" />
 8. 保存します。 新規ユーザーのパスワードを再入力します。
+9. 作成された新規ユーザーに、暫定パスワードを変更するよう依頼します。
 
 #### 手順 3. 作成済みユーザーに Namespace へのアクセスを付与する (optional)
 1. Vantiq Edgeに **Organization Admin** ロールを持つユーザーでログインします。
