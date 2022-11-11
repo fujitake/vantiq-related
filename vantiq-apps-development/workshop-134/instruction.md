@@ -154,7 +154,7 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
         |-|-|
         |groupBy|event.code|
 
-### 4. 【Cached Enrich】仕分け条件をイベントに追加する
+### 4.【Cached Enrich】仕分け条件をイベントに追加する
 
 このアプリケーションが受け取る元の内容は以下のように`code`と`name`だけが含まれているデータです。
 ```json
@@ -219,6 +219,7 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
     |-|-|-|
     |associatedType|sorting_condition|-|
     |foreignKeys|["code"]|この項目に設定したプロパティがクエリの条件になる|
+    |refreshInterval|1 day|-|
 
     > VAILで書くとすると`SELECT ONE FROM sorting_condition WHERE code == code`ということになります。
 
@@ -385,7 +386,7 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
         #### ExtractToKanagawaの設定
         |項目|設定値|備考|
         |-|-|-|
-        |condition|event.message.sorting_condition.center_id == 1|神奈川物流センターのIDは`2`|
+        |condition|event.message.sorting_condition.center_id == 2|神奈川物流センターのIDは`2`|
 
 
     3. 埼玉物流センター用
@@ -588,10 +589,12 @@ MQTTクライアントで送信先のTopicをサブスクライブしておき�
 
     <img src="./imgs/result.png" width="500">
 
-
 ## 参考情報
-
 [実装サンプル](./box_sorter)
+
+# Next step
+準備中
+<!-- [](./additional-contents.md) -->
 
 以上
 
