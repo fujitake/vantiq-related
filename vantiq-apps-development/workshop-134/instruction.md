@@ -22,7 +22,7 @@
 
     2.6. [【Filter】条件に合致したイベントだけを通過させ、仕分けする](#filter)
 
-    2.7. [【PublishToSource】仕分け結果をSource経由でMQTTブローカーに送信する](#publishtosource)
+    2.7. [【PublishToSource】仕分け指示をSource経由でMQTTブローカーに送信する](#publishtosource)
 
 3. [【動作確認】送信結果が正しく仕分けされているか確認する](#test-app)
 
@@ -49,7 +49,7 @@
 |種別|リソース名|役割|
 |-|-|-|
 |MQTT|BoxInfoMqtt|荷物の仕分け情報の受信用MQTTクライアント|
-|MQTT|SortingResultMqtt|仕分け結果の送信用MQTTクライアント|
+|MQTT|SortingResultMqtt|仕分け指示の送信用MQTTクライアント|
 
 #### Application
 
@@ -65,11 +65,11 @@
 |Cached Enrich|AttachCondition|仕分け条件をイベントに追加する<br/><span style="color:blue;">※本ワークショップでは荷物を物流センター単位で仕分けます<span>|
 |Transformation|TransformForMqtt|必要なフォーマットにイベントを変換する|
 |Filter|ExtractToTokyo<br/>ExtractToKanagawa<br/>ExtractToSaitama|条件に合致したイベントだけを通過させ、仕分けする|
-|PublishToSource|PublishToTokyo<br/>PublishToKanagawa<br/>PublishToSaitama|仕分け結果をSource経由でMQTTブローカーに送信する|
+|PublishToSource|PublishToTokyo<br/>PublishToKanagawa<br/>PublishToSaitama|仕分け指示をSource経由でMQTTブローカーに送信する|
 
 > リソース名やタスク名は任意のものに変更しても構いません
 
-> App BuilderやActivity Patternの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md)
+> App BuilderやActivity Patternの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md)を参照してください。
 
 #### Type
 |種別|リソース名|役割|
@@ -83,7 +83,7 @@
 |center_id|Integer|物流センターのID|
 |center_name|String|物流センター名|
 
-> Vantiqのリソースの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md)
+> Vantiqのリソースの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md)を参照してください。
 
 <a id="preparation"></a>
 ## 0.【準備】入力用MQTTブローカー疎通確認
@@ -301,24 +301,15 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
 <a id="transformation"></a>
 ### 5. 【Transformation】必要なフォーマットにイベントを変換する
 
-本ワークショップでは最終的に仕分けした結果をMQTTブローカーに送信します。そこで注意が必要なのが各Sourceごとに送信時に必要なフォーマットが異なることです。
+本ワークショップでは最終的に仕分け指示をMQTTブローカーに送信します。
 
-例えばREMOTE Sourceの場合は、
-```json
-{
-    "body": <送信したい内容>
-}
-```
-という形式で`body`プロパティに送信内容を含めた形式にすることが必要です。
-
-MQTT Sourceの場合は以下のフォーマットです。`message`プロパティのvalueとして実際に送信したい内容を含める必要があります。
+送信時に利用するプロトコルによって必要なフォーマットが異なり、MQTT場合は`message`プロパティのvalueとして実際に送信したい内容を含める必要があります。
 ```json
 {
     "message": <送信したい内容>
 }
 ```
-**詳細はこちら**
-[各Source別実装サンプル](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/docs/jp/data_sending.md#samples)
+> プロトコルによってどのようなフォーマットになるかを確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/docs/jp/data_sending.md#samples)を参照してください。
 
 `Transformation` Activityを使って、このフォーマットにイベントを変換します。
 ```json
@@ -539,7 +530,7 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
         ```
 
 <a id="publishtosource"></a>
-### 7. 【PublishToSource】仕分け結果をSource経由でMQTTブローカーに送信する
+### 7. 【PublishToSource】仕分け指示をSource経由でMQTTブローカーに送信する
 
 ここまでの実装で仕分けができるようになりましたので、その結果をMQTTブローカーに送信します。それぞれ異なったTopicに送信します。
 
@@ -556,6 +547,9 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
 アプリケーションに戻り、送信処理を実装します。
 
 2. 各`Extract***`タスクの次に、それぞれ以下のタスクを追加してからアプリケーションを保存する
+
+    <span style="color:red;">**送信先のTopicとして物流センターごとに`/center/tokyo`、`/center/kanagawa`、`/center/saitama`を使用しますが、HiveMQのPublic MQTT Brokerなどパブリックな環境を使用する場合、他人と重複してしまいますので、`/center/<ご自身のお名前>/tokyo`とするなどして重複を避けるようにしてください。**</span>
+
     1. `ExtractToTokyo`タスクの次:
 
         |項目|設定値|
@@ -600,7 +594,7 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
 
 MQTTクライアントで送信先のTopicをサブスクライブしておき、正しく仕分けされるか確認します。
 
-1. MQTTクライアントで仕分け結果の送信先のMQTTブローカーに接続し、`/center/tokyo`,`/center/kanagawwa`,`/center/saitama`をサブスクライブする
+1. MQTTクライアントで仕分け指示の送信先のMQTTブローカーに接続し、`/center/tokyo`,`/center/kanagawwa`,`/center/saitama`をサブスクライブする
 
     <img src="./imgs/result-mqtt.png" width="500">
 
@@ -629,9 +623,9 @@ MQTTクライアントで送信先のTopicをサブスクライブしておき�
     }
     ```
 
-3. 各物流センターのTopicに正しく仕分け結果が届いていることを確認する
+3. 各物流センターのTopicに正しく仕分け指示が届いていることを確認する
 
-    **例: /center/tokyo Topicに"お茶 24本"の仕分け結果が届いている**
+    **例: /center/tokyo Topicに"お茶 24本"の仕分け指示が届いている**
 
     <img src="./imgs/result.png" width="500">
 
