@@ -5,6 +5,28 @@
 2. 【App Builder】荷物仕分けアプリ開発
 3. 【動作確認】送信結果が正しく仕分けされているか確認する
 
+## 目次
+
+0. [【準備】入力用MQTTブローカー疎通確認](#preparation)
+1. [【Source】VantiqでMQTTブローカーのデータをサブスクライブする](#sub-from-vantiq)
+2. [【App Builder】荷物仕分けアプリケーション開発](#implement-vantiq-app)
+
+    2.1. [アプリケーションを作成する](#create-new-app)
+
+    2.2. [【EventStream】Sourceでサブスクライブした内容をアプリケーションで受け取る](#eventstream)
+
+    2.3. [【SplitByGroup】イベントの処理ノードを荷物のコード単位で振り分ける](#splitbygroup)
+
+    2.4. [【Cached Enrich】仕分け条件をイベントに追加する](#cached-enrich)
+
+    2.5. [【Transformation】必要なフォーマットにイベントを変換する](#transformation)
+
+    2.6. [【Filter】条件に合致したイベントだけを通過させ、仕分けする](#filter)
+
+    2.7. [【PublishToSource】仕分け結果をSource経由でMQTTブローカーに送信する](#publishtosource)
+
+3. [【動作確認】送信結果が正しく仕分けされているか確認する](#test-app)
+
 ## 実装詳細
 
 ### アプリケーションが前提とする受信内容
@@ -59,8 +81,8 @@
 |center_id|Integer|物流センターのID|
 |center_name|String|物流センター名|
 
-
-## 【準備】入力用MQTTブローカー疎通確認
+<a id="preparation"></a>
+## 0.【準備】入力用MQTTブローカー疎通確認
 
 入力には以下のMQTTブローカーを使用します。
 |項目|設定値|備考|
@@ -80,6 +102,7 @@
 
 > 今後の手順では、テスト用のメッセージをこの方法でMQTTブローカーに送信して開発を進めます。
 
+<a id="sub-from-vantiq"></a>
 ## 1. 【Source】VantiqでMQTTブローカーのデータをサブスクライブする
 MQTTブローカーと接続したい場合、MQTTクライアントが必要です。これはVantiqでも同じです。VantiqのSourceはMQTTに対応しており、これがクライアントになります。
 
@@ -103,9 +126,11 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
 
             <img src="./imgs/sub-test-msg.png" width="400">
 
-## 2. 【App Builder】荷物仕分けアプリ開発
+<a id="implement-vantiq-app"></a>
+## 2. 【App Builder】荷物仕分けアプリケーション開発
 この手順からアプリケーション開発を開始します。MQTTブローカーから取得したメッセージをイベントとして、処理を実装していきます。
 
+<a id="create-new-app"></a>
 ### 1. アプリケーションを作成する
 1. メニューバーの`追加` -> `Advanced` -> `App...` -> `+ New App` をクリックしアプリケーションの新規作成画面を開く
 
@@ -117,7 +142,8 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
 
 <img src="./imgs/box-sorter-init.png" width="400">
 
-### 2.【EventStream】Sourceでサブスクライブした内容をアプリで受け取る
+<a id="eventstream"></a>
+### 2.【EventStream】Sourceでサブスクライブした内容をアプリケーションで受け取る
 
 `EventStream`を使って外部から取得したメッセージをイベントとしてアプリケーションに渡します。
 
@@ -135,6 +161,7 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
 4. ご自身のMQTTクライアントから疎通確認時と同じようにメッセージを送信し、その内容が`Subscription:BoxSorter_ReceiveBoxInfo`に表示されることを確認する
     > この手順で、アプリケーションがMQTT Source(BoxInfoMqtt)経由で受信した内容を扱える状態まで実装できています。
 
+<a id="splitbygroup"></a>
 ### 3. 【SplitByGroup】イベントの処理ノードを荷物のコード単位で振り分ける
 
 `SplitByGroup`は任意のキー単位でイベントをグルーピングし、そのグループごとに処理が実行されるノードを振り分けます。この次の手順でメモリ上にデータを保存する処理を実装しますが、SplitByGroupの次にその処理を入れることで使用するメモリを分散させることができます。
@@ -154,6 +181,7 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
         |-|-|
         |groupBy|event.code|
 
+<a id="cached-enrich"></a>
 ### 4.【Cached Enrich】仕分け条件をイベントに追加する
 
 このアプリケーションが受け取る元の内容は以下のように`code`と`name`だけが含まれているデータです。
@@ -256,6 +284,7 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
 
     `sort_condition`というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
+<a id="transformation"></a>
 ### 5. 【Transformation】必要なフォーマットにイベントを変換する
 
 本ワークショップでは最終的に仕分けした結果をMQTTブローカーに送信します。そこで注意が必要なのが各Sourceごとに送信時に必要なフォーマットが異なることです。
@@ -348,6 +377,7 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
 ```
 上記のように`message`のvalueにTransformation前のイベントが入ったことを確認してください。
 
+<a id="filter"></a>
 ### 6. 【Filter】条件に合致したイベントだけを通過させ、仕分けする
 
 特定の物流センターのイベントのみが通過できるフローを実装することで仕分けを行います。
@@ -494,6 +524,7 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
         }
         ```
 
+<a id="publishtosource"></a>
 ### 7. 【PublishToSource】仕分け結果をSource経由でMQTTブローカーに送信する
 
 ここまでの実装で仕分けができるようになりましたので、その結果をMQTTブローカーに送信します。それぞれ異なったTopicに送信します。
@@ -550,7 +581,8 @@ MQTT Sourceの場合は以下のフォーマットです。`message`プロパテ
         |source|SortingResultMqtt|-|
         |sourceConfig|{"topic": "/center/saitama"}|MQTTブローカーの/center/saitama Topicに送信|
 
-## 【動作確認】送信結果が正しく仕分けされているか確認する
+<a id="test-app"></a>
+## 3.【動作確認】送信結果が正しく仕分けされているか確認する
 
 MQTTクライアントで送信先のTopicをサブスクライブしておき、正しく仕分けされるか確認します。
 
