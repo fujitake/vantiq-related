@@ -69,7 +69,7 @@
 
 > リソース名やタスク名は任意のものに変更しても構いません
 
-> Application BuilderやActivity Patternの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md)
+> App BuilderやActivity Patternの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md)
 
 #### Type
 |種別|リソース名|役割|
@@ -152,17 +152,19 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
 `EventStream`を使って外部から取得したメッセージをイベントとしてアプリケーションに渡します。
 
 1. `Initiate`タスクをクリックし、`Name`に`ReceiveBoxInfo`と入力する
-2. `Configuration`の`Click to Edit`から以下の内容を設定し、アプリケーションを保存する
+2. `Configuration`の`Click to Edit`から以下の内容を入力し、`OK`をクリックする
 
     |項目|設定値|
     |-|-|
     |inboundResource|sources|
     |inboundResourceId|BoxInfoMqtt|
 
-3. `ReceiveBoxInfo`タスクを右クリックし、`View Task Events`をクリックする
+3. App Builderのペインの上部にあるフロッピーディスクのアイコンをクリックし、アプリケーションを保存する
+
+4. `ReceiveBoxInfo`タスクを右クリックし、`View Task Events`をクリックする
     > `Subscription:BoxSorter_ReceiveBoxInfo`が開かれます。ここにはReceiveBoxInfoタスクの処理結果が表示されます。
 
-4. ご自身のMQTTクライアントから疎通確認時と同じようにメッセージを送信し、その内容が`Subscription:BoxSorter_ReceiveBoxInfo`に表示されることを確認する
+5. ご自身のMQTTクライアントから疎通確認時と同じようにメッセージを送信し、その内容が`Subscription:BoxSorter_ReceiveBoxInfo`に表示されることを確認する
     > この手順で、アプリケーションがMQTT Source(BoxInfoMqtt)経由で受信した内容を扱える状態まで実装できています。
 
 <a id="splitbygroup"></a>
