@@ -548,7 +548,7 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
 
 2. 各`Extract***`タスクの次に、それぞれ以下のタスクを追加してからアプリケーションを保存する
 
-    <span style="color:red;">**送信先のTopicとして物流センターごとに`/center/tokyo`、`/center/kanagawa`、`/center/saitama`を使用しますが、HiveMQのPublic MQTT Brokerなどパブリックな環境を使用する場合、他人と重複してしまいますので、`/center/<ご自身のお名前>/tokyo`とするなどして重複を避けるようにしてください。**</span>
+    **送信先のTopicとして物流センターごとに`/center/tokyo`、`/center/kanagawa`、`/center/saitama`を使用しますが、HiveMQのPublic MQTT Brokerなどパブリックな環境を使用する場合、他人と重複する可能性があるため、`/center/<ご自身のお名前>/tokyo`とするなどして重複を避けるようにしてください。**
 
     1. `ExtractToTokyo`タスクの次:
 
