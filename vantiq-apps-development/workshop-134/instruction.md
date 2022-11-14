@@ -198,7 +198,7 @@ MQTTブローカーと接続したい場合、MQTTクライアントが必要で
 }
 ```
 仕分けをして行くにあたり、その判断材料となる情報を追加する必要があります。
-Vantiqでは`Enrich`というActivity Patternが用意されており、イベントに対してTypeに保存されたレコードの内容を追加することができます。`Cached Enrich`はそのキャッシュ対応版です。
+Vantiqでは`Enrich`というActivity Patternが用意されており、イベントに対してTypeに保存されたレコードの内容を追加することができます。`Cached Enrich`はメモリ上にデータをキャッシュすることで二回目以降の処理を高速化をする方式です。
 
 |項目|設定値|詳細|
 |-|-|-|
@@ -214,7 +214,7 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
         |-|-|
         |Name|sorting_condition|
         |Role|standard|
-    2. `sort_condition`のペインが表示されるので、タブごとに以下の設定を行い保存する
+    2. `sorting_condition`のペインが表示されるので、タブごとに以下の設定を行い保存する
 
         **Propertiesタブ**
         |プロパティ名|データ型|Required|
@@ -233,11 +233,19 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
         |-|-|
         |Key|code|
 
-    3. `sort_condition` Typeにデータをインポートする
+    3. `sorting_condition` Typeにデータをインポートする
         1. メニューバーの`Projects` -> `Import...` を開き、`Select Import Type:`を`Data`に設定する
         2. `Drop CSV or JSON file for import here`の箇所に[sorting_condition.csv](./sorting_condition.csv)をドロップし`Import`をクリックする
 
         > Typeにレコードをインポートする際は`Data`を選択する必要があります。デフォルトは`Projects`になっているので注意してください。
+
+        3. `sorting_condition` Typeのペインを開き、上部にある`Show All Records`をクリックしてインポートが成功しているか確認する
+
+            |center_id|center_name|code|
+            |-|-|-|
+            |1|東京物流センター|14961234567890|
+            |2|神奈川物流センター|14961234567892|
+            |3|埼玉物流センター|14961234567893|
 
 これでTypeとレコードが用意できたのでアプリケーションの開発に戻ります。今回は`Cached Enrich`を使用します。事前に`SplitByGroup`を使用しているため、使用するメモリは分散されます。
 
@@ -288,7 +296,7 @@ Vantiqでは`Enrich`というActivity Patternが用意されており、イベ�
     ```
     > `_id`や`ars_***`はシステム側で自動生成されるプロパティのため、この例と同じにはなりません。
 
-    `sort_condition`というプロパティが追加されており、物流センターに関する情報を追加することができました。
+    `sorting_condition`というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
 <a id="transformation"></a>
 ### 5. 【Transformation】必要なフォーマットにイベントを変換する
