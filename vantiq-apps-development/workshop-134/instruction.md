@@ -6,7 +6,6 @@
 3. 【動作確認】送信結果が正しく仕分けされているか確認する
 
 ## 目次
-
 0. [【準備】入力用MQTTブローカー疎通確認](#preparation)
 1. [【Source】VantiqでMQTTブローカーのデータをサブスクライブする](#sub-from-vantiq)
 2. [【App Builder】荷物仕分けアプリケーション開発](#implement-vantiq-app)
@@ -44,14 +43,15 @@
 |name|String|
 
 ### 実装するリソース
-#### Sources
+
+#### Source
 
 |種別|リソース名|役割|
 |-|-|-|
-|MQTT Source|BoxInfoMqtt|荷物の仕分け情報の受信用MQTTクライアント|
-|MQTT Source|SortingResultMqtt|仕分け結果の送信用MQTTクライアント|
+|MQTT|BoxInfoMqtt|荷物の仕分け情報の受信用MQTTクライアント|
+|MQTT|SortingResultMqtt|仕分け結果の送信用MQTTクライアント|
 
-#### Applications
+#### Application
 
 |リソース名|役割|
 |-|-|
@@ -69,7 +69,9 @@
 
 > リソース名やタスク名は任意のものに変更しても構いません
 
-#### Types
+> Application BuilderやActivity Patternの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md)
+
+#### Type
 |種別|リソース名|役割|
 |-|-|-|
 |Standard|sorting_condition|仕分けに必要な情報を保持|
@@ -80,6 +82,8 @@
 |code|String|送り先コード|
 |center_id|Integer|物流センターのID|
 |center_name|String|物流センター名|
+
+> Vantiqのリソースの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md)
 
 <a id="preparation"></a>
 ## 0.【準備】入力用MQTTブローカー疎通確認
