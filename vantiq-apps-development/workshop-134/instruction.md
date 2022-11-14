@@ -630,7 +630,7 @@ MQTTクライアントで送信先のTopicをサブスクライブしておき�
     <img src="./imgs/result.png" width="500">
 
 ## 参考情報
-[実装サンプル](./box_sorter)
+[実装サンプル](./box_sorter.zip)
 
 # Next step
 準備中
