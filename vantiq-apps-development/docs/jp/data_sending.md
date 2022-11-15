@@ -7,7 +7,7 @@
     1. [VAIL Activity](#implement-ac-vail)
     1. [Transformation + PublishToSource Activity](#implement-ac-pts)
 
-1. [各Source別実装サンプル](#samples)
+1. [Source別実装サンプル](#samples)
     1. [REMOTE Source](#sample-remote)
     1. [MQTT Source](#sample-mqtt)
     1. [AMQP Source](#sample-amqp)
@@ -159,7 +159,7 @@ PublishToSource Activityの出力は、以下のように送信時に使用し�
 ```
 <a id="samples"></a>
 
-## 2. 各Source別実装サンプル
+## 2. Source別実装サンプル
 
 各Sourceごとに送信処理を実装したVAILのサンプルを紹介します。
 
