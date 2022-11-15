@@ -51,7 +51,7 @@
 |MQTT|BoxInfoMqtt|荷物の仕分け情報の受信用MQTTクライアント|
 |MQTT|SortingResultMqtt|仕分け指示の送信用MQTTクライアント|
 
-#### Application
+#### App
 
 |リソース名|役割|
 |-|-|
