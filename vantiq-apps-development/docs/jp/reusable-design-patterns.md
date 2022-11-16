@@ -36,6 +36,7 @@
   - [Adapter/Bridge パターン](#adapter)   
   - [Lookup パターン](#lookup)
   - [Upsert State パターン](#upsert-state)
+  - [Constant パターン](#constant)
   - [Stream-To-Bulk パターン](#stream-to-bulk)
   - [External Datasink パターン](#external-datasink)
   - [Websocket パターン](#websocket)
@@ -388,6 +389,25 @@ state.machineID = event.machineID
 **Sample Project**
 - [UpsertState.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/UpsertState.zip)
 
+---
+### Constant <a id="constant"></a>
+<img src="../../imgs/reusable-design-patterns/const.png" width=50%>
+
+**Overview**
+- DB（Type）に保持した定数値をアプリケーションで使用する。
+- ビルドなしに定数値の入れ替え、反映を行う。
+
+**Motivation**
+- 手作業、または運用のタイミングにより定数を切り替えたい。
+
+**Usage**
+- 試験運用時のパラメータ調整
+- 調整可能な運用カレンダー作成
+
+**Note**
+
+**Sample Project**
+- [Const.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/Const.zip)
 ---
 
 ## 出力編

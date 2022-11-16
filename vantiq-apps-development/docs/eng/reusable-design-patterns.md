@@ -444,6 +444,25 @@ __Usage__
 - [UpsertState.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/UpsertState.zip)
 
 ---
+### Constant <a id="constant"></a>
+<img src="../../imgs/reusable-design-patterns/const.png" width=50%>
+
+**Overview**
+- Use constant values held in DB (Type) for the application.
+- Replace and reflect constant values without build.
+
+**Motivation**
+- Want to switch constants manually or by operational timing.
+
+**Usage**
+- Adjustment of parameters for test operations
+- Adjustable operational calendar creation
+
+**Note**
+
+**Sample Project**
+- [Const.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/Const.zip)
+---
 
 ## Output section
 
