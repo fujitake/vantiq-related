@@ -16,9 +16,9 @@ terraform {
 
 locals {
   tf_remote_backend = {
-    bucket = "<INPUT-YOUR-BUCKET-NAME>"
-    key    = "<INPUT-YOUR-KEY-PREFIX>"
-    region = "<INPUT-YOUR-BUCKET-REGION>"
+    bucket_name = "<INPUT-YOUR-BUCKET-NAME>"
+    key_prefix  = "<INPUT-YOUR-KEY-PREFIX>"
+    region      = "<INPUT-YOUR-BUCKET-REGION>"
   }
 }
 
