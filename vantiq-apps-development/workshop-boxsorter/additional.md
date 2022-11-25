@@ -97,14 +97,14 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 次に、キー単位ではなくStateに含まれる全ての要素を確認してみます。これにはProcedureの実装が必要です。
 
 1. `apps.services.BoxSorter`->`Implement`タブを開き`Procedures`の`+`をクリックし、`New Procedure`をクリックする
-<img src="./imgs/service-proc.png" width="300">
+    <img src="./imgs/service-proc.png" width="300">
 
 2. 新規のProcedureが表示されるので以下の内容をペーストし保存する
-```js
-package apps.services
-multi partition PROCEDURE BoxSorter.getEntries()
-AttachConditionState.entrySet()
-```
+    ```js
+    package apps.services
+    multi partition PROCEDURE BoxSorter.getEntries()
+    AttachConditionState.entrySet()
+    ```
 このProcedureは`AttachConditionState` Stateに含まれる全てのようをそ取得します。今回Cached Enrichの前に`SplitByGroup`を使って処理ノードを分散させていました。`multi partition`という修飾子をつけることで分散した全ノードから要素を取得できます。
 
 > 保存するとインターフェースの修復をするかの確認ダイアログが表示されますが`インターフェースの修復`をクリックするようにしてください。
@@ -114,63 +114,63 @@ AttachConditionState.entrySet()
 3. 実行し、結果を確認する
 <img src="./imgs/exec-service-proc.png" width="４00">
 
-```json
-[
-   [
-      {
-         "14961234567892": {
-            "expiresAt": "2022-11-17T01:33:08.201Z",
-            "value": {
-               "_id": "636210de304f430ecd9a61c6",
-               "center_id": 2,
-               "center_name": "神奈川物流センター",
-               "code": "14961234567892",
-               "ars_namespace": "workshop_134",
-               "ars_version": 2,
-               "ars_createdAt": "2022-11-02T06:40:30.984Z",
-               "ars_createdBy": "yshimizu",
-               "ars_modifiedAt": "2022-11-08T06:00:11.637Z",
-               "ars_modifiedBy": "yshimizu"
+    ```json
+    [
+    [
+        {
+            "14961234567892": {
+                "expiresAt": "2022-11-17T01:33:08.201Z",
+                "value": {
+                "_id": "636210de304f430ecd9a61c6",
+                "center_id": 2,
+                "center_name": "神奈川物流センター",
+                "code": "14961234567892",
+                "ars_namespace": "workshop_134",
+                "ars_version": 2,
+                "ars_createdAt": "2022-11-02T06:40:30.984Z",
+                "ars_createdBy": "yshimizu",
+                "ars_modifiedAt": "2022-11-08T06:00:11.637Z",
+                "ars_modifiedBy": "yshimizu"
+                }
             }
-         }
-      },
-      {
-         "14961234567893": {
-            "expiresAt": "2022-11-17T01:33:13.198Z",
-            "value": {
-               "_id": "636210de304f430ecd9a61c7",
-               "center_id": 3,
-               "center_name": "埼玉物流センター",
-               "code": "14961234567893",
-               "ars_namespace": "workshop_134",
-               "ars_version": 2,
-               "ars_createdAt": "2022-11-02T06:40:30.989Z",
-               "ars_createdBy": "yshimizu",
-               "ars_modifiedAt": "2022-11-08T06:00:11.644Z",
-               "ars_modifiedBy": "yshimizu"
+        },
+        {
+            "14961234567893": {
+                "expiresAt": "2022-11-17T01:33:13.198Z",
+                "value": {
+                "_id": "636210de304f430ecd9a61c7",
+                "center_id": 3,
+                "center_name": "埼玉物流センター",
+                "code": "14961234567893",
+                "ars_namespace": "workshop_134",
+                "ars_version": 2,
+                "ars_createdAt": "2022-11-02T06:40:30.989Z",
+                "ars_createdBy": "yshimizu",
+                "ars_modifiedAt": "2022-11-08T06:00:11.644Z",
+                "ars_modifiedBy": "yshimizu"
+                }
             }
-         }
-      },
-      {
-         "14961234567890": {
-            "expiresAt": "2022-11-10T05:31:32.701Z",
-            "value": {
-               "_id": "636210de304f430ecd9a61c5",
-               "center_id": 1,
-               "center_name": "東京物流センター",
-               "code": "14961234567890",
-               "ars_namespace": "workshop_134",
-               "ars_version": 2,
-               "ars_createdAt": "2022-11-02T06:40:30.894Z",
-               "ars_createdBy": "yshimizu",
-               "ars_modifiedAt": "2022-11-08T06:00:11.354Z",
-               "ars_modifiedBy": "yshimizu"
+        },
+        {
+            "14961234567890": {
+                "expiresAt": "2022-11-10T05:31:32.701Z",
+                "value": {
+                "_id": "636210de304f430ecd9a61c5",
+                "center_id": 1,
+                "center_name": "東京物流センター",
+                "code": "14961234567890",
+                "ars_namespace": "workshop_134",
+                "ars_version": 2,
+                "ars_createdAt": "2022-11-02T06:40:30.894Z",
+                "ars_createdBy": "yshimizu",
+                "ars_modifiedAt": "2022-11-08T06:00:11.354Z",
+                "ars_modifiedBy": "yshimizu"
+                }
             }
-         }
-      }
-   ]
-]
-```
+        }
+    ]
+    ]
+    ```
 codeが`14961234567890`、`14961234567892`、`14961234567893`の要素がStateに格納されていることがわかります。
 
 以上
