@@ -6,20 +6,18 @@ Vantiqでは`State`と呼ばれるリソースにてメモリ上にデータを�
 
 今回、`State`を作る手順はありませんでしたが、`Cached Enrich`を使いTypeのレコードをメモリ上に保存し、処理の高速化を図るという実装を行いました。この際に自動で`State`が作成されています。
 
-Cached EnrichはTypeから該当レコードを取得しStateに格納する、という処理を行なっています。
-
-Stateに格納されたTypeのレコードを確認していきます。
+Cached EnrichはTypeから該当レコードを取得しStateに格納する、という処理を行なっています。Stateに格納されたTypeのレコードを確認していきます。
 
 
 ### 1. 自動生成されたリソースを確認する
 
 まずアプリケーションを作成すると自動で「apps.services.<アプリケーション名>」の`Service`が作成されます。Serviceとは、任意の機能単位でVantiqのリソースをカプセル化する機能です。※ここではServiceの詳細は割愛します。
 
-> 例えば今回であれば荷物仕分けアプリケーション機能単位でリソースをグルーピングするようなイメージです
+> 例えば今回であれば荷物仕分けアプリケーション機能単位でリソースをグルーピングするようなイメージです。
 
 StateはこのService単位で管理されます。
 
-開発画面、左の`Project Contents`を確認してみます。
+開発画面左の`Project Contents`を確認してみます。
 
 <img src="./imgs/project-contents.png" width="300">
 
@@ -34,7 +32,7 @@ StateはこのService単位で管理されます。
 |Procedure|apps.services.BoxSorter.AttachConditionStateUpdateForEvent|
 
 Serviceと、Procedureが自動生成されていることがわかります。
-Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<Cached Enrichを設定したTask名>State***`という命名で生成されます。
+Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<Cached Enrichを設定したTask名>State***`という名前で生成されます。
 
 これらのProcedureは`State`を操作するためのProcedureです。
 |Procedure|内容|
@@ -66,30 +64,32 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 
 そして`code`をキーとしてイベントに対してレコードを追加していました。
 
-つまり`apps.services.BoxSorter.AttachConditionStateGet`を実行し、引数に`code`の値を設定するとそれに該当するStateの中身(`Entry`と呼びます）を取得できます。
+つまり`apps.services.BoxSorter.AttachConditionStateGet`を実行し、引数に`code`の値を設定するとそれに該当するStateの要素を取得できます。
 
 1. `apps.services.BoxSorter.AttachConditionStateGet`を開き、以下の内容で実行する
-|パラメータ名|center_name|
-|-|-|-|
-|partitionKey|14961234567890|
+
+    |パラメータ名|center_name|
+    |-|-|
+    |partitionKey|14961234567890|
+
 2. 以下のような結果が返ることを確認する
-```json
-{
-   "expiresAt": "2022-11-10T05:31:32.701Z",
-   "value": {
-      "_id": "636210de304f430ecd9a61c5",
-      "center_id": 1,
-      "center_name": "東京物流センター",
-      "code": "14961234567890",
-      "ars_namespace": "workshop_134",
-      "ars_version": 2,
-      "ars_createdAt": "2022-11-02T06:40:30.894Z",
-      "ars_createdBy": "yshimizu",
-      "ars_modifiedAt": "2022-11-08T06:00:11.354Z",
-      "ars_modifiedBy": "yshimizu"
-   }
-}
-```
+    ```json
+    {
+    "expiresAt": "2022-11-10T05:31:32.701Z",
+    "value": {
+        "_id": "636210de304f430ecd9a61c5",
+        "center_id": 1,
+        "center_name": "東京物流センター",
+        "code": "14961234567890",
+        "ars_namespace": "workshop_134",
+        "ars_version": 2,
+        "ars_createdAt": "2022-11-02T06:40:30.894Z",
+        "ars_createdBy": "yshimizu",
+        "ars_modifiedAt": "2022-11-08T06:00:11.354Z",
+        "ars_modifiedBy": "yshimizu"
+    }
+    }
+    ```
 > Cached Enrichが`code`の値が`14961234567890`であるイベントを処理する際に追加する内容がStateに格納されていることがわかります。
 
 ### 3. Procedureを作ってStateに含まれる全ての要素を確認してみる
