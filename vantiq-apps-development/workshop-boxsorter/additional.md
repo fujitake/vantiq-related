@@ -112,7 +112,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 > `Service Builder`の詳細についてはここでは割愛します。
 
 3. 実行し、結果を確認する
-<img src="./imgs/exec-service-proc.png" width="400">
+<img src="./imgs/exec-service-proc.png" width="500">
 
     ```json
     [
