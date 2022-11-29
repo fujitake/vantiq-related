@@ -19,8 +19,14 @@
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
   - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
   - [ライセンスの有効期限を確認したい](#check-license-expiration)
-  - [vantiq podが起動しない](#vantiq_pod_will_not_start)
-
+  - [環境依存によるトラブル](#env_dependency_problem)
+    - [vantiq podが起動しない](#vantiq_pod_will_not_start)
+      - [keycloak-initでFailedとなる](#vantiq_pod_will_not_start_public_ip_node)
+    - [MongoDB podが起動しない](#mongodb_pod_will_not_start)
+      - [bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_cluster_default_domain)
+      - [mongodb-2 の bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_dns_tcp_fallback)
+    - [telegraf-ds / telegraf-promでメトリクスを収集できない](#telegraf_pod_not_collect)
+    - [Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される](#only_vantiq_timeout)
 
 # Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
 
@@ -738,9 +744,12 @@ System Admin でログイン >> メニュー右上のユーザーアイコン >>
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
 
-# Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
+# 環境依存によるトラブル <a id="env_dependency_problem"></a>
+以下はKubernetesクラスタの環境が特殊であったり制限を設定していたりした場合に発生した事例。
 
-### keycloak-initでFailedとなる
+## Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
+
+### keycloak-initでFailedとなる <a id="vantiq_pod_will_not_start_public_ip_node"></a>
 
 `keycloak-init` init containerで失敗している理由を調べるため、当該コンテナログを出力する。
 ```sh
@@ -750,3 +759,113 @@ HTTPS required [invalid request]
 ```
 上記の場合、エラーメッセージとして `HTTPS required [invalid request]`と出ていた。これの原因は、Kubernetesのワーカーノードに割り当てられたIPレンジがグローバルIPアドレスとなっているため、プライベートIPからのアドレスを想定しているkeycloakサーバーに拒絶されている。
 よって、kubernetesクラスタを構成し直す必要がある。
+
+
+## MongoDB Podが起動しない <a id="mongodb_pod_will_not_start"></a>
+### bootstrap init ContainerがRunningのままになる <a id="mongodb_pod_will_not_start_cluster_default_domain"></a>
+
+以下のようにbootstrap init Containerの処理が完了せず、Init:2/3のままになり、Podが起動しない。
+```bash
+$ kubectl get po -n <your-ns>
+NAME                               READY   STATUS     RESTARTS   AGE
+mongodb-0                          0/2     Init:2/3   0          3m
+```
+
+kubectl describe podで確認すると以下のようにStateがRunningのままになっている。
+```bash
+Init Containers:
+  ・・・
+  bootstrap:
+    Image:         mongo:4.2.5
+    Command:
+      /work-dir/peer-finder
+    Args:
+      -on-start=/init/on-start.sh
+      -service=vantiq-omc-mongodb
+    State:          Running
+      Started:      Tue, 29 Nov 2022 10:19:36 +0900
+    Ready:          False
+    Restart Count:  0
+  ・・・
+```
+
+bootstrap init Containerのログを調べても何も出力されない。
+```bash
+$ kubectl logs -n <your-ns> mongodb-0 -c bootstrap
+$
+```
+
+上記は`Kubernetesクラスタのデフォルトドメインが cluster.local ではない場合`に発生するため、デフォルトドメインを`cluster.local`にするように設定変更する必要が有る。  
+
+<details>
+<summary>cluster.local以外のデフォルトドメインで構築する場合(非推奨)</summary>
+
+[こちら](https://vantiq.sharepoint.com/:p:/s/jp-tech/EceSW6n8Q4xOoZ7NzUbDaa8BMorNJl32ShOTpVh5s8IcLQ?e=xWxhss)の2,5を参照
+
+</details>
+
+### mongodb-2 の bootstrap init ContainerがRunningのままになる <a id="mongodb_pod_will_not_start_dns_tcp_fallback"></a>
+
+以下のようにmongodb-2のbootstrap init Containerの処理が完了せず、Init:2/3のままになり、Podが起動しない。  
+ただし、mongodb-0,1 Podは正常に起動する。  
+```bash
+$ kubectl get po -n <your-ns>
+NAME                               READY   STATUS     RESTARTS   AGE
+mongodb-0                          2/2     Running    0          3m
+mongodb-1                          2/2     Running    0          7m
+mongodb-2                          0/2     Init:2/3   0          12m
+```
+
+bootstrap init Containerのログを調べると以下のように表示される。  
+```bash
+$ kubectl logs -n <your-ns> mongodb-2 –c bootstrap​
+2022/08/08 08:47:33 Determined Domain to be vantiq-your-namespace.svc.cluster.local​
+2022/08/08 08:47:43 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
+2022/08/08 08:47:54 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
+2022/08/08 08:48:05 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
+2022/08/08 08:48:16 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host
+```
+
+上記は`MongoDBのnamespace名(Vantiqのホスト名部分)が長く、クラスタ内部DNSへのtcp通信の疎通ができない場合(udp通信は疎通可能)`に発生する可能性がある。  
+`クラスタ内部DNSへのtcp通信の疎通ができるようにするように設定変更` or `namespace名(Vantiqのホスト名部分)を短くする`ようにする必要が有る。  
+
+原因はDNSからの応答メッセージのサイズが大きくなることによりTCPフォールバックが発生してしまうためである。  
+bootstrap内の処理でMongoDBのHeadless Serviceを利用し各PodのIPアドレスを取得しているが、MongoDBのNamespace部分がある程度の長さを超えるとTCPに切り替わってしまい、TCPの疎通が制限されていると取得できなくなってしまう。  
+TCPフォールバックが発生しているかどうかはdigコマンドやtcpdumpなどのパケットキャプチャで確認できる。  
+
+## telegraf-ds / telegraf-promでメトリクスを収集できない <a id="telegraf_pod_not_collect"></a>
+
+telegraf-dsで以下のようにログが発生しているとメトリクスが取得できていない。  
+```bash
+$ kubectl logs -n <your-ns> telegraf-ds-xxxx
+2022-07-13T02:34:30Z W! [inputs.kubernetes] Collection took longer than expected; not complete after interval of 30s
+```
+
+telegraf-promでは以下のようにログが発生しているとメトリクスが取得できていない。  
+```bash
+2022-07-13T05:38:03Z E! [inputs.prometheus] Error in plugin: error making HTTP request to http://xx.xx.xx.xx:xxxx/metrics: Get "http://xx.xx.xx.xx:xxxx/metrics": dial tcp xx.xx.xx.xx:xxxx: i/o timeout (Client.Timeout exceeded while awaiting headers)
+```
+
+以下のような疎通の問題が原因で上記が発生するため、疎通できるように設定する必要が有る。  
+- telegraf-ds  
+  `telegraf-ds Pod -> スケジュールされたNode(のkubelet)`への疎通ができない
+- telegraf-prom  
+  `telegraf-prom Pod -> MongoDB,Ingress Nginx Controller`への疎通ができない
+
+
+## Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される <a id="only_vantiq_timeout"></a>
+Podは正常に起動しているが、ブラウザからアクセスするとVantiq IDEはタイムアウトで表示できないがkeycloakのadminコンソールは正常にアクセスできる場合がある。  
+上記は`PodにアサインされているIPを利用したPod間通信ができないように制限されている`場合に発生する。  
+
+Ingress Nginx Contollerの動作でIngressによるルーティングの宛先には各PodのIP(endpoint)が利用される。  
+ただし、Ingressで設定している宛先のServiceがExternalNameの場合はService経由の通信になる。  
+VantiqのIngressではkeycloakへの宛先にはExternalName、Vantiqへの宛先にはClusterIP Serviceが指定されているため上記のような現象が発生する。  
+
+`PodにアサインされているIPを利用したPod間通信ができる`ようにすることで対処可能。
+
+<details>
+<summary>Pod間通信を制限したままで構築する場合(非推奨)</summary>
+
+[こちら](https://vantiq.sharepoint.com/:p:/s/jp-tech/EceSW6n8Q4xOoZ7NzUbDaa8BMorNJl32ShOTpVh5s8IcLQ?e=xWxhss)の7を参照
+
+</details>
