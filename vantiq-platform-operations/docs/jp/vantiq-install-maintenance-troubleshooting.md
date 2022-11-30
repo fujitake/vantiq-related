@@ -7,7 +7,8 @@
 - Kubectl ツールを使って k8s クラスタを操作する環境へのアクセスがあること
 
 # 目次
-
+  - [Kubernetesリソースの確認](#kubectl_resource_check)
+  - [PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する](#db_auth_error_caused_by_secret)
   - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)
   - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
   - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
@@ -27,6 +28,286 @@
       - [mongodb-2 の bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_dns_tcp_fallback)
     - [telegraf-ds / telegraf-promでメトリクスを収集できない](#telegraf_pod_not_collect)
     - [Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される](#only_vantiq_timeout)
+
+# Kubernetesリソースの確認<a id="kubectl_resource_check"></a>
+構築時や保守時の基本的な確認としてkubectl コマンドを利用したリソースの確認がある  
+主に以下のような確認ができる    
+
+- リソースの一覧からステータス確認
+- 各リソースの詳細を確認
+- 各Pod(コンテナ)のログを確認
+
+## リソースの一覧からステータス確認
+kubectl コマンドでKubernetesの各リソースの確認は以下のように行う
+```bash
+# <resource>: 表示したいリソースの種類でよく使うものは以下
+# pod / deployment / statefulset / job / cronjob / service / pv / pvc / secret / configmap 
+kubectl get <resource>
+
+# -n <Namespace名>: Namespaceを指定
+# -A: すべてのNamespaceのリソースを表示 
+# -o wide: 詳細出力
+# shared Namespace のPodを表示
+kubectl get pod -n shared
+
+# すべてのNamespaceのPodを表示
+kubectl get pod -A
+
+# すべてのNamespaceのPodの詳細も表示
+kubectl get pod -A -o wide
+```
+
+※Namespace指定の-n / -A オプションはkubectl コマンド共通のオプション
+
+
+## 各リソースの詳細表示
+kubectl describeコマンドで各リソースの詳細を表示することができる
+
+```bash
+# <resource>: 表示したいリソースの種類
+# <name>: 表示したいリソースの名前(kubectl get から確認可能)
+kubectl describe <resource> <name>
+
+# shared Namespaceのkeycloak-0 Podの詳細を表示
+kubectl describe pod keycloak-0 -n shared
+
+# shared Namespaceのkeycloakdb Secretの詳細を表示
+kubectl describe secret keycloakdb -n shared
+```
+
+## Pod(コンテナ)のログを確認
+```bash
+# <pod-name>: 表示したいPodの名前(kubectl get から確認可能)
+# -c: コンテナ名を指定(Pod内に複数コンテナが有る場合)
+kubectl logs <pod-name> -c <コンテナ名>
+
+# mongodb-0 の mongodbコンテナのログを確認
+kubectl logs -n your-namespace mongodb-0 -c mongo
+```
+
+
+## よくある流れ
+上記で紹介したコマンドを利用し、Podが正常起動していないときにどのように確認していくのか一例を紹介する  
+
+まずPod一覧から正常起動していないPodを確認
+```bash
+$ kubectl get pod -n your-namespace -o wide
+NAME                         READY   STATUS               RESTARTS   AGE    IP            NODE                     NOMINATED NODE   READINESS GATES
+・・・
+mongodb-0                    2/2     Running              0          40h    10.1.48.220   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-1                    2/2     Running              0          40h    10.1.48.155   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-2                    2/2     Running              0          40h    10.1.48.191   aks-mongodbnp-vmssxxxx   <none>           <none>
+vantiq-0                     0/1     CrashLoopBackOff     0          36h    10.1.48.20    aks-vantiqnp-vmssxxxx    <none>           <none>
+```
+
+上記の場合`vantiq-0` Podの`STATUS`が異常(CrashLoopBackOff)なことが確認できたので、kubectl describeコマンドで詳細を確認する  
+PodのSTATUSに関しては[Podのライフサイクル | Kubernetes](https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)を参照
+```bash
+$ kubectl describe pod -n your-namespace vantiq-0
+Name:         vantiq-0
+・・・
+Containers:
+  vantiq:
+    State:          CrashLoopBack
+    Ready:          False
+・・・
+Events:                      
+  FirstSeen	LastSeen	Count	From					                  SubobjectPath		        Type		  Reason		Message
+  ---------	--------	-----	----					                  -------------		        --------	------		-------
+  <Events>
+```
+
+`Containers`フィールドからコンテナのステータス、`Events`フィールドからエラーメッセージなどを確認  
+(複数コンテナが起動しているPodではエラーが発生しているコンテナをContainersフィールドのStateから特定する)  
+Eventsから原因が特定できない場合などはkubectl logs コマンドでコンテナログを確認  
+
+Pod起動前に初期化処理などを行うinitコンテナで処理が失敗する場合もあり、その場合はkubectl get コマンドで以下のように表示されたりする  
+initコンテナに関するSTATUSについては[Initコンテナのデバッグ | Kubernetes](https://kubernetes.io/ja/docs/tasks/debug/debug-application/debug-init-containers/#understanding-pod-status)を参照
+```bash
+$ kubectl get pod -n your-namespace -o wide
+NAME                         READY   STATUS               RESTARTS   AGE    IP            NODE                     NOMINATED NODE   READINESS GATES
+・・・
+mongodb-0                    2/2     Running              0          40h    10.1.48.220   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-1                    2/2     Running              0          40h    10.1.48.155   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-2                    2/2     Running              0          40h    10.1.48.191   aks-mongodbnp-vmssxxxx   <none>           <none>
+vantiq-0                     1/3     Init:Error           0          36h    10.1.48.20    aks-vantiqnp-vmssxxxx    <none>           <none>
+```
+
+この場合も同様にkubectl describe コマンドでPodの詳細を確認
+```bash
+$ kubectl describe pod -n your-namespace vantiq-0
+Name:         vantiq-0
+・・・
+Init Containers:
+  keycloak-init:
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+    Ready:          True
+  mongo-available:
+    ・・・
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    State:          Terminated
+      Reason:       Error
+    Ready:          False
+    ・・・
+  load-model:
+    ・・・
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+・・・
+Events:                      
+  FirstSeen	LastSeen	Count	From					                  SubobjectPath		        Type		  Reason		Message
+  ---------	--------	-----	----					                  -------------		        --------	------		-------
+  <Events>
+```
+
+initコンテナで起動に失敗している場合は、`Init Containers`フィールドを確認する  
+上記の場合は`mongo-available` initコンテナでエラーが発生しているため、`Events`フィールドや以下のようにkubectl logsコマンドでエラー内容を確認し対応する  
+
+```bash
+# initコンテナの場合も-cオプションで対象のコンテナ名を指定すれば良い
+kubectl logs -n your-namespace vantiq-0 -c mongo-available
+```
+
+# PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する <a id="db_auth_error_caused_by_secret"></a>
+keycloak PodでPostgreSQL DBに対して、Vantiq PodでMongoDBやkeycloakに対して接続の認証エラーが発生することがある  
+よくある原因としてはdeploy.yamlで指定している認証情報のコピペ・指定ミスがある  
+
+接続情報はKubernetesのSecretリソースとして作成され、各Podにファイルや環境変数やファイルとして渡されている  
+正しく渡されているかは以下のように確認する
+1. Podに渡されているSecretリソースを特定
+2. Secretリソースの値を確認
+
+## 1. Podに渡されているSecretリソースを特定
+kubectl describe コマンドで確認可能  
+一例として、Vantiq Podに渡されているkeycloakに対しての資格情報の確認の流れを紹介する  
+
+```bash
+$ kubectl describe pod -n your-namespace vantiq-0
+Name:         vantiq-0
+・・・
+Init Containers:
+  keycloak-init:
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 28 Nov 2022 14:19:57 +0000
+      Finished:     Mon, 28 Nov 2022 14:20:04 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      ・・・
+      KEYCLOAK_PASSWORD:  <set to the key 'password' in secret 'keycloak'>       Optional: false
+      ・・・
+Events:                      
+  FirstSeen	LastSeen	Count	From					                  SubobjectPath		        Type		  Reason		Message
+  ---------	--------	-----	----					                  -------------		        --------	------		-------
+  <Events>
+```
+
+`Init Containers`フィールドの`keycloak-init`コンテナに注目する  
+`Environment`フィールドを見ると、`KEYCLOAK_PASSWORD`という環境変数に`keycloak` Secretの`password`というkeyの値が渡されていることが分かる  
+
+kubectl get コマンドで対象のSecretが存在することを確認  
+```bash
+$ kubectl get secret -n your-namespace keycloak
+NAME       TYPE     DATA   AGE
+keycloak   Opaque   2      62d
+```
+
+次の手順でこのSecretに格納されている値を確認していく  
+
+## 2. Secretリソースの値を確認
+Secretリソースはkubectl describeコマンドでは格納されている値が表示されない  
+```bash
+$ kubectl describe secret -n your-namespace keycloak
+Name:         keycloak
+Namespace:    your-namespace
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password:       10 bytes
+smtp.password:  64 bytes
+```
+
+そのため、kubectl getコマンドの-oオプションを利用し値を確認する  
+```bash
+$ kubectl get secret -n your-namespace keycloak -o yaml
+apiVersion: v1
+data:
+  password: ZHVtbXlwYXNzd29yZA==
+  smtp.password: ZHVtbXlwYXNzd29yZGR1bW15cGFzc3dvcmQ=
+kind: Secret
+metadata:
+  ・・・
+  name: keycloak
+  namespace: your-namespace
+type: Opaque
+```
+
+`data`フィールドに値が格納されている  
+今回確認するのは`password` Keyの値のため、`ZHVtbXlwYXNzd29yZA==`が対象の値である  
+なおSecretリソースは値をbase64エンコードして作成するため、実際に渡される値は上記で確認できた値をbase64デコードすることで確認できる  
+よってPodに渡されている値は`dummypassword`という値  
+
+この値が間違ったものである場合は、deploy.yamlを修正して再デプロイを行う  
+
+※Secretの値を確認する場合は以下のように確認することもできる
+```bash
+# keycloakのpasswordの確認
+kubectl get secret -n your-namespace keycloak -o jsonpath='{.data.password}' | base64 -d
+
+# SSL証明書ファイルの確認
+kubectl get secret -n your-namespace vantiq-ssl-cert -o jsonpath="{.data['tls\.crt']}" | base64 -d
+# SSL証明書の内容確認
+kubectl get secret -n your-namespace vantiq-ssl-cert -o jsonpath="{.data['tls\.crt']}" | base64 -d | openssl x509 -text -noout
+```
+
+## 補足: Podに渡されているSecretリソースを特定 - ファイルマウントバージョン
+上記の例では環境変数にSecretが利用されている場合だったが、ファイルとしてPodにマウントされる場合もある。  
+Vantiq のライセンスファイルなどが該当するが、どのSecretがPodにマウントされているかは以下のようにkubectl describeコマンドで確認する  
+
+```bash
+$ kubectl describe po -n internal vantiq-0
+Name:         vantiq-0
+・・・
+Containers:
+  vantiq:
+    ・・・
+    Mounts:
+      /etc/default from vantiq-defaults (rw)
+      /opt/vantiq/config/license from vantiq-license (rw)
+  ・・・
+Volumes:
+  ・・・
+  vantiq-license:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  vantiq-license
+    Optional:    false
+  vantiq-defaults:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      vantiq-config
+    Optional:  false
+  ・・・
+Events:                      <none>
+```
+
+各コンテナの`Mountsフィールド`に注目する  
+vantiq-0 Podの`/opt/vantiq/config/license`ディレクトリに`vantiq-license` Volumeがマウントされていることを確認できる  
+
+続いて`vantiq-license` Volumeの確認を行うため、`Volumes`フィールドを確認する  
+対象の`vantiq-license`フィールドを確認すると`vantiq-license` Secretが利用されていることが分かる  
+(`vantiq-defaults`のようにVolumesにはSecret以外にもConfigMapも指定できる)  
+ここまで確認できたら前述のkubectl getコマンドでSecretが存在しているかといったことや、値があっているかといったことを確認することができる  
+
+
 
 # Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
 
