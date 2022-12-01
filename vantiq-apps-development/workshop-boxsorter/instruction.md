@@ -633,8 +633,7 @@ MQTTクライアントで送信先のTopicをサブスクライブしておき�
 [実装サンプル](./box_sorter.zip)
 
 # Next step
-準備中
-<!-- [](./additional-contents.md) -->
+ [【追加コンテンツ】Stateの中身を確認してみる](./additional.md)
 
 以上
 
