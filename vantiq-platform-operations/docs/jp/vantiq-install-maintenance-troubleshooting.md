@@ -20,7 +20,7 @@
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
   - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
   - [ライセンスの有効期限を確認したい](#check-license-expiration)
-  - [環境依存によるトラブル](#env_dependency_problem)
+  - [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例 ](#env_dependency_problem)
     - [vantiq podが起動しない](#vantiq_pod_will_not_start)
       - [keycloak-initでFailedとなる](#vantiq_pod_will_not_start_public_ip_node)
     - [MongoDB podが起動しない](#mongodb_pod_will_not_start)
@@ -180,6 +180,14 @@ keycloak PodでPostgreSQL DBに対して、Vantiq PodでMongoDBやkeycloakに対
 正しく渡されているかは以下のように確認する
 1. Podに渡されているSecretリソースを特定
 2. Secretリソースの値を確認
+
+確認後、必要に応じてSecretの変更を行う  
+**その際に以下の点に注意**  
+- Secretリソースを更新しただけだと、Podの環境変数として利用しているSecret値に反映しない  
+  ファイルとしてマウントしているSecretは更新される(反映までの遅延発生の可能性あり)
+- コンテナの起動時にのみConfig情報(環境変数/ファイルとしてマウントされているSecretの情報)を読み込むケースが多い  
+  ConfigmapやSecretをデプロイ後、それらに依存するPodの再起動(rollout start)が必要
+
 
 ## 1. Podに渡されているSecretリソースを特定
 kubectl describe コマンドで確認可能  
@@ -1025,7 +1033,7 @@ System Admin でログイン >> メニュー右上のユーザーアイコン >>
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
 
-# 環境依存によるトラブル <a id="env_dependency_problem"></a>
+# 特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  <a id="env_dependency_problem"></a>
 以下はKubernetesクラスタの環境が特殊であったり制限を設定していたりした場合に発生した事例。
 
 ## Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
@@ -1076,14 +1084,7 @@ $ kubectl logs -n <your-ns> mongodb-0 -c bootstrap
 $
 ```
 
-上記は`Kubernetesクラスタのデフォルトドメインが cluster.local ではない場合`に発生するため、デフォルトドメインを`cluster.local`にするように設定変更する必要が有る。  
-
-<details>
-<summary>cluster.local以外のデフォルトドメインで構築する場合(非推奨)</summary>
-
-[こちら](https://vantiq.sharepoint.com/:p:/s/jp-tech/EceSW6n8Q4xOoZ7NzUbDaa8BMorNJl32ShOTpVh5s8IcLQ?e=xWxhss)の2,5を参照
-
-</details>
+上記は`Kubernetesクラスタのデフォルトドメインが cluster.local ではない`ために発生した。デフォルトドメインを`cluster.local`にするように設定変更することで回避できる。  
 
 ### mongodb-2 の bootstrap init ContainerがRunningのままになる <a id="mongodb_pod_will_not_start_dns_tcp_fallback"></a>
 
@@ -1106,9 +1107,9 @@ $ kubectl logs -n <your-ns> mongodb-2 –c bootstrap​
 2022/08/08 08:48:05 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
 2022/08/08 08:48:16 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host
 ```
-
-上記は`MongoDBのnamespace名(Vantiqのホスト名部分)が長く、クラスタ内部DNSへのtcp通信の疎通ができない場合(udp通信は疎通可能)`に発生する可能性がある。  
-`クラスタ内部DNSへのtcp通信の疎通ができるようにするように設定変更` or `namespace名(Vantiqのホスト名部分)を短くする`ようにする必要が有る。  
+ 
+上記は当該環境で`MongoDBのnamespace名(Vantiqのホスト名部分)が長く、クラスタ内部DNSへのtcp通信の疎通ができない(udp通信は疎通可能)`ために発生した。
+`クラスタ内部DNSへのtcp通信の疎通ができるようにするように設定変更` or `namespace名(Vantiqのホスト名部分)を短くする`ことで回避できる。  
 
 原因はDNSからの応答メッセージのサイズが大きくなることによりTCPフォールバックが発生してしまうためである。  
 bootstrap内の処理でMongoDBのHeadless Serviceを利用し各PodのIPアドレスを取得しているが、MongoDBのNamespace部分がある程度の長さを超えるとTCPに切り替わってしまい、TCPの疎通が制限されていると取得できなくなってしまう。  
@@ -1127,7 +1128,7 @@ telegraf-promでは以下のようにログが発生しているとメトリク�
 2022-07-13T05:38:03Z E! [inputs.prometheus] Error in plugin: error making HTTP request to http://xx.xx.xx.xx:xxxx/metrics: Get "http://xx.xx.xx.xx:xxxx/metrics": dial tcp xx.xx.xx.xx:xxxx: i/o timeout (Client.Timeout exceeded while awaiting headers)
 ```
 
-以下のような疎通の問題が原因で上記が発生するため、疎通できるように設定する必要が有る。  
+以下のような疎通の問題が原因で上記が発生していた、疎通できるように設定する必要が有る。  
 - telegraf-ds  
   `telegraf-ds Pod -> スケジュールされたNode(のkubelet)`への疎通ができない
 - telegraf-prom  
@@ -1143,10 +1144,3 @@ Ingress Nginx Contollerの動作でIngressによるルーティングの宛先�
 VantiqのIngressではkeycloakへの宛先にはExternalName、Vantiqへの宛先にはClusterIP Serviceが指定されているため上記のような現象が発生する。  
 
 `PodにアサインされているIPを利用したPod間通信ができる`ようにすることで対処可能。
-
-<details>
-<summary>Pod間通信を制限したままで構築する場合(非推奨)</summary>
-
-[こちら](https://vantiq.sharepoint.com/:p:/s/jp-tech/EceSW6n8Q4xOoZ7NzUbDaa8BMorNJl32ShOTpVh5s8IcLQ?e=xWxhss)の7を参照
-
-</details>
