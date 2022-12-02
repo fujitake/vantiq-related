@@ -28,7 +28,7 @@ resource "azurerm_postgresql_server" "keycloak-dbserver" {
 
   administrator_login           = "keycloak"
   administrator_login_password  = random_string.postgres_password.result
-  version                       = "10"
+  version                       = "11"
   ssl_enforcement_enabled       = false
   public_network_access_enabled = var.public_network_access_enabled
 
