@@ -75,19 +75,19 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 2. 以下のような結果が返ることを確認する
     ```json
     {
-    "expiresAt": "2022-11-10T05:31:32.701Z",
-    "value": {
-        "_id": "636210de304f430ecd9a61c5",
-        "center_id": 1,
-        "center_name": "東京物流センター",
-        "code": "14961234567890",
-        "ars_namespace": "workshop_134",
-        "ars_version": 2,
-        "ars_createdAt": "2022-11-02T06:40:30.894Z",
-        "ars_createdBy": "yshimizu",
-        "ars_modifiedAt": "2022-11-08T06:00:11.354Z",
-        "ars_modifiedBy": "yshimizu"
-    }
+        "expiresAt": "2022-11-10T05:31:32.701Z",
+        "value": {
+            "_id": "636210de304f430ecd9a61c5",
+            "center_id": 1,
+            "center_name": "東京物流センター",
+            "code": "14961234567890",
+            "ars_namespace": "workshop_134",
+            "ars_version": 2,
+            "ars_createdAt": "2022-11-02T06:40:30.894Z",
+            "ars_createdBy": "yshimizu",
+            "ars_modifiedAt": "2022-11-08T06:00:11.354Z",
+            "ars_modifiedBy": "yshimizu"
+        }
     }
     ```
 > Cached Enrichが`code`の値が`14961234567890`であるイベントを処理する際に追加する内容がStateに格納されていることがわかります。
@@ -171,6 +171,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
         ]
     ]
     ```
+
 codeが`14961234567890`、`14961234567892`、`14961234567893`の要素がStateに格納されていることがわかります。
 
 # Next step
