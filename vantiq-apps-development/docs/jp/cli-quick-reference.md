@@ -1,6 +1,7 @@
 # VANTIQ CLI クイックリファレンス
 
-Vantiq Extension Source を利用する際などに必要になる Vantiq CLI の利用方法について説明します。
+Vantiq Extension Source を利用する際などに必要になる Vantiq CLI の利用方法について説明します。  
+（※記事作成時のVANTIQバージョン：1.34）
 
 ## TOC
 - [インストール](#install)

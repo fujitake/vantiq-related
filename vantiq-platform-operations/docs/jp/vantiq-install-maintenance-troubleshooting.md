@@ -7,7 +7,8 @@
 - Kubectl ツールを使って k8s クラスタを操作する環境へのアクセスがあること
 
 # 目次
-
+  - [Kubernetesリソースの確認](#kubectl_resource_check)
+  - [PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する](#db_auth_error_caused_by_secret)
   - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)
   - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
   - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
@@ -19,7 +20,301 @@
   - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
   - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
   - [ライセンスの有効期限を確認したい](#check-license-expiration)
-  - [vantiq podが起動しない](#vantiq_pod_will_not_start)
+  - [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例 ](#env_dependency_problem)
+    - [vantiq podが起動しない](#vantiq_pod_will_not_start)
+      - [keycloak-initでFailedとなる](#vantiq_pod_will_not_start_public_ip_node)
+    - [MongoDB podが起動しない](#mongodb_pod_will_not_start)
+      - [bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_cluster_default_domain)
+      - [mongodb-2 の bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_dns_tcp_fallback)
+    - [telegraf-ds / telegraf-promでメトリクスを収集できない](#telegraf_pod_not_collect)
+    - [Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される](#only_vantiq_timeout)
+
+# Kubernetesリソースの確認<a id="kubectl_resource_check"></a>
+構築時や保守時の基本的な確認としてkubectl コマンドを利用したリソースの確認がある  
+主に以下のような確認ができる    
+
+- リソースの一覧からステータス確認
+- 各リソースの詳細を確認
+- 各Pod(コンテナ)のログを確認
+
+## リソースの一覧からステータス確認
+kubectl コマンドでKubernetesの各リソースの確認は以下のように行う
+```bash
+# <resource>: 表示したいリソースの種類でよく使うものは以下
+# pod / deployment / statefulset / job / cronjob / service / pv / pvc / secret / configmap 
+kubectl get <resource>
+
+# -n <Namespace名>: Namespaceを指定
+# -A: すべてのNamespaceのリソースを表示 
+# -o wide: 詳細出力
+# shared Namespace のPodを表示
+kubectl get pod -n shared
+
+# すべてのNamespaceのPodを表示
+kubectl get pod -A
+
+# すべてのNamespaceのPodの詳細も表示
+kubectl get pod -A -o wide
+```
+
+※Namespace指定の-n / -A オプションはkubectl コマンド共通のオプション
+
+
+## 各リソースの詳細表示
+kubectl describeコマンドで各リソースの詳細を表示することができる
+
+```bash
+# <resource>: 表示したいリソースの種類
+# <name>: 表示したいリソースの名前(kubectl get から確認可能)
+kubectl describe <resource> <name>
+
+# shared Namespaceのkeycloak-0 Podの詳細を表示
+kubectl describe pod keycloak-0 -n shared
+
+# shared Namespaceのkeycloakdb Secretの詳細を表示
+kubectl describe secret keycloakdb -n shared
+```
+
+## Pod(コンテナ)のログを確認
+```bash
+# <pod-name>: 表示したいPodの名前(kubectl get から確認可能)
+# -c: コンテナ名を指定(Pod内に複数コンテナが有る場合)
+kubectl logs <pod-name> -c <コンテナ名>
+
+# mongodb-0 の mongodbコンテナのログを確認
+kubectl logs -n your-namespace mongodb-0 -c mongo
+```
+
+
+## よくある流れ
+上記で紹介したコマンドを利用し、Podが正常起動していないときにどのように確認していくのか一例を紹介する  
+
+まずPod一覧から正常起動していないPodを確認
+```bash
+$ kubectl get pod -n your-namespace -o wide
+NAME                         READY   STATUS               RESTARTS   AGE    IP            NODE                     NOMINATED NODE   READINESS GATES
+・・・
+mongodb-0                    2/2     Running              0          40h    10.1.48.220   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-1                    2/2     Running              0          40h    10.1.48.155   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-2                    2/2     Running              0          40h    10.1.48.191   aks-mongodbnp-vmssxxxx   <none>           <none>
+vantiq-0                     0/1     CrashLoopBackOff     0          36h    10.1.48.20    aks-vantiqnp-vmssxxxx    <none>           <none>
+```
+
+上記の場合`vantiq-0` Podの`STATUS`が異常(CrashLoopBackOff)なことが確認できたので、kubectl describeコマンドで詳細を確認する  
+PodのSTATUSに関しては[Podのライフサイクル | Kubernetes](https://kubernetes.io/ja/docs/concepts/workloads/pods/pod-lifecycle/#pod-phase)を参照
+```bash
+$ kubectl describe pod -n your-namespace vantiq-0
+Name:         vantiq-0
+・・・
+Containers:
+  vantiq:
+    State:          CrashLoopBack
+    Ready:          False
+・・・
+Events:                      
+  FirstSeen	LastSeen	Count	From					                  SubobjectPath		        Type		  Reason		Message
+  ---------	--------	-----	----					                  -------------		        --------	------		-------
+  <Events>
+```
+
+`Containers`フィールドからコンテナのステータス、`Events`フィールドからエラーメッセージなどを確認  
+(複数コンテナが起動しているPodではエラーが発生しているコンテナをContainersフィールドのStateから特定する)  
+Eventsから原因が特定できない場合などはkubectl logs コマンドでコンテナログを確認  
+
+Pod起動前に初期化処理などを行うinitコンテナで処理が失敗する場合もあり、その場合はkubectl get コマンドで以下のように表示されたりする  
+initコンテナに関するSTATUSについては[Initコンテナのデバッグ | Kubernetes](https://kubernetes.io/ja/docs/tasks/debug/debug-application/debug-init-containers/#understanding-pod-status)を参照
+```bash
+$ kubectl get pod -n your-namespace -o wide
+NAME                         READY   STATUS               RESTARTS   AGE    IP            NODE                     NOMINATED NODE   READINESS GATES
+・・・
+mongodb-0                    2/2     Running              0          40h    10.1.48.220   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-1                    2/2     Running              0          40h    10.1.48.155   aks-mongodbnp-vmssxxxx   <none>           <none>
+mongodb-2                    2/2     Running              0          40h    10.1.48.191   aks-mongodbnp-vmssxxxx   <none>           <none>
+vantiq-0                     1/3     Init:Error           0          36h    10.1.48.20    aks-vantiqnp-vmssxxxx    <none>           <none>
+```
+
+この場合も同様にkubectl describe コマンドでPodの詳細を確認
+```bash
+$ kubectl describe pod -n your-namespace vantiq-0
+Name:         vantiq-0
+・・・
+Init Containers:
+  keycloak-init:
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+    Ready:          True
+  mongo-available:
+    ・・・
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    State:          Terminated
+      Reason:       Error
+    Ready:          False
+    ・・・
+  load-model:
+    ・・・
+    State:          Waiting
+      Reason:       PodInitializing
+    Ready:          False
+・・・
+Events:                      
+  FirstSeen	LastSeen	Count	From					                  SubobjectPath		        Type		  Reason		Message
+  ---------	--------	-----	----					                  -------------		        --------	------		-------
+  <Events>
+```
+
+initコンテナで起動に失敗している場合は、`Init Containers`フィールドを確認する  
+上記の場合は`mongo-available` initコンテナでエラーが発生しているため、`Events`フィールドや以下のようにkubectl logsコマンドでエラー内容を確認し対応する  
+
+```bash
+# initコンテナの場合も-cオプションで対象のコンテナ名を指定すれば良い
+kubectl logs -n your-namespace vantiq-0 -c mongo-available
+```
+
+# PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する <a id="db_auth_error_caused_by_secret"></a>
+keycloak PodでPostgreSQL DBに対して、Vantiq PodでMongoDBやkeycloakに対して接続の認証エラーが発生することがある  
+よくある原因としてはdeploy.yamlで指定している認証情報のコピペ・指定ミスがある  
+
+接続情報はKubernetesのSecretリソースとして作成され、各Podにファイルや環境変数やファイルとして渡されている  
+正しく渡されているかは以下のように確認する
+1. Podに渡されているSecretリソースを特定
+2. Secretリソースの値を確認
+
+確認後、必要に応じてSecretの変更を行う  
+**その際に以下の点に注意**  
+- Secretリソースを更新しただけだと、Podの環境変数として利用しているSecret値に反映しない  
+  ファイルとしてマウントしているSecretは更新される(反映までの遅延発生の可能性あり)
+- コンテナの起動時にのみConfig情報(環境変数/ファイルとしてマウントされているSecretの情報)を読み込むケースが多い  
+  ConfigmapやSecretをデプロイ後、それらに依存するPodの再起動(rollout start)が必要
+
+
+## 1. Podに渡されているSecretリソースを特定
+kubectl describe コマンドで確認可能  
+一例として、Vantiq Podに渡されているkeycloakに対しての資格情報の確認の流れを紹介する  
+
+```bash
+$ kubectl describe pod -n your-namespace vantiq-0
+Name:         vantiq-0
+・・・
+Init Containers:
+  keycloak-init:
+    State:          Terminated
+      Reason:       Completed
+      Exit Code:    0
+      Started:      Mon, 28 Nov 2022 14:19:57 +0000
+      Finished:     Mon, 28 Nov 2022 14:20:04 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:
+      ・・・
+      KEYCLOAK_PASSWORD:  <set to the key 'password' in secret 'keycloak'>       Optional: false
+      ・・・
+Events:                      
+  FirstSeen	LastSeen	Count	From					                  SubobjectPath		        Type		  Reason		Message
+  ---------	--------	-----	----					                  -------------		        --------	------		-------
+  <Events>
+```
+
+`Init Containers`フィールドの`keycloak-init`コンテナに注目する  
+`Environment`フィールドを見ると、`KEYCLOAK_PASSWORD`という環境変数に`keycloak` Secretの`password`というkeyの値が渡されていることが分かる  
+
+kubectl get コマンドで対象のSecretが存在することを確認  
+```bash
+$ kubectl get secret -n your-namespace keycloak
+NAME       TYPE     DATA   AGE
+keycloak   Opaque   2      62d
+```
+
+次の手順でこのSecretに格納されている値を確認していく  
+
+## 2. Secretリソースの値を確認
+Secretリソースはkubectl describeコマンドでは格納されている値が表示されない  
+```bash
+$ kubectl describe secret -n your-namespace keycloak
+Name:         keycloak
+Namespace:    your-namespace
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+password:       10 bytes
+smtp.password:  64 bytes
+```
+
+そのため、kubectl getコマンドの-oオプションを利用し値を確認する  
+```bash
+$ kubectl get secret -n your-namespace keycloak -o yaml
+apiVersion: v1
+data:
+  password: ZHVtbXlwYXNzd29yZA==
+  smtp.password: ZHVtbXlwYXNzd29yZGR1bW15cGFzc3dvcmQ=
+kind: Secret
+metadata:
+  ・・・
+  name: keycloak
+  namespace: your-namespace
+type: Opaque
+```
+
+`data`フィールドに値が格納されている  
+今回確認するのは`password` Keyの値のため、`ZHVtbXlwYXNzd29yZA==`が対象の値である  
+なおSecretリソースは値をbase64エンコードして作成するため、実際に渡される値は上記で確認できた値をbase64デコードすることで確認できる  
+よってPodに渡されている値は`dummypassword`という値  
+
+この値が間違ったものである場合は、deploy.yamlを修正して再デプロイを行う  
+
+※Secretの値を確認する場合は以下のように確認することもできる
+```bash
+# keycloakのpasswordの確認
+kubectl get secret -n your-namespace keycloak -o jsonpath='{.data.password}' | base64 -d
+
+# SSL証明書ファイルの確認
+kubectl get secret -n your-namespace vantiq-ssl-cert -o jsonpath="{.data['tls\.crt']}" | base64 -d
+# SSL証明書の内容確認
+kubectl get secret -n your-namespace vantiq-ssl-cert -o jsonpath="{.data['tls\.crt']}" | base64 -d | openssl x509 -text -noout
+```
+
+## 補足: Podに渡されているSecretリソースを特定 - ファイルマウントバージョン
+上記の例では環境変数にSecretが利用されている場合だったが、ファイルとしてPodにマウントされる場合もある。  
+Vantiq のライセンスファイルなどが該当するが、どのSecretがPodにマウントされているかは以下のようにkubectl describeコマンドで確認する  
+
+```bash
+$ kubectl describe po -n internal vantiq-0
+Name:         vantiq-0
+・・・
+Containers:
+  vantiq:
+    ・・・
+    Mounts:
+      /etc/default from vantiq-defaults (rw)
+      /opt/vantiq/config/license from vantiq-license (rw)
+  ・・・
+Volumes:
+  ・・・
+  vantiq-license:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  vantiq-license
+    Optional:    false
+  vantiq-defaults:
+    Type:      ConfigMap (a volume populated by a ConfigMap)
+    Name:      vantiq-config
+    Optional:  false
+  ・・・
+Events:                      <none>
+```
+
+各コンテナの`Mountsフィールド`に注目する  
+vantiq-0 Podの`/opt/vantiq/config/license`ディレクトリに`vantiq-license` Volumeがマウントされていることを確認できる  
+
+続いて`vantiq-license` Volumeの確認を行うため、`Volumes`フィールドを確認する  
+対象の`vantiq-license`フィールドを確認すると`vantiq-license` Secretが利用されていることが分かる  
+(`vantiq-defaults`のようにVolumesにはSecret以外にもConfigMapも指定できる)  
+ここまで確認できたら前述のkubectl getコマンドでSecretが存在しているかといったことや、値があっているかといったことを確認することができる  
+
 
 
 # Vantiq MongoDB の回復をしたい<a id="recovery_of_vantiq_mongoDB"></a>
@@ -738,9 +1033,12 @@ System Admin でログイン >> メニュー右上のユーザーアイコン >>
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
 
-# Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
+# 特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  <a id="env_dependency_problem"></a>
+以下はKubernetesクラスタの環境が特殊であったり制限を設定していたりした場合に発生した事例。
 
-### keycloak-initでFailedとなる
+## Vantiq Podが起動しない <a id="vantiq_pod_will_not_start"></a>
+
+### keycloak-initでFailedとなる <a id="vantiq_pod_will_not_start_public_ip_node"></a>
 
 `keycloak-init` init containerで失敗している理由を調べるため、当該コンテナログを出力する。
 ```sh
@@ -750,3 +1048,99 @@ HTTPS required [invalid request]
 ```
 上記の場合、エラーメッセージとして `HTTPS required [invalid request]`と出ていた。これの原因は、Kubernetesのワーカーノードに割り当てられたIPレンジがグローバルIPアドレスとなっているため、プライベートIPからのアドレスを想定しているkeycloakサーバーに拒絶されている。
 よって、kubernetesクラスタを構成し直す必要がある。
+
+
+## MongoDB Podが起動しない <a id="mongodb_pod_will_not_start"></a>
+### bootstrap init ContainerがRunningのままになる <a id="mongodb_pod_will_not_start_cluster_default_domain"></a>
+
+以下のようにbootstrap init Containerの処理が完了せず、Init:2/3のままになり、Podが起動しない。
+```bash
+$ kubectl get po -n <your-ns>
+NAME                               READY   STATUS     RESTARTS   AGE
+mongodb-0                          0/2     Init:2/3   0          3m
+```
+
+kubectl describe podで確認すると以下のようにStateがRunningのままになっている。
+```bash
+Init Containers:
+  ・・・
+  bootstrap:
+    Image:         mongo:4.2.5
+    Command:
+      /work-dir/peer-finder
+    Args:
+      -on-start=/init/on-start.sh
+      -service=vantiq-omc-mongodb
+    State:          Running
+      Started:      Tue, 29 Nov 2022 10:19:36 +0900
+    Ready:          False
+    Restart Count:  0
+  ・・・
+```
+
+bootstrap init Containerのログを調べても何も出力されない。
+```bash
+$ kubectl logs -n <your-ns> mongodb-0 -c bootstrap
+$
+```
+
+上記は`Kubernetesクラスタのデフォルトドメインが cluster.local ではない`ために発生した。デフォルトドメインを`cluster.local`にするように設定変更することで回避できる。  
+
+### mongodb-2 の bootstrap init ContainerがRunningのままになる <a id="mongodb_pod_will_not_start_dns_tcp_fallback"></a>
+
+以下のようにmongodb-2のbootstrap init Containerの処理が完了せず、Init:2/3のままになり、Podが起動しない。  
+ただし、mongodb-0,1 Podは正常に起動する。  
+```bash
+$ kubectl get po -n <your-ns>
+NAME                               READY   STATUS     RESTARTS   AGE
+mongodb-0                          2/2     Running    0          3m
+mongodb-1                          2/2     Running    0          7m
+mongodb-2                          0/2     Init:2/3   0          12m
+```
+
+bootstrap init Containerのログを調べると以下のように表示される。  
+```bash
+$ kubectl logs -n <your-ns> mongodb-2 –c bootstrap​
+2022/08/08 08:47:33 Determined Domain to be vantiq-your-namespace.svc.cluster.local​
+2022/08/08 08:47:43 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
+2022/08/08 08:47:54 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
+2022/08/08 08:48:05 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host​
+2022/08/08 08:48:16 lookup vantiq-your-namespace-mongodb on x.x.x.x:53: no such host
+```
+ 
+上記は当該環境で`MongoDBのnamespace名(Vantiqのホスト名部分)が長く、クラスタ内部DNSへのtcp通信の疎通ができない(udp通信は疎通可能)`ために発生した。
+`クラスタ内部DNSへのtcp通信の疎通ができるようにするように設定変更` or `namespace名(Vantiqのホスト名部分)を短くする`ことで回避できる。  
+
+原因はDNSからの応答メッセージのサイズが大きくなることによりTCPフォールバックが発生してしまうためである。  
+bootstrap内の処理でMongoDBのHeadless Serviceを利用し各PodのIPアドレスを取得しているが、MongoDBのNamespace部分がある程度の長さを超えるとTCPに切り替わってしまい、TCPの疎通が制限されていると取得できなくなってしまう。  
+TCPフォールバックが発生しているかどうかはdigコマンドやtcpdumpなどのパケットキャプチャで確認できる。  
+
+## telegraf-ds / telegraf-promでメトリクスを収集できない <a id="telegraf_pod_not_collect"></a>
+
+telegraf-dsで以下のようにログが発生しているとメトリクスが取得できていない。  
+```bash
+$ kubectl logs -n <your-ns> telegraf-ds-xxxx
+2022-07-13T02:34:30Z W! [inputs.kubernetes] Collection took longer than expected; not complete after interval of 30s
+```
+
+telegraf-promでは以下のようにログが発生しているとメトリクスが取得できていない。  
+```bash
+2022-07-13T05:38:03Z E! [inputs.prometheus] Error in plugin: error making HTTP request to http://xx.xx.xx.xx:xxxx/metrics: Get "http://xx.xx.xx.xx:xxxx/metrics": dial tcp xx.xx.xx.xx:xxxx: i/o timeout (Client.Timeout exceeded while awaiting headers)
+```
+
+以下のような疎通の問題が原因で上記が発生していた、疎通できるように設定する必要が有る。  
+- telegraf-ds  
+  `telegraf-ds Pod -> スケジュールされたNode(のkubelet)`への疎通ができない
+- telegraf-prom  
+  `telegraf-prom Pod -> MongoDB,Ingress Nginx Controller`への疎通ができない
+
+
+## Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される <a id="only_vantiq_timeout"></a>
+Podは正常に起動しているが、ブラウザからアクセスするとVantiq IDEはタイムアウトで表示できないがkeycloakのadminコンソールは正常にアクセスできる場合がある。  
+上記は`PodにアサインされているIPを利用したPod間通信ができないように制限されている`場合に発生する。  
+
+Ingress Nginx Contollerの動作でIngressによるルーティングの宛先には各PodのIP(endpoint)が利用される。  
+ただし、Ingressで設定している宛先のServiceがExternalNameの場合はService経由の通信になる。  
+VantiqのIngressではkeycloakへの宛先にはExternalName、Vantiqへの宛先にはClusterIP Serviceが指定されているため上記のような現象が発生する。  
+
+`PodにアサインされているIPを利用したPod間通信ができる`ようにすることで対処可能。
