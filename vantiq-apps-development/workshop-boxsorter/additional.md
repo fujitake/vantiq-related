@@ -114,7 +114,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 3. 実行し、結果を確認する
 <img src="./imgs/exec-service-proc.png" width="600">
 
-    ```json
+```json
     [
         [
             {
@@ -170,7 +170,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
             }
         ]
     ]
-    ```
+```
 
 codeが`14961234567890`、`14961234567892`、`14961234567893`の要素がStateに格納されていることがわかります。
 
