@@ -1,5 +1,13 @@
 # Vantiq Service
 
+## 関連リソース
+
+- Vantiq Academy (要ログイン)
+  - [2.7: Service Builder](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/lessons/lesson-2-vantiq-%e9%96%8b%e7%99%ba%e3%83%97%e3%83%a9%e3%83%83%e3%83%88%e3%83%95%e3%82%a9%e3%83%bc%e3%83%a0/topic/2-7-service-builder-copy-2/)
+  - [5.1: State](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/lessons/lesson-5-stateful-services-copy-2/topic/5-1-state-copy-2/)
+  - [5.2: App Builder: Service State](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/lessons/lesson-5-stateful-services-copy-2/topic/5-2-app-builder-service-state-copy-2/)
+
+
 ## Vantiq Serviceとは
 
 - 関連した機能の実装をまとめて __カプセル化__ し、より __高スループット__ かつ __高スケーラビリティ__ なアプリケーションを作成するモジュール単位です。
