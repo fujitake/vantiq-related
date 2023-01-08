@@ -23,8 +23,8 @@
 # 初回構築作業 (Quick Reference)<a id="quick_reference"></a>
 
 ### 事前準備 (アクセス権限等)<a id="preparation_access_permissions"></a>
-- SSL 証明書ファイル (Customer より入手)
-- 有効な Vantiq License ファイル (`license.key`、`public.pem`) (Vantiq Support より入手)
+- SSL 証明書ファイル (お客様にてご用意いただくもの)
+- 有効な Vantiq License ファイル (`license.key`、`public.pem`) ([Vantiq Support, Vantiq担当より取得ください](./how_to_request_license.md))
 - DNS Zone の管理権限、もしくは即時対応可能な更新依頼先 (Customer より入手)  
    DNS 管理者が外部の方の場合、事前に相談しておくこと  
    既存の zone であれば、15分程度で有効になる(実際には数分で有効になるはず)  
