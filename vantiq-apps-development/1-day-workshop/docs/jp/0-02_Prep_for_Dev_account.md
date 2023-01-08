@@ -25,3 +25,8 @@
 6. 最後に右上の [変更の保存] ボタンをクリックして、招待メールを送信します。<img src="../../imgs/00_Prep2/image2.png"  width=70%>
 
 手順は以上です。
+
+## 関連リソース
+
+- Vantiq Reference
+  - [Organization Administration Tasks](https://dev.vantiq.co.jp/docs/system/namespaces/index.html#organization-administration-tasks)
