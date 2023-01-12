@@ -67,6 +67,7 @@ Vantiqアプリケーション開発チーム向けのアプリ開発や運用�
 - [Vantiqアカウント作成（開発者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-01_Prep_for_Account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-02_Prep_for_Dev_account.md)
 - [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
+- [Vantiq workshop (荷物仕分けアプリケーション)](./vantiq-apps-development/workshop-boxsorter/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
@@ -75,6 +76,7 @@ Vantiqアプリケーション開発チーム向けのアプリ開発や運用�
 - [再利用可能なアプリケーション デザインパターン](./vantiq-apps-development/docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./vantiq-apps-development/docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+- [VANTIQ CLI クイックリファレンス](./vantiq-apps-development/docs/jp/cli-quick-reference.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
 Vantiqアプリケーション開発チーム向けのVantiqと外部Webサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
@@ -101,8 +103,10 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
 ### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
 インフラチーム向けのVantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
 
-- [Terraform を使って AWS EKS を作成](./vantiq-cloud-infra-operations/terraform_aws/readme.md)
-- [Terraform を使って Azure AKS を作成](./vantiq-cloud-infra-operations/terraform_azure/readme.md)
+- [Terraform を使って AWS EKS を作成(state分割バージョン) - 202210新規追加](./vantiq-cloud-infra-operations/terraform_aws/new/readme.md)
+- [Terraform を使って Azure AKS を作成(state分割バージョン) - 202211新規追加](./vantiq-cloud-infra-operations/terraform_azure/new/readme.md)
+- [ **(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_aws/old/readme.md)
+- [ **(deprecated)** Terraform を使って Azure AKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_azure/old/readme.md)
 - [kubernetes（EKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#eks_upgrade)    
 - [kubernetes（AKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#aks_upgrade)
 - [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)

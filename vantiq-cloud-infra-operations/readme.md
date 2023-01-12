@@ -3,9 +3,10 @@ Vantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラ
 
 ![](imgs/section-top/vantiq-intall-flow.png)
 
-
-- [Terraform を使って AWS EKS を作成](./terraform_aws/readme.md)
-- [Terraform を使って Azure AKS を作成](./terraform_azure/readme.md)
+- [Terraform を使って AWS EKS を作成(state分割バージョン) - 202210新規追加](./terraform_aws/new/readme.md)
+- [Terraform を使って Azure AKS を作成(state分割バージョン) - 202211新規追加](./terraform_azure/new/readme.md)
+- [ **(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./terraform_aws/old/readme.md)
+- [ **(deprecated)** Terraform を使って Azure AKS を作成(一括作成バージョン)](./terraform_azure/old/readme.md)
 - [kubernetes（EKS) バージョンアップ](./docs/jp/kubernetes-upgrade.md#eks_upgrade)
 - [kubernetes（AKS) バージョンアップ](./docs/jp/kubernetes-upgrade.md#aks_upgrade)
 - [Vantiq を運用するのに必要な AWS の権限](./docs/jp/aws_op_priviliges.md)
