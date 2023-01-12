@@ -513,6 +513,8 @@ return newObj
 1. 各作業者ごとに Project を定義し、作業範囲を限定することで互いの更新が干渉しないようにする。
 1. Namespace 全体のエラーが見えてしまう。自分の作業範囲外のエラーが見えてしまうことで作業の支障になる可能性がある。
 
+※開発中のNamespaceに他のユーザーを招待する方法はこちら（[開発中のNamespaceに他のユーザーを招待したい](#invite_users_to_ns)）
+
 ### Resource の一覧を csv で出力したい<a id="リソースの一覧をcsvで出力したい"></a>
 Namespace が含む Resource の一覧は [すべての Resource] (メニュー右上の歯車 >> すべての Resources の表示) から確認できます。
 ![](../../imgs/reverse-lookup/show-all-resources.png)
