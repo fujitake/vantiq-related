@@ -153,7 +153,8 @@ localsで定義している以下のconfigを設定
 - locals.network_config    
   - `vpc_cidr_block`: 作成するVPCのcidr  
   - `public_subnet_config`: 作成するPublic Subnetのconfigで、各キーのオブジェクト(az-0など)が1つのSubnet  
-  - `private_subnet_config`: public_subnet_configと同様、Private Subnet用config
+  - `private_subnet_config`: public_subnet_configと同様、Private Subnet用config  
+    ※ availability_zoneのサフィックス(a,b,c,dなど)は利用するリージョンに合わせて適宜変更をしてください。
 
 - locals.rds_config  
   PrivateエンドポイントのDBインスタンスを作成(network_config内のPrivate Subnet内のいずれかのAZへシングル構成で作成)  

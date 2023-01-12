@@ -51,7 +51,7 @@ locals {
       }
       # "az-2" = {
       #   cidr_block        = "172.20.2.0/24"
-      #   availability_zone = "${local.common_config.region}c"
+      #   availability_zone = "${local.common_config.region}d"
       # }
     }
 
@@ -66,7 +66,7 @@ locals {
       }
       # "az-2" = {
       #   cidr_block        = "172.20.12.0/24"
-      #   availability_zone = "${local.common_config.region}c"
+      #   availability_zone = "${local.common_config.region}d"
       # }
     }
   }
