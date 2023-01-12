@@ -1,9 +1,16 @@
+provider "aws" {
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region     = module.constants.common_config.region
+}
+
 ### Case by use local for terraform backend - start ###
 terraform {
   backend "local" {
     path = "terraform.tfstate"
   }
 }
+
 ### Case by use local for terraform backend - end ###
 
 ### Case by use S3 Bucket for terraform backend - start ###
@@ -24,7 +31,7 @@ module "constants" {
 
 module "vpc" {
   source       = "../../modules/vpc"
-  cluster_name = module.constants.common_config.cluster_name
+  cluster_name = "${module.constants.common_config.cluster_name}-${module.constants.common_config.env_name}"
   env_name     = module.constants.common_config.env_name
   subnet_roles = {
     public  = "elb"

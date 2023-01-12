@@ -46,7 +46,7 @@ resource "aws_eks_node_group" "vantiq-nodegroup" {
 
   remote_access {
     ec2_ssh_key               = aws_key_pair.worker.key_name
-    source_security_group_ids = var.basion_ec2_sg_ids
+    source_security_group_ids = var.sg_ids_allowed_ssh_to_worker
   }
 
   scaling_config {

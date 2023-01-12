@@ -50,8 +50,8 @@ variable "worker_access_ssh_key_name" {
   default     = null
 }
 
-variable "basion_ec2_sg_ids" {
-  description = "basion ec2 instance security group ids"
+variable "sg_ids_allowed_ssh_to_worker" {
+  description = "security group ids allowed ssh access to worker node"
   type        = list(string)
   default     = null
 }

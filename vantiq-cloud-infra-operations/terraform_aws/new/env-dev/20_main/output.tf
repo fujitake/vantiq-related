@@ -31,9 +31,9 @@ output "postgres_admin_password" {
 }
 
 ###
-#  Basion instance
+#  Bastion instance
 ###
-output "basion_public_ip" {
-  value       = data.terraform_remote_state.basion.outputs.basion_public_ip
-  description = "basion instance public ip"
+output "bastion_public_ip" {
+  value       = module.constants.common_config.bastion_enabled ? module.opnode.bastion_public_ip : null
+  description = "bastion instance public ip"
 }

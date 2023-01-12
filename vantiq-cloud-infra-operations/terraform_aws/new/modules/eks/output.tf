@@ -6,9 +6,20 @@ output "cluster_eks_name" {
   value = aws_eks_cluster.vantiq-eks.name
 }
 
-# output "worker_security_group_id" {
-#   value = aws_security_group.worker.id
-# }
+output "oidc_provider" {
+  description = "The OpenID Connect identity provider (issuer URL without leading `https://`)"
+  value       = replace(aws_eks_cluster.vantiq-eks.identity[0].oidc[0].issuer, "https://", "")
+}
+
+output "oidc_issuer" {
+  description = "The OpenID Connect issuer"
+  value       = aws_eks_cluster.vantiq-eks.identity[0].oidc[0].issuer
+}
+
+output "cluster_id" {
+  description = "The ID of the EKS cluster. Note: currently a value is returned only for local EKS clusters created on Outposts"
+  value       = aws_eks_cluster.vantiq-eks.cluster_id
+}
 
 ###
 ###  kubeconfig Output

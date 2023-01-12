@@ -40,7 +40,7 @@ apt-get install -y zulu8-jdk
 # apt-get -y install zulu-8-azure-jdk
 
 # install kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v${basion_kubectl_version}/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v${bastion_kubectl_version}/bin/linux/amd64/kubectl
 chmod +555 ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
 
