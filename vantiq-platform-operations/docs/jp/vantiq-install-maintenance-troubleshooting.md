@@ -7,27 +7,65 @@
 - Kubectl ツールを使って k8s クラスタを操作する環境へのアクセスがあること
 
 # 目次
-  - [Kubernetesリソースの確認](#kubectl_resource_check)
-  - [PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する](#db_auth_error_caused_by_secret)
-  - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)
-  - [Grafana Data Source を追加する時、エラーとなる](#error_when_adding_grafana_data_source)  
-  - [Azure で Backup の設定ができない](#unable_to_configure_backup_in_azure)
-  - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい](#reuse_old_pv)
-  - [Grafana でメトリクスが表示されない](#metrics_not_showing_up_in_grafana)  
-  - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった](#metrics_gone_after_vantiq_update)
-  - [Keycloak pod が起動しない](#keycloak_pod_will_not_start)  
-  - [Podが再起動を繰り返し、起動できない](#pod-cannot-start)  
-  - [Vantiq IDE にログインしようとすると、エラーが出る](#error_when_trying_to_login_to_vantiq_ide)  
-  - [System Admin 用の key を紛失した、期限切れになった](#lost_or_expired_key_for_system_admin)   
-  - [ライセンスの有効期限を確認したい](#check-license-expiration)
-  - [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例 ](#env_dependency_problem)
-    - [vantiq podが起動しない](#vantiq_pod_will_not_start)
-      - [keycloak-initでFailedとなる](#vantiq_pod_will_not_start_public_ip_node)
-    - [MongoDB podが起動しない](#mongodb_pod_will_not_start)
-      - [bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_cluster_default_domain)
-      - [mongodb-2 の bootstrap init ContainerがRunningのままになる](#mongodb_pod_will_not_start_dns_tcp_fallback)
-    - [telegraf-ds / telegraf-promでメトリクスを収集できない](#telegraf_pod_not_collect)
-    - [Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される](#only_vantiq_timeout)
+- [はじめに](#はじめに)
+  - [前提](#前提)
+- [目次](#目次)
+- [Kubernetesリソースの確認](#kubernetesリソースの確認)
+  - [リソースの一覧からステータス確認](#リソースの一覧からステータス確認)
+  - [各リソースの詳細表示](#各リソースの詳細表示)
+  - [Pod(コンテナ)のログを確認](#podコンテナのログを確認)
+  - [よくある流れ](#よくある流れ)
+- [PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する ](#postgresql-dbや-mongodb-keycloakとの接続の認証エラーが発生する-)
+  - [1. Podに渡されているSecretリソースを特定](#1-podに渡されているsecretリソースを特定)
+  - [2. Secretリソースの値を確認](#2-secretリソースの値を確認)
+  - [補足: Podに渡されているSecretリソースを特定 - ファイルマウントバージョン](#補足-podに渡されているsecretリソースを特定---ファイルマウントバージョン)
+- [Vantiq MongoDB の回復をしたい](#vantiq-mongodb-の回復をしたい)
+- [Grafana Data Source を追加する時、エラーとなる](#grafana-data-source-を追加する時エラーとなる)
+      - [Solution](#solution)
+      - [Solution 2](#solution-2)
+- [Azure で Backup の設定ができない](#azure-で-backup-の設定ができない)
+- [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。](#undeployとdeployを繰り返したらpvがreleaseされてしまった再利用したい)
+      - [リカバリー手順](#リカバリー手順)
+      - [リカバリーに関する留意事項](#リカバリーに関する留意事項)
+- [Grafana でメトリクスが表示されない](#grafana-でメトリクスが表示されない)
+      - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか診断する)
+      - [telegraf でエラーが出ているか診断する](#telegraf-でエラーが出ているか診断する)
+      - [Possible Solution 1](#possible-solution-1)
+      - [Possible Solution 2](#possible-solution-2)
+        - [Vantiq Resources](#vantiq-resources)
+          - ["Pod" Variable](#pod-variable)
+          - [CPU utilization](#cpu-utilization)
+        - [MongoDB Monitoring Dashboard](#mongodb-monitoring-dashboard)
+          - ["installation" and "Pod" Variable](#installation-and-pod-variable)
+          - [CPU utilization](#cpu-utilization-1)
+- [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった ](#vantiqバージョンアップしたらgrafanaのdashboardがすべて消えてしまった-)
+      - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
+      - [リカバリー: sqlite3からmysqlへのデータ移行を行う](#リカバリー-sqlite3からmysqlへのデータ移行を行う)
+      - [リカバリー手順について補足](#リカバリー手順について補足)
+- [Keycloak pod が起動しない](#keycloak-pod-が起動しない)
+      - [Azure Database for PostgreSQL が起動せずエラーになる場合](#azure-database-for-postgresql-が起動せずエラーになる場合)
+      - [その他](#その他)
+- [Podが再起動を繰り返し、起動できない](#podが再起動を繰り返し起動できない)
+      - [kubernetesワーカーノード間で通信ができているか](#kubernetesワーカーノード間で通信ができているか)
+      - [Readiness Probeのタイムアウトまでの時間を長くする](#readiness-probeのタイムアウトまでの時間を長くする)
+- [Vantiq IDE にログインしようとすると、エラーが出る](#vantiq-ide-にログインしようとするとエラーが出る)
+      - [SSL 証明書が有効かどうか診断する](#ssl-証明書が有効かどうか診断する)
+      - [サーバー間の時刻同期ができてきるか診断する](#サーバー間の時刻同期ができてきるか診断する)
+    - [Vantiq IDEにログインしようとするとエラーメッセージが出てループする](#vantiq-ideにログインしようとするとエラーメッセージが出てループする)
+- [System Admin 用の key を紛失した、期限切れになった](#system-admin-用の-key-を紛失した期限切れになった)
+- [ライセンスの有効期限を確認したい ](#ライセンスの有効期限を確認したい-)
+- [EKS アップグレード時の必要作業 ](#eks-アップグレード時の必要作業-)
+  - [v1.23(v1.22 -\> v1.23へ更新する場合) ](#v123v122---v123へ更新する場合-)
+    - [a. AWS Management Consoleから行う場合](#a-aws-management-consoleから行う場合)
+    - [b. Terraformで行う場合](#b-terraformで行う場合)
+- [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  ](#特殊環境-eks-aks以外の環境でのトラブルシューティング事例--)
+  - [Vantiq Podが起動しない ](#vantiq-podが起動しない-)
+    - [keycloak-initでFailedとなる ](#keycloak-initでfailedとなる-)
+  - [MongoDB Podが起動しない ](#mongodb-podが起動しない-)
+    - [bootstrap init ContainerがRunningのままになる ](#bootstrap-init-containerがrunningのままになる-)
+    - [mongodb-2 の bootstrap init ContainerがRunningのままになる ](#mongodb-2-の-bootstrap-init-containerがrunningのままになる-)
+  - [telegraf-ds / telegraf-promでメトリクスを収集できない ](#telegraf-ds--telegraf-promでメトリクスを収集できない-)
+  - [Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される ](#vantiqへの通信がタイムアウト502504エラーしkeycloakのadminコンソールは正常に表示される-)
 
 # Kubernetesリソースの確認<a id="kubectl_resource_check"></a>
 構築時や保守時の基本的な確認としてkubectl コマンドを利用したリソースの確認がある  
@@ -1032,6 +1070,70 @@ Vantiq のデプロイからやり直す必要がある
 System Admin でログイン >> メニュー右上のユーザーアイコン >> About と進むと、ライセンス有効期限が表示されます。
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
+
+# EKS アップグレード時の必要作業 <a id="required-operation-before-eks-upgrade"></a>
+EKSのバージョン更新に伴い対応が必要な作業について説明します。  
+なお、実施前に公式の以下のドキュメントを必ず参照してください。  
+[Amazon EKS Kubernetes versions - Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html)
+
+## v1.23(v1.22 -> v1.23へ更新する場合) <a id="check-license-expiration"></a>
+MasterをUpdateする前に`EBS CSI Driver`をEKSクラスタに追加する必要があります。  
+**すでに追加されている場合は対応の必要はありません。**  
+
+以下の手順でAWS EBS CSI DriverアドオンをEKSに追加します。  
+1. AWS EBS CSI Driver用のIRSA(IAM Roles for Service Accounts, kubernetesのService Accountに適用するIAM Role)の作成  
+   [Creating the Amazon EBS CSI driver IAM role for service accounts - Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/csi-iam-role.html)
+2. EKS Managed アドオンとしてAWS EBS CSI Driverをデプロイ  
+   [Managing the Amazon EBS CSI driver as an Amazon EKS add-on - Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/managing-ebs-csi.html#adding-ebs-csi-eks-add-on)
+
+上記手順実施にあたって以下の2パターンについて説明します。
+- a. AWS Management Consoleから行う場合
+- b. Terraformで行う場合
+
+### a. AWS Management Consoleから行う場合
+詳細な手順は公式ドキュメントを参照してください。本ドキュメントではスクリーンショットを用いて手順の概要について説明しています。  
+1. AWS EBS CSI Driver用のIRSA(IAM Roles for Service Accounts, kubernetesのService Accountに適用するIAM Role)の作成  
+ドキュメントにある通り、まずはIAM OIDC プロバイダの作成を行います。  
+参照: [Creating an IAM OIDC provider for your cluster - Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)  
+対象のクラスタを選択し、`OpenID Connect プロバイダー URL`をコピーしておきます。  
+![eks-1-23-1](../../imgs/vantiq_k8s_troubleshooting/eks-1-23-1.png)  
+IAM > IDプロバイダからプロバイダを以下のように追加します。  
+![eks-1-23-2](../../imgs/vantiq_k8s_troubleshooting/eks-1-23-2.png)  
+
+続いてIAM Roleを作成します。以下のように作成したIDプロバイダを指定します。    
+![eks-1-23-3](../../imgs/vantiq_k8s_troubleshooting/eks-1-23-3.png)
+
+1. EKS Managed アドオンとしてAWS EBS CSI Driverをデプロイ  
+EKS > クラスター > 対象のクラスタ > アドオン から EBS CSI Driver をクラスタに追加します。  
+追加する際のIAMロールの選択では1で作成したRoleを選択してください。  
+追加が完了すると以下のようにManagement Consoleから確認できます。  
+![eks-1-23-4](../../imgs/vantiq_k8s_troubleshooting/eks-1-23-4.png)
+
+また、以下のようにkubectl コマンドでアドオンがデプロイされたことを確認します。  
+```bash
+$ kubectl get deployment,daemonset,pod -n kube-system -l app.kubernetes.io/component=csi-driver
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/ebs-csi-controller   2/2     2            2           23h
+
+NAME                                  DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR              AGE
+daemonset.apps/ebs-csi-node           4         4         4       4            4           kubernetes.io/os=linux     23h
+daemonset.apps/ebs-csi-node-windows   0         0         0       0            0           kubernetes.io/os=windows   23h
+
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/ebs-csi-controller-776884c99b-qpc4d   6/6     Running   0          23h
+pod/ebs-csi-controller-776884c99b-rrrg6   6/6     Running   0          23h
+pod/ebs-csi-node-2d9tk                    3/3     Running   0          23h
+pod/ebs-csi-node-6bc6t                    3/3     Running   0          23h
+pod/ebs-csi-node-96wj5                    3/3     Running   0          23h
+pod/ebs-csi-node-lwkj4                    3/3     Running   0          23h
+```
+
+### b. Terraformで行う場合
+本リポジトリのサンプルTerraformコードを参考にしてください。  
+[ebs_csi_driver Module](../../../vantiq-cloud-infra-operations/terraform_aws/new/modules/eks_addon/ebs_csi_driver/csi_driver.tf)がEBS CSI Driverのモジュールです。  
+[20_main > main.tf](../../../vantiq-cloud-infra-operations/terraform_aws/new/env-prod/20_main/main.tf)で上記モジュールを呼び出しています。  
+
+
 
 # 特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  <a id="env_dependency_problem"></a>
 以下はKubernetesクラスタの環境が特殊であったり制限を設定していたりした場合に発生した事例。
