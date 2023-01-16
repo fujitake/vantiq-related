@@ -97,6 +97,7 @@ locals {
     managed_node_group_config = {
       "VANTIQ" = {
         ami_type       = "AL2_x86_64"
+        kubernetes_version  = "1.24"
         instance_types = ["c5.xlarge"] # c5.xlarge x 3
         disk_size      = 40
         scaling_config = {
@@ -108,6 +109,7 @@ locals {
       },
       "MongoDB" = {
         ami_type       = "AL2_x86_64"
+        kubernetes_version  = "1.24"
         instance_types = ["r5.xlarge"] # r5.xlarge x 3
         disk_size      = 40
         scaling_config = {
@@ -119,6 +121,7 @@ locals {
       },
       "keycloak" = {
         ami_type       = "AL2_x86_64"
+        kubernetes_version  = "1.24"
         instance_types = ["m5.large"] # m5.large x 3
         disk_size      = 40
         scaling_config = {
@@ -130,6 +133,7 @@ locals {
       },
       "grafana" = {
         ami_type       = "AL2_x86_64"
+        kubernetes_version  = "1.24"
         instance_types = ["r5.xlarge"] # r5.xlarge x 1
         disk_size      = 40
         scaling_config = {
@@ -141,6 +145,7 @@ locals {
       },
       "mertics" = {
         ami_type       = "AL2_x86_64"
+        kubernetes_version  = "1.24"
         instance_types = ["m5.xlarge"] # m5.xlarge x 1
         disk_size      = 40
         scaling_config = {

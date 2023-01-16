@@ -170,6 +170,7 @@ localsで定義している以下のconfigを設定
 - locals.eks_config  
   PublicアクセスポイントのEKSを作成  
   - `managed_node_group_config`: マネージドノードグループの設定で、各キーのオブジェクト(VANTIQなど)が1つのマネージドノードグループ  
+    - `kubernetes_version`: Worker Nodeのkubernetesバージョンでマイナーバージョンまでを指定
   - `sg_ids_allowed_ssh_to_worker`: Worker Nodeへのsshアクセスを許可するために指定する接続元のセキュリティグループID(bastionを本terraform以外で作成してある場合にlist(string)でIDを指定)  
     ※ 作成したbastionとWorker Nodeへの疎通が必要なため別途適切な設定を行うこと
 
