@@ -9,7 +9,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [CSV ファイルを入力したい](#CSVファイルを入力したい)
   - [複数の Topic をまとめてサブスクライブしたい](#複数のトピックをまとめてサブスクライブしたい)
   - [Sourceを変数に置き換えたい](#Sourceを変数に置き換えたい)
-  - [Remote SourceにOAuth認証を使いたい](#RemoteSourceにOAuth認証を使いたい)
+  - [Remote SourceにOAuth認証を使いたい](#remote-sourceにoauth認証を使いたい)
 - [アプリケーション実装関連](#アプリケーション実装関連)
   - [前後のイベント情報を蓄積して処理したい](#前後のイベント情報を蓄積して処理したい)
   - [デバッグしたい](#デバッグしたい)
@@ -142,7 +142,7 @@ return response
 
 [VAIL Reference Guide ： Variable References](https://dev.vantiq.com/docs/system/rules/index.html#variable-references)
 
-### Remote SourceにOAuth認証を使いたい<a id="RemoteSourceにOAuth認証を使いたい"></a>
+### Remote SourceにOAuth認証を使いたい<a id="remote-sourceにoauth認証を使いたい"></a>
 [Remote SourceでOAuth2.0認可フローによるアクセストークン再発行を受けAPIリクエストするための設定](./remote_source_oauth.md)
 
 ## アプリケーション実装関連<a id="アプリケーション実装関連"></a>
