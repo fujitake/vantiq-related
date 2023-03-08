@@ -18,6 +18,7 @@
   - [SSL 証明書を更新する](#renew_ssl_certificate)  
   - [License ファイルを更新する](#renew_license_files)  
   - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)  
+  - [InfluxDBのPVを拡張する](#resize_influxdb_pv)
 
 
 # 初回構築作業 (Quick Reference)<a id="quick_reference"></a>
