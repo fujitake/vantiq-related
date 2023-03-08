@@ -138,6 +138,8 @@ pvc-6b18ccfa-xxxx-xxxx-xxxx-xxxxxxxxxxxx   55Gi       RWO            Retain     
 ・・・
 ```
 
+ここでPV自体(EBSやAzure Disk)の拡張は完了しており、InfluxDB Podを再起動すれば書き込めるようなっている。  
+しかし次回以降deploy_toolsでdeploySharedを実行した際にエラーになってしまうため、StatefulSetを削除しdeploySharedを実行という手順でInfluxDBの再起動を行う。  
 
 2. InfluxDB StatefulSetを削除  
 ```bash
