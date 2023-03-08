@@ -28,23 +28,24 @@
       - [リカバリー手順](#リカバリー手順)
       - [リカバリーに関する留意事項](#リカバリーに関する留意事項)
 - [Grafana でメトリクスが表示されない](#grafana-でメトリクスが表示されない)
-      - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか診断する)
-      - [telegraf でエラーが出ているか診断する](#telegraf-でエラーが出ているか診断する)
-      - [Possible Solution 1](#possible-solution-1)
-      - [Possible Solution 2](#possible-solution-2)
-        - [Vantiq Resources](#vantiq-resources)
-          - ["Pod" Variable](#pod-variable)
-          - [CPU utilization](#cpu-utilization)
-        - [MongoDB Monitoring Dashboard](#mongodb-monitoring-dashboard)
-          - ["installation" and "Pod" Variable](#installation-and-pod-variable)
-          - [CPU utilization](#cpu-utilization-1)
+  - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか診断する)
+  - [telegraf でエラーが出ているか診断する](#telegraf-でエラーが出ているか診断する)
+    - [telegraf-dsで「no space left on device」、といったエラーが発生する](#telegraf-dsでno-space-left-on-deviceといったエラーが発生する)
+    - [telegrafでServiceAcoountに関連した403エラーが発生する](#telegrafでserviceacoountに関連した403エラーが発生する)
+  - [その他](#その他)
+    - [Vantiq Resources](#vantiq-resources)
+        - ["Pod" Variable](#pod-variable)
+        - [CPU utilization](#cpu-utilization)
+    - [MongoDB Monitoring Dashboard](#mongodb-monitoring-dashboard)
+      - ["installation" and "Pod" Variable](#installation-and-pod-variable)
+      - [CPU utilization](#cpu-utilization-1)
 - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった ](#vantiqバージョンアップしたらgrafanaのdashboardがすべて消えてしまった-)
       - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
       - [リカバリー: sqlite3からmysqlへのデータ移行を行う](#リカバリー-sqlite3からmysqlへのデータ移行を行う)
       - [リカバリー手順について補足](#リカバリー手順について補足)
 - [Keycloak pod が起動しない](#keycloak-pod-が起動しない)
       - [Azure Database for PostgreSQL が起動せずエラーになる場合](#azure-database-for-postgresql-が起動せずエラーになる場合)
-      - [その他](#その他)
+      - [その他](#その他-1)
 - [Podが再起動を繰り返し、起動できない](#podが再起動を繰り返し起動できない)
       - [kubernetesワーカーノード間で通信ができているか](#kubernetesワーカーノード間で通信ができているか)
       - [Readiness Probeのタイムアウトまでの時間を長くする](#readiness-probeのタイムアウトまでの時間を長くする)
@@ -495,7 +496,7 @@ deployment.apps/grafana scaled
 ![Screen Shot 2021-08-30 at 21.31.17](../../imgs/vantiq-install-maintenance/grafana_not_showing.png)
 
 
-#### InfluxDB にメトリクスが存在するか診断する
+## InfluxDB にメトリクスが存在するか診断する
 データが表示されていないパネルのクエリを調べると、`kubernetes` データベースの `nginx_ingress_controller_requests` が使われているが、これが InfluxDB にあるか確認する。
 
 ```sh
@@ -528,9 +529,26 @@ go_gc_duration_seconds
 ...
 ```
 
-#### telegraf でエラーが出ているか診断する
-メトリクスがない場合、telegraf 側でエラーが出ているか確認する。
+## telegraf でエラーが出ているか診断する
+メトリクスがない場合やある時期を境に途切れている場合は、telegraf 側でエラーが出ているか確認する。
+以下に発生しうるエラー例とその対応を記述する。  
 
+### telegraf-dsで「no space left on device」、といったエラーが発生する
+
+- エラーログ例
+```sh
+2023-03-06T01:29:53Z E! [outputs.influxdb] When writing to [http://influxdb:8086]: 500 Internal Server Error: engine: error writing WAL entry: write /var/lib/influxdb/wal/kubernetes/autogen/126/_00005.wal: no space left on device
+2023-03-06T01:29:53Z E! [agent] Error writing to outputs.influxdb: could not write any address
+```
+
+
+InfluxDBのPVの空き容量がなくなると上記のようなエラーがtelegraf-dsで発生する。  
+この場合はInfluxDBのPVを拡張することで対処可能。手順については[InfluxDB PV拡張手順](./resize_influxdb_pv.md)を参照
+
+
+### telegrafでServiceAcoountに関連した403エラーが発生する
+
+- エラーログ例
 ```sh
 $ stern -n shared telegraf-* -s 1s
 
@@ -538,9 +556,8 @@ telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:35Z E! [inputs.promethe
 telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:36Z E! [inputs.prometheus] Unable to watch resources: kubernetes api: Failure 403 pods is forbidden: User "system:serviceaccount:shared:telegraf-prom" cannot watch resource "pods" in API group "" at the cluster scope
 telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:37Z E! [inputs.prometheus] Unable to watch resources: kubernetes api: Failure 403 pods is forbidden: User "system:serviceaccount:shared:telegraf-prom" cannot watch resource "pods" in API group "" at the cluster scope
 telegraf-prom-86c55969cb-fxmnx telegraf 2021-08-25T23:33:38Z E! [inputs.prometheus] Unable to watch resources: kubernetes api: Failure 403 pods is forbidden: User "system:serviceaccount:shared:telegraf-prom" cannot watch resource "pods" in API group "" at the cluster scope
-```
 
-#### Possible Solution 1
+```
 AWS や Azure で、kubernetes クラスタの RBAC を有効にすると、デフォルトでは Cluster レベルの情報にアクセスする権限がない。`Service Account` を作成し、明示的に `telegraf` に対して権限をつける必要がある。
 
 ```sh
@@ -592,12 +609,12 @@ subjects:
 ```
 Reference: https://stackoverflow.com/questions/53908848/kubernetes-pods-nodes-is-forbidden/53909115
 
-#### Possible Solution 2
+## その他
 AKS 1.19からコンテナランタイムが`dockerd`から`containerd`に切り替わったことにより、取得できるメトリクスが変わっている。それに合わせgrafana側のクエリを変更しなければいけない。
 `Vantiq Resource`と`MongoDB Monitoring Dashboard`が影響を受ける。
 
-##### Vantiq Resources
-###### "Pod" Variable
+### Vantiq Resources
+##### "Pod" Variable
 Dashboard settings > Variables  
 
 Old
@@ -609,7 +626,7 @@ To-Be
 show tag values from "kubernetes_pod_container" with key="pod_name" where pod_name =~ /vantiq-/
 ```
 
-###### CPU utilization
+##### CPU utilization
 Old
 ```sh:
 SELECT mean("usage_percent") AS "cpu usage" FROM "docker_container_cpu" WHERE ("io.kubernetes.pod.name" =~ /^$pod$/ AND "io.kubernetes.pod.namespace" =~ /^$installation$/ AND component = '' and container_name =~ /^k8s_vantiq_vantiq/) AND $timeFilter GROUP BY time($__interval), "io.kubernetes.pod.name" fill(none)
@@ -629,8 +646,8 @@ To-Be
 $tag_pod_name: $col
 ```
 
-##### MongoDB Monitoring Dashboard
-###### "installation" and "Pod" Variable
+### MongoDB Monitoring Dashboard
+#### "installation" and "Pod" Variable
 Old
 ```sh
 # installation
@@ -646,7 +663,7 @@ show tag values with key = namespace
 show tag values from "kubernetes_pod_container" with key="pod_name" where pod_name =~ /mongodb-/
 ```
 
-###### CPU utilization
+#### CPU utilization
 Old
 ```sh:
 SELECT mean("usage_percent") FROM "docker_container_cpu" WHERE ("io.kubernetes.pod.name" =~ /^$pod$/ AND "io.kubernetes.container.name" = 'mongodb' AND "io.kubernetes.pod.namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)

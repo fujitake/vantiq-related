@@ -318,3 +318,6 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 
 
 Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.md _(要権限)_
+
+### InfluxDBのPVを拡張する<a id="resize_influxdb_pv"></a>
+[InfluxDB PV拡張手順](./resize_influxdb_pv.md)を参照
