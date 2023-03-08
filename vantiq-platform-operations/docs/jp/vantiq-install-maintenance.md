@@ -18,6 +18,7 @@
   - [SSL 証明書を更新する](#renew_ssl_certificate)  
   - [License ファイルを更新する](#renew_license_files)  
   - [Vantiq MongoDB の回復をしたい](#recovery_of_vantiq_mongoDB)  
+  - [InfluxDBのPVを拡張する](#resize_influxdb_pv)
 
 
 # 初回構築作業 (Quick Reference)<a id="quick_reference"></a>
@@ -318,3 +319,6 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 
 
 Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.md _(要権限)_
+
+### InfluxDBのPVを拡張する<a id="resize_influxdb_pv"></a>
+[InfluxDB PV拡張手順](./resize_influxdb_pv.md)を参照
