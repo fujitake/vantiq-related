@@ -8,7 +8,8 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [ひとつの Source の定義でさまざまな Web サービスを呼び分けしたい](#ひとつのSourceの定義でさまざまなWebサービスを呼び分けしたい)
   - [CSV ファイルを入力したい](#CSVファイルを入力したい)
   - [複数の Topic をまとめてサブスクライブしたい](#複数のトピックをまとめてサブスクライブしたい)
-  - [Sorceを変数に置き換えたい](#Sorceを変数に置き換えたい)
+  - [Sourceを変数に置き換えたい](#Sourceを変数に置き換えたい)
+  - [Remote SourceにOAuth認証を使いたい](#remote-sourceにoauth認証を使いたい)
 - [アプリケーション実装関連](#アプリケーション実装関連)
   - [前後のイベント情報を蓄積して処理したい](#前後のイベント情報を蓄積して処理したい)
   - [デバッグしたい](#デバッグしたい)
@@ -123,8 +124,8 @@ payload.topicname = msg.topic
 publish payload to TOPIC "/downstream/sensor/telemetry"
 ```
 
-### Sorceを変数に置き換えたい<a id="Sorceを変数に置き換えたい"></a>
-Sorceを変数に置き換えたい場合は、変数名に`@`をつけて使用します。
+### Sourceを変数に置き換えたい<a id="Sourceを変数に置き換えたい"></a>
+Sourceを変数に置き換えたい場合は、変数名に`@`をつけて使用します。
 
 ※SELECT文でもPUBLISH文でも利用できます。
 
@@ -141,6 +142,8 @@ return response
 
 [VAIL Reference Guide ： Variable References](https://dev.vantiq.com/docs/system/rules/index.html#variable-references)
 
+### Remote SourceにOAuth認証を使いたい<a id="remote-sourceにoauth認証を使いたい"></a>
+[Remote SourceでOAuth2.0認可フローによるアクセストークン再発行を受けAPIリクエストするための設定](./remote_source_oauth.md)
 
 ## アプリケーション実装関連<a id="アプリケーション実装関連"></a>
 
@@ -512,6 +515,8 @@ return newObj
 基本は作業者ごとに Namespace を作成し、それぞれ作業を行うことを推奨します。 同一 Namespace で使用した場合、以下の点に留意する必要があります。
 1. 各作業者ごとに Project を定義し、作業範囲を限定することで互いの更新が干渉しないようにする。
 1. Namespace 全体のエラーが見えてしまう。自分の作業範囲外のエラーが見えてしまうことで作業の支障になる可能性がある。
+
+※開発中のNamespaceに他のユーザーを招待する方法はこちら（[開発中のNamespaceに他のユーザーを招待したい](#invite_users_to_ns)）
 
 ### Resource の一覧を csv で出力したい<a id="リソースの一覧をcsvで出力したい"></a>
 Namespace が含む Resource の一覧は [すべての Resource] (メニュー右上の歯車 >> すべての Resources の表示) から確認できます。

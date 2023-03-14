@@ -33,6 +33,11 @@ resource "aws_eks_cluster" "vantiq-eks" {
 ###
 ### Maneged Node Group
 ###
+data "aws_ssm_parameter" "eks_ami_release_version" {
+  for_each = var.managed_node_group_config
+  name = "/aws/service/eks/optimized-ami/${each.value.kubernetes_version}/amazon-linux-2/recommended/release_version"
+}
+
 resource "aws_eks_node_group" "vantiq-nodegroup" {
   for_each        = var.managed_node_group_config
   cluster_name    = aws_eks_cluster.vantiq-eks.name
@@ -40,13 +45,15 @@ resource "aws_eks_node_group" "vantiq-nodegroup" {
   node_role_arn   = aws_iam_role.eks-worker-node-role.arn
 
   ami_type       = each.value.ami_type
+  version         = each.value.kubernetes_version
+  release_version = nonsensitive(data.aws_ssm_parameter.eks_ami_release_version[each.key].value)
   instance_types = each.value.instance_types
   disk_size      = each.value.disk_size
   subnet_ids     = var.private_subnet_ids
 
   remote_access {
     ec2_ssh_key               = aws_key_pair.worker.key_name
-    source_security_group_ids = var.basion_ec2_sg_ids
+    source_security_group_ids = var.sg_ids_allowed_ssh_to_worker
   }
 
   scaling_config {

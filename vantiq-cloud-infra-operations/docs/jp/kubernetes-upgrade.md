@@ -30,27 +30,25 @@ Node Poolsから対象のNodepoolを選択し、それぞれ更新を行いま�
 
 #### Terraformからアップグレードする
 
-「[Terraform を使って Azure AKS を作成](../../../vantiq-cloud-infra-operations/terraform_azure/readme.md)」のテンプレートを使用してインストールした想定の手順です。異なるテンプレートの場合、それに合わせ変更を行います。
+「[Terraform を使って Azure AKS を作成](../../../vantiq-cloud-infra-operations/terraform_azure/new/readme.md)」のテンプレートを使用してインストールした想定の手順です。異なるテンプレートの場合、それに合わせ変更を行います。
 
-1. `main.tf`の`kubernetes_version`の値をターゲットのバージョンに変更します。
+1. `constants.tf`の`locals.common_config.cluster_version`の値をターゲットのバージョンに変更します。
 ```terraform
 ###
 ###  AKS
 ###
-module "aks" {
-  # fixed parameter. Do not change.
-  source = "../modules/aks"
-  aks_cluster_name = "aks-${var.vantiq_cluster_name}-${var.env_name}"
-  location = var.location
-  resource_group_name = "rg-${var.vantiq_cluster_name}-${var.env_name}-aks"
-  tags = {
-     environment = var.env_name
-     app = var.vantiq_cluster_name
+locals {
+  common_config = {
+    vantiq_cluster_name      = "vantiq"
+    env_name                 = "prod"
+    location                 = "japaneast"
+    cluster_version          = "1.22.15" # 1.21.2 -> 1.22.15
+    opnode_kubectl_version   = "1.22.15"
+    ssh_private_key_aks_node = "aks_node_id_rsa"
+    ssh_public_key_aks_node  = "aks_node_id_rsa.pub"
+    ssh_public_key_opnode    = "opnode_id_rsa.pub"
   }
-  depends_on = [module.vpc]
-
-  # kubernetes version
-  kubernetes_version = "1.21.2"  // 1.20.9 -> 1.21.2
+}
 ```
 
 2. `terraform plan`を実行し、変更内容が正しいことを確認します。この時点で想定以外の変更が検知された場合、まずその変更を解消してください。
@@ -119,31 +117,97 @@ Terraformでアップグレードする  | Terraformの構成ファイル上で�
 
 #### Terraformからアップグレードする
 
-「[Terraform を使って AWS EKS を作成](../../../vantiq-cloud-infra-operations/terraform_aws/readme.md)」のテンプレートを使用してインストールした想定の手順です。異なるテンプレートの場合、それに合わせ変更を行います。
+「[Terraform を使って AWS EKS を作成](../../../vantiq-cloud-infra-operations/terraform_aws/new/readme.md)」のテンプレートを使用してインストールした想定の手順です。異なるテンプレートの場合、それに合わせ変更を行います。
 
-1. `main.tf`の`cluster_version`の値をターゲットのバージョンに変更します。
+1. Control Planeの更新を行うため、`constants.tf`の`locals.common_config.cluster_version`の値をターゲットのバージョンに変更します。
 ```terraform
-module "eks" {
-  source             = "../modules/eks"
-  cluster_name       = local.cluster_name
-  env_name           = local.env_name
-  vpc_id             = module.vpc.vpc_id
-  public_subnet_ids  = module.vpc.public_subnet_ids
-  private_subnet_ids = module.vpc.private_subnet_ids
-
-  worker_access_ssh_key_name = local.worker_access_ssh_key_name
-  basion_ec2_sg_ids          = [aws_security_group.basion-ssh-allow.id]
-
-  keycloak_db_expose_port = local.keycloak_db_expose_port
-  keycloak_db_sg_id       = module.keycloak-db.keycloak_db_sg_id
-
-  # The following is custom setting
-  cluster_version = "1.21"  # 1.20 -> 1.21　
+locals {
+  common_config = {
+    cluster_name                   = "<INPUT-YOUR-CLUSTER-NAME>"
+    cluster_version                = "1.24"    # 1.23 -> 1.24　
+    bastion_kubectl_version        = "1.24.7"
+    env_name                       = "prod"
+    region                         = "<INPUT-YOUR-REGION>"
+    worker_access_private_key      = "<INPUT-YOUR-SSH-PRIVATE-KEY-FILE-NAME>"
+    worker_access_public_key_name  = "<INPUT-YOUR-SSH-PUBLIC-KEY-FILE-NAME>"
+    bastion_access_public_key_name = "<INPUT-YOUR-SSH-PUBLIC-KEY-FILE-NAME>"
+    bastion_enabled                = true
+    bastion_instance_type          = "t2.micro"
+  }
+}
 ```
 
-2. `terraform plan`を実行し、変更内容が正しいことを確認します。この時点で想定以外の変更が検知された場合、まずその変更を解消してください。
+2. `terraform plan`を実行し、変更内容が正しいことを確認します。この時点で想定以外の変更が検知された場合、まずその変更を解消してください。  
+この時点でWorker NodeのAMIのバージョンがリリースされたことにより変更が検知された場合は、以下のようにlifecycleのignore_changesを一時的にeks Moduleのaws_eks_node_groupに追加しWorker Nodeへの変更を回避します。  
+```terraform
+resource "aws_eks_node_group" "vantiq-nodegroup" {
+  for_each        = var.managed_node_group_config
+  cluster_name    = aws_eks_cluster.vantiq-eks.name
+  node_group_name = "${each.key}-nodegroup"
+  node_role_arn   = aws_iam_role.eks-worker-node-role.arn
 
-3. `terraform apply`を実行します。
+  ami_type       = each.value.ami_type
+  version         = each.value.kubernetes_version
+  release_version = nonsensitive(data.aws_ssm_parameter.eks_ami_release_version[each.key].value)
+  instance_types = each.value.instance_types
+  disk_size      = each.value.disk_size
+  subnet_ids     = var.private_subnet_ids
+
+  remote_access {
+    ec2_ssh_key               = aws_key_pair.worker.key_name
+    source_security_group_ids = var.sg_ids_allowed_ssh_to_worker
+  }
+
+  scaling_config {
+    desired_size = each.value.scaling_config.desired_size
+    max_size     = each.value.scaling_config.max_size
+    min_size     = each.value.scaling_config.min_size
+  }
+
+  labels = {
+    "vantiq.com/workload-preference" = each.value.node_workload_label
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.eks-worker-node,
+    aws_iam_role_policy_attachment.ecr-ro,
+    aws_iam_role_policy_attachment.eks-cni
+  ]
+
+  # 一時的に追加
+  lifecycle {
+    ignore_changes = [release_version]
+  }
+
+}
+```
+
+3. `terraform apply`を実行し、Control Planeを更新します。
+
+4. Worker Nodeの更新を行うため、`constants.tf`の`locals.eks_config.managed_node_group_config.kubernetes_version`の値をターゲットのバージョンに変更します。
+```terraform
+locals {
+  eks_config = {
+    managed_node_group_config = {
+      "VANTIQ" = {
+        ami_type       = "AL2_x86_64"
+        kubernetes_version  = "1.24" # 1.23 -> 1.24
+        instance_types = ["c5.xlarge"] # c5.xlarge x 3
+        disk_size      = 40
+        scaling_config = {
+          desired_size = 3
+          max_size     = 6
+          min_size     = 0
+        }
+        node_workload_label = "compute"
+      },
+      ・・・
+```
+
+5. `terraform plan`を実行し、変更内容が正しいことを確認します。この時点で想定以外の変更が検知された場合、まずその変更を解消してください。  
+手順2でlifecycleのignore_changesを追加していた場合は削除しておきます。  
+
+6. `terraform apply`を実行し、Worker Nodeを更新します。
 
 
 ## Kubernetesアップグレードに伴う既知のリスク、留意事項

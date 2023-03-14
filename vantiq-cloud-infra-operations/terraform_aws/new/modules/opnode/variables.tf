@@ -1,3 +1,8 @@
+variable "enabled" {
+  description = "bastion ec2 instance create flag"
+  type        = bool
+  default     = true
+}
 
 variable "cluster_name" {
   description = "EKS Cluster Name"
@@ -11,20 +16,20 @@ variable "env_name" {
   default     = null
 }
 
-variable "basion_kubectl_version" {
+variable "bastion_kubectl_version" {
   description = "install kubectl version"
   type        = string
   default     = "$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"
 }
 
-variable "basion_vpc_id" {
+variable "bastion_vpc_id" {
   description = "VPC ID"
   type        = string
   default     = null
 }
 
-variable "basion_subnet_id" {
-  description = "VPC subnet id to allocate basion instance"
+variable "bastion_subnet_id" {
+  description = "VPC subnet id to allocate bastion instance"
   type        = string
   default     = null
 }
@@ -35,14 +40,14 @@ variable "worker_access_private_key" {
   default     = null
 }
 
-variable "basion_access_public_key_name" {
-  description = "Public key for registering basion instance"
+variable "bastion_access_public_key_name" {
+  description = "Public key for registering bastion instance"
   type        = string
   default     = null
 }
 
-variable "basion_instance_type" {
-  description = "Basion EC2 instance type"
+variable "bastion_instance_type" {
+  description = "bastion EC2 instance type"
   type        = string
   default     = null
 }
