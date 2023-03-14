@@ -123,7 +123,7 @@ VAIL を実行しその結果を受け取る (下図)
 |①|名前空間の名前 e.g., connectingtest|
 |②|[Shared Access Key Name] (#SAKEY) e.g., RootManageSharedAccessKey|
 |③|[Shared Access Key] (#SAKEY) (主キー)|
-- Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③;
+- Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③
 
 #### 具体例
 ```
