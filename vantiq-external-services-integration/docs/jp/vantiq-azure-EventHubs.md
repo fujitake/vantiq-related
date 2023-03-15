@@ -61,15 +61,15 @@
     "enabledSaslMechanisms": [
         "PLAIN"
     ],
-    “password”: “<①>",
+    "password": "<①>",
     "passwordType": "string",
     "serverURIs": [
-        “amqps://<②>.servicebus.windows.net:5671"
+        "amqps://<②>.servicebus.windows.net:5671"
     ],
     "topics": [
-        “③/ConsumerGroups/$default/Partitions/0"
+        "③/ConsumerGroups/$default/Partitions/0"
     ],
-    “username”: “<④>"
+    "username": "<④>"
 }
 ```
 ### 2.2 VAIL 設定
@@ -80,14 +80,14 @@
 |2: topic|● Event Hub Topics Name<br>● 2.1 AMQP (Source) 設定での ③ e.g., eh_topic|
 ```
 PROCEDURE eh_amqp_pub()
-var msg = {"message": {"content": “ABCDEFGHIJKRLMN"}}
-PUBLISH msg to SOURCE <①> USING { "topic": “<②>" }
+var msg = {"message": {"content": "ABCDEFGHIJKRLMN"}}
+PUBLISH msg to SOURCE <①> USING { "topic": "<②>" }
 ```
 - Payload は以下の構造を用いる
 ```
 {
-  “message”: {
-    “key": “value“
+  "message": {
+    "key": "value"
   }
 }
 ```
@@ -99,7 +99,9 @@ VAIL を実行しその結果を受け取る (下図)
 <h2 id="KAFKA">3. Kafka (Source) の接続方法 on Vantiq IDE</h2>
 
 ### 3.1 Kafka (Source) 設定
-以下の項目を自分の環境に合わせて記入する
+以下の項目を自分の環境に合わせて記入する  
+> ※Shared Access Key（共通アクセスポリシー）については、 [5. Shared Acces Key について](#SAKEY) を参照してください。
+
 |項番:項目|内容|
 ---|---
 |①: 名前空間の名前|e.g., connectingtest|
@@ -107,13 +109,13 @@ VAIL を実行しその結果を受け取る (下図)
 |③: Event Hub Topic Name|e.g,. eh_topic|
 ```
 {
-    “bootstrap.servers”: “sb://<①>.servicebus.windows.net:9093",
-    “sasl.jaas.config”: “org.apache.kafka.common.security.plain.PlainLoginModule required username=\”$ConnectionString\“ password=\“<②>\";",
+    "bootstrap.servers": "sb://<①>.servicebus.windows.net:9093",
+    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"<②>\";",
     "sasl.mechanism": "PLAIN",
-    "security.protocol": "SASL_SSL“,
+    "security.protocol": "SASL_SSL",
     "consumer.group.id": "$Default",
     "consumer.topics": [
-        “<③>"
+        "<③>"
     ]
 }
 ```
@@ -121,9 +123,24 @@ VAIL を実行しその結果を受け取る (下図)
 |項目|内容|
 ---|---
 |①|名前空間の名前 e.g., connectingtest|
-|②|[Shared Access Key Name] (#SAKEY)|
+|②|[Shared Access Key Name] (#SAKEY) e.g., RootManageSharedAccessKey|
 |③|[Shared Access Key] (#SAKEY) (主キー)|
-- Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③;
+- Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③
+
+#### 具体例
+```
+{
+    "bootstrap.servers": "sb://connectingtest.servicebus.windows.net:9093",
+    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"Endpoint=sb://connectingtest.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=\";",
+    "sasl.mechanism": "PLAIN",
+    "security.protocol": "SASL_SSL",
+    "consumer.group.id": "$Default",
+    "consumer.topics": [
+        "eh_topic"
+    ]
+}
+```
+
 ### 3.2 VAIL 設定
 以下の項目を自分の環境に合わせて記入する
 |項番:項目|内容|
@@ -146,8 +163,8 @@ VAIL を実行しデータを受信(①)することを確認する (下図)
 注意: &lt;Source Name&gt;、&lt;Topic Name&gt; には適当な値を設定する必要あり
 ```
 PROCEDURE eh_amqp_pub()
-var msg = {"message": {"content": “ABCDEFGHIJKRLMN"}}
-PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
+var msg = {"message": {"content": "ABCDEFGHIJKRLMN"}}
+PUBLISH msg to SOURCE <Source Name> { "topic": "<Topic Name>" }
 ```
 <img src="../../imgs/vantiq-azure-EventHubs/azure_pchgsrc.jpg">
 
