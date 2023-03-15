@@ -99,7 +99,9 @@ VAIL を実行しその結果を受け取る (下図)
 <h2 id="KAFKA">3. Kafka (Source) の接続方法 on Vantiq IDE</h2>
 
 ### 3.1 Kafka (Source) 設定
-以下の項目を自分の環境に合わせて記入する
+以下の項目を自分の環境に合わせて記入する  
+> ※Shared Access Key（共通アクセスポリシー）については、 [5. Shared Acces Key について](#SAKEY) を参照してください。
+
 |項番:項目|内容|
 ---|---
 |①: 名前空間の名前|e.g., connectingtest|
