@@ -61,15 +61,15 @@
     "enabledSaslMechanisms": [
         "PLAIN"
     ],
-    “password”: “<①>",
+    "password": "<①>",
     "passwordType": "string",
     "serverURIs": [
-        “amqps://<②>.servicebus.windows.net:5671"
+        "amqps://<②>.servicebus.windows.net:5671"
     ],
     "topics": [
-        “③/ConsumerGroups/$default/Partitions/0"
+        "③/ConsumerGroups/$default/Partitions/0"
     ],
-    “username”: “<④>"
+    "username": "<④>"
 }
 ```
 ### 2.2 VAIL 設定
@@ -80,14 +80,14 @@
 |2: topic|● Event Hub Topics Name<br>● 2.1 AMQP (Source) 設定での ③ e.g., eh_topic|
 ```
 PROCEDURE eh_amqp_pub()
-var msg = {"message": {"content": “ABCDEFGHIJKRLMN"}}
-PUBLISH msg to SOURCE <①> USING { "topic": “<②>" }
+var msg = {"message": {"content": "ABCDEFGHIJKRLMN"}}
+PUBLISH msg to SOURCE <①> USING { "topic": "<②>" }
 ```
 - Payload は以下の構造を用いる
 ```
 {
-  “message”: {
-    “key": “value“
+  "message": {
+    "key": "value"
   }
 }
 ```
@@ -107,13 +107,13 @@ VAIL を実行しその結果を受け取る (下図)
 |③: Event Hub Topic Name|e.g,. eh_topic|
 ```
 {
-    “bootstrap.servers”: “sb://<①>.servicebus.windows.net:9093",
-    “sasl.jaas.config”: “org.apache.kafka.common.security.plain.PlainLoginModule required username=\”$ConnectionString\“ password=\“<②>\";",
+    "bootstrap.servers": "sb://<①>.servicebus.windows.net:9093",
+    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"<②>\";",
     "sasl.mechanism": "PLAIN",
-    "security.protocol": "SASL_SSL“,
+    "security.protocol": "SASL_SSL",
     "consumer.group.id": "$Default",
     "consumer.topics": [
-        “<③>"
+        "<③>"
     ]
 }
 ```
@@ -146,8 +146,8 @@ VAIL を実行しデータを受信(①)することを確認する (下図)
 注意: &lt;Source Name&gt;、&lt;Topic Name&gt; には適当な値を設定する必要あり
 ```
 PROCEDURE eh_amqp_pub()
-var msg = {"message": {"content": “ABCDEFGHIJKRLMN"}}
-PUBLISH msg to SOURCE <Source Name> { "topic": “<Topic Name>" }
+var msg = {"message": {"content": "ABCDEFGHIJKRLMN"}}
+PUBLISH msg to SOURCE <Source Name> { "topic": "<Topic Name>" }
 ```
 <img src="../../imgs/vantiq-azure-EventHubs/azure_pchgsrc.jpg">
 
