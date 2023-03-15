@@ -121,9 +121,24 @@ VAIL を実行しその結果を受け取る (下図)
 |項目|内容|
 ---|---
 |①|名前空間の名前 e.g., connectingtest|
-|②|[Shared Access Key Name] (#SAKEY)|
+|②|[Shared Access Key Name] (#SAKEY) e.g., RootManageSharedAccessKey|
 |③|[Shared Access Key] (#SAKEY) (主キー)|
-- Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③;
+- Endpoint=sb://①.servicebus.windows.net/;SharedAccessKeyName=②;SharedAccessKey=③
+
+#### 具体例
+```
+{
+    "bootstrap.servers": "sb://connectingtest.servicebus.windows.net:9093",
+    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"$ConnectionString\" password=\"Endpoint=sb://connectingtest.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=\";",
+    "sasl.mechanism": "PLAIN",
+    "security.protocol": "SASL_SSL",
+    "consumer.group.id": "$Default",
+    "consumer.topics": [
+        "eh_topic"
+    ]
+}
+```
+
 ### 3.2 VAIL 設定
 以下の項目を自分の環境に合わせて記入する
 |項番:項目|内容|
