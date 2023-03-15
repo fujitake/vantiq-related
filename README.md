@@ -75,6 +75,7 @@ Vantiqアプリケーション開発チーム向けのアプリ開発や運用�
 - [Vantiq Service](./vantiq-apps-development/docs/jp/vantiq-service.md)
 - [再利用可能なアプリケーション デザインパターン](./vantiq-apps-development/docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./vantiq-apps-development/docs/jp/reverse-lookup.md)
+- [Vantiq アプリ開発のよくある質問](./vantiq-apps-development/docs/jp/faq.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [VANTIQ CLI クイックリファレンス](./vantiq-apps-development/docs/jp/cli-quick-reference.md)
 
