@@ -14,6 +14,8 @@
   - [リソースの一覧からステータス確認](#リソースの一覧からステータス確認)
   - [各リソースの詳細表示](#各リソースの詳細表示)
   - [Pod(コンテナ)のログを確認](#podコンテナのログを確認)
+    - [Podのlogにタイムスタンプを表示する ](#Podのlogにタイムスタンプを表示する)
+    - [Podのログがエスケープシーケンスで見にくい](#Podのログがエスケープシーケンスで見にくい)
   - [よくある流れ](#よくある流れ)
 - [PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する ](#postgresql-dbや-mongodb-keycloakとの接続の認証エラーが発生する-)
   - [1. Podに渡されているSecretリソースを特定](#1-podに渡されているsecretリソースを特定)
@@ -124,6 +126,23 @@ kubectl logs <pod-name> -c <コンテナ名>
 kubectl logs -n your-namespace mongodb-0 -c mongo
 ```
 
+### Podのlogにタイムスタンプを表示する  
+keycloakなどは以下のように`--timestamps`オプションで日付を表示する  
+```bash
+kubectl logs -n shared keycloak-0 --timestamps
+```
+
+### Podのログがエスケープシーケンスで見にくい
+keycloakのlogが以下のように`ESC[...m`といった文字列が表示され見にくい
+```log
+ESC[0mESC[33m06:08:45,145 WARN  [org.wildfly.extension.elytron] ...
+```
+
+これは色文字のエスケープシーケンスのため、以下のようにlessの`-R`オプションでエスケープシーケンスを認識させて表示すると見やすくなる  
+(上記の例は黄色文字のエスケープシーケンス)
+```bash
+kubectl logs -n shared keycloak-0 --timestamps | less -R
+```
 
 ## よくある流れ
 上記で紹介したコマンドを利用し、Podが正常起動していないときにどのように確認していくのか一例を紹介する  
