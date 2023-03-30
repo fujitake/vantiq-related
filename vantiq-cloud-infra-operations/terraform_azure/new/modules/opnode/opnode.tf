@@ -68,6 +68,8 @@ resource "azurerm_linux_virtual_machine" "opnode-1" {
   }
 
   custom_data = base64encode(templatefile("${path.module}/init-script.sh", {
+    jdk_version     = var.bastion_jdk_version
+    kubectl_version = var.bastion_kubectl_version
     user_name = var.opnode_user_name
     ssh_key   = file(var.ssh_private_key_aks_node)
 

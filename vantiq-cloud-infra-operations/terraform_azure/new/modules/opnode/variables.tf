@@ -81,3 +81,15 @@ variable "vm_backup_enabled" {
   type        = bool
   default     = false
 }
+
+variable "bastion_jdk_version" {
+  description = "install jdk version"
+  type        = string
+  default     = "11"
+}
+
+variable "bastion_kubectl_version" {
+  description = "install kubectl version"
+  type        = string
+  default     = "$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"
+}

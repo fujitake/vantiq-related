@@ -24,15 +24,14 @@ EOF
 EOF
 chmod 444 /home/${user_name}/.ssh/id_rsa
 
-# install java8
-#apt-get -y install openjdk-8-jre
+# install java
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
 apt-add-repository "deb http://repos.azul.com/azure-only/zulu/apt stable main"
 apt-get -q update
-apt-get -y install zulu-8-azure-jdk
+apt-get -y install zulu-${jdk_version}-azure-jdk
 
 # install kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.22.6/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v${kubectl_version}/bin/linux/amd64/kubectl
 chmod +555 ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
 
