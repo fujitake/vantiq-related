@@ -20,12 +20,11 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 # add user to docker group to make docker accessible without sudo
 gpasswd -a ubuntu docker
 
-# install java8
-#apt-get -y install openjdk-8-jre
+# install java
 apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 0xB1998361219BD9C9
 apt-add-repository "deb http://repos.azul.com/azure-only/zulu/apt stable main"
 apt-get -q update
-apt-get -y install zulu-8-azure-jdk
+apt-get -y install zulu-11-azure-jdk
 
 # install kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.21.5/bin/linux/amd64/kubectl

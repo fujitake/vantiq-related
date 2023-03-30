@@ -23,14 +23,15 @@ locals {
   common_config = {
     cluster_name                   = "<INPUT-YOUR-CLUSTER-NAME>"
     cluster_version                = "1.24"
-    bastion_kubectl_version        = "1.24.7"
+    bastion_kubectl_version        = "1.24.10"
     env_name                       = "template"
     region                         = "<INPUT-YOUR-REGION>"
     worker_access_private_key      = "<INPUT-YOUR-SSH-PRIVATE-KEY-FILE-NAME>"
     worker_access_public_key_name  = "<INPUT-YOUR-SSH-PUBLIC-KEY-FILE-NAME>"
     bastion_access_public_key_name = "<INPUT-YOUR-SSH-PUBLIC-KEY-FILE-NAME>"
     bastion_enabled                = true
-    bastion_instance_type          = "t2.micro"
+    bastion_instance_type          = "t2.small"
+    bastion_jdk_version            = "11"
   }
 }
 

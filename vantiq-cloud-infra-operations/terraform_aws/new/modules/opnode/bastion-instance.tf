@@ -17,6 +17,7 @@ data "aws_ami" "ubuntu" {
 data "template_file" "bastion" {
   template = file("${path.module}/bastion-userdata.sh.tpl")
   vars = {
+    jdk_version               = var.bastion_jdk_version
     bastion_kubectl_version   = var.bastion_kubectl_version
     worker_access_private_key = file(var.worker_access_private_key)
   }
