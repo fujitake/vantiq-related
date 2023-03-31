@@ -149,6 +149,8 @@ localsで定義している以下のconfigを設定
   - `bastion_access_public_key_name`: 事前準備事項で作成したSSHキー(公開鍵)のファイル名を指定(踏み台サーバアクセス用)
   - `bastion_enabled`: 踏み台サーバを作成するかのフラグ(true: 作成する, false: 作成しない)
   - `bastion_instance_type`: 踏み台サーバのインスタンスサイズを指定
+  - `bastion_jdk_version`: 踏み台サーバへインストールするJDKのバージョンを指定(デフォルト11)  
+    Vantiq r1.34以下をインストールする場合は"8"を指定、r1.35以降はデフォルトの"11"を指定
 
 - locals.network_config    
   - `vpc_cidr_block`: 作成するVPCのcidr  

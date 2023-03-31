@@ -11,7 +11,7 @@ output "postgres_admin_password" {
 }
 
 output "postgres_db_name" {
-  value = aws_db_instance.keycloak-postgres.name
+  value = aws_db_instance.keycloak-postgres.db_name
 }
 
 # output "postgres_admin_db_name" {

@@ -90,4 +90,7 @@ module "opnode" {
 
   # used for set up opnode
   ssh_private_key_aks_node = "../${module.constants.opnode_config.ssh_private_key_aks_node}"
+
+  bastion_kubectl_version = module.constants.common_config.opnode_kubectl_version
+  bastion_jdk_version = module.constants.common_config.opnode_jdk_version
 }

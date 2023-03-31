@@ -173,6 +173,9 @@ sshのキーファイルはconstants.tfファイルと同じディレクトリ�
   - `ssh_private_key_aks_node`: 事前準備事項で作成したSSHキー(秘密鍵)のファイル名ワーカーノードアクセス用にbastionノードへアップロード)
   - `ssh_public_key_aks_node`: 事前準備事項で作成したSSHキー(公開鍵)のファイル名を指定(ワーカーノードアクセス用)
   - `ssh_public_key_opnode`: 事前準備事項で作成したSSHキー(公開鍵)のファイル名を指定(bastionノードアクセス用)
+  - `opnode_kubectl_version`: 踏み台サーバへインストールするkubectlのバージョンを指定(x.xx.xxのようにパッチバージョンまで指定)  
+  - `opnode_jdk_version`: 踏み台サーバへインストールするJDKのバージョンを指定(デフォルト11)  
+    Vantiq r1.34以下をインストールする場合は"8"を指定、r1.35以降はデフォルトの"11"を指定
 
 - locals.network_config  
   - `vnet_address_cidr` - 作成するVNETのcidr  

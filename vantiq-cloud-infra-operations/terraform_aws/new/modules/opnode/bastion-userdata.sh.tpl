@@ -27,17 +27,14 @@ EOF
 EOF
 chmod 444 /home/ubuntu/.ssh/id_rsa
 
-# install java8
-#apt-get -y install openjdk-8-jre
+# install java
 apt-key adv \
   --keyserver hkp://keyserver.ubuntu.com:80 \
   --recv-keys 0xB1998361219BD9C9
 curl -O https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-3_all.deb
 apt-get install -y ./zulu-repo_1.0.0-3_all.deb
-# apt-add-repository "deb http://repos.azul.com/azure-only/zulu/apt stable main"
 apt-get -q update
-apt-get install -y zulu8-jdk
-# apt-get -y install zulu-8-azure-jdk
+apt-get install -y zulu${jdk_version}-jdk
 
 # install kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v${bastion_kubectl_version}/bin/linux/amd64/kubectl

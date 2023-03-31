@@ -16,6 +16,12 @@ variable "env_name" {
   default     = null
 }
 
+variable "bastion_jdk_version" {
+  description = "install jdk version"
+  type        = string
+  default     = "11"
+}
+
 variable "bastion_kubectl_version" {
   description = "install kubectl version"
   type        = string

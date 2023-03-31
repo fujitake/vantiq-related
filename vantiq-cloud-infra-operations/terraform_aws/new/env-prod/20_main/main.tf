@@ -116,6 +116,7 @@ module "opnode" {
   cluster_name = module.constants.common_config.cluster_name
   env_name     = module.constants.common_config.env_name
 
+  bastion_jdk_version     = module.constants.common_config.bastion_jdk_version
   bastion_kubectl_version = module.constants.common_config.bastion_kubectl_version
 
   bastion_vpc_id        = local.vpc_module_data.vpc_id
