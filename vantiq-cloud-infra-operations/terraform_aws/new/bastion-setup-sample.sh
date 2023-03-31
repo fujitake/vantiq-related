@@ -27,7 +27,7 @@ apt-get -q update
 apt-get -y install zulu-11-azure-jdk
 
 # install kubectl
-curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.21.5/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.24.10/bin/linux/amd64/kubectl
 chmod +555 ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
 
