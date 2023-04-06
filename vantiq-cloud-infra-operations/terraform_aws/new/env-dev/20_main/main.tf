@@ -56,6 +56,12 @@ locals {
     eks_oidc_provider_arn             = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:oidc-provider/${module.eks.oidc_provider}"
     eks_oidc_issuer                   = module.eks.oidc_issuer
   }
+  managed_node_group_config = {
+    for node_group, conf in module.constants.eks_config.managed_node_group_config :
+    node_group => contains(module.constants.eks_config.single_az_node_list, node_group) ?
+    merge(conf, { subnet_ids = [local.vpc_module_data.private_subnet_ids[0]] }) :
+    merge(conf, { subnet_ids = local.vpc_module_data.private_subnet_ids })
+  }
 }
 
 module "constants" {
@@ -76,7 +82,7 @@ module "eks" {
   sg_ids_allowed_ssh_to_worker = local.sg_ids_allowed_ssh_to_worker
 
   cluster_version           = module.constants.common_config.cluster_version
-  managed_node_group_config = module.constants.eks_config.managed_node_group_config
+  managed_node_group_config = local.managed_node_group_config
 }
 
 module "eks-addon-ebs-csi-driver" {
