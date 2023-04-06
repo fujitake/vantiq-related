@@ -97,10 +97,10 @@ locals {
   eks_config = {
     managed_node_group_config = {
       "VANTIQ" = {
-        ami_type       = "AL2_x86_64"
-        kubernetes_version  = "1.24"
-        instance_types = ["c5.xlarge"] # c5.xlarge x 3
-        disk_size      = 40
+        ami_type           = "AL2_x86_64"
+        kubernetes_version = "1.24"
+        instance_types     = ["c5.xlarge"] # c5.xlarge x 3
+        disk_size          = 40
         scaling_config = {
           desired_size = 3
           max_size     = 6
@@ -109,10 +109,10 @@ locals {
         node_workload_label = "compute"
       },
       "MongoDB" = {
-        ami_type       = "AL2_x86_64"
-        kubernetes_version  = "1.24"
-        instance_types = ["r5.xlarge"] # r5.xlarge x 3
-        disk_size      = 40
+        ami_type           = "AL2_x86_64"
+        kubernetes_version = "1.24"
+        instance_types     = ["r5.xlarge"] # r5.xlarge x 3
+        disk_size          = 40
         scaling_config = {
           desired_size = 3
           max_size     = 6
@@ -121,10 +121,10 @@ locals {
         node_workload_label = "database"
       },
       "keycloak" = {
-        ami_type       = "AL2_x86_64"
-        kubernetes_version  = "1.24"
-        instance_types = ["t3.medium"] # t3.medium x 3
-        disk_size      = 40
+        ami_type           = "AL2_x86_64"
+        kubernetes_version = "1.24"
+        instance_types     = ["t3.medium"] # t3.medium x 3
+        disk_size          = 40
         scaling_config = {
           desired_size = 3
           max_size     = 6
@@ -133,10 +133,10 @@ locals {
         node_workload_label = "shared"
       },
       "grafana" = {
-        ami_type       = "AL2_x86_64"
-        kubernetes_version  = "1.24"
-        instance_types = ["r5.xlarge"] # r5.xlarge x 1
-        disk_size      = 40
+        ami_type           = "AL2_x86_64"
+        kubernetes_version = "1.24"
+        instance_types     = ["r5.xlarge"] # r5.xlarge x 1
+        disk_size          = 40
         scaling_config = {
           desired_size = 1
           max_size     = 6
@@ -144,11 +144,11 @@ locals {
         }
         node_workload_label = "influxdb"
       },
-      "mertics" = {
-        ami_type       = "AL2_x86_64"
-        kubernetes_version  = "1.24"
-        instance_types = ["m5.xlarge"] # m5.xlarge x 1
-        disk_size      = 40
+      "metrics" = {
+        ami_type           = "AL2_x86_64"
+        kubernetes_version = "1.24"
+        instance_types     = ["m5.xlarge"] # m5.xlarge x 1
+        disk_size          = 40
         scaling_config = {
           desired_size = 1
           max_size     = 6
@@ -157,6 +157,7 @@ locals {
         node_workload_label = "compute"
       }
     }
+    single_az_node_list          = ["grafana"]
     sg_ids_allowed_ssh_to_worker = []
   }
   eks_addon_config = {
