@@ -1,0 +1,41 @@
+[ {
+  "Location" : {
+    "coordinates" : [ 139.5811, 35.5445 ],
+    "type" : "Point"
+  },
+  "PumpID" : 1,
+  "RPMSensorID" : "rpmSensor1",
+  "TempSensorID" : "tempSensor1"
+}, {
+  "Location" : {
+    "coordinates" : [ 139.5819, 35.5448 ],
+    "type" : "Point"
+  },
+  "PumpID" : 2,
+  "RPMSensorID" : "rpmSensor2",
+  "TempSensorID" : "tempSensor2"
+}, {
+  "Location" : {
+    "coordinates" : [ 139.581, 35.5442 ],
+    "type" : "Point"
+  },
+  "PumpID" : 3,
+  "RPMSensorID" : "rpmSensor3",
+  "TempSensorID" : "tempSensor3"
+}, {
+  "Location" : {
+    "coordinates" : [ 139.5813, 35.5447 ],
+    "type" : "Point"
+  },
+  "PumpID" : 4,
+  "RPMSensorID" : "rpmSensor4",
+  "TempSensorID" : "tempSensor4"
+}, {
+  "Location" : {
+    "coordinates" : [ 139.5812, 35.5446 ],
+    "type" : "Point"
+  },
+  "PumpID" : 5,
+  "RPMSensorID" : "rpmSensor5",
+  "TempSensorID" : "tempSensor5"
+} ]

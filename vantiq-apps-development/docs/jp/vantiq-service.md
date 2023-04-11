@@ -41,6 +41,13 @@
 - Serviceスコープを持ち、Service 内の Procedure やイベントハンドラのタスクから参照可能である
 - Service外部からアクセスする場合、アクセサ（getter, setterなどの Procedure ）を実装する必要がある
 
+#### Internal Event Handler
+Source, Type, Topicから発生するイベントを受ける。
+- イベントのソースが変わるだけで、それ以外の機能は INBOUND/OUTBOUNDと同様。
+- V1.35 に導入された。V1.34以前は INBOUND Event Handler と Internal Event Handlerの区別はない。 
+
+<img src="../../imgs/vantiq-service/internal-event-handler.png" width=50%>
+
 ### カプセル化されたリソース
 
 Serviceにカプセル化されたリソースは、機能的に以下の要素に相当します。
@@ -132,7 +139,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 ### 他のモジュール、外部サービスとの統合
 - Serviceの外部から、Service + インタフェース名でイベントを受けたり渡したりできる。
 
-![service-integration.png](../../imgs/vantiq-service/service-integration.png)
+![service-integration-135.png](../../imgs/vantiq-service/service-integration-135.png)
 
 ### Concurrent Service
 - Stateへのアクセスはスレッドまたがることが不可避である。スレッドセーフに行うため、**Concurrent Service** が提供されている。
@@ -144,6 +151,11 @@ State  |  一時保存用途としてのType (クエリは使用不可)
     - _computeIfAbsent(key, remappingFunction)_ - Mapにキーが存在しない場合にエントリーを作成する
     - _computeIfPresent(key, remappingFunction)_ - キーに対応するvalueを更新する
 - [Concurrent Service リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html#concurrent)
+
+## Vantiq Service の派生機能
+- **[Concurrent.Cache](https://dev.vantiq.co.jp/docs/system/rules/index.html#concurrent)** (v1.35~) – ConcurrentMapの派生で、メモリで保持するオブジェクト数上限、期間、超過時の通知イベントを設定できる。 
+- **Cache Service** (v1.35~) -  Type への読み書きを仲介することで、永続化の負荷を吸収する Service。 読み取り専用 (Lookup) or 読み書き両用 (Update)を設定可能。
+- **[Storage Manager](https://dev.vantiq.co.jp/docs/system/storagemanagers/index.html)** (v1.35~) – 外部ストレージサービスへのCRUDオペレーションを VAIL SQLで行うラッパーを実装する Service. 
 
 
 ## Vantiq Service ベストプラクティス
