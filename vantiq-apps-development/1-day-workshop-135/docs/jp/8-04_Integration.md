@@ -15,7 +15,7 @@ Vantiqは以下の方法で外部システムとインテグレーションす�
 ## 外部システムからVantiqへREST APIで接続する
 
 Vantiqは、リソースへのRESTベースのHTTPSアクセスをサポートしています。
-- リソースのURI構造: `/api/v<version>/resources/<リソース名>[/<リソース識別子>]`
+- リソースのURI構造: `/api/<version>/resources/<リソース名>[/<リソース識別子>]`
   - APIの現在のバージョンは1です(すなわち、/api/v1/...)。
   - <リソース名>には、リソースの種類（topics, type, procedure etc.) もしくはユーザー定義のTypeの名前を指定することができます。
   - ユーザー定義のリソースの前には/customが付きます。 例：`/api/v1/resources/custom/Customer`
@@ -36,11 +36,11 @@ Vantiqは、リソースへのRESTベースのHTTPSアクセスをサポート�
 
 ## Vantiqから外部サービスへREST APIで接続 (Remote Source)
 
-Restベースの外部サービスにアクセスできるようにする
+RESTベースの外部サービスにアクセスできるようにする
 - Googleマップ、AI＆MLサービス、データベース、SAP、Saleforce etc…
 - REMOTE SourceにURLとHTTPパラメータを定義しておける。
   - 例) – Server URI = https://maps.googleapis.com/maps/api/geocode/outputFormat , Query Parameters = { ”address” : “XXXXXXX”} 
 - VAIL(RuleやProcedure)から呼び出します。
   - `SELECT` (SQLのような構文) - データを取得、もしくはリクエストに対するレスポンスで受け取る
   - `PUBLISH` - レスポンスなしでデータを送信する
-- Rest サービスを定期的にポーリングするように構成することもできる
+- REST サービスを定期的にポーリングするように構成することもできる
