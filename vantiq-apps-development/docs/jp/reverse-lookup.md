@@ -10,6 +10,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
   - [複数の Topic をまとめてサブスクライブしたい](#複数のトピックをまとめてサブスクライブしたい)
   - [Sourceを変数に置き換えたい](#Sourceを変数に置き換えたい)
   - [Remote SourceにOAuth認証を使いたい](#remote-sourceにoauth認証を使いたい)
+  - [Podの再起動時もMQTT SourceのQoSを保証したい](#podの再起動時もmqtt-sourceのqosを保証したい)
 - [アプリケーション実装関連](#アプリケーション実装関連)
   - [前後のイベント情報を蓄積して処理したい](#前後のイベント情報を蓄積して処理したい)
   - [デバッグしたい](#デバッグしたい)
@@ -144,6 +145,22 @@ return response
 
 ### Remote SourceにOAuth認証を使いたい<a id="remote-sourceにoauth認証を使いたい"></a>
 [Remote SourceでOAuth2.0認可フローによるアクセストークン再発行を受けAPIリクエストするための設定](./remote_source_oauth.md)
+
+### Podの再起動時もMQTT SourceのQoSを保証したい<a id="Podの再起動時もmqtt-sourceのQoSを保証したい"></a>
+MQTT Source で `QoS: At least once` を設定していても、Vantiq Podの過負荷による再起動が発生した場合などにEventがDropされる可能性があります。この様な場合にも信頼性の高いメッセージングを有効にするには、設定パラメータ `clientId` と `cleanSession` を指定する必要があります。
+
+[MQTT Source Integration ： QoS](https://dev.vantiq.co.jp/docs/system/sources/mqtt/index.html#qos)
+
+`clientId` には固定のユニークな値を設定し、`cleanSession` は false に設定する必要があります。`clientId` 値により、ブローカーはクライアントセッションを識別できるため、ソースがオフラインの間にブローカーが保持したメッセージはすべて配信することができます。
+
+```json:MQTT Source Configuration
+{
+    ...,
+    "cleanSession": false,
+    "clientId": "uniqueClientId",
+    ...
+}
+```
 
 ## アプリケーション実装関連<a id="アプリケーション実装関連"></a>
 
