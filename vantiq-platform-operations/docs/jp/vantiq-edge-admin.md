@@ -127,3 +127,57 @@ services:
 ```
 3. `componse.yaml`が配置されているディレクトリに移動し、`docker-compose down` を実行する。
 4. 同ディレクトリで `docker-compse up -d` を実行する。バージョン更新して起動するまで数分かかります。
+
+### mongodbのバックアップとリストア
+
+#### mongodb dump
+Vantit Edgeプロジェクトディレクトリ(Vantiq Edgeを管理するdocker-composeのルートディレクトリ)へ移動する。（docker-compose.ymlがあるディレクトリをルートとする）
+```sh
+$ cd /home/myhome/vantiq-edge
+```
+```sh
+. (<- ここがルート)
+|-- docker-compose.yml
+|-- config
+    |-- license.key 
+    |-- public.pem
+```
+Vantiq Edgeを停止する
+```sh
+$ docker-compose rm -fs vantiq_edge
+```
+mongodumpを実行する。完了すると、コンテナ上の/tmp/ars02以下にダンプファイルが出力されます。
+```sh
+$ docker-compose exec vantiq_edge_mongo mongodump -u ars -p ars -d ars02 --gzip -o /tmp/
+```
+コンテナ上のダンプファイルをホストにコピーする
+```sh
+$ docker-compose cp vantiq_edge_mongo:/tmp/ars02 ./
+```
+
+コンテナ上のダンプファイルを削除する
+```sh
+$ docker-compose exec vantiq_edge_mongo rm -fr /tmp/ars02
+```
+
+#### mongo restore
+
+Vantit Edgeプロジェクトディレクトリ(Vantiq Edgeを管理するdocker-composeのルートディレクトリ)へ移動する。（docker-compose.ymlがあるディレクトリをルートとする）
+```sh
+$ cd /home/myhome/vantiq-edge
+```
+
+ダンプ(ars02)をコンテナにコピーする。
+```sh
+$ docker-compose cp ars02 vantiq_edge_mongo:/tmp/
+```
+
+リストアを実行する
+```sh
+$ docker-compose exec vantiq_edge_mongo mongorestore -u ars -p ars -d ars02 --gzip --drop /tmp/ars02
+```
+
+コンテナ上のダンプファイルを削除する
+```sh
+$ docker-compose exec vantiq_edge_mongo rm -fr /tmp/ars02
+```

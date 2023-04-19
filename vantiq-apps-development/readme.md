@@ -2,7 +2,8 @@
 Vantiqアプリケーションの開発や運用に関するガイドやマテリアルです。
 - [Vantiqアカウント作成（開発者向け）](./1-day-workshop/docs/jp/0-01_Prep_for_Account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./1-day-workshop/docs/jp/0-02_Prep_for_Dev_account.md)
-- [Vantiq 1-day workshop](./1-day-workshop/docs/jp/readme.md)
+- [Vantiq 1-day workshop (v1.34)](./1-day-workshop/docs/jp/readme.md)
+- [Vantiq 1-day workshop (v1.35)](./1-day-workshop-135/docs/jp/readme.md)
 - [Vantiq workshop (荷物仕分けアプリケーション)](./workshop-boxsorter/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./docs/jp/vail_basics.md)
