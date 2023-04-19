@@ -61,6 +61,11 @@
   - [v1.23(v1.22 -\> v1.23へ更新する場合) ](#v123v122---v123へ更新する場合-)
     - [a. AWS Management Consoleから行う場合](#a-aws-management-consoleから行う場合)
     - [b. Terraformで行う場合](#b-terraformで行う場合)
+- [IP制限を行っている外部システムにVantiqからの通信をIP指定で許可したい](#ip-blocking-from-vantiq)
+  - [前提](#ip-blocking-from-vantiq_pre)
+  - [EKSの場合](#ip-blocking-from-vantiq_on-eks)
+  - [AKSの場合](#ip-blocking-from-vantiq_on-aks)
+- [データの暗号化がどうなっているか知りたい](#data-encryption-matrix)
 - [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  ](#特殊環境-eks-aks以外の環境でのトラブルシューティング事例--)
   - [Vantiq Podが起動しない ](#vantiq-podが起動しない-)
     - [keycloak-initでFailedとなる ](#keycloak-initでfailedとなる-)
@@ -1168,6 +1173,50 @@ pod/ebs-csi-node-lwkj4                    3/3     Running   0          23h
 本リポジトリのサンプルTerraformコードを参考にしてください。  
 [ebs_csi_driver Module](../../../vantiq-cloud-infra-operations/terraform_aws/new/modules/eks_addon/ebs_csi_driver/csi_driver.tf)がEBS CSI Driverのモジュールです。  
 [20_main > main.tf](../../../vantiq-cloud-infra-operations/terraform_aws/new/env-prod/20_main/main.tf)で上記モジュールを呼び出しています。  
+
+
+# IP制限を行っている外部システムにVantiqからの通信をIP指定で許可したい<a id="ip-blocking-from-vantiq"></a>
+## 前提<a id="ip-blocking-from-vantiq_pre"></a>
+- 本リポジトリで公開しているサンプルterraformの構成
+- EKS/AKSどちらもv1.24
+
+## EKSの場合<a id="ip-blocking-from-vantiq_on-eks"></a>
+NAT Gateway経由となるため、NAT Gatewayに関連付けられたElastic IPを指定する。  
+各AZごとにNAT Gatewayが存在するため、デフォルト構成の場合3AZ分、3つのElastic IPを外部システムの許可リストに追加する。  
+コンソール上などでのリソース名は`xxx-eip-az-0/1/2`となっている。  
+
+## AKSの場合<a id="ip-blocking-from-vantiq_on-aks"></a>
+ロードバランサー経由となっているため、ロードバランサーに関連付けられたパブリックIPアドレスを指定する。  
+`rg-xxx-aks-node`リソースグループ内の「xxx-xxx-xxx-xxx」というようにIDの羅列となっているパブリックIPアドレスを外部システムの許可リストに追加する。  
+「kubernetes-」と頭についているパブリックIPアドレスの方ではないため注意。  
+
+
+# データの暗号化がどうなっているか知りたい<a id="data-encryption-matrix"></a>
+
+本リポジトリで公開しているサンプル構成の場合、暗号化は以下のようになっています。
+
+- AKSの場合
+
+| 対象 | アプリケーション側 | サーバ側 | ストレージ側 |
+|:-:|:-:|:-:|:-:|
+| MongoDB |  一部暗号化有(Secrets)<br>※typeもプロパティ単位で暗号化可能 | 暗号化無 | 暗号化有(Azure Managed) |
+| Keycloak(PostgreSQL) | 暗号化無 | 暗号化有(Azure Managed) | 暗号化有(Azure Managed) |
+
+- EKSの場合
+
+| 対象 | アプリケーション側 | サーバ側 | ストレージ側 |
+|:-:|:-:|:-:|:-:|
+| MongoDB |  一部暗号化有(Secrets)<br>※typeもプロパティ単位で暗号化可能 | 暗号化無 | 暗号化無 |
+| Keycloak(PostgreSQL) | 暗号化無 | 暗号化無 | 暗号化無 |
+
+ストレージ側(EBS)とKeycloakのサーバ側(RDS)はオプションを有効にすることで暗号化可能です。
+
+- 参考  
+  - https://learn.microsoft.com/ja-jp/azure/virtual-machines/disk-encryption  
+  - https://learn.microsoft.com/ja-jp/azure/postgresql/single-server/concepts-security  
+  - https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/EBSEncryption.html
+  - https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Overview.Encryption.html  
+
 
 
 
