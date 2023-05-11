@@ -75,6 +75,7 @@
   - [telegraf-ds / telegraf-promでメトリクスを収集できない ](#telegraf-ds--telegraf-promでメトリクスを収集できない-)
   - [Vantiqへの通信がタイムアウト(502/504エラー)し、keycloakのadminコンソールは正常に表示される ](#vantiqへの通信がタイムアウト502504エラーしkeycloakのadminコンソールは正常に表示される-)
 
+
 # Kubernetesリソースの確認<a id="kubectl_resource_check"></a>
 構築時や保守時の基本的な確認としてkubectl コマンドを利用したリソースの確認がある  
 主に以下のような確認ができる    
@@ -1111,6 +1112,13 @@ Vantiq のデプロイからやり直す必要がある
 System Admin でログイン >> メニュー右上のユーザーアイコン >> About と進むと、ライセンス有効期限が表示されます。
 
 <img src="../../imgs/vantiq-install-maintenance/vantiq-cloud-license-expiration.png" width=50%>
+
+# ライセンス更新を適用したが、更新されない <a id="license_not_updating"></a>
+`generateSecrets`, `deployVantiq` を適用したものの、ライセンスが更新されない。（同様の現象がSSL証明書更新でも起こる場合がある）。以下を確認する。
+1. 何らかの原因で、`generateSecrets`が失敗している可能性がある。
+    `targetCluster/deploy/secrets` 配下にある当該ファイル (`vantiq-license.yaml`, `vantiq-ssl-dert.yaml` など）のタイムスタンプを確認し、更新されているか確認する。更新されていない場合、当該ファイルを削除し、`generateSecrets` を再実行する。
+
+1. `kubectl get secrets -n <namespace> vantiq-license -o yaml` を実行し、Secretリソースがデプロイされているか（デプロイした時間）、また内容が反映されているか確認する。 Secretに反映されているならば、`vantiq-server`を再起動する。（Secretリソースを更新しても自動的に反映しない）
 
 # EKS アップグレード時の必要作業 <a id="required-operation-before-eks-upgrade"></a>
 EKSのバージョン更新に伴い対応が必要な作業について説明します。  

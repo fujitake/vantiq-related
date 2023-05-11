@@ -78,6 +78,7 @@ Vantiqアプリケーション開発チーム向けのアプリ開発や運用�
 - [Vantiqアプリ開発 逆引きリファレンス](./vantiq-apps-development/docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [VANTIQ CLI クイックリファレンス](./vantiq-apps-development/docs/jp/cli-quick-reference.md)
+- [バージョンアップに伴う互換性について](./vantiq-apps-development/docs/jp/incompatibilities.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
 Vantiqアプリケーション開発チーム向けのVantiqと外部Webサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。

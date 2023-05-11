@@ -13,6 +13,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [再利用可能なアプリケーション デザインパターン](./docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
+- [バージョンアップに伴う互換性について](./docs/jp/incompatibilities.md)
 
 
 # Vantiq Application Development related

@@ -655,3 +655,25 @@ PUBLISH { html: body } TO SOURCE AppErrorNotifyEmailServer USING { from: fromAdd
 
 サンプルのProcedureでは、`AppErrorNotifyEmailServer` というSourceを作成し、メール送信を行っています。
 必要に応じSourceを変更することで、SlackやMicrosoft Teamsへの通知なども実現できます。
+
+### リソースのステータスをまとめて制御したい<a id="activate_resources"></a>
+
+以下の2つの方法で、まとめて制御することができます。
+
+1.  [Active Resource Control Center](https://dev.vantiq.co.jp/docs/system/namespaces/index.html#active-resource-control-center) で対象を確認可能（v1.35〜）
+2.  REST APIでActive状態を切り替える
+
+```sh
+curl --location --request POST 'https://dev.vantiq.co.jp/api/v1/resources/sources' \
+--header 'Authorization: Bearer xxx' \
+--header 'Content-Type: application/json' \
+--data-raw '{  "name": "JsonPlaceHolder",  "active": true}'
+111
+```
+
+VAILからActive状態を切り替え
+```js
+var operation = {    "op": "update",    "resourceName": "collaborationtypes",    "object": {         "name": "sampleApp",        "active": true     }
+}
+var result = ResourceAPI.executeOp(operation)
+```
