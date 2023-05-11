@@ -19,12 +19,12 @@ Vantiq マイナーバージョンアップ（ex. `1.34.x` -> `1.35.x`)に伴い
 まず、移行する対象のAppを確認します。  リソースタイプ "App "のスタンドアロンAppと、それに対応するペアリングサービスを確認します。 
 なお、スタンドアロンAppが属するパッケージによって、Service Package名が変わることに注意してください。
 
-| アプリパッケージ |  サービスパッケージ |
+| App のパッケージ |  Service のパッケージ |
 |---|---|
-| (デフォルトのパッケージ)  |  アプリケーション・サービス |
+| (デフォルトのパッケージ)  |  apps.services |
 | jp.co.vantiq.apps | jp.co.vantiq.apps |
 
-この説明では、デフォルトパッケージ名のスタンドアロンApp「PumpDetection」を例としています。
+この説明では、デフォルトパッケージのスタンドアロンApp「PumpDetection」を例としていますが、実際のパッケージ名にあわせ適宜読み替えてください。
 
 ![image1](../../imgs/incompatibilities/image1.png)
 
@@ -44,7 +44,7 @@ Vantiq マイナーバージョンアップ（ex. `1.34.x` -> `1.35.x`)に伴い
 ![image4](../../imgs/incompatibilities/image4.png)
 
 
-#### Topicを設定したService Inboundを1.35でサポートされたService Inboundに移行する。
+### Topicを設定したService Inboundを1.35でサポートされたService Inboundに移行する。
 
 #### 背景
 >## Customer Impacts
@@ -64,7 +64,7 @@ Vantiq マイナーバージョンアップ（ex. `1.34.x` -> `1.35.x`)に伴い
 
 #### 移行の手順
 
-1.35で導入された変更により、TopickからのEvent Streamは、"Internal Event Handler "で受けるようになりました。
+1.35で導入された変更により、Topic からのEvent Streamは、"Internal Event Handler "で受けるようになりました。
 
 TopicからのEvent Streamを受け取るInternal Event Handlerを作成します。Implementタブの「Internal Event Handler」メニューから、「Visual Event Handler」を作成を行います。
 
