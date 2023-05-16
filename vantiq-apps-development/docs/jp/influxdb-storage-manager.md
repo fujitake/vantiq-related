@@ -6,7 +6,11 @@
 
 ## InfluxDB Storage Managerについて
 
-- Storage Managerは、使用したいデータベースに合わせて個別に実装する必要がありますが、InfluxDB Cloud用のリファレンスStorage ManagerがVantiqより提供されています。このStorage Managerを使用することで、InfluxDB Cloudを使用してデータを永続化できVantiqアプリでTypeとして使用することができます。
+- Storage Managerは、使用したいデータベースに合わせて個別に実装する必要がありますが、InfluxDB 用のリファレンスStorage ManagerがVantiqより提供されています。このStorage Managerを使用することで、InfluxDB を使用してデータを永続化できVantiqアプリでTypeとして使用することができます。
+
+**Note**
+本ドキュメントでは、InfluxDB Cloud の使用を前提とします。InfluxDB OSSによるローカル環境での使用に関しては未検証です。
+また、InfluxDB Storage Manager のDescriptionでは明記されていませんが、OrganizationやBucketを指定する必要があることからInfluxDB v2.0以降が対象となります。
 
 ## InfluxDB Storage Managerの使用
 
@@ -96,35 +100,35 @@ InfluxDB Cloud Serverlessを使用するためには、InfluxDB Cloudのアカ�
 1. Vantiq CatalogからInfluxDB Storage ManagerのAssemblyをインストールします。
    1. VantiqのUIで、[追加] > [Assemblies] を選択します。
    1. . `InfluxStorageManager` をクリックし、Assemblyをインストールします。
-   
-   ![AddAssembly](../../imgs/influxdb-storage-manager/addassembly.png)
-   
-   1. Config を編集します。
-   
-   ![Config](../../imgs/influxdb-storage-manager/installconfig.png)
-   
-   必要に応じてInfluxURLのOverride値を設定してください。requestDefaults は以下の内容を設定してください。
 
-      ```json
-        {
-          "headers": {
-            "Authorization": "Token <Your Token>"
-            },
-          "query": {
-            "org": "<Your Organization>"
-            }
-        }
-      ```
+      ![AddAssembly](../../imgs/influxdb-storage-manager/addassembly.png)
+
+   1. Config を編集します。
+
+      ![Config](../../imgs/influxdb-storage-manager/installconfig.png)
+
+      必要に応じてInfluxURLのOverride値を設定してください。requestDefaults は以下の内容を設定してください。
+
+         ```json
+         {
+            "headers": {
+               "Authorization": "Token <Your Token>"
+               },
+            "query": {
+               "org": "<Your Organization>"
+               }
+         }
+         ```
 
    1. Project に InfluxStorageManager が追加されました。
-   
-   ![InfluxStorageManager](../../imgs/influxdb-storage-manager/influxstoragemanager.png)
+
+      ![InfluxStorageManager](../../imgs/influxdb-storage-manager/influxstoragemanager.png)
 
 ### Typeの作成
 
 1. Vantiq UIから新規Typeを作成します。
 
-![CreateType](../../imgs/influxdb-storage-manager/createtype.png)
+   ![CreateType](../../imgs/influxdb-storage-manager/createtype.png)
 
 1. Type名には、InfluxDB の `measurement` を指定します。ここでは `home` となります。
 1. Role は永続型の`standard`、Storage Managerは`InfluxStorageManager`が選択可能となっているので選択します。
@@ -140,14 +144,34 @@ InfluxDB Cloud Serverlessを使用するためには、InfluxDB Cloudのアカ�
 
 1. TypeのProperties を追加します。`timestamp`のみがデフォルトで設定されています。 InfluxDB のTag、Field に対応するProperty を追加します。
 
-![AddProperty](../../imgs/influxdb-storage-manager/properties.png)
+   ![AddProperty](../../imgs/influxdb-storage-manager/properties.png)
 
 1. [すべてのレコードを表示]でデータを確認してみます。
 
-![AllRecords](../../imgs/influxdb-storage-manager/showdata.png)
+   ![AllRecords](../../imgs/influxdb-storage-manager/showdata.png)
 
 **Note**
 InfluxDBは、データを`measurement`、`tag`、`field`の組み合わせからなる`Series` として保存します。co、temp、humの個々のフィールドは別々のSeries（テーブル）に配置されます。Storage Managerは個々のSeriesの内容を結合しないため、Selectの結果は一つのタイムスタンプ・Tag(room) の組み合わせに対しco、temp、humの3種類の結果が返されます。
+以下はInfluxDBbに直接Flux クエリを発行した結果です。
+
+```sql
+from(bucket: "get-started")
+    |> range(start: -30d)
+    |> filter(fn: (r) => r._measurement == "home" and r.room == "bedroom")
+```
+![FluxQuery1](../../imgs/influxdb-storage-manager/fluxquery1.png)
+
+co、temp、humがそれぞれ別のSeries（テーブル）に保存されていて、3件のレコードがあることが確認できます。
+各フィールドをまとめて1つのレコードのように見せるには、Fluxの[pivot関数](https://docs.influxdata.com/flux/v0.x/stdlib/universe/pivot/#Copyright)を使用します。
+
+```sql
+from(bucket: "get-started")
+    |> range(start: -30d)
+    |> filter(fn: (r) => r._measurement == "home" and r.room == "bedroom")
+    |> pivot(rowKey: ["_measurement", "room","_time"], columnKey: ["_field"], valueColumn: "_value")
+```
+
+![FluxQuery2](../../imgs/influxdb-storage-manager/fluxquery2.png)
 
 ### Vantiqアプリ内での使用
 
@@ -155,19 +179,19 @@ InfluxDBは、データを`measurement`、`tag`、`field`の組み合わせか�
 
 1. SaveToType アクティビティを使用したAppを作成します。
 
-![SaveToType](../../imgs/influxdb-storage-manager/savetotypeapp.png)
+   ![SaveToType](../../imgs/influxdb-storage-manager/savetotypeapp.png)
 
 1. SaveToType アクティビティの設定を行います。
 
-![SaveToTypeConfig](../../imgs/influxdb-storage-manager/savetotypeactivity.png)
+   ![SaveToTypeConfig](../../imgs/influxdb-storage-manager/savetotypeactivity.png)
 
 1. Eventを発行します。
 
-![PublishEvent](../../imgs/influxdb-storage-manager/savetotypepublishevent.png)
+   ![PublishEvent](../../imgs/influxdb-storage-manager/savetotypepublishevent.png)
 
 1. InfluxDBにデータが保存されていることを確認します。
 
-![CheckData](../../imgs/influxdb-storage-manager/savetotyperesult.png)
+   ![CheckData](../../imgs/influxdb-storage-manager/savetotyperesult.png)
 
 **Warning**
 InfluxDBStorageManager のTypeでは、`upsert`オプションは有効にできません。
@@ -177,14 +201,20 @@ InfluxDBStorageManager のTypeでは、`upsert`オプションは有効にでき
 
 1. Enrich アクティビティを使用したAppを作成します。
 
-![Enrich](../../imgs/influxdb-storage-manager/enrichapp.png)
+   ![Enrich](../../imgs/influxdb-storage-manager/enrichapp.png)
 
 1. Enrich アクティビティの設定を行います。
 
-![EnrichConfig](../../imgs/influxdb-storage-manager/enrichactivity.png)
+   ![EnrichConfig](../../imgs/influxdb-storage-manager/enrichactivity.png)
 
-![EnrichConfig2](../../imgs/influxdb-storage-manager/enrichactivity2.png)
+   ![EnrichConfig2](../../imgs/influxdb-storage-manager/enrichactivity2.png)
 
 Inbound Event のキーでInfluxDBのレコードが一意に取得できればよいのですが、前述の通りco、temp、humの3つのSeriesがあるためEnrich実行時のクエリでデータが3件取得され、Enrichはエラーとなります。
 `The generated rule: Enrich failed because: Encountered exception during execution: Sequence contains more than one element!`
-データ構造によっては使用可能な場合もあります。
+InfluxDB TypeのレコードをEnrichしたい場合、
+
+- Enrichが可能なデータ構造にしておく(複数のFieldを持たない)
+- Enrichアクティビティを使用せずVAILでpivot関数を使用したクエリを発行する
+- Enrichアクティビティを使用せずVAILでSELECTし取得した3件のデータを結合する
+
+が考えられます。
