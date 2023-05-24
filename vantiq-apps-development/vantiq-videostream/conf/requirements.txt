@@ -1,7 +1,3 @@
-gevent==21.1.2
 requests==2.25.1
-websocket==0.2.1
-websocket-client==1.0.1
 opencv-python
-fastapi
 numpy
