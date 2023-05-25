@@ -14,6 +14,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiqアプリ開発 逆引きリファレンス](./docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [バージョンアップに伴う互換性について](./docs/jp/incompatibilities.md)
+- [ネットワークカメラ映像解析ハンズオン](./vantiq-videostream/docs/jp/hands-on-lab.md)
 
 
 # Vantiq Application Development related
