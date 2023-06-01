@@ -45,9 +45,15 @@
   - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
     - [リカバリー: sqlite3からmysqlへのデータ移行を行う](#リカバリー-sqlite3からmysqlへのデータ移行を行う)
     - [リカバリー手順について補足](#リカバリー手順について補足)
-- [Keycloak pod が起動しない](#keycloak-pod-が起動しない)
-  - [Azure Database for PostgreSQL が起動せずエラーになる場合](#azure-database-for-postgresql-が起動せずエラーになる場合)
-  - [その他](#その他-1)
+- [Keycloak関連](#Keycloak関連)
+  - [keycloakとPostgreSQL間のコネクションTips](#keycloakとPostgreSQL間のコネクションTips)
+    - [keycloakからPostgreSQLへの接続が継続して切れた場合の挙動](#keycloakからPostgreSQLへの接続が継続して切れた場合の挙動)
+    - [keycloakのPostgreSQLへの接続設定](#keycloakのPostgreSQLへの接続設定)
+    - [psqlを使った接続プールの確認](#psqlを使った接続プールの確認)
+    - [参考)Azure PostgreSQL 単一サーバv11のkeepalive設定値](#参考azure-postgresql-単一サーバv11のkeepalive設定値)
+  - [Keycloak pod が起動しない](#keycloak-pod-が起動しない)
+    - [Azure Database for PostgreSQL が起動せずエラーになる場合](#azure-database-for-postgresql-が起動せずエラーになる場合)
+    - [その他](#その他-1))
 - [Podが再起動を繰り返し、起動できない](#podが再起動を繰り返し起動できない)
   - [kubernetesワーカーノード間で通信ができているか](#kubernetesワーカーノード間で通信ができているか)
   - [Readiness Probeのタイムアウトまでの時間を長くする](#readiness-probeのタイムアウトまでの時間を長くする)
@@ -950,7 +956,92 @@ SELECT CONCAT('DROP TABLE ',
 kubectl rollout restart deploy -n shared grafana
 ```
 
-# Keycloak pod が起動しない<a id="keycloak_pod_will_not_start"></a>
+# Keycloak関連<a id="related_keycloak"></a>
+
+## keycloakとPostgreSQL間のコネクションTips<a id="keycloak_postgres_connection_tips"></a>
+※system version 3.10.12時点での設定。
+
+### keycloakからPostgreSQLへの接続が継続して切れた場合の挙動
+- keycloak PodはRunningのまま
+  - keycloak Podに設定してあるk8sのLiveness Probeは正常判定で継続
+- コネクションのValidationに失敗した場合、Validationは停止((Validationについては[keycloakのPostgreSQLへの接続設定](#keycloakのPostgreSQLへの接続設定)を参照))
+  - keycloak から PostgreSQLへ接続が必要なリクエストが発生した場合、再接続を行う
+
+### keycloakのPostgreSQLへの接続設定
+PostgreSQLへ接続は主に以下のような設定となっている。  
+- JDBC経由
+- ユーザ名/パスワードによる認証
+- コネクションプールのValidationをバックグラウンドで実行  
+  - インターバルは60秒  
+  - Validationでは"SELECT 1"クエリを実行
+- プールの最小/最大サイズは0/20(デフォルト)
+
+設定値を抜粋すると以下のようになっている。  
+```xml
+        <subsystem xmlns="urn:jboss:domain:datasources:6.0">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true" use-ccm="true">
+                    <connection-url>jdbc:postgresql://${env.DB_ADDR:postgres}/${env.DB_DATABASE:keycloak}${env.JDBC_PARAMS:}</connection-url>
+                    <driver>postgresql</driver>
+                    <pool>
+                        <flush-strategy>IdleConnections</flush-strategy>
+                    </pool>
+                    <security>
+                        <user-name>${env.DB_USER:keycloak}</user-name>
+                        <password>${env.DB_PASSWORD:password}</password>
+                    </security>
+                    <validation>
+                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+                        <background-validation>true</background-validation>
+                        <background-validation-millis>60000</background-validation-millis>
+                    </validation>
+                </datasource>
+                <drivers>
+                    <driver name="postgresql" module="org.postgresql.jdbc">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>
+        </subsystem>
+```
+
+各設定値の詳細は以下のドキュメント参照  
+- [Server Installation and Configuration Guide](https://keycloak-documentation.openstandia.jp/15.1.1/ja_JP/server_installation/index.html#_database)
+- [WildFly Full 23 Model Reference](https://docs.wildfly.org/23/wildscribe/subsystem/datasources/data-source/ExampleDS/index.html)  
+  Wildflyのバージョンはkeycloakの[リリースノート](https://www.keycloak.org/docs/latest/release_notes/index.html)を参照
+
+
+### psqlを使った接続プールの確認
+"pg_stat_acrivity"テーブルから確認可能。  
+```
+postgres=> select * from pg_stat_activity where usename='keycloak';
+```
+
+|datid|datname|pid|usesysid|usename|application_name|client_addr|client_hostname|client_port|backend_start|xact_start|query_start|state_change|wait_event_type|wait_event|state|backend_xid|backend_xmin|query|backend_type|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.10||5441|2023-06-01 06:54:37.384285+00||2023-06-01 06:59:49.693643+00|2023-06-01 06:59:49.693643+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.18||1345|2023-06-01 06:54:37.384285+00||2023-06-01 07:00:38.083761+00|2023-06-01 07:00:38.083761+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.10||21632|2023-06-01 06:54:37.384285+00||2023-06-01 06:59:49.693643+00|2023-06-01 06:59:49.693643+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.63||4224|2023-05-31 18:01:25.005794+00||2023-06-01 06:59:48.662421+00|2023-06-01 06:59:48.662421+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|psql|x.x.x.4||12930|2023-06-01 07:00:40.333734+00|2023-06-01 07:00:40.396233+00|2023-06-01 07:00:40.396233+00|2023-06-01 07:00:40.396233+00|||active||53279|select * from pg_stat_activity;|client backend|
+
+### 参考)Azure PostgreSQL 単一サーバv11のkeepalive設定値
+
+| パラメーター名 | 値 | パラメーター型 | 説明 |
+|--- | --- | --- | --- |
+| tcp_keepalives_count | 0 | Dynamic Maximum number of TCP keepalive retransmits. |
+| tcp_keepalives_idle | 0 | Dynamic Time between issuing TCP keepalives. Unit is s. |
+| tcp_keepalives_interval | 0 |Dynamic	Time between TCP keepalive retransmits.Unit is s. |
+
+各項目の詳細は[PostgreSQL: Documentation: 11: 19.3. Connections and Authentication](https://www.postgresql.org/docs/11/runtime-config-connection.html)を参照  
+値が0になっているためOSの設定を引き継ぐ。LinuxのTCP関連のカーネルパラメータのデフォルト値は以下。
+| パラメーター名 | 値 |
+|-|-|
+|tcp_keepalive_probes  | 9 |  
+|tcp_keepalive_time | 7200秒 |  
+|tcp_keepalive_intvl  | 75秒 |  
+
+## Keycloak pod が起動しない<a id="keycloak_pod_will_not_start"></a>
 
 Keycloak が短い周期でエラーとなり、起動しない。
 ```
