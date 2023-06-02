@@ -14,8 +14,8 @@
   - [リソースの一覧からステータス確認](#リソースの一覧からステータス確認)
   - [各リソースの詳細表示](#各リソースの詳細表示)
   - [Pod(コンテナ)のログを確認](#podコンテナのログを確認)
-    - [Podのlogにタイムスタンプを表示する ](#Podのlogにタイムスタンプを表示する)
-    - [Podのログがエスケープシーケンスで見にくい](#Podのログがエスケープシーケンスで見にくい)
+    - [Podのlogにタイムスタンプを表示する](#podのlogにタイムスタンプを表示する)
+    - [Podのログがエスケープシーケンスで見にくい](#podのログがエスケープシーケンスで見にくい)
   - [よくある流れ](#よくある流れ)
 - [PostgreSQL DBや MongoDB, Keycloakとの接続の認証エラーが発生する ](#postgresql-dbや-mongodb-keycloakとの接続の認証エラーが発生する-)
   - [1. Podに渡されているSecretリソースを特定](#1-podに渡されているsecretリソースを特定)
@@ -23,12 +23,12 @@
   - [補足: Podに渡されているSecretリソースを特定 - ファイルマウントバージョン](#補足-podに渡されているsecretリソースを特定---ファイルマウントバージョン)
 - [Vantiq MongoDB の回復をしたい](#vantiq-mongodb-の回復をしたい)
 - [Grafana Data Source を追加する時、エラーとなる](#grafana-data-source-を追加する時エラーとなる)
-  - [Solution](#solution)
-  - [Solution 2](#solution-2)
+      - [Solution](#solution)
+      - [Solution 2](#solution-2)
 - [Azure で Backup の設定ができない](#azure-で-backup-の設定ができない)
 - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。](#undeployとdeployを繰り返したらpvがreleaseされてしまった再利用したい)
-  - [リカバリー手順](#リカバリー手順)
-  - [リカバリーに関する留意事項](#リカバリーに関する留意事項)
+      - [リカバリー手順](#リカバリー手順)
+      - [リカバリーに関する留意事項](#リカバリーに関する留意事項)
 - [Grafana でメトリクスが表示されない](#grafana-でメトリクスが表示されない)
   - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか診断する)
   - [telegraf でエラーが出ているか診断する](#telegraf-でエラーが出ているか診断する)
@@ -36,36 +36,43 @@
     - [telegrafでServiceAcoountに関連した403エラーが発生する](#telegrafでserviceacoountに関連した403エラーが発生する)
   - [その他](#その他)
     - [Vantiq Resources](#vantiq-resources)
-      - ["Pod" Variable](#pod-variable)
-      - [CPU utilization](#cpu-utilization)
+        - ["Pod" Variable](#pod-variable)
+        - [CPU utilization](#cpu-utilization)
     - [MongoDB Monitoring Dashboard](#mongodb-monitoring-dashboard)
       - ["installation" and "Pod" Variable](#installation-and-pod-variable)
       - [CPU utilization](#cpu-utilization-1)
 - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった ](#vantiqバージョンアップしたらgrafanaのdashboardがすべて消えてしまった-)
-  - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
-    - [リカバリー: sqlite3からmysqlへのデータ移行を行う](#リカバリー-sqlite3からmysqlへのデータ移行を行う)
-    - [リカバリー手順について補足](#リカバリー手順について補足)
-- [Keycloak pod が起動しない](#keycloak-pod-が起動しない)
-  - [Azure Database for PostgreSQL が起動せずエラーになる場合](#azure-database-for-postgresql-が起動せずエラーになる場合)
-  - [その他](#その他-1)
+      - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
+      - [リカバリー: sqlite3からmysqlへのデータ移行を行う](#リカバリー-sqlite3からmysqlへのデータ移行を行う)
+      - [リカバリー手順について補足](#リカバリー手順について補足)
+- [Keycloak関連](#keycloak関連)
+  - [keycloakとPostgreSQL間のコネクションTips](#keycloakとpostgresql間のコネクションtips)
+    - [keycloakからPostgreSQLへの接続が継続して切れた場合の挙動](#keycloakからpostgresqlへの接続が継続して切れた場合の挙動)
+    - [keycloakのPostgreSQLへの接続設定](#keycloakのpostgresqlへの接続設定)
+    - [psqlを使った接続プールの確認](#psqlを使った接続プールの確認)
+    - [参考)Azure PostgreSQL 単一サーバv11のkeepalive設定値](#参考azure-postgresql-単一サーバv11のkeepalive設定値)
+  - [Keycloak pod が起動しない](#keycloak-pod-が起動しない)
+      - [Azure Database for PostgreSQL が起動せずエラーになる場合](#azure-database-for-postgresql-が起動せずエラーになる場合)
+      - [その他](#その他-1)
 - [Podが再起動を繰り返し、起動できない](#podが再起動を繰り返し起動できない)
-  - [kubernetesワーカーノード間で通信ができているか](#kubernetesワーカーノード間で通信ができているか)
-  - [Readiness Probeのタイムアウトまでの時間を長くする](#readiness-probeのタイムアウトまでの時間を長くする)
+      - [kubernetesワーカーノード間で通信ができているか](#kubernetesワーカーノード間で通信ができているか)
+      - [Readiness Probeのタイムアウトまでの時間を長くする](#readiness-probeのタイムアウトまでの時間を長くする)
 - [Vantiq IDE にログインしようとすると、エラーが出る](#vantiq-ide-にログインしようとするとエラーが出る)
-  - [SSL 証明書が有効かどうか診断する](#ssl-証明書が有効かどうか診断する)
-  - [サーバー間の時刻同期ができてきるか診断する](#サーバー間の時刻同期ができてきるか診断する)
-  - [Vantiq IDEにログインしようとするとエラーメッセージが出てループする](#vantiq-ideにログインしようとするとエラーメッセージが出てループする)
+      - [SSL 証明書が有効かどうか診断する](#ssl-証明書が有効かどうか診断する)
+      - [サーバー間の時刻同期ができてきるか診断する](#サーバー間の時刻同期ができてきるか診断する)
+    - [Vantiq IDEにログインしようとするとエラーメッセージが出てループする](#vantiq-ideにログインしようとするとエラーメッセージが出てループする)
 - [System Admin 用の key を紛失した、期限切れになった](#system-admin-用の-key-を紛失した期限切れになった)
 - [ライセンスの有効期限を確認したい ](#ライセンスの有効期限を確認したい-)
+- [ライセンス更新を適用したが、更新されない ](#ライセンス更新を適用したが更新されない-)
 - [EKS アップグレード時の必要作業 ](#eks-アップグレード時の必要作業-)
   - [v1.23(v1.22 -\> v1.23へ更新する場合) ](#v123v122---v123へ更新する場合-)
     - [a. AWS Management Consoleから行う場合](#a-aws-management-consoleから行う場合)
     - [b. Terraformで行う場合](#b-terraformで行う場合)
-- [IP制限を行っている外部システムにVantiqからの通信をIP指定で許可したい](#ip-blocking-from-vantiq)
-  - [前提](#ip-blocking-from-vantiq_pre)
-  - [EKSの場合](#ip-blocking-from-vantiq_on-eks)
-  - [AKSの場合](#ip-blocking-from-vantiq_on-aks)
-- [データの暗号化がどうなっているか知りたい](#data-encryption-matrix)
+- [IP制限を行っている外部システムにVantiqからの通信をIP指定で許可したい](#ip制限を行っている外部システムにvantiqからの通信をip指定で許可したい)
+  - [前提](#前提-1)
+  - [EKSの場合](#eksの場合)
+  - [AKSの場合](#aksの場合)
+- [データの暗号化がどうなっているか知りたい](#データの暗号化がどうなっているか知りたい)
 - [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  ](#特殊環境-eks-aks以外の環境でのトラブルシューティング事例--)
   - [Vantiq Podが起動しない ](#vantiq-podが起動しない-)
     - [keycloak-initでFailedとなる ](#keycloak-initでfailedとなる-)
@@ -950,7 +957,92 @@ SELECT CONCAT('DROP TABLE ',
 kubectl rollout restart deploy -n shared grafana
 ```
 
-# Keycloak pod が起動しない<a id="keycloak_pod_will_not_start"></a>
+# Keycloak関連<a id="related_keycloak"></a>
+
+## keycloakとPostgreSQL間のコネクションTips<a id="keycloak_postgres_connection_tips"></a>
+※system version 3.10.12時点での設定。
+
+### keycloakからPostgreSQLへの接続が継続して切れた場合の挙動
+- keycloak PodはRunningのまま
+  - keycloak Podに設定してあるk8sのLiveness Probeは正常判定で継続
+- コネクションのValidationに失敗した場合、Validationは停止((Validationについては[keycloakのPostgreSQLへの接続設定](#keycloakのPostgreSQLへの接続設定)を参照))
+  - keycloak から PostgreSQLへ接続が必要なリクエストが発生した場合、再接続を行う
+
+### keycloakのPostgreSQLへの接続設定
+PostgreSQLへ接続は主に以下のような設定となっている。  
+- JDBC経由
+- ユーザ名/パスワードによる認証
+- コネクションプールのValidationをバックグラウンドで実行  
+  - インターバルは60秒  
+  - Validationでは"SELECT 1"クエリを実行
+- プールの最小/最大サイズは0/20(デフォルト)
+
+設定値を抜粋すると以下のようになっている。  
+```xml
+        <subsystem xmlns="urn:jboss:domain:datasources:6.0">
+            <datasources>
+                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true" use-ccm="true">
+                    <connection-url>jdbc:postgresql://${env.DB_ADDR:postgres}/${env.DB_DATABASE:keycloak}${env.JDBC_PARAMS:}</connection-url>
+                    <driver>postgresql</driver>
+                    <pool>
+                        <flush-strategy>IdleConnections</flush-strategy>
+                    </pool>
+                    <security>
+                        <user-name>${env.DB_USER:keycloak}</user-name>
+                        <password>${env.DB_PASSWORD:password}</password>
+                    </security>
+                    <validation>
+                        <check-valid-connection-sql>SELECT 1</check-valid-connection-sql>
+                        <background-validation>true</background-validation>
+                        <background-validation-millis>60000</background-validation-millis>
+                    </validation>
+                </datasource>
+                <drivers>
+                    <driver name="postgresql" module="org.postgresql.jdbc">
+                        <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+                    </driver>
+                </drivers>
+            </datasources>
+        </subsystem>
+```
+
+各設定値の詳細は以下のドキュメント参照  
+- [Server Installation and Configuration Guide](https://keycloak-documentation.openstandia.jp/15.1.1/ja_JP/server_installation/index.html#_database)
+- [WildFly Full 23 Model Reference](https://docs.wildfly.org/23/wildscribe/subsystem/datasources/data-source/ExampleDS/index.html)  
+  Wildflyのバージョンはkeycloakの[リリースノート](https://www.keycloak.org/docs/latest/release_notes/index.html)を参照
+
+
+### psqlを使った接続プールの確認
+"pg_stat_acrivity"テーブルから確認可能。  
+```
+postgres=> select * from pg_stat_activity where usename='keycloak';
+```
+
+|datid|datname|pid|usesysid|usename|application_name|client_addr|client_hostname|client_port|backend_start|xact_start|query_start|state_change|wait_event_type|wait_event|state|backend_xid|backend_xmin|query|backend_type|
+|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.10||5441|2023-06-01 06:54:37.384285+00||2023-06-01 06:59:49.693643+00|2023-06-01 06:59:49.693643+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.18||1345|2023-06-01 06:54:37.384285+00||2023-06-01 07:00:38.083761+00|2023-06-01 07:00:38.083761+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.10||21632|2023-06-01 06:54:37.384285+00||2023-06-01 06:59:49.693643+00|2023-06-01 06:59:49.693643+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|PostgreSQL JDBC Driver|x.x.x.63||4224|2023-05-31 18:01:25.005794+00||2023-06-01 06:59:48.662421+00|2023-06-01 06:59:48.662421+00|Client|ClientRead|idle|||SELECT 1|client backend|
+|16498|keycloak|yyyy|xxxxx|keycloak|psql|x.x.x.4||12930|2023-06-01 07:00:40.333734+00|2023-06-01 07:00:40.396233+00|2023-06-01 07:00:40.396233+00|2023-06-01 07:00:40.396233+00|||active||53279|select * from pg_stat_activity;|client backend|
+
+### 参考)Azure PostgreSQL 単一サーバv11のkeepalive設定値
+
+| パラメーター名 | 値 | 説明 |
+|--- | --- | --- |
+| tcp_keepalives_count | 0 | Dynamic Maximum number of TCP keepalive retransmits. |
+| tcp_keepalives_idle | 0 | Dynamic Time between issuing TCP keepalives. Unit is s. |
+| tcp_keepalives_interval | 0 |Dynamic	Time between TCP keepalive retransmits.Unit is s. |
+
+各項目の詳細は[PostgreSQL: Documentation: 11: 19.3. Connections and Authentication](https://www.postgresql.org/docs/11/runtime-config-connection.html)を参照  
+値が0になっているためOSの設定を引き継ぐ。LinuxのTCP関連のカーネルパラメータのデフォルト値は以下。
+| パラメーター名 | 値 |
+|-|-|
+|tcp_keepalive_probes  | 9 |  
+|tcp_keepalive_time | 7200秒 |  
+|tcp_keepalive_intvl  | 75秒 |  
+
+## Keycloak pod が起動しない<a id="keycloak_pod_will_not_start"></a>
 
 Keycloak が短い周期でエラーとなり、起動しない。
 ```
