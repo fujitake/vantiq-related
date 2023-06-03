@@ -29,7 +29,7 @@
 ![](../../imgs/vantiq-videostream-safie/image1.png)
 
 # 資材
-「[資材置場](../conf/videostream-safie)」
+「[資材置場](../../conf/vantiq-videostream-safie)」
 
 
 # 事前準備
