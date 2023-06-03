@@ -99,6 +99,9 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
   - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
   - [fluentd](./vantiq-devices-integration/docs/jp/fluentd.md)
 - [デバイスの接続サンプル](./vantiq-devices-integration/readme.md#device_sample)
+  - [オムロン環境センサー](./vantiq-devices-integration/conf/omron-env-sensor-sample)
+  - [SORACOM GPSマルチセンサー](./vantiq-devices-integration/docs/jp/Vantiq_SoracomGPSMultiunit.md)
+  - [Safie One](./vantiq-devices-integration/docs/jp/vantiq-videostream-safie.md)
 
 
 ### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
