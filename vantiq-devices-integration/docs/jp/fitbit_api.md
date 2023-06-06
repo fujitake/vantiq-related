@@ -7,6 +7,7 @@ Fitbit API を VANTIQ で利用する方法を解説します。
 - [Fitbit API](#fitbit-api)
   - [目次](#目次)
   - [サンプルプロジェクト](#サンプルプロジェクト)
+    - [サンプルHTMLファイル](#サンプルhtmlファイル)
   - [事前設定](#事前設定)
   - [OAuth 2.0 アプリケーションタイプについて](#oauth-20-アプリケーションタイプについて)
   - [OAuth 2.0 PKCE 認証](#oauth-20-pkce-認証)
@@ -83,6 +84,10 @@ Fitbit API を VANTIQ で利用する方法を解説します。
 
 [FitbitAPIサンプルプロジェクト](./../../conf/fitbit_api/fitbit_api_sample.zip)
 
+### サンプルHTMLファイル
+FitbitAPIサンプルプロジェクト内で使われている HTML ファイルは下記のとおりです。
+- [サインアップ用のページ（fitbit_oauth.html）](./../../conf/fitbit_api/fitbit_oauth.html)
+- [ログイン用ページ（fitbit_oauth_redirect.html）](./../../conf/fitbit_api/fitbit_oauth_redirect.html)
 
 
 ## 事前設定

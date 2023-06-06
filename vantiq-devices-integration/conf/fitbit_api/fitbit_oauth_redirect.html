@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" />
+    <script>
+        const VANTIQ_ENDPOINT = '/api/v1/resources/procedures/jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.GetAccessToken';
+        const VANTIQ_ACCESS_TOKEN = 'Bearer ';
+
+        let server_uri = location.protocol + '//' + location.host;
+        let url = new URL(window.location.href);
+        let code = url.searchParams.get('code');
+        let token = url.searchParams.get('token');
+
+        document.addEventListener("DOMContentLoaded", function(){
+            let userNameElement = document.getElementById('name');
+            let passwordElement = document.getElementById('pass');
+            let submitButton = document.getElementById('submit');
+            submitButton.addEventListener('click', function(){
+                submitButton.setAttribute("disabled", true);
+                let user = userNameElement.value;
+                let pass = passwordElement.value;
+                let body = {
+                    user
+                    , pass
+                    , code
+                };
+                const request = new XMLHttpRequest();
+                request.open('POST', server_uri + VANTIQ_ENDPOINT);
+                request.setRequestHeader('Content-Type', 'application/json');
+                request.setRequestHeader('Authorization', VANTIQ_ACCESS_TOKEN + token);
+                request.send(JSON.stringify(body));
+                request.onreadystatechange = function(){
+                    if(request.readyState == 4){
+                        if(request.status == 200){
+                            document.write("Your Fitbit User ID is: " + JSON.parse(request.responseText));
+                        }else{
+                            window.alert("Login failed!");
+                            submitButton.removeAttribute("disabled");
+                        }
+                    }
+                };
+            });
+        });
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            margin-top: 25vh;
+        }
+        .input_form {
+            width: 280px;
+        }
+        .input_form > div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .input_form > input {
+            display: block;
+            width: 80px;
+            height: 1.5rem;
+            margin: 10px 0 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="input_form">
+        <div>
+            <span>User Name:</span>
+            <input type="text" id="name" required>
+        </div>
+        <div>
+            <span>Password:</span>
+            <input type="password" id="pass" required>
+        </div>
+        <input type="button" id="submit" value="Login">
+    </div>
+</body>
+</html>
