@@ -92,3 +92,6 @@ C -->|Invoke| E
 - [オムロン環境センサー](./conf/omron-env-sensor-sample)/[Omron Ambient Sensor 2JCIE-BU01, 2JCIE-BL01](./conf/omron-env-sensor-sample/README_en.md)
 - [SORACOM GPSマルチセンサー](./docs/jp/Vantiq_SoracomGPSMultiunit.md)
 - [Safie One](./docs/jp/vantiq-videostream-safie.md)
+- 
+## ウェアラブルデバイスとの連携
+- [Fitbit](./docs/jp/fitbit_api.md)
