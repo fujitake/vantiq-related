@@ -97,7 +97,7 @@ sequenceDiagram
 
 
 ## 環境構築
-1. `Projects` → `インポート...` から、プロジェクトのインポートを行います。  
+1. `Projects` → `インポート...` から、 [FitbitAPIサンプルプロジェクト](./../../conf/fitbit_api/fitbit_api_sample.zip) のインポートを行います。  
 2. `管理` → `Advanced` → `Access Tokens` から、 VANTIQ のアクセストークンを発行します。  
 3. 発行したアクセストークンを `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.Config` プロシージャの `VANTIQ_ACCESS_TOKEN` に代入します。  
 4. 事前設定で発行された Fitbit の `OAuth 2.0 Client ID` を `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.Config` プロシージャの `FITBIT_CLIENT_ID` に代入します。  
