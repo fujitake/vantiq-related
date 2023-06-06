@@ -100,9 +100,11 @@ sequenceDiagram
 1. `Projects` → `インポート...` から、プロジェクトのインポートを行います。  
 2. `管理` → `Advanced` → `Access Tokens` から、 VANTIQ のアクセストークンを発行します。  
 3. 発行したアクセストークンを `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.Config` プロシージャの `VANTIQ_ACCESS_TOKEN` に代入します。  
-4. `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.HtmlUploader` プロシージャを実行します。  
-5. サインアップ用のページ（fitbit_oauth.html）ログイン用ページ（fitbit_oauth_redirect.html）の URL がそれぞれ発行されます。  
-   ※Fitbit API の Application設定の `Redirect URL` にログイン用ページ（fitbit_oauth_redirect.html）の URL を設定します。  
+4. 事前設定で発行された Fitbit の `OAuth 2.0 Client ID` を `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.Config` プロシージャの `FITBIT_CLIENT_ID` に代入します。  
+5. 事前設定で発行された Fitbit の `Client Secret` を `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.Config` プロシージャの `FITBIT_CLIENT_SECRET` に代入します。  
+6. `jp.co.vantiq.common.fitbit.webapi.FitbitOAuth.HtmlUploader` プロシージャを実行します。  
+7. サインアップ用のページ（fitbit_oauth.html）ログイン用ページ（fitbit_oauth_redirect.html）の URL がそれぞれ発行されます。  
+8. Fitbit API の Application設定の `Redirect URL` にログイン用ページ（fitbit_oauth_redirect.html）の URL を設定します。  
 
 
 
