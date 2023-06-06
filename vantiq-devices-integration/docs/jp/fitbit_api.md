@@ -6,7 +6,7 @@ Fitbit API を VANTIQ で利用する方法を解説します。
 ## サンプルプロジェクト
 今回利用するサンプルプロジェクトは下記からダウンロードできます。  
 
-[FitbitAPIサンプルプロジェクト](./conf/fitbit_api/fitbit_api_sample.zip)
+[FitbitAPIサンプルプロジェクト](./../../conf/fitbit_api/fitbit_api_sample.zip)
 
 
 
