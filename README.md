@@ -105,7 +105,7 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
   - [SORACOM GPSマルチセンサー](./vantiq-devices-integration/docs/jp/Vantiq_SoracomGPSMultiunit.md)
   - [Safie One](./vantiq-devices-integration/docs/jp/vantiq-videostream-safie.md)
 - [ウェアラブルデバイスとの連携](./vantiq-devices-integration/readme.md#ウェアラブルデバイスとの連携)
-  - [Fitbit](./docs/jp/fitbit_api.md)
+  - [Fitbit](./vantiq-devices-integration/docs/jp/fitbit_api.md)
 
 ### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
 インフラチーム向けのVantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
