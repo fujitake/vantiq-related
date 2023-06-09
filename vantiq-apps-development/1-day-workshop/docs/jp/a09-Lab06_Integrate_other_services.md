@@ -360,3 +360,9 @@ Slack にメッセージを送信するまでの手順は以上です。
 
 -   VANTIQ では「**VAIL**」という SQL と JavaScript を合わせたような独自言語でプログラミングすることができます。  
     ✔︎ 詳細については [リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html) をご確認ください。
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+| 12 | Vantiqのリソース全般の紹介 | | Reference | | [実例を通して Vantiq のリソースを理解する](../../../vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md) |
+| 13 | 混雑検出アプリ開発課題 | Lab | Vantiq 1-day Workshop の次のステップ | | [混雑検出課題アプリ](a10-dev01_detect_congestion_app.md) |

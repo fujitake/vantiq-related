@@ -253,3 +253,8 @@ curl -g -X DELETE
 
 -   VANTIQ の _REST API_ を使うことにより、外部システムとの連携を簡単に実現することができます。  
     ✔︎  例えば複数の外部システムから　VANTIQ　にデータを POST してアプリケーションで結合・整形することや、外部システムから `Type` の値を更新して `Enrich` する内容を変更するなど今回のワークショップで学習していただいた内容を使えば簡単に実装することができます。
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+| 11 | 他サービスとの連携 | Lab | Vantiq 1-day Workshop の次のステップ | | [Lab06_Integrate_other_services](a09-Lab06_Integrate_other_services.md) |
