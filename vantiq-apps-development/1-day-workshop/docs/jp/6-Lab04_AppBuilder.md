@@ -192,4 +192,4 @@
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|7| Lab 04 までの復習|Lecture| |15| [03_Review](7-03_Review.md)|  
+| 8 | Lab 04 までの復習 | Lecture | | 15 | [03_Review](7-03_Review.md) |

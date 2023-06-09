@@ -94,4 +94,4 @@ AppBuilder において、ショートカットキーが使用できます。
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|2| 準備 (データジェネレーターの設定)|Lab|データジェネレーターの準備 |15|[Lab01_Preparation](2-Lab01_Preparation.md)|
+| 2 | 準備 | Lab | Namespace やデータジェネレーターの準備 | 5 ～ 15 | [Lab01_Preparation](2-Lab01_Preparation.md)|

@@ -139,4 +139,4 @@
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|3| Types (タイプ)|Lab|データベースのテーブルのような機能|20|[Lab02_Types](3-Lab02_Types.md)|
+| 3 | Vantiq の基本リソース | Lecture | Vantiqアプリケーションを構成する最も基本なリソース | 15 | [00_BasicResources](0-10_BasicResources.md) |

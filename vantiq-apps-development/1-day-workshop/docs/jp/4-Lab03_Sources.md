@@ -107,4 +107,4 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|5| App Builder の紹介| Lecture|  |15| [02_AppBuilder](5-02_AppBuilder.md)|  
+| 6 | App Builder の紹介 | Lecture |  | 15 | [02_AppBuilder](5-02_AppBuilder.md) |
