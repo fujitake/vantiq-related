@@ -613,4 +613,4 @@ return lastEvent
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|6|App Builder (アプリケーション ビルダー)|Lab|受信したイベントの処理ロジックの作成|45|[Lab04_AppBuilder](6-Lab04_AppBuilder.md)|  
+| 7 | App Builder (アプリケーション ビルダー) | Lab | 受信したイベントの処理ロジックの作成 | 45 | [Lab04_AppBuilder](6-Lab04_AppBuilder.md) |

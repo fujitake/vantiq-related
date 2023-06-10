@@ -26,3 +26,8 @@
 |__App__|SourceやTypeなどの入出力をつなぐアプリケーションを実装する。|
 |__Procedure__|再利用可能なコード、関数。|
 |__Topic__|Vantiqアプリ内でイベントの受け渡しをするイベントバス。REST APIのエンドポイントとしても機能する。|
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+| 4 | Types (タイプ) | Lab | データベースのテーブルのような機能 | 20 | [Lab02_Types](3-Lab02_Types.md) |

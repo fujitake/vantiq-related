@@ -20,32 +20,44 @@
 
 1. 「追加」 > 「Advanced」 > 「App...」 > 「_+ 新規 App_」 から App Builder のウィンドウを開きます。
 
-2. 名前に 「PumpFailureDetection」と入力し、「_OK_」をクリックします。
+1. 名前に 「PumpFailureDetection」と入力し、「_OK_」をクリックします。
 
-3. _オレンジのボックス_ をクリックし、ウィンドウ右側のパラメーターを以下の通り設定します。  
-    1.  名前: _TempStream_  
-    2.  設定：  
-        1.  inboundResource: _sources_  
-        2.  inboundResourceId: _TempMQTT_  　＊ ドロップダウンリストより選択
+1. _オレンジのボックス_ をクリックし、ウィンドウ右側のパラメーターを以下の通り設定します。
+   1. 名前: _TempStream_  
+1. 設定：  
+   1. inboundResource: _sources_  
+   1. inboundResourceId: _TempMQTT_  　＊ ドロップダウンリストより選択
 
     <img src="../../imgs/Lab04/image2_3.png" width=70%>
 
-4. ウィンドウ左側の Activity Pattern のリストにある「Flow Control」から「`EventStream`」をドラッグ&ドロップし、以下の通り設定します。 ＊ 開発エリアが狭い場合はウィンドウを広げてください。  
-    1.  名前: _RPMSStream_  
-    2.  設定:  
-        1.  inboundResource: _sources_  
-        2.  inboundResourceId: _RPMSMQTT_  　＊ ドロップダウンリストより選択
+1. ウィンドウ左側の Activity Pattern のリストにある「Flow Control」から「`EventStream`」をドラッグ&ドロップし、以下の通り設定します。 ＊ 開発エリアが狭い場合はウィンドウを広げてください。  
+   1. 名前: _RPMSStream_  
+   1. 設定:  
+      1. inboundResource: _sources_  
+      1. inboundResourceId: _RPMSMQTT_  　＊ ドロップダウンリストより選択
 
-5. 右上の _変更の保存_ ボタンをクリックしてアプリケーションを保存します。
+1. 右上の _変更の保存_ ボタンをクリックしてアプリケーションを保存します。
 
-6. データジェネレーターを起動し _Start Generator_ ボタンをクリックしてデータ生成を開始します。
+1. 開発画面に戻り以下の手順で 2つの Stream でデータを取得できていることを確認します。  
+   1. それぞれのイベントストリームをクリックし「_Task Events の表示_」をクリックします。  
+   1. それぞれ `Temp` データ (イベント) と `RPMS` データ (イベント) が表示されることを確認します。
 
-7. 開発画面に戻り以下の手順で 2つの Stream でデータを取得できていることを確認します。  
-    1.  それぞれのイベントストリームをクリックし「_Task Events の表示_」をクリックします。  
-    2.  それぞれ `Temp` データ (イベント) と `RPMS` データ (イベント) が表示されることを確認します。
+   <img src="../../imgs/Lab04/image4_5.png" width=60%>  
 
-    <img src="../../imgs/Lab04/image4_5.png" width=60%>  
-&emsp;&emsp;&emsp;&emsp;&emsp;   ＊「Task Events の表示」は各タスクを右クリックすることで表示されるメニューからも表示できます。
+   ＊「Task Events の表示」は各タスクを右クリックすることで表示されるメニューからも表示できます。
+
+   ＊データ (イベント)が表示されない場合は、Dummyデータが生成されているか確認してください。
+   <details>
+   <summary>講師がいる場合</summary>
+
+   講師に確認してください。
+   </details>
+
+   <details>
+   <summary>講師がいない場合</summary>
+
+   データジェネレーターを起動し _Start Generator_ ボタンをクリックしてデータ生成を開始します。
+   </details>
 
 ## ***Step 2（Enrich による情報付加）***
 
@@ -63,8 +75,8 @@
 アプリケーションを保存してから、`EnrichTemp` タスクをクリックし、「Task Events の表示」にて受信した `Temp` イベントに `Pumps` Type のデータが付加されていることを確認してください。また、データジェネレーターが停止している場合は再度実行してください。
 
 <img src="../../imgs/Lab04/image6.png" width=60%>  
-① 受信した `Temp` イベント  
 
+① 受信した `Temp` イベント  
 ② 付加された `Pumps` Type のデータ　　
 
 センサーの ID で受信したセンサーのデータとポンプのマスタデータが関連付けられていることが確認できます。
@@ -139,29 +151,43 @@
 `SplitByGroup` を使用してイベントをポンプの ID 毎にグルーピングしてから、**Dwell** を使用して温度データと回転数データが一定の値を超え続けたことを検知します。
 
 1. Activity Pattern のリストにある「Flow Control」から「`SplitByGroup`」を `TransformEvent` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
-    1.  名前: _GroupBy_
+   1. 名前: _GroupBy_
 
-2. 設定を以下の通り行います。  
-    1.  groupBy: _event.PumpID_
+1. 設定を以下の通り行います。  
+   1. groupBy: _event.PumpID_
 
-3. Activity Pattern のリストにある「Filters」から「`Dwell`」を `GroupBy` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
-    1.  名前: _DetectFailure_
+1. Activity Pattern のリストにある「Filters」から「`Dwell`」を `GroupBy` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
+   1. 名前: _DetectFailure_
 
-4. 設定を以下の通り行います。  
-    1.  condition: _event.Temp > 199 and event.RPMS > 3999_  
-    2.  duration: _20 seconds_
+1. 設定を以下の通り行います。  
+   1. condition: _event.Temp > 199 and event.RPMS > 3999_  
+   1. duration: _20 seconds_
 
-5. アプリケーションを保存してから、`DetectFailure` タスクをクリックし「Task Events の表示」にて `DetectFailure` タスクで処理したイベントの結果を確認できる状態にします。
+1. アプリケーションを保存してから、`DetectFailure` タスクをクリックし「Task Events の表示」にて `DetectFailure` タスクで処理したイベントの結果を確認できる状態にします。
 
-6. データジェネレーターを開き、「Set Status of Pump」下の _Select a Pump_ プルダウンから「Pump 1」を選択します。
+1. ポンプの異常データを生成します。  
 
-7.  _Normal_ プルダウンから「High Temp & RPMS」を選択し、_Update Pump Status_ ボタンをクリックします (PumpID 1 のポンプの温度と回転数が高い数値になります)。
+   <details>
+   <summary>講師がいる場合</summary>
+   
+   講師に異常データの生成を依頼してください。
+   </details>
 
-8. _Start Generator_ ボタンをクリックしてデータ生成を開始します。
+   <details>
+   <summary>講師がいない場合</summary>
 
-9. 開発画面に戻ります。
+   1. データジェネレーターを開き、「Set Status of Pump」下の _Select a Pump_ プルダウンから「Pump 1」を選択します。
 
-10. 温度 200度以上・回転数 4000回以上のイベントが 20秒間継続して生成されると検出します。
+   1. _Normal_ プルダウンから「High Temp & RPMS」を選択し、_Update Pump Status_ ボタンをクリックします (PumpID 1 のポンプの温度と回転数が高い数値になります)。
+
+   1. _Start Generator_ ボタンをクリックしてデータ生成を開始します。
+
+   1. 開発画面に戻ります。
+   </details>
+
+
+
+1. 温度 200度以上・回転数 4000回以上のイベントが 20秒間継続して生成されると検出します。
 
     <img src="../../imgs/Lab04/image12.png" width=60%>    
 
@@ -169,11 +195,11 @@
 
 * [Project Contents] ペイン
 
-<img src="../../imgs/Lab04/image13new.png" width=30%>  
+  <img src="../../imgs/Lab04/image13new.png" width=30%>  
 
 * PumpFailureDetection
 
-<img src="../../imgs/Lab04/image14.png" width=65%>  
+  <img src="../../imgs/Lab04/image14.png" width=65%>  
 
 ## ***▷確認ポイント***
 
@@ -192,4 +218,4 @@
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|7| Lab 04 までの復習|Lecture| |15| [03_Review](7-03_Review.md)|  
+| 8 | Lab 04 までの復習 | Lecture | | 15 | [03_Review](7-03_Review.md) |

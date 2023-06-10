@@ -27,39 +27,91 @@
 
 1. 「追加」 > 「Source...」 > 「_+ 新規 Source_」から Source の新規作成画面を開きます。
 
-2. Source 名に「TempMQTT」と入力します。
+1. Source 名に「TempMQTT」と入力します。
 
-3. Source の種類 を「MQTT」に設定します。
+1. Source の種類 を「MQTT」に設定します。
 
-4. 「Server URI」タブを開き「_+ Server URI の追加_」をクリックし、[ご自身で事前に準備された MQTT Broker server の URI](./2-Lab01_Preparation.md#mqtt_broker_setting) を設定します。
+1. 「Server URI」タブを開き「_+ Server URI の追加_」をクリックし、 **MQTT Broker server** の **URI** を設定します。
 
-5. 「Topic」タブを開き「_+ Topic の追加_」をクリックし、以下の Topic を設定します。
+   <details>
+   <summary>講師がいる場合</summary>
 
-  Topic： "_/***your name***/pump/Temp_"
+   **MQTT Broker server** の **URI** は、講師に確認してください。
+   </details>
 
-  ＊ [Lab 01 でデータジェネレーター設定](./2-Lab01_Preparation.md#data_generator_setting) の **「TempSensorTopic」に入力した値と同じ**にします。また、topic 名に**ダブルクォーテーションは含みません**。topic 名の**前後に半角スペースが入らないよう**にしてください。
+   <details>
+   <summary>講師がいない場合</summary>
 
+   **MQTT Broker server** の **URI** は、 [ご自身で事前に準備された MQTT Broker server の URI](./2-Lab01_Preparation.md#mqtt_broker_setting) になります。
+   </details>
 
-6. _変更の保存_ ボタンをクリックし、Source を保存します。  
+1. 「Topic」タブを開き「_+ Topic の追加_」をクリックし、以下の Topic を設定します。
+
+   <details>
+   <summary>講師がいる場合</summary>
+
+   **Topic** は、講師に確認してください。  
+
+   ＊topic 名の**前後に半角スペースが入らないよう**にしてください。
+   </details>
+
+   <details>
+   <summary>講師がいない場合</summary>
+
+   **Topic** は、 [データジェネレーターの設定](./2-Lab01_Preparation.md#data_generator_setting) で設定した "_/***unique name***/pump/***Temp***_" になります。  
+
+   ＊データジェネレーター設定の **「TempSensorTopic」に入力した値と同じ**にします。また、topic 名に**ダブルクォーテーションは含みません**。topic 名の**前後に半角スペースが入らないよう**にしてください。
+   </details>
+
+1. _変更の保存_ ボタンをクリックし、Source を保存します。  
 
     <img src="../../imgs/Lab03/image1.png" width=60%>
 
-7. 上記の `TempMQTT` Source と同様の手順で以下の画像を参考に `RPMSMQTT` Source を作成してください。  
+1. 上記の `TempMQTT` Source と同様の手順で以下の画像を参考に `RPMSMQTT` Source を作成してください。  
 
-    <img src="../../imgs/Lab03/image2.png" width=60%>
+   <img src="../../imgs/Lab03/image2.png" width=60%>
+
+   <details>
+   <summary>講師がいる場合</summary>
+
+   - Source 名：RPMSMQTT
+   - Topic 名：（※講師に確認してください）
+   </details>
+
+   <details>
+   <summary>講師がいない場合</summary>
+
+   - Source 名：RPMSMQTT
+   - Topic 名：_/***unique name***/pump/***RPMS***_
+   </details>
 
 以上で、Source の作成は終了です。
 
 ## ***Step 2（Source の受信テスト）***
 
-1. 以下のようにして、**Data Generator** を開き、_Start Generator_ ボタンをクリックして温度と回転数データの生成を開始します。
-    ![RTC](../../imgs/Lab03/RTC.gif)  
+<details>
+<summary>講師がいる場合</summary>
 
-2. VANTIQ 開発画面に戻って TempMQTT を開き、「_データの受信テスト_」をクリックし、データを受信できていることを確認します。
+1. TempMQTT を開き、「_データの受信テスト_」をクリックし、データを受信できていることを確認します。
 
-    <img src="../../imgs/Lab03/image3.png" width=80%>
+   <img src="../../imgs/Lab03/image3.png" width=80%>
 
-3. `RPMSMQTT` でも同様の手順でデータが受信できていることを確認してください。
+1. `RPMSMQTT` でも同様の手順でデータが受信できていることを確認してください。
+</details>
+
+<details>
+<summary>講師がいない場合</summary>
+
+1. 以下のようにして、**Data Generator** を開き、_Start Generator_ ボタンをクリックして温度と回転数データの生成を開始します。  
+
+   ![RTC](../../imgs/Lab03/RTC.gif)  
+
+1. VANTIQ 開発画面に戻って TempMQTT を開き、「_データの受信テスト_」をクリックし、データを受信できていることを確認します。
+
+   <img src="../../imgs/Lab03/image3.png" width=80%>
+
+1. `RPMSMQTT` でも同様の手順でデータが受信できていることを確認してください。
+</details>
 
 以上で、Source の受信テストは終了です。
 
@@ -67,15 +119,17 @@
 
 Source に「**Schema**」の Type を設定し、受信イベントの構造と型を定義することにより、`Lab-04 AppBuilder` の Step で行う作業でプロパティの入力補助が有効になります。
 
-1. `TempMQTT` の「データの受信テスト」で開いたウィンドウの「_Type Data の作成_」をクリックします。
+1. `TempMQTT` の「データの受信テスト」で開いたウィンドウの「_Type Data の作成_」をクリックします。  
 
-    <img src="../../imgs/Lab03/image4.png" width=80%>
+   <img src="../../imgs/Lab03/image4.png" width=80%>
 
-2. 以下の画像を参考に Type 名を「_TempMQTTSchema_」に修正し「_保存_」をクリックします。これで `TempMQTT` の「Schema」Type が作成されます。
+1. 以下の画像を参考に Type 名を「_TempMQTTSchema_」に修正し「_保存_」をクリックします。これで `TempMQTT` の「Schema」Type が作成されます。  
 
-    <img src="../../imgs/Lab03/image5.png" width=45%>
+   <img src="../../imgs/Lab03/image5.png" width=45%>
 
-3. 画面左の [Project Contents] ペインの「Type」の箇所にある、作成した「`TempMQTTSchema`」を開き、自動で認識された型のうち、「Time」プロパティの型を「_DateTime_」に変更します。
+1. 画面左の [Project Contents] ペインの「Type」の箇所にある、作成した「`TempMQTTSchema`」を開きます。  
+   プロパティの型が自動で認識されていますが、「Time」プロパティの型が「String」型になっています。  
+   「String」型では扱いづらいため「_DateTime_」型に変更します。
 
    a. 「Properties」タブを開きます。
 
@@ -87,11 +141,11 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
    <img src="../../imgs/Lab03/image7.png" width=60%>
 
-4. 画面左の [Project Contents] ペインの「Source」の箇所にある「`TempMQTT`」を開き、「Properties」タブの「Message Type」に「_TempMQTTSchema_」を設定し、Source を保存します。
+1. 画面左の [Project Contents] ペインの「Source」の箇所にある「`TempMQTT`」を開き、「Properties」タブの「Message Type」に「_TempMQTTSchema_」を設定し、Source を保存します。
 
    <img src="../../imgs/Lab03/image8.png" width=60%>
 
-5. 1.\~4. の Step を繰り返し、「`RPMSMQTT`」Source から「`RPMSMQTTSchema`」Typeを作成し、「RPMSMQTT」Source の「Message Type」に設定してください。
+1. 1.\~4. の Step を繰り返し、「`RPMSMQTT`」Source から「`RPMSMQTTSchema`」Typeを作成し、「RPMSMQTT」Source の「Message Type」に設定してください。
 
 以上で、Schema の設定は終了です。
 
@@ -107,4 +161,4 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|5| App Builder の紹介| Lecture|  |15| [02_AppBuilder](5-02_AppBuilder.md)|  
+| 6 | App Builder の紹介 | Lecture |  | 15 | [02_AppBuilder](5-02_AppBuilder.md) |

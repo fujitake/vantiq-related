@@ -1,4 +1,5 @@
 # VANTIQ で開発する上での基本事項
+このセッションでは VANTIQ で開発する上での基本的な事項について解説します。
 
 ## ナビゲーション バーについて
 
@@ -29,7 +30,8 @@
 
 ## Namespace と Project の関係について
 
-各 Resource は Project ではなく Namespace に保存されるため、Namespace 内の各 Project で Namespace 内の全ての Resource を使うことができます。
+各 Resource は Namespace ごとに保存されます。  
+そのため Namespace 内の各 Project で、 Namespace 内に存在する全ての Resource を共通で使うことができます。
 
 ![Namespace と Project の関係について](../../imgs/01_Basics/slide6.png)
 
@@ -38,20 +40,24 @@
 * Project の保存
   * Project のレイアウトの状態やその Project でどの Resource を扱うのかを保存します。
   * 画面左上の緑の「 _保存_ 」をクリックして保存します。  
-![Project の保存](../../imgs/01_Basics/slide7_1.png)「PumpFailureDetection」という Project 名で保存する。
+
+  ![Project の保存](../../imgs/01_Basics/slide7_1.png)  
+  （「PumpFailureDetection」という Project 名で保存する例）
 
 * 各 Resource の保存
   * Type や Source などの各 Resource を作成すると Namespace に保存されます。
   * 各 Resource 編集ダイアログの _保存_ ボタンをクリックして保存します。  
 ![各 Resource の保存](../../imgs/01_Basics/slide7_2.png)
 
-_＊ 例えば Type を新規作成して Project の保存をせずにブラウザーをリロードしてしまうと、_  
-_Project の保存をしていないために Type が Project に追加されていない状態になります。_  
-_しかし、作成自体はされており、Namespace には保存されています。_
+### 注意点
+_＊ 例えば Type を新規作成し、 Project の保存をせずにブラウザーのリロードをしてしまうと、_  
+_Project の保存をしていないために作成した Type が Project に追加されていない状態になってしまいます。_  
+_しかし、 Type の作成自体はされているため、作成した Type は Namespace には保存されているという状態になります。_  
+_この場合、 Type の新規作成画面から作成した Type を選択し、 Project に追加してください。_
 
 ## Project の自動保存について
 
-自動保存の設定をしておくことで、不意な状況で変更内容が失われることを防ぎます。  
+Project の自動保存の設定をしておくことで、不意な状況で変更内容が失われることを防ぐことができます。  
 画面右上の人型アイコンから IDE 設定ウィンドウを開いて設定します。
 
 <img src="../../imgs/01_Basics/slide8.png" width=80%>  
@@ -94,4 +100,4 @@ AppBuilder において、ショートカットキーが使用できます。
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
-|2| 準備 (データジェネレーターの設定)|Lab|データジェネレーターの準備 |15|[Lab01_Preparation](2-Lab01_Preparation.md)|
+| 2 | 準備 | Lab | Namespace やデータジェネレーターの準備 | 5 ～ 15 | [Lab01_Preparation](2-Lab01_Preparation.md)|
