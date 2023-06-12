@@ -119,7 +119,7 @@ Pumps Type にマスタデータを登録します。今回は複数件のデー
 
 ### Type の NaturalKey とは？
 
-`NaturalKey` は `UPSERT` を行う場合や `REST API` でアクセスする際に利用されます。  
+Type に設定できるプロパティの一つである `NaturalKey` は、 `UPSERT` を行う場合や `REST API` でアクセスする際に利用されます。  
 
 `UPSERT` を行う場合は `NaturalKey` を基準として、既存のレコードが存在しなければ `INSERT` され、既存のレコードが存在する場合は `UPDATE` が行われます。  
 `NaturalKey` が設定されていない場合、 `UPSERT` の利用はできません。  
