@@ -196,6 +196,8 @@
 
    <img src="../../imgs/Lab04/image12.png" width=60%>    
 
+## ここまでのまとめ
+
 ここまでの手順で [Project Contents] ペインと App には下の画像のような要素が存在しているはずですので、ご確認ください。
 
 * [Project Contents] ペイン
