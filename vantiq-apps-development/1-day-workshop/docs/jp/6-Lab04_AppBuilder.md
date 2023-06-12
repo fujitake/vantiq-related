@@ -83,6 +83,13 @@
 
 **設定するパラメーターに注意して同様の手順で `RPMSStream` の下に「`EnrichRPMS`」を追加してください。また、「Task Events の表示」での確認も行なってください。**
 
+<details>
+<summary>EnrichRPMS の設定の正解</summary>
+
+- associatedType: _Pumps_
+- foreignKeys : _RPMSSensorID_
+</details>
+
 ## ***Step 3（Join によるイベントの結合）***
 
 **Join** を使用して 2つの Stream のイベント同士を結合します。
