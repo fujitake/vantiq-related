@@ -43,7 +43,7 @@ Type には、データを格納するための Type である「**Standard**」
 
 5. 「Is Index unique?」にチェックを入れ、Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。
+6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。（Point! [NaturalKey とは？](#type-の-naturalkey-とは)）
 
 7. Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
@@ -75,7 +75,7 @@ Type には、データを格納するための Type である「**Standard**」
 
 5. 「Is Index unique?」にチェックを入れ、Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Keys」タブを開き「_Key の設定_」をクリックします。
+6. 「Natural Keys」タブを開き「_Key の設定_」をクリックします。（Point! [NaturalKey とは？](#type-の-naturalkey-とは)）
 
 7. Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
