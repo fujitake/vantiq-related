@@ -43,7 +43,7 @@ Type には、データを格納するための Type である「**Standard**」
 
 5. 「Is Index unique?」にチェックを入れ、Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。
+6. 「Natural Keys」タブを開き「_Keyの設定_」をクリックします。（Point! [NaturalKey とは？](#type-の-naturalkey-とは)）
 
 7. Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
@@ -75,7 +75,7 @@ Type には、データを格納するための Type である「**Standard**」
 
 5. 「Is Index unique?」にチェックを入れ、Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
-6. 「Natural Keys」タブを開き「_Key の設定_」をクリックします。
+6. 「Natural Keys」タブを開き「_Key の設定_」をクリックします。（Point! [NaturalKey とは？](#type-の-naturalkey-とは)）
 
 7. Key に「`PumpID`」を設定して「_OK_」をクリックします。
 
@@ -114,6 +114,26 @@ Pumps Type にマスタデータを登録します。今回は複数件のデー
     ✔︎   大文字、小文字が正しいか、入力ミスがないかを改めて確認してください。ミスがあると今後の手順でエラーが発生します。
 
 -   データが正しく登録されているか
+
+## 補足説明
+
+### Type の NaturalKey とは？
+
+Type に設定できるプロパティの一つである `NaturalKey` は、 `UPSERT` を行う場合や `REST API` でアクセスする際に利用されます。  
+
+`UPSERT` を行う場合は `NaturalKey` を基準として、既存のレコードが存在しなければ `INSERT` され、既存のレコードが存在する場合は `UPDATE` が行われます。  
+`NaturalKey` が設定されていない場合、 `UPSERT` の利用はできません。  
+
+また、 `NaturalKey` を持つオブジェクトが一意であることは保証されていません。  
+一意であることを強制するには、2つの方法があります。  
+- 1つ目は、 `NaturalKey` を持つオブジェクトを `Unique` な `Indexe` として設定することです。  
+  この場合、重複するデータは追加ができなくなります。  
+- 2つ目は、データの追加を行う際は `INSERT` の利用をせずに、 `UPSERT` のみを利用する方法です。  
+  この場合、重複するデータは上書き保存されます。  
+
+#### 参考
+- [Resource Reference Guide - Type](https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#types)
+- [VAIL 入門 - UPSERT](./../../../docs/jp/vail_basics.md#upsert-既存レコードがない場合はinsert既存がある場合はupdate)
 
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
