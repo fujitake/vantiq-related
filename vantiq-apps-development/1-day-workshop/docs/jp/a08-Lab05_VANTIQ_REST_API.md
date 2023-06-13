@@ -5,13 +5,21 @@
 この Lab では **VANTIQ の REST API** を使用して外部から VANTIQ のリソースを操作したり、**App Builder** で作成したアプリケーションを動かします。
 
 また、この Lab では以下のツールを使用します。  
-**Postman（**<https://www.getpostman.com/>**）**  
+**Postman（**<https://www.postman.com/downloads/>**）**  
 ***＊ curl コマンドや他の REST クライアントを使っていただいても問題ありません。***
 
--   **外部から VANTIQ の `Type` へデータの登録・取得・更新・削除を行う**  
+なお、 Postman には下記の2種類があります。  
+お使いの環境に応じて利用してください。  
+
+- The Postman app（デスクトップアプリ）
+- Postman on the web（Webアプリ）
+
+### Postman (REST Client) で行うこと
+
+- **外部から VANTIQ の `Type` へデータの登録・取得・更新・削除を行う**  
 Postman（REST Client）を使用して `Type` のデータを POST、GET、PUT、DELETE します。
 
--   **外部から VANTIQ の `Topic` にデータを POST し、アプリを動かす**  
+- **外部から VANTIQ の `Topic` にデータを POST し、アプリを動かす**  
 Postman（REST Client）を使用して `Topic` にデータを POST し、アプリケーションを動かします。  
 
     **＊ Topic**：VANTIQ 内のイベント処理でデータを送受信する機能。_REST API_ を使用する際は外部からでも `Topic` にイベントを Publish できる。  
