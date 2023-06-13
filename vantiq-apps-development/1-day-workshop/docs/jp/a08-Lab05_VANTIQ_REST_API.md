@@ -49,7 +49,7 @@ Postman (REST Client) からご自身の `Namespace` の `Type` を操作しま�
     ＊ アクセストークン部分をクリックするとコピーできます。  
     ![Access Token](../../imgs/Lab05/image1.png)  
 
-2.  別タブを開き「<https://www.getpostman.com/>」から Postman をインストールして起動します。  
+2.  別タブを開き「<https://www.postman.com/downloads/>」から Postman をインストールして起動します。  
 
     1.  下の画像のようになっていることを確認します。  
 
