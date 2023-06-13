@@ -6,8 +6,6 @@
 
 また、この Lab では以下のツールを使用します。  
 **Postman（**<https://www.getpostman.com/>**）**  
-または **Postman Chrome App**  
-**(**<https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=ja-jp>**)**  
 ***＊ curl コマンドや他の REST クライアントを使っていただいても問題ありません。***
 
 -   **外部から VANTIQ の `Type` へデータの登録・取得・更新・削除を行う**  
