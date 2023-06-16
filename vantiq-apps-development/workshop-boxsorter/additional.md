@@ -175,6 +175,23 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 
 codeが`14961234567890`、`14961234567892`、`14961234567893`の要素がStateに格納されていることがわかります。
 
+# State の補足説明
+
+State はここで述べた以外にも様々な特徴や使い方があります。  
+詳しくは下記のドキュメント等を御覧ください。  
+
+- State とは？
+  - [Vantiq Serviceとは - State](./../docs/jp/vantiq-service.md#state)
+  - [Stateful Serviceとは](./../docs/jp/vantiq-service.md#stateful-serviceとは)
+- State の種類と Procedure
+  - [Stateful Serviceとは - Global State](./../docs/jp/vantiq-service.md#global-state)
+  - [Stateful Serviceとは - Partioned State + Partitioned Procedure](./../docs/jp/vantiq-service.md#partioned-state--partitioned-procedure)
+  - [Stateful Serviceとは - Partioned State + Multi-Partitioned Procedure](./../docs/jp/vantiq-service.md#partioned-state--multi-partitioned-procedure)
+- State を利用するアクティビティ
+  - [Stateful Serviceとは - Stateful なアクティビティパターン](./../docs/jp/vantiq-service.md#stateful-なアクティビティパターン)
+- State の冗長化
+  - [Stateful Serviceとは - Replication Factor](./../docs/jp/vantiq-service.md#replication-factor)
+
 # Next step
 開発者の方は、より深く理解をするため[Vantiq アプリケーション開発者コース＆レベル1認定試験](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/)（要ログイン）の受講をお勧めします。
 
