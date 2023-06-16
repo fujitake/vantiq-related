@@ -105,7 +105,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
     multi partition PROCEDURE BoxSorter.getEntries()
     AttachConditionState.entrySet()
     ```
-このProcedureは`AttachConditionState` Stateに含まれる全てのようをそ取得します。今回Cached Enrichの前に`SplitByGroup`を使って処理ノードを分散させていました。`multi partition`という修飾子をつけることで分散した全ノードから要素を取得できます。
+このProcedureは`AttachConditionState` Stateに含まれる全ての要素を取得します。今回Cached Enrichの前に`SplitByGroup`を使って処理ノードを分散させていました。`multi partition`という修飾子をつけることで分散した全ノードから要素を取得できます。
 
 > 保存するとインターフェースの修復をするかの確認ダイアログが表示されますが`インターフェースの修復`をクリックするようにしてください。
 
