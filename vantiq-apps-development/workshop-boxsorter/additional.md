@@ -191,6 +191,8 @@ State はここで述べた以外にも様々な特徴や使い方がありま�
   - [Stateful Serviceとは - Stateful なアクティビティパターン](./../docs/jp/vantiq-service.md#stateful-なアクティビティパターン)
 - State の冗長化
   - [Stateful Serviceとは - Replication Factor](./../docs/jp/vantiq-service.md#replication-factor)
+- State を使う上で欠かせない Service とは？
+  - [Vantiq Serviceとは](./../docs/jp/vantiq-service.md#vantiq-serviceとは)
 
 # Next step
 開発者の方は、より深く理解をするため[Vantiq アプリケーション開発者コース＆レベル1認定試験](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/)（要ログイン）の受講をお勧めします。
