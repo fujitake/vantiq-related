@@ -14,6 +14,10 @@
    - 参考: [【速報】新サービスAmazon MQを早速使ってみた！](https://dev.classmethod.jp/articles/re-invent-2017-amazon-mq-first-impression/)  
 1. MQTT Broker Server の URI をメモしておきます。  
 
+### 注意点
+
+- パブリックな MQTT Broker Server は、不意に接続が切断されてしまうということがあるため、利用する際は注意してください。  
+  Source のアクティブ化などについては [Source のアクティブ化](./0-04_SourceActivate.md) を参照してください。
 
 ## ***Step 2***
 
@@ -131,3 +135,9 @@
 1. _Normal_ プルダウンから「High Temp & RPMS」を選択し、_Update Pump Status_ ボタンをクリックします (PumpID 1 のポンプの温度と回転数が高い数値になります)。
 
 1. _Start Generator_ ボタンをクリックしてデータ生成を開始します。
+
+## ***▷確認ポイント***
+
+- データジェネレータでデータの生成ができない場合  
+  Source がアクティブになっているか確認してください。  
+  詳しくは [Source のアクティブ化](./0-04_SourceActivate.md) を参照してください。

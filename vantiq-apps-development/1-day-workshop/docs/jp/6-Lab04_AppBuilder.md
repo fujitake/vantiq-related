@@ -221,6 +221,10 @@
   ✔︎ リファレンスに各 Activity pattern についての情報がございますので確認してみましょう。  
   ✔︎ App Builder リファレンス: <https://dev.vantiq.co.jp/docs/system/apps/index.html>
 
+- Source からデータが受信できない場合  
+  Source がアクティブになっているか確認してください。  
+  詳しくは [Source のアクティブ化](./0-04_SourceActivate.md) を参照してください。
+
 
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |

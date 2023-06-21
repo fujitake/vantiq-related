@@ -361,6 +361,10 @@ Slack にメッセージを送信するまでの手順は以上です。
 -   VANTIQ では「**VAIL**」という SQL と JavaScript を合わせたような独自言語でプログラミングすることができます。  
     ✔︎ 詳細については [リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html) をご確認ください。
 
+- EventStream でイベントを受信できない場合  
+  Source がアクティブになっているか確認してください。  
+  詳しくは [Source のアクティブ化](./0-04_SourceActivate.md) を参照してください。
+
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
 |:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
