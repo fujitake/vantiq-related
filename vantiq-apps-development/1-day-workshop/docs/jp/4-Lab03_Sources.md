@@ -155,8 +155,9 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
 ## ***▷確認ポイント***
 
--   `TempMQTT` と `RPMSMQTT` に設定されている Topic（MQTT Broker の Topic）がそれぞれ温度用、回転数用の Topic になっていること    
-    ✔︎   ミスがあると今後の手順でエラーが発生します。  
+- `TempMQTT` と `RPMSMQTT` に設定されている Topic（MQTT Broker の Topic）がそれぞれ温度用、回転数用の Topic になっていること  
+  ✔︎ ミスがあると今後の手順でエラーが発生します。  
+- Source が非アクティブになっている場合は [Source のアクティブ化](./0-04_SourceActivate.md) を参照してください。
 
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
