@@ -105,7 +105,14 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
     multi partition PROCEDURE BoxSorter.getEntries()
     AttachConditionState.entrySet()
     ```
-このProcedureは`AttachConditionState` Stateに含まれる全ての要素を取得します。今回Cached Enrichの前に`SplitByGroup`を使って処理ノードを分散させていました。`multi partition`という修飾子をつけることで分散した全ノードから要素を取得できます。
+このProcedureは `AttachConditionState` Stateに含まれる全ての要素を取得します。  
+
+VANTIQ 上を流れるイベントストリームは、複数のノードに分散されて処理されます。  
+この際、イベントストリームがどのノードで処理されるかは決まっておらず、負荷に応じて分散されています。  
+今回、 Cached Enrich の前に `SplitByGroup` を使ったことで、不規則に分散していたイベントストリームが `SplitByGroup` の `groupBy` で指定した値ごとに同じノードで処理が行われるようになりました。  
+
+Procedure を宣言する際に `multi partition` という修飾子をつけることで、分散した全ノードから要素を取得することができます。
+
 
 > 保存するとインターフェースの修復をするかの確認ダイアログが表示されますが`インターフェースの修復`をクリックするようにしてください。
 
