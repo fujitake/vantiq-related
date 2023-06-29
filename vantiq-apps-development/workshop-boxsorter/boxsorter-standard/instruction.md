@@ -630,7 +630,11 @@ MQTTクライアントで送信先のTopicをサブスクライブしておき�
     <img src="./imgs/result.png" width="500">
 
 ## 参考情報
-[実装サンプル](./box_sorter.zip)
+
+- Vantiq 1.34
+  - [実装サンプル（ver 1.34）](./box_sorter_1.34.zip)
+- Vantiq 1.36
+  - [実装サンプル（ver 1.36）](./box_sorter_1.36.zip)
 
 # Next step
  [【追加コンテンツ】Stateの中身を確認してみる](./additional.md)
