@@ -274,7 +274,14 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |項目|設定値|備考|
       |-|-|-|
       |associatedType|sorting_condition|-|
-      |foreignKeys|["code"]|この項目に設定したプロパティがクエリの条件になる|
+
+      `foreignKeys` の `<null>` をクリックし、下記の設定を行います。
+
+      1. `+ アイテムの追加` をクリックする
+
+         |項目|設定値|備考|
+         |-|-|-|
+         |Value|code|この項目に設定したプロパティがクエリの条件になる|
       </details>
       
       <details>
