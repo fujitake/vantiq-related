@@ -114,7 +114,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 下記のリンクから Google Colaboratory を開く
 
-   🔗 [BoxSorterDataGenerator](./BoxSorterDataGenerator.ipynb)
+   🔗 [BoxSorterDataGenerator](./BoxSorterDataGenerator.ipynb){:target="_blank"}
 
 1. `Open in Colab` をクリックする
 
