@@ -93,7 +93,7 @@
 ## 0.【準備】Google Colaboratory の動作確認
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
-Google Colaboratory を利用するにあたり、 Vantiq Access Token を発行する必要があります。
+Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。
 
 1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開く
 
