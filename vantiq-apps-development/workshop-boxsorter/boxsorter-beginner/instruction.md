@@ -101,10 +101,9 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 以下の内容を設定し、保存する
 
-   |項目|設定値|設定箇所|
+   |項目|設定値|備考|
    |-|-|-|
-   |Name|BoxDataToken|-|
-   > 上記以外の名前でも問題ありません。
+   |Name|BoxDataToken|左記以外の名前でも問題ありません。|
 
    ![accesstoken_02](./imgs/accesstoken_02.png)
 
@@ -119,6 +118,22 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 1. `Open in Colab` をクリックし、 Google Colaboratory を開く
 
    ![OpenGoogleColab](./imgs/open_google_colab.png)
+
+1. `# 設定情報` に以下の内容を入力する
+
+   |項目|設定値|備考|
+   |-|-|-|
+   |url|https://{VantiqのURL(FQDN)}/api/v1/resources/topics//BoxInfoApi|SSL化されていないサーバーの場合は、 `https://` を `http://` に置き換えてください。|
+   |accesstoken|7tFxPj4JuNFnuwmGcEadU_6apA1r3Iji2N7AZS5HuVU=|上記で発行した Access Token|
+
+   ![google_colab_setting](./imgs/google_colab_setting.png)
+
+1. 上から順に1つずつ `実行ボタン` を押していく  
+   実行が終わるのを待ってから、次の `実行ボタン` を押してください。  
+
+   ![google_colab_run](./imgs/google_colab_run.png)
+
+1. エラーが発生していないことを確認し、 `# データジェネレータ本体` の左側の `停止ボタン` を押して、一旦、停止させておく
 
 ## 1. 【Topic】Vantiqで Google Colaboratory のデータを受信する
 
