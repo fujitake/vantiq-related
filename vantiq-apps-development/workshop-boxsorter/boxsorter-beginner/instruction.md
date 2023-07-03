@@ -2,7 +2,7 @@
 
 ## 実装の流れ
 
-1. 【Source】Vantiq で入力用の MQTTブローカーのデータをサブスクライブする
+1. 【Topic】Vantiq で Google Colaboratory 用のエンドポイントを作成する
 1. 【App Builder】荷物仕分けアプリの開発
 1. 【動作確認】送信結果が正しく仕分けされているか確認する
 
