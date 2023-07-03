@@ -112,11 +112,11 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![accesstoken_03](./imgs/accesstoken_03.png)
 
-1. 下記のリンクから Google Colaboratory を開く
+1. 下記のリンクから **データジェネレータ** のページを開く
 
    🔗 [BoxSorterDataGenerator](./BoxSorterDataGenerator.ipynb)
 
-1. `Open in Colab` をクリックする
+1. `Open in Colab` をクリックし、 Google Colaboratory を開く
 
    ![OpenGoogleColab](./imgs/open_google_colab.png)
 
