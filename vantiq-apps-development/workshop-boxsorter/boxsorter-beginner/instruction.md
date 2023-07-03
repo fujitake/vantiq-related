@@ -178,7 +178,7 @@ Vantiq の Topic がエンドポイントになります。
 `EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
 
 1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力する
-1. `Configuration` の `Click to Edit` から以下の内容を入力し、 `OK` をクリックする
+1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックする
 
    |項目|設定値|
    |-|-|
