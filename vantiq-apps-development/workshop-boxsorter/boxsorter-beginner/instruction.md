@@ -29,7 +29,6 @@
     - [5. 【LogStream】仕分け指示をログとして表示](#5-logstream仕分け指示をログとして表示)
   - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
   - [参考情報](#参考情報)
-  - [Next step](#next-step)
 
 ## 実装詳細
 
@@ -509,12 +508,8 @@ Google Colaboratory からダミーデータを送信しておき、正しく仕
 ## 参考情報
 
 - Vantiq 1.34
-  - [実装サンプル（ver 1.34）](./box_sorter_1.34.zip)
+  - [実装サンプル（ver 1.34）](./data/box_sorter_beginner_1.34.zip)
 - Vantiq 1.36
-  - [実装サンプル（ver 1.36）](./box_sorter_1.36.zip)
-
-## Next step
-
-[【追加コンテンツ】Stateの中身を確認してみる](./additional.md)
+  - [実装サンプル（ver 1.36）](./data/box_sorter_beginner_1.36.zip)
 
 以上
