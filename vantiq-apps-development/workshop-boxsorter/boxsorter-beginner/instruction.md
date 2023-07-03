@@ -92,9 +92,33 @@
 
 ## 0.【準備】Google Colaboratory の動作確認
 
-入力には Google Colaboratory を使用します。
+Google Colaboratory を使用して、ダミーデータの生成します。  
+Google Colaboratory を利用するにあたり、 Vantiq Access Token を発行する必要があります。
 
-[BoxSorterDataGenerator](./BoxSorterDataGenerator.ipynb)
+1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開く
+
+   ![accesstoken_01](./imgs/accesstoken_01.png)
+
+1. 以下の内容を設定し、保存する
+
+   |項目|設定値|設定箇所|
+   |-|-|-|
+   |Name|BoxDataToken|-|
+   > 上記以外の名前でも問題ありません。
+
+   ![accesstoken_02](./imgs/accesstoken_02.png)
+
+1. 発行された `Access Token` をクリックして、クリップボードにコピーしておく
+
+   ![accesstoken_03](./imgs/accesstoken_03.png)
+
+1. 下記のリンクから Google Colaboratory を開く
+
+   🔗 [BoxSorterDataGenerator](./BoxSorterDataGenerator.ipynb)
+
+1. `Open in Colab` をクリックする
+
+   ![OpenGoogleColab](./imgs/open_google_colab.png)
 
 ## 1. 【Topic】Vantiqで Google Colaboratory のデータを受信する
 
