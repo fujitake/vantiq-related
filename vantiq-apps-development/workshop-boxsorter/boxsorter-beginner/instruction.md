@@ -345,7 +345,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
 この物流センターID `center_id` で仕分けをします。
 
-1. `AttachCondition` タスクの次に以下のタスクを追加する
+1. `AttachCondition` タスクの次に以下のタスクを追加し、アプリケーションを保存する
    1. 東京物流センター用
 
       |項目|設定値|
