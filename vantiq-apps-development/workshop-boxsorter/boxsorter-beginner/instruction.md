@@ -187,7 +187,7 @@ Vantiq の Topic がエンドポイントになります。
 
 1. App Builder のペインの上部にあるフロッピーディスクのアイコンをクリックし、アプリケーションを保存する
 
-1. `ReceiveBoxInfo` タスクを右クリックし、 `View Task Events` をクリックする
+1. `ReceiveBoxInfo` タスクを右クリックし、 `タスク Events を表示` をクリックする
    > `Subscription:BoxSorter_ReceiveBoxInfo` が開かれます。ここには ReceiveBoxInfo タスクの処理結果が表示されます。
 
 1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認する
