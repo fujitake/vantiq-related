@@ -141,3 +141,8 @@ Vantiqプラットフォーム管理チーム向けのクラウドインフラ�
 - [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)
 - [Vantiq Organization, Namespace, User Role の関係](./vantiq-platform-operations/docs/jp/org_user_management.md)
 - [Vantiq Edge Admin タスク](./vantiq-platform-operations/docs/jp/vantiq-edge-admin.md)
+
+### [Google Colaboratory](./vantiq-google-colab)
+
+Google Colaboratory に関するドキュメントやサンプルコードになります。
+
