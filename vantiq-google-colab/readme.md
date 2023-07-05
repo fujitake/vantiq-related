@@ -10,6 +10,6 @@ Google Colaboratory に関するドキュメントやサンプルコードにな
 
 > **アイコンの説明**
 > 
-> - :book: ドキュメントです。
+> - :book: 解説や手順などのドキュメントです。
 > - :computer: Google Colaboratory のサンプルコードです。
 > - :beginner: ワークショップなどで利用している Google Colaboratory コードです。
