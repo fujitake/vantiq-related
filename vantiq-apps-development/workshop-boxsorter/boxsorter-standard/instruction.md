@@ -252,21 +252,21 @@ Vantiqでは `Enrich` という Activity Pattern が用意されており、イ�
       |Name|sorting_condition|
       |Role|standard|
 
-   1. `sorting_condition`のペインが表示されるので、タブごとに以下の設定を行い保存する
+   1. `sorting_condition` のペインが表示されるので、タブごとに以下の設定を行い保存する
 
-      **Propertiesタブ**
+      **Properties タブ**
       |プロパティ名|データ型|Required|
       |-|-|-|
       |code|String|✅|
       |center_id|Integer|✅|
       |center_name|String|✅|
 
-      **Indexesタブ**
+      **Indexes タブ**
       |項目|設定値|Is Unigue|
       |-|-|-|
       |Key|code|✅|
 
-      **Natural Keysタブ**
+      **Natural Keys タブ**
       |項目|設定値|
       |-|-|
       |Key|code|
