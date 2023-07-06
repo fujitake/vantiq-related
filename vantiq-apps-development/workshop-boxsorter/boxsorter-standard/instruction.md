@@ -90,13 +90,13 @@
 |center_id|Integer|物流センターの ID|
 |center_name|String|物流センター名|
 
-> Vantiqのリソースの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md)を参照してください。
+> Vantiq のリソースの基礎について確認したい方は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
 
 ## 0.【準備】Google Colaboratory の動作確認
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 
-ダミーデータを受信するあたって、以下の MQTTブローカーを使用します。
+ダミーデータを送受信するあたって、以下の MQTTブローカーを使用します。
 |項目|設定値|備考|
 |-|-|-|
 |Server URI|mqtt://public.vantiq.com:1883|-|
@@ -140,7 +140,8 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 ## 1. 【Source】VantiqでMQTTブローカーのデータをサブスクライブする
 
-MQTTブローカーと接続したい場合、 MQTTクライアントが必要です。これは Vantiq でも同じです。Vantiq の Source は MQTT に対応しており、これがクライアントになります。
+MQTTブローカーと接続したい場合、 MQTTクライアントが必要です。これは Vantiq でも同じです。  
+Vantiq の Source は MQTT に対応しており、これがクライアントになります。
 
 1. MQTT Source を作成する
    1. メニューバーの `追加` -> `Source...` -> `+ 新規 Source` をクリックし Source の新規作成画面を開く
