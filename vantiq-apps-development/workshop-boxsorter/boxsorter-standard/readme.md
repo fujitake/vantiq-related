@@ -2,7 +2,7 @@
 
 ## 荷物仕分け (Box Sorter) アプリケーション 
 
-読み取った送り先コードで荷物を仕分けするアプリケーションの実装を通じてVantiqの基本機能を学びます。
+読み取った送り先コードで荷物を仕分けするアプリケーションの実装を通じて Vantiq の基本機能や MQTT について学びます。
 
 ## 荷物仕分けシステムの全体のイメージ
 
@@ -18,25 +18,29 @@
 
 [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
 
-ワークショップではVantiqの担当部分であるNo.3〜5を実装します。
->No.1と2は、MQTTクライアントから直接MQTTブローカーに読み取り結果のサンプル情報を送信することで代用します。
+ワークショップではVantiqの担当部分である No.3〜5 を実装します。
+> No.1〜2 は、 Google Colaboratory を利用し、 MQTTブローカーに読み取り結果のサンプル情報を送信することで代用します。  
+> Google Colaboratory の詳細は [こちら](/vantiq-google-colab\docs\jp\colab_basic_knowledge.md) で解説しています。
 
 ### Vantiqで実装する荷物仕分け (Box Sorter) アプリケーション 概要
 
 <img src="./imgs/vantiq-app.png" width="600">
 
-このアプリケーションを実装していきます。詳細は次のステップで説明しますが、`MQTTブローカーから情報を取得`、`仕分け`、`仕分け指示をMQTTブローカーに送信`という処理を行います。
+このアプリケーションを実装していきます。  
+詳細は次のステップで説明しますが、 `MQTTブローカーから情報を取得` 、`仕分け` 、`仕分け指示をMQTTブローカーに送信` という処理を行います。
 
 ## 各自で準備するVantiq以外の要素(事前にご準備ください)
 
 - MQTTブローカー
-  - Vantiqから仕分け結果を送信する先として使用します
-  - お好きなブローカーをご利用ください。AmazonMQなどマネージドなものを使っても、ActiveMQやMosquittoをご自身でインストールして準備しても構いません
-  - [The Free Public MQTT Broker by HiveMQ](https://www.hivemq.com/public-mqtt-broker/)のように無料で使用できるブローカーもございます
-  - Vantiqやご自身のクライアントからアクセスできる必要がありますのでインターネット接続できる必要があります
-- MQTTクライアント
-  - ご自身の環境からMQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します
-  - お好きなクライアントをご利用ください（[MQTT X](https://mqttx.app/)など）
+  - Vantiq から仕分け結果を送信する先として使用します。
+  - お好きなブローカーをご利用ください。AmazonMQなどマネージドなものを使っても、ActiveMQやMosquittoをご自身でインストールして準備しても構いません。
+  - [The Free Public MQTT Broker by HiveMQ](https://www.hivemq.com/public-mqtt-broker/) のように無料で使用できるブローカーもございます。
+  - Vantiqやご自身のクライアントからアクセスできる必要がありますのでインターネット接続できる必要があります。
+- Google アカウント
+  - Google Colaboratory を利用するために使用します。
+- MQTTクライアント（Google Colaboratory を利用しない場合）
+  - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
+  - お好きなクライアントをご利用ください（[MQTT X](https://mqttx.app/) など）。
 
 ## ドキュメント
 

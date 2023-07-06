@@ -15,6 +15,8 @@
     - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
     - [実装するリソース](#実装するリソース)
   - [0.【準備】Google Colaboratory の動作確認](#0準備google-colaboratory-の動作確認)
+    - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
+    - [Google Colaboratory の設定](#google-colaboratory-の設定)
   - [1. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#1-topicvantiqで-google-colaboratory-のデータを受信する)
   - [2. 【App Builder】荷物仕分けアプリケーション開発](#2-app-builder荷物仕分けアプリケーション開発)
     - [1. アプリケーションを作成する](#1-アプリケーションを作成する)
@@ -62,7 +64,7 @@
 |EventStream|ReceiveBoxInfo|Topic で受信した内容をアプリで受け取る|
 |Enrich|AttachCondition|仕分け条件をイベントに追加する<br/><span style="color:blue;">※本ワークショップでは荷物を物流センター単位で仕分けます<span>|
 |Filter|ExtractToTokyo<br/>ExtractToKanagawa<br/>ExtractToSaitama|条件に合致したイベントだけを通過させ、仕分けする|
-|LogStream|PublishToTokyo<br/>PublishToKanagawa<br/>PublishToSaitama|仕分け指示を Log に表示する|
+|LogStream|LogToTokyo<br/>LogToKanagawa<br/>LogToSaitama|仕分け指示を Log に表示する|
 
 > リソース名やタスク名は任意のものに変更しても構いません。
 
@@ -79,7 +81,7 @@
 |プロパティ名|データ型|論理名|
 |-|-|-|
 |code|String|送り先コード|
-|center_id|Integer|物流センターのID|
+|center_id|Integer|物流センターの ID|
 |center_name|String|物流センター名|
 
 > Vantiq のリソースの基礎について確認したい方は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
@@ -87,7 +89,9 @@
 ## 0.【準備】Google Colaboratory の動作確認
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
-Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。
+Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。  
+
+### Vantiq Access Token の発行
 
 1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開く
 
@@ -105,13 +109,17 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![accesstoken_03](./imgs/accesstoken_03.png)
 
+### Google Colaboratory の設定
+
 1. 下記のリンクから **データジェネレータ** のページを開く
 
    🔗 [BoxSorterDataGenerator](./BoxSorterDataGenerator.ipynb)
 
-1. `Open in Colab` をクリックし、 Google Colaboratory を開く
+   > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
-   ![OpenGoogleColab](./imgs/open_google_colab.png)
+1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
+
+   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
 
 1. `# 設定情報` に以下の内容を入力する
 
@@ -122,8 +130,8 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![google_colab_setting](./imgs/google_colab_setting.png)
 
-1. 上から順に1つずつ `実行ボタン` を押していく  
-   実行が終わるのを待ってから、次の `実行ボタン` を押してください。  
+1. 上から順に1つずつ `再生ボタン` を押していく  
+   実行が終わるのを待ってから、次の `再生ボタン` を押してください。  
 
    ![google_colab_run](./imgs/google_colab_run.png)
 

@@ -14,8 +14,7 @@
   - [実装詳細](#実装詳細)
     - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
     - [実装するリソース](#実装するリソース)
-  - [0.【準備】Google Colaboratory の動作確認](#0準備google-colaboratory-の動作確認)
-    - [Google Colaboratory の設定](#google-colaboratory-の設定)
+  - [0.【準備】入力用MQTTブローカー疎通確認](#0準備入力用mqttブローカー疎通確認)
   - [1. 【Source】VantiqでMQTTブローカーのデータをサブスクライブする](#1-sourcevantiqでmqttブローカーのデータをサブスクライブする)
   - [2. 【App Builder】荷物仕分けアプリケーション開発](#2-app-builder荷物仕分けアプリケーション開発)
     - [1. アプリケーションを作成する](#1-アプリケーションを作成する)
@@ -91,11 +90,9 @@
 
 > Vantiqのリソースの基礎について確認したい方は[こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md)を参照してください。
 
-## 0.【準備】Google Colaboratory の動作確認
+## 0.【準備】入力用MQTTブローカー疎通確認
 
-Google Colaboratory を使用して、ダミーデータの生成します。  
-
-ダミーデータを受信するあたって、以下の MQTTブローカーを使用します。
+入力には以下のMQTTブローカーを使用します。
 |項目|設定値|備考|
 |-|-|-|
 |Server URI|mqtt://public.vantiq.com:1883|-|
@@ -103,59 +100,41 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 >この MQTTブローカーはワークショップ用のパブリックなブローカーです。認証は不要です。  
 >上記以外の MQTTブローカーを利用しても問題ありません。
 
-### Google Colaboratory の設定
 
-1. 下記のリンクから **データジェネレータ** のページを開く
 
-   :link: [BoxSorterDataGenerator (Standard)](./../../../vantiq-google-colab/docs/jp/box-sorter_data-generator_standard.ipynb)
+1. ご自身のMQTTクライアントから上記のワークショップ用ブローカーに接続し、以下のようなJSON系式のメッセージを送信できることを確認してください
 
-1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
+   ```json
+   {
+       "msg": "Hello!"
+   }
+   ```
 
-   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
+   <img src="./imgs/try-publish.png" width="400">
 
-1. `# MQTTブローカー設定` に以下の内容を入力する
+> 今後の手順では、テスト用のメッセージをこの方法でMQTTブローカーに送信して開発を進めます。
 
-   |項目|設定値|備考|
-   |-|-|-|
-   |broker|public.vantiq.com|※変更不要です。|
-   |port|1883|※変更不要です。|
-   |topic|/workshop/jp/**yourname**/boxinfo|`yourname` の箇所に任意の値を入力します。（※英数字のみ）|
-   |client_id||※変更不要です。|
-   |username||※変更不要です。|
-   |password||※変更不要です。|
-
-1. 上から順に1つずつ `再生ボタン` を押していく  
-   実行が終わるのを待ってから、次の `再生ボタン` を押してください。  
-
-   1. `# モジュールのインストール`
-   1. `# モジュールインポート`
-   1. `# MQTTブローカー設定`
-   1. `# 送信データ設定`
-   1. `# MQTT Publisher 本体`
-
-1. エラーが発生していないことを確認し、 `# MQTT Publisher 本体` の左側の `停止ボタン` を押して、一旦、停止させておく
 
 
 
 ## 1. 【Source】VantiqでMQTTブローカーのデータをサブスクライブする
 
-MQTTブローカーと接続したい場合、 MQTTクライアントが必要です。これは Vantiq でも同じです。Vantiq の Source は MQTT に対応しており、これがクライアントになります。
+MQTTブローカーと接続したい場合、MQTTクライアントが必要です。これはVantiqでも同じです。VantiqのSourceはMQTTに対応しており、これがクライアントになります。
 
-1. MQTT Source を作成する
-   1. メニューバーの `追加` -> `Source...` -> `+ 新規 Source` をクリックし Source の新規作成画面を開く
-
+1. MQTT Sourceを作成する
+   1. メニューバーの`追加` -> `Source...` -> `+ New Source` をクリックしSourceの新規作成画面を開く
    1. 以下の内容を設定し、保存する
 
       |設定順|項目|設定値|設定箇所|
       |-|-|-|-|
       |1|Source Name|BoxInfoMqtt|-|
       |2|Source Type|MQTT|-|
-      |3|Server URI|mqtt://public.vantiq.com:1883|`Server URI` タブ -> `+ Server URI を追加`|
-      |4|Topic|/workshop/jp/yourname/boxinfo <br> ※`yourname` の箇所には Google Colaboratory の設定時に設定した値を使用する|`Topic` タブ -> `+ Topic を追加`
+      |3|Server URI|mqtt://public.vantiq.com:1883|`Server URI`タブ -> `+ Add Server    URI`|
+      |4|Topic|/workshop/jp/yourname/boxinfo <br> ※`yourname`の箇所には疎通確認時と同じ   値を使用する|`Topic`タブ -> `+ Add Topic`
       > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
 
    1. メッセージをサブスクライブできることを確認する
-      1. `BoxInfoMqtt` Source のペインを開き `データの受信テスト`(Test Data Receipt) をクリックする
+      1. `BoxInfoMqtt` Sourceのペインを開き`テストデータの受信`(Test Data Receipt)をクリックする
          > `Subscription:BoxInfoMqtt`というペインが新たに開かれます。メッセージをサブスクライブするとここに取得した内容が表示されます。
       1. ご自身のMQTTクライアント（MQTT Xなど）から疎通確認時と同じようにメッセージを送信する
       1. `Subscription:BoxInfoMqtt`にご自身のMQTTクライアントから送信した内容が表示されることを確認する
