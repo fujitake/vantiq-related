@@ -481,7 +481,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |Activity Pattern|Filter|
       |Task Name|ExtractToTokyo|
 
-      #### ExtractToTokyoの設定
+      #### ExtractToTokyo の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -494,7 +494,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |Activity Pattern|Filter|
       |Task Name|ExtractToKanagawa|
 
-      #### ExtractToKanagawaの設定
+      #### ExtractToKanagawa の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -507,7 +507,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |Activity Pattern|Filter|
       |Task Name|ExtractToSaitama|
 
-      #### ExtractToSaitamaの設定
+      #### ExtractToSaitama の設定
 
       |項目|設定値|備考|
       |-|-|-|
