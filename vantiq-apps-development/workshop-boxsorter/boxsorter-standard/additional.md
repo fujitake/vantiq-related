@@ -1,22 +1,27 @@
 # 荷物仕分けアプリケーション開発 追加コンテンツ
 
-## Stateの中身を確認してみる
+## State の中身を確認してみる
 
-Vantiqでは`State`と呼ばれるリソースにてメモリ上にデータを保持することができます。Typeと異なり、MongoDBにアクセスする必要がないため処理の高速化を図る際には基本的に使用することになります。
+Vantiq では `State` と呼ばれるリソースを用いることで、データをメモリ上に保持することができます。  
+Type と異なり、 MongoDB にアクセスする必要がないため、処理の高速化を図りたい場合には積極的に使用する必要があります。  
 
-今回、`State`を作る手順はありませんでしたが、`Cached Enrich`を使いTypeのレコードをメモリ上に保存し、処理の高速化を図るという実装を行いました。この際に自動で`State`が作成されています。
+今回、 `State` を作成したり操作するといった手順はありませんでした。  
+`State` を直接操作するかわりに `Cached Enrich` を使い Type のレコードをメモリ上に保存し、処理の高速化を図るという実装を行いました。  
+この際、自動で `State` が作成されています。  
+そして、 Cached Enrich は Type から該当レコードを取得し State に格納する、という処理を行なっています。  
 
-Cached EnrichはTypeから該当レコードを取得しStateに格納する、という処理を行なっています。Stateに格納されたTypeのレコードを確認していきます。
+本ワークショップでは、 State に格納された Type のレコードを確認していきます。
 
 ### 1. 自動生成されたリソースを確認する
 
-まずアプリケーションを作成すると自動で「apps.services.<アプリケーション名>」の`Service`が作成されます。Serviceとは、任意の機能単位でVantiqのリソースをカプセル化する機能です。※ここではServiceの詳細は割愛します。
+まずアプリケーションを作成すると自動で「apps.services.<アプリケーション名>」の `Service` が作成されます。  
+Service とは、任意の機能単位で Vantiq のリソースをカプセル化する機能です。※ここでは Service の詳細については割愛します。
 
-> 例えば今回であれば荷物仕分けアプリケーション機能単位でリソースをグルーピングするようなイメージです。
+> 今回の例であれば荷物仕分けアプリケーション機能単位でリソースをグルーピングするようなイメージです。
 
-StateはこのService単位で管理されます。
+State はこの Service 単位で管理されます。
 
-開発画面左の`Project Contents`を確認してみます。
+開発画面左の `Project Contents` を確認してみます。
 
 <img src="./imgs/project-contents.png" width="300">
 
@@ -30,10 +35,10 @@ StateはこのService単位で管理されます。
 |Procedure|apps.services.BoxSorter.AttachConditionStateReset|
 |Procedure|apps.services.BoxSorter.AttachConditionStateUpdateForEvent|
 
-Serviceと、Procedureが自動生成されていることがわかります。
-Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<Cached Enrichを設定したTask名>State***`という名前で生成されます。
+`Service` と、 `Procedure` が自動生成されていることがわかります。  
+Cached Enrich 関連の Procedure は `apps.services.<アプリケーション名>.<Cached Enrichを設定したTask名>State***` という名前で生成されます。
 
-これらのProcedureは`State`を操作するためのProcedureです。
+これらの Procedure は `State` を操作するための Procedure です。
 |Procedure|内容|
 |-|-|
 |***StateGet|Stateから値を取得する|
@@ -41,32 +46,33 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 |***StateReset|Stateをリセットする|
 |***StateUpdateForEvent|Typeのレコードを取得しStateをその内容で更新する|
 
-自動生成されたStateも確認してみます。StateはServiceの中に作成されます。
+自動生成された State も確認してみます。  
+State は Service の中に作成されます。
 
-1. `apps.services.BoxSorter`->`Implement`タブ->`State`->`Partitioned State Type`を開く
+1. `apps.services.BoxSorter` -> `Implement` タブ -> `State` -> `Partitioned State Type` を開く
 
 <img src="./imgs/state.png" width="400">
 
-`<Cached Enrichを設定したTask名>State`である`AttachConditionState`が作成されていることが確認できます。
+`<Cached Enrichを設定したTask名>State` である `AttachConditionState` が作成されていることが確認できます。
 
-このStateにProcedureでアクセスすることで格納されている内容を確認することができます。
+この State に Procedure でアクセスすることで格納されている内容を確認することができます。
 
-### 2. Procedureを使ってStateの中身を確認してみる
+### 2. Procedure を使って State の中身を確認してみる
 
-`***StateGet`のProcedureはCached Enrichの設定で指定したキーを引数にして、それに該当する値を返します。
+`***StateGet` の Procedure は Cached Enrich の設定で指定したキーを引数にして、それに該当する値を返します。
 
-`sorting_condition` Typeには以下のレコードが保存されていました。
+`sorting_condition` Type には以下のレコードが保存されていました。
 |center_id|center_name|code|
 |-|-|-|
 |1|東京物流センター|14961234567890|
 |2|神奈川物流センター|14961234567892|
 |3|埼玉物流センター|14961234567893|
 
-そして`code`をキーとしてイベントに対してレコードを追加していました。
+そして `code` をキーとしてイベントに対してレコードを追加していました。
 
-つまり`apps.services.BoxSorter.AttachConditionStateGet`を実行し、引数に`code`の値を設定するとそれに該当するStateの要素を取得できます。
+つまり `apps.services.BoxSorter.AttachConditionStateGet` を実行し、引数に `code` の値を設定するとそれに該当する State の要素を取得できます。
 
-1. `apps.services.BoxSorter.AttachConditionStateGet`を開き、以下の内容で実行する
+1. `apps.services.BoxSorter.AttachConditionStateGet` を開き、以下の内容で実行する
 
    |パラメータ名|center_name|
    |-|-|
@@ -92,16 +98,18 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
    }
    ```
 
-   > Cached Enrichが`code`の値が`14961234567890`であるイベントを処理する際に追加する内容がStateに格納されていることがわかります。
+   > Cached Enrich が `code` の値が `14961234567890` であるイベントを処理する際に追加する内容が State に格納されていることがわかります。
 
-### 3. Procedureを作ってStateに含まれる全ての要素を確認してみる
+### 3. Procedure を作って State に含まれる全ての要素を確認してみる
 
-次に、キー単位ではなくStateに含まれる全ての要素を確認してみます。これにはProcedureの実装が必要です。
+次に、キー単位ではなく State に含まれる全ての要素を確認してみます。  
+これには Procedure を実装する必要があります。
 
-1. `apps.services.BoxSorter`->`Implement`タブを開き`Procedures`の`+`をクリックし、`New Procedure`をクリックする
+1. `apps.services.BoxSorter` -> `Implement` タブを開き `Procedures` の `+` をクリックし、 `New Procedure` をクリックする
+
    <img src="./imgs/service-proc.png" width="300">
 
-1. 新規のProcedureが表示されるので以下の内容をペーストし保存する
+1. 新規の Procedure が表示されるので以下の内容をペーストし保存する
 
    ```js
    package apps.services
@@ -109,7 +117,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
    AttachConditionState.entrySet()
    ```
 
-   このProcedureは `AttachConditionState` Stateに含まれる全ての要素を取得します。  
+   このProcedure は `AttachConditionState` State に含まれる全ての要素を取得します。  
    
    VANTIQ 上を流れるイベントストリームは、複数のノードに分散されて処理されます。  
    この際、イベントストリームがどのノードで処理されるかは決まっておらず、負荷に応じて分散されています。  
@@ -117,9 +125,9 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
 
    Procedure を宣言する際に `multi partition` という修飾子をつけることで、分散した全ノードから要素を取得することができます。  
    
-   > 保存するとインターフェースの修復をするかの確認ダイアログが表示されますが`インターフェースの修復`をクリックするようにしてください。  
+   > 保存するとインターフェースの修復をするかの確認ダイアログが表示されますので、 `インターフェースの修復` をクリックするようにしてください。  
 
-   > `Service Builder`の詳細についてはここでは割愛します。  
+   > `Service Builder` の詳細については割愛します。  
 
 1. 実行し、結果を確認する
 
@@ -183,7 +191,7 @@ Cached Enrich関連のProcedureは`apps.services.<アプリケーション名>.<
    ]
    ```
 
-codeが`14961234567890`、`14961234567892`、`14961234567893`の要素がStateに格納されていることがわかります。
+code が `14961234567890` 、`14961234567892` 、`14961234567893` の要素が State に格納されていることがわかります。
 
 ## State の補足説明
 
@@ -206,6 +214,6 @@ State はここで述べた以外にも様々な特徴や使い方がありま�
 
 ## Next step
 
-開発者の方は、より深く理解をするため[Vantiq アプリケーション開発者コース＆レベル1認定試験](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/)（要ログイン）の受講をお勧めします。
+開発者の方は、より深く理解をするため [Vantiq アプリケーション開発者コース＆レベル1認定試験](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/) （要ログイン）の受講をお勧めします。
 
 以上
