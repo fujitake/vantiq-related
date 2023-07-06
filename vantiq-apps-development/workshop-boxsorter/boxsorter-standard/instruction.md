@@ -52,8 +52,8 @@
 
 |種別|リソース名|役割|
 |-|-|-|
-|MQTT|BoxInfoMqtt|荷物の仕分け情報の受信用MQTTクライアント|
-|MQTT|SortingResultMqtt|仕分け指示の送信用MQTTクライアント|
+|MQTT|BoxInfoMqtt|荷物の仕分け情報の受信用の MQTTクライアント|
+|MQTT|SortingResultMqtt|仕分け指示の送信用の MQTTクライアント|
 
 #### App
 
@@ -74,7 +74,7 @@
 
 > リソース名やタスク名は任意のものに変更しても構いません
 
-> App BuilderやActivity Patternの基礎について確認したい方は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md) を参照してください。
+> App Builder や Activity Pattern の基礎について確認したい方は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md) を参照してください。
 
 #### Type
 
