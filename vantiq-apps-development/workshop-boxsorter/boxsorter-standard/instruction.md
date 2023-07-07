@@ -625,7 +625,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |Activity Pattern|PublishToSource|
       |Task Name|PublishToTokyo|
 
-      #### PublishToTokyoの設定
+      #### PublishToTokyo の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -639,7 +639,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |Activity Pattern|PublishToSource|
       |Task Name|PublishToKanagawa|
 
-      #### PublishToKanagawaの設定
+      #### PublishToKanagawa の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -653,7 +653,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |Activity Pattern|PublishToSource|
       |Task Name|PublishToSaitama|
 
-      #### PublishToSaitamaの設定
+      #### PublishToSaitama の設定
 
       |項目|設定値|備考|
       |-|-|-|
