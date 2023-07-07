@@ -18,18 +18,20 @@ Beginner コースとは下記の点が異なります。
 Vantiq では、外部システムとの接続ポイントとして、 Source というリソースが用意されています。  
 Source を利用することで、様々な通信プロトコルを用いたデータの送受信が可能となります。
 
-#### CachedEnrich
+#### CachedEnrich Activity Pattern
 
 Type へ毎回 アクセスを行う **Enrich** ではなく、 Type のデータをメモリ上にキャッシュすることでより高速な処理が可能になる **CachedEnrich** を用いるように変更します。
 
-#### SplitByGroup
+#### SplitByGroup Activity Pattern
 
 CachedEnrich を用いる上で必要になる **SplitByGroup** を用います。  
 
 Vantiq では複数の処理ノードにイベントが分散されて処理されています。  
 事前に **SplitByGroup** を用いることで、任意のキー単位でイベントをグルーピングし、処理されるノードを固定できるようになります。
 
+#### Transformation Activity Pattern
 
+イベントのフォーマットを変換するために **Transformation** を用います。
 
 ## 荷物仕分けシステムの全体のイメージ
 
