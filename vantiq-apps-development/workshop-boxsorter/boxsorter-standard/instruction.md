@@ -27,6 +27,7 @@
     - [7. 【PublishToSource】仕分け指示をSource経由でMQTTブローカーに送信する](#7-publishtosource仕分け指示をsource経由でmqttブローカーに送信する)
   - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
     - [Google Colaboratory の設定](#google-colaboratory-の設定-1)
+  - [補足説明](#補足説明)
   - [参考情報](#参考情報)
   - [Next step](#next-step)
 
@@ -479,7 +480,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |項目|設定値|
       |-|-|
       |Activity Pattern|Filter|
-      |Task Name|ExtractToTokyo|
+      |タスク Name|ExtractToTokyo|
 
       #### ExtractToTokyo の設定
 
@@ -492,7 +493,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |項目|設定値|
       |-|-|
       |Activity Pattern|Filter|
-      |Task Name|ExtractToKanagawa|
+      |タスク Name|ExtractToKanagawa|
 
       #### ExtractToKanagawa の設定
 
@@ -505,7 +506,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |項目|設定値|
       |-|-|
       |Activity Pattern|Filter|
-      |Task Name|ExtractToSaitama|
+      |タスク Name|ExtractToSaitama|
 
       #### ExtractToSaitama の設定
 
@@ -623,7 +624,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |項目|設定値|
       |-|-|
       |Activity Pattern|PublishToSource|
-      |Task Name|PublishToTokyo|
+      |タスク Name|PublishToTokyo|
 
       #### PublishToTokyo の設定
 
@@ -637,7 +638,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |項目|設定値|
       |-|-|
       |Activity Pattern|PublishToSource|
-      |Task Name|PublishToKanagawa|
+      |タスク Name|PublishToKanagawa|
 
       #### PublishToKanagawa の設定
 
@@ -651,7 +652,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |項目|設定値|
       |-|-|
       |Activity Pattern|PublishToSource|
-      |Task Name|PublishToSaitama|
+      |タスク Name|PublishToSaitama|
 
       #### PublishToSaitama の設定
 
@@ -719,6 +720,12 @@ MQTTクライアントで送信先の Topic をサブスクライブしておき
    **例: /center/tokyo Topic に お茶 24本 の仕分け指示が届いている**
 
    ![result.png](./imgs/result.png)
+
+## 補足説明
+
+Type の NaturalKey については、下記を参照してください。
+
+:link: [Type の NaturalKey とは？](#type-の-naturalkey-とは)
 
 ## 参考情報
 

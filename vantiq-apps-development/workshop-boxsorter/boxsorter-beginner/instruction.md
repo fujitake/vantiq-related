@@ -25,6 +25,7 @@
     - [4. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#4-filter条件に合致したイベントだけを通過させ仕分けする)
     - [5. 【LogStream】仕分け指示をログとして表示](#5-logstream仕分け指示をログとして表示)
   - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
+  - [補足説明](#補足説明)
   - [参考情報](#参考情報)
 
 ## 実装詳細
@@ -227,19 +228,19 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
    1. `sorting_condition` のペインが表示されるので、タブごとに以下の設定を行い保存する
 
-      **Propertiesタブ**
+      **Properties タブ**
       |プロパティ名|データ型|Required|
       |-|-|-|
       |code|String|✅|
       |center_id|Integer|✅|
       |center_name|String|✅|
 
-      **Indexesタブ**
+      **Indexes タブ**
       |項目|設定値|Is Unigue|
       |-|-|-|
       |Key|code|✅|
 
-      **Natural Keysタブ**
+      **Natural Keys タブ**
       |項目|設定値|
       |-|-|
       |Key|code|
@@ -360,7 +361,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |Activity Pattern|Filter|
       |Task Name|ExtractToTokyo|
 
-      #### ExtractToTokyoの設定
+      #### ExtractToTokyo の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -373,7 +374,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |Activity Pattern|Filter|
       |Task Name|ExtractToKanagawa|
 
-      #### ExtractToKanagawaの設定
+      #### ExtractToKanagawa の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -386,7 +387,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |Activity Pattern|Filter|
       |Task Name|ExtractToSaitama|
 
-      #### ExtractToSaitamaの設定
+      #### ExtractToSaitama の設定
 
       |項目|設定値|備考|
       |-|-|-|
@@ -514,6 +515,12 @@ Google Colaboratory からダミーデータを送信しておき、正しく仕
    **例: 各物流センターごとに Log メッセージ が表示されている**
 
    ![Log メッセージ](./imgs/log-message.png)
+
+## 補足説明
+
+Type の NaturalKey については、下記を参照してください。
+
+:link: [Type の NaturalKey とは？](#type-の-naturalkey-とは)
 
 ## 参考情報
 
