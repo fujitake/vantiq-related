@@ -1,8 +1,17 @@
-# Vantiq ワークショップ 概要
+# 荷物仕分けアプリケーション (Standard コース)
 
-## 荷物仕分け (Box Sorter) アプリケーション 
+読み取った送り先コードで荷物を仕分けするアプリケーションの開発を体験します。  
 
-読み取った送り先コードで荷物を仕分けするアプリケーションの実装を通じて Vantiq の基本機能や MQTT について学びます。  
+> **補足**  
+> 物流センターで利用されている荷物仕分けシステムは下記の様に呼ばれています。
+>
+> - ボックスソーター (Box sorter)
+> - スライドシューソーター (Sliding shoe sorter)
+> - サーフィンソーター (Surfing Sorter)
+
+## 荷物仕分け (Box Sorter) アプリケーション の学習概要
+
+荷物仕分けアプリケーションの開発を通じて Vantiq の基本機能や MQTT について学びます。  
 
 ### Beginner コースとの違い
 
@@ -18,20 +27,27 @@ Beginner コースとは下記の点が異なります。
 Vantiq では、外部システムとの接続ポイントとして、 Source というリソースが用意されています。  
 Source を利用することで、様々な通信プロトコルを用いたデータの送受信が可能となります。
 
-#### CachedEnrich Activity Pattern
+### 学習目標
 
-Type へ毎回 アクセスを行う **Enrich** ではなく、 Type のデータをメモリ上にキャッシュすることでより高速な処理が可能になる **CachedEnrich** を用いるように変更します。
+このワークショップ終了後、下記のことができるようになっていることが目標になります。
 
-#### SplitByGroup Activity Pattern
+#### 主目的
 
-CachedEnrich を用いる上で必要になる **SplitByGroup** を用います。  
+1. **Source リソース** を利用して **MQTT ブローカー** とデータの送受信を行うアプリケーションの開発方法を理解する。
+1. 次の **Vantiq リソース** の作成方法を理解する。
+   1. **Source** 
+1. 次の **Activity Pattern** の使い方を理解する。
+   1. **EventStream**
+   1. **SplitByGroup**
+   1. **CashedEnrich**
+   1. **Transformation**
+   1. **PublishToSource**
+1. 外部システムとの接続ポイントとして、 **Source** を用いることを理解する。
+1. **App** の **EventStream** Activity Pattern に **Source** を指定することで、外部からのデータを **App** に引き渡せることを理解する。
 
-Vantiq では複数の処理ノードにイベントが分散されて処理されています。  
-事前に **SplitByGroup** を用いることで、任意のキー単位でイベントをグルーピングし、処理されるノードを固定できるようになります。
+#### 副次目的
 
-#### Transformation Activity Pattern
-
-イベントのフォーマットを変換するために **Transformation** を用います。
+1. MQTT の概要を理解する。
 
 ## 荷物仕分けシステムの全体のイメージ
 
@@ -57,6 +73,39 @@ Vantiq では複数の処理ノードにイベントが分散されて処理さ�
 
 このアプリケーションを実装していきます。  
 詳細は次のステップで説明しますが、 `MQTTブローカーから情報を取得` 、`仕分け` 、`仕分け指示を MQTTブローカーに送信` という処理を行います。
+
+### 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
+
+このワークショップでは下記の Activity Pattern を利用します。
+> 荷物仕分けアプリケーション (Beginner コース) で紹介したものは割愛します。  
+> 詳細は [こちら](./../boxsorter-beginner/readme.md) を参照してください。
+
+#### EventStream Activity
+
+App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
+**EventStream** はデータの入り口となります。  
+今回は **Topic** ではなく、 **Source** からデータを受け取ります。
+
+#### CachedEnrich Activity
+
+イベントが通過するたびに Type へのアクセスを行う **Enrich** に代わり、 Type のデータをメモリ上にキャッシュし、より高速な処理ができる **CachedEnrich** を用いるようにします。
+
+#### SplitByGroup Activity
+
+CachedEnrich を用いる上で必要になる Activity Pattern が **SplitByGroup** になります。  
+
+Vantiq ではイベントが複数の処理ノードに分散されて処理されています。  
+事前に **SplitByGroup** を用いることで、任意のキー単位でイベントをグルーピングし、処理されるノードが固定されるようにできます。
+
+#### Transformation Activity
+
+イベントのフォーマットを変換するために **Transformation** を用います。  
+
+入力データや出力データのスキーマが未定な場合やスキーマが変更になった場合にも活用することができ、スキーマに対して柔軟な対応が可能になります。  
+
+#### PublishToSource Activity
+
+イベントデータを **Source** 経由で外部に送信するために **PublishToSource** を用います。
 
 ## 各自で準備するVantiq以外の要素(事前にご準備ください)
 
