@@ -32,6 +32,10 @@
 - Google アカウント
   - Google Colaboratory を利用するために使用します。
 
+## 必要なマテリアル
+
+:link: [sorting_condition.csv](./data/sorting_condition.csv)
+
 ## ドキュメント
 
-- [手順](./instruction.md)
+:link: [手順](./instruction.md)

@@ -72,6 +72,10 @@ Vantiq では複数の処理ノードにイベントが分散されて処理さ�
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
   - お好きなクライアントをご利用ください（[MQTT X](https://mqttx.app/) など）。
 
+## 必要なマテリアル
+
+:link: [sorting_condition.csv](./data/sorting_condition.csv)
+
 ## ドキュメント
 
-- [手順](./instruction.md)
+:link: [手順](./instruction.md)
