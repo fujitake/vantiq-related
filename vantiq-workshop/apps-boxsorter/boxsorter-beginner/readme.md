@@ -1,4 +1,4 @@
-# 荷物仕分けアプリケーション (Beginner コース)
+# 荷物仕分けアプリケーション (Beginner)
 
 読み取った送り先コードで荷物を仕分けするアプリケーションの開発を体験します。  
 
@@ -57,7 +57,22 @@
 > No.1〜2 は、 Google Colaboratory を利用し、 TOPIC に読み取り結果のサンプル情報を送信することで代用します。  
 > Google Colaboratory の詳細は [こちら](/vantiq-google-colab\docs\jp\colab_basic_knowledge.md) で解説しています。
 
-### Vantiq で実装する荷物仕分け (Box Sorter) アプリケーション 概要
+### Vantiq で利用するリソースなどの解説
+
+Vantiq リソースや各用語について解説します。
+
+#### Topic
+
+Vantiq 内部でデータの受け渡しに利用するエンドポイントになります。  
+また、外部からデータを受け渡す際の REST API のエンドポイントとして用いることもできます。
+
+#### App (App Builder)
+
+App は GUI でアプリケーションの作成ができるツールになります。  
+あらかじめ用意されている処理のパターンを組み合わせて開発を行います。  
+用意されたパターンで対応できない場合は、プログラミングも可能なため柔軟な実装ができます。
+
+## Vantiq で実装する荷物仕分け (Box Sorter) アプリケーション 概要
 
 <img src="./imgs/vantiq-app.png" width="600">
 
