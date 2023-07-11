@@ -29,7 +29,6 @@
     - [Google Colaboratory の設定](#google-colaboratory-の設定-1)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
-  - [Next step](#next-step)
 
 ## 実装詳細
 
@@ -733,9 +732,5 @@ Type の NaturalKey については、下記を参照してください。
   - [実装サンプル（ver 1.34）](./data/box_sorter_standard_1.34.zip)
 - Vantiq 1.36
   - [実装サンプル（ver 1.36）](./data/box_sorter_standard_1.36.zip)
-
-## Next step
-
-[【追加コンテンツ】Stateの中身を確認してみる](./additional.md)
 
 以上
