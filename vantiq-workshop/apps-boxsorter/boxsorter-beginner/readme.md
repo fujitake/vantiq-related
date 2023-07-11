@@ -13,9 +13,9 @@
 
 荷物仕分けアプリケーションの開発を通じて Vantiq の基本機能を学びます。  
 
-### 学習目標
+### 学習目的
 
-このワークショップ終了後、下記のことができるようになっていることが目標になります。
+このワークショップの目的は下記のとおりです。
 
 #### 主目的
 
@@ -112,7 +112,8 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ## 必要なマテリアル
 
-:link: [sorting_condition.csv](./data/sorting_condition.csv)
+商品マスタデータ
+- :link: [sorting_condition.csv](./data/sorting_condition.csv)
 
 ## ドキュメント
 

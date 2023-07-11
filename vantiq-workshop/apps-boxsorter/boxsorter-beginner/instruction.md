@@ -1,6 +1,8 @@
-# 荷物仕分けアプリケーション開発
+# 荷物仕分けアプリケーション開発 (Beginner)
 
 ## 実装の流れ
+
+下記の流れで実装していきます。
 
 1. 【Topic】Vantiq で Google Colaboratory 用のエンドポイントを作成する
 1. 【App Builder】荷物仕分けアプリの開発
@@ -8,7 +10,7 @@
 
 ## 目次
 
-- [荷物仕分けアプリケーション開発](#荷物仕分けアプリケーション開発)
+- [荷物仕分けアプリケーション開発 (Beginner)](#荷物仕分けアプリケーション開発-beginner)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [実装詳細](#実装詳細)
@@ -524,9 +526,9 @@ Type の NaturalKey については、下記を参照してください。
 
 ## 参考情報
 
-- Vantiq 1.34
-  - [実装サンプル（ver 1.34）](./data/box_sorter_beginner_1.34.zip)
-- Vantiq 1.36
-  - [実装サンプル（ver 1.36）](./data/box_sorter_beginner_1.36.zip)
+プロジェクトファイル
+- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./data/box_sorter_beginner_1.34.zip)
+- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./data/box_sorter_beginner_1.36.zip)
+
 
 以上
