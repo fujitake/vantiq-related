@@ -115,7 +115,6 @@ stateの依存関係は以下のようになっている。
   az account show
   ```
 
-- kubectlをインストール
 - Terraformのtfstateデータをblobに保存する場合、Storage Accountを作成する。 (ローカルマシンで管理するのではあれば不要だが、共同作業ができなくなる。)
   ```sh
   # リソースグループを作成
