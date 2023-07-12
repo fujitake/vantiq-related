@@ -62,13 +62,13 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 
 このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
 
-### [Vantiq ワークショップ](./vantiq-workshop/readme.md)
+### [Vantiq 入門](./vantiq-introduction/readme.md)
 
-Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式で解説しています。
+Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式を含め、様々な方法で解説しています。
 
-1. [荷物仕分けアプリケーション (Beginner)](./vantiq-workshop/apps-boxsorter/boxsorter-beginner/readme.md)
-1. [荷物仕分けアプリケーション (Standard)](./vantiq-workshop/apps-boxsorter/boxsorter-standard/readme.md)
-1. [荷物仕分けアプリケーション (State)](./vantiq-workshop/apps-boxsorter/boxsorter-state/readme.md)
+1. [荷物仕分けアプリケーション (Beginner)](./vantiq-introduction/apps-boxsorter/boxsorter-beginner/readme.md)
+1. [荷物仕分けアプリケーション (Standard)](./vantiq-introduction/apps-boxsorter/boxsorter-standard/readme.md)
+1. [荷物仕分けアプリケーション (State)](./vantiq-introduction/apps-boxsorter/boxsorter-state/readme.md)
 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
 
