@@ -98,7 +98,7 @@ stateの依存関係は以下のようになっている。
 
 - kubectlをインストール
   ```sh
-  sudo snap install kubectl –classic
+  sudo snap install kubectl --classic
   ```
 
 - account管理者としてログインする
