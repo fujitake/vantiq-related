@@ -37,10 +37,12 @@ Type と異なり、 MongoDB にアクセスする必要がないため、処理
 
 ## 必要なマテリアル
 
-商品マスタデータ
+### 商品マスタデータ
+
 - :link: [sorting_condition.csv](./../boxsorter-standard/data/sorting_condition.csv)
 
-プロジェクトファイル
+### プロジェクトファイル
+
 - :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.34）](./data/box_sorter_standard_1.34.zip)
 - :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.36）](./data/box_sorter_standard_1.36.zip)
 

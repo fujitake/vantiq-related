@@ -112,7 +112,8 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ## 必要なマテリアル
 
-商品マスタデータ
+### 商品マスタデータ
+
 - :link: [sorting_condition.csv](./data/sorting_condition.csv)
 
 ## ドキュメント
