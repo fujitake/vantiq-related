@@ -30,7 +30,7 @@
 
 ### MQTTクライアント
 
-- :link: [MQTTX Download](https://mqttx.app/downloads)
+- :globe_with_meridians: [MQTTX Download](https://mqttx.app/downloads)
 
 ### ドキュメント
 

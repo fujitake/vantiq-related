@@ -51,7 +51,7 @@
 1. 制御システムは仕分け指示を MQTTブローカーから取得する。
 1. 制御システムは仕分け指示に従ってソーターを制御する。
 
-:link: [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
+:globe_with_meridians: [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
 
 ワークショップではVantiqの担当部分である No.3〜5 を実装します。
 > No.1〜2 は、 Google Colaboratory を利用し、 MQTTブローカーに読み取り結果のサンプル情報を送信することで代用します。  
@@ -117,13 +117,13 @@ Vantiq ではイベントが複数の処理ノードに分散されて処理さ�
   - Vantiq から仕分け結果を送信する先として使用します。
   - お好きなブローカーをご利用ください。  
     AmazonMQ などマネージドなものを使っても、 ActiveMQ や Mosquitto をご自身でインストールして準備しても構いません。
-  - [The Free Public MQTT Broker by HiveMQ](https://www.hivemq.com/public-mqtt-broker/) のように無料で使用できるブローカーもございます。
+  - :globe_with_meridians:[The Free Public MQTT Broker by HiveMQ](https://www.hivemq.com/public-mqtt-broker/) のように無料で使用できるブローカーもございます。
   - Vantiq やご自身のクライアントからアクセスできる必要がありますのでインターネット接続できる必要があります。
 - Google アカウント
   - Google Colaboratory を利用するために使用します。
 - MQTTクライアント（Google Colaboratory を利用しない場合）
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
-  - お好きなクライアントをご利用ください（[MQTTX](https://mqttx.app/) など）。
+  - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
 
 ## 必要なマテリアル
 

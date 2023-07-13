@@ -33,4 +33,4 @@
 ## 関連リソース
 
 ### Vantiq Reference
-  - :link: [Organization Administration Tasks](https://dev.vantiq.co.jp/docs/system/namespaces/index.html#organization-administration-tasks)
+  - :globe_with_meridians: [Organization Administration Tasks](https://dev.vantiq.co.jp/docs/system/namespaces/index.html#organization-administration-tasks)

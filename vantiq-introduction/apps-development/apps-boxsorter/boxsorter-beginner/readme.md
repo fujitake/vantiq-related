@@ -51,7 +51,7 @@
 1. Vantiq は仕分け指示を制御システムに送信する。
 1. 制御システムは仕分け指示に従ってソーターを制御する。
 
-:link: [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
+:globe_with_meridians: [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
 
 ワークショップでは Vantiq の担当部分である No.3〜4 を実装します。
 > No.1〜2 は、 Google Colaboratory を利用し、 TOPIC に読み取り結果のサンプル情報を送信することで代用します。  

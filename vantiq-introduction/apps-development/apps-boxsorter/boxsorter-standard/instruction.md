@@ -77,7 +77,7 @@
 
 > リソース名やタスク名は任意のものに変更しても構いません
 
-> App Builder や Activity Pattern の基礎について確認したい方は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md) を参照してください。
+> App Builder や Activity Pattern の基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md) を参照してください。
 
 #### Type
 
@@ -93,7 +93,7 @@
 |center_id|Integer|物流センターの ID|
 |center_name|String|物流センター名|
 
-> Vantiq のリソースの基礎について確認したい方は [こちら](https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
+> Vantiq のリソースの基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
 
 ## 0.【準備】Google Colaboratory の動作確認
 
@@ -672,8 +672,8 @@ MQTTクライアントで送信先の Topic をサブスクライブしておき
 > MQTTクライアントは Google Colaboratory の Python スクリプト以外でも大丈夫です。  
 >  
 > 例：
-> - :link: [MQTTX](https://mqttx.app/)
-> - :link: [Try MQTT Browser Client](https://www.hivemq.com/demos/websocket-client/) （HiveMQ が提供する Web アプリ）
+> - :globe_with_meridians: [MQTTX](https://mqttx.app/)
+> - :globe_with_meridians: [Try MQTT Browser Client](https://www.hivemq.com/demos/websocket-client/) （HiveMQ が提供する Web アプリ）
 
 ### Google Colaboratory の設定
 
