@@ -68,8 +68,8 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 
 #### 開発環境の準備
 
-- [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/root_account.md)
-- [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/dev_account.md)
+- [Vantiqアカウント作成（開発者向け）](./vantiq-introduction/apps-development/vantiq-devenv/root_account/root_account.md)
+- [Vantiqアカウント作成（組織管理者向け）](./vantiq-introduction/apps-development/vantiq-devenv/dev_account/dev_account.md)
 
 #### アプリケーション開発入門
 
