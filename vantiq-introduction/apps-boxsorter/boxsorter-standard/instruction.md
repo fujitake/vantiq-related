@@ -18,7 +18,7 @@
     - [実装するリソース](#実装するリソース)
   - [0.【準備】Google Colaboratory の動作確認](#0準備google-colaboratory-の動作確認)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
-  - [1. 【Source】VantiqでMQTTブローカーのデータをサブスクライブする](#1-sourcevantiqでmqttブローカーのデータをサブスクライブする)
+  - [1. 【Source】Vantiq で MQTTブローカーのデータをサブスクライブする](#1-sourcevantiq-で-mqttブローカーのデータをサブスクライブする)
   - [2. 【App Builder】荷物仕分けアプリケーション開発](#2-app-builder荷物仕分けアプリケーション開発)
     - [1. アプリケーションを作成する](#1-アプリケーションを作成する)
     - [2.【EventStream】Source でサブスクライブした内容をアプリケーションで受け取る](#2eventstreamsource-でサブスクライブした内容をアプリケーションで受け取る)
@@ -140,7 +140,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 1. エラーが発生していないことを確認し、 `# MQTT Publisher 本体` の左側の `停止ボタン` を押して、一旦、停止させておく
 
-## 1. 【Source】VantiqでMQTTブローカーのデータをサブスクライブする
+## 1. 【Source】Vantiq で MQTTブローカーのデータをサブスクライブする
 
 MQTTブローカーと接続したい場合、 MQTTクライアントが必要です。これは Vantiq でも同じです。  
 Vantiq の Source は MQTT に対応しており、これがクライアントになります。
@@ -161,8 +161,8 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
    1. メッセージをサブスクライブできることを確認する
       1. `BoxInfoMqtt` Source のペインを開き `データの受信テスト`(Test Data Receipt) をクリックする
          > `Subscription:BoxInfoMqtt`というペインが新たに開かれます。メッセージをサブスクライブするとここに取得した内容が表示されます。
-      1. ご自身のMQTTクライアント（MQTT Xなど）から疎通確認時と同じようにメッセージを送信する
-      1. `Subscription:BoxInfoMqtt`にご自身のMQTTクライアントから送信した内容が表示されることを確認する
+      1. Google Colaboratory からメッセージを送信する
+      1. `Subscription:BoxInfoMqtt` に Google Colaboratory から送信した内容が表示されることを確認する
 
          ![sub-test-msg](./imgs/sub-test-msg.png)
 
