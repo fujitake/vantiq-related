@@ -29,6 +29,7 @@
   - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
+    - [プロジェクトファイル](#プロジェクトファイル)
 
 ## 実装詳細
 
@@ -526,9 +527,10 @@ Type の NaturalKey については、下記を参照してください。
 
 ## 参考情報
 
-プロジェクトファイル
-- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./data/box_sorter_beginner_1.34.zip)
-- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./data/box_sorter_beginner_1.36.zip)
+### プロジェクトファイル
+
+- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_beginner_1.34.zip)
+- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_beginner_1.36.zip)
 
 
 以上

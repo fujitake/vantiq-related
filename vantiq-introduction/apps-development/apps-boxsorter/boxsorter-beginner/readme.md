@@ -114,7 +114,7 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ### 商品マスタデータ
 
-- :link: [sorting_condition.csv](./data/sorting_condition.csv)
+- :link: [sorting_condition.csv](./../data/sorting_condition.csv)
 
 ## ドキュメント
 

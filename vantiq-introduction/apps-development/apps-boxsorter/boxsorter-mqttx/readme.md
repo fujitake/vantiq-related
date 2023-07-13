@@ -25,8 +25,8 @@
 
 ### プロジェクトファイル
 
-- :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.34）](./data/box_sorter_standard_1.34.zip)
-- :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.36）](./data/box_sorter_standard_1.36.zip)
+- :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_standard_1.34.zip)
+- :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_standard_1.36.zip)
 
 ### MQTTクライアント
 

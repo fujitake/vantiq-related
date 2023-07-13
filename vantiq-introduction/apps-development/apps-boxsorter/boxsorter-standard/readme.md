@@ -129,7 +129,7 @@ Vantiq ではイベントが複数の処理ノードに分散されて処理さ�
 
 ### 商品マスタデータ
 
-- :link: [sorting_condition.csv](./data/sorting_condition.csv)
+- :link: [sorting_condition.csv](./../data/sorting_condition.csv)
 
 ## ドキュメント
 
