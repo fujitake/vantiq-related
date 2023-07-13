@@ -119,7 +119,7 @@ Pumps Type にマスタデータを登録します。今回は複数件のデー
 
 Type の NaturalKey については、下記を参照してください。
 
-:link: [Type の NaturalKey とは？](#type-の-naturalkey-とは)
+- [Type の NaturalKey とは？](/vantiq-apps-development/docs/jp/reverse-lookup.md#type-の-naturalkey-とは)
 
 ## Vantiq 1-day Workshop 次のセッション  
 |Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |

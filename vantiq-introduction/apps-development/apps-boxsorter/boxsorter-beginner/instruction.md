@@ -117,9 +117,9 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 下記のリンクから **データジェネレータ** のページを開く
 
-   :link: [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
+   - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
 
-   > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
+      > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
 1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
 
@@ -523,14 +523,14 @@ Google Colaboratory からダミーデータを送信しておき、正しく仕
 
 Type の NaturalKey については、下記を参照してください。
 
-:link: [Type の NaturalKey とは？](#type-の-naturalkey-とは)
+- [Type の NaturalKey とは？](/vantiq-apps-development/docs/jp/reverse-lookup.md#type-の-naturalkey-とは)
 
 ## 参考情報
 
 ### プロジェクトファイル
 
-- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_beginner_1.34.zip)
-- :link: [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_beginner_1.36.zip)
+- [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_beginner_1.34.zip)
+- [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_beginner_1.36.zip)
 
 
 以上

@@ -111,7 +111,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 1. 下記のリンクから **データジェネレータ** のページを開く
 
-   :link: [BoxSorterDataGenerator (Standard)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_standard.ipynb)
+   - [BoxSorterDataGenerator (Standard)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_standard.ipynb)
 
    > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
@@ -672,16 +672,16 @@ MQTTクライアントで送信先の Topic をサブスクライブしておき
 > MQTTクライアントは Google Colaboratory の Python スクリプト以外でも大丈夫です。  
 >  
 > 例：
-> - [MQTTX](https://mqttx.app/)
-> - [Try MQTT Browser Client](https://www.hivemq.com/demos/websocket-client/) （HiveMQ が提供する Web アプリ）
+> - :link: [MQTTX](https://mqttx.app/)
+> - :link: [Try MQTT Browser Client](https://www.hivemq.com/demos/websocket-client/) （HiveMQ が提供する Web アプリ）
 
 ### Google Colaboratory の設定
 
 1. 下記のリンクから **サブスクライブアプリ** のページを開く
 
-   :link: [BoxSorterDataSubscriber (Standard)](/vantiq-google-colab/docs/jp/box-sorter_data-subscriber_standard.ipynb)
+   - [BoxSorterDataSubscriber (Standard)](/vantiq-google-colab/docs/jp/box-sorter_data-subscriber_standard.ipynb)
 
-   > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
+      > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
 1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
 
@@ -727,13 +727,13 @@ MQTTクライアントで送信先の Topic をサブスクライブしておき
 
 Type の NaturalKey については、下記を参照してください。
 
-:link: [Type の NaturalKey とは？](#type-の-naturalkey-とは)
+- [Type の NaturalKey とは？](/vantiq-apps-development/docs/jp/reverse-lookup.md#type-の-naturalkey-とは)
 
 ## 参考情報
 
 ### プロジェクトファイル
 
-- :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_standard_1.34.zip)
-- :link: [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_standard_1.36.zip)
+- [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_standard_1.34.zip)
+- [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_standard_1.36.zip)
 
 以上

@@ -15,7 +15,7 @@
 
 > **注意**  
 > 荷物仕分けアプリケーション (Beginner) を実施していない場合は、先に 荷物仕分けアプリケーション (Beginner) を実施してください。  
-> :link: [荷物仕分けアプリケーション (Beginner)](./../boxsorter-beginner/readme.md)
+> - [荷物仕分けアプリケーション (Beginner)](./../boxsorter-beginner/readme.md)
 
 ### 学習目的
 
@@ -123,14 +123,14 @@ Vantiq ではイベントが複数の処理ノードに分散されて処理さ�
   - Google Colaboratory を利用するために使用します。
 - MQTTクライアント（Google Colaboratory を利用しない場合）
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
-  - お好きなクライアントをご利用ください（[MQTT X](https://mqttx.app/) など）。
+  - お好きなクライアントをご利用ください（[MQTTX](https://mqttx.app/) など）。
 
 ## 必要なマテリアル
 
 ### 商品マスタデータ
 
-- :link: [sorting_condition.csv](./../data/sorting_condition.csv)
+- [sorting_condition.csv](./../data/sorting_condition.csv)
 
-## ドキュメント
+### ドキュメント
 
-:link: [手順](./instruction.md)
+- [手順](./instruction.md)
