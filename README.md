@@ -68,6 +68,7 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 
 1. [荷物仕分けアプリケーション (Beginner)](./vantiq-introduction/apps-boxsorter/boxsorter-beginner/readme.md)
 1. [荷物仕分けアプリケーション (Standard)](./vantiq-introduction/apps-boxsorter/boxsorter-standard/readme.md)
+1. [荷物仕分けアプリケーション (MQTTX)](./vantiq-introduction/apps-boxsorter/boxsorter-mqttx/readme.md)
 1. [荷物仕分けアプリケーション (State)](./vantiq-introduction/apps-boxsorter/boxsorter-state/readme.md)
 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
