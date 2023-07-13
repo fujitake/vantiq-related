@@ -51,7 +51,7 @@
 1. 制御システムは仕分け指示を MQTTブローカーから取得する。
 1. 制御システムは仕分け指示に従ってソーターを制御する。
 
-[実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
+:link: [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
 
 ワークショップではVantiqの担当部分である No.3〜5 を実装します。
 > No.1〜2 は、 Google Colaboratory を利用し、 MQTTブローカーに読み取り結果のサンプル情報を送信することで代用します。  
