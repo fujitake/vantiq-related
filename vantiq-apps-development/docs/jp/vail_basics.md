@@ -491,6 +491,55 @@ members Typeから削除されたレコード
 | :---: | :---: | :---: |
 | 5 | James | 80 |
 
+### Bulk INSERT (一括追加), Bulk UPSERT (一括追加/更新)
+
+**INSERT** や **UPSERT** では、一括でデータの追加や更新ができる **Bulk INSERT** や **Bulk UPSERT** が利用できます。
+
+#### Bulk INSERT (一括追加)
+
+通常の **INSERT 文** と同様に記述し、値を配列で渡します。
+
+```js
+var members = [
+    {
+        id: 6,
+        name: "John",
+        age: 38
+    }, {
+        id: 7,
+        name: "Ava",
+        age: 27
+    }, {
+        id: 8,
+        name: "Brian",
+        age: 28
+    }
+]
+INSERT members(members)
+```
+
+#### Bulk UPSERT (一括追加/更新)
+
+通常の **UPSERT 文** と同様に記述し、値を配列で渡します。
+
+```js
+var members = [
+    {
+        id: 6,
+        name: "Paul",
+        age: 42
+    }, {
+        id: 7,
+        name: "Mary",
+        age: 23
+    }, {
+        id: 8,
+        name: "Daniel",
+        age: 39
+    }
+]
+UPSERT members(members)
+```
 
 ## データ送信・取得
 外部のブローカーへのデータ送信や他サービスのAPIの実行をする際に使用する構文についての説明です。

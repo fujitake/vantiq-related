@@ -62,14 +62,30 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 
 このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
 
+### [Vantiq 入門](./vantiq-introduction/readme.md)
+
+Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式を含め、様々な方法で解説しています。
+
+#### 開発環境の準備
+
+- [Vantiqアカウント作成（開発者向け）](./vantiq-introduction/apps-development/vantiq-devenv/root_account/root_account.md)
+- [Vantiqアカウント作成（組織管理者向け）](./vantiq-introduction/apps-development/vantiq-devenv/dev_account/dev_account.md)
+
+#### アプリケーション開発入門
+
+1. [荷物仕分けアプリケーション (Beginner)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-beginner/readme.md)
+1. [荷物仕分けアプリケーション (Standard)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-standard/readme.md)
+1. [荷物仕分けアプリケーション (MQTTX)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)
+1. [荷物仕分けアプリケーション (State)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-state/readme.md)
+
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
+
 Vantiqアプリケーション開発チーム向けのアプリ開発や運用に関するガイドや学習マテリアルです。
+
 - [Vantiqアカウント作成（開発者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-01_Prep_for_Account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-02_Prep_for_Dev_account.md)
 - [Vantiq 1-day workshop(v1.34)](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
 - [Vantiq 1-day workshop(v1.35)](./vantiq-apps-development/1-day-workshop-135/docs/jp/readme.md)
-- [Vantiq Box Sorter workshop for Beginner (荷物仕分けアプリケーション)](./vantiq-apps-development/workshop-boxsorter/boxsorter-beginner/readme.md)
-- [Vantiq Box Sorter workshop for Standard (荷物仕分けアプリケーション)](./vantiq-apps-development/workshop-boxsorter/boxsorter-standard/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
@@ -83,7 +99,9 @@ Vantiqアプリケーション開発チーム向けのアプリ開発や運用�
 - [ネットワークカメラ映像解析ハンズオン](./vantiq-apps-development/vantiq-videostream/docs/jp/hands-on-lab.md)
 
 ### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
+
 Vantiqアプリケーション開発チーム向けのVantiqと外部Webサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
+
 - [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
 - [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
 - [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
@@ -96,7 +114,9 @@ Vantiqアプリケーション開発チーム向けのVantiqと外部Webサー�
 - [PostgREST](./vantiq-external-services-integration/docs/jp/vantiq-PostgREST.md)
 
 ### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
+
 Vantiqアプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
+
 - [Edge~Vantiq構成 データ連携 ガイドライン](./vantiq-devices-integration/docs/jp/device-to-vantiq.md)
 - コネクターサンプル
   - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
@@ -109,12 +129,13 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
   - [Fitbit](./vantiq-devices-integration/docs/jp/fitbit_api.md)
 
 ### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
+
 インフラチーム向けのVantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
 
 - [Terraform を使って AWS EKS を作成(state分割バージョン) - 202210新規追加](./vantiq-cloud-infra-operations/terraform_aws/new/readme.md)
 - [Terraform を使って Azure AKS を作成(state分割バージョン) - 202211新規追加](./vantiq-cloud-infra-operations/terraform_azure/new/readme.md)
-- [ **(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_aws/old/readme.md)
-- [ **(deprecated)** Terraform を使って Azure AKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_azure/old/readme.md)
+- [**(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_aws/old/readme.md)
+- [**(deprecated)** Terraform を使って Azure AKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_azure/old/readme.md)
 - [kubernetes（EKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#eks_upgrade)    
 - [kubernetes（AKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#aks_upgrade)
 - [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)
@@ -122,12 +143,11 @@ Vantiqアプリケーション開発チーム向けのVantiqとデバイスを�
 - [閉域網構成における考慮事項 (Azure編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-azure.md)
 - [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/jp/vantiq-cloudwatch.md)
 
-
-
 ### [Vantiqプラットフォームインストール関連](./vantiq-platform-operations)
+
 Vantiqプラットフォーム管理チーム向けのクラウドインフラ上へのVantiq Platformのインストールや運用に関するガイドや手順です。
 
-- [Vantiq Cloud 構築および保守 ](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md)
+- [Vantiq Cloud 構築および保守](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md)
 - [deploy.yamlのカスタマイズ構成](./vantiq-platform-operations/docs/jp/deploy_yaml_config.md)
 - [Vantiq Cloud 構築および保守におけるトラブルシューティング](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance-troubleshooting.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md)
