@@ -39,7 +39,7 @@ Type と異なり、 MongoDB にアクセスする必要がないため、処理
 
 ### 商品マスタデータ
 
-- :link: [sorting_condition.csv](./../boxsorter-standard/data/sorting_condition.csv)
+- :link: [sorting_condition.csv](./../data/sorting_condition.csv)
 
 ### プロジェクトファイル
 
