@@ -155,7 +155,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
       |1|Source Name|BoxInfoMqtt|-|
       |2|Source Type|MQTT|-|
       |3|Server URI|mqtt://public.vantiq.com:1883|`Server URI` タブ -> `+ Server URI を追加`|
-      |4|Topic|/workshop/jp/yourname/boxinfo <br> ※`yourname` の箇所には Google Colaboratory の設定時に設定した値を使用する|`Topic` タブ -> `+ Topic を追加`
+      |4|Topic|/workshop/jp/yourname/boxinfo <br> ※`yourname` の箇所には Google Colaboratory の設定時に設定した値を使用する|`Topic` タブ -> `+ Topic を追加`|
       > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
 
    1. メッセージをサブスクライブできることを確認する
