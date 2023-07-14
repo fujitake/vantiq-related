@@ -115,11 +115,6 @@ App を利用する際に必ずルートタスクとして設定されている 
 ### 商品マスタデータ
 
 - [sorting_condition.csv](./../data/sorting_condition.csv)
-- [sc](/blob/main/vantiq-introduction/apps-development/apps-boxsorter/data/sorting_condition.csv)
-- [sc](/blob/latest/vantiq-introduction/apps-development/apps-boxsorter/data/sorting_condition.csv)
-- [sc](/releases/latest/vantiq-introduction/apps-development/apps-boxsorter/data/sorting_condition.csv)
-- [DL](/raw/main/vantiq-introduction/apps-development/apps-boxsorter/data/sorting_condition.csv)
-- [DL](/raw/latest/vantiq-introduction/apps-development/apps-boxsorter/data/sorting_condition.csv)
 
 ### ドキュメント
 
