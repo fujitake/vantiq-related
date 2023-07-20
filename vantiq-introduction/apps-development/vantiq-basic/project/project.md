@@ -61,7 +61,7 @@ Project をエクスポートすることで、他の Namespace へインポー�
 
    ![project_export_01.png](./imgs/project_export_01.png)
 
-1. エクスポートする Resource を選択します。  
+1. エクスポートする Resource を選択し、 `エクスポート` をクリックします。  
    Type のデータもエクスポートする際は、 `データをエクスポート` にチェックを入れます。  
 
    ![project_export_02.png](./imgs/project_export_02.png)
