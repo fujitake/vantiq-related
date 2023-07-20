@@ -64,19 +64,11 @@ Guides and procedures for the Vantiq Platform Management Team on installing and 
 
 ### [Vantiq 入門](./vantiq-introduction/readme.md)
 
-Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式を含め、様々な方法で解説しています。
+Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式などで解説しています。
 
-#### 開発環境の準備
-
-- [Vantiqアカウント作成（開発者向け）](./vantiq-introduction/apps-development/vantiq-devenv/root_account/root_account.md)
-- [Vantiqアカウント作成（組織管理者向け）](./vantiq-introduction/apps-development/vantiq-devenv/dev_account/dev_account.md)
-
-#### アプリケーション開発入門
-
-1. [荷物仕分けアプリケーション (Beginner)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-beginner/readme.md)
-1. [荷物仕分けアプリケーション (Standard)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-standard/readme.md)
-1. [荷物仕分けアプリケーション (MQTTX)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)
-1. [荷物仕分けアプリケーション (State)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-state/readme.md)
+- [開発環境の準備](./vantiq-introduction/readme.md#開発環境の準備)
+- [Vantiq の基本](./vantiq-introduction/readme.md#vantiq-の基本)
+- [アプリケーション開発入門](./vantiq-introduction/readme.md#アプリケーション開発入門)
 
 ### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
 

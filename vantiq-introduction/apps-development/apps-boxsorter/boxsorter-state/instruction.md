@@ -205,18 +205,18 @@ State はここで述べた以外にも様々な特徴や使い方がありま�
 詳しくは下記のドキュメント等を御覧ください。  
 
 - State とは？
-  - [Vantiq Serviceとは - State](./../docs/jp/vantiq-service.md#state)
-  - [Stateful Serviceとは](./../docs/jp/vantiq-service.md#stateful-serviceとは)
+  - [Vantiq Serviceとは - State](/vantiq-apps-development/docs/jp/vantiq-service.md#state)
+  - [Stateful Serviceとは](/vantiq-apps-development/docs/jp/vantiq-service.md#stateful-serviceとは)
 - State の種類と Procedure
-  - [Stateful Serviceとは - Global State](./../docs/jp/vantiq-service.md#global-state)
-  - [Stateful Serviceとは - Partioned State + Partitioned Procedure](./../docs/jp/vantiq-service.md#partioned-state--partitioned-procedure)
-  - [Stateful Serviceとは - Partioned State + Multi-Partitioned Procedure](./../docs/jp/vantiq-service.md#partioned-state--multi-partitioned-procedure)
+  - [Stateful Serviceとは - Global State](/vantiq-apps-development/docs/jp/vantiq-service.md#global-state)
+  - [Stateful Serviceとは - Partioned State + Partitioned Procedure](/vantiq-apps-development/docs/jp/vantiq-service.md#partioned-state--partitioned-procedure)
+  - [Stateful Serviceとは - Partioned State + Multi-Partitioned Procedure](/vantiq-apps-development/docs/jp/vantiq-service.md#partioned-state--multi-partitioned-procedure)
 - State を利用するアクティビティ
-  - [Stateful Serviceとは - Stateful なアクティビティパターン](./../docs/jp/vantiq-service.md#stateful-なアクティビティパターン)
+  - [Stateful Serviceとは - Stateful なアクティビティパターン](/vantiq-apps-development/docs/jp/vantiq-service.md#stateful-なアクティビティパターン)
 - State の冗長化
-  - [Stateful Serviceとは - Replication Factor](./../docs/jp/vantiq-service.md#replication-factor)
+  - [Stateful Serviceとは - Replication Factor](/vantiq-apps-development/docs/jp/vantiq-service.md#replication-factor)
 - State を使う上で欠かせない Service とは？
-  - [Vantiq Serviceとは](./../docs/jp/vantiq-service.md#vantiq-serviceとは)
+  - [Vantiq Serviceとは](/vantiq-apps-development/docs/jp/vantiq-service.md#vantiq-serviceとは)
 
 ## Next step
 
