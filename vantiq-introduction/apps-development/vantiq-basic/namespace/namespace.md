@@ -16,9 +16,6 @@
     - [Project の作成（ウィザード画面）](#project-の作成ウィザード画面)
     - [Project の作成（ナビゲーションバー）](#project-の作成ナビゲーションバー)
     - [Namespace と Project の確認](#namespace-と-project-の確認)
-  - [Project のインポート](#project-のインポート)
-  - [Project のエクスポート](#project-のエクスポート)
-  - [Project の管理](#project-の管理)
 
 ## Namespace とは
 
@@ -154,24 +151,3 @@ Namespace や Project の作成にいくつかの方法があります。
    - **画面左上：** 作成した Project 名
 
    ![check_01.png](./imgs/check_01.png)
-
-## Project のインポート
-
-他の Namespace で作成した Project などを別の Namespace にインポートすることができます。  
-
-Vantiq パブリッククラウドで開発した Project を Vantiq プライベートクラウドへインポートするといったこともできます。  
-
-## Project のエクスポート
-
-開発した Project をエクスポートすることができます。  
-エクスポートすることで、他の Namespace へインポートすることやバックアップとして保管することも可能になります。  
-
-
-
-## Project の管理
-
-Namespace 内の Project の管理方法を解説します。
-
-
-
-
