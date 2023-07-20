@@ -23,7 +23,7 @@
 
 Project のインポートの利用例を下記にあげます。  
 
-- Vantiq パブリッククラウドで開発した Project を Vantiq プライベートクラウドへインポートする。
+- Vantiq Public Cloud で開発した Project を Vantiq Private Cloud へインポートする。
 - 開発環境で作成した Project を本番環境にインポートする。
 - Workshop などで提供されるデータジェネレータや実装サンプルをインポートする。
 
