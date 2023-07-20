@@ -1,4 +1,4 @@
-English follows Japanese:
+[English follows Japanese:](https://github.com/fujitake/vantiq-related/tree/main#purpose)
 ***
 
 ## 目的
@@ -35,7 +35,7 @@ Vantiq アプリケーション開発チーム向けのアプリ開発に関す�
 - [VANTIQ CLI クイックリファレンス](./vantiq-apps-development/docs/jp/cli-quick-reference.md)
 - [バージョンアップに伴う互換性について](./vantiq-apps-development/docs/jp/incompatibilities.md)
 
-### [Google Colaboratory](./vantiq-google-colab)
+### [Google Colaboratoryを使ったデータジェネレータ](./vantiq-google-colab)
 
 Google Colaboratory の基本的な使い方やデータジェネレータのサンプルコードを紹介しています。Vantiq アプリを開発する際に便利なデータジェネレータを簡単にご用意頂けます。
 
