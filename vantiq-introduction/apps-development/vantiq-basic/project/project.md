@@ -67,6 +67,7 @@ Project をエクスポートすることで、他の Namespace へインポー�
    ![project_export_02.png](./imgs/project_export_02.png)
 
 1. エクスポートした Project が zip ファイルでダウンロードされます。  
+   以上で Project のエクスポートは完了です。  
 
 ## Project の追加作成
 
