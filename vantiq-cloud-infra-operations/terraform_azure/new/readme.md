@@ -56,7 +56,7 @@ stateの依存関係は以下のようになっている。
 - **Subnet** (Worker Node, LB, Bastion)
 - **NAT Gateway** - NAT GWを設定し、Private Subnetにアタッチ
 - **Route Table** - ユーザー定義Route Tableを作成し、private subnetにアタッチ
-- **Netowrk Security Group**
+- **Network Security Group**
 
 ### aks
 - **AKS**
@@ -205,7 +205,7 @@ sshのキーファイルはconstants.tfファイルと同じディレクトリ�
 
 #### tfstateの管理をblobで行う場合
 以下の2点の設定を行う必要が有る。
-1. `constants.tf`のlocals.tf_remote_backendのパラメータ設定
+1. `constants.tf`のlocals.tf_remote_backendのパラメータ設定  
    `resource_group_name`: 事前準備で作成したストレージアカウントのリソースグループ名を指定  
    `storage_account_name`: 事前準備で作成したストレージアカウント名を指定  
    `container_name`: 事前準備で作成したblobのコンテナ名を指定  
@@ -240,7 +240,7 @@ sshのキーファイルはconstants.tfファイルと同じディレクトリ�
 
 [Movie](https://vantiq.sharepoint.com/:v:/s/jp-tech/EYrDXmQthmJAgQnGKx7qVksBRZUTynaXEF0o0IR5uWNdlw?e=pxRIYH)
 
-1 ~ 3 は 01_network,　02_basion, 03_mainの各ディレクトリで実行する必要が有ります。 
+1 ~ 3 は 01_network, 02_basion, 03_mainの各ディレクトリで実行する必要が有ります。 
 削除の際の`terraform destroy`も各ディレクトリで行う必要が有ります。  
 
 1. terraform初期化（必要なプログラムのダウンロードなど）
