@@ -61,7 +61,7 @@ data "terraform_remote_state" "opnode" {
 #   }
 # }
 
-### Case by use S3 Bucket for terraform backend - end ###
+### Case by use Azure Storage for terraform backend - end ###
 
 
 data "azurerm_subscription" "current" {}
@@ -121,7 +121,7 @@ module "aks" {
   # enable container insights + loganalytics
   loganalytics_enabled = module.constants.aks_config.loganalytics_enabled
 
-  # netowrk profile - required. may be variable for each client
+  # network profile - required. may be variable for each client
   service_cidr       = module.constants.aks_config.service_cidr
   dns_service_ip     = module.constants.aks_config.dns_service_ip
   aks_node_subnet_id = data.terraform_remote_state.network.outputs.vpc_snet_aks_node_id
