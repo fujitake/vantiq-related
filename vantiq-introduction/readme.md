@@ -11,6 +11,7 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 
 1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/namespace.md)
 1. [Project の管理について](./apps-development/vantiq-basic/project/project.md)
+1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/basic-common.md)
 
 ## アプリケーション開発入門
 
