@@ -1,86 +1,25 @@
-
-## Purpose
-This repository is for sharing various technical guidance and instructions of Vantiq product.
-
-### [Vantiq Application Development related](./vantiq-apps-development)
-Guides and learning materials for developing and operating Vantiq Applications.
-- [Vantiq 1-day workshop](./vantiq-apps-development/1-day-workshop/docs/eng/readme.md)
-- [Understanding Vantiq Resources through real-world example](./vantiq-apps-development/vantiq-resources-introduction/docs/eng/Vantiq_resources_introduction.md)  
-- [Reusable application design patterns](./vantiq-apps-development/docs/eng/reusable-design-patterns.md)
-- [Set up Vantiq External Lifecycle Management](./vantiq-apps-development/docs/eng/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
-
-### [Vantiq with External Services Integration](./vantiq-external-services-integration)
-Guides and procedures for integrating Vantiq with cloud web services, brokers, and database services.  
-- [Amazon MQ](./vantiq-external-services-integration/docs/en/vantiq-aws-AmazonMQ.md)
-- [Amazon DynamoDB](./vantiq-external-services-integration/docs/en/vantiq-aws-dynamodb.md)
-- [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/en/vantiq-aws-msk.md)
-- [AWS IoT Core](./vantiq-external-services-integration/docs/en/vantiq-aws-iotcore.md)
-- [Azure Cosmos DB](./vantiq-external-services-integration/docs/en/vantiq-azure-CosmosDB.md)
-- [Azure Event Hubs](./vantiq-external-services-integration/docs/en/vantiq-azure-EventHubs.md)
-- [GCP Pub/Sub](./vantiq-external-services-integration/docs/en/vantiq-gcp-PubSub.md)
-- [SendGrid](./vantiq-external-services-integration/docs/en/vantiq-sendgrid.md)  
-- [Design Patterns Combined with API Gateway](./vantiq-external-services-integration/docs/en/vantiq-apigw.md)
-- [How to setup PostgREST](./vantiq-external-services-integration/docs/en/vantiq-PostgREST.md)
-
-
-### [Vantiq with Devices Integration](./vantiq-devices-integration)
-Guidelines and sample code for integrating Vantiq with devices.  
-- [Edge - Vantiq configuration Data integration Guideline](./vantiq-devices-integration/docs/eng/device-to-vantiq.md)
-- Connector samples
-  - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
-  - [fluentd](./vantiq-devices-integration/docs/eng/fluentd.md)
-- [Device connection samples](./vantiq-devices-integration/readme_en.md#device_sample)
-
-
-### [Vantiq Cloud Infrastructure related](./vantiq-cloud-infra-operations)
-Guides and instructions on AWS, Azure cloud infrastructure and Kubernetes clusters to run Vantiq.  
-- [AWS EKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_aws/readme_en.md)
-- [Azure AKS for Vantiq with Terraform](./vantiq-cloud-infra-operations/terraform_azure/readme_en.md)
-- [kubernetes (EKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#eks_upgrade)    
-- [kubernetes (AKS) upgrade](./vantiq-cloud-infra-operations/docs/eng/kubernetes-upgrade.md#aks_upgrade)
-- [AWS permissions that are required to manage Vantiq](./vantiq-cloud-infra-operations/docs/eng/aws_op_priviliges.md)
-- [Considerations for Closed Network Configuration (AWS)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-aws.md)
-- [Considerations for Closed Network Configuration (Azure)](./vantiq-cloud-infra-operations/docs/eng/vantiq-install-closed-network-azure.md)
-- [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/eng/vantiq-cloudwatch.md)  
-
-
-### [Vantiq Platform Installation related](./vantiq-platform-operations)
-Guides and procedures for the Vantiq Platform Management Team on installing and operating the Vantiq Platform on cloud infrastructure.  
-- [Trouble Shooting Guide for Vantiq Cloud operations](./vantiq-platform-operations/docs/eng/vantiq_k8s_troubleshooting.md)
-- [Custom configuration of deploy.yaml](./vantiq-platform-operations/docs/eng/deploy_yaml_config.md)
-- [Trouble Shooting Guide for Vantiq Cloud install and maintenance](./vantiq-platform-operations/docs/eng/vantiq-install-maintenance-troubleshooting.md)
-- [Network Configuration Debug Tool](./vantiq-platform-operations/docs/eng/alpine-f.md)
-- [Servers Time Synchronization Check Tool](./vantiq-platform-operations/docs/eng/timestamp_ds.md)
-- [MongoDB related](./vantiq-platform-operations/docs/eng/mongodb.md)
-- [Procedure for generating a CSR for a server certificate](./vantiq-platform-operations/docs/eng/prepare_csr4rsasslcert.md)
-- [Migration of Vantiq Organization](./vantiq-platform-operations/docs/eng/vantiq-org-migration.md)
-- [Procedure for tearing down Vantiq Private Cloud](./vantiq-platform-operations/docs/eng/vantiq-teardown.md)
-- [How to create a new Quay.io account](./vantiq-platform-operations/docs/eng/create_quay.io_account.md)
-- [Relationship between Vantiq Organization, Namespace and User Role](./vantiq-platform-operations/docs/eng/org_user_management.md)
+[English follows Japanese:](https://github.com/fujitake/vantiq-related/tree/main#purpose)
+***
 
 ## 目的
 
-このリポジトリは、Vantiqに関わるさまざまな技術的なガイドや手順を共有するものです。
+このリポジトリは、Vantiq 製品に関わる技術的なガイドや設定手順、及び関連サービスとのインテグレーションに関するセットアップ手順などを共有するためのものです。
+
+## Vantiq アプリケーション開発関連
+
+Vantiq アプリケーション開発者向けの情報となります。初めて Vantiq を触る方向けの情報、Vantiq を使ってクラウドサービスとの連携のサンプルや手順を知りたい方、IoT デバイスやゲートウェイが生成するデータを Vantiq に送信する場合のサンプル、Google Colaboratoryで用意するデータジェネレータなど[製品リファレンス](https://dev.vantiq.co.jp/docs/system/index.html)ではカバーされていない範囲の情報を提供することを目的としています。
 
 ### [Vantiq 入門](./vantiq-introduction/readme.md)
 
-Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式を含め、様々な方法で解説しています。
+Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式などで解説しています。
 
-#### 開発環境の準備
+- [開発環境の準備](./vantiq-introduction/readme.md#開発環境の準備)
+- [Vantiq の基本](./vantiq-introduction/readme.md#vantiq-の基本)
+- [アプリケーション開発入門](./vantiq-introduction/readme.md#アプリケーション開発入門)
 
-- [Vantiqアカウント作成（開発者向け）](./vantiq-introduction/apps-development/vantiq-devenv/root_account/root_account.md)
-- [Vantiqアカウント作成（組織管理者向け）](./vantiq-introduction/apps-development/vantiq-devenv/dev_account/dev_account.md)
+### [Vantiq のアプリケーション開発を学ぶ](./vantiq-apps-development)
 
-#### アプリケーション開発入門
-
-1. [荷物仕分けアプリケーション (Beginner)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-beginner/readme.md)
-1. [荷物仕分けアプリケーション (Standard)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-standard/readme.md)
-1. [荷物仕分けアプリケーション (MQTTX)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)
-1. [荷物仕分けアプリケーション (State)](./vantiq-introduction/apps-development/apps-boxsorter/boxsorter-state/readme.md)
-
-### [Vantiqアプリケーション開発関連](./vantiq-apps-development)
-
-Vantiqアプリケーション開発チーム向けのアプリ開発や運用に関するガイドや学習マテリアルです。
+Vantiq アプリケーション開発チーム向けのアプリ開発に関するガイドや運用に関する情報をまとめています。
 
 - [Vantiqアカウント作成（開発者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-01_Prep_for_Account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./vantiq-apps-development/1-day-workshop/docs/jp/0-02_Prep_for_Dev_account.md)
@@ -93,81 +32,64 @@ Vantiqアプリケーション開発チーム向けのアプリ開発や運用�
 - [Vantiq Service](./vantiq-apps-development/docs/jp/vantiq-service.md)
 - [再利用可能なアプリケーション デザインパターン](./vantiq-apps-development/docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./vantiq-apps-development/docs/jp/reverse-lookup.md)
-- [Vantiq External Lifecycle Management の設定](./vantiq-apps-development/docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [VANTIQ CLI クイックリファレンス](./vantiq-apps-development/docs/jp/cli-quick-reference.md)
 - [バージョンアップに伴う互換性について](./vantiq-apps-development/docs/jp/incompatibilities.md)
-- [ネットワークカメラ映像解析ハンズオン](./vantiq-apps-development/vantiq-videostream/docs/jp/hands-on-lab.md)
 
-### [Vantiqと外部サービスとの連携](./vantiq-external-services-integration)
+### [Google Colaboratoryを使ったデータジェネレータ](./vantiq-google-colab)
 
-Vantiqアプリケーション開発チーム向けのVantiqと外部Webサービス、ブローカー、データベースサービスとの連携に関するガイドや手順です。
-
-- [Amazon MQ](./vantiq-external-services-integration/docs/jp/vantiq-aws-AmazonMQ.md)
-- [Amazon DynamoDB](./vantiq-external-services-integration/docs/jp/vantiq-aws-dynamodb.md)
-- [Amazon Managed Streaming For Kafka (MSK)](./vantiq-external-services-integration/docs/jp/vantiq-aws-msk.md)
-- [AWS IoT Core](./vantiq-external-services-integration/docs/jp/vantiq-aws-iotcore.md)
-- [Azure Cosmos DB](./vantiq-external-services-integration/docs/jp/vantiq-azure-CosmosDB.md)
-- [Azure Event Hubs](./vantiq-external-services-integration/docs/jp/vantiq-azure-EventHubs.md)
-- [GCP Pub/Sub](./vantiq-external-services-integration/docs/jp/vantiq-gcp-PubSub.md)
-- [SendGrid](./vantiq-external-services-integration/docs/jp/vantiq-sendgrid.md)
-- [API Gatewayと組み合わせたデザインパターン](./vantiq-external-services-integration/docs/jp/vantiq-apigw.md)
-- [PostgREST](./vantiq-external-services-integration/docs/jp/vantiq-PostgREST.md)
-
-### [Vantiqとデバイスとの連携](./vantiq-devices-integration)
-
-Vantiqアプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
-
-- [Edge~Vantiq構成 データ連携 ガイドライン](./vantiq-devices-integration/docs/jp/device-to-vantiq.md)
-- コネクターサンプル
-  - [Python Code](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample) / [Vantiq Project](./vantiq-devices-integration/conf/vantiq-restapi-mqtt-amqp-python-sample/vantiq-project-sample.zip)
-  - [fluentd](./vantiq-devices-integration/docs/jp/fluentd.md)
-- [デバイスの接続サンプル](./vantiq-devices-integration/readme.md#device_sample)
-  - [オムロン環境センサー](./vantiq-devices-integration/conf/omron-env-sensor-sample)
-  - [SORACOM GPSマルチセンサー](./vantiq-devices-integration/docs/jp/Vantiq_SoracomGPSMultiunit.md)
-  - [Safie One](./vantiq-devices-integration/docs/jp/vantiq-videostream-safie.md)
-- [ウェアラブルデバイスとの連携](./vantiq-devices-integration/readme.md#ウェアラブルデバイスとの連携)
-  - [Fitbit](./vantiq-devices-integration/docs/jp/fitbit_api.md)
-
-### [クラウドインフラ関連](./vantiq-cloud-infra-operations)
-
-インフラチーム向けのVantiqを稼働させるAWS, AzureのクラウドインフラやKubernetesクラスタに関するガイドや手順です。
-
-- [Terraform を使って AWS EKS を作成(state分割バージョン) - 202210新規追加](./vantiq-cloud-infra-operations/terraform_aws/new/readme.md)
-- [Terraform を使って Azure AKS を作成(state分割バージョン) - 202211新規追加](./vantiq-cloud-infra-operations/terraform_azure/new/readme.md)
-- [**(deprecated)** Terraform を使って AWS EKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_aws/old/readme.md)
-- [**(deprecated)** Terraform を使って Azure AKS を作成(一括作成バージョン)](./vantiq-cloud-infra-operations/terraform_azure/old/readme.md)
-- [kubernetes（EKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#eks_upgrade)    
-- [kubernetes（AKS) バージョンアップ](./vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md#aks_upgrade)
-- [Vantiq を運用するのに必要な AWS の権限](./vantiq-cloud-infra-operations/docs/jp/aws_op_priviliges.md)
-- [閉域網構成における考慮事項 (AWS編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-aws.md)
-- [閉域網構成における考慮事項 (Azure編)](./vantiq-cloud-infra-operations/docs/jp/vantiq-install-closed-network-azure.md)
-- [Vantiq Cloudwatch Logs](./vantiq-cloud-infra-operations/docs/jp/vantiq-cloudwatch.md)
-
-### [Vantiqプラットフォームインストール関連](./vantiq-platform-operations)
-
-Vantiqプラットフォーム管理チーム向けのクラウドインフラ上へのVantiq Platformのインストールや運用に関するガイドや手順です。
-
-- [Vantiq Cloud 構築および保守](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance.md)
-- [deploy.yamlのカスタマイズ構成](./vantiq-platform-operations/docs/jp/deploy_yaml_config.md)
-- [Vantiq Cloud 構築および保守におけるトラブルシューティング](./vantiq-platform-operations/docs/jp/vantiq-install-maintenance-troubleshooting.md)
-- [Vantiq Cloud 運用におけるトラブルシューティングガイド](./vantiq-platform-operations/docs/jp/vantiq_k8s_troubleshooting.md)
-- [ネットワーク構成デバッグツール](./vantiq-platform-operations/docs/jp/alpine-f.md)
-- [サーバー間時刻同期確認ツール](./vantiq-platform-operations/docs/jp/timestamp_ds.md)
-- [mongodb 関連](./vantiq-platform-operations/docs/jp/mongodb.md)
-- [grafana 関連](./vantiq-platform-operations/docs/jp/grafana.md)
-- [サーバー証明書用 CSR 作成手順](./vantiq-platform-operations/docs/jp/prepare_csr4rsasslcert.md)
-- [Vantiq Organizationのマイグレーション作業](./vantiq-platform-operations/docs/jp/vantiq-org-migration.md)
-- [Vantiq Private Cloud解体作業](./vantiq-platform-operations/docs/jp/vantiq-teardown.md)
-- [Quay.io の新規アカウント作成手順](./vantiq-platform-operations/docs/jp/create_quay.io_account.md)
-- [Vantiq Organization, Namespace, User Role の関係](./vantiq-platform-operations/docs/jp/org_user_management.md)
-- [Vantiq Edge Admin タスク](./vantiq-platform-operations/docs/jp/vantiq-edge-admin.md)
-
-### [Google Colaboratory](./vantiq-google-colab)
-
-Google Colaboratory に関するドキュメントやサンプルコードになります。
+Google Colaboratory の基本的な使い方やデータジェネレータのサンプルコードを紹介しています。Vantiq アプリを開発する際に便利なデータジェネレータを簡単にご用意頂けます。
 
 - [:book: Google Colaboratory の基礎](./vantiq-google-colab/docs/jp/colab_basic_knowledge.md)
 - [:computer: MQTT Publisher Sample](./vantiq-google-colab/docs/jp/mqtt_publisher_sample.ipynb)
 - [:computer: MQTT Subscriber Sample](./vantiq-google-colab/docs/jp/mqtt_subscriber_sample.ipynb)
 - [:beginner: Box Sorter Data Generator (Beginner)](./vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
 - [:beginner: Box Sorter Data Generator (Standard)](./vantiq-google-colab/docs/jp/box-sorter_data-generator_standard.ipynb)
+
+
+### [Vantiq とパブリッククラウド サービスとの連携](./vantiq-external-services-integration)
+
+Vantiq アプリケーション開発チーム向けの Vantiq とパブリッククラウド サービスとの連携に関するガイドや設定手順を紹介しています。MQTT や Kafka といったブローカー、データベースサービス、メールサービスとの連携に関するガイドや手順となります。
+
+### [Vantiq とデバイスとの連携](./vantiq-devices-integration)
+
+Vantiq アプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
+
+## Vantiq Private Cloud 関連
+
+Vantiq Private Cloud のインストールと運用管理における対応手順など、インフラチームの方々向けの情報をまとめました。
+
+### [Vantiq Private Cloud 構築のための AWS EKS / Azure AKS インフラ関連情報](./vantiq-cloud-infra-operations)
+
+Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関するガイドや手順となります。こちらで紹介している Terraform スクリプトを実行頂くと、Vantiq Private Cloud に必要な設定一式をご用意頂けます。また、AWS EKS、Azure AKS のバージョンアップの手順も記載しております。
+
+### [Vantiq Private Cloud のインストールと運用管理](./vantiq-platform-operations)
+
+別途用意されたAWS EKS、Azure AKS 環境に対し、Vantiq Private Cloud をインストールする手順や運用管理に関するガイドや手順を紹介しています。運用時に必要となる作業手順やトラブルシューティングガイドもございます。
+
+***
+
+# Purpose
+This repository is for sharing various technical guidance and instructions of Vantiq product related knowledges. It also contains public cloud services which potentially integrate with Vantiq.
+
+## Vantiq Application Development related
+
+ Articles for Vantiq beiginners, sample codes and procedure for Vantiq apps Developers who want to integrate with public cloud services, and Python programmers are using IoT Sensors / Gateways / Google Colaboratory send messages to Vantiq.
+
+### [Learning developing Vantiq applications](./vantiq-apps-development)
+Guides and learning materials for developing and operating Vantiq Applications.
+
+### [Integration with External Services and Vantiq](./vantiq-external-services-integration/readme_en.md)
+Guides and procedures for integrating Vantiq with cloud web services, brokers, and database services.  
+
+### [Integration with IoT devices with Vantiq](./vantiq-devices-integration/readme_en.md)
+Guidelines and sample code for integrating Vantiq with devices.
+
+## Vantiq Private Cloud related
+
+Articles for infrastructure management guys include installation preparation of Vantiq Private Cloud and operations.
+
+### [AWS EKS/Azure AKS Infrastructure for Vantiq Private Cloud](./vantiq-cloud-infra-operations)
+Terraform codes for setting up AWS ESK and Azure AKS infrastructure run Vantiq Private Cloud instance.
+
+### [Vantiq Private Cloud Installation and Management](./vantiq-platform-operations)
+Guides and procedures for the Vantiq Private Cloud Management Team on installing and operating of Vantiq Private Cloud on cloud infrastructure.

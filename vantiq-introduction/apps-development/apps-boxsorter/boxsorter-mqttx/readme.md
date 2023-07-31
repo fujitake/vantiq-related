@@ -21,7 +21,7 @@
 
 ### 商品マスタデータ
 
-- [sorting_condition.csv](./../boxsorter-standard/data/sorting_condition.csv)
+- [sorting_condition.csv](./../data/sorting_condition.csv)
 
 ### プロジェクトファイル
 

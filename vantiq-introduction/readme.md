@@ -7,6 +7,11 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 - [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/root_account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/dev_account.md)
 
+## Vantiq の基本
+
+1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/namespace.md)
+1. [Project の管理について](./apps-development/vantiq-basic/project/project.md)
+
 ## アプリケーション開発入門
 
 1. [荷物仕分けアプリケーション (Beginner)](./apps-development/apps-boxsorter/boxsorter-beginner/readme.md)
