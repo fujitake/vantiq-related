@@ -2,30 +2,29 @@
 Vantiq Platformの構築や運用に関するガイドや手順です。
 ![](imgs/section-top/vantiq-intall-flow.png)
 
-- [Vantiq Cloud 構築および保守 ](./docs/jp/vantiq-install-maintenance.md)
-- [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
-- [Vantiq Cloud 構築および保守におけるトラブルシューティング](./docs/jp/vantiq-install-maintenance-troubleshooting.md)
+## Vantiq Cloud
+- [Vantiq Cloud 構築 ](./docs/jp/vantiq-install.md)
+  - [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
+  - [Grafanaカスタマイズ(Email通知設定)](./docs/jp/grafana.md)
+  - [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
+- [Vantiq Cloud 保守 ](./docs/jp/vantiq-maintenance.md)
+- [Vantiq Cloud 構成Tips/構築および保守におけるトラブルシューティング過去事例](./docs/jp/vantiq-install-maintenance-troubleshooting.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./docs/jp/vantiq_k8s_troubleshooting.md)
+- [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
+
+
+## Vantiq Edge
+- [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
+- [Vantiq Edge Admin タスク](./docs/jp/vantiq-edge-admin.md)  
+- [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
+
+## その他/ツール
+- [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [ネットワーク構成デバッグツール](./docs/jp/alpine-f.md)
 - [サーバー間時刻同期確認ツール](./docs/jp/timestamp_ds.md)
-- [mongodb 関連](./docs/jp/mongodb.md)
-- [grafana 関連](./docs/jp/grafana.md)
 - [サーバー証明書用 CSR 作成手順](./docs/jp/prepare_csr4rsasslcert.md)
-- [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
-- [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
-- [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
-- [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
-- [Vantiq Edge Admin タスク](./docs/jp/vantiq-edge-admin.md)  
 
-## Vantiqプラットフォームに関する保守項目一覧
 
-\# | 項目名                            | 説明                                                                                                                            | 適切なタイミング                                                | 準備期間の目安 | 更新時のサービス停止 | 作業者
----|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------|----------------|----------------------|-------------------
-1  | [Vantiq ライセンス更新](./docs/jp/vantiq-install-maintenance.md#renew_license_files)              | Vantiq クラスタが参照するライセンスファイル。**ライセンスが有効でない場合、Vantiq サービスが停止される。**                        | PO 発行後、ライセンス期限前                             | 1 week         | 必要なし             | Vantiq サポート
-2  | [SSL 証明書更新](./docs/jp/vantiq-install-maintenance.md#renew_ssl_certificate)                     | Vantiq クラスタで使用する SSL 証明書。<br />**有効期限が切れると、Vantiq IDE にログインや、HTTPS REST でサービス接続ができなくなる。**     | 証明書の有効期限前                                     | 2 weeks        | 必要なし             | Vantiq サポート
-3  | [Vantiq マイナーバージョンアップ](./docs/jp/vantiq-install-maintenance.md#minor_version_upgrade))    | Vantiq の機能追加を伴うバージョンアップを行う。                                                                                  | 概ね 4ヶ月に一度（年3回）                                            | 1 week         | 必要                 | Vantiq サポート
-4  | [Vantiq パッチバージョンアップ](./docs/jp/vantiq-install-maintenance.md#patch_version_upgrade)      | Vantiq の現行バージョンの不具合修正を行うバージョンアップを行う。                                                                | 随時。運用上支障がある不具合修正のリリース時。                  | 2 days         | 必要なし             | Vantiq サポート
-5  | service principal アカウントの更新 | （AzureでInternal Load Balancerを構成する場合のみ）<br />Vantiq を Private 構成にするため、AKS に権限を持つ Service Principal を使用している。<br />**有効期限切れ後サービスが停止する可能性ある。** | Service Principal の有効期限前。                                 | 1 week         | 必要                 | Vantiq サポート
 
 
 # Vantiq Platform related
