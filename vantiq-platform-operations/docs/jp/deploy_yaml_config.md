@@ -20,7 +20,8 @@ vantiq:
 ```
 
 #### userdb
-userdbを構成する。Vantiqで扱う永続データのうち、システム関連を`mongodb`, ユーザー所有を`userdb`に保存する。
+userdbを構成する。Vantiqで扱う永続データのうち、システム関連を`mongodb`, ユーザー所有を`userdb`に保存する。  
+ISVモデルでマルチテナントに展開する場合、`userdb`を構成する。
 
 ```yaml
 vantiq:
@@ -41,6 +42,52 @@ vantiq:
       bucket: userdbbackup
 ```
 
+以下は、さらに`userdb`のバックアップと意図したNodeにスケジュールされるよう`affinity`を追加した例。
+```yaml
+vantiq:
+  userdb:
+    enabled: true
+    backup:
+      enabled: true
+      provider: azure
+      schedule: "@daily"
+      bucket: userdbbackup
+
+    affinity: |
+      nodeAffinity:
+        {{- if eq .Values.workloadPreference "hard" }}
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: vantiq.com/workload-preference
+              operator: In
+              values:
+              - userdb
+        {{- else }}
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 50
+          preference:
+            matchExpressions:
+            - key: vantiq.com/workload-preference
+              operator: In
+              values:
+              - userdb
+        {{- end }}
+      podAntiAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - userdb
+                    - vantiq
+                    - vision-analytics
+                    - metrics-collector
+                    - influxdb-influxdb
+                    - influxdb
+            topologyKey: kubernetes.io/hostname
+```
 
 
 #### metrics-collector

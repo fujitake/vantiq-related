@@ -173,5 +173,3 @@ $ eksctl create nodegroup -f tmp-np.yaml
 2022-12-28 06:25:35 [✖]  creating CloudFormation stack "eksctl-watanabe_vantiq_cluster-prod-nodegroup-VANTIQ-nodegroup-containerd": operation error CloudFormation: CreateStack, https response error StatusCode: 400, RequestID: 3d721d54-29a5-4dd1-8ba7-cf212d4f35ee, api error ValidationError: 1 validation error detected: Value 'eksctl-watanabe_vantiq_cluster-prod-nodegroup-VANTIQ-nodegroup-containerd' at 'stackName' failed to satisfy constraint: Member must satisfy regular expression pattern: [a-zA-Z][-a-zA-Z0-9]*
 
 ```
-
-
