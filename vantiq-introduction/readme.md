@@ -19,6 +19,6 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 1. [荷物仕分けアプリケーション (Standard)](./apps-development/apps-boxsorter/boxsorter-standard/readme.md)
 1. [荷物仕分けアプリケーション (MQTTX)](./apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)
 1. [VAIL の基礎](./apps-development/vantiq-basic/vail_basic/vail_basic.md)
-1. [VAIL Type のデータ操作](./apps-development/vantiq-type/vail_basic/vail_type.md)
+1. [VAIL Type のデータ操作](./apps-development/vantiq-basic/vail_type/vail_type.md)
 1. [VAIL データ送信](./apps-development/vantiq-basic/vail_data/vail_data.md)
 1. [荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)
