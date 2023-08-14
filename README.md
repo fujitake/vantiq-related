@@ -26,7 +26,6 @@ Vantiq アプリケーション開発チーム向けのアプリ開発に関す�
 - [Vantiq 1-day workshop(v1.34)](./vantiq-apps-development/1-day-workshop/docs/jp/readme.md)
 - [Vantiq 1-day workshop(v1.35)](./vantiq-apps-development/1-day-workshop-135/docs/jp/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-apps-development/vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
-- [VAILの基礎](./vantiq-apps-development/docs/jp/vail_basics.md)
 - [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./vantiq-apps-development/docs/jp/debug_demo.md)
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-apps-development/docs/jp/data_sending.md)
 - [Vantiq Service](./vantiq-apps-development/docs/jp/vantiq-service.md)

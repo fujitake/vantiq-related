@@ -11,10 +11,14 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 
 1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/namespace.md)
 1. [Project の管理について](./apps-development/vantiq-basic/project/project.md)
+1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/basic-common.md)
 
 ## アプリケーション開発入門
 
 1. [荷物仕分けアプリケーション (Beginner)](./apps-development/apps-boxsorter/boxsorter-beginner/readme.md)
 1. [荷物仕分けアプリケーション (Standard)](./apps-development/apps-boxsorter/boxsorter-standard/readme.md)
 1. [荷物仕分けアプリケーション (MQTTX)](./apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)
+1. [VAIL の基礎](./apps-development/vantiq-basic/vail_basic/vail_basic.md)
+1. [VAIL Type のデータ操作](./apps-development/vantiq-basic/vail_type/vail_type.md)
+1. [VAIL データ送信](./apps-development/vantiq-basic/vail_data/vail_data.md)
 1. [荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)
