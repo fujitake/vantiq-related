@@ -8,17 +8,13 @@
   - [目次](#目次)
   - [データ送信・取得](#データ送信取得)
     - [MQTTブローカーへの送信イメージ](#mqttブローカーへの送信イメージ)
-  - [Source の設定](#source-の設定)
-    - [General](#general)
-    - [Properties](#properties)
   - [HTTP](#http)
+    - [HTTP Remote Source の設定](#http-remote-source-の設定)
     - [GET](#get)
     - [POST](#post)
   - [MQTT、AMQP、Kafka](#mqttamqpkafka)
-  - [Source の設定](#source-の設定-1)
-    - [General](#general-1)
-    - [Server URI](#server-uri)
-  - [MQTT ブローカーへのパブリッシュ](#mqtt-ブローカーへのパブリッシュ)
+    - [MQTT Source の設定](#mqtt-source-の設定)
+    - [MQTT ブローカーへのパブリッシュ](#mqtt-ブローカーへのパブリッシュ)
     - [注意点](#注意点)
   - [備考](#備考)
     - [Source を変数に置き換える場合](#source-を変数に置き換える場合)
@@ -27,31 +23,36 @@
 
 外部のブローカーへのデータ送信や他サービスの API を実行する際に、使用する構文についての説明です。  
 プロトコルごとに一部異なる部分がありますが、基本的な構文は同じです。  
-PUBLISH 文、 SELECT 文を使用することができます。  
+PUBLISH 文 と SELECT 文を使用することができます。  
 
 ### MQTTブローカーへの送信イメージ
 
 ![mqtt](./imgs/mqtt.gif)
 
-## Source の設定
+## HTTP
+
+まずは、 HTTP Remote Source を作成し、 HTTP の GET リクエストや POST リクエストを試してみます。  
+
+### HTTP Remote Source の設定
 
 ナビゲーションメニューの `追加` → `Source` から `新規 Source` をクリックします。  
 下記の内容を設定します。  
 
-### General
+#### General
 
 |設定項目|設定値|
 |:---|:---|
 |Source Name|VantiqRender|
 |Source Type|REMOTE|
 
-### Properties
+#### Properties
 
 |設定項目|設定値|
 |:---|:---|
 |Server URI|https://vantiq.onrender.com|
 
-## HTTP
+> 上記の API は Python FastAPI で作成した API サンプルになります。  
+> [Render](https://render.com/) という外部サービスで動作しています。  
 
 ### GET
 
@@ -249,21 +250,22 @@ PUT や DELETE などこの他のメソッドに関しては、 SELECT 文、 PU
 
 ## MQTT、AMQP、Kafka
 
-ブローカーに PUBLISH する際には PUBLISH 文を使用します。  
+次は、 MQTT Source を作成し、 MQTT ブローカーにメッセージを PUBLISH してみます。  
+MQTT や AMQP 、 Kafka などのブローカーにメッセージを PUBLISH する際には PUBLISH 文を使用します。  
 
-## Source の設定
+### MQTT Source の設定
 
 ナビゲーションメニューの `追加` → `Source` から `新規 Source` をクリックします。  
 下記の内容を設定します。  
 
-### General
+#### General
 
 |設定項目|設定値|
 |:---|:---|
 |Source Name|VantiqMqttBroker|
 |Source Type|MQTT|
 
-### Server URI
+#### Server URI
 
 `+ Server URI を追加` をクリックし、下記の内容を設定します。
 
@@ -271,7 +273,9 @@ PUT や DELETE などこの他のメソッドに関しては、 SELECT 文、 PU
 |:---|:---|
 |Server URI|mqtt://public.vantiq.com:1883|
 
-## MQTT ブローカーへのパブリッシュ
+> 上記の MQTT ブローカーは、検証用のパブリックなブローカーとなっています。  
+
+### MQTT ブローカーへのパブリッシュ
 
 次の例は MQTT ブローカーに PUBLISH する例です。  
 AMQP や Kafka の場合でもほとんど同じ記述になります。  
