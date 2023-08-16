@@ -21,6 +21,7 @@
   - [DELETE (削除)](#delete-削除)
   - [Bulk INSERT (一括追加), Bulk UPSERT (一括追加/更新)](#bulk-insert-一括追加-bulk-upsert-一括追加更新)
     - [Bulk INSERT (一括追加)](#bulk-insert-一括追加)
+    - [Bulk UPSERT (一括追加/更新)](#bulk-upsert-一括追加更新)
 
 ## データ操作
 
@@ -593,7 +594,7 @@ INSERT Members(members)
 }
 ```
 
-#### Bulk UPSERT (一括追加/更新)
+### Bulk UPSERT (一括追加/更新)
 
 通常の **UPSERT 文** と同様に記述し、値を配列で渡します。
 
