@@ -8,7 +8,7 @@
   - [目次](#目次)
   - [データ操作](#データ操作)
     - [Members Type](#members-type)
-    - [保持しているデータ（計3件）](#保持しているデータ計3件)
+    - [保持しているデータ](#保持しているデータ)
     - [サンプル](#サンプル)
   - [SELECT (取得)](#select-取得)
     - [1. 全件、全プロパティを取得](#1-全件全プロパティを取得)
@@ -21,10 +21,6 @@
   - [DELETE (削除)](#delete-削除)
   - [Bulk INSERT (一括追加), Bulk UPSERT (一括追加/更新)](#bulk-insert-一括追加-bulk-upsert-一括追加更新)
     - [Bulk INSERT (一括追加)](#bulk-insert-一括追加)
-  - [データ送信・取得](#データ送信取得)
-    - [HTTP](#http)
-    - [MQTT、AMQP、Kafka](#mqttamqpkafka)
-    - [備考](#備考)
 
 ## データ操作
 
@@ -48,7 +44,7 @@ Members Type のプロパティは次のとおりです。
 | name | String | ◯ | - | - | - |
 | age | Integer | - | - | - | - |
 
-### 保持しているデータ（計3件）
+### 保持しているデータ
 
 Members Type で保持しているレコードは次のとおりです。
 
@@ -638,129 +634,3 @@ UPSERT Members(members)
     "_id": "64d2080a6da9080881f0c97a"
 }
 ```
-
-## データ送信・取得
-
-外部のブローカーへのデータ送信や他サービスのAPIの実行をする際に使用する構文についての説明です。
-プロトコルごとに一部異なる部分がありますが、基本は同じです。PUBLISH文、SELECT文を使用することができます。
-
-**MQTTブローカーへの送信イメージ**
-
-![mqtt](../../imgs/vail-basics/gif/mqtt.gif)
-
-### HTTP
-
-#### GET
----
-最もシンプルな例は次のような記述になります。ExternalAPIは`REMOTE` Sourceです。
-エンドポイントやAuthorizationはSource側に設定済みです。これらの設定はVAIL側、Source側どちらにでも設定することができます。この例では`response`にGETした内容が入ります。
-```JavaScript
-var response = SELECT FROM SOURCE ExternalAPI
-```
-
-次の例では、VAIL側に設定値を記述しています。`WITH`句を使うことで設定値をリクエストに反映させることができます。`path`を設定するとSouceの`Source URIに設定設定されているURI + path`でリクエストします。つまりSourceに`https://xxxx.com`と設定されている場合は`https://xxxx.com/anything`となります。`headers`はヘッダーの設定、`query`はクエリパラメータです。
-```JavaScript
-var path = "/anything"
-var headers = {
-    "Content-type": "application/json",
-    "Authorization": "xxxxxxxx"
-}
-var query = {
-    xxx_id: 100
-}
-var response = SELECT FROM SOURCE ExternalAPI WITH path = path, headers = headers, query = query
-```
-
-
-
-#### POST
----
-POSTしたい場合はSELECT文とPUBLISH文の両方を使用できます。
-
-SELECT文を使用する場合デフォルトではメソットは`GET`になります。POSTしたい場合は`WITH`句を使用してPOSTを設定します。またPOSTしたい内容も設定します。
-```JavaScript
-var data = {
-    id: 1,
-    value: "Hello"
-}
-var response = SELECT FROM SOURCE ExternalAPI WITH method = "POST", body = data
-```
-
-PUBLISH文を使用する場合、こちらはデフォルトでPOSTになりますのでbody以外の追加の設定は必要ありません。
-```JavaScript
-var data = {
-    id: 1,
-    value: "Hello"
-}
-PUBLISH { body: data } TO SOURCE ExternalAPI
-```
-
-SELECT文の時のように設定値をVAIL側で持たせたい場合はWITH句ではなく`USING`句を使います。WITH句と記述方法が異なり、objectを使用します。USING句を使用せず、bodyと合わせて一つのObjectで書くこともできます。
-```JavaScript
-var data = {
-    id: 1,
-    value: "Hello"
-}
-var config = {
-    method: "PUT",
-    path: "/anything"
-}
-PUBLISH { body: data } TO SOURCE ExternalAPI USING config
-//PUBLISH { body: data, method: "PUT", path: "/anything" } TO SOURCE ExternalAPI
-```
-
-PUBLISH文で注意が必要なのは`{ body: data }`の部分です。HTTP POSTの場合、keyに`body`が必要です。
-例えば`{ message: data }`などとするとエラーとなります。
-
-SELECT文とPUBLISH文をどう使い分けるかに関しては`返り値`が必要かどうかで決定します。SELECT文の場合はGETの時と同様、レスポンス内容が返り値となります。PUBLISH文は単純にPOSTが成功したかどうかを`true`か`false`のみで返します。
-
-PUTやDELETEなどこの他のメソッドに関しては、SELECT文、PUBLISH文いずれもデフォルトのメソッドではありませんので`method`に設定を行って使用してください。
-
-
-
-### MQTT、AMQP、Kafka
-
-ブローカーにPUBLISHする際にはPUBLISH文を使用します。次の例はMQTTブローカーにPUBLISHする例ですがAMQP、Kafkaの場合でもほとんど同じです。
-
-```JavaScript
-var data = {
-    id: 1,
-    value: "Hello"
-}
-var config = {
-    topic: "/test/event"
-}
-PUBLISH { message: data } TO SOURCE MqttBroker USING config
-//PUBLISH { topic: "/test/event", message: data } TO SOURCE MqttBroker
-```
-送信先となる`topic`の設定が必要となります。
-
-注意点はHTTPの時と同様に`{ message: data }`の部分です。HTTPでは`body`がkeyとなる必要がありますが、`MQTTとAMQP`の場合は`message`、`Kafka`の場合は`value`がkeyとなる必要があります。
-
-
-
-### 備考
-
-#### Sourceを変数に置き換える場合
-
-Sourceを変数に置き換える場合は、下記のように変数名に`@`をつけて使用します。
-
-これは、SELECT文でもPUBLISH文でも利用できます。
-
-※下記の例ではSource名を`ExternalAPI`としています。
-
-```JavaScript
-var sourceName = "ExternalAPI"
-var response = SELECT FROM SOURCE @sourceName
-```
-
-Procedureで引数を受け取る場合は下記のようになります。
-
-```JavaScript
-PROCEDURE getUsers(sourceName String)
-var response = SELECT FROM SOURCE @sourceName
-return response
-```
-
-[VAIL Reference Guide ： Variable References](https://dev.vantiq.com/docs/system/rules/index.html#variable-references)
-
