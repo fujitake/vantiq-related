@@ -115,7 +115,6 @@ App を利用する際に必ずルートタスクとして設定されている 
 ### 商品マスタデータ
 
 - [sorting_condition.csv](./../data/sorting_condition.csv)
-- [DL](/fujitake/vantiq-related/raw/main/vantiq-introduction/apps-development/apps-boxsorter/data/sorting_condition.csv)
 
 ### ドキュメント
 
