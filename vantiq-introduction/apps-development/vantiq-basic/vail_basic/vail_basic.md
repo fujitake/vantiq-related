@@ -1,12 +1,12 @@
-# VAIL の基礎
+# VAIL 入門（基礎）
 
-Vantiqアプリケーション開発時に使用する言語である `VAIL` の基本についての解説です。
+Vantiq アプリケーション開発時に使用する独自言語である `VAIL` の基本についての解説です。
 
 詳細事項に関しては :globe_with_meridians:[リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html) をご参照ください。
 
 ## 目次
 
-- [VAIL の基礎](#vail-の基礎)
+- [VAIL 入門（基礎）](#vail-入門基礎)
   - [目次](#目次)
   - [Procedure の作成](#procedure-の作成)
   - [Procedure の実行](#procedure-の実行)

@@ -1,10 +1,10 @@
-# VAIL Type のデータ操作
+# VAIL 入門（Type の操作）
 
-`VAIL` で Type のデータ操作を行う方法を解説します。  
+`VAIL` を用いて Type のデータを操作する方法を解説します。  
 
 ## 目次
 
-- [VAIL Type のデータ操作](#vail-type-のデータ操作)
+- [VAIL 入門（Type の操作）](#vail-入門type-の操作)
   - [目次](#目次)
   - [データ操作](#データ操作)
     - [Members Type](#members-type)
