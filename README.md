@@ -5,17 +5,18 @@
 
 このリポジトリは、Vantiq 製品に関わる技術的なガイドや設定手順、及び関連サービスとのインテグレーションに関するセットアップ手順などを共有するためのものです。
 
-## Vantiq アプリケーション開発関連
 
 Vantiq アプリケーション開発者向けの情報となります。初めて Vantiq を触る方向けの情報、Vantiq を使ってクラウドサービスとの連携のサンプルや手順を知りたい方、IoT デバイスやゲートウェイが生成するデータを Vantiq に送信する場合のサンプル、Google Colaboratoryで用意するデータジェネレータなど[製品リファレンス](https://dev.vantiq.co.jp/docs/system/index.html)ではカバーされていない範囲の情報を提供することを目的としています。
 
-### [Vantiq 入門](./vantiq-introduction/readme.md)
+## [Vantiq 入門](./vantiq-introduction/readme.md)
 
 Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式などで解説しています。
 
 - [開発環境の準備](./vantiq-introduction/readme.md#開発環境の準備)
 - [Vantiq の基本](./vantiq-introduction/readme.md#vantiq-の基本)
 - [アプリケーション開発入門](./vantiq-introduction/readme.md#アプリケーション開発入門)
+
+## Vantiq アプリケーション開発関連
 
 ### [Vantiq のアプリケーション開発を学ぶ](./vantiq-apps-development)
 
