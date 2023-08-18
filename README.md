@@ -34,16 +34,10 @@ Vantiq アプリケーション開発チーム向けのアプリ開発に関す�
 - [VANTIQ CLI クイックリファレンス](./vantiq-apps-development/docs/jp/cli-quick-reference.md)
 - [バージョンアップに伴う互換性について](./vantiq-apps-development/docs/jp/incompatibilities.md)
 
-### [Google Colaboratoryを使ったデータジェネレータ](./vantiq-google-colab)
+### [Google Colaboratory を使ったデータジェネレータ](./vantiq-google-colab)
 
-Google Colaboratory の基本的な使い方やデータジェネレータのサンプルコードを紹介しています。Vantiq アプリを開発する際に便利なデータジェネレータを簡単にご用意頂けます。
-
-- [:book: Google Colaboratory の基礎](./vantiq-google-colab/docs/jp/colab_basic_knowledge.md)
-- [:computer: MQTT Publisher Sample](./vantiq-google-colab/docs/jp/mqtt_publisher_sample.ipynb)
-- [:computer: MQTT Subscriber Sample](./vantiq-google-colab/docs/jp/mqtt_subscriber_sample.ipynb)
-- [:beginner: Box Sorter Data Generator (Beginner)](./vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
-- [:beginner: Box Sorter Data Generator (Standard)](./vantiq-google-colab/docs/jp/box-sorter_data-generator_standard.ipynb)
-
+Google Colaboratory の基本的な使い方やデータジェネレータのサンプルコードを紹介しています。  
+Vantiq アプリを開発する際に便利なデータジェネレータを簡単にご用意頂けます。
 
 ### [Vantiq とパブリッククラウド サービスとの連携](./vantiq-external-services-integration)
 
