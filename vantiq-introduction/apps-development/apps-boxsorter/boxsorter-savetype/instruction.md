@@ -17,6 +17,7 @@
   - [6. SaveToType Activity で発生したエラーの原因を調べる](#6-savetotype-activity-で発生したエラーの原因を調べる)
   - [7. SaveToType Activity で発生したエラーを修正する](#7-savetotype-activity-で発生したエラーを修正する)
   - [8. Type に未登録データが保存されているか確認する](#8-type-に未登録データが保存されているか確認する)
+  - [実装サンプル](#実装サンプル)
 
 ## 0. 事前準備
 
@@ -297,3 +298,7 @@ event データには `time` というプロパティが存在しています。
 1. 最新の未登録データが登録されていることを確認する
 
 以上
+
+## 実装サンプル
+
+- [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_savetype_1.36.zip)
