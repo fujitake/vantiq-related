@@ -10,7 +10,8 @@ Vantiqプラットフォームに関する保守項目一覧は以下の通り�
 2  | [SSL 証明書更新](#renew_ssl_certificate)                     | Vantiq クラスタで使用する SSL 証明書。<br />**有効期限が切れると、Vantiq IDE にログインや、HTTPS REST でサービス接続ができなくなる。**     | 証明書の有効期限前                                     | 2 weeks        | 必要なし             | Vantiq サポート
 3  | [Vantiq マイナーバージョンアップ](#vantiq_minor_version_upgrade)    | Vantiq の機能追加を伴うバージョンアップを行う。                                                                                  | 概ね 4ヶ月に一度（年3回）                                            | 1 week         | 必要                 | Vantiq サポート
 4  | [Vantiq パッチバージョンアップ](#vantiq-patch-version-upgrade)      | Vantiq の現行バージョンの不具合修正を行うバージョンアップを行う。                                                                | 随時。運用上支障がある不具合修正のリリース時。                  | 2 days         | 必要なし             | Vantiq サポート
-5  | service principal アカウントの更新 | （AzureでInternal Load Balancerを構成する場合のみ）<br />Vantiq を Private 構成にするため、AKS に権限を持つ Service Principal を使用している。<br />**有効期限切れ後サービスが停止する可能性ある。** | Service Principal の有効期限前。                                 | 1 week         | 必要                 | Vantiq サポート
+5  | [Vantiq Sharedコンポーネントバージョンアップ](#vantiq-patch-version-upgrade)      | Vantiq のKeycloakやGrafanaなどのバージョンアップを行う。                                                                | Vantiqマイナーバージョンアップと同タイミング、もしくはSharedコンポーネントで運用上支障がある不具合修正のリリース時。                  | 2 days         | バージョンアップ内容による             | Vantiq サポート
+6 | service principal アカウントの更新 | （AzureでInternal Load Balancerを構成する場合のみ）<br />Vantiq を Private 構成にするため、AKS に権限を持つ Service Principal を使用している。<br />**有効期限切れ後サービスが停止する可能性ある。** | Service Principal の有効期限前。                                 | 1 week         | 必要                 | Vantiq サポート
 
 
 # 目次
@@ -19,11 +20,15 @@ Vantiqプラットフォームに関する保守項目一覧は以下の通り�
 - [はじめに](#はじめに)
 - [目次](#目次)
 - [保守作業](#保守作業)
+  - [k8sdeploy toolsによる保守作業時のPodの再起動について](#k8sdeploy-toolsによる保守作業時のpodの再起動について)
+    - [deployコマンド実行前の現状とのマニフェストの差分確認方法](#deployコマンド実行前の現状とのマニフェストの差分確認方法)
   - [Vantiqバージョンアップ作業](#vantiqバージョンアップ作業)
     - [Vantiq Minor Version Upgrade](#vantiq-minor-version-upgrade)
     - [Vantiq Minor Version Upgrade - Rollback](#vantiq-minor-version-upgrade---rollback)
     - [Vantiq Patch Version Upgrade](#vantiq-patch-version-upgrade)
     - [Vantiq Patch Version Upgrade - Rollback](#vantiq-patch-version-upgrade---rollback)
+    - [Vantiq Shared Component Version Upgrade](#vantiq-shared-component-version-upgrade)
+    - [Vantiq Shared Componen Version Upgrade - Rollback](#vantiq-shared-componen-version-upgrade---rollback)
   - [Kubernetesバージョンアップ作業](#kubernetesバージョンアップ作業)
     - [Kubernetes Minor Version Upgrade](#kubernetes-minor-version-upgrade)
   - [更新作業](#更新作業)
@@ -35,9 +40,73 @@ Vantiqプラットフォームに関する保守項目一覧は以下の通り�
 
 # 保守作業<a id="the_maintenance_operations"></a>
 
+## k8sdeploy toolsによる保守作業時のPodの再起動について
+本ドキュメントに記載している各保守項目に関しては再起動やローリングアップデートが行われるコンポーネントは記載しているが、system versionだけ更新したりdeploy.yamlだけ修正したりしていたがdeployコマンドを実行していなかった場合などに再起動する予定のなかったPodが再起動するということが発生する可能性がある。  
+
+前回の保守作業で何を実施したか分からなくなった場合には以下を参照し、どういった変更が反映されるか事前確認を行い、必要に応じてメンテンナンスタイムを確保し実施すること。
+
+
+各deployコマンド( `./gradlew -Pcluster=<クラスタ名> deployXXX` )実行の対象は以下のコンポーネント。  
+deployVantiqのコンポーネントはVantiqへアクセスする際のホスト名部分のNamespaceに、それ以外のコンポーネントはshared Namespaceにデプロイされる。  
+
+- deployShared
+  - Deployment
+    - grafana
+    - grafanadb-mysql
+    - telegraf-prom
+  - StatefulSet
+    - keycloak
+    - influxdb
+  - DaemonSet
+    - telegraf-ds
+  
+- deployVantiq
+  - StatefulSet
+    - vantiq
+    - mongodb
+    - metrics-collector
+
+- deployNginx
+  - ingress-nginx-controller
+
+保守作業時のdeploy.yamlなどの変更内容やsystem versionのアップデート先によってはdeployコマンド実行時に上記のコンポーネントにより管理されているPodが再起動する可能性がある。  
+sysem versionの変更内容などはk8sdeploy tools のリリース内容([Releases · Vantiq/k8sdeploy](https://github.com/Vantiq/k8sdeploy/releases))やリポジトリの各Tagの内容などを確認すること。  
+
+**※注意**  
+想定外のPodの再起動を防ぐために、system versionを変更した際には一度deployShared/Nginx/Vantiqを実行することを推奨。  
+system versionのみ変更すると、例えば以下のようなケースが発生しうる。  
+```
+ 7月のメンテナンスでsystem version の変更を実施(deployコマンドは未実行)  
+ 9月にSSL証明書を更新。通常はdeployVantiqを実行した際にPodは再起動しないがバージョンアップ先のsystem versionにPodの再起動が必要な変更が含まれていたためPodが再起動してしまった。
+```
+
+
+### deployコマンド実行前の現状とのマニフェストの差分確認方法
+deployコマンド実行時のマニフェストの差分確認を行う場合は以下のような手順で確認を行える。  
+
+```bash
+# 現在のHelmのリリースに反映されているマニフェストを取得
+helm get manifest -n <YOUR-NAMESPACE> <RELEASE-NAME> > current_xxx_release.yaml
+
+# 反映しようとしている各リリースの内容をdry-runオプションを指定することで確認可能
+./gradlew -Pcluster=<クラスタ名> -Pdry-run deployXXX > deoloyXXX-dry-run.log
+```
+
+上記で各Helmチャートのマニフェストが出力される。出力内容が長いためファイルへ出力している。  
+deployコマンドの出力では"MANIFEST"で検索するとそれぞれのリリースのマニフェストを検索し、該当部分のマニフェストとhelmコマンドで取得したマニフェストを比較し変更箇所を確認する。  
+
+helmのリリースは以下のコマンドで確認可能。
+```bash
+helm ls -A
+```
+
+
 ## Vantiqバージョンアップ作業<a id="vantiq_version_upgrade_operations"></a>
 
 ### Vantiq Minor Version Upgrade<a id="vantiq_minor_version_upgrade"></a>
+
+**Vantiq Podの再起動が必要**
+
 Vantiq の Minor Version がインクレメントされるアップグレード（e.g. `1.30.10` -> `1.31.0`)  
 Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが必要になる。
 1. 顧客の DTC にアップグレードに伴うサービス停止をアナウンスする (顧客 DTC はサービス停止による影響回避を社内で調整する)。
@@ -114,6 +183,9 @@ Vantiqの各コンポーネントはkubernetes上で稼働しているため、�
 
 
 ### Vantiq Patch Version Upgrade<a id="vantiq_patch_version_upgrade"></a>
+
+**Vantiq Podの再起動が必要**
+
 Patch Version がインクレメントされるアップグレード（e.g. `1.30.10` -> `1.30.11`)  
 DB Schema 拡張を伴わないため、Vantiq Pod のみの更新となる。
 1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで`git pull` を実行する。
@@ -154,7 +226,28 @@ Vantiqの各コンポーネントはkubernetes上で稼働しているため、�
 1. `deploy.yaml` の変更を適用する。 `./gradlew -Pcluster=<クラスタ名> deployVantiq`   
 
 
+### Vantiq Shared Component Version Upgrade<a id="vantiq-shared-version-upgrade">
+
+**shared Namespace内の Podの再起動が必要な場合がある**  
+
+Vantiq の Sharedコンポーネント(k8sのshared Namespaceにデプロイされている)のアップグレード。  
+アップグレードの内容によっては瞬断などが発生するため、k8sdeploy tools の リリース内容([Releases · Vantiq/k8sdeploy](https://github.com/Vantiq/k8sdeploy/releases))を確認すること。  
+
+1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで `git pull` を実行する。
+2. `cluster.properties` の `vantiq_system_release` を 目的のバージョンに置き換える。
+3. `./gradlew -Pcluster=<CLUSTER-NAME> setupCluster` コマンドを実行する。
+4. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。
+
+### Vantiq Shared Componen Version Upgrade - Rollback<a id="vantiq-shared-version-upgrade---rollback">
+切り戻しのためにsystem versionを変更前のバージョンに戻し再度deployコマンドまで実行する。  
+1. `cluster.properties` の `vantiq_system_release` を 変更前のバージョンに置き換える。
+2. `./gradlew -Pcluster=<CLUSTER-NAME> setupCluster` コマンドを実行する。
+3. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。
+
+
 ## Kubernetesバージョンアップ作業<a id="kubernetes_version_upgrade_operations"></a>
+
+**すべてのPodで再起動(Nodeの移動)が発生**
 
 ### Kubernetes Minor Version Upgrade<a id="k8s_minor_version_upgrade"></a>
 [Kubernetesアップグレード](../../../vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md)を参照
@@ -162,6 +255,9 @@ Vantiqの各コンポーネントはkubernetes上で稼働しているため、�
 ## 更新作業<a id="renew_operations"></a>  
 
 ### SSL 証明書を更新する<a id="renew_ssl_certificate"></a>
+
+**Podの再起動は発生しない**
+
 SSL 証明書が期限切れになると、ブラウザーでアクセス時にエラーとなるが、このようになる前に計画的に SSL 証明書を更新が必要である。
 ![Screen Shot 2021-08-30 at 23.04.52](../../imgs/vantiq-install-maintenance/ssl_expired_error.png)
 
@@ -185,6 +281,8 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 
 ### License ファイルを更新する<a id="renew_license_files"></a>
 
+**Vantiq Podの再起動が必要**
+
 1. Vantiq Support から License ファイル (それぞれ、`public.pem`、`license.key` とする) を取得する。
 2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
 3. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
@@ -192,6 +290,8 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 5. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 ### License ファイルを更新する - Rollback<a id="renew_license_files_rollback"></a>
+
+**Vantiq Podの再起動が必要**
 
 1. バックアップしておいた License ファイルを `targetCluster/deploy/sensitive` の下にリネームして戻す。
 1. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
@@ -202,4 +302,5 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.md _(要権限)_
 
 ### InfluxDBのPVを拡張する<a id="resize_influxdb_pv"></a>
+**InfluxDB Podの再起動が必要**  
 [InfluxDB PV拡張手順](./resize_influxdb_pv.md)を参照
