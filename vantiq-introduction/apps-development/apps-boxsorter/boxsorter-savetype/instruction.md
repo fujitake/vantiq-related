@@ -301,4 +301,5 @@ event データには `time` というプロパティが存在しています。
 
 ## 実装サンプル
 
+- [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_savetype_1.34.zip)
 - [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_savetype_1.36.zip)
