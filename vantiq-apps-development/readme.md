@@ -5,7 +5,6 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiq 1-day workshop (v1.34)](./1-day-workshop/docs/jp/readme.md)
 - [Vantiq 1-day workshop (v1.35)](./1-day-workshop-135/docs/jp/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
-- [デバッグの流れ（デモを通してデバッグの基礎を学ぶ）](./docs/jp/debug_demo.md)
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./docs/jp/data_sending.md)
 - [Vantiq Service](./docs/jp/vantiq-service.md)
 - [再利用可能なアプリケーション デザインパターン](./docs/jp/reusable-design-patterns.md)
