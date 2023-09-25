@@ -86,7 +86,7 @@ Topic からデータを送信すると、アプリケーションの ConvertTem
 
 `The generated rule: ConvertTemperature failed because: Encountered exception during execution: No signature of method: java.lang.Class.multiply() is applicable for argument types: (String) values: [100]`
 
-また `event` を見ると `{"id":1,"temperature":"100"}` とあり、どうやら送信されてきているイベントに含まれる temperature の型が一致していないということがわかります。
+また `event` を見ると `{"id":1,"temperature":"100"}` とあり、どうやら送信されてきているイベントに含まれる temperature の型が一致していないようです。
 
 ### 3. 送信されてきたデータの確認
 
@@ -94,7 +94,7 @@ Topic からデータを送信すると、アプリケーションの ConvertTem
 ここにはタスクで処理した結果が出力されていきます。  
 
 まずは、エラーが発生している ConvertTemperature タスクの前にある Event タスクの出力結果を確認してみます。  
-下記のイベントが ConvertTemperature タスクの入力値となっているかがわかります。
+下記のイベントが ConvertTemperature タスクの入力値になっていることが分かります。
 
 ![subscription](./imgs/subscription.png)
 
@@ -102,11 +102,11 @@ Topic からデータを送信すると、アプリケーションの ConvertTem
 
 ### 4. Procedureを修正
 
-ConvertTemperature タスクで呼び出されている Procedure を確認すると、 `event.temperature = 5 / 9 * (event.temperature - 32)` となっています。  
+エラーとなっている ConvertTemperature タスクで呼び出されている Procedure を確認すると、 `event.temperature = 5 / 9 * (event.temperature - 32)` となっています。  
 String 型の temperature の値を計算式でそのまま利用しようとしています。  
 これがエラーの原因です。  
 
-エラーの原因がわかったので、 Procedure を修正します。  
+エラーの原因が分かったので、 Procedure を修正します。  
 String 型を Integer 型に変換する処理を追加します。  
 
 #### 修正前の Procedure
