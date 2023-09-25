@@ -23,3 +23,4 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 1. [VAIL 入門（Type の操作）](./apps-development/vail-introductory/vail_type/vail_type.md)
 1. [VAIL 入門（外部へのデータ送信）](./apps-development/vail-introductory/vail_data/vail_data.md)
 1. [荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)
+1. [デバッグ方法](./apps-development/debug/readme.md)
