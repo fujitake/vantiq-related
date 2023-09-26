@@ -21,6 +21,7 @@ Vantiq アプリケーション開発時に使用する独自言語である `VA
     - [Type](#type)
   - [配列](#配列)
   - [Try catch](#try-catch)
+  - [実装サンプル](#実装サンプル)
 
 ## Procedure の作成
 
@@ -42,7 +43,7 @@ VAIL を使うにあたって、まずは Procedure を用意します。
 
    ![vail_procedure_create_04.png](./imgs/vail_procedure_create_04.png)
 
-1. Procedure 名を任意の名前に変更し、保存します。（例：VailSampleProcedure）  
+1. Procedure 名を任意の名前に変更し、保存します。（例：vailSampleProcedure）  
 
    ![vail_procedure_create_05.png](./imgs/vail_procedure_create_05.png)
 
@@ -74,7 +75,7 @@ VAIL を使うにあたって、まずは Procedure を用意します。
 他の言語と同様に VAIL でもコメントアウトを記述できます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE commentOut()
 
 // 1行ずつ、
 // コメントを書くことができます
@@ -96,7 +97,7 @@ VAIL では変数の宣言に `var` を用います。
 > JavaScript like ですが `;` は使用しません。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE declareVariable()
 
 var a
 var b = 0
@@ -107,7 +108,7 @@ var b = 0
 VAIL では下記のデータ型が利用できます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE vailTypes()
 
 // String
 var a = "Hello"
@@ -141,7 +142,7 @@ var e = {
 VAIL では下記の演算子が利用できます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE binaryOperator()
 
 var a = 2
 var b = 3
@@ -164,7 +165,7 @@ b -= 1 // 2
 上記の演算子が正しく動いているか Log に出力して、確認してみましょう。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE binaryOperatorLog()
 
 var a = 2
 var b = 3
@@ -202,6 +203,8 @@ log.info("b: " + b)
 VAIL では下記の比較演算子が利用できます。  
 
 ```JavaScript
+PROCEDURE logicalOperator()
+
 3 == 3 // true
 3 == "3" // false
 
@@ -226,7 +229,7 @@ NOT true // false
 上記の比較演算子が正しく動いているか Log に出力して、確認してみましょう。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE logicalOperatorLog()
 
 var a = 3 == 3 // true
 log.info("a: " + a)
@@ -275,7 +278,7 @@ VAIL での if 文は下記のとおりです。
 括弧なし
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE flowControlIf1()
 
 var a = 10
 if a > 11 {
@@ -288,7 +291,7 @@ if a > 11 {
 括弧あり
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE flowControlIf2()
 
 var a = 10
 if (a > 11) {
@@ -306,10 +309,19 @@ fuga
 
 > **注意**  
 > VAIL は論理演算子のショートカットを行わないことがあります。  
-> 以下の例では右辺も評価されるため、エラーとなります。 
->  
+> 下記に具体的な例を示します。
+>
+> まずは比較するための Procedure を用意します。
+>
 > ```JavaScript
-> PROCEDURE VailSampleProcedure()
+> PROCEDURE compare(arg1, arg2)
+> return arg1 == arg2
+> ```
+>
+> 以下の例では右辺も評価され、 Procedure が呼び出されてしまうため、エラーとなります。
+>
+> ```JavaScript
+> PROCEDURE flowControlIf3()
 >
 > var stack = ["first"]
 > // stack の最後の2要素を比べて同じであれば pop する
@@ -321,7 +333,7 @@ fuga
 > 以下の様に実装すると安全です。
 > 
 > ```JavaScript
-> PROCEDURE VailSampleProcedure()
+> PROCEDURE flowControlIf4()
 >
 > var stack = ["first"]
 > // stack の最後の2要素を比べて同じであれば pop する
@@ -340,7 +352,7 @@ VAIL での for 文は Python の for 文と似ています。
 なお、 if 文と同様に条件部分は括弧付き、括弧なしのどちらでも動作します。 
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE iterationFor()
 
 var a = 1
 for i in range(0, 5, 1) {
@@ -364,7 +376,7 @@ return a
 `UNTIL`を使うと条件に一致した時点でループから抜けます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE iterationForUntil()
 
 var a = 1
 for i in range(0, 5, 1) UNTIL i == 2 {
@@ -398,7 +410,7 @@ Type からレコードを取得し、レコードごとに処理を実行する
 </details>
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE iterationForType()
 
 var targetAge
 for member in SELECT FROM Members {
@@ -416,8 +428,8 @@ return targetAge
 23
 ```
 
-> **サンプル**  
-> サンプルとして用いた Type は [こちら](./data/VailSample_Type.zip) から、ダウンロードできます。  
+> **Type のサンプル**  
+> サンプルとして用いた Type は [こちら](./data/Vail_Basic_Type.zip) から、ダウンロードできます。  
 > Project にインポートして利用してください。  
 
 ## 配列
@@ -425,7 +437,7 @@ return targetAge
 VAIL でも配列が利用できます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE vailArray()
 
 var myArray = [1,2,3,"Apple","Peach"]
 var firstElement = myArray[0] // 1
@@ -458,7 +470,7 @@ return myArray
 VAIL では例外処理も利用できます。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE flowControlTry()
 
 var results = []
 try {
@@ -489,3 +501,8 @@ return results
     "Hello, finally"
 ]
 ```
+
+## 実装サンプル
+
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.34）](./data/Vail_Basic_1.34.zip)
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.37）](./data/Vail_Basic_1.37.zip)

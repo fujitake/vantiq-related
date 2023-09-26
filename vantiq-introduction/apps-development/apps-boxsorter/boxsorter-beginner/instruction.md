@@ -20,12 +20,14 @@
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
   - [1. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#1-topicvantiqで-google-colaboratory-のデータを受信する)
+    - [Topic の作成](#topic-の作成)
   - [2. 【App Builder】荷物仕分けアプリケーション開発](#2-app-builder荷物仕分けアプリケーション開発)
-    - [1. アプリケーションを作成する](#1-アプリケーションを作成する)
+    - [1. アプリケーションの作成](#1-アプリケーションの作成)
     - [2.【EventStream】Topic で受信した内容をアプリケーションで受け取る](#2eventstreamtopic-で受信した内容をアプリケーションで受け取る)
-    - [3.【Enrich】仕分け条件をイベントに追加する](#3enrich仕分け条件をイベントに追加する)
-    - [4. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#4-filter条件に合致したイベントだけを通過させ仕分けする)
-    - [5. 【LogStream】仕分け指示をログとして表示](#5-logstream仕分け指示をログとして表示)
+    - [3. Type の作成](#3-type-の作成)
+    - [4.【Enrich】仕分け条件をイベントに追加する](#4enrich仕分け条件をイベントに追加する)
+    - [5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#5-filter条件に合致したイベントだけを通過させ仕分けする)
+    - [6. 【LogStream】仕分け指示をログとして表示](#6-logstream仕分け指示をログとして表示)
   - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
@@ -146,29 +148,30 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 サーバーからデータを受信したい場合、エンドポイントが必要です。これは Vantiq でも同じです。  
 Vantiq の Topic がエンドポイントになります。
 
-1. Topic を作成する
-   1. メニューバーの `追加` -> `Advanced` -> `Topic...` -> `+ 新規 Topic` をクリックし Topic の新規作成画面を開く
-   1. 以下の内容を設定し、保存する
+### Topic の作成
 
-      |項目|設定値|設定箇所|
-      |-|-|-|
-      |Name|/BoxInfoApi|-|
-      > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
+1. メニューバーの `追加` -> `Advanced` -> `Topic...` -> `+ 新規 Topic` をクリックし Topic の新規作成画面を開く
+1. 以下の内容を設定し、保存する
 
-   1. データを受信できることを確認する
-      1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックする
-         > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
-      1. Google Colaboratory のデータジェネレータを起動する
-      1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認する
+   |項目|設定値|設定箇所|
+   |-|-|-|
+   |Name|/BoxInfoApi|-|
+   > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
 
-         <img src="./imgs/receive-test-data.png" width="400">
+1. データを受信できることを確認する
+   1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックする
+      > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
+   1. Google Colaboratory のデータジェネレータを起動する
+   1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認する
+
+      <img src="./imgs/receive-test-data.png" width="400">
 
 ## 2. 【App Builder】荷物仕分けアプリケーション開発
 
 この手順からアプリケーション開発を開始します。  
 Google Colaboratory から取得したデータをイベントとして、処理を実装していきます。
 
-### 1. アプリケーションを作成する
+### 1. アプリケーションの作成
 
 1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開く
 
@@ -200,7 +203,7 @@ Google Colaboratory から取得したデータをイベントとして、処理
 1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認する
    > この手順で、アプリケーションが Topic で受信した内容を扱える状態まで実装できています。
 
-### 3.【Enrich】仕分け条件をイベントに追加する
+### 3. Type の作成
 
 このアプリケーションが受け取る元の内容は以下のように `code` と `name` だけが含まれているデータです。
 
@@ -248,26 +251,29 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |-|-|
       |Key|code|
 
-   1. `sorting_condition` Type にデータをインポートする
-      1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定する
-      1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./data/sorting_condition.csv) をドロップし `インポート` をクリックする
+1. `sorting_condition` Type にデータをインポートする
+   1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定する
+   1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./../data/sorting_condition.csv) をドロップし `インポート` をクリックする
 
-         > Type にレコードをインポートする際は `Data` を選択する必要があります。  
-         > デフォルトは `Projects` になっているので注意してください。  
+      > Type にレコードをインポートする際は `Data` を選択する必要があります。  
+      > デフォルトは `Projects` になっているので注意してください。  
 
-         > インポートする CSV ファイルのファイル名は `sorting_condition.csv` になっている必要があります。  
-         > ファイル名が異なる場合は `sorting_condition.csv` にリネームしてください。  
+      > インポートする CSV ファイルのファイル名は `sorting_condition.csv` になっている必要があります。  
+      > ファイル名が異なる場合は `sorting_condition.csv` にリネームしてください。  
 
-      1. `sorting_condition` Type のペインを開き、上部にある `すべてのレコードを表示` をクリックしてインポートが成功しているか確認する
+   1. `sorting_condition` Type のペインを開き、上部にある `すべてのレコードを表示` をクリックしてインポートが成功しているか確認する
 
-         |center_id|center_name|code|
-         |-|-|-|
-         |1|東京物流センター|14961234567890|
-         |2|神奈川物流センター|14961234567892|
-         |3|埼玉物流センター|14961234567893|
+      |center_id|center_name|code|
+      |-|-|-|
+      |1|東京物流センター|14961234567890|
+      |2|神奈川物流センター|14961234567892|
+      |3|埼玉物流センター|14961234567893|
 
-   これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
-   今回は `Enrich` を使用します。
+これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
+
+### 4.【Enrich】仕分け条件をイベントに追加する
+
+`Enrich` Activity Pattern を使用して、 Type のデータを追加します。
 
 1. `ReceiveBoxInfo` タスクを右クリックし、 `新規タスクとリンク` から新しいタスクを後続に追加する
    1. `新規タスクとリンク` ダイアログが表示されるので以下の内容を入力し `OK` をクリックする
@@ -342,7 +348,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
       `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
-### 4. 【Filter】条件に合致したイベントだけを通過させ、仕分けする
+### 5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする
 
 特定の物流センターのイベントのみが通過できるフローを実装することで仕分けを行います。  
 今回は「東京」「神奈川」「埼玉」の3つの物流センター単位で仕分けをしますので `Filter` Activity を設定したタスクを3つ実装します。
@@ -457,7 +463,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
         }
         ```
 
-### 5. 【LogStream】仕分け指示をログとして表示
+### 6. 【LogStream】仕分け指示をログとして表示
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
 
