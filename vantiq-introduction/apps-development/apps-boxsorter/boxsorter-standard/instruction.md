@@ -276,7 +276,7 @@ Vantiqでは `Enrich` という Activity Pattern が用意されており、イ�
 
    1. `sorting_condition` Type にデータをインポートする
       1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定する
-      1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./data/sorting_condition.csv) をドロップし `インポート` をクリックする
+      1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./../data/sorting_condition.csv) をドロップし `インポート` をクリックする
 
          > Type にレコードをインポートする際は `Data` を選択する必要があります。  
          > デフォルトは `Projects` になっているので注意してください。  
