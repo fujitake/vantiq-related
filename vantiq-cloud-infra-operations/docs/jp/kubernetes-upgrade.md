@@ -66,7 +66,7 @@ Terraformでアップグレードする  | Terraformの構成ファイル上で�
 1. Control Planeの更新
    **Control Planeのみ更新**、もしくは**Control PlaneとすべてのNodepoolを更新するオプション**があるが、**前者で行います**。Nodepoolについては、Vantiq pod群の依存関係を考慮し、順番に実施する必要があります。
 
-   ![aks1](../../imgs/kubernetes-upgrade/aks-1.png)
+  ![aks1](../../imgs/kubernetes-upgrade/aks-1.png)
 
 2. Nodepoolの更新
   更新を行う前にtelegraf-promを停止しておきます。  
@@ -76,11 +76,11 @@ Terraformでアップグレードする  | Terraformの構成ファイル上で�
 
   Node Poolsから対象のNodepoolを選択し、それぞれ更新を行います。  
 
-    ![aks2](../../imgs/kubernetes-upgrade/aks-2.png)
+  ![aks2](../../imgs/kubernetes-upgrade/aks-2.png)
 
-    Nodepoolを選択し、**Update Kubernetes** を実行します。
+  Nodepoolを選択し、**Update Kubernetes** を実行します。
 
-    ![aks3](../../imgs/kubernetes-upgrade/aks-3.png)
+  ![aks3](../../imgs/kubernetes-upgrade/aks-3.png)
 
   Nodepoolの更新が完了したら以下のコマンドでtelegraf-promを起動します。  
   ```sh

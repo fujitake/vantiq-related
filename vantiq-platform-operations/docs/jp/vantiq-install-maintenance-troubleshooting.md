@@ -51,6 +51,7 @@
     - [Vantiq IDEにログインしようとするとエラーメッセージが出てループする](#vantiq-ideにログインしようとするとエラーメッセージが出てループする)
   - [System Admin 用の key を紛失した、期限切れになった](#system-admin-用の-key-を紛失した期限切れになった)
   - [ライセンス更新を適用したが、更新されない ](#ライセンス更新を適用したが更新されない-)
+  - [deployコマンド実行時に"UPGRADE FAILED: resource mapping not found for name: …"といったようなエラーが発生する ](#deployコマンド実行時にupgrade-failed-resource-mapping-not-found-for-name-といったようなエラーが発生する-)
   - [特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  ](#特殊環境-eks-aks以外の環境でのトラブルシューティング事例--)
     - [Vantiq Podが起動しない ](#vantiq-podが起動しない-)
       - [keycloak-initでFailedとなる ](#keycloak-initでfailedとなる-)
@@ -960,6 +961,16 @@ Vantiq のデプロイからやり直す必要がある
     `targetCluster/deploy/secrets` 配下にある当該ファイル (`vantiq-license.yaml`, `vantiq-ssl-dert.yaml` など）のタイムスタンプを確認し、更新されているか確認する。更新されていない場合、当該ファイルを削除し、`generateSecrets` を再実行する。
 
 1. `kubectl get secrets -n <namespace> vantiq-license -o yaml` を実行し、Secretリソースがデプロイされているか（デプロイした時間）、また内容が反映されているか確認する。 Secretに反映されているならば、`vantiq-server`を再起動する。（Secretリソースを更新しても自動的に反映しない）
+
+## deployコマンド実行時に"UPGRADE FAILED: resource mapping not found for name: …"といったようなエラーが発生する <a id="helm_error_on_deploy_command"></a>
+以下のようなエラーの場合、K8s APIのバージョンがdeprecateになったことによるHelmのエラーのため修正作業が必要。
+```log
+> Task :vantiqSystem:deployTelegrafProm FAILED
+Error: UPGRADE FAILED: resource mapping not found for name: "telegraf-prom" namespace: "" from "": no matches for kind "PodDisruptionBudget" in version "policy/v1beta1"
+ensure CRDs are installed first
+```
+
+詳細は[Kubernetes Minor Version Upgrade](./vantiq-maintenance.md#kubernetes-minor-version-upgrade)を参照
 
 
 ## 特殊環境 (EKS, AKS以外の環境）でのトラブルシューティング事例  <a id="env_dependency_problem"></a>
