@@ -267,7 +267,7 @@ ensure CRDs are installed first
 ```
 
 このような状況になってしまった場合、Helmのmapkubeapisというプラグインを利用して対応する。  
-[mapkubeapis](https://github.com/helm/helm-mapkubeapis)  
+[helm/helm-mapkubeapis - GitHub](https://github.com/helm/helm-mapkubeapis)  
 上記GitHubのReadmeの通りプラグインをインストール後、以下のように修正する。  
 
 ```sh
@@ -276,7 +276,7 @@ helm ls -A
 
 # mapkubeapisでリリースを修正。以下はtelegraf-promの例
 # -n: Namespace 
-helm maplubeapis -n shared telegraf-prom
+helm mapkubeapis -n shared telegraf-prom
 ```
 
 
