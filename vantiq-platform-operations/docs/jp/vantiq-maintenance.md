@@ -252,6 +252,34 @@ Vantiq の Sharedコンポーネント(k8sのshared Namespaceにデプロイさ�
 ### Kubernetes Minor Version Upgrade<a id="k8s_minor_version_upgrade"></a>
 [Kubernetesアップグレード](../../../vantiq-cloud-infra-operations/docs/jp/kubernetes-upgrade.md)を参照
 
+**※注意**  
+現在のSystem Versionがバージョンアップ後のK8sのバージョンを対応しているか確認しておくこと。  
+対応していない場合は現在とバージョンアップ後のK8sのバージョンを対応しているSystem VersionにアップデートしてからK8sのバージョンアップを行うこと。  
+
+バージョンアップ後のK8sのバージョンに対応していないSystem VersionのままK8sのバージョンをあげてしまうとK8s APIのバージョンのdeprecateによりHelmのリリースが更新できなくなってしまうことがある。  
+更新できなくなると`UPGRADE FAILED`というようなエラーが発生しPodの更新などができなくなる。  
+以下はtelegraf-promで発生した際の例。  
+
+```log
+> Task :vantiqSystem:deployTelegrafProm FAILED
+Error: UPGRADE FAILED: resource mapping not found for name: "telegraf-prom" namespace: "" from "": no matches for kind "PodDisruptionBudget" in version "policy/v1beta1"
+ensure CRDs are installed first
+```
+
+このような状況になってしまった場合、Helmのmapkubeapisというプラグインを利用して対応する。  
+[mapkubeapis](https://github.com/helm/helm-mapkubeapis)  
+上記GitHubのReadmeの通りプラグインをインストール後、以下のように修正する。  
+
+```sh
+# 対象のリリースを確認
+helm ls -A
+
+# mapkubeapisでリリースを修正。以下はtelegraf-promの例
+# -n: Namespace 
+helm maplubeapis -n shared telegraf-prom
+```
+
+
 ## 更新作業<a id="renew_operations"></a>  
 
 ### SSL 証明書を更新する<a id="renew_ssl_certificate"></a>
