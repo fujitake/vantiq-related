@@ -12,6 +12,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [バージョンアップに伴う互換性について](./docs/jp/incompatibilities.md)
 - [ネットワークカメラ映像解析ハンズオン](./vantiq-videostream/docs/jp/hands-on-lab.md)
+- [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
 
 # Vantiq Application Development related
 
