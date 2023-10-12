@@ -105,12 +105,18 @@ App を利用する際に必ずルートタスクとして設定されている 
 イベントデータをログに出力します。  
 今回は仕分け指示が正しく行われているかを確認するために利用します。
 
-## 各自で準備するVantiq以外の要素(事前にご準備ください)
-
-- Google アカウント
-  - Google Colaboratory を利用するために使用します。
-
 ## 必要なマテリアル
+
+### 各自で準備する Vantiq 以外の要素
+
+以下のいずれかを事前にご用意ください。
+
+- Google Colab
+  - Google アカウント（※Google Colaboratory を利用するために使用します）
+  - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
+- Python
+  - Python 実行環境
+  - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.py)
 
 ### 商品マスタデータ
 
