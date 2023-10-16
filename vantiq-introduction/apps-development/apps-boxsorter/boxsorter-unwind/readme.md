@@ -26,7 +26,7 @@
 ![vantiq-app.png](./imgs/vantiq-app.png)
 
 このアプリケーションを実装していきます。  
-詳細は次のステップで説明しますが、 `ReciveBoxInfo` タスクから分岐した処理の実装を行います。
+詳細は次のステップで説明しますが、 `Unwind` Activity の追加実装を行います。
 
 ### 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
 
