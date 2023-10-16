@@ -188,3 +188,4 @@ Google Colaboratory からパブリッシュしたメッセージを確認しま
 ## 実装サンプル
 
 - [荷物仕分けアプリ (Unwind) の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_1.37.zip)
+- [荷物仕分けアプリ (Unwind Ex) の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_ex_1.37.zip)
