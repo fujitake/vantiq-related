@@ -35,6 +35,10 @@ Vantiq アプリケーション開発チーム向けの Vantiq とパブリッ�
 
 Vantiq アプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
 
+### [Vantiq とAI/MLとの連携](./vantiq-aiml-integration)
+
+Vantiq アプリケーション開発チーム向けのVantiqとAI/MLを連携させるガイドラインやサンプルコードです。
+
 ## Vantiq Private Cloud 関連
 
 Vantiq Private Cloud のインストールと運用管理における対応手順など、インフラチームの方々向けの情報をまとめました。
@@ -46,6 +50,10 @@ Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関す�
 ### [Vantiq Private Cloud のインストールと運用管理](./vantiq-platform-operations)
 
 別途用意されたAWS EKS、Azure AKS 環境に対し、Vantiq Private Cloud をインストールする手順や運用管理に関するガイドや手順を紹介しています。運用時に必要となる作業手順やトラブルシューティングガイドもございます。
+
+### [Vantiq Edge のインストール](./vantiq-edge-operations)
+
+Vantiq EdgeをセットアップするためのDocker composeのインストールやVantiq Edgeのインストール手順などを紹介しています。
 
 ***
 
