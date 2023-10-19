@@ -21,6 +21,9 @@ Docker Compose を用いて Vantiq Edge をインストールします。
 
 - [Vantiq Edgeインストールガイド（Docker環境のインストール手順）](https://community.vantiq.com/wp-content/uploads/2022/06/edge-install-ja-2.html#docker_image_installation)
 
+> **注意**  
+> Docker Compose を構築、起動するには root 権限が必要になります。
+
 ## アカウント作成
 
 Vantiq Edge のインストールが完了したら、システム管理者としてログインして、各ユーザーのアカウントを発行します。  
