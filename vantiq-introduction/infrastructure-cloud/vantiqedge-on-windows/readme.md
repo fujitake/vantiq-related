@@ -7,8 +7,8 @@ Vantiq Edge を Windows 端末にインストールする方法を解説して�
 Windows に Docker 環境を構築するには、下記の2つの方法があります。  
 詳細はリンク先の Qiita 記事をご覧ください。  
 
-- [WSL2](https://qiita.com/IoriGunji/items/15814a99c4114bcd04d8)
-- [Rancher Desktop](https://qiita.com/IoriGunji/items/f2a86ffdc629b6edc549)
+- :globe_with_meridians: [WSL2](https://qiita.com/IoriGunji/items/15814a99c4114bcd04d8)
+- :globe_with_meridians: [Rancher Desktop](https://qiita.com/IoriGunji/items/f2a86ffdc629b6edc549)
 
 > **注意**  
 > Docker Desktop for Windows および Docker Desktop for Mac は、2021年9月に有料化しました。  
