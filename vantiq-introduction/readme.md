@@ -22,7 +22,7 @@ Vantiq の基本的な扱い方を解説しています。
 1. [Project の管理について](./apps-development/vantiq-basic/project/project.md)
 1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/basic-common.md)
 
-### アプリケーション開発入門
+### アプリケーション開発ワークショップ
 
 実際に Vantiq を使ってアプリケーションを開発していきます。  
 表の上から順に実施していただくことを推奨しています。  

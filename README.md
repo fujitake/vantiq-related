@@ -13,8 +13,8 @@ Vantiq アプリケーション開発者向けの情報となります。初め�
 Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式などで解説しています。
 
 - [開発環境の準備](./vantiq-introduction/readme.md#開発環境の準備)
-- [Vantiq の基本](./vantiq-introduction/readme.md#vantiq-の基本)
 - [アプリケーション開発入門](./vantiq-introduction/readme.md#アプリケーション開発入門)
+- [インフラ／クラウド入門](./vantiq-introduction/readme.md#インフラ／クラウド入門)
 
 ## Vantiq アプリケーション開発関連
 
