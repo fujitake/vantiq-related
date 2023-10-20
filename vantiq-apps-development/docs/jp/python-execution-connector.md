@@ -11,7 +11,7 @@
 - Vantiq サーバー
   - Vantiq 1.23 or later が用意されていること
   - 開発者用 Namespace を作成済みであること
-- ローカル環境
+- Python 実行環境
   - Python 3.8 or later がインストールされていること
 - [Vantiq CLI](./cli-quick-reference.md) がインストールされていること
 
@@ -20,7 +20,10 @@
 この説明では以下の環境の作業を例にしています。
 - Vantiq サーバー : 
   - dev.vantiq.co.jp
-- ローカル環境(Python実行環境) : 
+- Python実行環境 : 
+  - Macbook Pro M1 
+  - Python 3.11 (venv使用)
+- ローカル環境 (CLI実行環境)
   - Macbook Pro M1 
   - Python 3.11 (venv使用)
 
@@ -50,7 +53,7 @@
 
 
 
-### ローカル環境 (Python実行環境) ですること
+### Python実行環境ですること
 
 1. `pip`を使って`vantiqPythonExecConnector`をインストールします。
 
@@ -152,7 +155,7 @@ var result = SELECT * FROM SOURCE jp.co.vantiq.test.pythonSource
 log.info("Got result: {}", [result])
 ```
 
-ローカル側で実行され、ログが出力されているのがわかります。
+Pyhon実行環境にて実行され、ログが出力されているのがわかります。
 
 ```sh
 loop count 20
@@ -203,7 +206,7 @@ var result = SELECT * FROM SOURCE jp.co.vantiq.test.pythonSource
 log.info("Got result: {}", [result])
 ```
 
-### Python から実行後を値を返す
+### Python 側から実行後を値を返す
 
 実行した Python スクリプトの中で宣言したグローバル変数は、デフォルトではそのまま `SELECT FROM SOURCE`の戻り値(`pythonCallResults`)として得られます。 以下の例では `decimal` という変数の値が得られます。
 
@@ -230,7 +233,7 @@ Vantiq側のログ出力
     Message: Got result: [{pythonCallResults={decimal=5589}}]
 
 
-### Python から非同期に値を返す
+### Python 側から非同期に値を返す
 
 実行中の Python スクリプトから Vantiq 側へ非同期にデータを送信することができます。
 
@@ -324,7 +327,7 @@ Vantiqがビルトインとして対応していないプロトコルによる�
     WITH code = python_code, presetValues = { current_time: now()}
     log.info("Got Result:{}", [result])
     ```
-- Python Execution Connector (PEC) で実行する Python スクリプトがimport必要とするライブラリは、予め pip でインストールした上で、PECを実行すればよい。 同様に、環境変数のロードもPECを通じて行うことができる。
+- Python Execution Connector (PEC) で実行する Python スクリプトがimport必要とするライブラリは、予め Python実行環境で pip でインストールした上で、PECを実行すればよい。 同様に、環境変数のロードもPECを通じて行うことができる。
 - Python Execution Connector (PEC) は任意のPythonスクリプトを実行できる。悪意のあるコードも実行されうる。PECを実行をするユーザーの権限や、PECが接続する先のサービス（例えばDBサーバー）への権限等は適切に設定すること。
 - SELECTは30秒でタイムアウトする。よって、Pythonコードを実行できる時間は30秒。
 - PEC側では、コルーチンで実行するため、同時に実行できるのは1スレッドのみ。同時にPECへのリクエストがある場合、待ち合わせて順次実行する。
