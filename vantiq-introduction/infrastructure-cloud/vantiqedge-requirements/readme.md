@@ -46,6 +46,9 @@ Vantiq Edge を動かすには Docker 環境が必要になります。
 
 ARM プロセッサーでは Vantiq Edge を動かすことはできません。（Vantiq Edge r1.37 時点）
 
+> **補足**  
+> MacOS M1 も ARM 系プロセッサのため、 Vantiq Edge を動かすことはできません。
+
 ### Vantiq Edge を動かせない理由
 
 #### Docker 環境の場合
