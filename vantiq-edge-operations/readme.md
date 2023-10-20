@@ -8,14 +8,12 @@
 
 ## テスト目的の方向け
 
-- [Windows 10/11でWSL2を使ってDockerを動かす](https://qiita.com/IoriGunji/items/15814a99c4114bcd04d8)
+- [Windows 10/11](https://github.com/fujitake/vantiq-related/blob/main/vantiq-introduction/infrastructure-cloud/vantiqedge-on-windows/readme.md)
 - macOS Intelではpodmanなどを使うことで動作することを確認しております。
-- macOS m1にてLimaやpodmanなどではコンテナ版Vantiq edge(amd64)は動作しないことを確認しております。
+- macOS m1にてLimaやpodmanなどではコンテナ版Vantiq edge(amd64)は`動作しない`ことを確認しております。
 
-:::note info
-Docker DesktopはDocker社の有償プランの対象となります。
-:::
-
+> **注意**
+> Docker DesktopはDocker社の有償プランの対象となります。
 
 
 ## Vantiq Edgeのインストール手順
