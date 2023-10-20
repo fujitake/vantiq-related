@@ -19,10 +19,16 @@ Windows に Docker 環境を構築するには、下記の2つの方法があり
 Docker Compose を用いて Vantiq Edge をインストールします。  
 詳細は下記のガイドをご覧ください。  
 
-- [Vantiq Edgeインストールガイド（Docker環境のインストール手順）](https://community.vantiq.com/wp-content/uploads/2022/06/edge-install-ja-2.html#docker_image_installation)
-
 > **注意**  
 > Docker Compose を構築、起動するには root 権限が必要になります。
+
+### r1.36 まで
+
+- [Vantiq Edgeインストールガイド（Docker環境のインストール手順）](https://community.vantiq.com/wp-content/uploads/2022/06/edge-install-ja-2.html#docker_image_installation)
+
+### r1.37 以降
+
+- [Vantiq Edge R1.37のインストールと大規模言語モデル関連機能の設定ガイド](/vantiq-edge-operations/docs/jp/setup_vantiq_edge_r137_w_LLM.md)
 
 ## アカウント作成
 
