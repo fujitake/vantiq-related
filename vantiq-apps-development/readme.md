@@ -13,6 +13,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [バージョンアップに伴う互換性について](./docs/jp/incompatibilities.md)
 - [ネットワークカメラ映像解析ハンズオン](./vantiq-videostream/docs/jp/hands-on-lab.md)
 - [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
+- [Python Execution Connector](./docs/jp/python-execution-connector.md)
 
 # Vantiq Application Development related
 
