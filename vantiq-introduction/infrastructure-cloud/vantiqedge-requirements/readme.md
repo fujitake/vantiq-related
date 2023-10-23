@@ -53,7 +53,7 @@ ARM プロセッサーでは Vantiq Edge を動かすことはできません。
 
 #### Docker 環境の場合
 
-- Docker Compose が ARM に対応していないため、 Docker 環境が起動できません。
+- Vantiq Edge の Docker コンテナが ARM に対応していないため、 Docker 環境では Vantiq Edge の起動はできません。
 
 #### 非 Docker 環境の場合
 
