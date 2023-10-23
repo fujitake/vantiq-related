@@ -1,0 +1,6 @@
+{
+   "class_name": "langchain.chat_models.azure_openai.AzureChatOpenAI",
+   "deployment_name": "<your generative deployment name from Azure AI Stduio>",
+   "openai_api_base": "<your endpoint from Azure Portal>",
+   "openai_api_version": "2023-05-15"
+}
