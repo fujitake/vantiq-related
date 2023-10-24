@@ -13,6 +13,7 @@ Vantiqプラットフォームに関する保守項目一覧は以下の通り�
 5  | [Vantiq Sharedコンポーネントバージョンアップ](#vantiq-patch-version-upgrade)      | Vantiq のKeycloakやGrafanaなどのバージョンアップを行う。                                                                | Vantiqマイナーバージョンアップと同タイミング、もしくはSharedコンポーネントで運用上支障がある不具合修正のリリース時。                  | 2 days         | バージョンアップ内容による             | Vantiq サポート
 6 | [service principal アカウントの更新](https://learn.microsoft.com/ja-jp/azure/aks/update-credentials) | （AzureでInternal Load Balancerを構成する場合のみ）<br />Vantiq を Private 構成にするため、AKS に権限を持つ Service Principal を使用している。<br />**有効期限切れ後サービスが停止する可能性ある。** | Service Principal の有効期限前。                                 | 1 week         | 必要                 | Vantiq サポート
 
+
 # 目次
 
 [保守作業](#the_maintenance_operations)  
