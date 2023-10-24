@@ -13,7 +13,6 @@ Vantiqプラットフォームに関する保守項目一覧は以下の通り�
 5  | [Vantiq Sharedコンポーネントバージョンアップ](#vantiq-patch-version-upgrade)      | Vantiq のKeycloakやGrafanaなどのバージョンアップを行う。                                                                | Vantiqマイナーバージョンアップと同タイミング、もしくはSharedコンポーネントで運用上支障がある不具合修正のリリース時。                  | 2 days         | バージョンアップ内容による             | Vantiq サポート
 6 | [service principal アカウントの更新](https://learn.microsoft.com/ja-jp/azure/aks/update-credentials) | （AzureでInternal Load Balancerを構成する場合のみ）<br />Vantiq を Private 構成にするため、AKS に権限を持つ Service Principal を使用している。<br />**有効期限切れ後サービスが停止する可能性ある。** | Service Principal の有効期限前。                                 | 1 week         | 必要                 | Vantiq サポート
 
-
 # 目次
 
 [保守作業](#the_maintenance_operations)  
@@ -37,6 +36,7 @@ Vantiqプラットフォームに関する保守項目一覧は以下の通り�
     - [License ファイルを更新する](#license-ファイルを更新する)
     - [License ファイルを更新する - Rollback](#license-ファイルを更新する---rollback)
     - [InfluxDBのPVを拡張する](#influxdbのpvを拡張する)
+    - [EmailServerを変更する](#EmailServerを変更する)
 
 # 保守作業<a id="the_maintenance_operations"></a>
 
@@ -332,3 +332,35 @@ Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.
 ### InfluxDBのPVを拡張する<a id="resize_influxdb_pv"></a>
 **InfluxDB Podの再起動が必要**  
 [InfluxDB PV拡張手順](./resize_influxdb_pv.md)を参照
+
+### EmailServerを変更する<a id="renew_email_Server"></a> 
+1. 新規に利用するEmail ServerのSMTP HOST、PORT、USER/PASSWORDを取得する。
+2. Vantiq IDEへsystemユーザでログインしsystem Namespaceへ移動する。
+3. Search boxに ”generic”と入力し、enterを押下する。 検索結果 Windowが表示されるので、[system] にチェックをつけ、"GenericEmailSender"をクリックする。
+4. Propertyタブを開き、[ConfigをJSONとして編集] にチェックをつけ、表示されたJSONをファイルとして保存し、バックアップとする。
+5. Email serverの設定を行い、保存する。
+6. Keycloak Admin Consoleへアクセスする。
+7. Realm SettingsからEmailタブを開き、Email設定を退避させ、バックアップとする。
+8. Email server の設定を行い、保存する。
+9. Vantiq IDEから招待メールを送信し、ユーザ登録できることを確認する。
+10. deploy.yamlとsecrets.yamlを退避させ、バックアップとする。
+11. deploy.yamlを編集する。
+```sh
+vantiq:
+  keycloak:    
+    smtp:
+      host: <HOST>
+      port: <Port>
+      from: <source_mail>
+      fromDisplayName: Vantiq Operations
+      auth: true
+      starttls: true
+      user: <username>
+```
+12. secrets.yamlを編集する。
+```sh
+vantiq:
+  keycloak: 
+    data:
+      smtp.password: <password>
+```
