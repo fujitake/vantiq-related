@@ -1,6 +1,7 @@
 # はじめに
 
-本記事では VANTIQ 初回構築作業において、[k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools) _(要権限)_ でカバーされていない補足の説明について記載する。
+本記事は Vantiq Private Cloiud 初回構築作業のクイックリファレンスです。  
+詳細に関しては[k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools) _(要権限)_ のドキュメントを参照してください。
 
 ## 前提
 
@@ -30,7 +31,8 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 - SMTPサービスのエンドポイント、および資格情報
 - APNs認証キー、FCM用アクセストークン（iOS, AndroidのVantiq Mobileを使用する場合のみ）
 - 踏み台サーバのIPアドレス、ユーザー名、ssh秘密鍵（本記事のこれ以降の作業は踏み台サーバ上で行うことを想定する。）
-- 作業対象のkubernetesクラスタへのアクセス権
+- 作業対象のkubernetesクラスタへのアクセス権  
+  EKSの場合はAWS CLIのセットアップが必要
 
 
 ### 事前準備 (作業環境)<a id="preparation_work_environment"></a>
@@ -62,7 +64,8 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 7. `targetCluster` ディレクトリに移動する。
 8. クラスタ名を決定し、次のコマンドを実行する。
 	 `git checkout -b <クラスタ名>`  
-     **targetClusterディレクトリで実行すること。後工程の./gradlewコマンドの-PClusterオプションでクラスタ名を指定する必要有**
+     **targetClusterディレクトリで実行すること。後工程の./gradlewコマンドの-PClusterオプションでクラスタ名を指定する必要有**  
+     **EKSの場合~/.aws/credentialsファイルにクラスタ名のプロファイルを作成する必要有**  
 9.  続けて `cluster.properties` に任意の設定を行う。下記は一例。
    - #`requiredRemote`=`false` のコメントアウトを外す
    - `provider`=`aws` (aws|azure|alicloud|kubeadm)
@@ -82,9 +85,18 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 	  `secrets.yaml` ファイルと `deploy` というディレクトリが生成される  
 13. `deploy.yaml` と `secrets.yaml` を修正する。  
     secrets.yamlで指定しているSSL証明書やライセンスファイルなどは`targetCluster/deploy/sensitive`ディレクトリより下に配置しておく  
+    設定項目の詳細に関しては[Installing Vantiq - Deployment Tasks](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/Installation.md#deployment-tasks)や[deploy.yamlのカスタマイズ構成](./deploy_yaml_config.md)を参照  
+    **system version が3.11.2以降にリリースされている場合はMongoDBのBackupが不要であってもsecrets.yamlでcredentialファイルの設定を行う必要有**  
+    **上記の場合はcredentialファイルの内容はダミーで問題無し**  
+    **credentialファイルの設定をしないとVantiq Podが起動しないため注意**  
 14. 次のコマンドを実行し、パスワード関連ファイルを生成する。
-	`./gradlew -Pcluster=<クラスタ名> generateSecrets`
-15. 次のコマンドを実行し、デプロイを実施する。
+	`./gradlew -Pcluster=<クラスタ名> generateSecrets`  
+  指定するファイルや値を間違えてしまった場合はsecrets.yamlやファイルを更新した後上記コマンドを再度実行する必要有  
+  **既存の問題でgenerateSecretsを実行しても更新されない場合がある。その際にはtargetCluster/deploy/secrets/<Component>/<secret yaml file>を消してから再度generateSecretsを実行すること。**  
+  **Vantiqのライセンスなどk8sのSecretに反映された後にPodの再起動を必要とするものがあるため注意**  
+15. 次のコマンドを実行し、デプロイを実施する。  
+  **Vantiq Pod起動後、48時間以内に手順22 - 1のVantiq IDEログインまで行う必要有**  
+  **48時間経過すると初回ログイン時に必要な手順17のkeyが無効化されるためインストールし直し**  
   `./gradlew -Pcluster=<クラスタ名> deployNginx`  
 	`./gradlew -Pcluster=<クラスタ名> deployShared`  
   `./gradlew -Pcluster=<クラスタ名> deployVantiq`  
@@ -100,7 +112,7 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
   	2020-05-06T16:21:58.595 [vert.x-eventloop-thread-0] INFO  io.vantiq.startup - ******************************************************************
     ```
     keyは初回ログインの際に必要なため必ず保存しておくこと。  
-    **初回起動時のみ表示されるため、確認し忘れた場合はインストールし直しが必要**
+    **初回起動時のみ表示されるため、確認し忘れた場合はインストールし直しが必要。keyの有効期限は48時間**
 18. 次のコマンドを実行し、各種 pod が適切な node に乗っていることを確認する。    
 	`kubectl describe nodes | egrep "^Name:|mongodb-[0-2]|vantiq-[0-2]|metrics-|vision-|influxdb-|grafana(-|db)|keycloak-|ingress-nginx|telegraf-prom|zone"`  
 	適切なノードに乗っていない場合は、別途手順を確認する

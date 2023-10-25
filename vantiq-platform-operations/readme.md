@@ -3,7 +3,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 ![](imgs/section-top/vantiq-intall-flow.png)
 
 ## Vantiq Cloud
-- [Vantiq Cloud 構築 ](./docs/jp/vantiq-install.md)
+- [Vantiq Private Cloud 初回構築作業クイックリファレンス ](./docs/jp/vantiq-install.md)
   - [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
   - [Grafanaカスタマイズ(Email通知設定)](./docs/jp/grafana.md)
   - [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
