@@ -7,7 +7,7 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
   - [deploy.yamlのカスタマイズ構成](./docs/jp/deploy_yaml_config.md)
   - [Grafanaカスタマイズ(Email通知設定)](./docs/jp/grafana.md)
   - [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
-- [Vantiq Cloud 保守 ](./docs/jp/vantiq-maintenance.md)
+- [Vantiq Cloud 保守 (アップグレード、証明書更新など) ](./docs/jp/vantiq-maintenance.md)
 - [Vantiq Cloud 構成Tips/構築および保守におけるトラブルシューティング過去事例](./docs/jp/vantiq-install-maintenance-troubleshooting.md)
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./docs/jp/vantiq_k8s_troubleshooting.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
