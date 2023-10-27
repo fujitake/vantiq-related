@@ -129,6 +129,10 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
 
 4. Topicにメッセージを発行します。
 
+   ```json
+   {"question":"ストリーミングプロセッシングについて解説してください。"}
+   ```
+
    ![submitpromptapp_04](../../imgs/LLM_Platform_Support/submitpromptapp_04.png)
 
 5. ログに、LLMからの回答が出力されていることを確認します。
@@ -158,6 +162,10 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
    ![answerquestionapp_03](../../imgs/LLM_Platform_Support/answerquestionapp_02.png)
 
 4. Topicにメッセージを発行します。
+
+   ```json
+   {"question":"令和５年（ネ）第１００５０号 損害賠償請求控訴事件の被控訴人の名前を回答してください。回答は日本語で行ってください。"}
+   ```
 
    ![submitpromptapp_04](../../imgs/LLM_Platform_Support/submitpromptapp_06.png)
 
