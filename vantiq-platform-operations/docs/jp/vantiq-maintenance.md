@@ -340,7 +340,6 @@ Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.
 
 EmailServerを変更するには、GUIによる修正が2箇所 (GenericEmailSender と keycloak) 必要です。  
 また、deployコマンドを実行した場合、以前の設定に戻ってしまうため、yamlファイルを修正します。  
-なお、Podの再起動では、デグレードは発生しません。
 
 
 1. 新規に利用するEmail ServerのSMTP HOST、PORT、USER/PASSWORDを取得する。
