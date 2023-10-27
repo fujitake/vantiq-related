@@ -11,7 +11,6 @@ LLM リソースでは、既定のモデル(OpenAI、と、HuggingFace)以外の
 
 今回は、以下のように2つのモデルをデプロイしています。
 ![AOAI_DEPLOY](../../imgs/LLM_Platform_Support/aoai_deploy.png)
-
 **Note**
 > この文書ではAzure OpenAI Service のリソース作成方法やデプロイ方法については解説しません。[公式のリファレンス](https://learn.microsoft.com/ja-JP/azure/ai-services/openai/overview)や、以下のようなインターネット上の記事を参照して設定してください。
 > https://qiita.com/vfuji/items/196c8bb31be0ebdc8886
@@ -49,8 +48,7 @@ LLMsの一覧が表示されます。「新規」をクリックし、新しいL
    }
    ```
 
-
-1. [OK]をクリックし、作成を完了します。
+4. [OK]をクリックし、作成を完了します。
 
 ### Embedding LLM
 
