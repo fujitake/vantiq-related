@@ -4,6 +4,7 @@
 
 下記の流れで実装していきます。
 
+1. 【準備】Namespace の作成とデータジェネレータの準備
 1. 【Source】Vantiq で入力用の MQTTブローカーのデータをサブスクライブする
 1. 【App Builder】荷物仕分けアプリの開発
 1. 【動作確認】送信結果が正しく仕分けされているか確認する
@@ -16,10 +17,11 @@
   - [実装詳細](#実装詳細)
     - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
     - [実装するリソース](#実装するリソース)
-  - [0.【準備】Google Colaboratory の動作確認](#0準備google-colaboratory-の動作確認)
+  - [1.【準備】Namespace の作成](#1準備namespace-の作成)
+  - [2.【準備】Google Colaboratory の動作確認](#2準備google-colaboratory-の動作確認)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
-  - [1. 【Source】Vantiq で MQTTブローカーのデータをサブスクライブする](#1-sourcevantiq-で-mqttブローカーのデータをサブスクライブする)
-  - [2. 【App Builder】荷物仕分けアプリケーション開発](#2-app-builder荷物仕分けアプリケーション開発)
+  - [3. 【Source】Vantiq で MQTTブローカーのデータをサブスクライブする](#3-sourcevantiq-で-mqttブローカーのデータをサブスクライブする)
+  - [4. 【App Builder】荷物仕分けアプリケーション開発](#4-app-builder荷物仕分けアプリケーション開発)
     - [1. アプリケーションの作成](#1-アプリケーションの作成)
     - [2.【EventStream】Source でサブスクライブした内容をアプリケーションで受け取る](#2eventstreamsource-でサブスクライブした内容をアプリケーションで受け取る)
     - [3. 【SplitByGroup】イベントの処理ノードを荷物のコード単位で振り分ける](#3-splitbygroupイベントの処理ノードを荷物のコード単位で振り分ける)
@@ -28,7 +30,7 @@
     - [6. 【Transformation】必要なフォーマットにイベントを変換する](#6-transformation必要なフォーマットにイベントを変換する)
     - [7. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#7-filter条件に合致したイベントだけを通過させ仕分けする)
     - [8. 【PublishToSource】仕分け指示をSource経由でMQTTブローカーに送信する](#8-publishtosource仕分け指示をsource経由でmqttブローカーに送信する)
-  - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
+  - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
     - [Google Colaboratory の設定](#google-colaboratory-の設定-1)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
@@ -96,7 +98,11 @@
 
 > Vantiq のリソースの基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
 
-## 0.【準備】Google Colaboratory の動作確認
+## 1.【準備】Namespace の作成
+
+アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
+
+## 2.【準備】Google Colaboratory の動作確認
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 
@@ -142,7 +148,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 1. エラーが発生していないことを確認し、 `# MQTT Publisher 本体` の左側の `停止ボタン` を押して、一旦、停止させておく
 
-## 1. 【Source】Vantiq で MQTTブローカーのデータをサブスクライブする
+## 3. 【Source】Vantiq で MQTTブローカーのデータをサブスクライブする
 
 MQTTブローカーと接続したい場合、 MQTTクライアントが必要です。これは Vantiq でも同じです。  
 Vantiq の Source は MQTT に対応しており、これがクライアントになります。
@@ -168,7 +174,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
          ![sub-test-msg](./imgs/sub-test-msg.png)
 
-## 2. 【App Builder】荷物仕分けアプリケーション開発
+## 4. 【App Builder】荷物仕分けアプリケーション開発
 
 この手順からアプリケーション開発を開始します。  
 MQTTブローカーから取得したメッセージをイベントとして、処理を実装していきます。
@@ -668,7 +674,7 @@ Vantiq では `Transformation` Activity を使うことで、フォーマット�
       |source|SortingResultMqtt|-|
       |sourceConfig|{"topic": "/center/saitama"}|MQTTブローカーの `/center/saitama` Topic に送信|
 
-## 3.【動作確認】送信結果が正しく仕分けされているか確認する
+## 5.【動作確認】送信結果が正しく仕分けされているか確認する
 
 MQTTクライアントで送信先の Topic をサブスクライブしておき、正しく仕分けされるか確認します。  
 
