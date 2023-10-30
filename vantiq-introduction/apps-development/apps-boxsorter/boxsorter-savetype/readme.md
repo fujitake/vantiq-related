@@ -30,7 +30,7 @@
 このアプリケーションを実装していきます。  
 詳細は次のステップで説明しますが、 `AttachCondition` タスクから分岐した処理の実装を行います。
 
-### 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
+## 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
 > 荷物仕分けアプリケーション (Beginner) や 荷物仕分けアプリケーション (Standard) で紹介したものは割愛します。  
@@ -39,7 +39,9 @@
 > - [荷物仕分けアプリケーション (Beginner)](./../boxsorter-beginner/readme.md)
 > - [荷物仕分けアプリケーション (Standard)](./../boxsorter-standard/readme.md)
 
-#### SaveToType Activity
+### SaveToType Activity
+
+![activitypattern_savetotype.png](./imgs/activitypattern_savetotype.png)
 
 イベントを Type に保存します。  
 保存方法は `INSERT` もしくは `UPSERT` になります。  
