@@ -108,6 +108,11 @@ volumes:
 
 `docker login quay.io`コマンドで quay.ioにご自分のアカウントを使ってログインして下さい。
 
+> [!NOTE]
+> ログインしていない状態でdocker compose up -dを実行すると、下記のようなエラーが出力されます。quay.ioにログインしていることをご確認の上、実行して下さい。
+> 
+> Error response from daemon: unauthorized: access to the requested resource is not authorized
+
 `compose.yaml`がある作業ディレクトリにて下記コマンドを実行します。初回起動時はイメージのダウンロードと起動時の設定のため、時間がかかります。
 
 ```
