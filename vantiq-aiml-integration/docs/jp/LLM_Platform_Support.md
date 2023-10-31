@@ -189,4 +189,4 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
    ![answerquestionapp_05](../../imgs/LLM_Platform_Support/answerquestionapp_03.png)
 
 
-[サンプルプロジェクト](../../conf/LLM_Platform_Support/llm_test.zip)
+[サンプルプロジェクト](../../conf/LLM_Platform_Support/llm_demo.zip)
