@@ -28,7 +28,7 @@
 このアプリケーションを実装していきます。  
 詳細は次のステップで説明しますが、 `Unwind` Activity の追加実装を行います。
 
-### 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
+## 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
 > 荷物仕分けアプリケーション (Beginner) や 荷物仕分けアプリケーション (Standard) で紹介したものは割愛します。  
@@ -37,7 +37,9 @@
 > - [荷物仕分けアプリケーション (Beginner)](./../boxsorter-beginner/readme.md)
 > - [荷物仕分けアプリケーション (Standard)](./../boxsorter-standard/readme.md)
 
-#### Unwind Activity
+### Unwind Activity
+
+![activitypattern_unwind.png](./imgs/activitypattern_unwind.png)
 
 配列が含まれる1つのイベントを複数のイベントに分割して並列処理を行います。  
 分割してから個々のイベントととして並列処理するようになるため、負荷分散になります。  

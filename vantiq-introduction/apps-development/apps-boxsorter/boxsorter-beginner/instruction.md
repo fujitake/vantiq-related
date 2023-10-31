@@ -4,6 +4,7 @@
 
 下記の流れで実装していきます。
 
+1. 【準備】Namespace の作成とデータジェネレータの準備
 1. 【Topic】Vantiq で Google Colaboratory 用のエンドポイントを作成する
 1. 【App Builder】荷物仕分けアプリの開発
 1. 【動作確認】送信結果が正しく仕分けされているか確認する
@@ -16,19 +17,20 @@
   - [実装詳細](#実装詳細)
     - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
     - [実装するリソース](#実装するリソース)
-  - [0.【準備】Google Colaboratory の動作確認](#0準備google-colaboratory-の動作確認)
+  - [1.【準備】Namespace の作成](#1準備namespace-の作成)
+  - [2.【準備】Google Colaboratory の動作確認](#2準備google-colaboratory-の動作確認)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
-  - [1. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#1-topicvantiqで-google-colaboratory-のデータを受信する)
+  - [3. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#3-topicvantiqで-google-colaboratory-のデータを受信する)
     - [Topic の作成](#topic-の作成)
-  - [2. 【App Builder】荷物仕分けアプリケーション開発](#2-app-builder荷物仕分けアプリケーション開発)
+  - [4. 【App Builder】荷物仕分けアプリケーション開発](#4-app-builder荷物仕分けアプリケーション開発)
     - [1. アプリケーションの作成](#1-アプリケーションの作成)
     - [2.【EventStream】Topic で受信した内容をアプリケーションで受け取る](#2eventstreamtopic-で受信した内容をアプリケーションで受け取る)
     - [3. Type の作成](#3-type-の作成)
     - [4.【Enrich】仕分け条件をイベントに追加する](#4enrich仕分け条件をイベントに追加する)
     - [5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#5-filter条件に合致したイベントだけを通過させ仕分けする)
     - [6. 【LogStream】仕分け指示をログとして表示](#6-logstream仕分け指示をログとして表示)
-  - [3.【動作確認】送信結果が正しく仕分けされているか確認する](#3動作確認送信結果が正しく仕分けされているか確認する)
+  - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
@@ -92,7 +94,14 @@
 
 > Vantiq のリソースの基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
 
-## 0.【準備】Google Colaboratory の動作確認
+## 1.【準備】Namespace の作成
+
+アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
+
+詳細は下記をご確認ください。  
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+
+## 2.【準備】Google Colaboratory の動作確認
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。  
@@ -143,7 +152,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. エラーが発生していないことを確認し、 `# データジェネレータ本体` の左側の `停止ボタン` を押して、一旦、停止させておく
 
-## 1. 【Topic】Vantiqで Google Colaboratory のデータを受信する
+## 3. 【Topic】Vantiqで Google Colaboratory のデータを受信する
 
 サーバーからデータを受信したい場合、エンドポイントが必要です。これは Vantiq でも同じです。  
 Vantiq の Topic がエンドポイントになります。
@@ -166,7 +175,7 @@ Vantiq の Topic がエンドポイントになります。
 
       <img src="./imgs/receive-test-data.png" width="400">
 
-## 2. 【App Builder】荷物仕分けアプリケーション開発
+## 4. 【App Builder】荷物仕分けアプリケーション開発
 
 この手順からアプリケーション開発を開始します。  
 Google Colaboratory から取得したデータをイベントとして、処理を実装していきます。
@@ -508,7 +517,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |-|-|-|
       |level|info|-|
 
-## 3.【動作確認】送信結果が正しく仕分けされているか確認する
+## 5.【動作確認】送信結果が正しく仕分けされているか確認する
 
 Google Colaboratory からダミーデータを送信しておき、正しく仕分けされるか確認します。
 
@@ -537,6 +546,5 @@ Type の NaturalKey については、下記を参照してください。
 
 - [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_beginner_1.34.zip)
 - [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_beginner_1.36.zip)
-
 
 以上

@@ -57,16 +57,34 @@
 > No.1〜2 は、 Google Colaboratory を利用し、 TOPIC に読み取り結果のサンプル情報を送信することで代用します。  
 > Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/jp/colab_basic_knowledge.md) で解説しています。
 
-### Vantiq で利用するリソースなどの解説
+## Vantiq で利用するリソースなどの解説
 
 Vantiq リソースや各用語について解説します。
 
-#### Topic
+### Topic
+
+![resource_topic.png](./imgs/resource_topic.png)
 
 Vantiq 内部でデータの受け渡しに利用するエンドポイントになります。  
 また、外部からデータを受け渡す際の REST API のエンドポイントとして用いることもできます。
 
-#### App (App Builder)
+### Type
+
+![resource_type.png](./imgs/resource_type.png)
+
+Vantiq 内部でデータを保存するために利用します。  
+内部的には NoSQL の MongoDB を利用しています。  
+Activity Pattern や VAIL からデータの読み書きが出来ます。  
+外部から REST API を用いて、データの読み書きをすることも出来ます。  
+
+主にマスタデータの保存やデータの一時的な保存に利用されることが多いです。  
+
+> **注意**  
+> Type は NoSQL のため、 RDB とは異なり、リレーションシップやトランザクション処理は出来ません。  
+
+### App (App Builder)
+
+![resource_app.png](./imgs/resource_app.png)
 
 App は GUI でアプリケーションの作成ができるツールになります。  
 あらかじめ用意されている処理のパターンを組み合わせて開発を行います。  
@@ -79,28 +97,36 @@ App は GUI でアプリケーションの作成ができるツールになり�
 このアプリケーションを実装していきます。  
 詳細は次のステップで説明しますが、 `Google Colaboratory から情報を取得` 、 `仕分け` 、 `仕分け指示を表示` という処理を行います。
 
-### 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
+## 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
 
-#### EventStream Activity
+### EventStream Activity
+
+![activitypattern_eventstream.png](./imgs/activitypattern_eventstream.png)
 
 App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
 **EventStream** はデータの入り口となります。  
 **EventStream** の入力元に **Topic** を指定することで、 Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POST されたデータを受け取ることができます。
 
-#### Enrich Activity
+### Enrich Activity
+
+![activitypattern_enrich.png](./imgs/activitypattern_enrich.png)
 
 イベントに対して Type に保存されているレコードを追加します。  
 イベントが通過するたびに Type へのアクセスが発生するため、パフォーマンスの低下には注意してください。
 
-#### Filter Activity
+### Filter Activity
+
+![activitypattern_filter.png](./imgs/activitypattern_filter.png)
 
 **Filter** に設定した条件に合致するイベントのみを通過させます。  
 条件に合致しなかったイベントは破棄されるため、注意してください。  
 複数の **Filter** を利用することで、 `if / else if / else` の様に分岐させることができます。
 
-#### LogStream Activity
+### LogStream Activity
+
+![activitypattern_logstream.png](./imgs/activitypattern_logstream.png)
 
 イベントデータをログに出力します。  
 今回は仕分け指示が正しく行われているかを確認するために利用します。
@@ -114,9 +140,11 @@ App を利用する際に必ずルートタスクとして設定されている 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
   - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
+  - [BoxSorterDataGenerator (Beginner・複数送信用)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_multi.ipynb)
 - Python
   - Python 実行環境
   - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.py)
+  - [BoxSorterDataGenerator (Beginner・複数送信用)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_multi.py)
 
 ### 商品マスタデータ
 
