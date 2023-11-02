@@ -9,14 +9,14 @@
 1. 【App Builder】荷物仕分けアプリの開発
 1. 【動作確認】送信結果が正しく仕分けされているか確認する
 
+> リソース名やタスク名は任意のものに変更しても構いません。
+
 ## 目次
 
 - [荷物仕分けアプリケーション開発 (Beginner)](#荷物仕分けアプリケーション開発-beginner)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
-  - [実装詳細](#実装詳細)
-    - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-    - [実装するリソース](#実装するリソース)
+  - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
   - [1.【準備】Namespace の作成](#1準備namespace-の作成)
   - [2.【準備】Google Colaboratory の動作確認](#2準備google-colaboratory-の動作確認)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
@@ -35,9 +35,7 @@
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
 
-## 実装詳細
-
-### アプリケーションが前提とする受信内容
+## アプリケーションが前提とする受信内容
 
 ```json
 {
@@ -45,54 +43,6 @@
     "name": "お茶 24本"
 }
 ```
-
-|項目|データ型|
-|-|-|
-|code|String|
-|name|String|
-
-### 実装するリソース
-
-#### Topic
-
-|種別|リソース名|役割|
-|-|-|-|
-|REMOTE|/BoxInfoApi|荷物の仕分け情報の受信用エンドポイント|
-
-#### App
-
-|リソース名|役割|
-|-|-|
-|BoxSorter|荷物の仕分け|
-
-##### BoxSorter 詳細
-
-|Activity Pattern|タスク名|役割|
-|-|-|-|
-|EventStream|ReceiveBoxInfo|Topic で受信した内容をアプリで受け取る|
-|Enrich|AttachCondition|仕分け条件をイベントに追加する<br/><span style="color:blue;">※本ワークショップでは荷物を物流センター単位で仕分けます<span>|
-|Filter|ExtractToTokyo<br/>ExtractToKanagawa<br/>ExtractToSaitama|条件に合致したイベントだけを通過させ、仕分けする|
-|LogStream|LogToTokyo<br/>LogToKanagawa<br/>LogToSaitama|仕分け指示を Log に表示する|
-
-> リソース名やタスク名は任意のものに変更しても構いません。
-
-> App Builder や Activity Pattern の基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md) を参照してください。
-
-#### Type
-
-|種別|リソース名|役割|
-|-|-|-|
-|Standard|sorting_condition|仕分けに必要な情報を保持|
-
-##### sorting_condition 詳細
-
-|プロパティ名|データ型|論理名|
-|-|-|-|
-|code|String|送り先コード|
-|center_id|Integer|物流センターの ID|
-|center_name|String|物流センター名|
-
-> Vantiq のリソースの基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
 
 ## 1.【準備】Namespace の作成
 
@@ -150,8 +100,6 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![google_colab_run](./imgs/google_colab_run.png)
 
-1. エラーが発生していないことを確認し、 `# データジェネレータ本体` の左側の `停止ボタン` を押して、一旦、停止させておく
-
 ## 3. 【Topic】Vantiqで Google Colaboratory のデータを受信する
 
 サーバーからデータを受信したい場合、エンドポイントが必要です。これは Vantiq でも同じです。  
@@ -170,7 +118,6 @@ Vantiq の Topic がエンドポイントになります。
 1. データを受信できることを確認する
    1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックする
       > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
-   1. Google Colaboratory のデータジェネレータを起動する
    1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認する
 
       <img src="./imgs/receive-test-data.png" width="400">
