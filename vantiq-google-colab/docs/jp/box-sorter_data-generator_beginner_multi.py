@@ -8,14 +8,8 @@ import schedule
 # 設定情報
 url = 'https://{VantiqのURL(FQDN)}/api/v1/resources/topics/{Topic名}'
 endpoints = [
-    {
-        'url': url
-        , 'token': ''
-    }
-    , {
-        'url': url
-        , 'token': ''
-    }
+    {'url': url, 'token': ''}
+    , {'url': url, 'token': ''}
 ]
 
 # ダミーデータ
@@ -42,6 +36,7 @@ def data_post():
         payload = json.dumps(dummy_data[random.randint(0, 2)])
         response = requests.request("POST", endpoint['url'], headers=headers, data=payload)
         print(response.text)
+        time.sleep(0.1)
 
 # 定期実行
 schedule.every(2).seconds.do(data_post)
