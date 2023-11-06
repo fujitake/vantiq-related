@@ -16,7 +16,6 @@
   - [目次](#目次)
   - [実装詳細](#実装詳細)
     - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-    - [実装するリソース](#実装するリソース)
   - [1.【準備】Namespace の作成](#1準備namespace-の作成)
   - [2.【準備】Google Colaboratory の動作確認](#2準備google-colaboratory-の動作確認)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
@@ -51,48 +50,6 @@
 |code|String|
 |name|String|
 
-### 実装するリソース
-
-#### Topic
-
-|種別|リソース名|役割|
-|-|-|-|
-|REMOTE|/BoxInfoApi|荷物の仕分け情報の受信用エンドポイント|
-
-#### App
-
-|リソース名|役割|
-|-|-|
-|BoxSorter|荷物の仕分け|
-
-##### BoxSorter 詳細
-
-|Activity Pattern|タスク名|役割|
-|-|-|-|
-|EventStream|ReceiveBoxInfo|Topic で受信した内容をアプリで受け取る|
-|Enrich|AttachCondition|仕分け条件をイベントに追加する<br/><span style="color:blue;">※本ワークショップでは荷物を物流センター単位で仕分けます<span>|
-|Filter|ExtractToTokyo<br/>ExtractToKanagawa<br/>ExtractToSaitama|条件に合致したイベントだけを通過させ、仕分けする|
-|LogStream|LogToTokyo<br/>LogToKanagawa<br/>LogToSaitama|仕分け指示を Log に表示する|
-
-> リソース名やタスク名は任意のものに変更しても構いません。
-
-> App Builder や Activity Pattern の基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/5-02_AppBuilder.md) を参照してください。
-
-#### Type
-
-|種別|リソース名|役割|
-|-|-|-|
-|Standard|sorting_condition|仕分けに必要な情報を保持|
-
-##### sorting_condition 詳細
-
-|プロパティ名|データ型|論理名|
-|-|-|-|
-|code|String|送り先コード|
-|center_id|Integer|物流センターの ID|
-|center_name|String|物流センター名|
-
-> Vantiq のリソースの基礎について確認したい方は [こちら](/vantiq-apps-development/1-day-workshop/docs/jp/0-10_BasicResources.md) を参照してください。
 
 ## 1.【準備】Namespace の作成
 
@@ -277,6 +234,13 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |1|東京物流センター|14961234567890|
       |2|神奈川物流センター|14961234567892|
       |3|埼玉物流センター|14961234567893|
+
+
+|プロパティ名|データ型|論理名|
+|-|-|-|
+|code|String|送り先コード|
+|center_id|Integer|物流センターの ID|
+|center_name|String|物流センター名|
 
 これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
 
