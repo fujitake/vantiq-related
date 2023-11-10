@@ -66,6 +66,9 @@ Vantiq リソースや各用語について解説します。
 オーバーヘッドの多い **HTTP** プロトコルに変わり、通信量がより少ない **MQTT** プロトコルを利用してデータの送受信を行います。  
 また、通信プロトコルの変更に伴い **Topic** ではなく **Soruce** を利用してデータの送受信を行います。
 
+詳細は下記を御覧ください。  
+[MQTT について](./about_mqtt.pdf)
+
 ### Source
 
 ![resource_source.png](./imgs/resource_source.png)
