@@ -1,29 +1,31 @@
-# ボックスソーター（入門編・REST API）
+# ボックスソーター（入門編・Transformation）
 
 ## 実装の流れ
 
 下記の流れで実装していきます。
 
-1. 【準備】Namespace の作成と Project の保存、データジェネレータの準備
-1. 【Topic】Vantiq で Google Colaboratory 用のエンドポイントを作成する
-1. 【App Builder】ボックスソーターアプリの開発
-1. 【動作確認】送信結果が正しく仕分けされているか確認する
+1. 【準備】Namespace の作成と Project のインポート、データジェネレータの準備
+1. 【動作確認】既存のアプリケーションが正しく動作するか確認する
+1. 【App Builder】ボックスソーターアプリの改修
+1. 【動作確認】送信結果のデータフォーマットを確認する
 
 > リソース名やタスク名は任意のものに変更しても構いません。
 
 ## 目次
 
-- [ボックスソーター（入門編・REST API）](#ボックスソーター入門編rest-api)
+- [ボックスソーター（入門編・Transformation）](#ボックスソーター入門編transformation)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-  - [1.【準備】Namespace の作成と Project の保存](#1準備namespace-の作成と-project-の保存)
+  - [1.【準備】Namespace の作成と Project のインポート](#1準備namespace-の作成と-project-のインポート)
+    - [Namespace の作成](#namespace-の作成)
+    - [Project のインポート](#project-のインポート)
   - [2.【準備】データジェネレータの準備](#2準備データジェネレータの準備)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
-  - [3. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#3-topicvantiqで-google-colaboratory-のデータを受信する)
-    - [Topic の作成](#topic-の作成)
-  - [4. 【App Builder】ボックスソーターアプリの開発](#4-app-builderボックスソーターアプリの開発)
+  - [3. 【動作確認】既存のアプリケーションが正しく動作するか確認する](#3-動作確認既存のアプリケーションが正しく動作するか確認する)
+  - [4. 【App Builder】ボックスソーターアプリの改修](#4-app-builderボックスソーターアプリの改修)
+    - [1. Transformation Activity の追加](#1-transformation-activity-の追加)
     - [1. アプリケーションの作成](#1-アプリケーションの作成)
     - [2.【EventStream】Topic で受信した内容をアプリケーションで受け取る](#2eventstreamtopic-で受信した内容をアプリケーションで受け取る)
     - [3. Type の作成](#3-type-の作成)
@@ -31,7 +33,6 @@
     - [5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#5-filter条件に合致したイベントだけを通過させ仕分けする)
     - [6. 【LogStream】仕分け指示をログとして表示](#6-logstream仕分け指示をログとして表示)
   - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
-  - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
@@ -46,18 +47,29 @@
 }
 ```
 
-## 1.【準備】Namespace の作成と Project の保存
+## 1.【準備】Namespace の作成と Project のインポート
+
+### Namespace の作成
 
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
-あわせてプロジェクトの保存も行っておきます。  
 
 詳細は下記をご確認ください。  
 [Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+
+### Project のインポート
+
+Namespace の切り替えが出来たら、 Project のインポートを行います。  
+**ボックスソーター（入門編・REST API）** の Project をインポートしてください。  
+
+詳細は下記を参照してください。  
+[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
 
 ## 2.【準備】データジェネレータの準備
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。  
+
+**Vantiq Access Token** は Namespace ごとに発行する必要があります。
 
 ### Vantiq Access Token の発行
 
@@ -103,33 +115,35 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![google_colab_run](./imgs/google_colab_run.png)
 
-## 3. 【Topic】Vantiqで Google Colaboratory のデータを受信する
+## 3. 【動作確認】既存のアプリケーションが正しく動作するか確認する
 
-サーバーからデータを受信したい場合、エンドポイントが必要です。  
-これは Vantiq でも同じです。  
-Vantiq の Topic がエンドポイントになります。  
+**Topic** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
-### Topic の作成
+1. 画面左側の **Project Contents** から **/BoxInfoApi Topic** を開きます。
+   
+   ![project-contents.png](./imgs/project-contents.png)
 
-1. メニューバーの `追加` -> `Advanced` -> `Topic...` -> `+ 新規 Topic` をクリックし Topic の新規作成画面を開く
-1. 以下の内容を設定し、保存する
+1. 左上の **データの受信テスト** をクリックします。
 
-   |項目|設定値|設定箇所|
-   |-|-|-|
-   |Name|/BoxInfoApi|-|
-   > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
+   ![boxinfoapi.png](./imgs/boxinfoapi.png)
 
-1. データを受信できることを確認する
-   1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックする
-      > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
-   1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認する
+1. データが受信できていることを確認します。
 
-      <img src="./imgs/receive-test-data.png" width="400">
+   ![boxinfoapi_subscribe.png](./imgs/boxinfoapi_subscribe.png)
 
-## 4. 【App Builder】ボックスソーターアプリの開発
+## 4. 【App Builder】ボックスソーターアプリの改修
 
-この手順からアプリケーション開発を開始します。  
-Google Colaboratory から取得したデータをイベントとして、処理を実装していきます。
+この手順からアプリケーションの改修を開始します。  
+
+### 1. Transformation Activity の追加
+
+**Transformation Activity** を追加して、データフォーマットの整形をします。  
+
+1. 
+
+
+
+
 
 ### 1. アプリケーションの作成
 
@@ -213,7 +227,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
 1. `sorting_condition` Type にデータをインポートする
    1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定する
-   1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./../../data/sorting_condition.csv) をドロップし `インポート` をクリックする
+   1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./../data/sorting_condition.csv) をドロップし `インポート` をクリックする
 
       > Type にレコードをインポートする際は `Data` を選択する必要があります。  
       > デフォルトは `Projects` になっているので注意してください。  
@@ -492,14 +506,6 @@ Google Colaboratory からダミーデータを送信しておき、正しく仕
 
    ![Log メッセージ](./imgs/log-message.png)
 
-## Project のエクスポート
-
-作成したアプリケーションを Project ごとエクスポートします。  
-Project のエクスポートを行うことで、他の Namespace にインポートしたり、バックアップとして管理することが出来ます。  
-
-詳細は下記を参照してください。  
-[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のエクスポート)
-
 ## ワークショップの振り返り
 
 1. **Topic**
@@ -527,7 +533,7 @@ Type の NaturalKey については、下記を参照してください。
 
 ### プロジェクトファイル
 
-- [ボックスソーター（入門編・REST API）の実装サンプル（Vantiq 1.34）](./../../data/box_sorter_beginner_restapi_1.34.zip)
-- [ボックスソーター（入門編・REST API）の実装サンプル（Vantiq 1.36）](./../../data/box_sorter_beginner_restapi_1.36.zip)
+- [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_beginner_1.34.zip)
+- [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_beginner_1.36.zip)
 
 以上
