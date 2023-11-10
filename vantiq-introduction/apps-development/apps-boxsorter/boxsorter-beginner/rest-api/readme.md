@@ -116,7 +116,7 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ### 商品マスタデータ
 
-- [sorting_condition.csv](./../data/sorting_condition.csv)
+- [sorting_condition.csv](./../../data/sorting_condition.csv)
 
 ## ワークショップの手順
 
