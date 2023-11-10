@@ -16,15 +16,9 @@
 - [荷物仕分けアプリケーション開発 (Beginner)](#荷物仕分けアプリケーション開発-beginner)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
-<<<<<<< HEAD
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-  - [1.【準備】Namespace の作成](#1準備namespace-の作成)
-=======
-  - [実装詳細](#実装詳細)
-    - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-  - [1.【準備】Namespace の作成とプロジェクトの保存](#1準備namespace-の作成とプロジェクトの保存)
->>>>>>> 014bbe294a48c18f6efdb525862084498542f7c3
-  - [2.【準備】Google Colaboratory の動作確認](#2準備google-colaboratory-の動作確認)
+  - [1.【準備】Namespace の作成と Project の保存](#1準備namespace-の作成と-project-の保存)
+  - [2.【準備】データジェネレータの準備](#2準備データジェネレータの準備)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
   - [3. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#3-topicvantiqで-google-colaboratory-のデータを受信する)
@@ -51,7 +45,7 @@
 }
 ```
 
-## 1.【準備】Namespace の作成
+## 1.【準備】Namespace の作成と Project の保存
 
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 あわせてプロジェクトの保存も行っておきます。  
@@ -59,7 +53,7 @@
 詳細は下記をご確認ください。  
 [Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
 
-## 2.【準備】Google Colaboratory の動作確認
+## 2.【準備】データジェネレータの準備
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。  
