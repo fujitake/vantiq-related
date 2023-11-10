@@ -16,8 +16,14 @@
 - [荷物仕分けアプリケーション開発 (Beginner)](#荷物仕分けアプリケーション開発-beginner)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
+<<<<<<< HEAD
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
   - [1.【準備】Namespace の作成](#1準備namespace-の作成)
+=======
+  - [実装詳細](#実装詳細)
+    - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
+  - [1.【準備】Namespace の作成とプロジェクトの保存](#1準備namespace-の作成とプロジェクトの保存)
+>>>>>>> 014bbe294a48c18f6efdb525862084498542f7c3
   - [2.【準備】Google Colaboratory の動作確認](#2準備google-colaboratory-の動作確認)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
@@ -31,6 +37,7 @@
     - [5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#5-filter条件に合致したイベントだけを通過させ仕分けする)
     - [6. 【LogStream】仕分け指示をログとして表示](#6-logstream仕分け指示をログとして表示)
   - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
+  - [ワークショップの振り返り](#ワークショップの振り返り)
   - [補足説明](#補足説明)
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
@@ -47,6 +54,7 @@
 ## 1.【準備】Namespace の作成
 
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
+あわせてプロジェクトの保存も行っておきます。  
 
 詳細は下記をご確認ください。  
 [Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
@@ -102,8 +110,9 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ## 3. 【Topic】Vantiqで Google Colaboratory のデータを受信する
 
-サーバーからデータを受信したい場合、エンドポイントが必要です。これは Vantiq でも同じです。  
-Vantiq の Topic がエンドポイントになります。
+サーバーからデータを受信したい場合、エンドポイントが必要です。  
+これは Vantiq でも同じです。  
+Vantiq の Topic がエンドポイントになります。  
 
 ### Topic の作成
 
@@ -225,6 +234,13 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |2|神奈川物流センター|14961234567892|
       |3|埼玉物流センター|14961234567893|
 
+
+|プロパティ名|データ型|論理名|
+|-|-|-|
+|code|String|送り先コード|
+|center_id|Integer|物流センターの ID|
+|center_name|String|物流センター名|
+
 これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
 
 ### 4.【Enrich】仕分け条件をイベントに追加する
@@ -258,7 +274,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       </details>
       
       <details>
-      <summary>Vantiq Version 1.36 の場合</summary>
+      <summary>Vantiq Version 1.36 以降の場合</summary>
       
       |項目|設定値|備考|
       |-|-|-|
@@ -480,6 +496,23 @@ Google Colaboratory からダミーデータを送信しておき、正しく仕
    **例: 各物流センターごとに Log メッセージ が表示されている**
 
    ![Log メッセージ](./imgs/log-message.png)
+
+## ワークショップの振り返り
+
+1. **Topic**
+   1. **Topic** は **REST API** のエンドポイントとして利用できます。
+   1. **データの受信テスト** から正しくデータを受信できていることを確認しました。
+1. **Type** 
+   1. **Type** を作成し、マスタデータをインポートしました。
+   1. **すべてのレコードを表示** からデータが正しくインポートできているか確認しました。
+   1. **Type** へのデータの書き込みは CSV ファイルなどのインポート以外に REST API を用いた追加や更新もできます。
+1. **App**
+   1. **App Builder** を用いて GUI ベースでアプリケーションを開発しました。
+   1. **タスクイベントの表示** からイベントデータを逐次確認する方法を学習しました。
+   1. **EventStream Activity** を用いて **Topic** で受信したデータを受け取りました。
+   1. **Enrich Activity** を用いて **Type** のデータをイベントデータに結合しました。
+   1. **Filter Activity** を用いてセンターIDごとにイベントを仕分けしました。
+   1. **LogStream Activity** を用いてデータの確認方法を学習しました。
 
 ## 補足説明
 
