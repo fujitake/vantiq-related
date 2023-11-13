@@ -63,7 +63,7 @@ App は GUI でアプリケーションの作成ができるツールになり�
 App Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
-![vantiq-app.png](./imgs/vantiq-app.png)
+![app_boxsorter_restapi.gif](./imgs/app_boxsorter_restapi.gif)
 
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
