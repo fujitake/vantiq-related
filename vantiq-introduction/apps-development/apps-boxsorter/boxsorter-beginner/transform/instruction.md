@@ -25,16 +25,11 @@
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
   - [3. 【動作確認】既存のアプリケーションが正しく動作するか確認する](#3-動作確認既存のアプリケーションが正しく動作するか確認する)
   - [4. 【App Builder】ボックスソーターアプリの改修](#4-app-builderボックスソーターアプリの改修)
-    - [1. Transformation Activity の追加](#1-transformation-activity-の追加)
-    - [1. アプリケーションの作成](#1-アプリケーションの作成)
-    - [2.【EventStream】Topic で受信した内容をアプリケーションで受け取る](#2eventstreamtopic-で受信した内容をアプリケーションで受け取る)
-    - [3. Type の作成](#3-type-の作成)
-    - [4.【Enrich】仕分け条件をイベントに追加する](#4enrich仕分け条件をイベントに追加する)
-    - [5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#5-filter条件に合致したイベントだけを通過させ仕分けする)
-    - [6. 【LogStream】仕分け指示をログとして表示](#6-logstream仕分け指示をログとして表示)
+    - [1. App を開く](#1-app-を開く)
+    - [2. Transformation Activity の追加](#2-transformation-activity-の追加)
+    - [3. Filter Activity の修正](#3-filter-activity-の修正)
   - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
   - [ワークショップの振り返り](#ワークショップの振り返り)
-  - [補足説明](#補足説明)
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
 
@@ -121,7 +116,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 画面左側の **Project Contents** から **/BoxInfoApi Topic** を開きます。
    
-   ![project-contents.png](./imgs/project-contents.png)
+   ![project-contents.png](./imgs/project-contents_topic.png)
 
 1. 左上の **データの受信テスト** をクリックします。
 
@@ -135,365 +130,52 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 この手順からアプリケーションの改修を開始します。  
 
-### 1. Transformation Activity の追加
+### 1. App を開く
+
+1. 画面左側の **Project Contents** から App を開きます。
+
+   ![project-contents_app.png](./imgs/project-contents_app.png)
+
+### 2. Transformation Activity の追加
 
 **Transformation Activity** を追加して、データフォーマットの整形をします。  
 
-1. 
+1. **Modifiers** の中から `Transformation` を選択し、 `AttachCondition` と `Filter Activity` の間の **矢印** の上にドロップします。
 
+1. 不要な **矢印** を選択し、 **Delete** キーを押下します。
 
+1. 上記の作業を繰り返し、すべての **Filter Activity** を配置し直します。
 
+   ![boxsorter_transform.gif](./imgs/boxsorter_transform.gif)
 
+1. `Transformation` タスクをクリックし、 `Configuration` の `クリックして編集` を開く。  
+   `transformation (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックする
 
-### 1. アプリケーションの作成
-
-1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開く
-
-1. `Name` に `BoxSorter` と入力し `OK` をクリックする
-
-   > `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。デフォルトで `Initiate` タスクが作成されます。
-
-   > アプリケーションのルートとなるタスクに設定される Activity Pattern は常に `EventStream` Activity になります。
-
-   <img src="./imgs/box-sorter-init.png" width="400">
-
-### 2.【EventStream】Topic で受信した内容をアプリケーションで受け取る
-
-`EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
-
-1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力する
-1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックする
-
-   |項目|設定値|
+   |Outbound Property|Transformation Expression|
    |-|-|
-   |inboundResource|topics|
-   |inboundResourceId|/BoxInfoApi|
+   |code|event.code|
+   |name|event.name|
+   |center_id|event.sorting_condition.center_id|
+   |center_name|event.sorting_condition.center_name|
 
-1. App Builder のペインの上部にあるフロッピーディスクのアイコンをクリックし、アプリケーションを保存する
+   ![transformation_setting.png](./imgs/transformation_setting.png)
 
-1. `ReceiveBoxInfo` タスクを右クリックし、 `タスク Events を表示` をクリックする
-   > `Subscription:BoxSorter_ReceiveBoxInfo` が開かれます。ここには ReceiveBoxInfo タスクの処理結果が表示されます。
+### 3. Filter Activity の修正
 
-1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認する
-   > この手順で、アプリケーションが Topic で受信した内容を扱える状態まで実装できています。
+**Transformation Activity** を利用して、イベントのデータフォーマットを変更したため、後続タスクの **Filter Activity** の条件式を修正する必要があります。
 
-### 3. Type の作成
+1. 各 `Filter Activity` を選択し、 `Configuration` の `クリックして編集` を開く。  
+   `condition (Union)` の `条件式` をクリックして、以下の内容を入力し、 `OK` をクリックする
 
-このアプリケーションが受け取る元の内容は以下のように `code` と `name` だけが含まれているデータです。
-
-```json
-{
-    "code": "14961234567890",
-    "name": "お茶 24本"
-}
-```
-
-仕分けをしていくにあたり、その判断材料となる情報を追加する必要があります。  
-Vantiq では `Enrich` という Activity Pattern が用意されており、イベントに対して Type に保存されたレコードの内容を追加することができます。  
-
-|項目|設定値|詳細|
-|-|-|-|
-|Enrich|イベントに Type のレコードを追加する|毎回 MongoDB に対してクエリを発行する|
-
-あらかじめ仕分けの判断材料となる情報を保持した Type を作成しておき、これらの Activity でその Type の情報を取得してイベントに追加します。  
-一旦アプリケーションから離れ、 Type の作成とレコード追加を行います。  
-
-1. `sorting_condition` Type を作成する
-   1. メニューバーの `追加` -> `Type...` -> `+ 新規 Type` をクリックして Type の新規作成画面を開き、以下の内容を入力して `OK` をクリックする
-
-      |項目|設定値|
-      |-|-|
-      |Name|sorting_condition|
-      |Role|standard|
-
-   1. `sorting_condition` のペインが表示されるので、タブごとに以下の設定を行い保存する
-
-      **Properties タブ**
-      |プロパティ名|データ型|Required|
-      |-|-|-|
-      |code|String|✅|
-      |center_id|Integer|✅|
-      |center_name|String|✅|
-
-      **Indexes タブ**
-      |項目|設定値|Is Unigue|
-      |-|-|-|
-      |Key|code|✅|
-
-      **Natural Keys タブ**
-      |項目|設定値|
-      |-|-|
-      |Key|code|
-
-1. `sorting_condition` Type にデータをインポートする
-   1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定する
-   1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./../data/sorting_condition.csv) をドロップし `インポート` をクリックする
-
-      > Type にレコードをインポートする際は `Data` を選択する必要があります。  
-      > デフォルトは `Projects` になっているので注意してください。  
-
-      > インポートする CSV ファイルのファイル名は `sorting_condition.csv` になっている必要があります。  
-      > ファイル名が異なる場合は `sorting_condition.csv` にリネームしてください。  
-
-   1. `sorting_condition` Type のペインを開き、上部にある `すべてのレコードを表示` をクリックしてインポートが成功しているか確認する
-
-      |center_id|center_name|code|
-      |-|-|-|
-      |1|東京物流センター|14961234567890|
-      |2|神奈川物流センター|14961234567892|
-      |3|埼玉物流センター|14961234567893|
-
-
-|プロパティ名|データ型|論理名|
-|-|-|-|
-|code|String|送り先コード|
-|center_id|Integer|物流センターの ID|
-|center_name|String|物流センター名|
-
-これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
-
-### 4.【Enrich】仕分け条件をイベントに追加する
-
-`Enrich` Activity Pattern を使用して、 Type のデータを追加します。
-
-1. `ReceiveBoxInfo` タスクを右クリックし、 `新規タスクとリンク` から新しいタスクを後続に追加する
-   1. `新規タスクとリンク` ダイアログが表示されるので以下の内容を入力し `OK` をクリックする
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|Enrich|
-      |タスク Name|AttachCondition|
-
-   1. `AttachCondition` タスクをクリックし、 `Configuration` から以下の設定を行いアプリケーションを保存する
-
-      <details>
-      <summary>Vantiq Version 1.34 の場合</summary>
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |associatedType|sorting_condition|-|
-
-      `foreignKeys` の `<null>` をクリックし、下記の設定を行います。
-
-      1. `+ アイテムの追加` をクリックする
-
-         |項目|設定値|備考|
-         |-|-|-|
-         |Value|code|この項目に設定したプロパティがクエリの条件になる|
-      </details>
-      
-      <details>
-      <summary>Vantiq Version 1.36 以降の場合</summary>
-      
-      |項目|設定値|備考|
-      |-|-|-|
-      |associatedType|sorting_condition|-|
-
-      `foreignKeys` の `<null>` をクリックし、下記の設定を行います。
-
-      1. `+ 外部キーのプロパティを追加する` をクリックする
-
-         |項目|設定値|備考|
-         |-|-|-|
-         |Associated Type Property|code|Type 側のプロパティ|
-         |Foreign Key Expression|event.code|イベント側のプロパティ|
-      </details>
-
-   > VAIL で書くとすると `SELECT ONE FROM sorting_condition WHERE code == code` ということになります。
-
-1. Google Colaboratory からダミーデータを送信し、 Enrich の動作を確認する
-   1. `AttachCondition` タスクを右クリックし、 `タスク Events を表示` をクリックして Subscription を表示する
-   1. Google Colaboratory のデータジェネレータを起動し、ダミーデータを送信する
-      > 送信先のエンドポイントなどはこれまでと同じです。
-
-   1. Vantiq の開発画面に戻り、表示しておいた Subscription に以下のようなイベントが表示されていることを確認する
-
-      ```json
-      {
-          "code": "14961234567890",
-          "name": "お茶 24本",
-          "sorting_condition": {
-              "_id": "649d30c7c32b66791581af76",
-              "center_id": 1,
-              "center_name": "東京物流センター",
-              "code": "14961234567890",
-              "ars_namespace": "BoxSorter",
-              "ars_version": 1,
-              "ars_createdAt": "2023-06-29T07:20:39.157Z",
-              "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-          }
-      }
-      ```
-
-      > `_id` や `ars_***` はシステム側で自動生成されるプロパティのため、この例と同じにはなりません。
-
-      `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
-
-### 5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする
-
-特定の物流センターのイベントのみが通過できるフローを実装することで仕分けを行います。  
-今回は「東京」「神奈川」「埼玉」の3つの物流センター単位で仕分けをしますので `Filter` Activity を設定したタスクを3つ実装します。
-
-物流センターとその ID は以下の関係になっています。
-|物流センター|物流センターID|
-|-|-|
-|東京|1|
-|神奈川|2|
-|埼玉|3|
-
-この物流センターID `center_id` で仕分けをします。
-
-1. `AttachCondition` タスクの次に以下のタスクを追加し、アプリケーションを保存する
-   1. 東京物流センター用
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|Filter|
-      |Task Name|ExtractToTokyo|
-
-      #### ExtractToTokyo の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |condition|event.sorting_condition.center_id == 1|東京物流センターのIDは `1`|
-
-   1. 神奈川物流センター用
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|Filter|
-      |Task Name|ExtractToKanagawa|
-
-      #### ExtractToKanagawa の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |condition|event.sorting_condition.center_id == 2|神奈川物流センターのIDは `2`|
-
-   1. 埼玉物流センター用
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|Filter|
-      |Task Name|ExtractToSaitama|
-
-      #### ExtractToSaitama の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |condition|event.sorting_condition.center_id == 3|埼玉物流センターのIDは `3`|
-
-1. 3つの `ExtractTo***` タスクで `タスク Events を表示` を行い、それぞれ適切なイベントのみ通過しているか確認する
-   1. Google Colaboratory からダミーデータを送信する
-
-   1. 各 Subscription でイベントを適切なイベントだけ通過しているか確認する
-      - `ExtractToTokyo` の Subscription に以下のイベント **のみ** が表示されていること
-
-        ```json
-        {
-            "code": "14961234567890",
-            "name": "お茶 24本",
-            "sorting_condition": {
-                "_id": "649d30c7c32b66791581af76",
-                "center_id": 1,
-                "center_name": "東京物流センター",
-                "code": "14961234567890",
-                "ars_namespace": "BoxSorter",
-                "ars_version": 1,
-                "ars_createdAt": "2023-06-29T07:20:39.157Z",
-                "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-            }
-        }
-        ```
-
-      - `ExtractToKanagawa` の Subscription に以下のイベント **のみ** が表示されていること
-
-        ```json
-        {
-            "code": "14961234567892",
-            "name": "化粧水 36本",
-            "sorting_condition": {
-                "_id": "649d30c7c32b66791581af77",
-                "center_id": 2,
-                "center_name": "神奈川物流センター",
-                "code": "14961234567892",
-                "ars_namespace": "BoxSorter",
-                "ars_version": 1,
-                "ars_createdAt": "2023-06-29T07:20:39.200Z",
-                "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-            }
-        }
-        ```
-
-      - `ExtractToSaitama` の Subscription に以下のイベント **のみ** が表示されていること
-
-        ```json
-        {
-            "code": "14961234567893",
-            "name": "ワイン 12本",
-            "sorting_condition": {
-                "_id": "649d30c7c32b66791581af78",
-                "center_id": 3,
-                "center_name": "埼玉物流センター",
-                "code": "14961234567893",
-                "ars_namespace": "BoxSorter",
-                "ars_version": 1,
-                "ars_createdAt": "2023-06-29T07:20:39.244Z",
-                "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-            }
-        }
-        ```
-
-### 6. 【LogStream】仕分け指示をログとして表示
-
-ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
-
-1. 各 `ExtractTo***` タスクの次に、それぞれ以下のタスクを追加してからアプリケーションを保存する
-
-   1. `ExtractToTokyo` タスクの次:
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|LogStream|
-      |タスク Name|LogToTokyo|
-
-      #### LogToTokyo の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |level|info|-|
-
-   1. `ExtractToKanagawa` タスクの次:
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|LogStream|
-      |タスク Name|LogToKanagawa|
-
-      #### LogToKanagawa の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |level|info|-|
-
-   1. `ExtractToSaitama` タスクの次:
-
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|LogStream|
-      |タスク Name|LogToSaitama|
-
-      #### LogToSaitama の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |level|info|-|
+   |物流センター|設定項目|設定値|
+   |-|-|-|
+   |東京物流センター|condition|event.center_id == 1|
+   |神奈川物流センター|condition|event.center_id == 2|
+   |埼玉物流センター|condition|event.center_id == 3|
 
 ## 5.【動作確認】送信結果が正しく仕分けされているか確認する
 
-Google Colaboratory からダミーデータを送信しておき、正しく仕分けされるか確認します。
-
-1. Google Colaboratory からダミーデータを送信する
+Log 画面から `LogStream` のログデータを確認します。  
 
 1. Log メッセージ 画面を表示する
    1. 画面右下の `Debugging` をクリックする
@@ -508,26 +190,13 @@ Google Colaboratory からダミーデータを送信しておき、正しく仕
 
 ## ワークショップの振り返り
 
-1. **Topic**
-   1. **Topic** は **REST API** のエンドポイントとして利用できます。
-   1. **データの受信テスト** から正しくデータを受信できていることを確認しました。
-1. **Type** 
-   1. **Type** を作成し、マスタデータをインポートしました。
-   1. **すべてのレコードを表示** からデータが正しくインポートできているか確認しました。
-   1. **Type** へのデータの書き込みは CSV ファイルなどのインポート以外に REST API を用いた追加や更新もできます。
+1. **Project**
+   1. Namespace に Project をインポートする方法を学習しました。
+1. **Vantiq Access Token** 
+   1. Namespace ごとに Vantiq Access Token が必要なことを学習しました。
 1. **App**
-   1. **App Builder** を用いて GUI ベースでアプリケーションを開発しました。
-   1. **タスクイベントの表示** からイベントデータを逐次確認する方法を学習しました。
-   1. **EventStream Activity** を用いて **Topic** で受信したデータを受け取りました。
-   1. **Enrich Activity** を用いて **Type** のデータをイベントデータに結合しました。
-   1. **Filter Activity** を用いてセンターIDごとにイベントを仕分けしました。
-   1. **LogStream Activity** を用いてデータの確認方法を学習しました。
-
-## 補足説明
-
-Type の NaturalKey については、下記を参照してください。
-
-- [Type の NaturalKey とは？](/vantiq-apps-development/docs/jp/reverse-lookup.md#type-の-naturalkey-とは)
+   1. App の修正方法を学習しました。
+   1. **Transformation Activity** を用いて、データフォーマットの変換方法を学習しました。
 
 ## 参考情報
 
