@@ -141,7 +141,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 **Transformation Activity** を追加して、データフォーマットの整形をします。  
 
-1. **Modifiers** の中から `Transformation` を選択し、 `AttachCondition` と `Filter Activity` の間の **矢印** の上にドロップします。
+1. **Modifiers** の中から `Transformation` を選択し、 `AttachCondition` タスクと `Filter Activity` の間の **矢印** の上にドロップします。
 
 1. 不要な **矢印** を選択し、 **Delete** キーを押下します。
 
