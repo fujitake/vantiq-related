@@ -150,17 +150,17 @@ Google Colaboratory から取得したデータをイベントとして、処理
 
    ![create_app_02.png](./imgs/create_app_02.png)
 
-   > `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。デフォルトで `Initiate` タスクが作成されます。
-
-   > アプリケーションのルートとなるタスクに設定される Activity Pattern は常に `EventStream` Activity になります。
-
 ### 2.【EventStream】Topic で受信した内容をアプリケーションで受け取る
 
 `EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
 
+> `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。デフォルトで `Initiate` タスクが作成されます。
+
 1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力する
 
    ![create_app_03.png](./imgs/create_app_03.png)
+
+   > アプリケーションのルートとなるタスクに設定される Activity Pattern は常に `EventStream` Activity になります。
 
 1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックする
 
