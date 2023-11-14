@@ -132,7 +132,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ### 1. App を開く
 
-1. 画面左側の **Project Contents** から App を開きます。
+1. 画面左側の **Project Contents** から **BoxSorter App** を開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
 
