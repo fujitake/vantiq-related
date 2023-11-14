@@ -86,10 +86,10 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（入門編・MQTT）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_savetype.ipynb)
+  - [BoxSorterDataGenerator（入門編・MQTT）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_mqtt.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（入門編・MQTT）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_savetype.py)
+  - [BoxSorterDataGenerator（入門編・MQTT）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_mqtt.py)
 - MQTTクライアント
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
   - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
@@ -105,17 +105,3 @@ App を利用する際に必ずルートタスクとして設定されている 
 ### ドキュメント
 
 - [手順](./instruction.md)
-
-
-
-
-
-------
-
-
-
-
-
-
-
-
