@@ -300,7 +300,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
    1. `AttachCondition` タスクをクリックし、 `Configuration` から以下の設定を行いアプリケーションを保存する
 
       <details>
-      <summary>Vantiq Version 1.34 の場合</summary>
+      <summary>Vantiq Version 1.35 以前の場合</summary>
 
       |項目|設定値|備考|
       |-|-|-|
@@ -324,12 +324,16 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
       `foreignKeys` の `<null>` をクリックし、下記の設定を行います。
 
+      ![app_enrich_01.png](./imgs/app_enrich_01.png)
+
       1. `+ 外部キーのプロパティを追加する` をクリックする
 
          |項目|設定値|備考|
          |-|-|-|
          |Associated Type Property|code|Type 側のプロパティ|
          |Foreign Key Expression|event.code|イベント側のプロパティ|
+
+         ![app_enrich_02.png](./imgs/app_enrich_02.png)
       </details>
 
    > VAIL で書くとすると `SELECT ONE FROM sorting_condition WHERE code == code` ということになります。
