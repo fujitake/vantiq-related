@@ -39,6 +39,7 @@ Vantiq の基本的な扱い方を解説しています。
 |:-:|-|-|
 |◯|[ボックスソーター（入門編・REST API）](./apps-development/apps-boxsorter/boxsorter-beginner/rest-api/readme.md)|なし|
 |◯|[ボックスソーター（入門編・Transformation）](./apps-development/apps-boxsorter/boxsorter-beginner/transform/readme.md)|ボックスソーター（入門編・REST API）|
+|◯|[ボックスソーター（入門編・MQTT）](./apps-development/apps-boxsorter/boxsorter-beginner/mqtt/readme.md)|ボックスソーター（入門編・Transformation）|
 
 
 > **必須の解説**  
