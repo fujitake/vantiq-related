@@ -161,7 +161,7 @@ client_max_body_size 20m;
 ```
 
 compose.yamlを編集します。  
-`services.vantiq_edge.environment.VIRTUAL_HOST`にFQDNを設定します。
+`services.vantiq_edge.environment.VIRTUAL_HOST`にFQDNを設定します。  
 
 ```yaml
 services:
