@@ -202,7 +202,6 @@ Log 画面から `LogStream` のログデータを確認します。
 
 ### プロジェクトファイル
 
-- [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_beginner_1.34.zip)
-- [荷物仕分けアプリ (Beginner) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_beginner_1.36.zip)
+- [ボックスソーター（入門編・Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_beginner_transform_1.37.zip)
 
 以上
