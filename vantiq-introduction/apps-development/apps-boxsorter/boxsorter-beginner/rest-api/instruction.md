@@ -112,19 +112,28 @@ Vantiq の Topic がエンドポイントになります。
 ### Topic の作成
 
 1. メニューバーの `追加` -> `Advanced` -> `Topic...` -> `+ 新規 Topic` をクリックし Topic の新規作成画面を開く
+   
+   ![create_topic_01.png](./imgs/create_topic_01.png)
+
 1. 以下の内容を設定し、保存する
 
    |項目|設定値|設定箇所|
    |-|-|-|
    |Name|/BoxInfoApi|-|
+
+   ![create_topic_02.png](./imgs/create_topic_02.png)
+
    > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
 
 1. データを受信できることを確認する
    1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックする
+
+      ![create_topic_03.png](./imgs/create_topic_03.png)
+
       > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
    1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認する
 
-      <img src="./imgs/receive-test-data.png" width="400">
+      ![receive-test-data.png](./imgs/receive-test-data.png)
 
 ## 4. 【App Builder】ボックスソーターアプリの開発
 
