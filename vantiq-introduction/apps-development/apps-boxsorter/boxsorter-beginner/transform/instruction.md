@@ -89,7 +89,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 下記のリンクから **データジェネレータ** のページを開く
 
-   - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
+   - [BoxSorterDataGenerator (入門編・REST API)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.ipynb)
 
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 

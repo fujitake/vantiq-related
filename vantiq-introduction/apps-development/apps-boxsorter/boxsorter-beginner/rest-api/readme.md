@@ -107,12 +107,12 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.ipynb)
-  - [BoxSorterDataGenerator (Beginner・複数送信用)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_multi.ipynb)
+  - [BoxSorterDataGenerator (入門編・REST API)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.ipynb)
+  - [BoxSorterDataGenerator (入門編・REST API・複数送信用)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api_multi.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator (Beginner)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner.py)
-  - [BoxSorterDataGenerator (Beginner・複数送信用)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_multi.py)
+  - [BoxSorterDataGenerator (入門編・REST API)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.py)
+  - [BoxSorterDataGenerator (入門編・REST API・複数送信用)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api_multi.py)
 
 ### 商品マスタデータ
 
