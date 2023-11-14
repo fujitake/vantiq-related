@@ -141,6 +141,9 @@ https://vantiq.example.comでアクセスしたい場合、SSL証明書と秘密
 - 秘密鍵  
   vantiq.example.com.key
 
+また、nginxを構成する場合には、アップロードするファイルサイズの上限がデフォルトで1MBとなります。ProejctやLLMのドキュメント読み込みにてエラーが発生する可能性があるため、上限を引き上げておきます。本手順では例として20MBを設定します。
+configディレクトリにmy_proxy.confを配置します。  
+
 ```
 .
 └── config
@@ -148,11 +151,17 @@ https://vantiq.example.comでアクセスしたい場合、SSL証明書と秘密
     │   ├── YOUR.FQDN.CERT-FILE.crt
     │   └── YOUR.FQDN.KEY-FILE.key
     ├── license.key
-    └── public.pem
+    ├── public.pem
+    └── my_proxy.conf
+```
+
+my_proxy.confの内容は次の通りです。  
+```
+client_max_body_size 20m;
 ```
 
 compose.yamlを編集します。  
-`services.vantiq_edge.environment.VIRTUAL_HOST`にFQDNを設定します。  
+`services.vantiq_edge.environment.VIRTUAL_HOST`にFQDNを設定します。
 
 ```yaml
 services:
@@ -165,6 +174,7 @@ services:
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./config/certs:/etc/nginx/certs
+      - ./config/my_proxy.conf:/etc/nginx/conf.d/my_proxy.conf
     networks:
       - vantiq_edge
 
