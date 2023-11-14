@@ -143,8 +143,12 @@ Google Colaboratory から取得したデータをイベントとして、処理
 ### 1. アプリケーションの作成
 
 1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開く
+   
+   ![create_app_01.png](./imgs/create_app_01.png)
 
 1. `Name` に `BoxSorter` と入力し `OK` をクリックする
+
+   ![create_app_02.png](./imgs/create_app_02.png)
 
    > `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。デフォルトで `Initiate` タスクが作成されます。
 
@@ -157,6 +161,9 @@ Google Colaboratory から取得したデータをイベントとして、処理
 `EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
 
 1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力する
+
+   ![create_app_03.png](./imgs/create_app_03.png)
+
 1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックする
 
    |項目|設定値|
@@ -164,12 +171,25 @@ Google Colaboratory から取得したデータをイベントとして、処理
    |inboundResource|topics|
    |inboundResourceId|/BoxInfoApi|
 
+   ![create_app_04.png](./imgs/create_app_04.png)
+
+   ![create_app_05.png](./imgs/create_app_05.png)
+
 1. App Builder のペインの上部にあるフロッピーディスクのアイコンをクリックし、アプリケーションを保存する
 
+   ![create_app_06.png](./imgs/create_app_06.png)
+
 1. `ReceiveBoxInfo` タスクを右クリックし、 `タスク Events を表示` をクリックする
+
+   ![create_app_07.png](./imgs/create_app_07.png)
+
    > `Subscription:BoxSorter_ReceiveBoxInfo` が開かれます。ここには ReceiveBoxInfo タスクの処理結果が表示されます。
 
-1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認する
+1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。  
+   送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認します。ｄ；
+
+   ![create_app_08.png](./imgs/create_app_08.png)
+
    > この手順で、アプリケーションが Topic で受信した内容を扱える状態まで実装できています。
 
 ### 3. Type の作成
@@ -201,7 +221,13 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |Name|sorting_condition|
       |Role|standard|
 
+      ![create_type_01.png](./imgs/create_type_01.png)
+
+      ![create_type_02.png](./imgs/create_type_02.png)
+
    1. `sorting_condition` のペインが表示されるので、タブごとに以下の設定を行い保存する
+
+      > **Properties** の設定が終わったら、一度保存しておきます。
 
       **Properties タブ**
       |プロパティ名|データ型|Required|
@@ -210,19 +236,38 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
       |center_id|Integer|✅|
       |center_name|String|✅|
 
+      ![create_type_03.png](./imgs/create_type_03.png)
+
+      ![create_type_04.png](./imgs/create_type_04.png)
+
+      ![create_type_05.png](./imgs/create_type_05.png)
+
       **Indexes タブ**
       |項目|設定値|Is Unigue|
       |-|-|-|
       |Key|code|✅|
+
+      ![create_type_06.png](./imgs/create_type_06.png)
+
+      ![create_type_07.png](./imgs/create_type_07.png)
 
       **Natural Keys タブ**
       |項目|設定値|
       |-|-|
       |Key|code|
 
+      ![create_type_08.png](./imgs/create_type_08.png)
+
+      ![create_type_09.png](./imgs/create_type_09.png)
+
 1. `sorting_condition` Type にデータをインポートする
    1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定する
+
+      ![csv_import_01.png](./imgs/csv_import_01.png)
+
    1. `インポートする CSV ファイルまたは JSON ファイルをここにドロップ` の箇所に [sorting_condition.csv](./../../data/sorting_condition.csv) をドロップし `インポート` をクリックする
+
+      ![csv_import_02.png](./imgs/csv_import_02.png)
 
       > Type にレコードをインポートする際は `Data` を選択する必要があります。  
       > デフォルトは `Projects` になっているので注意してください。  
@@ -232,18 +277,9 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
    1. `sorting_condition` Type のペインを開き、上部にある `すべてのレコードを表示` をクリックしてインポートが成功しているか確認する
 
-      |center_id|center_name|code|
-      |-|-|-|
-      |1|東京物流センター|14961234567890|
-      |2|神奈川物流センター|14961234567892|
-      |3|埼玉物流センター|14961234567893|
+      ![csv_import_03.png](./imgs/csv_import_03.png)
 
-
-|プロパティ名|データ型|論理名|
-|-|-|-|
-|code|String|送り先コード|
-|center_id|Integer|物流センターの ID|
-|center_name|String|物流センター名|
+      ![csv_import_04.png](./imgs/csv_import_04.png)
 
 これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
 
