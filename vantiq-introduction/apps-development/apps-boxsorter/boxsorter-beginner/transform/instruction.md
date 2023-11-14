@@ -29,6 +29,7 @@
     - [2. Transformation Activity の追加](#2-transformation-activity-の追加)
     - [3. Filter Activity の修正](#3-filter-activity-の修正)
   - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
+  - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
@@ -187,6 +188,13 @@ Log 画面から `LogStream` のログデータを確認します。
    **例: 各物流センターごとに Log メッセージ が表示されている**
 
    ![Log メッセージ](./imgs/log-message.png)
+
+## Project のエクスポート
+
+作成したアプリケーションを Project ごとエクスポートします。  
+
+詳細は下記を参照してください。  
+[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のエクスポート)
 
 ## ワークショップの振り返り
 
