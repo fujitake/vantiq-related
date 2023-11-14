@@ -154,8 +154,6 @@ Google Colaboratory から取得したデータをイベントとして、処理
 
    > アプリケーションのルートとなるタスクに設定される Activity Pattern は常に `EventStream` Activity になります。
 
-   ![box-sorter-init.png](./imgs/box-sorter-init.png)
-
 ### 2.【EventStream】Topic で受信した内容をアプリケーションで受け取る
 
 `EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
