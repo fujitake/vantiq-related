@@ -139,7 +139,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ### 2. Transformation Activity の追加
 
-**Transformation Activity** を追加して、データフォーマットの整形をします。  
+**Transformation Activity** を追加して、イベントデータを整形をします。  
 
 1. **Modifiers** の中から `Transformation` を選択し、 `AttachCondition` タスクと `Filter Activity` の間の **矢印** の上にドロップします。
 
@@ -163,7 +163,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ### 3. Filter Activity の修正
 
-**Transformation Activity** を利用して、イベントのデータフォーマットを変更したため、後続タスクの **Filter Activity** の条件式を修正する必要があります。
+**Transformation Activity** を利用して、イベントの整形をしたため、後続タスクの **Filter Activity** の条件式を修正する必要があります。
 
 1. 各 `Filter Activity` を選択し、 `Configuration` の `クリックして編集` を開く。  
    `condition (Union)` の `条件式` をクリックして、以下の内容を入力し、 `OK` をクリックする
@@ -204,7 +204,7 @@ Log 画面から `LogStream` のログデータを確認します。
    1. Namespace ごとに Vantiq Access Token が必要なことを学習しました。
 1. **App**
    1. App の修正方法を学習しました。
-   1. **Transformation Activity** を用いて、データフォーマットの変換方法を学習しました。
+   1. **Transformation Activity** を用いて、データの整形方法を学習しました。
 
 ## 参考情報
 
