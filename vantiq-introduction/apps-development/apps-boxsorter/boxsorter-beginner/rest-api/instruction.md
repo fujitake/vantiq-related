@@ -325,26 +325,26 @@ Topic で取得したデータをイベントとして、処理を実装して�
 1. `AttachCondition` タスクをクリックし、 `タスク Events を表示` をクリックし、 Enrich の動作確認を行います。  
    下記のようなイベントになっていることを確認します。
 
-      ```json
-      {
-          "code": "14961234567890",
-          "name": "お茶 24本",
-          "sorting_condition": {
-              "_id": "649d30c7c32b66791581af76",
-              "center_id": 1,
-              "center_name": "東京物流センター",
-              "code": "14961234567890",
-              "ars_namespace": "BoxSorter",
-              "ars_version": 1,
-              "ars_createdAt": "2023-06-29T07:20:39.157Z",
-              "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-          }
-      }
-      ```
+   ```json
+   {
+       "code": "14961234567890",
+       "name": "お茶 24本",
+       "sorting_condition": {
+           "_id": "649d30c7c32b66791581af76",
+           "center_id": 1,
+           "center_name": "東京物流センター",
+           "code": "14961234567890",
+           "ars_namespace": "BoxSorter",
+           "ars_version": 1,
+           "ars_createdAt": "2023-06-29T07:20:39.157Z",
+           "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
+       }
+   }
+   ```
 
-      > `_id` や `ars_***` はシステム側で自動生成されるプロパティのため、この例と同じにはなりません。
+   > `_id` や `ars_***` はシステム側で自動生成されるプロパティのため、この例と同じにはなりません。
 
-      `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
+   `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
 ### 4. 【Filter】仕分け処理の実装
 
@@ -360,157 +360,128 @@ Topic で取得したデータをイベントとして、処理を実装して�
 
 この物流センターID `center_id` で仕分けをします。
 
-1. `AttachCondition` タスクの次に以下のタスクを追加し、アプリケーションを保存します。
-   1. 東京物流センター用
+1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクの上にドロップします。  
+   この作業を3回繰り返し、3つの **Filter Activity** を配置します。
+
+   ![app_filter_01.gif](./imgs/app_filter_01.gif)
+
+1. 各 **Filter Activity** の `タスク名` の設定と `Configuration` の `クリックして編集` から `condition (Union)` に条件式の設定を行い、アプリケーションを保存します。  
+
+   1. 東京物流センター
 
       |項目|設定値|
       |-|-|
-      |Activity Pattern|Filter|
-      |Task Name|ExtractToTokyo|
+      |Name|ExtractToTokyo|
+      |condition (Union)|event.sorting_condition.center_id == 1|
 
-      #### ExtractToTokyo の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |condition|event.sorting_condition.center_id == 1|東京物流センターのIDは `1`|
-
-   1. 神奈川物流センター用
+   1. 神奈川物流センター
 
       |項目|設定値|
       |-|-|
-      |Activity Pattern|Filter|
-      |Task Name|ExtractToKanagawa|
+      |Name|ExtractToKanagawa|
+      |condition (Union)|event.sorting_condition.center_id == 2|
 
-      #### ExtractToKanagawa の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |condition|event.sorting_condition.center_id == 2|神奈川物流センターのIDは `2`|
-
-   1. 埼玉物流センター用
+   1. 埼玉物流センター
 
       |項目|設定値|
       |-|-|
-      |Activity Pattern|Filter|
-      |Task Name|ExtractToSaitama|
+      |Name|ExtractToSaitama|
+      |condition (Union)|event.sorting_condition.center_id == 3|
 
-      #### ExtractToSaitama の設定
+1. 各 **Filter Activity** で `タスク Events を表示` を行い、それぞれ適切なイベントのみが通過しているか確認します。
 
-      |項目|設定値|備考|
-      |-|-|-|
-      |condition|event.sorting_condition.center_id == 3|埼玉物流センターのIDは `3`|
+   - 東京物流センター： `ExtractToTokyo`
 
-1. 3つの `ExtractTo***` タスクで `タスク Events を表示` を行い、それぞれ適切なイベントのみ通過しているか確認します。
-   1. Google Colaboratory からダミーデータを送信します。
+     ```json
+     {
+         "code": "14961234567890",
+         "name": "お茶 24本",
+         "sorting_condition": {
+             "_id": "649d30c7c32b66791581af76",
+             "center_id": 1,
+             "center_name": "東京物流センター",
+             "code": "14961234567890",
+             "ars_namespace": "BoxSorter",
+             "ars_version": 1,
+             "ars_createdAt": "2023-06-29T07:20:39.157Z",
+             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
+         }
+     }
+     ```
 
-   1. 各 Subscription でイベントを適切なイベントだけ通過しているか確認します。  
-      - `ExtractToTokyo` の Subscription に以下のイベント **のみ** が表示されていることを確認します。
+   - 神奈川物流センター： `ExtractToKanagawa`
 
-        ```json
-        {
-            "code": "14961234567890",
-            "name": "お茶 24本",
-            "sorting_condition": {
-                "_id": "649d30c7c32b66791581af76",
-                "center_id": 1,
-                "center_name": "東京物流センター",
-                "code": "14961234567890",
-                "ars_namespace": "BoxSorter",
-                "ars_version": 1,
-                "ars_createdAt": "2023-06-29T07:20:39.157Z",
-                "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-            }
-        }
-        ```
+     ```json
+     {
+         "code": "14961234567892",
+         "name": "化粧水 36本",
+         "sorting_condition": {
+             "_id": "649d30c7c32b66791581af77",
+             "center_id": 2,
+             "center_name": "神奈川物流センター",
+             "code": "14961234567892",
+             "ars_namespace": "BoxSorter",
+             "ars_version": 1,
+             "ars_createdAt": "2023-06-29T07:20:39.200Z",
+             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
+         }
+     }
+     ```
 
-      - `ExtractToKanagawa` の Subscription に以下のイベント **のみ** が表示されていることを確認します。
+   - 埼玉物流センター： `ExtractToSaitama`
 
-        ```json
-        {
-            "code": "14961234567892",
-            "name": "化粧水 36本",
-            "sorting_condition": {
-                "_id": "649d30c7c32b66791581af77",
-                "center_id": 2,
-                "center_name": "神奈川物流センター",
-                "code": "14961234567892",
-                "ars_namespace": "BoxSorter",
-                "ars_version": 1,
-                "ars_createdAt": "2023-06-29T07:20:39.200Z",
-                "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-            }
-        }
-        ```
-
-      - `ExtractToSaitama` の Subscription に以下のイベント **のみ** が表示されていることを確認します。
-
-        ```json
-        {
-            "code": "14961234567893",
-            "name": "ワイン 12本",
-            "sorting_condition": {
-                "_id": "649d30c7c32b66791581af78",
-                "center_id": 3,
-                "center_name": "埼玉物流センター",
-                "code": "14961234567893",
-                "ars_namespace": "BoxSorter",
-                "ars_version": 1,
-                "ars_createdAt": "2023-06-29T07:20:39.244Z",
-                "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-            }
-        }
-        ```
+     ```json
+     {
+         "code": "14961234567893",
+         "name": "ワイン 12本",
+         "sorting_condition": {
+             "_id": "649d30c7c32b66791581af78",
+             "center_id": 3,
+             "center_name": "埼玉物流センター",
+             "code": "14961234567893",
+             "ars_namespace": "BoxSorter",
+             "ars_version": 1,
+             "ars_createdAt": "2023-06-29T07:20:39.244Z",
+             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
+         }
+     }
+     ```
 
 ### 5. 【LogStream】仕分け指示をログとして表示
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
 
-1. 各 `ExtractTo***` タスクの次に、それぞれ以下のタスクを追加してからアプリケーションを保存します。
+1. App ペイン左側の `Actions` の中から `LogStream` を選択し、各 **Filter Activity** の上にドロップします。  
+   この作業を3回繰り返し、3つの **LogStream Activity** を配置します。
 
-   1. `ExtractToTokyo` タスクの次:
+   ![app_logstream_01.gif](./imgs/app_logstream_01.gif)
 
-      |項目|設定値|
-      |-|-|
-      |Activity Pattern|LogStream|
-      |タスク Name|LogToTokyo|
+1. 各 **LogStream Activity** の `タスク名` の設定と `Configuration` の `クリックして編集` から `level` の設定を行い、アプリケーションを保存します。  
 
-      #### LogToTokyo の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |level|info|-|
-
-   1. `ExtractToKanagawa` タスクの次:
+   1. 東京物流センター
 
       |項目|設定値|
       |-|-|
-      |Activity Pattern|LogStream|
-      |タスク Name|LogToKanagawa|
+      |Name|LogToTokyo|
+      |level (Enumerated)|info|
 
-      #### LogToKanagawa の設定
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |level|info|-|
-
-   1. `ExtractToSaitama` タスクの次:
+   1. 神奈川物流センター
 
       |項目|設定値|
       |-|-|
-      |Activity Pattern|LogStream|
-      |タスク Name|LogToSaitama|
+      |Name|LogToKanagawa|
+      |level (Enumerated)|info|
 
-      #### LogToSaitama の設定
+   1. 埼玉物流センター
 
-      |項目|設定値|備考|
-      |-|-|-|
-      |level|info|-|
+      |項目|設定値|
+      |-|-|
+      |Name|LogToSaitama|
+      |level (Enumerated)|info|
 
 ## 6.【動作確認】送信結果が正しく仕分けされているか確認する
 
-Google Colaboratory からダミーデータを送信しておき、正しく仕分けされるか確認します。
-
-1. Google Colaboratory からダミーデータを送信します。
+データジェネレータからダミーデータを送信しておき、正しく仕分けされるか確認します。
 
 1. Log メッセージ 画面を表示します。
    1. 画面右下の `Debugging` をクリックします。
