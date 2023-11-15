@@ -21,15 +21,16 @@
   - [2.【準備】データジェネレータの準備](#2準備データジェネレータの準備)
     - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
-  - [3. 【Topic】Vantiqで Google Colaboratory のデータを受信する](#3-topicvantiqで-google-colaboratory-のデータを受信する)
+  - [3. Topic を用いた REST API エンドポイントの作成](#3-topic-を用いた-rest-api-エンドポイントの作成)
     - [Topic の作成](#topic-の作成)
-  - [4. 【App Builder】ボックスソーターアプリの開発](#4-app-builderボックスソーターアプリの開発)
+  - [4. Type を用いたマスタデータの作成](#4-type-を用いたマスタデータの作成)
+    - [Type の作成](#type-の作成)
+  - [4. App Builder を用いた App の開発](#4-app-builder-を用いた-app-の開発)
     - [1. アプリケーションの作成](#1-アプリケーションの作成)
     - [2.【EventStream】Topic で受信した内容をアプリケーションで受け取る](#2eventstreamtopic-で受信した内容をアプリケーションで受け取る)
-    - [3. Type の作成](#3-type-の作成)
-    - [4.【Enrich】仕分け条件をイベントに追加する](#4enrich仕分け条件をイベントに追加する)
-    - [5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#5-filter条件に合致したイベントだけを通過させ仕分けする)
-    - [6. 【LogStream】仕分け指示をログとして表示](#6-logstream仕分け指示をログとして表示)
+    - [3.【Enrich】仕分け条件をイベントに追加する](#3enrich仕分け条件をイベントに追加する)
+    - [4. 【Filter】条件に合致したイベントだけを通過させ、仕分けする](#4-filter条件に合致したイベントだけを通過させ仕分けする)
+    - [5. 【LogStream】仕分け指示をログとして表示](#5-logstream仕分け指示をログとして表示)
   - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
   - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
@@ -103,7 +104,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![google_colab_run](./imgs/google_colab_run.png)
 
-## 3. 【Topic】Vantiqで Google Colaboratory のデータを受信する
+## 3. Topic を用いた REST API エンドポイントの作成
 
 サーバーからデータを受信したい場合、エンドポイントが必要です。  
 これは Vantiq でも同じです。  
@@ -135,62 +136,7 @@ Vantiq の Topic がエンドポイントになります。
 
       ![receive-test-data.png](./imgs/receive-test-data.png)
 
-## 4. 【App Builder】ボックスソーターアプリの開発
-
-この手順からアプリケーション開発を開始します。  
-Google Colaboratory から取得したデータをイベントとして、処理を実装していきます。
-
-### 1. アプリケーションの作成
-
-1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開く
-   
-   ![create_app_01.png](./imgs/create_app_01.png)
-
-1. `Name` に `BoxSorter` と入力し `OK` をクリックする
-
-   ![create_app_02.png](./imgs/create_app_02.png)
-
-### 2.【EventStream】Topic で受信した内容をアプリケーションで受け取る
-
-`EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
-
-> `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。デフォルトで `Initiate` タスクが作成されます。
-
-1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力する
-
-   ![create_app_03.png](./imgs/create_app_03.png)
-
-   > アプリケーションのルートとなるタスクに設定される Activity Pattern は常に `EventStream` Activity になります。
-
-1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックする
-
-   |項目|設定値|
-   |-|-|
-   |inboundResource|topics|
-   |inboundResourceId|/BoxInfoApi|
-
-   ![create_app_04.png](./imgs/create_app_04.png)
-
-   ![create_app_05.png](./imgs/create_app_05.png)
-
-1. App Builder のペインの上部にあるフロッピーディスクのアイコンをクリックし、アプリケーションを保存する
-
-   ![create_app_06.png](./imgs/create_app_06.png)
-
-1. `ReceiveBoxInfo` タスクを右クリックし、 `タスク Events を表示` をクリックする
-
-   ![create_app_07.png](./imgs/create_app_07.png)
-
-   > `Subscription:BoxSorter_ReceiveBoxInfo` が開かれます。ここには ReceiveBoxInfo タスクの処理結果が表示されます。
-
-1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。  
-   送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認します。ｄ；
-
-   ![create_app_08.png](./imgs/create_app_08.png)
-
-   > この手順で、アプリケーションが Topic で受信した内容を扱える状態まで実装できています。
-
-### 3. Type の作成
+## 4. Type を用いたマスタデータの作成
 
 このアプリケーションが受け取る元の内容は以下のように `code` と `name` だけが含まれているデータです。
 
@@ -210,6 +156,8 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
 あらかじめ仕分けの判断材料となる情報を保持した Type を作成しておき、これらの Activity でその Type の情報を取得してイベントに追加します。  
 一旦アプリケーションから離れ、 Type の作成とレコード追加を行います。  
+
+### Type の作成
 
 1. `sorting_condition` Type を作成する
    1. メニューバーの `追加` -> `Type...` -> `+ 新規 Type` をクリックして Type の新規作成画面を開き、以下の内容を入力して `OK` をクリックする
@@ -279,16 +227,69 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
       ![csv_import_04.png](./imgs/csv_import_04.png)
 
-これで Type とレコードが用意できたのでアプリケーションの開発に戻ります。  
+## 4. App Builder を用いた App の開発
 
-### 4.【Enrich】仕分け条件をイベントに追加する
+この手順からアプリケーション開発を開始します。  
+Topic で取得したデータをイベントとして、処理を実装していきます。
+
+### 1. アプリケーションの作成
+
+1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開く
+   
+   ![create_app_01.png](./imgs/create_app_01.png)
+
+1. `Name` に `BoxSorter` と入力し `OK` をクリックする
+
+   ![create_app_02.png](./imgs/create_app_02.png)
+
+### 2.【EventStream】Topic で受信した内容をアプリケーションで受け取る
+
+`EventStream` を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
+
+> `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。デフォルトで `Initiate` タスクが作成されます。
+
+1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力する
+
+   ![create_app_03.png](./imgs/create_app_03.png)
+
+   > アプリケーションのルートとなるタスクに設定される Activity Pattern は常に `EventStream` Activity になります。
+
+1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックする
+
+   |項目|設定値|
+   |-|-|
+   |inboundResource|topics|
+   |inboundResourceId|/BoxInfoApi|
+
+   ![create_app_04.png](./imgs/create_app_04.png)
+
+   ![create_app_05.png](./imgs/create_app_05.png)
+
+1. App Builder のペインの上部にあるフロッピーディスクのアイコンをクリックし、アプリケーションを保存する
+
+   ![create_app_06.png](./imgs/create_app_06.png)
+
+1. `ReceiveBoxInfo` タスクを右クリックし、 `タスク Events を表示` をクリックする
+
+   ![create_app_07.png](./imgs/create_app_07.png)
+
+   > `Subscription:BoxSorter_ReceiveBoxInfo` が開かれます。ここには ReceiveBoxInfo タスクの処理結果が表示されます。
+
+1. Google Colaboratory のデータジェネレーターを起動し、ダミーデータを送信します。  
+   送信された内容が `Subscription:BoxSorter_ReceiveBoxInfo` に表示されることを確認します。ｄ；
+
+   ![create_app_08.png](./imgs/create_app_08.png)
+
+   > この手順で、アプリケーションが Topic で受信した内容を扱える状態まで実装できています。
+
+### 3.【Enrich】仕分け条件をイベントに追加する
 
 `Enrich` Activity Pattern を使用して、 Type のデータを追加します。
 
 1. 画面左側の **Project Contents** から **BoxSorter App** を開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
-   
+
 1. `ReceiveBoxInfo` タスクを右クリックし、 `新規タスクとリンク` から新しいタスクを後続に追加する
    1. `新規タスクとリンク` ダイアログが表示されるので以下の内容を入力し `OK` をクリックする
 
@@ -366,7 +367,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
 
       `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
-### 5. 【Filter】条件に合致したイベントだけを通過させ、仕分けする
+### 4. 【Filter】条件に合致したイベントだけを通過させ、仕分けする
 
 特定の物流センターのイベントのみが通過できるフローを実装することで仕分けを行います。  
 今回は「東京」「神奈川」「埼玉」の3つの物流センター単位で仕分けをしますので `Filter` Activity を設定したタスクを3つ実装します。
@@ -481,7 +482,7 @@ Vantiq では `Enrich` という Activity Pattern が用意されており、イ
         }
         ```
 
-### 6. 【LogStream】仕分け指示をログとして表示
+### 5. 【LogStream】仕分け指示をログとして表示
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
 
