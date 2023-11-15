@@ -282,10 +282,6 @@ Topic で取得したデータをイベントとして、処理を実装して�
 
 `Enrich` Activity Pattern を使用して、 Type のデータを追加します。
 
-1. 画面左側の **Project Contents** から **BoxSorter App** を開きます。
-
-   ![project-contents_app.png](./imgs/project-contents_app.png)
-
 1. `ReceiveBoxInfo` タスクを右クリックし、 `新規タスクとリンク` から新しいタスクを後続に追加する
    1. `新規タスクとリンク` ダイアログが表示されるので以下の内容を入力し `OK` をクリックする
 
