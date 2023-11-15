@@ -218,6 +218,10 @@ Topic で取得したデータをイベントとして、処理を実装して�
 
 ### 1. アプリケーションの作成
 
+App Builder を用いて、 App を新規作成します。
+
+#### App の新規作成
+
 1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開きます。
    
    ![create_app_01.png](./imgs/create_app_01.png)
@@ -232,6 +236,8 @@ Topic で取得したデータをイベントとして、処理を実装して�
 
 > `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。  
 > デフォルトで `Initiate` タスクが作成されます。
+
+#### EventStream の設定
 
 1. `Initiate` タスクをクリックし、 `Name` に `ReceiveBoxInfo` と入力します。
 
@@ -270,6 +276,8 @@ Topic で取得したデータをイベントとして、処理を実装して�
 ### 3.【Enrich】仕分け条件をイベントに追加する
 
 **Enrich Activity** を使用して、 Type のデータをイベントに追加します。
+
+#### Enrich Activity の実装
 
 1. App ペイン左側の `Modifiers` の中から `Enrich` を選択し、 `ReceiveBoxInfo` タスクの上にドロップします。
 
@@ -359,6 +367,8 @@ Topic で取得したデータをイベントとして、処理を実装して�
 |埼玉|3|
 
 この物流センターID `center_id` で仕分けをします。
+
+#### Filter Activity の実装
 
 1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクの上にドロップします。  
    この作業を3回繰り返し、3つの **Filter Activity** を配置します。
@@ -450,6 +460,8 @@ Topic で取得したデータをイベントとして、処理を実装して�
 ### 5. 【LogStream】仕分け指示をログとして表示
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
+
+#### LogStream Activity の実装
 
 1. App ペイン左側の `Actions` の中から `LogStream` を選択し、各 **Filter Activity** の上にドロップします。  
    この作業を3回繰り返し、3つの **LogStream Activity** を配置します。
