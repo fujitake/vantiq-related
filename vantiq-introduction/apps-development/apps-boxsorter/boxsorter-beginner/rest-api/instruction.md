@@ -6,6 +6,7 @@
 
 1. 【準備】Namespace の作成と Project の保存、データジェネレータの準備
 1. 【Topic】Vantiq で REST API 用のエンドポイントを作成する
+1. 【Type】Vantiq マスタデータを取り込む
 1. 【App Builder】ボックスソーターアプリの開発
 1. 【動作確認】送信結果が正しく仕分けされているか確認する
 
