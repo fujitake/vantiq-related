@@ -27,9 +27,9 @@
     - [3-1. Topic ペインの表示](#3-1-topic-ペインの表示)
     - [3-2. Topic のデータ受信テスト](#3-2-topic-のデータ受信テスト)
   - [4. App Builder を用いたボックスソーターアプリの改修](#4-app-builder-を用いたボックスソーターアプリの改修)
-    - [1. 【App Builder】App ペインの表示](#1-app-builderapp-ペインの表示)
-    - [2. 【Transformation】イベントデータの整形](#2-transformationイベントデータの整形)
-    - [3. 【Filter】仕分け条件の修正](#3-filter仕分け条件の修正)
+    - [4-1. 【App Builder】App ペインの表示](#4-1-app-builderapp-ペインの表示)
+    - [4-2. 【Transformation】イベントデータの整形](#4-2-transformationイベントデータの整形)
+    - [4-3. 【Filter】仕分け条件の修正](#4-3-filter仕分け条件の修正)
   - [5. 仕分け結果の確認](#5-仕分け結果の確認)
     - [5-1. Log メッセージ画面の表示](#5-1-log-メッセージ画面の表示)
     - [5-2. Log の確認](#5-2-log-の確認)
@@ -139,17 +139,17 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 この手順からアプリケーションの改修を開始します。  
 
-### 1. 【App Builder】App ペインの表示
+### 4-1. 【App Builder】App ペインの表示
 
 1. 画面左側の **Project Contents** から `BoxSorter` App を開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
 
-### 2. 【Transformation】イベントデータの整形
+### 4-2. 【Transformation】イベントデータの整形
 
 **Transformation Activity** を追加して、イベントデータを整形をします。  
 
-#### 2-1. Transformation Activity の実装
+#### Transformation Activity の実装
 
 1. **Modifiers** の中から `Transformation` を選択し、 `AttachCondition` タスクと `Filter Activity` の間の **矢印** の上にドロップします。
 
@@ -171,11 +171,11 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![transformation_setting.png](./imgs/transformation_setting.png)
 
-### 3. 【Filter】仕分け条件の修正
+### 4-3. 【Filter】仕分け条件の修正
 
 **Transformation Activity** を利用して、イベントの整形をしたため、後続タスクの **Filter Activity** の条件式を修正する必要があります。
 
-#### 3-1. Filter Activity の修正
+#### Filter Activity の修正
 
 1. 各 **Filter Activity** を選択し、 `Configuration` の `クリックして編集` を開きます。  
    `condition (Union)` の `条件式` をクリックして、以下の内容を入力し、 `OK` をクリックします。

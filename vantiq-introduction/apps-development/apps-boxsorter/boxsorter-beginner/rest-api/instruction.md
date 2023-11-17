@@ -24,12 +24,13 @@
     - [2-2. Google Colaboratory の設定](#2-2-google-colaboratory-の設定)
   - [3. Topic を用いた REST API エンドポイントの作成](#3-topic-を用いた-rest-api-エンドポイントの作成)
     - [3-1. Topic の作成](#3-1-topic-の作成)
+    - [3-2. データの受信テスト](#3-2-データの受信テスト)
   - [4. Type を用いたマスタデータの作成](#4-type-を用いたマスタデータの作成)
     - [4-1. Type の作成](#4-1-type-の作成)
     - [4-2. マスタデータのインポート](#4-2-マスタデータのインポート)
   - [5. App Builder を用いた App の開発](#5-app-builder-を用いた-app-の開発)
     - [5-1. 【App Builder】アプリケーションの作成](#5-1-app-builderアプリケーションの作成)
-    - [5-2. 【EventStream】Topic データの受信](#5-2-eventstreamtopic-データの受信)
+    - [5-2. 【EventStream】Topic データの取得](#5-2-eventstreamtopic-データの取得)
     - [5-3. 【Enrich】仕分け条件の追加](#5-3-enrich仕分け条件の追加)
     - [5-4. 【Filter】仕分け処理の実装](#5-4-filter仕分け処理の実装)
     - [5-5. 【LogStream】仕分け指示のログ出力の実装](#5-5-logstream仕分け指示のログ出力の実装)
@@ -129,15 +130,16 @@ Vantiq の Topic がエンドポイントになります。
 
    > 上記以外にも設定できる項目はありますが本ワークショップでは使用しません。
 
-1. データを受信できることを確認します。
-   1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックします。
+### 3-2. データの受信テスト
 
-      ![create_topic_03.png](./imgs/create_topic_03.png)
+1. `/BoxInfoApi` Topicのペインを開き `データの受信テスト` をクリックします。
 
-      > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
-   1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認します。
+   ![create_topic_03.png](./imgs/create_topic_03.png)
 
-      ![receive-test-data.png](./imgs/receive-test-data.png)
+   > `Subscription: /BoxInfoApi` というペインが新たに開かれます。データを受信するとここに取得した内容が表示されます。
+1. `Subscription: /BoxInfoApi` に Google Colaboratory から受信した内容が表示されることを確認します。
+
+   ![receive-test-data.png](./imgs/receive-test-data.png)
 
 ## 4. Type を用いたマスタデータの作成
 
@@ -232,7 +234,7 @@ App Builder を用いて、 App を新規作成します。
 
    ![create_app_02.png](./imgs/create_app_02.png)
 
-### 5-2. 【EventStream】Topic データの受信
+### 5-2. 【EventStream】Topic データの取得
 
 **EventStream Activity** を使って Topic からデータを受け取ります。  
 受け取ったデータはイベントとして、アプリケーションで利用可能な状態になります。
