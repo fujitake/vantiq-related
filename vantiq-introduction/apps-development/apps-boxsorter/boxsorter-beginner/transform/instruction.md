@@ -5,9 +5,9 @@
 下記の流れで実装していきます。
 
 1. 【準備】Namespace の作成と Project のインポート、データジェネレータの準備
-1. 【動作確認】既存のアプリケーションが正しく動作するか確認する
+1. 【動作確認】既存のアプリケーションの動作確認
 1. 【App Builder】ボックスソーターアプリの改修
-1. 【動作確認】送信結果のデータフォーマットを確認する
+1. 【動作確認】仕分け結果の確認
 
 > リソース名やタスク名は任意のものに変更しても構いません。
 
@@ -17,18 +17,22 @@
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-  - [1.【準備】Namespace の作成と Project のインポート](#1準備namespace-の作成と-project-のインポート)
-    - [Namespace の作成](#namespace-の作成)
-    - [Project のインポート](#project-のインポート)
-  - [2.【準備】データジェネレータの準備](#2準備データジェネレータの準備)
-    - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
-    - [Google Colaboratory の設定](#google-colaboratory-の設定)
-  - [3. 【動作確認】既存のアプリケーションが正しく動作するか確認する](#3-動作確認既存のアプリケーションが正しく動作するか確認する)
-  - [4. 【App Builder】ボックスソーターアプリの改修](#4-app-builderボックスソーターアプリの改修)
-    - [1. App を開く](#1-app-を開く)
-    - [2. Transformation Activity の追加](#2-transformation-activity-の追加)
-    - [3. Filter Activity の修正](#3-filter-activity-の修正)
-  - [5.【動作確認】送信結果が正しく仕分けされているか確認する](#5動作確認送信結果が正しく仕分けされているか確認する)
+  - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
+    - [1-1. Namespace の作成](#1-1-namespace-の作成)
+    - [1-2. Project のインポート](#1-2-project-のインポート)
+  - [2. データジェネレータの準備](#2-データジェネレータの準備)
+    - [2-1. Vantiq Access Token の発行](#2-1-vantiq-access-token-の発行)
+    - [2-2. Google Colaboratory の設定](#2-2-google-colaboratory-の設定)
+  - [3. 既存のアプリケーションの動作確認](#3-既存のアプリケーションの動作確認)
+    - [3-1. Topic ペインの表示](#3-1-topic-ペインの表示)
+    - [3-2. Topic のデータ受信テスト](#3-2-topic-のデータ受信テスト)
+  - [4. App Builder を用いたボックスソーターアプリの改修](#4-app-builder-を用いたボックスソーターアプリの改修)
+    - [1. 【App Builder】App ペインの表示](#1-app-builderapp-ペインの表示)
+    - [2. 【Transformation】イベントデータの整形](#2-transformationイベントデータの整形)
+    - [3. 【Filter】仕分け条件の修正](#3-filter仕分け条件の修正)
+  - [5. 仕分け結果の確認](#5-仕分け結果の確認)
+    - [5-1. Log メッセージ画面の表示](#5-1-log-メッセージ画面の表示)
+    - [5-2. Log の確認](#5-2-log-の確認)
   - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
@@ -43,16 +47,16 @@
 }
 ```
 
-## 1.【準備】Namespace の作成と Project のインポート
+## 1. Namespace の作成と Project のインポート
 
-### Namespace の作成
+### 1-1. Namespace の作成
 
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 
 詳細は下記をご確認ください。  
 [Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
 
-### Project のインポート
+### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
 **ボックスソーター（入門編・REST API）** の Project をインポートしてください。  
@@ -60,20 +64,20 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
 
-## 2.【準備】データジェネレータの準備
+## 2. データジェネレータの準備
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。  
 
 **Vantiq Access Token** は Namespace ごとに発行する必要があります。
 
-### Vantiq Access Token の発行
+### 2-1. Vantiq Access Token の発行
 
-1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開く
+1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開きます。
 
    ![accesstoken_01](./imgs/accesstoken_01.png)
 
-1. 以下の内容を設定し、保存する
+1. 以下の内容を設定し、保存します。
 
    |項目|設定値|備考|
    |-|-|-|
@@ -81,23 +85,23 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![accesstoken_02](./imgs/accesstoken_02.png)
 
-1. 発行された `Access Token` をクリックして、クリップボードにコピーしておく
+1. 発行された `Access Token` をクリックして、クリップボードにコピーしておきます。
 
    ![accesstoken_03](./imgs/accesstoken_03.png)
 
-### Google Colaboratory の設定
+### 2-2. Google Colaboratory の設定
 
-1. 下記のリンクから **データジェネレータ** のページを開く
+1. 下記のリンクから **データジェネレータ** のページを開きます。
 
    - [BoxSorterDataGenerator（入門編・REST API）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.ipynb)
 
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
-1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
+1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開きます。
 
    ![OpenGoogleColab](./imgs/open_in_colab_button.png)
 
-1. `# 設定情報` に以下の内容を入力する
+1. `# 設定情報` に以下の内容を入力します。
 
    |項目|設定値|備考|
    |-|-|-|
@@ -106,20 +110,24 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![google_colab_setting](./imgs/google_colab_setting.png)
 
-1. 上から順に1つずつ `再生ボタン` を押していく  
+1. 上から順に1つずつ `再生ボタン` を押していきます。  
    実行が終わるのを待ってから、次の `再生ボタン` を押してください。  
 
    ![google_colab_run](./imgs/google_colab_run.png)
 
-## 3. 【動作確認】既存のアプリケーションが正しく動作するか確認する
+## 3. 既存のアプリケーションの動作確認
 
 **Topic** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
-1. 画面左側の **Project Contents** から **/BoxInfoApi Topic** を開きます。
+### 3-1. Topic ペインの表示
+
+1. 画面左側の **Project Contents** から `/BoxInfoApi` Topic を開きます。
    
    ![project-contents.png](./imgs/project-contents_topic.png)
 
-1. 左上の **データの受信テスト** をクリックします。
+### 3-2. Topic のデータ受信テスト
+
+1. 左上の `データの受信テスト` をクリックします。
 
    ![boxinfoapi.png](./imgs/boxinfoapi.png)
 
@@ -127,19 +135,21 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![boxinfoapi_subscribe.png](./imgs/boxinfoapi_subscribe.png)
 
-## 4. 【App Builder】ボックスソーターアプリの改修
+## 4. App Builder を用いたボックスソーターアプリの改修
 
 この手順からアプリケーションの改修を開始します。  
 
-### 1. App を開く
+### 1. 【App Builder】App ペインの表示
 
-1. 画面左側の **Project Contents** から **BoxSorter App** を開きます。
+1. 画面左側の **Project Contents** から `BoxSorter` App を開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
 
-### 2. Transformation Activity の追加
+### 2. 【Transformation】イベントデータの整形
 
 **Transformation Activity** を追加して、イベントデータを整形をします。  
+
+#### 2-1. Transformation Activity の実装
 
 1. **Modifiers** の中から `Transformation` を選択し、 `AttachCondition` タスクと `Filter Activity` の間の **矢印** の上にドロップします。
 
@@ -149,8 +159,8 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![boxsorter_transform.gif](./imgs/boxsorter_transform.gif)
 
-1. `Transformation` タスクをクリックし、 `Configuration` の `クリックして編集` を開く。  
-   `transformation (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックする
+1. `Transformation` タスクをクリックし、 `Configuration` の `クリックして編集` を開きます。  
+   `transformation (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックします。
 
    |Outbound Property|Transformation Expression|
    |-|-|
@@ -161,12 +171,14 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![transformation_setting.png](./imgs/transformation_setting.png)
 
-### 3. Filter Activity の修正
+### 3. 【Filter】仕分け条件の修正
 
 **Transformation Activity** を利用して、イベントの整形をしたため、後続タスクの **Filter Activity** の条件式を修正する必要があります。
 
-1. 各 `Filter Activity` を選択し、 `Configuration` の `クリックして編集` を開く。  
-   `condition (Union)` の `条件式` をクリックして、以下の内容を入力し、 `OK` をクリックする
+#### 3-1. Filter Activity の修正
+
+1. 各 **Filter Activity** を選択し、 `Configuration` の `クリックして編集` を開きます。  
+   `condition (Union)` の `条件式` をクリックして、以下の内容を入力し、 `OK` をクリックします。
 
    |物流センター|設定項目|設定値|
    |-|-|-|
@@ -174,16 +186,19 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
    |神奈川物流センター|condition|event.center_id == 2|
    |埼玉物流センター|condition|event.center_id == 3|
 
-## 5.【動作確認】送信結果が正しく仕分けされているか確認する
+## 5. 仕分け結果の確認
 
 Log 画面から `LogStream` のログデータを確認します。  
 
-1. Log メッセージ 画面を表示する
-   1. 画面右下の `Debugging` をクリックする
+### 5-1. Log メッセージ画面の表示
 
-   1. 右側の `Errors` をクリックし、 `Log メッセージ` にチェックを入れる
+1. 画面右下の `Debugging` をクリックします。
 
-1. 各物流センターごとに正しく仕分け指示が表示されていることを確認する
+1. 右側の `Errors` をクリックし、 `Log メッセージ` にチェックを入れます。
+
+### 5-2. Log の確認
+
+1. 各物流センターごとに正しく仕分け指示が表示されていることを確認します。
 
    **例: 各物流センターごとに Log メッセージ が表示されている**
 

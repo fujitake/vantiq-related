@@ -18,22 +18,24 @@
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
-  - [1.【準備】Namespace の作成と Project の保存](#1準備namespace-の作成と-project-の保存)
-  - [2.【準備】データジェネレータの準備](#2準備データジェネレータの準備)
-    - [Vantiq Access Token の発行](#vantiq-access-token-の発行)
-    - [Google Colaboratory の設定](#google-colaboratory-の設定)
+  - [1. Namespace の作成と Project の保存](#1-namespace-の作成と-project-の保存)
+  - [2. データジェネレータの準備](#2-データジェネレータの準備)
+    - [2-1. Vantiq Access Token の発行](#2-1-vantiq-access-token-の発行)
+    - [2-2. Google Colaboratory の設定](#2-2-google-colaboratory-の設定)
   - [3. Topic を用いた REST API エンドポイントの作成](#3-topic-を用いた-rest-api-エンドポイントの作成)
-    - [Topic の作成](#topic-の作成)
+    - [3-1. Topic の作成](#3-1-topic-の作成)
   - [4. Type を用いたマスタデータの作成](#4-type-を用いたマスタデータの作成)
-    - [Type の作成](#type-の作成)
-    - [マスタデータのインポート](#マスタデータのインポート)
+    - [4-1. Type の作成](#4-1-type-の作成)
+    - [4-2. マスタデータのインポート](#4-2-マスタデータのインポート)
   - [5. App Builder を用いた App の開発](#5-app-builder-を用いた-app-の開発)
-    - [1. アプリケーションの作成](#1-アプリケーションの作成)
-    - [2.【EventStream】Topic のデータを受け取る](#2eventstreamtopic-のデータを受け取る)
-    - [3.【Enrich】仕分け条件をイベントに追加する](#3enrich仕分け条件をイベントに追加する)
-    - [4. 【Filter】仕分け処理の実装](#4-filter仕分け処理の実装)
-    - [5. 【LogStream】仕分け指示をログとして表示](#5-logstream仕分け指示をログとして表示)
-  - [6.【動作確認】送信結果が正しく仕分けされているか確認する](#6動作確認送信結果が正しく仕分けされているか確認する)
+    - [5-1. 【App Builder】アプリケーションの作成](#5-1-app-builderアプリケーションの作成)
+    - [5-2. 【EventStream】Topic データの受信](#5-2-eventstreamtopic-データの受信)
+    - [5-3. 【Enrich】仕分け条件の追加](#5-3-enrich仕分け条件の追加)
+    - [5-4. 【Filter】仕分け処理の実装](#5-4-filter仕分け処理の実装)
+    - [5-5. 【LogStream】仕分け指示のログ出力の実装](#5-5-logstream仕分け指示のログ出力の実装)
+  - [6. 仕分け結果の確認](#6-仕分け結果の確認)
+    - [6-1. Log メッセージ画面の表示](#6-1-log-メッセージ画面の表示)
+    - [6-2. Log の確認](#6-2-log-の確認)
   - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
@@ -48,7 +50,7 @@
 }
 ```
 
-## 1.【準備】Namespace の作成と Project の保存
+## 1. Namespace の作成と Project の保存
 
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 あわせてプロジェクトの保存も行っておきます。  
@@ -56,12 +58,12 @@
 詳細は下記をご確認ください。  
 [Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
 
-## 2.【準備】データジェネレータの準備
+## 2. データジェネレータの準備
 
 Google Colaboratory を使用して、ダミーデータの生成します。  
 Google Colaboratory を利用するにあたり、事前に **Vantiq Access Token** を発行する必要があります。  
 
-### Vantiq Access Token の発行
+### 2-1. Vantiq Access Token の発行
 
 1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開きます。
 
@@ -79,7 +81,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    ![accesstoken_03](./imgs/accesstoken_03.png)
 
-### Google Colaboratory の設定
+### 2-2. Google Colaboratory の設定
 
 1. 下記のリンクから **データジェネレータ** のページを開きます。
 
@@ -111,7 +113,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 これは Vantiq でも同じです。  
 Vantiq の Topic がエンドポイントになります。  
 
-### Topic の作成
+### 3-1. Topic の作成
 
 1. メニューバーの `追加` -> `Advanced` -> `Topic...` -> `+ 新規 Topic` をクリックし Topic の新規作成画面を開きます。
    
@@ -157,7 +159,7 @@ Type を作成した後に CSV ファイルをインポートします。
 > **補足説明**  
 > マスタデータなどを Type へインポートする方法は CSV ファイル以外にも、 REST API を用いて Type を更新するといった方法があります。  
 
-### Type の作成
+### 4-1. Type の作成
 
 1. メニューバーの `追加` -> `Type...` -> `+ 新規 Type` をクリックして Type の新規作成画面を開きます。
 
@@ -187,7 +189,7 @@ Type を作成した後に CSV ファイルをインポートします。
 
    ![create_type_05.png](./imgs/create_type_05.png)
 
-### マスタデータのインポート
+### 4-2. マスタデータのインポート
 
 1. メニューバーの `Projects` -> `インポート...` を開き、 `Select Import Type:` を `Data` に設定します。
 
@@ -216,7 +218,7 @@ Type を作成した後に CSV ファイルをインポートします。
 この手順からアプリケーション開発を開始します。  
 Topic で取得したデータをイベントとして、処理を実装していきます。
 
-### 1. アプリケーションの作成
+### 5-1. 【App Builder】アプリケーションの作成
 
 App Builder を用いて、 App を新規作成します。
 
@@ -230,11 +232,12 @@ App Builder を用いて、 App を新規作成します。
 
    ![create_app_02.png](./imgs/create_app_02.png)
 
-### 2.【EventStream】Topic のデータを受け取る
+### 5-2. 【EventStream】Topic データの受信
 
-**EventStream Activity** を使って外部から取得したデータをイベントとしてアプリケーションに渡します。
+**EventStream Activity** を使って Topic からデータを受け取ります。  
+受け取ったデータはイベントとして、アプリケーションで利用可能な状態になります。
 
-> `BoxSorter` のペインが開かれますのでここから開発作業を進めていきます。  
+> `BoxSorter` のペインが開かれますので、ここから開発作業を進めていきます。  
 > デフォルトで `Initiate` タスクが作成されます。
 
 #### EventStream の設定
@@ -273,7 +276,7 @@ App Builder を用いて、 App を新規作成します。
 
    > ここまでの手順で、アプリケーションが Topic で受信した内容を扱える状態まで実装できました。
 
-### 3.【Enrich】仕分け条件をイベントに追加する
+### 5-3. 【Enrich】仕分け条件の追加
 
 **Enrich Activity** を使用して、 Type のデータをイベントに追加します。
 
@@ -354,7 +357,7 @@ App Builder を用いて、 App を新規作成します。
 
    `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
-### 4. 【Filter】仕分け処理の実装
+### 5-4. 【Filter】仕分け処理の実装
 
 特定の物流センターのイベントのみが通過できるフローを実装することで仕分けを行います。  
 今回は「東京」「神奈川」「埼玉」の3つの物流センター単位で仕分けをしますので `Filter` Activity を設定したタスクを3つ実装します。
@@ -457,7 +460,7 @@ App Builder を用いて、 App を新規作成します。
      }
      ```
 
-### 5. 【LogStream】仕分け指示をログとして表示
+### 5-5. 【LogStream】仕分け指示のログ出力の実装
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
 
@@ -491,14 +494,17 @@ App Builder を用いて、 App を新規作成します。
       |Name|LogToSaitama|
       |level (Enumerated)|info|
 
-## 6.【動作確認】送信結果が正しく仕分けされているか確認する
+## 6. 仕分け結果の確認
 
 データジェネレータからダミーデータを送信しておき、正しく仕分けされるか確認します。
 
-1. Log メッセージ 画面を表示します。
-   1. 画面右下の `Debugging` をクリックします。
+### 6-1. Log メッセージ画面の表示
 
-   1. 右側の `Errors` をクリックし、 `Log メッセージ` にチェックを入れます。
+1. 画面右下の `Debugging` をクリックします。
+
+1. 右側の `Errors` をクリックし、 `Log メッセージ` にチェックを入れます。
+
+### 6-2. Log の確認
 
 1. 各物流センターごとに正しく仕分け指示が表示されていることを確認します。
 
