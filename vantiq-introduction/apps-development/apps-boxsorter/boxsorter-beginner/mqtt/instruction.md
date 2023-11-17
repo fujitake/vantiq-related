@@ -459,13 +459,13 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 ## ワークショップの振り返り
 
-1. **Project**
-   1. Namespace に Project をインポートする方法を学習しました。
-1. **Vantiq Access Token** 
-   1. Namespace ごとに Vantiq Access Token が必要なことを学習しました。
+1. **MQTT**
+   1. MQTT プロトコルについて学習しました。
+1. **Source** 
+   1. Source を用いることで、様々なプロトコルでデータの送受信ができることを学習しました。
 1. **App**
-   1. App の修正方法を学習しました。
-   1. **Transformation Activity** を用いて、データフォーマットの変換方法を学習しました。
+   1. **Transformation Activity** を用いて、データフォーマットを変換する方法を学習しました。
+   1. **PublishToSource Activity** を用いて、外部にデータを送信する方法を学習しました。
 
 ## 参考情報
 
