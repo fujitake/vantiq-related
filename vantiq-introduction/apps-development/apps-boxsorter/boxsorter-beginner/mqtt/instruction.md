@@ -164,7 +164,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 ### 3-2. データの受信テスト
 
-1. `BoxInfoMqtt` Source のペインを開き `データの受信テスト`(Test Data Receipt) をクリックします。
+1. `BoxInfoMqtt` Source のペインを開き `データの受信テスト` をクリックします。
 
    ![create_source_07.png](./imgs/create_source_07.png)
 
