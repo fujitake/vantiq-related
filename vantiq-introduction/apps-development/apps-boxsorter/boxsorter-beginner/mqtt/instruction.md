@@ -311,7 +311,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 #### LogStream Activity の削除
 
-1. 各 **LogStream Activity** を選択し、 `Delete` キーを押下します。
+1. 各 `LogStream Activity` を選択し、 `Delete` キーを押下します。
 
 1. 全ての **LogStream Activity** を削除します。
 
