@@ -180,7 +180,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 ### 4-1. 【App Builder】App ペインの表示
 
-1. 画面左側の **Project Contents** から **BoxSorter App** を開きます。
+1. 画面左側の **Project Contents** から `BoxSorter` App を開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
 
