@@ -10,7 +10,7 @@ Vantiq を利用するための事前準備の方法を解説しています。
 - [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/root_account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/dev_account.md)
 
-## アプリケーション開発入門
+## アプリケーション開発（入門編）
 
 Vantiq アプリケーションの開発方法をワークショップ形式で解説しています。  
 
@@ -27,9 +27,37 @@ Vantiq の基本的な扱い方を解説しています。
 実際に Vantiq を使ってアプリケーションを開発していきます。  
 表の上から順に実施していただくことを推奨しています。  
 
+#### 旧ワークショップ
+
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
-|◯|[荷物仕分けアプリケーション (Beginner)](./apps-development/apps-boxsorter/boxsorter-beginner/readme.md)|なし|
+|-|[荷物仕分けアプリケーション (Beginner)](./apps-development/apps-boxsorter/boxsorter-beginner/readme.md)|なし|
+
+#### 新ワークショップ
+
+|必須|ワークショップ|前提となるワークショップ|
+|:-:|-|-|
+|◯|[ボックスソーター（入門編・REST API）](./apps-development/apps-boxsorter/boxsorter-beginner/rest-api/readme.md)|なし|
+|◯|[ボックスソーター（入門編・Transformation）](./apps-development/apps-boxsorter/boxsorter-beginner/transform/readme.md)|ボックスソーター（入門編・REST API）|
+|◯|[ボックスソーター（入門編・MQTT）](./apps-development/apps-boxsorter/boxsorter-beginner/mqtt/readme.md)|ボックスソーター（入門編・Transformation）|
+
+
+> **必須の解説**  
+> ◯：必ず実施していただくことを推奨しています。  
+> △：追加のワークショップとなるため、余裕がある場合は実施していただくことを推奨しています。  
+> ✕：補足的なワークショップになります。
+
+## アプリケーション開発（基本編）
+
+Vantiq アプリケーションの開発方法をワークショップ形式で解説しています。  
+
+### アプリケーション開発ワークショップ
+
+実際に Vantiq を使ってアプリケーションを開発していきます。  
+表の上から順に実施していただくことを推奨しています。  
+
+|必須|ワークショップ|前提となるワークショップ|
+|:-:|-|-|
 |◯|[荷物仕分けアプリケーション (Standard)](./apps-development/apps-boxsorter/boxsorter-standard/readme.md)|荷物仕分けアプリケーション (Beginner)|
 |✕|[荷物仕分けアプリケーション (MQTTX)](./apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)|荷物仕分けアプリケーション (Standard)|
 |△|[荷物仕分けアプリケーション (SaveToType)](./apps-development/apps-boxsorter/boxsorter-savetype/readme.md)|荷物仕分けアプリケーション (Standard)|
@@ -39,11 +67,6 @@ Vantiq の基本的な扱い方を解説しています。
 |△|[荷物仕分けアプリケーション (Unwind)](./apps-development/apps-boxsorter/boxsorter-unwind/readme.md)|荷物仕分けアプリケーション (Standard)|
 |△|[荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)|荷物仕分けアプリケーション (Standard)|
 |◯|[デバッグ方法](./apps-development/debug/readme.md)|なし|
-
-> **必須の解説**  
-> ◯：必ず実施していただくことを推奨しています。  
-> △：追加のワークショップとなるため、余裕がある場合は実施していただくことを推奨しています。  
-> ✕：補足的なワークショップになります。
 
 ## インフラ／クラウド入門
 
