@@ -335,7 +335,7 @@ App Builder を用いて、 App を新規作成します。
 
    > VAIL で書くとすると `SELECT ONE FROM sorting_condition WHERE code == code` ということになります。
 
-1. `AttachCondition` タスクをクリックし、 `タスク Events を表示` をクリックし、 Enrich の動作確認を行います。  
+1. `AttachCondition` タスクをクリックし、 `タスク Events を表示` から、 Enrich の動作確認を行います。  
    下記のようなイベントになっていることを確認します。
 
    ```json
