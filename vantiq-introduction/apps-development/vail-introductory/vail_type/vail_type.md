@@ -22,6 +22,7 @@
   - [Bulk INSERT (一括追加), Bulk UPSERT (一括追加/更新)](#bulk-insert-一括追加-bulk-upsert-一括追加更新)
     - [Bulk INSERT (一括追加)](#bulk-insert-一括追加)
     - [Bulk UPSERT (一括追加/更新)](#bulk-upsert-一括追加更新)
+  - [実装サンプル](#実装サンプル)
 
 ## データ操作
 
@@ -58,8 +59,10 @@ Members Type で保持しているレコードは次のとおりです。
 
 ### サンプル
 
-Type のサンプルは [こちら](./data/VailSample_Type.zip) からダウンロードできます。  
+Type のサンプルは [こちら](./data/vail_type_type.zip) からダウンロードできます。  
 Project にインポートして利用してください。  
+
+Type のインポート方法は [こちら](./../type_import/readme.md) から参照してください。
 
 ## SELECT (取得)
 
@@ -68,7 +71,7 @@ Project にインポートして利用してください。
 Members Type から全レコード、全プロパティを取得します。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select1()
 
 var members = SELECT * FROM Members
 
@@ -134,7 +137,7 @@ return members
 Member Type から全レコードの `name` プロパティのみを取得します。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select2()
 
 var members = SELECT name FROM Members
 
@@ -170,7 +173,7 @@ return members
 > システムプロパティを含みたくない場合は、 `Utils.stripSystemProperties(object)` を用います。  
 >
 > ```JavaScript
-> PROCEDURE VailSampleProcedure()
+> PROCEDURE select3()
 > 
 > var members = SELECT name FROM Members
 > var new_members = []
@@ -208,7 +211,7 @@ SELECT 文を使用する際に WHERE 句を使った絞り込みができます
 WHERE 句の条件に合致するレコードのみを取得します。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select4()
 
 var members = SELECT id, name FROM Members WHERE id == 1
 
@@ -233,7 +236,7 @@ WHERE 句の条件に合致するレコードが、1件だけだとわかって�
 通常の `SELECT` は **配列** が戻り値になりますが、 `SELECT ONE` を使用した場合は **Object** が返り値となります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select5()
 
 var member = SELECT ONE id, name FROM Members WHERE id == 1
 
@@ -253,7 +256,7 @@ return member
 なお、該当するレコードが複数件存在する場合はエラーとなます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select6()
 
 var member = SELECT ONE id, name FROM Members WHERE name == "Yamada"
 
@@ -271,7 +274,7 @@ com.accessg2.ag2rs.data.duplicate.object.found: More than one instance of type: 
 また、該当するレコードが1件も存在しない場合は `null` が返り値となります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select7()
 
 var member = SELECT ONE id, name FROM Members WHERE id == 2
 
@@ -289,7 +292,7 @@ null
 その場合は `SELECT EXACTLY ONE` を使用することでレコードが存在しない場合にエラーを発生させることができます。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE select8()
 
 var member = SELECT EXACTLY ONE id, name FROM Members WHERE id == 2
 
@@ -317,7 +320,7 @@ Members Type に以下のレコードが追加されます。
 |5|Noah|50|
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE insert1()
 
 var member = {
     id: 5,
@@ -345,9 +348,9 @@ INSERT Members(member)
 なお、上記の INSERT 文は次のように書くこともできます。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE insert2()
 
-INSERT Members(id: 5, name: "Sato", age: 50)
+INSERT Members(id: 6, name: "Sato", age: 50)
 ```
 
 今回の Members Type では `age` プロパティは必須項目ではありません。  
@@ -355,10 +358,10 @@ INSERT Members(id: 5, name: "Sato", age: 50)
 必須項目を抜いたり、ユニーク設定をしている項目で既存レコードと重複がある場合はエラーになります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE insert3()
 
 var member = {
-    id: 6,
+    id: 7,
     name: "Nakamura"
 }
 INSERT Members(member)
@@ -368,7 +371,7 @@ INSERT Members(member)
 
 ```JavaScript
 {
-    "id": 6,
+    "id": 7,
     "name": "Nakamura",
     "ars_namespace": "VAIL",
     "ars_version": 1,
@@ -390,9 +393,9 @@ Members Type の更新されるレコード
 |6|Nakamura|60|
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE update1()
 
-UPDATE Members(age: 60) WHERE id == 6
+UPDATE Members(age: 60) WHERE id == 7
 ```
 
 結果
@@ -408,7 +411,7 @@ UPDATE Members(age: 60) WHERE id == 6
 UPDATE 文は WHERE 句が必須ですが、 INSERT 文のように更新するプロパティを Object で記述することもできます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE update2()
 
 var member = {
     name: "Taro Yamada",
@@ -443,7 +446,7 @@ Membets Type に追加されるレコード
 |10|Kaneko|80|
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE upsert1()
 
 var member = {
     id: 10,
@@ -476,7 +479,7 @@ Membets Type の更新されるレコード
 |1|Yamada|25|
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE upsert2()
 
 var member = {
     id: 1,
@@ -506,7 +509,7 @@ UPSERT 文で使用する Object には `ナチュラルキーに設定された
 INSERT 、 UPDATE のように次のように記述することもできます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE upsert3()
 
 UPSERT Members(id: 1, age: 28)
 ```
@@ -539,7 +542,7 @@ Members Type から削除されるレコード
 |5|Sato|50|
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE delete1()
 
 DELETE Members WHERE id == 5
 ```
@@ -559,7 +562,7 @@ DELETE Members WHERE id == 5
 通常の **INSERT 文** と同様に記述し、値を配列で渡します。
 
 ```javaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE bulk1()
 
 var members = [
     {
@@ -599,7 +602,7 @@ INSERT Members(members)
 通常の **UPSERT 文** と同様に記述し、値を配列で渡します。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE bulk2()
 
 var members = [
     {
@@ -635,3 +638,7 @@ UPSERT Members(members)
     "_id": "64d2080a6da9080881f0c97a"
 }
 ```
+
+## 実装サンプル
+
+- [VAIL 入門（Type）の実装サンプル（Vantiq 1.37）](./data/vail_type_1.37.zip)
