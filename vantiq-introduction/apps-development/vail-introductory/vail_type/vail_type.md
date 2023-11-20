@@ -16,12 +16,17 @@
     - [3. WHEREによる絞り込み](#3-whereによる絞り込み)
     - [4. 該当するレコードが1件のみと予めわかっている場合](#4-該当するレコードが1件のみと予めわかっている場合)
   - [INSERT (追加)](#insert-追加)
+    - [1. レコードの追加](#1-レコードの追加)
   - [UPDATE (更新)](#update-更新)
+    - [1. レコードの更新](#1-レコードの更新)
   - [UPSERT (既存レコードがない場合はINSERT、既存がある場合はUPDATE)](#upsert-既存レコードがない場合はinsert既存がある場合はupdate)
+    - [1. レコードの追加](#1-レコードの追加-1)
+    - [2. レコードの更新](#2-レコードの更新)
   - [DELETE (削除)](#delete-削除)
+    - [1. レコードの削除](#1-レコードの削除)
   - [Bulk INSERT (一括追加), Bulk UPSERT (一括追加/更新)](#bulk-insert-一括追加-bulk-upsert-一括追加更新)
-    - [Bulk INSERT (一括追加)](#bulk-insert-一括追加)
-    - [Bulk UPSERT (一括追加/更新)](#bulk-upsert-一括追加更新)
+    - [1. Bulk INSERT (一括追加)](#1-bulk-insert-一括追加)
+    - [2. Bulk UPSERT (一括追加/更新)](#2-bulk-upsert-一括追加更新)
   - [実装サンプル](#実装サンプル)
 
 ## データ操作
@@ -82,7 +87,7 @@ return members
 > `var members = SELECT FROM members`  
 > というように `SELECT` と `FROM` の間の `*` を省略することもできます。
 
-結果
+**結果**
 
 ```JavaScript
 [
@@ -144,7 +149,7 @@ var members = SELECT name FROM Members
 return members
 ```
 
-結果
+**結果**
 
 ```JavaScript
 [
@@ -185,7 +190,7 @@ return members
 > return new_members
 > ```
 >
-> 結果
+> **結果**
 >
 > ```JavaScript
 > [
@@ -218,7 +223,7 @@ var members = SELECT id, name FROM Members WHERE id == 1
 return members
 ```
 
-結果
+**結果**
 
 ```JavaScript
 [
@@ -243,7 +248,7 @@ var member = SELECT ONE id, name FROM Members WHERE id == 1
 return member
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -253,7 +258,9 @@ return member
 }
 ```
 
-なお、該当するレコードが複数件存在する場合はエラーとなます。  
+#### エラーになる場合
+
+該当するレコードが複数件存在する場合はエラーとなます。  
 
 ```JavaScript
 PROCEDURE select6()
@@ -263,7 +270,7 @@ var member = SELECT ONE id, name FROM Members WHERE name == "Yamada"
 return member
 ```
 
-Error
+**Error**
 
 ```Error
 HTTP Status 400 () （WHILE executing Procedure 'VailSampleProcedure'）:
@@ -271,7 +278,9 @@ HTTP Status 400 () （WHILE executing Procedure 'VailSampleProcedure'）:
 com.accessg2.ag2rs.data.duplicate.object.found: More than one instance of type: Members__VAIL with qual: {name=Yamada} was found.
 ```
 
-また、該当するレコードが1件も存在しない場合は `null` が返り値となります。  
+#### Null になる場合
+
+該当するレコードが1件も存在しない場合は `null` が返り値となります。  
 
 ```JavaScript
 PROCEDURE select7()
@@ -281,11 +290,13 @@ var member = SELECT ONE id, name FROM Members WHERE id == 2
 return member
 ```
 
-結果
+**結果**
 
 ```JavaScript
 null
 ```
+
+#### 明示的にエラーを発生させたい場合
 
 該当する必須の関連データが存在しない場合 `null` を返すのではなく明示的にエラーにしたい場合があります。（例:デバイスから送信されたイベントにセンサーのマスタデータを紐付けたい場合など）
 
@@ -299,7 +310,7 @@ var member = SELECT EXACTLY ONE id, name FROM Members WHERE id == 2
 return member
 ```
 
-Error
+**Error**
 
 ```Error
 HTTP Status 400 () （WHILE executing Procedure 'VailSampleProcedure'）:
@@ -312,6 +323,8 @@ io.vantiq.resource.not.found: The requested instance ('{id=2}') of the Members r
 ## INSERT (追加)
 
 ![insert](./imgs/insert.gif)
+
+### 1. レコードの追加
 
 Members Type に以下のレコードが追加されます。  
 
@@ -330,7 +343,7 @@ var member = {
 INSERT Members(member)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -353,6 +366,8 @@ PROCEDURE insert2()
 INSERT Members(id: 6, name: "Sato", age: 50)
 ```
 
+#### 必須プロパティについて
+
 今回の Members Type では `age` プロパティは必須項目ではありません。  
 そのため、以下のように実行しても処理は成功します。  
 必須項目を抜いたり、ユニーク設定をしている項目で既存レコードと重複がある場合はエラーになります。  
@@ -367,7 +382,7 @@ var member = {
 INSERT Members(member)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -385,6 +400,8 @@ INSERT Members(member)
 
 ![update](./imgs/update.gif)
 
+### 1. レコードの更新
+
 WHERE句の条件に合致するレコードを全て更新します。  
 
 Members Type の更新されるレコード
@@ -398,7 +415,7 @@ PROCEDURE update1()
 UPDATE Members(age: 60) WHERE id == 7
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -407,6 +424,8 @@ UPDATE Members(age: 60) WHERE id == 7
     "ars_modifiedBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
 }
 ```
+
+#### Object 表記の場合
 
 UPDATE 文は WHERE 句が必須ですが、 INSERT 文のように更新するプロパティを Object で記述することもできます。  
 
@@ -420,7 +439,7 @@ var member = {
 UPDATE Members(member) WHERE id == 4
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -434,6 +453,8 @@ UPDATE Members(member) WHERE id == 4
 ## UPSERT (既存レコードがない場合はINSERT、既存がある場合はUPDATE)
 
 ![upsert](./imgs/upsert.gif)
+
+### 1. レコードの追加
 
 Natural Key（ナチュラルキー）を基準として（今回の場合は `id`）、既存レコードがない場合は INSERT され、ある場合は UPDATE されます。  
 ナチュラルキーが設定されていない Type に対して UPSERT は使用できません。
@@ -456,7 +477,7 @@ var member = {
 UPSERT Members(member)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -470,6 +491,8 @@ UPSERT Members(member)
     "_id": "64d2041497788056d60768d6"
 }
 ```
+
+### 2. レコードの更新
 
 `id 1` のように既にレコードが存在する場合は UPDATE されます。  
 
@@ -488,7 +511,7 @@ var member = {
 UPSERT Members(member)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -506,6 +529,8 @@ UPSERT Members(member)
 
 UPSERT 文で使用する Object には `ナチュラルキーに設定されたプロパティ` と `更新したい全てのプロパティ` が必要です。  
 
+#### 省略表記の場合
+
 INSERT 、 UPDATE のように次のように記述することもできます。  
 
 ```JavaScript
@@ -514,7 +539,7 @@ PROCEDURE upsert3()
 UPSERT Members(id: 1, age: 28)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -534,6 +559,8 @@ UPSERT Members(id: 1, age: 28)
 
 ![delete](./imgs/delete.gif)
 
+### 1. レコードの削除
+
 WHERE句の条件に合致するレコードを全て削除します。
 
 Members Type から削除されるレコード
@@ -547,7 +574,7 @@ PROCEDURE delete1()
 DELETE Members WHERE id == 5
 ```
 
-結果
+**結果**
 
 ```JavaScript
 1
@@ -557,7 +584,7 @@ DELETE Members WHERE id == 5
 
 **INSERT** や **UPSERT** では、一括でデータの追加や更新ができる **Bulk INSERT** や **Bulk UPSERT** が利用できます。  
 
-### Bulk INSERT (一括追加)
+### 1. Bulk INSERT (一括追加)
 
 通常の **INSERT 文** と同様に記述し、値を配列で渡します。
 
@@ -582,7 +609,7 @@ var members = [
 INSERT Members(members)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
@@ -597,7 +624,7 @@ INSERT Members(members)
 }
 ```
 
-### Bulk UPSERT (一括追加/更新)
+### 2. Bulk UPSERT (一括追加/更新)
 
 通常の **UPSERT 文** と同様に記述し、値を配列で渡します。
 
@@ -622,7 +649,7 @@ var members = [
 UPSERT Members(members)
 ```
 
-結果
+**結果**
 
 ```JavaScript
 {
