@@ -164,7 +164,7 @@ return response
 
 ### POST リクエスト（SELECT 文）
 
-POST したい場合は SELECT 文と PUBLISH 文の両方を使用できます。  
+POST したい場合は SELECT 文と PUBLISH 文のいずれかを使用できます。  
 
 SELECT 文を使用する場合、デフォルトのメソットは `GET` になります。  
 POST をしたい場合は `WITH` 句を使用してメソッドに POST を設定します。  

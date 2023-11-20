@@ -428,7 +428,8 @@ UPDATE Members(age: 60) WHERE id == 7
 
 #### Object 表記の場合
 
-UPDATE 文は WHERE 句が必須ですが、 INSERT 文のように更新するプロパティを Object で記述することもできます。  
+INSERT 文のように更新するプロパティを Object で記述することもできます。  
+なお、UPDATE 文は WHERE 句が必須になります。  
 
 ```JavaScript
 PROCEDURE update2()
@@ -460,7 +461,7 @@ UPDATE Members(member) WHERE id == 4
 Natural Key（ナチュラルキー）を基準として（今回の場合は `id`）、既存レコードがない場合は INSERT され、ある場合は UPDATE されます。  
 ナチュラルキーが設定されていない Type に対して UPSERT は使用できません。
 
-`id` が `10` のレコードが存在しない場合に次のVAILを実行するとINSERTされます。
+`id` が `10` のレコードが存在しない場合に、次の VAIL を実行すると INSERT されます。
 
 Membets Type に追加されるレコード
 |id|name|age|
