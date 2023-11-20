@@ -47,7 +47,7 @@ VAIL を使うにあたって、まずは Procedure を用意します。
 
    ![vail_procedure_create_05.png](./imgs/vail_procedure_create_05.png)
 
-   > [!Note]  
+   > [!Note]
    > **補足**  
    > Procedure が保存されると、画面左側の Project Contents に作成した Procedure が表示されます。
 
