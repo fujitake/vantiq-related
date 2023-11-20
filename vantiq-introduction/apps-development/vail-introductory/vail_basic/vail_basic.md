@@ -429,7 +429,7 @@ return targetAge
 ```
 
 > **Type のサンプル**  
-> サンプルとして用いた Type は [こちら](./data/Vail_Basic_Type.zip) から、ダウンロードできます。  
+> サンプルとして用いた Type は [こちら](./data/vail_basic_type.zip) から、ダウンロードできます。  
 > Project にインポートして利用してください。  
 >
 > Type のインポート方法は [こちら](./../type_import/readme.md) から参照してください。
@@ -506,5 +506,5 @@ return results
 
 ## 実装サンプル
 
-- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.34）](./data/Vail_Basic_1.34.zip)
-- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.37）](./data/Vail_Basic_1.37.zip)
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.34）](./data/vail_basic_1.34.zip)
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.37）](./data/vail_basic_1.37.zip)
