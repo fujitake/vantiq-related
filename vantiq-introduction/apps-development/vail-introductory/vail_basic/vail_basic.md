@@ -47,7 +47,8 @@ VAIL を使うにあたって、まずは Procedure を用意します。
 
    ![vail_procedure_create_05.png](./imgs/vail_procedure_create_05.png)
 
-   > 補足  
+   > [!NOTE]  
+   > **補足**  
    > Procedure が保存されると、画面左側の Project Contents に作成した Procedure が表示されます。
 
 ## Procedure の実行
@@ -67,6 +68,7 @@ VAIL を使うにあたって、まずは Procedure を用意します。
 
    ![vail_procedure_run_03.png](./imgs/vail_procedure_run_03.png)
 
+   > [!TIP]  
    > **補足**  
    > `return` が存在しない場合は、最後に利用された変数の値が出力されます。
 
@@ -93,6 +95,7 @@ PROCEDURE commentOut()
 VAIL では変数の宣言に `var` を用います。  
 また、変数宣言と値の代入を同時に行うこともできます。  
 
+> [!NOTE]  
 > **補足**  
 > JavaScript like ですが `;` は使用しません。
 
@@ -307,6 +310,7 @@ if (a > 11) {
 fuga
 ```
 
+> [!WARNING]  
 > **注意**  
 > VAIL は論理演算子のショートカットを行わないことがあります。  
 > 下記に具体的な例を示します。
@@ -362,6 +366,7 @@ for i in range(0, 5, 1) {
 return a
 ```
 
+> [!NOTE]  
 > **補足**  
 > range 関数： range(from, to, increment)
 
@@ -428,9 +433,12 @@ return targetAge
 23
 ```
 
+> [!NOTE]  
 > **Type のサンプル**  
 > サンプルとして用いた Type は [こちら](./data/Vail_Basic_Type.zip) から、ダウンロードできます。  
 > Project にインポートして利用してください。  
+>
+> Type のインポート方法は [こちら](./../type_import/readme.md) から参照してください。
 
 ## 配列
 
