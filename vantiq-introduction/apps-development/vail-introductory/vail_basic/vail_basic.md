@@ -8,24 +8,38 @@ Vantiq アプリケーション開発時に使用する独自言語である `VA
 
 - [VAIL 入門（基礎）](#vail-入門基礎)
   - [目次](#目次)
-  - [Procedure の作成](#procedure-の作成)
-  - [Procedure の実行](#procedure-の実行)
+  - [Procedure の作成と実行方法](#procedure-の作成と実行方法)
+    - [Procedure の作成](#procedure-の作成)
+    - [Procedure の実行](#procedure-の実行)
   - [コメントアウト](#コメントアウト)
+    - [コメントアウト](#コメントアウト-1)
   - [変数](#変数)
+    - [変数宣言と初期化](#変数宣言と初期化)
   - [データ型](#データ型)
+    - [データ型の一覧](#データ型の一覧)
   - [演算子](#演算子)
+    - [演算子の一覧](#演算子の一覧)
   - [比較](#比較)
-  - [if文](#if文)
-  - [for文](#for文)
+    - [比較演算子の一覧](#比較演算子の一覧)
+  - [条件分岐](#条件分岐)
+    - [括弧なしの if 文](#括弧なしの-if-文)
+    - [括弧ありの if 文](#括弧ありの-if-文)
+  - [繰り返し処理](#繰り返し処理)
+    - [for 文](#for-文)
     - [UNTIL](#until)
     - [Type](#type)
   - [配列](#配列)
+    - [配列](#配列-1)
+  - [例外処理](#例外処理)
   - [Try catch](#try-catch)
   - [実装サンプル](#実装サンプル)
 
-## Procedure の作成
+## Procedure の作成と実行方法
 
-VAIL を使うにあたって、まずは Procedure を用意します。  
+VAIL を使うにあたり、 Procedure が必要になります。  
+ここでは Procedure の作成方法と実行方法について解説します。  
+
+### Procedure の作成
 
 1. 任意の Namespace に 任意の名前で Project を作成します。  
 
@@ -50,9 +64,7 @@ VAIL を使うにあたって、まずは Procedure を用意します。
    > **補足**  
    > Procedure が保存されると、画面左側の Project Contents に作成した Procedure が表示されます。
 
-## Procedure の実行
-
-作成した Procedure の実行方法について解説します。  
+### Procedure の実行
 
 1. Procedure ペインの左上の `実行ボタン` をクリックします。  
 
@@ -73,6 +85,8 @@ VAIL を使うにあたって、まずは Procedure を用意します。
 ## コメントアウト
 
 他の言語と同様に VAIL でもコメントアウトを記述できます。  
+
+### コメントアウト
 
 ```JavaScript
 PROCEDURE commentOut()
@@ -96,6 +110,8 @@ VAIL では変数の宣言に `var` を用います。
 > **補足**  
 > JavaScript like ですが `;` は使用しません。
 
+### 変数宣言と初期化
+
 ```JavaScript
 PROCEDURE declareVariable()
 
@@ -106,6 +122,8 @@ var b = 0
 ## データ型
 
 VAIL では下記のデータ型が利用できます。  
+
+### データ型の一覧
 
 ```JavaScript
 PROCEDURE vailTypes()
@@ -140,6 +158,8 @@ var e = {
 ## 演算子
 
 VAIL では下記の演算子が利用できます。  
+
+### 演算子の一覧
 
 ```JavaScript
 PROCEDURE binaryOperator()
@@ -201,6 +221,8 @@ log.info("b: " + b)
 ## 比較
 
 VAIL では下記の比較演算子が利用できます。  
+
+### 比較演算子の一覧
 
 ```JavaScript
 PROCEDURE logicalOperator()
@@ -270,12 +292,12 @@ log.info("l: " + l)
 
 </details>
 
-## if文
+## 条件分岐
 
 VAIL での if 文は下記のとおりです。  
 なお、条件部分は括弧付き、括弧なしのどちらでも動作します。  
 
-括弧なし
+### 括弧なしの if 文
 
 ```JavaScript
 PROCEDURE flowControlIf1()
@@ -288,7 +310,13 @@ if a > 11 {
 }
 ```
 
-括弧あり
+**結果**
+
+```JavaScript
+fuga
+```
+
+### 括弧ありの if 文
 
 ```JavaScript
 PROCEDURE flowControlIf2()
@@ -301,7 +329,7 @@ if (a > 11) {
 }
 ```
 
-結果
+**結果**
 
 ```JavaScript
 fuga
@@ -346,10 +374,12 @@ fuga
 >
 > 参照: https://dev.vantiq.co.jp/docs/system/rules/index.html#logical-operators
 
-## for文
+## 繰り返し処理
 
 VAIL での for 文は Python の for 文と似ています。  
 なお、 if 文と同様に条件部分は括弧付き、括弧なしのどちらでも動作します。 
+
+### for 文
 
 ```JavaScript
 PROCEDURE iterationFor()
@@ -365,7 +395,7 @@ return a
 > **補足**  
 > range 関数： range(from, to, increment)
 
-結果
+**結果**
 
 ```JavaScript
 32
@@ -373,7 +403,7 @@ return a
 
 ### UNTIL
 
-`UNTIL`を使うと条件に一致した時点でループから抜けます。  
+`UNTIL` を使うと条件に一致した時点でループから抜けます。  
 
 ```JavaScript
 PROCEDURE iterationForUntil()
@@ -386,7 +416,7 @@ for i in range(0, 5, 1) UNTIL i == 2 {
 return a
 ```
 
-結果
+**結果**
 
 ```JavaScript
 8
@@ -422,7 +452,7 @@ for member in SELECT FROM Members {
 return targetAge
 ```
 
-結果
+**結果**
 
 ```JavaScript
 23
@@ -438,6 +468,8 @@ return targetAge
 
 VAIL でも配列が利用できます。  
 
+### 配列
+
 ```JavaScript
 PROCEDURE vailArray()
 
@@ -449,7 +481,7 @@ myArray[10] = "Banana"
 return myArray
 ```
 
-結果
+**結果**
 
 ```JavaScript
 [
@@ -467,9 +499,11 @@ return myArray
 ]
 ```
 
-## Try catch
+## 例外処理
 
 VAIL では例外処理も利用できます。
+
+## Try catch
 
 ```JavaScript
 PROCEDURE flowControlTry()
@@ -495,7 +529,7 @@ return results
 
 上記のコードはエラーが発生するため、 `catch` 、 `finally` 内のソースコードのみが実行されます。
 
-結果
+**結果**
 
 ```JavaScript
 [
