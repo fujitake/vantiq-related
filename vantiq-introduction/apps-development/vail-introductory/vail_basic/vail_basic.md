@@ -1,6 +1,6 @@
 # VAIL 入門（基礎）
 
-Vantiq アプリケーション開発時に使用する独自言語である `VAIL` の基本についての解説です。
+Vantiq アプリケーション開発時に使用する独自言語である **VAIL** の基本についての解説です。
 
 詳細事項に関しては :globe_with_meridians:[リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html) をご参照ください。
 
