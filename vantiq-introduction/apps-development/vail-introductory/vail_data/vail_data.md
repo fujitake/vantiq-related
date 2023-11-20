@@ -18,6 +18,7 @@
     - [注意点](#注意点)
   - [備考](#備考)
     - [Source を変数に置き換える場合](#source-を変数に置き換える場合)
+  - [実装サンプル](#実装サンプル)
 
 ## データ送信・取得
 
@@ -51,8 +52,10 @@ PUBLISH 文 と SELECT 文を使用することができます。
 |:---|:---|
 |Server URI|https://vantiq.onrender.com|
 
+> **補足**  
 > 上記の API は Python FastAPI で作成した API サンプルになります。  
 > [Render](https://render.com/) という外部サービスで動作しています。  
+> なお、サンプル API のコードは [こちら](./data/VantiqApiTestTools.zip) から確認いただけます。
 
 ### GET
 
@@ -60,7 +63,7 @@ HTTP GET の最もシンプルな例は、次の記述になります。
 この例では `response` に GET した内容が入ります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE get1()
 
 var response = SELECT FROM SOURCE VantiqRender
 return response
@@ -88,7 +91,7 @@ return response
 つまり Source に `https://vantiq.onrender.com` と設定されている場合は `https://vantiq.onrender.com/horoscope` となります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE get2()
 
 var path = "/horoscope"
 var response = SELECT FROM SOURCE VantiqRender WITH path = path
@@ -106,7 +109,7 @@ return response
 次に `query` はクエリパラメータを設定してみます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE get3()
 
 var path = "/horoscope"
 var query = {
@@ -127,7 +130,7 @@ return response
 ヘッダーを設定する場合は、 `headers` を用います。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE get4()
 
 var path = "/auth-area"
 var headers = {
@@ -155,7 +158,7 @@ POST をしたい場合は `WITH` 句を使用してメソッドに POST を設�
 また POST したい内容も設定します。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE post1()
 
 var data = {
     id: 1,
@@ -182,7 +185,7 @@ PUBLISH 文を使用する場合はデフォルトで POST になります。
 従って、 body 以外の追加設定は必要ありません。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE post2()
 
 var data = {
     id: 1,
@@ -202,7 +205,7 @@ WITH 句とは記述方法が異なり、 object 形式を使用します。
 USING 句を使用せず、 body と合わせて1つの Object で記述することもできます。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE post3()
 
 var data = {
     id: 1,
@@ -224,7 +227,7 @@ true
 USING 句を使わない場合は次のようになります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE post4()
 
 var data = {
     id: 1,
@@ -281,7 +284,7 @@ MQTT や AMQP 、 Kafka などのブローカーにメッセージを PUBLISH �
 AMQP や Kafka の場合でもほとんど同じ記述になります。  
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE mqtt1()
 
 var data = {
     id: 1,
@@ -325,7 +328,7 @@ Source を変数に置き換える場合は、下記のように変数名に `@`
 これは、 SELECT 文でも PUBLISH 文でも利用できます。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure()
+PROCEDURE sourceName1()
 
 var sourceName = "VantiqRender"
 var response = SELECT FROM SOURCE @sourceName
@@ -335,10 +338,14 @@ return response
 Procedure で引数を受け取る場合は下記のようになります。
 
 ```JavaScript
-PROCEDURE VailSampleProcedure(sourceName String)
+PROCEDURE sourceName2(sourceName String)
 
 var response = SELECT FROM SOURCE @sourceName
 return response
 ```
 
 :globe_with_meridians: [VAIL Reference Guide ： Variable References](https://dev.vantiq.com/docs/system/rules/index.html#variable-references)
+
+## 実装サンプル
+
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.37）](./data/vail_data_1.37.zip)
