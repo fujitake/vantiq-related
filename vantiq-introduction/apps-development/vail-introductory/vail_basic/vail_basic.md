@@ -9,6 +9,7 @@ Vantiq アプリケーション開発時に使用する独自言語である **V
 - [VAIL 入門（基礎）](#vail-入門基礎)
   - [目次](#目次)
   - [Procedure の作成と実行方法](#procedure-の作成と実行方法)
+    - [Project の保存](#project-の保存)
     - [Procedure の作成](#procedure-の作成)
     - [Procedure の実行](#procedure-の実行)
   - [コメントアウト](#コメントアウト)
@@ -39,11 +40,13 @@ Vantiq アプリケーション開発時に使用する独自言語である **V
 VAIL を使うにあたり、 Procedure が必要になります。  
 ここでは Procedure の作成方法と実行方法について解説します。  
 
-### Procedure の作成
+### Project の保存
 
 1. 任意の Namespace に 任意の名前で Project を作成します。  
 
    ![vail_procedure_create_01.png](./imgs/vail_procedure_create_01.png)
+
+### Procedure の作成
 
 1. ナビゲーションバーから `追加` → `Advanced` → `Procedure...` をクリックします。  
 
