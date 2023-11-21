@@ -37,9 +37,9 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
-|◯|[ボックスソーター（入門編・REST API）](./apps-development/apps-boxsorter/boxsorter-beginner/rest-api/readme.md)|なし|
-|◯|[ボックスソーター（入門編・Transformation）](./apps-development/apps-boxsorter/boxsorter-beginner/transform/readme.md)|ボックスソーター（入門編・REST API）|
-|◯|[ボックスソーター（入門編・MQTT）](./apps-development/apps-boxsorter/boxsorter-beginner/mqtt/readme.md)|ボックスソーター（入門編・Transformation）|
+|◯|[ボックスソーター（入門編・REST API）](./apps-development/apps-boxsorter/rest-api/readme.md)|なし|
+|◯|[ボックスソーター（入門編・Transformation）](./apps-development/apps-boxsorter/transform/readme.md)|ボックスソーター（入門編・REST API）|
+|◯|[ボックスソーター（入門編・MQTT）](./apps-development/apps-boxsorter/mqtt/readme.md)|ボックスソーター（入門編・Transformation）|
 |◯|[VAIL 入門（基礎）](./apps-development/vail-introductory/vail_basic/vail_basic.md)|なし|
 
 > **必須の解説**  
