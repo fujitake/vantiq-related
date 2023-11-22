@@ -4,44 +4,7 @@
 
 > **注意**  
 > ボックスソーター（入門編・MQTT）を実施していない場合は、先にそちらを実施してください。  
-> - [ボックスソーター（入門編・MQTT）](/vantiq-introduction/apps-development/apps-boxsorter/boxsorter-beginner/mqtt/readme.md)
-
-## ボックスソーターの全体のイメージ
-
-<img src="./imgs/overview.png" width="800">
-
-1. バーコードリーダーで荷物のバーコードを読み取る。
-1. 読み取った結果を MQTTブローカーに送信する。
-1. Vantiq は MQTTブローカーから読み取り結果を取得する。
-1. Vantiq はその結果を元に仕分け処理を行う。
-1. Vantiq は仕分け指示を MQTTブローカーに送信する。
-1. 制御システムは仕分け指示を MQTTブローカーから取得する。
-1. 制御システムは仕分け指示に従ってソーターを制御する。
-
-:globe_with_meridians: [実物のイメージはこちら](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
-
-ワークショップではVantiqの担当部分である No.3〜5 を実装します。
-> No.1〜2 は、 Google Colaboratory を利用し、 MQTTブローカーに読み取り結果のサンプル情報を送信することで代用します。  
-> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/jp/colab_basic_knowledge.md) で解説しています。
-
-## Vantiq で利用するリソースなどの解説
-
-Vantiq リソースや各用語について解説します。
-
-### MQTT
-
-オーバーヘッドの多い **HTTP** プロトコルに変わり、通信量がより少ない **MQTT** プロトコルを利用してデータの送受信を行います。  
-また、通信プロトコルの変更に伴い **Topic** ではなく **Soruce** を利用してデータの送受信を行います。
-
-詳細は下記を御覧ください。  
-[MQTT について](./about_mqtt.pdf)
-
-### Source
-
-![resource_source.png](./imgs/resource_source.png)
-
-Vantiq では、外部システムとの接続ポイントとして、 Source というリソースが用意されています。  
-Source を利用することで、様々な通信プロトコルを用いたデータの送受信が可能となります。
+> - [ボックスソーター（入門編・MQTT）](./../mqtt/readme.md)
 
 ## Vantiq で実装するアプリケーションの概要
 
