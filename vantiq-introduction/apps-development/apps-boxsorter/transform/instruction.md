@@ -123,7 +123,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 画面左側の **Project Contents** から `/BoxInfoApi` Topic を開きます。
    
-   ![project-contents.png](./imgs/project-contents_topic.png)
+   ![project-contents_topic.png](./imgs/project-contents_topic.png)
 
 ### 3-2. Topic のデータ受信テスト
 
