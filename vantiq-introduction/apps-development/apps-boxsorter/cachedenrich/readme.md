@@ -59,11 +59,11 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ### 商品マスタデータ
 
-- [sorting_condition.csv](./../../data/sorting_condition.csv)
+- [sorting_condition.csv](./../data/sorting_condition.csv)
 
 ### プロジェクトファイル
 
-- [ボックスソーター（入門編・Transformation）の実装サンプル（Vantiq 1.37）](./../../data/box_sorter_beginner_transform_1.37.zip)
+- [ボックスソーター（入門編・Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
 
 ### ドキュメント
 

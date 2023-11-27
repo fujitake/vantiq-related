@@ -471,6 +471,6 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（入門編・MQTT）の実装サンプル（Vantiq 1.37）](./../../data/box_sorter_beginner_mqtt_1.37.zip)
+- [ボックスソーター（入門編・MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
 
 以上
