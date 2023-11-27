@@ -10,7 +10,7 @@ Vantiq を利用するための事前準備の方法を解説しています。
 - [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/root_account.md)
 - [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/dev_account.md)
 
-## アプリケーション開発（入門編）
+## アプリケーション開発（初級編）
 
 Vantiq アプリケーションの開発方法をワークショップ形式で解説しています。  
 
@@ -37,9 +37,9 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
-|◯|[ボックスソーター（入門編・REST API）](./apps-development/apps-boxsorter/rest-api/readme.md)|なし|
-|◯|[ボックスソーター（入門編・Transformation）](./apps-development/apps-boxsorter/transform/readme.md)|ボックスソーター（入門編・REST API）|
-|◯|[ボックスソーター（入門編・MQTT）](./apps-development/apps-boxsorter/mqtt/readme.md)|ボックスソーター（入門編・Transformation）|
+|◯|[ボックスソーター（初級編・REST API）](./apps-development/apps-boxsorter/rest-api/readme.md)|なし|
+|◯|[ボックスソーター（初級編・Transformation）](./apps-development/apps-boxsorter/transform/readme.md)|ボックスソーター（初級編・REST API）|
+|◯|[ボックスソーター（初級編・MQTT）](./apps-development/apps-boxsorter/mqtt/readme.md)|ボックスソーター（初級編・Transformation）|
 |◯|[VAIL 入門（基礎）](./apps-development/vail-introductory/vail_basic/vail_basic.md)|なし|
 
 > **必須の解説**  
