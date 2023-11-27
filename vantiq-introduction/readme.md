@@ -67,7 +67,7 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
-|◯|[ボックスソーター（中級編・CashedEnrich）](./apps-development/apps-boxsorter/cachedenrich/readme.md)|ボックスソーター（初級編・MQTT）|
+|◯|[ボックスソーター（中級編・CachedEnrich）](./apps-development/apps-boxsorter/cachedenrich/readme.md)|ボックスソーター（初級編・MQTT）|
 |✕|[ボックスソーター（中級編・MQTTX）](./apps-development/apps-boxsorter/mqttx/readme.md)|ボックスソーター（初級編・MQTT）|
 |◯|[ボックスソーター（中級編・SaveToType)](./apps-development/apps-boxsorter/savetype/readme.md)|ボックスソーター（初級編・MQTT）|
 |◯|[VAIL 入門（Type の操作）](./apps-development/vail-introductory/vail_type/vail_type.md)|なし|
