@@ -276,7 +276,13 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
    ![app_transform_mqtt_01.png](./imgs/app_transform_mqtt_01.png)
 
-1. `Transformation` タスクをクリックし、 `Configuration` の `クリックして編集` を開きます。  
+1. `Transformation` タスクをクリックし、 `タスク名` の設定を行います。
+
+   |項目|設定値|
+   |-|-|
+   |Name|TransformForMqtt|
+
+1. `Configuration` の `クリックして編集` を開きます。  
    `transformation (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックします。
 
    |Outbound Property|Transformation Expression|
