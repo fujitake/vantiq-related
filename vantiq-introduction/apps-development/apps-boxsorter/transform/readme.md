@@ -1,10 +1,10 @@
-# ボックスソーター（入門編・Transformation）
+# ボックスソーター（初級編・Transformation）
 
 ボックスソーターアプリを改修して、データを整形する方法を体験します。  
 
 > **注意**  
-> ボックスソーター（入門編・REST API）を実施していない場合は、先にそちらを実施してください。  
-> - [ボックスソーター（入門編・REST API）](./../rest-api/readme.md)
+> ボックスソーター（初級編・REST API）を実施していない場合は、先にそちらを実施してください。  
+> - [ボックスソーター（初級編・REST API）](./../rest-api/readme.md)
 
 ## Vantiq で実装するアプリケーションの概要
 
@@ -34,12 +34,12 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（入門編・REST API）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.ipynb)
-  - [BoxSorterDataGenerator（入門編・REST API・複数送信用）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api_multi.ipynb)
+  - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
+  - [BoxSorterDataGenerator（初級編・REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（入門編・REST API）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.py)
-  - [BoxSorterDataGenerator（入門編・REST API・複数送信用）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api_multi.py)
+  - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.py)
+  - [BoxSorterDataGenerator（初級編・REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.py)
 
 ### 商品マスタデータ
 
@@ -47,8 +47,8 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（入門編・REST API）の実装サンプル（Vantiq 1.34）](./../data/box_sorter_restapi_1.34.zip)
-- [ボックスソーター（入門編・REST API）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_restapi_1.37.zip)
+- [ボックスソーター（初級編・REST API）の実装サンプル（Vantiq 1.34）](./../data/box_sorter_restapi_1.34.zip)
+- [ボックスソーター（初級編・REST API）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_restapi_1.37.zip)
 
 ## ワークショップの手順
 

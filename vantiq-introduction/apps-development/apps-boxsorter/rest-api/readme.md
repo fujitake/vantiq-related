@@ -1,4 +1,4 @@
-# ボックスソーター（入門編・REST API）
+# ボックスソーター（初級編・REST API）
 
 読み取った送り先コードで荷物を仕分けするアプリケーションの開発を体験します。  
 
@@ -23,7 +23,7 @@
 
 ワークショップでは Vantiq の担当部分である No.3〜4 を実装します。
 > No.1〜2 は、 Google Colaboratory を利用し、 TOPIC に読み取り結果のサンプル情報を送信することで代用します。  
-> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/jp/colab_basic_knowledge.md) で解説しています。
+> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/colab_basic_knowledge.md) で解説しています。
 
 ## Vantiq で利用するリソースなどの解説
 
@@ -107,12 +107,12 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（入門編・REST API）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.ipynb)
-  - [BoxSorterDataGenerator（入門編・REST API・複数送信用）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api_multi.ipynb)
+  - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
+  - [BoxSorterDataGenerator（初級編・REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（入門編・REST API）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api.py)
-  - [BoxSorterDataGenerator（入門編・REST API・複数送信用）](/vantiq-google-colab/docs/jp/box-sorter_data-generator_beginner_rest-api_multi.py)
+  - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.py)
+  - [BoxSorterDataGenerator（初級編・REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.py)
 
 ### 商品マスタデータ
 
