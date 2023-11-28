@@ -55,7 +55,7 @@
 
 ワークショップではVantiqの担当部分である No.3〜5 を実装します。
 > No.1〜2 は、 Google Colaboratory を利用し、 MQTTブローカーに読み取り結果のサンプル情報を送信することで代用します。  
-> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/jp/colab_basic_knowledge.md) で解説しています。
+> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/colab_basic_knowledge.md) で解説しています。
 
 ## Vantiq で利用するリソースなどの解説
 
