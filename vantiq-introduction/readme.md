@@ -57,7 +57,6 @@ Vantiq の基本的な扱い方を解説しています。
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
 |-|[荷物仕分けアプリケーション (Standard)](./apps-development/apps-boxsorter/boxsorter-standard/readme.md)|荷物仕分けアプリケーション (Beginner)|
-|-|[荷物仕分けアプリケーション (MQTTX)](./apps-development/apps-boxsorter/boxsorter-mqttx/readme.md)|荷物仕分けアプリケーション (Standard)|
 |-|[荷物仕分けアプリケーション (SaveToType)](./apps-development/apps-boxsorter/boxsorter-savetype/readme.md)|荷物仕分けアプリケーション (Standard)|
 |-|[荷物仕分けアプリケーション (Unwind)](./apps-development/apps-boxsorter/boxsorter-unwind/readme.md)|荷物仕分けアプリケーション (Standard)|
 |-|[荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)|荷物仕分けアプリケーション (Standard)|
@@ -68,15 +67,15 @@ Vantiq の基本的な扱い方を解説しています。
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
 |◯|[ボックスソーター（中級編・CachedEnrich）](./apps-development/apps-boxsorter/cachedenrich/readme.md)|ボックスソーター（初級編・MQTT）|
-
-<!--
 |✕|[ボックスソーター（中級編・MQTTX）](./apps-development/apps-boxsorter/mqttx/readme.md)|ボックスソーター（初級編・MQTT）|
+
+|必須|ワークショップ|前提となるワークショップ|
+|:-:|-|-|
 |◯|[ボックスソーター（中級編・SaveToType)](./apps-development/apps-boxsorter/savetype/readme.md)|ボックスソーター（初級編・MQTT）|
 |◯|[VAIL 入門（Type の操作）](./apps-development/vail-introductory/vail_type/vail_type.md)|なし|
 |◯|[VAIL 入門（外部へのデータ送信）](./apps-development/vail-introductory/vail_data/vail_data.md)|なし|
 |△|[ボックスソーター（初級編・Unwind）](./apps-development/apps-boxsorter/unwind/readme.md)|荷物仕分けアプリケーション (Standard)|
 |◯|[デバッグ方法](./apps-development/debug/readme.md)|なし|
--->
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
