@@ -402,7 +402,7 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 1. 下記のリンクから **サブスクライブアプリ** のページを開きます。
 
-   - [BoxSorterDataSubscriber (Standard)](/vantiq-google-colab/code/box-sorter_data-subscriber_standard.ipynb)
+   - [BoxSorterDataSubscriber（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-subscriber_mqtt.ipynb)
 
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
