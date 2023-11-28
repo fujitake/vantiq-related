@@ -1,26 +1,35 @@
-# 荷物仕分けアプリケーション開発 (MQTTX)
+# ボックスソーター（中級編・MQTTX）
 
 ## 目次
 
-- [荷物仕分けアプリケーション開発 (MQTTX)](#荷物仕分けアプリケーション開発-mqttx)
+- [ボックスソーター（中級編・MQTTX）](#ボックスソーター中級編mqttx)
   - [目次](#目次)
-  - [0. 事前準備](#0-事前準備)
-    - [プロジェクトの準備](#プロジェクトの準備)
-    - [入力用 MQTTブローカーの疎通確認](#入力用-mqttブローカーの疎通確認)
-  - [1. MQTTX からパブリッシュしたメッセージを Source で受け取る](#1-mqttx-からパブリッシュしたメッセージを-source-で受け取る)
-  - [2. Source でサブスクライブした内容をアプリケーションで受け取る](#2-source-でサブスクライブした内容をアプリケーションで受け取る)
-  - [3. 送信結果が正しく仕分けされているか確認する](#3-送信結果が正しく仕分けされているか確認する)
+  - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
+    - [1-1. Namespace の作成](#1-1-namespace-の作成)
+    - [1-2. Project のインポート](#1-2-project-のインポート)
+  - [2. 入力用 MQTTブローカーの疎通確認](#2-入力用-mqttブローカーの疎通確認)
+  - [3. MQTTX からパブリッシュしたメッセージを Source で受け取る](#3-mqttx-からパブリッシュしたメッセージを-source-で受け取る)
+  - [4. Source でサブスクライブした内容をアプリケーションで受け取る](#4-source-でサブスクライブした内容をアプリケーションで受け取る)
+  - [5. 送信結果が正しく仕分けされているか確認する](#5-送信結果が正しく仕分けされているか確認する)
 
-## 0. 事前準備
+## 1. Namespace の作成と Project のインポート
 
-### プロジェクトの準備
+### 1-1. Namespace の作成
 
-荷物仕分けアプリケーション (Standard) のプロジェクトを開きます。  
+アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 
-> **補足**  
-> 荷物仕分けアプリケーション (Standard) のプロジェクトが存在しない場合などは、プロジェクトファイルをインポートしてください。
+詳細は下記をご確認ください。  
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
 
-### 入力用 MQTTブローカーの疎通確認
+### 1-2. Project のインポート
+
+Namespace の切り替えが出来たら、 Project のインポートを行います。  
+**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
+
+詳細は下記を参照してください。  
+[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
+
+## 2. 入力用 MQTTブローカーの疎通確認
 
 入力には以下の MQTTブローカーを使用します。
 
@@ -41,7 +50,7 @@
 
    <img src="./imgs/try-publish.png" width="400">
 
-## 1. MQTTX からパブリッシュしたメッセージを Source で受け取る
+## 3. MQTTX からパブリッシュしたメッセージを Source で受け取る
 
 MQTTX からパブリッシュしたメッセージを Vantiq の Source でサブスクライブできるか確認します。
 
@@ -63,7 +72,7 @@ MQTTX からパブリッシュしたメッセージを Vantiq の Source でサ�
 
          ![sub-test-msg](./imgs/sub-test-msg.png)
 
-## 2. Source でサブスクライブした内容をアプリケーションで受け取る
+## 4. Source でサブスクライブした内容をアプリケーションで受け取る
 
 MQTTX からパブリッシュしたメッセージを App の `EventStream` でも受け取れているか確認します。
 
@@ -72,7 +81,7 @@ MQTTX からパブリッシュしたメッセージを App の `EventStream` で
 1. MQTTX から疎通確認時と同じようにメッセージを送信する
 1. `Subscription:BoxSorter_ReceiveBoxInfo` に MQTTX から送信した内容が表示されることを確認する
 
-## 3. 送信結果が正しく仕分けされているか確認する
+## 5. 送信結果が正しく仕分けされているか確認する
 
 MQTTX で送信先の Topic をサブスクライブしておき、正しく仕分けされるか確認します。
 
