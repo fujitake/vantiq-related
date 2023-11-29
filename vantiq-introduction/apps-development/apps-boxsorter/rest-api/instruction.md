@@ -294,7 +294,7 @@ App Builder を用いて、 App を新規作成します。
    |-|-|
    |Name|AttachCondition|
 
-1. `AttachCondition` タスクをクリックし、 `Configuration` の `クリックして編集` を開き、以下の設定を行いアプリケーションを保存します。
+1. `Configuration` の `クリックして編集` を開き、以下の設定を行いアプリケーションを保存します。
 
    <details>
    <summary>Vantiq Version 1.35 以前の場合</summary>
