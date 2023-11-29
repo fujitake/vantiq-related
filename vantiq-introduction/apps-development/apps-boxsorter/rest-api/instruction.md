@@ -288,7 +288,7 @@ App Builder を用いて、 App を新規作成します。
 
    ![app_enrich_01.gif](./imgs/app_enrich_01.gif)
 
-1. `AttachCondition` タスクをクリックし、タスク名を設定します。
+1. `Enrich` タスクをクリックし、タスク名を設定します。
 
    |項目|設定値|
    |-|-|
