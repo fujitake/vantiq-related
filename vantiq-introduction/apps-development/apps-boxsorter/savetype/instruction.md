@@ -79,6 +79,9 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 設定方法は下記を参照してください。  
 [ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
 
+> **注意点**  
+> データジェネレータの種類が **ボックスソーター（初級編・MQTT）** とは異なるので注意してください。
+
 ## 3. 既存のアプリケーションの動作確認
 
 **Source** の **データの受信テスト** からデータが正しく受信できているか確認します。  
@@ -116,7 +119,7 @@ Google Colaboratory からパブリッシュしたメッセージを確認しま
 
 1. `BoxSorter` App のペインを開きます。
 
-1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクと `Transformation` タスクの間の `矢印` の上にドロップします。  
+1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクと `Transformation` タスクの間の **矢印** の上にドロップします。  
 
    ![box-sorter-app_add_filter-activity.gif](./imgs/box-sorter-app_add_filter-activity.gif)
 
@@ -248,8 +251,7 @@ Google Colaboratory からパブリッシュしたメッセージを確認しま
    |-|-|
    |Name|SaveUnregisteredItem|
 
-1. `Configuration` の `クリックして編集` を開きます。  
-   `condition (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックします。
+1. `Configuration` の `クリックして編集` を開き、以下の内容を入力し、 `OK` をクリックします。
 
    |項目|設定値|
    |-|-|
@@ -316,7 +318,7 @@ event データには `time` というプロパティが存在しています。
 
 1. `BoxSorter` App のペインを開きます。
 
-1. App ペイン左側の `Modifiers` の中から `Transformation` を選択し、 `SaveUnregisteredItem` タスクの間の `矢印` の上にドロップします。
+1. App ペイン左側の `Modifiers` の中から `Transformation` を選択し、 `NotApplicable` タスクと `SaveUnregisteredItem` タスクの間の **矢印** の上にドロップします。
 
    ![app_savetotype_04.png](./imgs/app_savetotype_04.png)
 
@@ -354,7 +356,7 @@ event データには `time` というプロパティが存在しています。
 
    ![type_view_01.png](./imgs/type_view_01.png)
 
-1. 最新の未登録データが登録されていることを確認する
+1. 最新の未登録データが登録されていることを確認します。
 
    ![type_view_02.png](./imgs/type_view_02.png)
 
