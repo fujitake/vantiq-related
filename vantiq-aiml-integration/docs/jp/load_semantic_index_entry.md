@@ -61,7 +61,7 @@ fi
 # 指定されたディレクトリ以下の.mdファイルを取得
 find "$directory" -type f -name "*.md" | while read file; do
     # vantiq コマンドを実行
-    vantiq load semanticindexentries jp.vantiq.SemanticIndexTest "$file"
+    vantiq load semanticindexentries <Semantic Index Name> "$file"
 done
 
 ```
