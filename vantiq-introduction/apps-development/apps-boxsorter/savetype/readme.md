@@ -3,14 +3,14 @@
 ボックスソーターアプリを改修して、 Type にデータを保存する方法について学習します。
 
 今回のセッションでは、 `sorting_condition` Type に登録されていない荷物コードがブローカーから送られてきます。  
-荷物コードが登録されていない荷物を管理するために、新たに Type を作成し、最新のデータを保存します。  
+荷物コードが登録されていない荷物を管理するために、新たに Type を作成し、最新の未登録データを保存します。  
 
 ## Vantiq で実装するアプリケーションの概要
 
 App Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
-![app_boxsorter_cachedenrich.gif](./imgs/vantiq-app.png)
+![boxsorter_savetotype.gif](./imgs/boxsorter_savetotype.gif)
 
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
