@@ -12,7 +12,7 @@ Vantiq R1.37にて実装された新機能 LLM関連機能についての資料�
 
 [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
 
-[Semantic Index へのEntry大量追加方法](./docs/jp/load_semantic_index_entry.md)
+[Semantic Index へのEntry追加方法](./docs/jp/load_semantic_index_entry.md)
 
 ## 画像処理AI
 

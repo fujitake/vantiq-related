@@ -111,6 +111,10 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
 
    ![CreateSemanticIndexEntry_05](../../imgs/LLM_Platform_Support/create_new_entry_06.png)
 
+> **Note**
+> ここでは、IDE上で一つずつSemantic Index Entryを作成していますが、[Semantic Index へのEntry追加方法](./load_semantic_index_entry.md) を参照することで、CLIを使用して一括でSemantic Index Entryを作成することも可能です。
+
+
 ### Vantiqアプリ内での使用
 
 ### Submit Prompt
