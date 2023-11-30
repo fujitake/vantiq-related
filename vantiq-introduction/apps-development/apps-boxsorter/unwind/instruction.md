@@ -1,11 +1,28 @@
 # 荷物仕分けアプリケーション開発 (Unwind)
 
+## 実装の流れ
+
+下記の流れで実装していきます。
+
+1. 【準備】Namespace の作成と Project のインポート、データジェネレータの準備
+1. 【動作確認】既存のアプリケーションの動作確認
+1. 【App Builder】既存のアプリケーションの修正
+1. 【Type】未登録データ保存容の Type の作成
+1. 【App Builder】ボックスソーターアプリの改修
+1. 【動作確認】仕分け結果の確認
+
+> リソース名やタスク名は任意のものに変更しても構いません。
+> 
 ## 目次
 
 - [荷物仕分けアプリケーション開発 (Unwind)](#荷物仕分けアプリケーション開発-unwind)
+  - [実装の流れ](#実装の流れ)
   - [目次](#目次)
-  - [0. 事前準備](#0-事前準備)
-    - [プロジェクトの準備](#プロジェクトの準備)
+  - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
+  - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
+    - [1-1. Namespace の作成](#1-1-namespace-の作成)
+    - [1-2. Project のインポート](#1-2-project-のインポート)
+  - [2. データジェネレータの準備](#2-データジェネレータの準備)
     - [入力用 MQTTブローカーの確認](#入力用-mqttブローカーの確認)
     - [Google Colaboratory の設定](#google-colaboratory-の設定)
     - [MQTT Source の確認](#mqtt-source-の確認)
@@ -16,14 +33,51 @@
   - [追加課題](#追加課題)
   - [実装サンプル](#実装サンプル)
 
-## 0. 事前準備
+## アプリケーションが前提とする受信内容
 
-### プロジェクトの準備
+```json
+[
+    {
+        "code": "14961234567890",
+        "name": "お茶 24本",
+        "time": "2023-11-14 07:58:37"
+    }
+]
+```
 
-荷物仕分けアプリケーション (Standard) のプロジェクトを開きます。  
+## 1. Namespace の作成と Project のインポート
 
-> **補足**  
-> 荷物仕分けアプリケーション (Standard) のプロジェクトが存在しない場合などは、プロジェクトファイルをインポートしてください。
+### 1-1. Namespace の作成
+
+アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
+
+詳細は下記をご確認ください。  
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+
+### 1-2. Project のインポート
+
+Namespace の切り替えが出来たら、 Project のインポートを行います。  
+**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
+
+詳細は下記を参照してください。  
+[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
+
+## 2. データジェネレータの準備
+
+Google Colaboratory を使用して、ダミーデータの生成します。  
+
+**データジェネレータ** は下記のものを利用します。
+
+- [BoxSorterDataGenerator (Unwind)](/vantiq-google-colab/code/box-sorter_data-generator_unwind.ipynb)
+
+設定方法は下記を参照してください。  
+[ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
+
+> **注意点**  
+> データジェネレータの種類が **ボックスソーター（中級編・CachedEnrich）** とは異なるので注意してください。
+
+
+
 
 ### 入力用 MQTTブローカーの確認
 
