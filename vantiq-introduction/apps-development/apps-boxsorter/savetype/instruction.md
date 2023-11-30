@@ -1,221 +1,271 @@
-# 荷物仕分けアプリケーション開発 (SaveToType)
+# ボックスソーター（中級編・SaveToType）
+
+## 実装の流れ
+
+下記の流れで実装していきます。
+
+1. 【準備】Namespace の作成と Project のインポート、データジェネレータの準備
+1. 【動作確認】既存のアプリケーションの動作確認
+1. 【App Builder】既存のアプリケーションの修正
+1. 【Type】未登録データ保存容の Type の作成
+1. 【App Builder】ボックスソーターアプリの改修
+1. 【動作確認】仕分け結果の確認
+
+> リソース名やタスク名は任意のものに変更しても構いません。
 
 ## 目次
 
-- [荷物仕分けアプリケーション開発 (SaveToType)](#荷物仕分けアプリケーション開発-savetotype)
+- [ボックスソーター（中級編・SaveToType）](#ボックスソーター中級編savetotype)
+  - [実装の流れ](#実装の流れ)
   - [目次](#目次)
-  - [0. 事前準備](#0-事前準備)
-    - [プロジェクトの準備](#プロジェクトの準備)
-    - [入力用 MQTTブローカーの確認](#入力用-mqttブローカーの確認)
-    - [Google Colaboratory の設定](#google-colaboratory-の設定)
-    - [MQTT Source の確認](#mqtt-source-の確認)
-  - [1. サブスクライブしたメッセージの確認](#1-サブスクライブしたメッセージの確認)
-  - [2. center\_id エラーの修正](#2-center_id-エラーの修正)
-  - [3. 未登録データの仕分け処理の追加実装](#3-未登録データの仕分け処理の追加実装)
-  - [4. 未登録データ用の Type の作成](#4-未登録データ用の-type-の作成)
-  - [5. 未登録データを Type に保存](#5-未登録データを-type-に保存)
-  - [6. SaveToType Activity で発生したエラーの原因を調べる](#6-savetotype-activity-で発生したエラーの原因を調べる)
-  - [7. SaveToType Activity で発生したエラーを修正する](#7-savetotype-activity-で発生したエラーを修正する)
-  - [8. Type に未登録データが保存されているか確認する](#8-type-に未登録データが保存されているか確認する)
-  - [実装サンプル](#実装サンプル)
+  - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
+  - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
+    - [1-1. Namespace の作成](#1-1-namespace-の作成)
+    - [1-2. Project のインポート](#1-2-project-のインポート)
+  - [2. データジェネレータの準備](#2-データジェネレータの準備)
+  - [3. 既存のアプリケーションの動作確認](#3-既存のアプリケーションの動作確認)
+  - [4. App Builder を用いたボックスソーターアプリの修正](#4-app-builder-を用いたボックスソーターアプリの修正)
+    - [4-1. サブスクライブしたメッセージの確認](#4-1-サブスクライブしたメッセージの確認)
+    - [4-2. center\_id エラーの修正](#4-2-center_id-エラーの修正)
+  - [5. 未登録データ保存用の Type の作成](#5-未登録データ保存用の-type-の作成)
+    - [5-1. Type の新規作成](#5-1-type-の新規作成)
+    - [5-2. Type の設定](#5-2-type-の設定)
+  - [6. App Builder を用いたボックスソーターアプリの改修](#6-app-builder-を用いたボックスソーターアプリの改修)
+    - [6-1. 未登録データの仕分け処理の追加実装](#6-1-未登録データの仕分け処理の追加実装)
+    - [6-2. 未登録データを Type に保存](#6-2-未登録データを-type-に保存)
+    - [6-3. SaveToType Activity で発生したエラーの原因を調べる](#6-3-savetotype-activity-で発生したエラーの原因を調べる)
+    - [6-4. SaveToType Activity で発生したエラーを修正する](#6-4-savetotype-activity-で発生したエラーを修正する)
+  - [7. Type に未登録データが保存されているか確認する](#7-type-に未登録データが保存されているか確認する)
+  - [ワークショップの振り返り](#ワークショップの振り返り)
+  - [参考情報](#参考情報)
+    - [NaturalKey について](#naturalkey-について)
+    - [プロジェクトファイル](#プロジェクトファイル)
 
-## 0. 事前準備
+## アプリケーションが前提とする受信内容
 
-### プロジェクトの準備
+```json
+{
+    "code": "14961234567890",
+    "name": "お茶 24本",
+    "time": "2023-11-14 07:58:37"
+}
+```
 
-荷物仕分けアプリケーション (Standard) のプロジェクトを開きます。  
+## 1. Namespace の作成と Project のインポート
 
-> **補足**  
-> 荷物仕分けアプリケーション (Standard) のプロジェクトが存在しない場合などは、プロジェクトファイルをインポートしてください。
+### 1-1. Namespace の作成
 
-### 入力用 MQTTブローカーの確認
+アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 
-入力には以下の MQTTブローカーを使用します。
+詳細は下記をご確認ください。  
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
 
-|項目|設定値|備考|
-|-|-|-|
-|Server URI|mqtt://public.vantiq.com:1883|-|
-|Topic|/workshop/jp/yourname/boxinfo|`yourname` の箇所に任意の値を入力する ※英数字のみ|
->この MQTTブローカーはワークショップ用のパブリックなブローカーです。認証は不要です。  
->上記以外の MQTTブローカーを利用しても問題ありません。
+### 1-2. Project のインポート
 
-### Google Colaboratory の設定
+Namespace の切り替えが出来たら、 Project のインポートを行います。  
+**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
 
-1. 下記のリンクから **データジェネレータ** のページを開く
+詳細は下記を参照してください。  
+[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
 
-   - [BoxSorterDataGenerator (SaveToType)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_savetype.ipynb)
+## 2. データジェネレータの準備
 
-   > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
+Google Colaboratory を使用して、ダミーデータの生成します。  
 
-1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
+**データジェネレータ** は下記のものを利用します。
 
-   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
+- [BoxSorterDataGenerator (SaveToType)](/vantiq-google-colab/code/box-sorter_data-generator_savetype.ipynb)
 
-1. `# MQTTブローカー設定` に以下の内容を入力する
+設定方法は下記を参照してください。  
+[ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
 
-   |項目|設定値|備考|
-   |-|-|-|
-   |broker|public.vantiq.com|※変更不要です。|
-   |port|1883|※変更不要です。|
-   |topic|/workshop/jp/**yourname**/boxinfo|`yourname` の箇所に任意の値を入力します。（※英数字のみ）|
-   |client_id||※変更不要です。|
-   |username||※変更不要です。|
-   |password||※変更不要です。|
+## 3. 既存のアプリケーションの動作確認
 
-1. 上から順に1つずつ `再生ボタン` を押していく  
-   実行が終わるのを待ってから、次の `再生ボタン` を押してください。  
+**Source** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
-   1. `# ライブラリのインストール`（※初回のみ）
-   1. `# ライブラリのインポート`（※初回のみ）
-   1. `# MQTTブローカー設定`
-   1. `# 送信データ設定`
-   1. `# MQTT Publisher 本体`
+詳細は下記を参照してください。  
+[ボックスソーター（中級編・CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
 
-1. エラーが発生していないことを確認し、 `# MQTT Publisher 本体` の左側の `停止ボタン` を押して、一旦、停止させておく
+## 4. App Builder を用いたボックスソーターアプリの修正
 
-### MQTT Source の確認
+アプリケーションでエラーが発生しているので、まずは既存アプリケーションの修正を行います。
 
-Source の設定を行い、メッセージがサブスクライブできるか確認します。  
-
-1. `BoxInfoMqtt` Source のペインを開く
-
-1. 以下の内容が設定されているか確認をする
-
-   |設定順|項目|設定値|設定箇所|
-   |-|-|-|-|
-   |1|Source Name|BoxInfoMqtt|-|
-   |2|Source Type|MQTT|-|
-   |3|Server URI|mqtt://public.vantiq.com:1883|`Server URI` タブ|
-   |4|Topic|/workshop/jp/yourname/boxinfo <br> ※`yourname` の箇所には疎通確認時に設定した値を使用する|`Topic` タブ|
-
-1. メッセージをサブスクライブできることを確認する
-   1. `BoxInfoMqtt` Source のペインの `データの受信テスト`(Test Data Receipt) をクリックする
-   1. Google Colaboratory の `# MQTT Publisher 本体` を実行し、メッセージを送信する
-   1. `Subscription:BoxInfoMqtt` に Google Colaboratory から送信した内容が表示されることを確認する
-
-      ![sub-test-msg](./imgs/sub-test-msg.png)
-
-## 1. サブスクライブしたメッセージの確認
+### 4-1. サブスクライブしたメッセージの確認
 
 Google Colaboratory からパブリッシュしたメッセージを確認します。  
 
-1. `BoxSorter` App のペインを開く
-1. `AttachCondition` タスクをクリックし、 `タスク Events を表示` をクリックする
-1. メッセージの中から `天然水` を探し、クリックして `タスク Event` を表示する
+1. `BoxSorter` App のペインを開きます。
+
+1. `AttachCondition` タスクをクリックし、 `タスク Events を表示` をクリックします。
+
+1. メッセージの中から `天然水` を探し、クリックして `タスク Event` を表示します。
    
    ![box-sorter-app_transform-for-mqtt.png](./imgs/box-sorter-app_transform-for-mqtt.png)
 
-1. `sorting_condition` を確認する
+1. `sorting_condition` を確認します。
    
    ![box-sorter-app_transform-for-mqtt_task-event.png](./imgs/box-sorter-app_transform-for-mqtt_task-event.png)
 
    > **補足**  
    > `sorting_condition` Type に `天然水` のデータが存在しないため、 CachedEnrich Activity で追加された `sorting_condition` の値は `null` になっています。
 
-## 2. center_id エラーの修正
+### 4-2. center_id エラーの修正
 
 現状のアプリケーションでは、 `sorting_condition` Type に登録されていない荷物コードが存在する場合、センター仕分け用の Filter Activity でエラーが出てしまします。  
 まずはこのエラーを修正します。  
 
-1. `BoxSorter` App のペインを開く
-1. `AttachCondition` タスクと `TransformForMqtt` タスクの間の `矢印` の上に `Filter` Activity を `ドラッグ＆ドロップ` する。  
-   
+1. `BoxSorter` App のペインを開きます。
+
+1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクと `Transformation` タスクの間の `矢印` の上にドロップします。  
+
    ![box-sorter-app_add_filter-activity.gif](./imgs/box-sorter-app_add_filter-activity.gif)
 
-   1. 追加した `Filter` Activity に下記の内容を設定し、保存する  
+1. `Filter` タスクをクリックし、 `タスク名` の設定を行います。
 
-      `'Filter' Activity`
-      |項目|設定値|
-      |-|-|
-      |Name|HasCenterID|
+   |項目|設定値|
+   |-|-|
+   |Name|HasCenterID|
 
-      `Configuration`
-      |項目|設定値|
-      |-|-|
-      |condition|event.sorting_condition != null|
+1. `Configuration` の `クリックして編集` を開きます。  
+   `condition (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックします。
 
-1. エラーが出力されないことを確認する
+   |項目|設定値|
+   |-|-|
+   |condition|event.sorting_condition != null|
 
-## 3. 未登録データの仕分け処理の追加実装
+   ![app_filter_01.png](./imgs/app_filter_01.png)
 
-`AttachCondition` タスクの後続タスクとして `Filter` Activity を追加し、 `sorting_condition` Type に登録されていないデータを集約します。  
+1. エラーが出力されないことを確認します。
 
-1. `BoxSorter` App のペインを開く
-1. `AttachCondition` タスクをクリックし、 `Filter` Activity を追加する  
-   1. 下記の内容を設定し、保存する  
-
-      `'Filter' Activity`
-      |項目|設定値|
-      |-|-|
-      |Name|NotApplicable|
-
-      `Configuration`
-      |項目|設定値|
-      |-|-|
-      |condition|event.sorting_condition == null|
-
-   1. `NotApplicable` の `タスク Events を表示` をクリックし、 `sorting_condition` Type に登録されていないデータが集約されていることを確認する
-
-## 4. 未登録データ用の Type の作成
+## 5. 未登録データ保存用の Type の作成
 
 荷物コードが未登録のデータを Type に保存し、後から確認できるようにします。  
 まずは未登録データを保存するための Type を作成します。  
 
-1. `unregistered_item` Type を作成する
-   1. メニューバーの `追加` -> `Type...` -> `+ 新規 Type` をクリックして Type の新規作成画面を開き、以下の内容を入力して `OK` をクリックする
+### 5-1. Type の新規作成
 
-      `Type を作成`
-      |項目|設定値|
-      |-|-|
-      |Name|unregistered_item|
-      |Role|standard|
+1. メニューバーの `追加` -> `Type...` -> `+ 新規 Type` をクリックして Type の新規作成画面を開きます。
 
-   1. `unregistered_item` のペインが表示されるので、タブごとに以下の設定を行い保存する
+   ![create_type_01.png](./imgs/create_type_01.png)
 
-      `Properties タブ`
-      |プロパティ名|データ型|Required|
-      |-|-|-|
-      |code|String|✅|
-      |name|String|✅|
-      |timestamp|DateTime|✅|
+1. 以下の内容を入力して `OK` をクリックします。
 
-      `Indexes タブ`
-      |項目|設定値|Is Unigue|
-      |-|-|-|
-      |Key|code|✅|
+   |項目|設定値|
+   |-|-|
+   |Name|unregistered_item|
+   |Role|standard|
 
-      `Natural Keys タブ`
-      |項目|設定値|
-      |-|-|
-      |Key|code|
+   ![create_type_02.png](./imgs/create_type_02.png)
 
-## 5. 未登録データを Type に保存
+### 5-2. Type の設定
+
+1. `unregistered_item` のペインが表示されるので、タブごとに以下の設定を行い、保存します。
+
+   **Properties タブ**
+   |プロパティ名|データ型|Required|
+   |-|-|-|
+   |code|String|✅|
+   |name|String|✅|
+   |timestamp|DateTime|✅|
+
+   ![create_type_03.png](./imgs/create_type_03.png)
+
+   ![create_type_04.png](./imgs/create_type_04.png)
+
+   ![create_type_05.png](./imgs/create_type_05.png)
+
+   > **補足説明**  
+   > プロパティの設定が終わったら、 Type を保存してください。
+
+   **Indexes タブ**
+   |項目|設定値|Is Unigue|
+   |-|-|-|
+   |Key|code|✅|
+
+   ![create_type_06.png](./imgs/create_type_06.png)
+
+   ![create_type_07.png](./imgs/create_type_07.png)
+
+   **Natural Keys タブ**
+   |項目|設定値|
+   |-|-|
+   |Key|code|
+
+   ![create_type_08.png](./imgs/create_type_08.png)
+
+   ![create_type_09.png](./imgs/create_type_09.png)
+
+1. Type を保存します。  
+
+## 6. App Builder を用いたボックスソーターアプリの改修
+
+準備が整ったので、ボックスソーターアプリの改修を行っていきます。
+
+### 6-1. 未登録データの仕分け処理の追加実装
+
+`AttachCondition` タスクの後続タスクとして **Filter Activity** を追加し、 `sorting_condition` Type に登録されていないデータを集約します。  
+
+#### Filter Activity の実装
+
+1. `BoxSorter` App のペインを開きます。
+
+1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクの上にドロップします。
+
+   ![app_filter_a1.png](./imgs/app_filter_a1.png)
+
+1. `Filter` タスクをクリックし、タスク名を設定します。
+
+   |項目|設定値|
+   |-|-|
+   |Name|NotApplicable|
+
+1. `Configuration` の `クリックして編集` を開きます。  
+   `condition (Union)` の `<null>` をクリックし、以下の設定を行いアプリケーションを保存します。
+
+   |項目|設定値|
+   |-|-|
+   |condition|event.sorting_condition == null|
+
+   ![app_filter_a2.png](./imgs/app_filter_a2.png)
+
+1. `NotApplicable` の `タスク Events を表示` をクリックし、 `sorting_condition` Type に登録されていないイベントが集約されていることを確認します。
+
+### 6-2. 未登録データを Type に保存
 
 `unregistered_item` Type の作成ができたので、実際に未登録データを Type に保存する処理を実装します。
 
-1. `BoxSorter` App のペインを開く
-1. `NotApplicable` タスクをクリックし、 `SaveToType` Activity を追加する  
-   1. 下記の内容を設定し、保存する  
+#### SaveToType Activity の実装
 
-      `'SaveToType' Activity`
-      |項目|設定値|
-      |-|-|
-      |Name|SaveUnregisteredItem|
+1. `BoxSorter` App のペインを開きます。
 
-      `Configuration`
-      |項目|設定値|
-      |-|-|
-      |type|unregistered_item|
-      |upsert|✅|
+1. App ペイン左側の `Actions` の中から `SaveToType` を選択し、 `NotApplicable` タスクの上にドロップします。  
 
-   1. エラーが発生せずに未登録データが Type に保存されていることを確認する
+   ![app_savetotype_01.png](./imgs/app_savetotype_01.png)
+
+1. `SaveToType` タスクをクリックし、 `タスク名` の設定を行います。
+
+   |項目|設定値|
+   |-|-|
+   |Name|SaveUnregisteredItem|
+
+1. `Configuration` の `クリックして編集` を開きます。  
+   `condition (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックします。
+
+   |項目|設定値|
+   |-|-|
+   |type (Enumerated)|unregistered_item|
+   |upsert (Boolean)|✅|
+
+   ![app_savetotype_02.png](./imgs/app_savetotype_02.png)
+
+1. エラーが発生せずに未登録データが Type に保存されていることを確認します。
 
    > **補足**  
    > 今回の実装方法ではエラーが発生します。  
    > 次のステップでは、この変更によって生じたエラーの解消を行います。  
    > エラーが頻発するとシステムに負荷がかかるため、 Google Colaboratory のデータジェネレータを一旦、停止させてください。
 
-## 6. SaveToType Activity で発生したエラーの原因を調べる
+### 6-3. SaveToType Activity で発生したエラーの原因を調べる
 
 `SaveUnregisteredItem` タスクではエラーが発生しました。  
 
@@ -224,6 +274,8 @@ Google Colaboratory からパブリッシュしたメッセージを確認しま
 ```
 The generated rule: SaveUnregisteredItem failed because: The property: unregistered_item.time is not defined.
 ```
+
+![app_savetotype_03.png](./imgs/app_savetotype_03.png)
 
 これは、
 
@@ -256,31 +308,34 @@ event データには `time` というプロパティが存在しています。
 `SaveToType` Activity を利用する場合は、 event データを Type のプロパティに合わせる必要があります。  
 そのため、今回の実装方法ではエラーが発生してしまったということです。
 
-## 7. SaveToType Activity で発生したエラーを修正する
+### 6-4. SaveToType Activity で発生したエラーを修正する
 
 `SaveUnregisteredItem` タスクで発生しているエラーの理由が分かったので、実際に修正していきます。
 
-1. `BoxSorter` App のペインを開く
-1. `NotApplicable` タスクと `SaveUnregisteredItem` タスクの間の `矢印` の上に `Transformation` Activity を `ドラッグ＆ドロップ` する。  
+#### Transformation Activity の実装
 
-   1. 追加した `Transformation` Activity に下記の内容を設定し、保存する  
+1. `BoxSorter` App のペインを開きます。
 
-      `'Transformation' Activity`
-      |項目|設定値|
-      |-|-|
-      |Name|TransformationForType|
+1. App ペイン左側の `Modifiers` の中から `Transformation` を選択し、 `SaveUnregisteredItem` タスクの間の `矢印` の上にドロップします。
 
-      `Configuration`
-      |項目|設定値|
-      |-|-|
-      |transformation|※下記の `transformation` を参照|
+   ![app_savetotype_04.png](./imgs/app_savetotype_04.png)
 
-      `transformation`
-      |項目|設定値|
-      |-|-|
-      |code|event.code|
-      |name|event.name|
-      |timestamp|toDate(replace(event.time, " ", "T") + "Z")|
+1. `Transformation1` タスクをクリックし、タスク名を設定します。
+
+   |項目|設定値|
+   |-|-|
+   |Name|TransformationForType|
+
+1. `Configuration` の `クリックして編集` を開きます。  
+   `transformation (Union)` の `<null>` をクリックし、以下の設定を行いアプリケーションを保存します。
+
+   |項目|設定値|
+   |-|-|
+   |code|event.code|
+   |name|event.name|
+   |timestamp|toDate(replace(event.time, " ", "T") + "Z")|
+
+   ![app_savetotype_05.png](./imgs/app_savetotype_05.png)
 
 1. エラーが出力されないことを確認する
 
@@ -289,17 +344,33 @@ event データには `time` というプロパティが存在しています。
 >
 > A：`unregistered_item` Type の `timestamp` プロパティの名前を `time` に変えただけでは、型エラーなどが発生してしまうため、 `Transformation` Activity を用いて型変換などもあわせて行っています。  
 
-## 8. Type に未登録データが保存されているか確認する
+## 7. Type に未登録データが保存されているか確認する
 
 `unregistered_item` Type に荷物コードが未登録のデータが登録されているか確認します。
 
-1. `unregistered_item` Type のペインを開く
-1. `すべてのレコードを表示` をクリックし、 `Type unregistered_item のすべてのオブジェクト` を開く  
+1. `unregistered_item` Type のペインを開きます。
+
+1. `すべてのレコードを表示` をクリックし、 `Type unregistered_item のすべてのオブジェクト` を開きます。
+
+   ![type_view_01.png](./imgs/type_view_01.png)
+
 1. 最新の未登録データが登録されていることを確認する
 
+   ![type_view_02.png](./imgs/type_view_02.png)
+
+## ワークショップの振り返り
+
+1. **App**
+   1. **SaveToType Activity** を用いて、イベントを Type に保存する方法を学習しました。
+
+## 参考情報
+
+### NaturalKey について
+
+- [Type の NaturalKey とは？](/vantiq-apps-development/docs/jp/reverse-lookup.md#type-の-naturalkey-とは)
+
+### プロジェクトファイル
+
+- [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_savetotype_1.37.zip)
+
 以上
-
-## 実装サンプル
-
-- [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_savetype_1.34.zip)
-- [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_savetype_1.36.zip)
