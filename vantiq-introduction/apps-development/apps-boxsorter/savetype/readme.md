@@ -43,10 +43,12 @@ App Builder を用いて、アプリケーションを作成していきます�
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
   - [BoxSorterDataGenerator（中級編・SaveToType）](/vantiq-google-colab/code/box-sorter_data-generator_savetype.ipynb)
-
 - Python
   - Python 実行環境
   - [BoxSorterDataGenerator（中級編・SaveToType）](/vantiq-google-colab/code/box-sorter_data-generator_savetype.py)
+- MQTTクライアント
+  - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
+  - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
 
 ### 商品マスタデータ
 
