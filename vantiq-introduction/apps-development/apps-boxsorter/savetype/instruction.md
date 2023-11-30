@@ -373,6 +373,6 @@ event データには `time` というプロパティが存在しています。
 
 ### プロジェクトファイル
 
-- [荷物仕分けアプリ (SaveToType) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_savetotype_1.37.zip)
+- [ボックスソーター（中級編・SaveToType）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_savetotype_1.37.zip)
 
 以上
