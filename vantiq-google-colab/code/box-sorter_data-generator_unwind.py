@@ -52,7 +52,7 @@ def publish(client):
         random_wait_time = random.uniform(publish_config['interval'][0], publish_config['interval'][1])
         time.sleep(random_wait_time)
         publish_max_item = random.randint(2, publish_config['max_item'])
-        msg = {'items': [publish_config['message'][random.randint(0, msg_length - 1)] for i in range(publish_max_item - 1)]}
+        msg = {'items': [publish_config['message'][random.randint(0, msg_length - 1)] for i in range(publish_max_item)]}
         msg['time'] = dt.now().strftime('%Y-%m-%d %H:%M:%S')
         result = client.publish(mqtt_config['topic'], json.dumps(msg, ensure_ascii=False, indent=4))
         status = result[0]
