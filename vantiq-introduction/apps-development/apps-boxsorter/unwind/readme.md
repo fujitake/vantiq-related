@@ -1,41 +1,21 @@
-# 荷物仕分けアプリケーション (Unwind)
+# ボックスソーター（中級編・Unwind）
 
-荷物仕分けアプリケーション (Standard) を利用して、配列データを並列処理する方法について学習します。
-
-## 荷物仕分けアプリケーション (Unwind) の学習概要
-
-開発した荷物仕分けアプリケーションを通じて、追加の Activity Pattern について学びます。  
+ボックスソーターアプリを改修して、配列データを並列処理する方法について学習します。
 
 今回のセッションでは、荷物のデータが配列としてブローカーから送られてきます。  
 この配列のデータをバラして、並列処理を行う追加改修を行います。  
 
-> **注意**  
-> 荷物仕分けアプリケーション (Standard) を実施していない場合は、先に 荷物仕分けアプリケーション (Standard) を実施してください。  
-> - [荷物仕分けアプリケーション (Standard)](./../boxsorter-standard/readme.md)
+## Vantiq で実装するアプリケーションの概要
 
-### 学習目的
-
-このワークショップの目的は下記のとおりです。
-
-#### 主目的
-
-1. ActivityPattern の **Unwind** の使い方を理解する。
-
-## Vantiqで実装する荷物仕分け (Box Sorter) アプリケーション 概要
+App Builder を用いて、アプリケーションを作成していきます。  
+アプリケーションの完成イメージは下記のとおりです。  
 
 ![vantiq-app.png](./imgs/vantiq-app.png)
 
-このアプリケーションを実装していきます。  
-詳細は次のステップで説明しますが、 `Unwind` Activity の追加実装を行います。
-
-## 荷物仕分けアプリケーションで利用する Activity Pattern の紹介
+## アプリケーションの開発で利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
-> 荷物仕分けアプリケーション (Beginner) や 荷物仕分けアプリケーション (Standard) で紹介したものは割愛します。  
->
-> 詳細は下記を参照してください。  
-> - [荷物仕分けアプリケーション (Beginner)](./../boxsorter-beginner/readme.md)
-> - [荷物仕分けアプリケーション (Standard)](./../boxsorter-standard/readme.md)
+> 他のワークショップで紹介したものは割愛します。  
 
 ### Unwind Activity
 
@@ -45,7 +25,7 @@
 分割してから個々のイベントととして並列処理するようになるため、負荷分散になります。  
 
 > **注意**  
-> `Unwind` Activity で配列を分割する際は、 `1000件` を上限として利用するようにしてください。
+> `Unwind` Activity で配列を分割する際は、 **1000件** を上限として利用するようにしてください。
 
 ## 必要なマテリアル
 
@@ -64,10 +44,10 @@
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator (Unwind)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_unwind.ipynb)
+  - [BoxSorterDataGenerator (中級編・Unwind)](/vantiq-google-colab/code/box-sorter_data-generator_unwind.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator (Unwind)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_unwind.py)
+  - [BoxSorterDataGenerator (中級編・Unwind)](/vantiq-google-colab/code/box-sorter_data-generator_unwind.py)
 - MQTTクライアント
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
   - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
@@ -78,8 +58,7 @@
 
 ### プロジェクトファイル
 
-- [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.34）](./../data/box_sorter_standard_1.34.zip)
-- [荷物仕分けアプリ (Standard) の実装サンプル（Vantiq 1.36）](./../data/box_sorter_standard_1.36.zip)
+- [ボックスソーター（初級編・MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
 
 ### ドキュメント
 
