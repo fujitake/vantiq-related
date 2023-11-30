@@ -57,7 +57,6 @@ Vantiq の基本的な扱い方を解説しています。
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
 |-|[荷物仕分けアプリケーション (Standard)](./apps-development/apps-boxsorter/boxsorter-standard/readme.md)|荷物仕分けアプリケーション (Beginner)|
-|-|[荷物仕分けアプリケーション (SaveToType)](./apps-development/apps-boxsorter/boxsorter-savetype/readme.md)|荷物仕分けアプリケーション (Standard)|
 |-|[荷物仕分けアプリケーション (Unwind)](./apps-development/apps-boxsorter/boxsorter-unwind/readme.md)|荷物仕分けアプリケーション (Standard)|
 |-|[荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)|荷物仕分けアプリケーション (Standard)|
 |-|[デバッグ方法](./apps-development/debug/readme.md)|なし|
