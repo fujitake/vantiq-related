@@ -23,13 +23,12 @@
     - [1-1. Namespace の作成](#1-1-namespace-の作成)
     - [1-2. Project のインポート](#1-2-project-のインポート)
   - [2. データジェネレータの準備](#2-データジェネレータの準備)
-    - [入力用 MQTTブローカーの確認](#入力用-mqttブローカーの確認)
-    - [Google Colaboratory の設定](#google-colaboratory-の設定)
-    - [MQTT Source の確認](#mqtt-source-の確認)
-  - [1. サブスクライブしたメッセージの確認](#1-サブスクライブしたメッセージの確認)
-  - [2. SplitbByCode タスクのエラー原因の確認](#2-splitbbycode-タスクのエラー原因の確認)
-  - [3. 配列の並列分散処理の追加実装（Unwind Activity）](#3-配列の並列分散処理の追加実装unwind-activity)
-  - [4. 仕訳処理が正しく行われていることを確認する](#4-仕訳処理が正しく行われていることを確認する)
+  - [3. 既存のアプリケーションの動作確認](#3-既存のアプリケーションの動作確認)
+  - [4. App Builder を用いたボックスソーターアプリの修正](#4-app-builder-を用いたボックスソーターアプリの修正)
+    - [4-1. サブスクライブしたメッセージの確認](#4-1-サブスクライブしたメッセージの確認)
+    - [4-2. Transformation タスクのエラー原因の確認](#4-2-transformation-タスクのエラー原因の確認)
+    - [4-3. 配列の並列分散処理の実装](#4-3-配列の並列分散処理の実装)
+  - [5. 仕訳処理が正しく行われていることを確認する](#5-仕訳処理が正しく行われていることを確認する)
   - [追加課題](#追加課題)
   - [実装サンプル](#実装サンプル)
 
@@ -76,125 +75,73 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 > **注意点**  
 > データジェネレータの種類が **ボックスソーター（中級編・CachedEnrich）** とは異なるので注意してください。
 
+## 3. 既存のアプリケーションの動作確認
 
+**Source** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
+詳細は下記を参照してください。  
+[ボックスソーター（中級編・CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
 
-### 入力用 MQTTブローカーの確認
+## 4. App Builder を用いたボックスソーターアプリの修正
 
-入力には以下の MQTTブローカーを使用します。
+アプリケーションでエラーが発生しているので、まずは既存アプリケーションの修正を行います。
 
-|項目|設定値|備考|
-|-|-|-|
-|Server URI|mqtt://public.vantiq.com:1883|-|
-|Topic|/workshop/jp/yourname/boxinfo|`yourname` の箇所に任意の値を入力する ※英数字のみ|
->この MQTTブローカーはワークショップ用のパブリックなブローカーです。認証は不要です。  
->上記以外の MQTTブローカーを利用しても問題ありません。
-
-### Google Colaboratory の設定
-
-1. 下記のリンクから **データジェネレータ** のページを開く
-
-   - [BoxSorterDataGenerator (Unwind)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_unwind.ipynb)
-
-   > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
-
-1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開く
-
-   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
-
-1. `# MQTTブローカー設定` に以下の内容を入力する
-
-   |項目|設定値|備考|
-   |-|-|-|
-   |broker|public.vantiq.com|※変更不要です。|
-   |port|1883|※変更不要です。|
-   |topic|/workshop/jp/**yourname**/boxinfo|`yourname` の箇所に任意の値を入力します。（※英数字のみ）|
-   |client_id||※変更不要です。|
-   |username||※変更不要です。|
-   |password||※変更不要です。|
-
-1. 上から順に1つずつ `再生ボタン` を押していく  
-   実行が終わるのを待ってから、次の `再生ボタン` を押してください。  
-
-   1. `# ライブラリのインストール`（※初回のみ）
-   1. `# ライブラリのインポート`（※初回のみ）
-   1. `# MQTTブローカー設定`
-   1. `# 送信データ設定`
-   1. `# MQTT Publisher 本体`
-
-1. エラーが発生していないことを確認し、 `# MQTT Publisher 本体` の左側の `停止ボタン` を押して、一旦、停止させておく
-
-### MQTT Source の確認
-
-Source の設定を行い、メッセージがサブスクライブできるか確認します。  
-
-1. `BoxInfoMqtt` Source のペインを開く
-
-1. 以下の内容が設定されているか確認をする
-
-   |設定順|項目|設定値|設定箇所|
-   |-|-|-|-|
-   |1|Source Name|BoxInfoMqtt|-|
-   |2|Source Type|MQTT|-|
-   |3|Server URI|mqtt://public.vantiq.com:1883|`Server URI` タブ|
-   |4|Topic|/workshop/jp/yourname/boxinfo <br> ※`yourname` の箇所には疎通確認時に設定した値を使用する|`Topic` タブ|
-
-1. メッセージをサブスクライブできることを確認する
-   1. `BoxInfoMqtt` Source のペインの `データの受信テスト`(Test Data Receipt) をクリックする
-   1. Google Colaboratory の `# MQTT Publisher 本体` を実行し、メッセージを送信する
-   1. `Subscription:BoxInfoMqtt` に Google Colaboratory から送信した内容が表示されることを確認する
-
-      ![sub-test-msg](./imgs/sub-test-msg.png)
-
-## 1. サブスクライブしたメッセージの確認
+### 4-1. サブスクライブしたメッセージの確認
 
 Google Colaboratory からパブリッシュしたメッセージを確認します。  
 
-1. `BoxSorter` App のペインを開く
-1. `ReceiveBoxInfo` タスクをクリックし、 `タスク Events を表示` をクリックする
-1. メッセージを何件かクリックして `タスク Event` を表示する
-   
-   ![box-sorter-app_data_01.png](./imgs/box-sorter-app_data_01.png)
+#### 入力データの確認
 
-1. 入力データのフォーマットを確認する
+1. `BoxSorter` App のペインを開きます。
+
+1. `ReceiveBoxInfo` タスクをクリックし、 `タスク Events を表示` をクリックします。
+
+1. メッセージを何件かクリックして `タスク Event` を表示します。
    
-   | ![box-sorter-app_data_02.png](./imgs/box-sorter-app_data_02.png) | ![box-sorter-app_data_03.png](./imgs/box-sorter-app_data_03.png) |
+   ![app_datacheck_01.png](./imgs/app_datacheck_01.png)
+
+1. 入力データのフォーマットを確認します。
+   
+   | ![app_datacheck_02.png](./imgs/app_datacheck_02.png) | ![app_datacheck_03.png](./imgs/app_datacheck_03.png) |
    |-|-|
 
-## 2. SplitbByCode タスクのエラー原因の確認
+### 4-2. Transformation タスクのエラー原因の確認
 
-現状のアプリケーションでは、 `SplitByCode` タスク以降の処理がなされていません。  
-まずは処理がされていない原因を調べます。
+現状のアプリケーションでは、 `Transformation` タスクでエラーが発生しています。  
+まずはエラーの原因を調べます。
 
-`SplitByCode` タスクでは、 `event.code` をもとにグルーピングを行っています。  
-ですが、現在の入力データでは、 `items` という配列の中に `code` が存在しています。  
-したがって、 `event.code` のデータが見当たらないため、グルーピングができず、以降の処理が破棄されていたのです。  
+エラーの内容を確認すると次のように書かれています。  
 
-## 3. 配列の並列分散処理の追加実装（Unwind Activity）
+```
+The generated transformation: Transformation failed because: The generated transformation procedure: Transformation failed because: Encountered exception during execution: Cannot get property 'center_id' on null object
+```
 
-`ReceiveBoxInfo` タスクと `SplitByCode` タスクの間に `Unwind` Activity を追加し、 配列の並列分散処理を実装します。  
+![app_error_01.png](./imgs/app_error_01.png)
 
-1. `BoxSorter` App のペインを開く
-1. `ReceiveBoxInfo` タスクと `SplitByCode` タスクの間の矢印に重なるように `Unwind` Activity を追加する
-   1. 下記の内容を設定し、保存する  
+入力フォーマットがオブジェクトから配列に変わったことで、 `center_id` が取得できなくなり、エラーが発生してしまっていることが分かります。
 
-      `'Filter' Activity`
-      |項目|設定値|
-      |-|-|
-      |Name|Unwind|
+### 4-3. 配列の並列分散処理の実装
 
-      `Configuration`
-      |項目|設定値|
-      |-|-|
-      |unwindProperty|items|
+#### Unwind Activity の実装
 
-   1. `Unwind` の `タスク Events を表示` をクリックし、配列のデータが個々のイベントに別れていることを確認する。
+1. App ペイン左側の `Flow Control` の中から `Unwind` を選択し、 `ReceiveBoxInfo` タスクと `AttachCondition` タスクの間の **矢印** の上にドロップします。
 
-## 4. 仕訳処理が正しく行われていることを確認する
+   ![app_unwind_01.png](./imgs/app_unwind_01.png)
+
+1. `Unwind` タスクをクリックし、 `Configuration` の `クリックして編集` を開きます。  
+   以下の設定を行いアプリケーションを保存します。
+
+   |Optional Parameter|Value|
+   |-|-|
+   |unwindProperty (Property)|items|
+
+   ![app_unwind_02.png](./imgs/app_unwind_02.png)
+
+1. `Unwind` タスクの `タスク Events を表示` をクリックし、配列のデータが個々のイベントに別れていることを確認します。
+
+## 5. 仕訳処理が正しく行われていることを確認する
 
 アプリケーション全体の動作を確認し、正しく仕訳処理が行われていることを確認します。  
-
-以上
 
 ## 追加課題
 
@@ -204,10 +151,9 @@ Google Colaboratory からパブリッシュしたメッセージを確認しま
 下記のいずれかのジェネレーターを利用して、アプリケーションの実装を行ってみましょう。  
 
 - Google Colab
-  - [BoxSorterDataGenerator (Unwind Ex)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_unwind_ex.ipynb)
+  - [BoxSorterDataGenerator (Unwind Ex)](/vantiq-google-colab/code/box-sorter_data-generator_unwind_ex.ipynb)
 - Pyehon
-  - [BoxSorterDataGenerator (Unwind Ex)](/vantiq-google-colab/docs/jp/box-sorter_data-generator_unwind_ex.py)
-
+  - [BoxSorterDataGenerator (Unwind Ex)](/vantiq-google-colab/code/box-sorter_data-generator_unwind_ex.py)
 
 入力データは下記を参考にしてください。
 
@@ -241,5 +187,7 @@ Google Colaboratory からパブリッシュしたメッセージを確認しま
 
 ## 実装サンプル
 
-- [荷物仕分けアプリ (Unwind) の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_1.37.zip)
-- [荷物仕分けアプリ (Unwind Ex) の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_ex_1.37.zip)
+- [ボックスソーター（中級編・Unwind）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_1.37.zip)
+- [ボックスソーター（中級編・Unwind Ex）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_ex_1.37.zip)
+
+以上

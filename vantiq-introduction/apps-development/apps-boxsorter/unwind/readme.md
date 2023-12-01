@@ -10,7 +10,7 @@
 App Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
-![vantiq-app.png](./imgs/vantiq-app.png)
+![boxsorter_unwind.gif](./imgs/boxsorter_unwind.gif)
 
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
