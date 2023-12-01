@@ -27,9 +27,9 @@ Semantic Index Entry は、IDE上で作成することも可能ですが、CLI�
                   loaded.  This option can be specified more than once to exclude multiple files/directories.
 ```
 
-`vantiq load semanticindexentries <Semantic Index Name> <filename>` で、Semantic Index にファイルを追加することができます。ファイルは、ローカルファイル、URL、ディレクトリのいずれかを指定することができます。ディレクトリを指定した場合、ディレクトリ内のファイルはzip圧縮されてSemantic Index に追加されます。ドキュメントの更新などを個別に管理したい場合、ディレクトリではなくスクリプトを使用して個々に追加することが望ましいです。
+`vantiq load semanticindexentries <Semantic Index Name> <filename>` で、Semantic Index にファイルを追加することができます。ファイルは、ローカルファイル、URL、ディレクトリのいずれかを指定することができます。ディレクトリを指定した場合、ディレクトリ内のファイルはzip圧縮されてSemantic Index に追加されます。後述の`-id`オプションを使用してファイルの更新などを個別に管理したい場合、ディレクトリではなくスクリプトを使用して個々に追加することが望ましいです。
 
-`-id` オプションで、Semantic Index Entry のIDを指定することができます。IDが指定された場合、既存のEntryがあれば更新されます。
+`-id` オプションで、Semantic Index Entry のIDを指定することができます。IDが指定された場合、既存のEntryがあれば更新されます。ファイルとIDの紐づけを管理することにより、ファイルの更新があった場合Semantic Index Entry の内容も更新することができます。
 `vantiq load semanticindexentries <Semantic Index Name> <filename> -id <Entry ID>`
 
 `-metadata` オプションで、Semantic Index Entry のメタデータを指定することができます。メタデータは、JSONファイルで指定します。
