@@ -58,7 +58,6 @@ Vantiq の基本的な扱い方を解説しています。
 |:-:|-|-|
 |-|[荷物仕分けアプリケーション (Standard)](./apps-development/apps-boxsorter/boxsorter-standard/readme.md)|荷物仕分けアプリケーション (Beginner)|
 |-|[荷物仕分けアプリケーション (State)](./apps-development/apps-boxsorter/boxsorter-state/readme.md)|荷物仕分けアプリケーション (Standard)|
-|-|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 
 #### 新ワークショップ
 
@@ -70,7 +69,7 @@ Vantiq の基本的な扱い方を解説しています。
 |◯|[VAIL 入門（Type の操作）](./apps-development/vail-introductory/vail_type/vail_type.md)|VAIL 入門（基礎）|
 |◯|[VAIL 入門（外部へのデータ送信）](./apps-development/vail-introductory/vail_data/vail_data.md)|VAIL 入門（基礎）|
 |△|[ボックスソーター（中級編・Unwind）](./apps-development/apps-boxsorter/unwind/readme.md)|ボックスソーター（初級編・MQTT）|
-|◯|[~~デバッグ方法~~](#)|※制作中|
+|△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 
 <!--
 |◯|[デバッグ方法](./apps-development/debug/readme.md)|なし|
