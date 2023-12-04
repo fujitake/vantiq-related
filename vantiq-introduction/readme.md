@@ -71,10 +71,6 @@ Vantiq の基本的な扱い方を解説しています。
 |△|[ボックスソーター（中級編・Unwind）](./apps-development/apps-boxsorter/unwind/readme.md)|ボックスソーター（初級編・MQTT）|
 |△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 
-<!--
-|◯|[デバッグ方法](./apps-development/debug/readme.md)|なし|
--->
-
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
 > △：追加のワークショップとなるため、余裕がある場合は実施していただくことを推奨しています。  
