@@ -14,6 +14,8 @@ Vantiq R1.37にて実装された新機能 LLM関連機能についての資料�
 
 [Semantic Index へのEntry追加方法](./docs/jp/load_semantic_index_entry.md)
 
+[Vantiq LLM とSlackのインテグレーションサンプル](./docs/jp/vantiq_llm_slack_integration.md)
+
 ## 画像処理AI
 
 Vantiq 外にある画像処理AIをVantiqと連携させる場合の資料です。
