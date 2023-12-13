@@ -4,7 +4,7 @@
 
 下記の流れで実装していきます。
 
-1. 【準備】Namespace の作成と Project の保存、データジェネレータの準備
+1. 【準備】Namespace の作成と Project の保存
 1. 【Secret】各種 LLM の API Key の設定
 1. 【LLM】LLM の設定
 1. 【Type】スキーマの作成
@@ -289,6 +289,6 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 
 ### プロジェクトファイル
 
-- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt_1.37.zip)
+- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-activity_1.37.zip)
 
 以上

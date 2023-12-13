@@ -60,6 +60,7 @@ Vantiq の基本的な扱い方を解説しています。
 |◯|[VAIL 入門（外部へのデータ送信）](./apps-development/vail-introductory/vail_data/vail_data.md)|VAIL 入門（基礎）|
 |△|[ボックスソーター（中級編・Unwind）](./apps-development/boxsorter/unwind/readme.md)|ボックスソーター（初級編・MQTT）|
 |△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
+|△|[LLM（SubmitPrompt Activity）](./apps-development/llm/submitprompt-activity/readme.md)|なし|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
