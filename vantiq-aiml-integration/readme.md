@@ -16,6 +16,8 @@ Vantiq R1.37にて実装された新機能 LLM関連機能についての資料�
 
 [Vantiq LLM とSlackのインテグレーションサンプル](./docs/jp/vantiq_llm_slack_integration.md)
 
+[Vantiq LLM とLINEのインテグレーションサンプル](./docs/jp/vantiq_llm_line_integration.md)
+
 ## 画像処理AI
 
 Vantiq 外にある画像処理AIをVantiqと連携させる場合の資料です。
