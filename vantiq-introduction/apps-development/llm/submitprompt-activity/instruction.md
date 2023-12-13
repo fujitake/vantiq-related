@@ -246,7 +246,7 @@ Topic からメッセージを送信し、 LLM との会話を行ってみます
 
 1. 画面左側の `Project Contents` から `/Inbound` Topic を開きます。
 
-   ![projectcontents_01.png](./imgs/projectcontents_01.png)
+   ![project-contents_topic.png](./imgs/project-contents_topic.png)
 
 ### 7-3. メッセージの送信
 
@@ -283,7 +283,7 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 1. **Topic** 
    1. **Topic** を用いて Vantiq アプリケーション用のエンドポイントを作成する方法を学習しました。
 1. **App**
-   1. **SubmitPrompt** を用いて LLM と対話する方法を学習しました。
+   1. **SubmitPrompt Activity** を用いて LLM と対話する方法を学習しました。
 
 ## 参考情報
 

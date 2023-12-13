@@ -29,11 +29,12 @@
   - [4. 既存のアプリケーションの動作確認](#4-既存のアプリケーションの動作確認)
   - [5. Procedure の作成](#5-procedure-の作成)
     - [5-1. Procedure の作成](#5-1-procedure-の作成)
+    - [5-2. Procedure の実行](#5-2-procedure-の実行)
   - [6. App Builder を用いた App の改修](#6-app-builder-を用いた-app-の改修)
     - [6-1. 【App Builder】App ペインの表示](#6-1-app-builderapp-ペインの表示)
-    - [6-2. 【EventStream】Topic データの取得](#6-2-eventstreamtopic-データの取得)
-    - [6-3. 【SubmitPrompt】LLM との会話機能の実装](#6-3-submitpromptllm-との会話機能の実装)
-    - [6-4. 【LogStream】ログ出力の実装](#6-4-logstreamログ出力の実装)
+    - [6-2. 【SubmitPrompt】既存のタスクの削除](#6-2-submitprompt既存のタスクの削除)
+    - [6-3. 【Procedure】プロシージャの呼び出し](#6-3-procedureプロシージャの呼び出し)
+    - [6-4. 【LogStream】ログタスクの修正](#6-4-logstreamログタスクの修正)
   - [7. LLM との会話](#7-llm-との会話)
     - [7-1. Log メッセージ画面の表示](#7-1-log-メッセージ画面の表示)
     - [7-2. /Inbound Topic ペインの表示](#7-2-inbound-topic-ペインの表示)
@@ -120,6 +121,8 @@ Procedure を作成します。
 
 1. メニューバーの `追加` -> `Advanced` -> `Procedure...` -> `+ 新規 Procedure` をクリックします。
 
+   ![procedure_01.png](./imgs/procedure_01.png)
+
 1. 下記の内容を入力し、保存します。
 
    ```JavaScript
@@ -130,22 +133,28 @@ Procedure を作成します。
    return response
    ```
 
+   ![procedure_02.png](./imgs/procedure_02.png)
+
+### 5-2. Procedure の実行
+
 1. ペイン左上の `実行ボタン` をクリックし、プロシージャを実行してみます。
 
+   ![procedure_03.png](./imgs/procedure_03.png)
 
+1. 引数に適当な文字を入力して `実行` をクリックします。
 
+   ![procedure_04.png](./imgs/procedure_04.png)
 
+1. 実行結果を確認し、 `OK` をクリックします。
 
-
-
-
-
-
-
+   ![procedure_05.png](./imgs/procedure_05.png)
 
 ## 6. App Builder を用いた App の改修
 
 この手順からアプリケーションの改修を開始します。  
+
+今回は **SubmitPrompt Activity** に変わり **Procedure Activity** を利用します。  
+そのために必要な改修を行っていきます。  
 
 ### 6-1. 【App Builder】App ペインの表示
 
@@ -153,78 +162,52 @@ Procedure を作成します。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
 
+### 6-2. 【SubmitPrompt】既存のタスクの削除
 
+**SubmitPrompt Activity** を削除します。  
 
-#### App の新規作成
+1. `SubmitPrompt` タスクを選択し、 `Delete` キーを押下して削除します。
 
-1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開きます。
-   
-   ![create_app_01.png](./imgs/create_app_01.png)
+   ![app_01.png](./imgs/app_01.png)
 
-1. 以下の内容を設定し、保存します。
+### 6-3. 【Procedure】プロシージャの呼び出し
 
-   |項目|設定値|
-   |-|-|
-   |Name|LlmApp|
+1. App ペイン左側の `Actions` の中から `Procedure` を選択し、 `LlmInbound` タスクの上にドロップします。  
 
-   ![create_app_02.png](./imgs/create_app_02.png)
+   ![app_02.png](./imgs/app_02.png)
 
-### 6-2. 【EventStream】Topic データの取得
-
-**EventStream Activity** を使って Topic からデータを受け取れるようにします。  
-
-#### EventStream の設定
-
-1. `Initiate` タスクをクリックし、以下の内容を設定します。  
-
-   |項目|設定値|
-   |-|-|
-   |Name|LlmInbound|
-
-   ![create_app_03.png](./imgs/create_app_03.png)
-
-1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックし、アプリケーションを保存します。
+1. `Procedure` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を入力します。
 
    |Required Parameter|Value|
    |-|-|
-   |inboundResource (Enumerated)|topics|
-   |inboundResourceId (String)|/Inbound|
+   |procedure (Enumerated)|submitPrompt|
 
-   ![create_app_04.png](./imgs/create_app_04.png)
+   ![app_03.png](./imgs/app_03.png)
 
-### 6-3. 【SubmitPrompt】LLM との会話機能の実装
+1. `parameters (Object)` の `<null>` をクリックします。
 
-**SubmitPrompt Activity** を使用して、 LLM との会話機能の実装を行います。
+   ![app_04.png](./imgs/app_04.png)
 
-#### SubmitPrompt Activity の実装
+1. 以下の設定を行いアプリケーションを保存します。
 
-1. App ペイン左側の `AI` の中から `SubmitPrompt` を選択し、 `LlmInbound` タスクの上にドロップします。
-
-   ![create_app_05.png](./imgs/create_app_05.png)
-
-1. `SubmitPrompt` タスクをクリックし、 `Configuration` の `クリックして編集` を開き、以下の設定を行いアプリケーションを保存します。
-
-   |Required Parameter|Value|
+   |Parameter|VAIL Expression|
    |-|-|
-   |llm (Enumerated)|LLM (gpt-3.5-turbo)|
-   |prompt (VAIL Expression)|event.message|
+   |prompt|event.message|
 
-   ![create_app_06.png](./imgs/create_app_06.png)
+   ![app_05.png](./imgs/app_05.png)
 
-### 6-4. 【LogStream】ログ出力の実装
+### 6-4. 【LogStream】ログタスクの修正
 
-LLM との会話をログに出力して、結果を確認できるようにします。  
+LLM との会話をログに出力して、結果を確認できるよう `LogStream` タスクを修正します。  
 
-#### LogStream Activity の実装
+1. `LogStream` タスクを選択し、 `Procedure` タスクの上にドロップして、アプリケーションを保存します。  
 
-1. App ペイン左側の `Actions` の中から `LogStream` を選択し、 `SubmitPrompt` タスクの上にドロップします。  
-
-   ![create_app_07.png](./imgs/create_app_07.png)
+   ![app_06.png](./imgs/app_06.png)
 
    > **補足**  
    > `Downstream イベント` は `event` を選択します。  
    >
-   > ![create_app_08.png](./imgs/create_app_08.png)
+   > ![app_07.png](./imgs/app_07.png)
 
 ## 7. LLM との会話
 
@@ -240,7 +223,7 @@ Topic からメッセージを送信し、 LLM との会話を行ってみます
 
 1. 画面左側の `Project Contents` から `/Inbound` Topic を開きます。
 
-   ![projectcontents_01.png](./imgs/projectcontents_01.png)
+   ![project-contents_topic.png](./imgs/project-contents_topic.png)
 
 ### 7-3. メッセージの送信
 
@@ -269,20 +252,15 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 ## ワークショップの振り返り
 
 1. **Secret**
-   1. **Secret** を用いることで API Key などを安全に管理できることを学習しました。
-1. **LLM** 
-   1. **LLM** を用いて LLM の追加を行う方法を学習しました。
-1. **Type** 
-   1. **Type** を用いてスキーマの設定を行う方法を学習しました。
-1. **Topic** 
-   1. **Topic** を用いて Vantiq アプリケーション用のエンドポイントを作成する方法を学習しました。
+   1. **Secret** を用いた場合、既存のアプリケーションをインポートしても再設定する必要があり、 API Key などを安全に管理できることを学習しました。
+   1. **Procedure** を利用し、独自言語である VAIL を用いた柔軟なアプリ開発ができることを学習しました。
 1. **App**
-   1. **SubmitPrompt** を用いて LLM と対話する方法を学習しました。
+   1. **Procedure Activity** を利用し、作成した Procedure を呼び出す方法を学習しました。
 
 ## 参考情報
 
 ### プロジェクトファイル
 
-- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt_1.37.zip)
+- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-vail_1.37.zip)
 
 以上
