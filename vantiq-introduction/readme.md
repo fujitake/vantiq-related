@@ -61,6 +61,7 @@ Vantiq の基本的な扱い方を解説しています。
 |△|[ボックスソーター（中級編・Unwind）](./apps-development/boxsorter/unwind/readme.md)|ボックスソーター（初級編・MQTT）|
 |△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 |△|[LLM（SubmitPrompt Activity）](./apps-development/llm/submitprompt-activity/readme.md)|なし|
+|△|[LLM（SubmitPrompt VAIL）](./apps-development/llm/submitprompt-vail/readme.md)|LLM（SubmitPrompt Activity）|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
