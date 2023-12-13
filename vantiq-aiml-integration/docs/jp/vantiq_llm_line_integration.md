@@ -39,30 +39,30 @@ LINEからのEventを受信し、Semantic Indexに登録された情報を返す
 3. `webhook` のEvent Handlerを実装します。以下のように実装します。
 ![EventHandler](../../imgs/vantiq_llm_line_integration/eventHandler.png)
 
-   - Unwind : `webhook` で受信したEventを展開します。(1つのWebhookに複数のWebhookイベントオブジェクトが含まれる場合があるため)
-   - IsMessageEvent : `Filter` アクティビティです。`webhook` で受信したEventがMessageEventかどうかを判定します。今回はメッセージイベントのみを対象とします。
-   - SplitByUser : 受信したEventのUserIdをキーにして、ユーザー毎に会話を管理します。
+   - Unwind : `webhook` で受信したEventを展開します。(1つのWebhookに複数のWebhookイベントオブジェクトが含まれる場合があるため) EventStreamに直接Eventの配列が流れてくるため、unwindPropertyの設定は不要です。
+   - IsMessageEvent : `Filter` アクティビティです。`webhook` で受信したEventがMessageEventかどうかを判定します。今回はメッセージイベントのみを対象とします。conditions に `event.type == "message"` を設定します。
+   - SplitByUser : 受信したEventのUserIdをキーにして、ユーザー毎に会話を管理します。groupByに `event.source.userId` を設定します。
    - AccumulateState : 会話IDの生成・保持を行います。
      - 以下のように設定します。
       ![AccumulateState](../../imgs/vantiq_llm_slack_integration/accumulateState.png)
      - vailの記述内容は以下の通りです。Vantiqの会話コンテクスト管理に関しての詳細は、[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#conversationmemory) を参照してください。
 
-       ```javascript
+         ```javascript
          // Update the value of state using event.
-         if(!state){
-         state = {}
+         if !state {
+            state = {}
          }
-         if(!state.convId){
+         if !state.convId {
             // convIdが存在しない場合、ConversationMemoryに会話を開始するようにリクエストする
-            var startConvo = []
-            state.convId = io.vantiq.ai.ConversationMemory.startConversation(startConvo)
+            var startConv = []
+            state.convId = io.vantiq.ai.ConversationMemory.startConversation(startConv)
          } 
-       ```
+         ```
 
    - SemanticSearch : `Procedure` アクティビティです。Semantic Indexに登録された情報を検索し、結果を返します。
      - 以下のService Procedureを作成してください。
 
-       ```javascript
+         ```javascript
          package jp.vantiq
          import service io.vantiq.ai.SemanticSearch
          import service io.vantiq.text.Template
@@ -92,7 +92,7 @@ LINEからのEventを受信し、Semantic Indexに登録された情報を返す
          }
 
          return result
-       ```
+         ```
 
      - アクティビティの設定は以下の通りです。
        ![SemanticSearch](../../imgs/vantiq_llm_line_integration/semanticSearch.png)
@@ -100,9 +100,9 @@ LINEからのEventを受信し、Semantic Indexに登録された情報を返す
    - SendToLine : `Procedure` アクティビティです。RemoteSourceにメッセージを送信します。
      - 以下のService Procedureを作成してください。
 
-       ```javascript
+         ```javascript
          package jp.vantiq
-         PROCEDURE LineMessagingAPIService.SendToLine(userId String, llmResponse Object )
+         ROCEDURE LineMessagingAPIService.SendToLine(userId String, llmResponse Object )
 
          var source_config = {
             "path": "/v2/bot/message/push"
@@ -121,7 +121,7 @@ LINEからのEventを受信し、Semantic Indexに登録された情報を返す
          PUBLISH { "body": data } TO SOURCE jp.vantiq.LineAPI Using source_config
 
          return null
-       ```
+         ```
 
      - アクティビティの設定は以下の通りです。
        ![SendToLine](../../imgs/vantiq_llm_line_integration/sendToLine.png)
@@ -132,34 +132,34 @@ LINEからのEventを受信し、Semantic Indexに登録された情報を返す
 Procedureのサンプルは以下となります。検証に成功した場合、ServiceのInbound EventにPublishします。
 まず、チャンネルシークレット・リクエストボディ・x-line-signature を受け取り、署名検証を行うService Procedureを作成します。(チャンネルシークレットは、LINE Developers コンソール のMessaging API の設定画面から取得できます。)
 
-```javascript:validateLineRequest
-   package jp.vantiq
-   PROCEDURE LineMessagingAPIService.validateLineRequest(channelSecret String, requestBody String, lineSignature String)
-   // see https://developers.line.biz/ja/reference/messaging-api/#signature-validation
-   var digest = Hash.hmacSha256(channelSecret, requestBody)
-   var encodedDigest = Encode.base64(digest)
+```javascript
+package jp.vantiq
+PROCEDURE LineMessagingAPIService.validateLineRequest(channelSecret String, requestBody String, lineSignature String)
+// see https://developers.line.biz/ja/reference/messaging-api/#signature-validation
+var digest = Hash.hmacSha256(channelSecret, requestBody)
+var encodedDigest = Encode.base64(digest)
 
-   return encodedDigest == lineSignature
+return encodedDigest == lineSignature
 ```
 
 次に、LINE Webhook Eventを受信するProcedureを作成します。以下のように実装します。
 
-```javascript:receiveLineMessages
-   PROCEDURE ReceiveLineMessages(destination String, events Object ARRAY)
-   var headers = Utils.getHttpHeaders()
+```javascript
+PROCEDURE ReceiveLineMessages(destination String, events Object ARRAY)
+var headers = Utils.getHttpHeaders()
 
-   var channelSecret = <Channel Secret>
-   var requestBody = {destination: destination, events : events}
-   var lineSignature = headers."x-line-signature"
+var channelSecret = <Channel Secret>
+var requestBody = {destination: destination, events : events}
+var lineSignature = headers."x-line-signature"
 
-   if jp.vantiq.LineMessagingAPIService.validateLineRequest(channelSecret, stringify(requestBody), lineSignature) {
-      // 署名検証に成功したらServiceにPublish
-      PUBLISH events TO SERVICE EVENT "jp.vantiq.LineMessagingAPIService/webhook"
-   }
+if jp.vantiq.LineMessagingAPIService.validateLineRequest(channelSecret, stringify(requestBody), lineSignature) {
+   // 署名検証に成功したらServiceにPublish
+   PUBLISH events TO SERVICE EVENT "jp.vantiq.LineMessagingAPIService/webhook"
+}
 ```
 
 1. LINE Messaging API のWebhook Url に、上記で作成したProcedureのURLを設定します。URLには、VantiqのREST APIのURLを設定します。クエリパラメータでVantiqのAPI Tokenを渡します。
- 
+
  > **NOTE**
  > 通常、POSTリクエストではクエリパラメータを使用しませんが、VantiqのREST APIは認証が必要なため、クエリパラメータでAPI Tokenを渡します。クエリパラメータに認証情報を含めることはセキュリティ上問題があるため、プロダクション環境ではAPI GatewayでAuthorization Headerを付与するなどの対応が必要です。
 
