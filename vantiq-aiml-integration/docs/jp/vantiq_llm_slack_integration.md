@@ -39,7 +39,8 @@ SlackからのEventを受信し、Semantic Indexに登録された情報を返�
 1. Service のInbound Event に、SlackからのEventを受信するための `inbound` を追加します。
 
 1. `inbound` のEvent Handlerを実装します。以下のように実装します。
-![EventHandler](../../imgs/vantiq_llm_slack_integration/eventhandler.png)
+   
+   ![EventHandler](../../imgs/vantiq_llm_slack_integration/eventhandler.png)
 
    - SplitByThread : `inbound` で受信したEventのthread_tsをキーにして、スレッド毎に会話を管理します。
    - AccumulateState : 会話IDの生成・保持を行います。
