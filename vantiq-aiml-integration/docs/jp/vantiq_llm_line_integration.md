@@ -37,7 +37,8 @@ LINEからのEventを受信し、Semantic Indexに登録された情報を返す
 2. Service のInbound Event に、LINE Webhookイベントを受信するための `webhook` を追加します。
 
 3. `webhook` のEvent Handlerを実装します。以下のように実装します。
-![EventHandler](../../imgs/vantiq_llm_line_integration/eventHandler.png)
+
+   ![EventHandler](../../imgs/vantiq_llm_line_integration/eventHandler.png)
 
    - Unwind : `webhook` で受信したEventを展開します。(1つのWebhookに複数のWebhookイベントオブジェクトが含まれる場合があるため) EventStreamに直接Eventの配列が流れてくるため、unwindPropertyの設定は不要です。
    - IsMessageEvent : `Filter` アクティビティです。`webhook` で受信したEventがMessageEventかどうかを判定します。今回はメッセージイベントのみを対象とします。conditions に `event.type == "message"` を設定します。
