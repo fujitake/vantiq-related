@@ -158,6 +158,8 @@ Procedure を作成します。
 
 ### 6-1. 【App Builder】App ペインの表示
 
+#### App ペインの表示
+
 1. 画面左側の **Project Contents** から `LlmApp` ペインを開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
@@ -166,11 +168,15 @@ Procedure を作成します。
 
 **SubmitPrompt Activity** を削除します。  
 
+#### SubmitPrompt の削除
+
 1. `SubmitPrompt` タスクを選択し、 `Delete` キーを押下して削除します。
 
    ![app_01.png](./imgs/app_01.png)
 
 ### 6-3. 【Procedure】プロシージャの呼び出し
+
+#### Procedure Activity の実装
 
 1. App ペイン左側の `Actions` の中から `Procedure` を選択し、 `LlmInbound` タスクの上にドロップします。  
 
@@ -199,6 +205,8 @@ Procedure を作成します。
 ### 6-4. 【LogStream】ログタスクの修正
 
 LLM との会話をログに出力して、結果を確認できるよう `LogStream` タスクを修正します。  
+
+#### LogStream の修正
 
 1. `LogStream` タスクを選択し、 `Procedure` タスクの上にドロップして、アプリケーションを保存します。  
 
