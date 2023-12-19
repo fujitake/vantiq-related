@@ -39,7 +39,6 @@ var body = {
     "mode": "chat",
     "character": "Example"
 }
-//var response = SELECT ONE FROM SOURCE textgenapi WITH headers = headers, body = body
 var response = SELECT ONE FROM SOURCE textgenapi WITH body = body, path = path
 ```
 
