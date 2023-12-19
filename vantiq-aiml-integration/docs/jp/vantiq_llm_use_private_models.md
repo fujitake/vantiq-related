@@ -45,4 +45,4 @@ var response = SELECT ONE FROM SOURCE textgenapi WITH body = body, path = path
 
 # リソース
 
-上記の Source と Procedure を含む Project のサンプルは[こちらからダウンロード](../../conf/vantiq_llm_private_models/sample_private_models.zip)してご利用頂けます。
+上記の Source と Procedure を含む Project のサンプルは[こちらからダウンロード](../../conf/vantiq_llm_private_models/sample_use_private_models.zip)してご利用頂けます。
