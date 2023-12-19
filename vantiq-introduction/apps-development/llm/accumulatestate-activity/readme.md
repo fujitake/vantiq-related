@@ -1,6 +1,7 @@
 # LLM（AccumulateState Activity）
 
-Vantiq で LLM（大規模言語モデル） を利用し、会話を継続する方法を学習します。  
+Vantiq で LLM（大規模言語モデル） を利用し、会話を継続するアプリケーションを実装します。  
+このセッションを通じて AccumulateState および State の学習を行います。  
 
 ## Vantiq で実装するアプリケーションの概要
 
