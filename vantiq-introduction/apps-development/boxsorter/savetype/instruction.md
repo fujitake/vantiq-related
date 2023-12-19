@@ -77,7 +77,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 - [BoxSorterDataGenerator (SaveToType)](/vantiq-google-colab/code/box-sorter_data-generator_savetype.ipynb)
 
 設定方法は下記を参照してください。  
-[ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
+[ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
 
 > **注意点**  
 > データジェネレータの種類が **ボックスソーター（初級編・MQTT）** とは異なるので注意してください。
@@ -87,7 +87,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 **Source** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
 詳細は下記を参照してください。  
-[ボックスソーター（中級編・CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/apps-boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
+[ボックスソーター（中級編・CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
 
 ## 4. App Builder を用いたボックスソーターアプリの修正
 
