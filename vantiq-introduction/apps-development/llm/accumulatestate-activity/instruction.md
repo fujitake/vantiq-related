@@ -7,7 +7,8 @@
 1. 【準備】Namespace の作成と Project のインポート
 1. 【Secret】各種 LLM の API Key の設定
 1. 【LLM】LLM の設定
-1. 【Procedure】VAIL を用いた Procedure の作成
+1. 【Type】スキーマの修正
+1. 【Procedure】Procedure の修正
 1. 【App Builder】LLM アプリケーションの改修
 1. 【動作確認】Log メッセージの確認
 
@@ -27,19 +28,21 @@
     - [3-1. LLM ペインの表示](#3-1-llm-ペインの表示)
     - [3-2. API Key Secret の設定](#3-2-api-key-secret-の設定)
   - [4. 既存のアプリケーションの動作確認](#4-既存のアプリケーションの動作確認)
-  - [5. Procedure の作成](#5-procedure-の作成)
-    - [5-1. Procedure の作成](#5-1-procedure-の作成)
-    - [5-2. Procedure の実行](#5-2-procedure-の実行)
+  - [5. スキーマの修正](#5-スキーマの修正)
+    - [5-1. LlmSchema ペインの表示](#5-1-llmschema-ペインの表示)
+    - [4-2. Property の追加](#4-2-property-の追加)
+  - [6. Procedure の修正](#6-procedure-の修正)
+    - [6-1. Procedure ペインの表示](#6-1-procedure-ペインの表示)
+    - [6-2. Procedure の修正](#6-2-procedure-の修正)
   - [6. App Builder を用いた App の改修](#6-app-builder-を用いた-app-の改修)
     - [6-1. 【App Builder】App ペインの表示](#6-1-app-builderapp-ペインの表示)
-    - [6-2. 【SubmitPrompt】既存のタスクの削除](#6-2-submitprompt既存のタスクの削除)
-    - [6-3. 【Procedure】プロシージャの呼び出し](#6-3-procedureプロシージャの呼び出し)
-    - [6-4. 【LogStream】ログタスクの修正](#6-4-logstreamログタスクの修正)
+    - [6-2. 【SuplitByGroup】](#6-2-suplitbygroup)
+    - [6-3. 【AccumulateState】イベントの状態の保持](#6-3-accumulatestateイベントの状態の保持)
+    - [6-4. 【Procedure】実引数の追加](#6-4-procedure実引数の追加)
   - [7. LLM との会話](#7-llm-との会話)
     - [7-1. Log メッセージ画面の表示](#7-1-log-メッセージ画面の表示)
     - [7-2. /Inbound Topic ペインの表示](#7-2-inbound-topic-ペインの表示)
-    - [7-3. メッセージの送信](#7-3-メッセージの送信)
-    - [7-4. アプリケーションとログの確認](#7-4-アプリケーションとログの確認)
+    - [7-3. メッセージの送信とログの確認](#7-3-メッセージの送信とログの確認)
   - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
@@ -83,8 +86,8 @@ Secret はネームスペースごとに管理されているため、改めて 
 
 ## 3. LLM の設定
 
-LLM の設定を行っていきます。  
-Secret の設定をし直す必要がります。  
+LLM の設定を行います。  
+Secret の設定をし直す必要があります。  
 
 ### 3-1. LLM ペインの表示
 
@@ -111,107 +114,162 @@ Secret の設定をし直す必要がります。
 `/Inbound` Topic からメッセージを送信し、アプリケーションが正しく動作するか確認します。  
 
 詳細は下記を参照してください。  
-[LLM（SubmitPrompt Activity） - 7. LLM との会話](/vantiq-introduction/apps-development/llm/submitprompt-activity/instruction.md#7-llm-との会話)
+[LLM（SubmitPrompt VAIL） - 7. LLM との会話](/vantiq-introduction/apps-development/llm/submitprompt-vail/instruction.md#7-llm-との会話)
 
-## 5. Procedure の作成
+## 5. スキーマの修正
 
-Procedure を作成します。  
+スキーマを修正し、会話を特定するための `talk_id` を追加します。
 
-### 5-1. Procedure の作成
+### 5-1. LlmSchema ペインの表示
 
-1. メニューバーの `追加` -> `Advanced` -> `Procedure...` -> `+ 新規 Procedure` をクリックします。
+1. 画面左側の **Project Contents** から `LlmSchema` ペインを開きます。
 
-   ![procedure_01.png](./imgs/procedure_01.png)
+   ![project-contents_type.png](./imgs/project-contents_type.png)
+
+### 4-2. Property の追加
+
+1. `Properties` タブを開き、 `+ Property を追加` をクリックします。
+
+   ![type_01.png](./imgs/type_01.png)
+
+1. 以下の内容を設定し、 `OK` をクリックして、 Type を保存します。
+
+   |項目|設定値|
+   |-|-|
+   |Name|talk_id|
+   |type|String|
+
+   ![type_02.png](./imgs/type_02.png)
+
+## 6. Procedure の修正
+
+現在のプロシージャでは、会話の継続ができません。  
+引数に `conversationId` を渡すことで、会話の継続が可能になります。  
+
+プロシージャを書き換えて、会話の継続ができるように変更します。  
+
+### 6-1. Procedure ペインの表示
+
+1. 画面左側の **Project Contents** から `submitPormpt` ペインを開きます。
+
+   ![project-contents_procedure.png](./imgs/project-contents_procedure.png)
+
+### 6-2. Procedure の修正
 
 1. 下記の内容を入力し、保存します。
 
    ```JavaScript
-   PROCEDURE submitPormpt(prompt)
+   PROCEDURE submitPormpt(prompt, conversationId)
 
-   var response = io.vantiq.ai.LLM.submitPrompt("LLM", prompt)
+   var response = io.vantiq.ai.LLM.submitPrompt("LLM", prompt, conversationId)
 
    return response
    ```
 
-   ![procedure_02.png](./imgs/procedure_02.png)
+   ![procedure_01.png](./imgs/procedure_01.png)
 
-### 5-2. Procedure の実行
 
-1. ペイン左上の `実行ボタン` をクリックし、プロシージャを実行してみます。
-
-   ![procedure_03.png](./imgs/procedure_03.png)
-
-1. 引数に適当な文字を入力して `実行` をクリックします。
-
-   ![procedure_04.png](./imgs/procedure_04.png)
-
-1. 実行結果を確認し、 `OK` をクリックします。
-
-   ![procedure_05.png](./imgs/procedure_05.png)
 
 ## 6. App Builder を用いた App の改修
 
 この手順からアプリケーションの改修を開始します。  
 
-今回は **SubmitPrompt Activity** に変わり **Procedure Activity** を利用します。  
-そのために必要な改修を行っていきます。  
+今回は **AccumulateState Activity** の追加実装を行っていきます。  
+**AccumulateState Activity** を用いることで、イベントの状態を State に保持し、会話を継続できるようにします。  
 
 ### 6-1. 【App Builder】App ペインの表示
+
+#### App ペインの表示
 
 1. 画面左側の **Project Contents** から `LlmApp` ペインを開きます。
 
    ![project-contents_app.png](./imgs/project-contents_app.png)
 
-### 6-2. 【SubmitPrompt】既存のタスクの削除
+### 6-2. 【SuplitByGroup】
 
-**SubmitPrompt Activity** を削除します。  
+後続のタスクで利用する **AccumulateState Activity** を用いるために、 **SuplitByGroup Activity** を利用して、 `talk_id` ごとにイベントをグルーピングします。  
 
-1. `SubmitPrompt` タスクを選択し、 `Delete` キーを押下して削除します。
+#### SuplitByGroup の実装
 
-   ![app_01.png](./imgs/app_01.png)
+1. App ペイン左側の `Flow Control` の中から `SplitByGroup` を選択し、 `LlmInbound` タスクと `Procedure` タスクの間の **矢印** の上にドロップします。  
 
-### 6-3. 【Procedure】プロシージャの呼び出し
+   ![app_splitbygroup_01.png](./imgs/app_splitbygroup_01.png)
 
-1. App ペイン左側の `Actions` の中から `Procedure` を選択し、 `LlmInbound` タスクの上にドロップします。  
-
-   ![app_02.png](./imgs/app_02.png)
-
-1. `Procedure` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を入力します。
+1. `SplitByGroup` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を設定して、アプリケーションを保存します。
 
    |Required Parameter|Value|
    |-|-|
-   |procedure (Enumerated)|submitPrompt|
+   |groupBy (VAIL Expression)|event.talk_id|
 
-   ![app_03.png](./imgs/app_03.png)
+   ![app_splitbygroup_02.png](./imgs/app_splitbygroup_02.png)
 
-1. `parameters (Object)` の `<null>` をクリックします。
+### 6-3. 【AccumulateState】イベントの状態の保持
 
-   ![app_04.png](./imgs/app_04.png)
+**AccumulateState Activity** を用いて、イベントの状態を State に保持します。
 
-1. 以下の設定を行いアプリケーションを保存します。
+#### AccumulateState の実装
 
-   |Parameter|VAIL Expression|
-   |-|-|
-   |prompt|event.message|
+1. App ペイン左側の `Modifiers` の中から `AccumulateState` を選択し、 `SplitByGroup` タスクと `Procedure` タスクの間の **矢印** の上にドロップします。  
 
-   ![app_05.png](./imgs/app_05.png)
-
-### 6-4. 【LogStream】ログタスクの修正
-
-LLM との会話をログに出力して、結果を確認できるよう `LogStream` タスクを修正します。  
-
-1. `LogStream` タスクを選択し、 `Procedure` タスクの上にドロップして、アプリケーションを保存します。  
-
-   ![app_06.png](./imgs/app_06.png)
+   ![app_accumulatestate_01.png](./imgs/app_accumulatestate_01.png)
 
    > **補足**  
    > `Downstream イベント` は `event` を選択します。  
    >
-   > ![app_07.png](./imgs/app_07.png)
+   > ![app_accumulatestate_02.png](./imgs/app_accumulatestate_02.png)
+
+1. `AccumulateState` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を設定します。
+
+   |Optional Parameter|Value|
+   |-|-|
+   |outboundBehavior (Enumerated)|Attach state value to outboundProperty|
+   |outboundProperty (String)|convId|
+
+   ![app_accumulatestate_03.png](./imgs/app_accumulatestate_03.png)
+
+1. `procedure (Union)` の `{"vailScript":"// Update the value of state using event.\nstate = event"}` をクリックします。
+
+   ![app_accumulatestate_04.png](./imgs/app_accumulatestate_04.png)
+
+1. 以下の内容を設定して、アプリケーションを保存します。
+
+   |設定項目|設定値|
+   |-|-|
+   |procedure Type|VAIL Block|
+   |procedure|※下記の VAIL コード|
+
+   ```JavaScript
+   // Update the value of state using event.
+   if(!state){
+       state = io.vantiq.ai.ConversationMemory.startConversation()
+   }
+   ```
+
+   ![app_accumulatestate_05.png](./imgs/app_accumulatestate_05.png)
+
+### 6-4. 【Procedure】実引数の追加
+
+Procedure の引数の設定を追加します。  
+
+#### Procedure の修正
+
+1. `Procedure` タスクをクリックし、 `Configuration` の `クリックして編集` を開き、 `parameters (Object)` の `{"prompt":"event.message"}` をクリックします。
+
+   ![app_procedure_01.png](./imgs/app_procedure_01.png)
+
+1. 以下の内容を設定して、アプリケーションを保存します。
+
+   |Parameter|VAIL Expression|
+   |-|-|
+   |prompt|event.message|
+   |conversationId|event.convId|
+
+   ![app_procedure_02.png](./imgs/app_procedure_02.png)
 
 ## 7. LLM との会話
 
-Topic からメッセージを送信し、 LLM との会話を行ってみます。  
+Topic からメッセージを送信し、 LLM との会話を行います。  
+今回は会話が継続されていることを確認する必要があるため、しりとりを行ってみます。
 
 ### 7-1. Log メッセージ画面の表示
 
@@ -225,21 +283,31 @@ Topic からメッセージを送信し、 LLM との会話を行ってみます
 
    ![project-contents_topic.png](./imgs/project-contents_topic.png)
 
-### 7-3. メッセージの送信
+### 7-3. メッセージの送信とログの確認
 
-1. `/Inbound` Topic ペインから任意のメッセージを入力し、 `Publish` をクリックします。
+1. `/Inbound` Topic ペインから任意のメッセージと任意の会話IDを入力し、 `Publish` をクリックします。
 
    ![log_01.png](./imgs/log_01.png)
 
-### 7-4. アプリケーションとログの確認
-
-1. アプリケーションが正しく動いているか確認します。
+1. ログを確認します。
 
    ![log_02.png](./imgs/log_02.png)
 
-1. LLM との会話の結果をログ画面で確認します。
+1. 引き続き、会話を継続します。
 
    ![log_03.png](./imgs/log_03.png)
+
+1. 再度、ログを確認します。
+
+   ![log_04.png](./imgs/log_04.png)
+
+1. 引き続き、会話を継続します。
+
+   ![log_05.png](./imgs/log_05.png)
+
+1. 再度、ログを確認します。
+
+   ![log_06.png](./imgs/log_06.png)
 
 ## Project のエクスポート
 
@@ -251,16 +319,13 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 
 ## ワークショップの振り返り
 
-1. **Secret**
-   1. **Secret** を用いた場合、既存のアプリケーションをインポートしても再設定する必要があり、 API Key などを安全に管理できることを学習しました。
-   1. **Procedure** を利用し、独自言語である VAIL を用いた柔軟なアプリ開発ができることを学習しました。
 1. **App**
-   1. **Procedure Activity** を利用し、作成した Procedure を呼び出す方法を学習しました。
+   1. **AccumulateState Activity** を利用し、イベントの状態を State に保持する方法を学習しました。
 
 ## 参考情報
 
 ### プロジェクトファイル
 
-- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-vail_1.37.zip)
+- [LLM（AccumulateState Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_accumulatestate-activity_1.37.zip)
 
 以上

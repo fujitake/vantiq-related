@@ -62,6 +62,7 @@ Vantiq の基本的な扱い方を解説しています。
 |△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 |△|[LLM（SubmitPrompt Activity）](./apps-development/llm/submitprompt-activity/readme.md)|なし|
 |△|[LLM（SubmitPrompt VAIL）](./apps-development/llm/submitprompt-vail/readme.md)|LLM（SubmitPrompt Activity）|
+|△|[LLM（AccumulateState Activity）](./apps-development/llm/accumulatestate-activity/readme.md)|LLM（SubmitPrompt VAIL）|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  

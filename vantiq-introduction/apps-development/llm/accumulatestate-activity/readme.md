@@ -13,11 +13,11 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 このワークショップでは下記の Activity Pattern を利用します。
 
-### Procedure Activity
+### AccumulateState Activity
 
-![activitypattern_procedure.png](./imgs/activitypattern_procedure.png)
+![activitypattern_accumulatestate.png](./imgs/activitypattern_accumulatestate.png)
 
-**Procedure Activity** を利用すると VAIL でコーディングした Procedure を App で利用で呼び出せます。  
+**AccumulateState Activity** を利用するとイベントの状態を State に保持することができます。
 
 ## 必要なマテリアル
 
