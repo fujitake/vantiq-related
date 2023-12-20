@@ -51,7 +51,7 @@
 あわせてプロジェクトの保存も行っておきます。  
 
 詳細は下記をご確認ください。  
-[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/readme.md)
 
 ## 2. Secret を用いた API Key の管理
 
