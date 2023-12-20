@@ -67,7 +67,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
 **ボックスソーター（初級編・Transformation）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
-[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
+[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
 
 ## 2. データジェネレータの準備
 
@@ -461,7 +461,7 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 作成したアプリケーションを Project ごとエクスポートします。  
 
 詳細は下記を参照してください。  
-[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のエクスポート)
+[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のエクスポート)
 
 ## ワークショップの振り返り
 

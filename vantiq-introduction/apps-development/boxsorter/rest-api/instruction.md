@@ -520,7 +520,7 @@ App Builder を用いて、 App を新規作成します。
 Project のエクスポートを行うことで、他の Namespace にインポートしたり、バックアップとして管理することが出来ます。  
 
 詳細は下記を参照してください。  
-[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のエクスポート)
+[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のエクスポート)
 
 ## ワークショップの振り返り
 
