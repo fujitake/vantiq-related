@@ -51,7 +51,7 @@
 あわせてプロジェクトの保存も行っておきます。  
 
 詳細は下記をご確認ください。  
-[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/readme.md)
 
 ## 2. Secret を用いた API Key の管理
 
@@ -270,7 +270,7 @@ Topic からメッセージを送信し、 LLM との会話を行ってみます
 Project のエクスポートを行うことで、他の Namespace にインポートしたり、バックアップとして管理することが出来ます。  
 
 詳細は下記を参照してください。  
-[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のエクスポート)
+[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のエクスポート)
 
 ## ワークショップの振り返り
 

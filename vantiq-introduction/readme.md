@@ -7,8 +7,8 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 Vantiq を利用するための事前準備の方法を解説しています。  
 アカウントが既に発行されている場合はこの手順を飛ばしてください。
 
-- [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/root_account.md)
-- [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/dev_account.md)
+- [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/readme.md)
+- [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/readme.md)
 
 ## アプリケーション開発
 
@@ -18,9 +18,9 @@ Vantiq アプリケーションの開発方法をワークショップ形式で�
 
 Vantiq の基本的な扱い方を解説しています。  
 
-1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/namespace.md)
-1. [Project の管理について](./apps-development/vantiq-basic/project/project.md)
-1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/basic-common.md)
+1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/readme.md)
+1. [Project の管理について](./apps-development/vantiq-basic/project/readme.md)
+1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/readme.md)
 
 ### アプリケーション開発ワークショップ（初級編）
 

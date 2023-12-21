@@ -55,7 +55,7 @@
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 
 詳細は下記をご確認ください。  
-[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/readme.md)
 
 ### 1-2. Project のインポート
 
@@ -63,7 +63,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
 **LLM（SubmitPrompt Activity）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
-[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のインポート)
+[Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
 
 ## 2. Secret を用いた API Key の管理
 
@@ -315,7 +315,7 @@ Topic からメッセージを送信し、 LLM との会話を行います。
 Project のエクスポートを行うことで、他の Namespace にインポートしたり、バックアップとして管理することが出来ます。  
 
 詳細は下記を参照してください。  
-[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/project.md#project-のエクスポート)
+[Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のエクスポート)
 
 ## ワークショップの振り返り
 

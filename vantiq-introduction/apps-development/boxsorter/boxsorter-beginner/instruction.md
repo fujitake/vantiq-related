@@ -99,7 +99,7 @@
 アプリケーションを実装する前に新しく Namespace を作成し、作成した Namespace に切り替えます。  
 
 詳細は下記をご確認ください。  
-[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/namespace.md)
+[Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/readme.md)
 
 ## 2.【準備】Google Colaboratory の動作確認
 
