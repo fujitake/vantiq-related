@@ -8,7 +8,7 @@ Vantiq を利用するための事前準備の方法を解説しています。
 アカウントが既に発行されている場合はこの手順を飛ばしてください。
 
 - [Vantiqアカウント作成（開発者向け）](./apps-development/vantiq-devenv/root_account/root_account.md)
-- [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/dev_account.md)
+- [Vantiqアカウント作成（組織管理者向け）](./apps-development/vantiq-devenv/dev_account/readme.md)
 
 ## アプリケーション開発
 
