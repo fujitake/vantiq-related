@@ -1,4 +1,4 @@
-# ボックスソーター（初級編・REST API）
+# ボックスソーター（REST API）
 
 ## 実装の流れ
 
@@ -14,7 +14,7 @@
 
 ## 目次
 
-- [ボックスソーター（初級編・REST API）](#ボックスソーター初級編rest-api)
+- [ボックスソーター（REST API）](#ボックスソーター初級編rest-api)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
@@ -86,7 +86,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 下記のリンクから **データジェネレータ** のページを開きます。
 
-   - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
+   - [BoxSorterDataGenerator（REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
 
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
@@ -543,7 +543,7 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（初級編・REST API）の実装サンプル（Vantiq 1.34）](./../data/box_sorter_restapi_1.34.zip)
-- [ボックスソーター（初級編・REST API）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_restapi_1.37.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq 1.34）](./../data/box_sorter_restapi_1.34.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_restapi_1.37.zip)
 
 以上

@@ -1,4 +1,4 @@
-# ボックスソーター（中級編・SaveToType）
+# ボックスソーター（SaveToType）
 
 ## 実装の流れ
 
@@ -15,7 +15,7 @@
 
 ## 目次
 
-- [ボックスソーター（中級編・SaveToType）](#ボックスソーター中級編savetotype)
+- [ボックスソーター（SaveToType）](#ボックスソーター中級編savetotype)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
@@ -63,7 +63,7 @@
 ### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
-**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
+**ボックスソーター（MQTT）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
@@ -77,17 +77,17 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 - [BoxSorterDataGenerator (SaveToType)](/vantiq-google-colab/code/box-sorter_data-generator_savetype.ipynb)
 
 設定方法は下記を参照してください。  
-[ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
+[ボックスソーター（CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
 
 > **注意点**  
-> データジェネレータの種類が **ボックスソーター（初級編・MQTT）** とは異なるので注意してください。
+> データジェネレータの種類が **ボックスソーター（MQTT）** とは異なるので注意してください。
 
 ## 3. 既存のアプリケーションの動作確認
 
 **Source** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
 詳細は下記を参照してください。  
-[ボックスソーター（中級編・CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
+[ボックスソーター（CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
 
 ## 4. App Builder を用いたボックスソーターアプリの修正
 
@@ -373,6 +373,6 @@ event データには `time` というプロパティが存在しています。
 
 ### プロジェクトファイル
 
-- [ボックスソーター（中級編・SaveToType）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_savetotype_1.37.zip)
+- [ボックスソーター（SaveToType）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_savetotype_1.37.zip)
 
 以上

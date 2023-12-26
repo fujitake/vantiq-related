@@ -1,4 +1,4 @@
-# ボックスソーター（中級編・CachedEnrich）
+# ボックスソーター（CachedEnrich）
 
 ## 実装の流れ
 
@@ -13,7 +13,7 @@
 
 ## 目次
 
-- [ボックスソーター（中級編・CachedEnrich）](#ボックスソーター中級編cachedenrich)
+- [ボックスソーター（CachedEnrich）](#ボックスソーターcachedenrich)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
@@ -58,7 +58,7 @@
 ### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
-**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
+**ボックスソーター（MQTT）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
@@ -79,7 +79,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 1. 下記のリンクから **データジェネレータ** のページを開きます。
 
-   - [BoxSorterDataGenerator（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
+   - [BoxSorterDataGenerator（MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
 
    > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
@@ -230,7 +230,7 @@ Type のデータをメモリ上に展開し、メモリ上でのマスタデー
 送信用の MQTT ブローカーからデータをサブスクライブし、仕分け結果を確認します。  
 MQTT クライアントで送信先の Topic をサブスクライブしておき、正しく仕分けされるか確認します。  
 
-手順は、 [ボックスソーター（初級編・MQTT）| 5. 仕分け結果の確認](./../mqtt/instruction.md#5-仕分け結果の確認) と同様です。
+手順は、 [ボックスソーター（MQTT）| 5. 仕分け結果の確認](./../mqtt/instruction.md#5-仕分け結果の確認) と同様です。
 
 ## Project のエクスポート
 
@@ -249,6 +249,6 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（中級編・CachedEnrich）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_cachedenrich_1.37.zip)
+- [ボックスソーター（CachedEnrich）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_cachedenrich_1.37.zip)
 
 以上

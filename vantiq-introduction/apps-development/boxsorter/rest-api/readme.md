@@ -1,4 +1,4 @@
-# ボックスソーター（初級編・REST API）
+# ボックスソーター（REST API）
 
 読み取った送り先コードで荷物を仕分けするアプリケーションの開発を体験します。  
 
@@ -107,12 +107,12 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
-  - [BoxSorterDataGenerator（初級編・REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.ipynb)
+  - [BoxSorterDataGenerator（REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
+  - [BoxSorterDataGenerator（REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.py)
-  - [BoxSorterDataGenerator（初級編・REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.py)
+  - [BoxSorterDataGenerator（REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.py)
+  - [BoxSorterDataGenerator（REST API・複数送信用）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api_multi.py)
 
 ### 商品マスタデータ
 

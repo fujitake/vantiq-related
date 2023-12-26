@@ -58,7 +58,7 @@
 ### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
-**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
+**ボックスソーター（MQTT）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
@@ -72,17 +72,17 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 - [BoxSorterDataGenerator (Unwind)](/vantiq-google-colab/code/box-sorter_data-generator_unwind.ipynb)
 
 設定方法は下記を参照してください。  
-[ボックスソーター（中級編・CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
+[ボックスソーター（CachedEnrich) - 2. データジェネレータの準備](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#2-データジェネレータの準備)
 
 > **注意点**  
-> データジェネレータの種類が **ボックスソーター（中級編・CachedEnrich）** とは異なるので注意してください。
+> データジェネレータの種類が **ボックスソーター（CachedEnrich）** とは異なるので注意してください。
 
 ## 3. 既存のアプリケーションの動作確認
 
 **Source** の **データの受信テスト** からデータが正しく受信できているか確認します。  
 
 詳細は下記を参照してください。  
-[ボックスソーター（中級編・CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
+[ボックスソーター（CachedEnrich) - 3. 既存のアプリケーションの動作確認](/vantiq-introduction/apps-development/boxsorter/cachedenrich/instruction.md#3-既存のアプリケーションの動作確認)
 
 ## 4. App Builder を用いたボックスソーターアプリの修正
 
@@ -196,7 +196,7 @@ The generated transformation: Transformation failed because: The generated trans
 
 ### プロジェクトファイル
 
-- [ボックスソーター（中級編・Unwind）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_1.37.zip)
-- [ボックスソーター（中級編・Unwind Ex）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_ex_1.37.zip)
+- [ボックスソーター（Unwind）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_1.37.zip)
+- [ボックスソーター（Unwind Ex）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_unwind_ex_1.37.zip)
 
 以上
