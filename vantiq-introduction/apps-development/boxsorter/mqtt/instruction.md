@@ -1,4 +1,4 @@
-# ボックスソーター（初級編・MQTT）
+# ボックスソーター（MQTT）
 
 ## 実装の流れ
 
@@ -13,7 +13,7 @@
 
 ## 目次
 
-- [ボックスソーター（初級編・MQTT）](#ボックスソーター初級編mqtt)
+- [ボックスソーター（MQTT）](#ボックスソーターmqtt)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
@@ -64,7 +64,7 @@
 ### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
-**ボックスソーター（初級編・Transformation）** の Project をインポートしてください。  
+**ボックスソーター（Transformation）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
@@ -85,7 +85,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 1. 下記のリンクから **データジェネレータ** のページを開きます。
 
-   - [BoxSorterDataGenerator（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
+   - [BoxSorterDataGenerator（MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
 
    > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
@@ -402,7 +402,7 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 1. 下記のリンクから **サブスクライブアプリ** のページを開きます。
 
-   - [BoxSorterDataSubscriber（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-subscriber_mqtt.ipynb)
+   - [BoxSorterDataSubscriber（MQTT）](/vantiq-google-colab/code/box-sorter_data-subscriber_mqtt.ipynb)
 
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
@@ -477,6 +477,6 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（初級編・MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
+- [ボックスソーター（MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
 
 以上

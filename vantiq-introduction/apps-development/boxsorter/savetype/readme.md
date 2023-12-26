@@ -1,4 +1,4 @@
-# ボックスソーター（中級編・SaveToType）
+# ボックスソーター（SaveToType）
 
 ボックスソーターアプリを改修して、 Type にデータを保存する方法について学習します。
 
@@ -42,10 +42,10 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（中級編・SaveToType）](/vantiq-google-colab/code/box-sorter_data-generator_savetype.ipynb)
+  - [BoxSorterDataGenerator（SaveToType）](/vantiq-google-colab/code/box-sorter_data-generator_savetype.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（中級編・SaveToType）](/vantiq-google-colab/code/box-sorter_data-generator_savetype.py)
+  - [BoxSorterDataGenerator（SaveToType）](/vantiq-google-colab/code/box-sorter_data-generator_savetype.py)
 - MQTTクライアント
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
   - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
@@ -56,7 +56,7 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（初級編・MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
+- [ボックスソーター（MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
 
 ### ドキュメント
 

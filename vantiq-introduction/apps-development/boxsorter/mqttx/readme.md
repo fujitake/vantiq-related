@@ -1,4 +1,4 @@
-# ボックスソーター（初級編・MQTTX）
+# ボックスソーター（MQTTX）
 
 ボックスソーターアプリを利用して、 MQTT クライアントの **MQTTX** について学習します。
 
@@ -21,10 +21,10 @@
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
+  - [BoxSorterDataGenerator（MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.py)
+  - [BoxSorterDataGenerator（MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.py)
 - MQTTクライアント
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
   - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
@@ -35,7 +35,7 @@
 
 ### プロジェクトファイル
 
-- [ボックスソーター（初級編・MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
+- [ボックスソーター（MQTT）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_mqtt_1.37.zip)
 
 ### ドキュメント
 

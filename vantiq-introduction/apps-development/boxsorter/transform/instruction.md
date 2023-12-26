@@ -1,4 +1,4 @@
-# ボックスソーター（初級編・Transformation）
+# ボックスソーター（Transformation）
 
 ## 実装の流れ
 
@@ -13,7 +13,7 @@
 
 ## 目次
 
-- [ボックスソーター（初級編・Transformation）](#ボックスソーター初級編transformation)
+- [ボックスソーター（Transformation）](#ボックスソーター初級編transformation)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
@@ -59,7 +59,7 @@
 ### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
-**ボックスソーター（初級編・REST API）** の Project をインポートしてください。  
+**ボックスソーター（REST API）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)
@@ -93,7 +93,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. 下記のリンクから **データジェネレータ** のページを開きます。
 
-   - [BoxSorterDataGenerator（初級編・REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
+   - [BoxSorterDataGenerator（REST API）](/vantiq-google-colab/code/box-sorter_data-generator_rest-api.ipynb)
 
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
@@ -225,6 +225,6 @@ Log 画面から `LogStream` のログデータを確認します。
 
 ### プロジェクトファイル
 
-- [ボックスソーター（初級編・Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
+- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
 
 以上

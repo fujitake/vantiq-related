@@ -1,8 +1,8 @@
-# ボックスソーター（中級編・MQTTX）
+# ボックスソーター（MQTTX）
 
 ## 目次
 
-- [ボックスソーター（中級編・MQTTX）](#ボックスソーター中級編mqttx)
+- [ボックスソーター（MQTTX）](#ボックスソーターmqttx)
   - [目次](#目次)
   - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
     - [1-1. Namespace の作成](#1-1-namespace-の作成)
@@ -24,7 +24,7 @@
 ### 1-2. Project のインポート
 
 Namespace の切り替えが出来たら、 Project のインポートを行います。  
-**ボックスソーター（初級編・MQTT）** の Project をインポートしてください。  
+**ボックスソーター（MQTT）** の Project をインポートしてください。  
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のインポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のインポート)

@@ -33,9 +33,9 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
-|◯|[ボックスソーター（初級編・REST API）](./apps-development/boxsorter/rest-api/readme.md)|なし|
-|◯|[ボックスソーター（初級編・Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（初級編・REST API）|
-|◯|[ボックスソーター（初級編・MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（初級編・Transformation）|
+|◯|[ボックスソーター（REST API）](./apps-development/boxsorter/rest-api/readme.md)|なし|
+|◯|[ボックスソーター（Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（REST API）|
+|◯|[ボックスソーター（MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（Transformation）|
 |◯|[VAIL 入門（基礎）](./apps-development/vail-introductory/vail_basic/vail_basic.md)|なし|
 
 > **必須の解説**  
@@ -53,12 +53,12 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|
 |:-:|-|-|
-|◯|[ボックスソーター（中級編・CachedEnrich）](./apps-development/boxsorter/cachedenrich/readme.md)|ボックスソーター（初級編・MQTT）|
-|✕|[ボックスソーター（中級編・MQTTX）](./apps-development/boxsorter/mqttx/readme.md)|ボックスソーター（初級編・MQTT）|
-|◯|[ボックスソーター（中級編・SaveToType)](./apps-development/boxsorter/savetype/readme.md)|ボックスソーター（初級編・MQTT）|
+|◯|[ボックスソーター（CachedEnrich）](./apps-development/boxsorter/cachedenrich/readme.md)|ボックスソーター（MQTT）|
+|✕|[ボックスソーター（MQTTX）](./apps-development/boxsorter/mqttx/readme.md)|ボックスソーター（MQTT）|
+|◯|[ボックスソーター（SaveToType)](./apps-development/boxsorter/savetype/readme.md)|ボックスソーター（MQTT）|
 |◯|[VAIL 入門（Type の操作）](./apps-development/vail-introductory/vail_type/vail_type.md)|VAIL 入門（基礎）|
 |◯|[VAIL 入門（外部へのデータ送信）](./apps-development/vail-introductory/vail_data/vail_data.md)|VAIL 入門（基礎）|
-|△|[ボックスソーター（中級編・Unwind）](./apps-development/boxsorter/unwind/readme.md)|ボックスソーター（初級編・MQTT）|
+|△|[ボックスソーター（Unwind）](./apps-development/boxsorter/unwind/readme.md)|ボックスソーター（MQTT）|
 |△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 |△|[LLM（SubmitPrompt Activity）](./apps-development/llm/submitprompt-activity/readme.md)|なし|
 |△|[LLM（SubmitPrompt VAIL）](./apps-development/llm/submitprompt-vail/readme.md)|LLM（SubmitPrompt Activity）|

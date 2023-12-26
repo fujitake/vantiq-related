@@ -1,10 +1,10 @@
-# ボックスソーター（初級編・MQTT）
+# ボックスソーター（MQTT）
 
 ボックスソーターアプリを改修して、 MQTT でデータを送受信する方法を体験します。  
 
 > **注意**  
-> ボックスソーター（初級編・Transformation）を実施していない場合は、先にそちらを実施してください。  
-> - [ボックスソーター（初級編・Transformation）](./../transform/readme.md)
+> ボックスソーター（Transformation）を実施していない場合は、先にそちらを実施してください。  
+> - [ボックスソーター（Transformation）](./../transform/readme.md)
 
 ## ボックスソーターの全体のイメージ
 
@@ -86,10 +86,10 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 - Google Colab
   - Google アカウント（※Google Colaboratory を利用するために使用します）
-  - [BoxSorterDataGenerator（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
+  - [BoxSorterDataGenerator（MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.ipynb)
 - Python
   - Python 実行環境
-  - [BoxSorterDataGenerator（初級編・MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.py)
+  - [BoxSorterDataGenerator（MQTT）](/vantiq-google-colab/code/box-sorter_data-generator_mqtt.py)
 - MQTTクライアント
   - ご自身の環境から MQTTブローカーに接続し、メッセージをパブリッシュしたりサブスクライブするのに使用します。
   - お好きなクライアントをご利用ください（:globe_with_meridians:[MQTTX](https://mqttx.app/) など）。
@@ -100,7 +100,7 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ### プロジェクトファイル
 
-- [ボックスソーター（初級編・Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
+- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
 
 ### ドキュメント
 
