@@ -42,15 +42,20 @@ Qiitaの記事
 ## 使用検討に関して考慮すること
 
 以下のポイントを考慮して使用するか検討してください。
+(1, 3, 5 はCamel Cnonectorに関わらず、Vantiq Connector全般に言えること）
 
-利用しない理由
-- Vantiqアプリ内で設定を持つため、密結合になります。 Vantiq本体と一体で保守運用する理由がないのであれば、運用の責任分界点を明確にする観点から独立したコンポーネントとして疎結合が望ましい。
-- 蓄積されたデータを読み込む処理を含むのであれば、一般的なETLツールを検討するのが。
+使用する場面
 
-利用する理由
-- ソースとなるシステムが発生したイベントを連携したい
-- 閉じたネットワークにあるデータソースと外にあるVantiqが連携する必要がある
-- Vantiqから出力するイベントを連携したり、蓄積させる必要がある
+1. 閉じたネットワークにあるデータ連携元と外にあるVantiqが連携する必要がある
+2. Vantiqがビルトインでサポートしないプロトコルでの連携を行いたい
+3. Vantiqとデータ連携元/連携先のシステムやコンポーネントと間で、イベントを連携する（連携元/連携先がメッセージブローカーである）
+4. Vantiqから出力するイベントを蓄積させる必要がある
+
+使用しない方がよい理由
+
+5. Vantiqアプリ内で設定を持つため、密結合になる。 Vantiq本体と一体で保守運用する理由がなく、運用の責任分界点を明確にする観点からVantiqから独立したコンポーネントとして疎結合が望ましい
+6. データ連携元から蓄積されたデータを読み込む処理を含む場合、一般的なETLツールを検討したほうがよい
+
 
 ## 環境セットアップ
 
@@ -88,24 +93,24 @@ Qiitaの記事
    メニュー >> Admminister >> Advanced >> Access Token 
    生成したアクセストークンは、次ステップのCLI、およびApache Camel実行環境の`server.config`で使用するため、控えておきます。
 
-2. 新しい Source Type `CAMEL_SOURCE`を追加します。
-   1. [`CAMEL_SOURCE.json`](https://github.com/Vantiq/vantiq-extension-sources/blob/master/camelSource/src/main/resources/CAMEL_SOURCE.json) をダウンロードして、CLIを実行するディレクトリに置きます。
+2. 新しい Source Type `CAMEL`を追加します。
+   1. [`camelConnectorImpl.json`](https://github.com/Vantiq/vantiq-extension-sources/blob/master/camelConnector/src/test/resources/camelConnectorImpl.json) をダウンロードして、CLIを実行するディレクトリに置きます。
    2. Vantig CLI から以下のコマンドを実行します。
    （[参照](https://github.com/Vantiq/vantiq-extension-sources/blob/master/pythonExecSource/docs/Usage.md#defining-the-source-in-vantiq)）
 
     ```sh
-    vantiq -s <profileName> load sourceimpls CAMEL_SOURCE.json
+    vantiq -s <profileName> load sourceimpls camelConnectorImpl.json
     ```
     もしくは
     ```sh
-    vantiq -b https://<host> -t <ACCESS_TOKEN> load sourceimpls CAMEL_SOURCE.json
+    vantiq -b https://<host> -t <ACCESS_TOKEN> load sourceimpls camelConnectorImpl.json
     ```
 
-   3. メニュー Add >> Source >> New Source で、Source新規作成 ペインを開き、Source Type: `CAMEL_SOURCE` が追加されていることを確認します。
+   3. メニュー Add >> Source >> New Source で、Source新規作成 ペインを開き、Source Type: `CAMEL` が追加されていることを確認します。
 
 
 3. Sourceを作成します。指定するパラメータは以下のとおりです。
-   -  Source Type: `CAMEL_SOURCE`  （前ステップで作成したもの） 
+   -  Source Type: `CAMEL`  （前ステップで作成したもの） 
    -  Source Name: 任意の名前 （ただし後のステップでCamel Connector実行環境の `server.config` で指定したものと一致させること。)
    Sourceを作成した後、Camel Connector実行環境から接続要求があると、直ちに接続が確立します。
 
