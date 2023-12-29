@@ -123,8 +123,18 @@ Qiitaの記事
         }
     }
     ```
-    `appName` - 任意の名前
-    `routesDocument` - Vantiq Document の名前を指定する。 yaml もしくは xml. Camelのルート定義を記載する。設定例は「設定例」の項を参照。  
+    - `appName` - 任意の名前
+    - `routesDocument` - [Vantiq Document](https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents) の名前を指定する。yaml もしくは xml. Camelのルート定義を記載する。
+
+    Source の Properties の記述例。この例では、ルート定義を([Vantiq Document](https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents) を、`AWSSQS.yaml` の名前で作成している。ルート定義の具体例は[設定例](#camel_route_example)を参照。
+    ```json   
+    {
+        "camelRuntime": {
+            "appName": "AWSSQS",
+            "routesDocument": "AWSSQS.yaml"
+        }
+    }
+    ```
 
 
 #### Camel Connector 実行環境
@@ -182,8 +192,8 @@ Qiitaの記事
     ├-- server.config
     ```
 
-
-## 設定例
+<a id="camel_route_example"></a>
+## 設定例 
 
 - Vantiq から外部コンポーネントへメッセージを Publish するエンドポイントは、 `from.uri: vantiq://server.config` と書きます。
 - Vantiq が外部コンポーネントからのメッセージを Subscribe するエンドポイント、 `to.uri: vantiq://server.config` と書きます。
