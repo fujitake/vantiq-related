@@ -173,4 +173,4 @@ Procedureのサンプルは以下となります。`app_mention`Eventを受信�
 
 ## リソース
 
-- [サンプルプロジェクト](../../conf/vantiq_llm_slack_integration/vantiq_llm_slack_integration.zip)
+- [サンプルプロジェクト](../../conf/vantiq_llm_slack_integration/llm_slack_integration.zip)
