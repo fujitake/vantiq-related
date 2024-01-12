@@ -64,6 +64,7 @@ Vantiq の基本的な扱い方を解説しています。
 |△|[LLM（SubmitPrompt VAIL）](./apps-development/llm/submitprompt-vail/readme.md)|LLM（SubmitPrompt Activity）|
 |△|[LLM（AccumulateState Activity）](./apps-development/llm/accumulatestate-activity/readme.md)|LLM（SubmitPrompt VAIL）|
 |△|[ボックスソーター（Vantiq REST API・Topic）](./apps-development/boxsorter/vantiq-restapi-topic/readme.md)|ボックスソーター（初級編・REST API）|
+|△|[ボックスソーター（Vantiq REST API・Type）](./apps-development/boxsorter/vantiq-restapi-type/readme.md)|ボックスソーター（初級編・REST API）|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
