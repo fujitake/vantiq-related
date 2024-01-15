@@ -39,7 +39,7 @@ Qiitaの記事
 - [統合フレームワーク　Apache Camelのメッセージルーティングの基本](https://qiita.com/mkyz08/items/db3083a761cb92828926)
 
 
-## 使用検討に関して考慮すること
+## 使用の際に考慮すること
 
 以下のポイントを考慮して使用するか検討してください。
 (1, 3, 5 はCamel Cnonectorに関わらず、Vantiq Connector全般に言えること）
@@ -53,8 +53,9 @@ Qiitaの記事
 
 使用しない方がよい理由
 
-5. Vantiqアプリ内で設定を持つため、密結合になる。 Vantiq本体と一体で保守運用する理由がなく、運用の責任分界点を明確にする観点からVantiqから独立したコンポーネントとして疎結合が望ましい
-6. データ連携元から蓄積されたデータを読み込む処理を含む場合、一般的なETLツールを検討したほうがよい
+1. VantiqコネクタはVantiqアプリで設定を持つため、密結合になる。（一般的に運用の責任分界点を明確にする観点から、疎結合にするのが望ましい。コネクタ含め一体として運用ができるかを確認すること。）
+2. データ連携元から蓄積されたデータをバッチ読み込み処理の用途としては、一般的なETLツールがより適している可能性がある
+
 
 
 ## 環境セットアップ
@@ -135,11 +136,14 @@ Qiitaの記事
         }
     }
     ```
+    上記の設定により、Vantiq Documentアップロードされた以下のyamlファイルが参照される。
+    ![iamge1](../../imgs/camel-connector/picture-document.png)
+    
 
 
 #### Camel Connector 実行環境
 
-1. [Vantiq Extension Source](https://github.com/Vantiq/vantiq-extension-sources/tree/master) からリポジトリをpullします。 `git pull` もしくは、zipでダウンロードして展開します。
+1. [Vantiq Extension Source](https://github.com/Vantiq/vantiq-extension-sources/tree/master) からリポジトリをpullします。 `git clone` もしくは、zipでダウンロードして展開します。
 
 2. `<リポジトリをダウンロードした場所>/vantiq-extension-sources` に移動し、`./gradlew camelConnector:assemble` を実行します。
 
@@ -167,7 +171,7 @@ Qiitaの記事
             ...
     ```
 
-5.  `server.config` を作成し、`camelConnector`に配置します。
+5.  `server.config` を作成し、`camelConnector` ディレクトリと同列に配置します。
 
     ```properties
     targetServer = https://dev.vantiq.com
