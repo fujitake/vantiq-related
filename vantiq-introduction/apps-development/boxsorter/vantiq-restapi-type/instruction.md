@@ -82,7 +82,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
      curl \
          -X GET \
          -H 'Authorization: Bearer xaGS9Vk0te88026fk2WLqG9rU2HFUYZ6icjqmeLcKsc=' \
-         'https://internal.vantiq.com/api/v1/resources/custom/sorting_condition'
+         'https://dev.vantiq.com/api/v1/resources/custom/sorting_condition'
      ```
 
 1. 取得したデータが下記の様になっているか確認します。  
@@ -152,7 +152,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
          -H 'Content-Type: application/json' \
          -H 'Authorization: Bearer xaGS9Vk0te88026fk2WLqG9rU2HFUYZ6icjqmeLcKsc=' \
          -d '{"code":"10061234567890", "center_id":"1", "center_name":"東京物流センター"}' \
-         'https://internal.vantiq.com/api/v1/resources/custom/sorting_condition'
+         'https://dev.vantiq.com/api/v1/resources/custom/sorting_condition'
      ```
 
 1. レスポンスを確認してみます。  
@@ -206,7 +206,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
          -H 'Content-Type: application/json' \
          -H 'Authorization: Bearer xaGS9Vk0te88026fk2WLqG9rU2HFUYZ6icjqmeLcKsc=' \
          -d '{"center_id":"2", "center_name":"神奈川物流センター"}' \
-         'https://internal.vantiq.com/api/v1/resources/custom/sorting_condition?where={"code":"10061234567890"}'
+         'https://dev.vantiq.com/api/v1/resources/custom/sorting_condition?where={"code":"10061234567890"}'
      ```
 
 1. レスポンスを確認してみます。  
@@ -254,7 +254,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
          -g \
          -H 'Content-Type: application/json' \
          -H 'Authorization: Bearer xaGS9Vk0te88026fk2WLqG9rU2HFUYZ6icjqmeLcKsc=' \
-         'https://internal.vantiq.com/api/v1/resources/custom/sorting_condition?where={"code":"10061234567890"}'
+         'https://dev.vantiq.com/api/v1/resources/custom/sorting_condition?where={"code":"10061234567890"}'
      ```
 
 1. レスポンスは空のオブジェクトになります。  
