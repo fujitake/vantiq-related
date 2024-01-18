@@ -14,7 +14,7 @@
 
 ## 目次
 
-- [ボックスソーター（REST API）](#ボックスソーター初級編rest-api)
+- [ボックスソーター（REST API）](#ボックスソーターrest-api)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
@@ -98,7 +98,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
    |項目|設定値|備考|
    |-|-|-|
-   |url|https://{VantiqのURL(FQDN)}/api/v1/resources/topics//BoxInfoApi|SSL化されていないサーバーの場合は、 `https://` を `http://` に置き換えてください。|
+   |url|https://【VantiqのURL(FQDN)】/api/v1/resources/topics//BoxInfoApi|SSL化されていないサーバーの場合は、 `https://` を `http://` に置き換えてください。|
    |accesstoken|7tFxPj4JuNFnuwmGcEadU_6apA1r3Iji2N7AZS5HuVU=|上記で発行した Access Token|
 
    ![google_colab_setting](./imgs/google_colab_setting.png)

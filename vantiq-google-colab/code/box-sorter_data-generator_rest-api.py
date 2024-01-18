@@ -6,8 +6,8 @@ from typing import Final
 import schedule
 
 # 設定情報
-url = "https://{VantiqのURL(FQDN)}/api/v1/resources/topics/{Topic名}"
-accesstoken = "{Vantiqのアクセストークン}"
+url = "https://【VantiqのURL(FQDN)】/api/v1/resources/topics/【Topic名】"
+accesstoken = "【Vantiqのアクセストークン】"
 
 # ダミーデータ
 dummy_data = [
