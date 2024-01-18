@@ -89,7 +89,7 @@ Namespace の切り替えが出来たら、 Project のインポートを行い�
          -H "Content-Type: application/json" \
          -H "Authorization: Bearer ※VantiqAccessToken" \
          -d '{"code":"10061234567890", "name":"みかん 1kg"}' \
-         "https://{VantiqのURL(FQDN)}/api/v1/resources/topics/{Topic名}"
+         "https://【VantiqのURL(FQDN)】/api/v1/resources/topics/【Topic名】"
      ```
 
      コマンド例
