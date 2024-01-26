@@ -1,0 +1,6 @@
+{
+   "class_name": "langchain.embeddings.AzureOpenAIEmbeddings",
+   "azure_deployment": "<your deployment name from Azure AI Studio>",
+   "azure_endpoint": "<your endpoint from Azure Portal>",
+   "openai_api_version": "2023-05-15"
+}
