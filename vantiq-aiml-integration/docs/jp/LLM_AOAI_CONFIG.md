@@ -1,4 +1,4 @@
-# LLM リソースで既定のモデル以外のモデルを使用する
+# LLM リソースで既定のモデル以外のモデルを使用する -Azure OpenAI Service-
 
 LLM リソースでは、既定のモデル(OpenAI、と、HuggingFace)以外のモデルも使用することが可能です。ここでは、[Azure OpenAI Service](https://azure.microsoft.com/ja-jp/products/ai-services/openai-service) を例として設定方法を記述します。
 
@@ -11,12 +11,17 @@ LLM リソースでは、既定のモデル(OpenAI、と、HuggingFace)以外の
 
 今回は、以下のように2つのモデルをデプロイしています。
 ![AOAI_DEPLOY](../../imgs/LLM_Platform_Support/aoai_deploy.png)
-**Note**
+
+> [!NOTE]
 > この文書ではAzure OpenAI Service のリソース作成方法やデプロイ方法については解説しません。[公式のリファレンス](https://learn.microsoft.com/ja-JP/azure/ai-services/openai/overview)や、以下のようなインターネット上の記事を参照して設定してください。
 > https://qiita.com/vfuji/items/196c8bb31be0ebdc8886
 > https://note.com/fushiroyama/n/n584473dd57b2
 
 ## 設定方法
+
+> [!CAUTION]
+> `Vantiq r1.37.5` までと、`Vantiq r1.37.6`以降とで、設定方法が異なります。ご利用のVantiqのバージョンに合わせて設定を行ってください。
+
 
 IDEのメニューから、[追加] > [LLMs] を選択します。
 
@@ -36,17 +41,30 @@ LLMsの一覧が表示されます。「新規」をクリックし、新しいL
 
    ![CreateGenerativeLLM_02](../../imgs/LLM_Platform_Support/create_new_generativellm_02.png)
 
-3. Configを選択し、Json Config を追加します。以下の内容を入力して [OK] をクリックします。
-[Generative LLMのConfig Json](../../conf/LLM_Platform_Support/aoai_genmodel.json)
+3. Configを選択し、Json Config を追加します。
+   以下の内容を入力して [OK] をクリックします。
+   - Vantiq r1.37.5までの場合 [Generative LLMのConfig Json](../../conf/LLM_Platform_Support/Until_1.37.5_aoai_genmodel.json)
 
-   ```json
-   {
-      "class_name": "langchain.chat_models.azure_openai.AzureChatOpenAI",
-      "deployment_name": "gpt-35-turbo-16k",
-      "openai_api_base": "https://xxxxxxxxxxx.openai.azure.com",
-      "openai_api_version": "2023-05-15"
-   }
-   ```
+      ```json
+      {
+         "class_name": "langchain.chat_models.azure_openai.AzureChatOpenAI",
+         "deployment_name": "gpt-35-turbo-16k",
+         "openai_api_base": "https://xxxxxxxxxxx.openai.azure.com",
+         "openai_api_version": "2023-05-15"
+      }
+      ```
+
+   - Vantiq r1.37.6以降の場合 [Generative LLMのConfig Json](../../conf/LLM_Platform_Support/After_1.37.6_aoai_genmodel.json)
+
+      ```json
+      {
+         "class_name": "langchain.chat_models.AzureChatOpenAI",
+         "azure_deployment": "gpt-35-turbo-16k",
+         "azure_endpoint": "https://xxxxxxxxxxx.openai.azure.com",
+         "openai_api_version": "2023-05-15"
+      }
+
+      ```
 
 4. [OK]をクリックし、作成を完了します。
 
@@ -61,16 +79,29 @@ LLMsの一覧が表示されます。「新規」をクリックし、新しいL
    ![CreateEmbeddingLLM_02](../../imgs/LLM_Platform_Support/create_new_embeddingllm_02.png)
 
 3. Configを選択し、Json Config を追加します。以下の内容を入力して [OK] をクリックします。
-[Embedding LLMのConfig Json](../../conf/LLM_Platform_Support/aoai_embmodel.json)
+   - Vantiq r1.37.5までの場合 [Embedding LLMのConfig Json](../../conf/LLM_Platform_Support/Until_1.37.5_aoai_embmodel.json)
 
-   ```json
-   {
-      "deployment": "text-embedding-ada-002",
-      "openai_api_base": "https://xxxxxxxxxxx.openai.azure.com",
-      "openai_api_version": "2023-05-15",
-      "class_name": "langchain.embeddings.OpenAIEmbeddings",
-      "openai_api_type": "azure"
-   }
-   ```
+      ```json
+      {
+         "class_name": "langchain.embeddings.OpenAIEmbeddings",
+         "deployment": "text-embedding-ada-002",
+         "openai_api_base": "https://xxxxxxxxxxx.openai.azure.com",
+         "openai_api_version": "2023-05-15",
+         "openai_api_type": "azure"
+      }
+      ```
+
+   - Vantiq r1.37.6以降の場合 [Embedding LLMのConfig Json](../../conf/LLM_Platform_Support/After_1.37.6_aoai_embmodel.json)
+
+      ```json
+      {
+         "class_name": "langchain.embeddings.AzureOpenAIEmbeddings",
+         "azure_deployment": "text-embedding-ada-002",
+         "azure_endpoint": "https://xxxxxxxxxxx.openai.azure.com",
+         "openai_api_version": "2023-05-15"
+      }
+
+      ```
+
 
 4. [OK]をクリックし、作成を完了します。
