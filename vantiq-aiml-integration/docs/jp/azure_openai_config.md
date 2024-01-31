@@ -1,4 +1,4 @@
-# LLM プライベートモデルの利用
+# Azure OpenAI のモデルを Vantiq で利用する方法
 
 Azure OpenAI でデプロイしたモデルを Vantiq で利用する方法の解説となります。
 
