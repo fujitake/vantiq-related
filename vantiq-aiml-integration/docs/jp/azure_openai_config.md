@@ -8,9 +8,8 @@ Azure OpenAI でデプロイしたモデルを Vantiq で利用する方法の�
 
 ## Azure OpenAI の API Key の設定
 
-Azure OpenAI の API Key を Secret として保存します。
-
-OpenAI の API Key と同様に設定していきます。
+Azure OpenAI の API Key を Secret として保存します。  
+OpenAI の API Key と同様に設定していきます。  
 
 1. Azure Portal から Azure OpenAI を開きます。
 
