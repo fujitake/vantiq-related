@@ -10,15 +10,12 @@
 
 Vantiq R1.37にて実装された新機能 LLM関連機能についての資料です。
 
-[LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
-
-[Semantic Index へのEntry追加方法](./docs/jp/load_semantic_index_entry.md)
-
-[Vantiq LLM とSlackのインテグレーションサンプル](./docs/jp/vantiq_llm_slack_integration.md)
-
-[Vantiq LLM とLINEのインテグレーションサンプル](./docs/jp/vantiq_llm_line_integration.md)
-
-[プライベートで構成した LLM を Vantiq で利用する手順](./docs/jp/vantiq_llm_use_private_models.md)
+- [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
+- [Semantic Index へのEntry追加方法](./docs/jp/load_semantic_index_entry.md)
+- [Vantiq LLM とSlackのインテグレーションサンプル](./docs/jp/vantiq_llm_slack_integration.md)
+- [Vantiq LLM とLINEのインテグレーションサンプル](./docs/jp/vantiq_llm_line_integration.md)
+- [プライベートで構成した LLM を Vantiq で利用する手順](./docs/jp/vantiq_llm_use_private_models.md)
+- [Azure OpenAI のモデルを Vantiq で利用する方法](./docs/jp/azure_openai_config.md)
 
 ## 画像処理AI
 
