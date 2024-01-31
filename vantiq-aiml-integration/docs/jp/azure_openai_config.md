@@ -19,7 +19,7 @@ OpenAI の API Key と同様に設定していきます。
 
 1. Vantiq IDE を開き、メニューバーの `管理` -> `Advanced` -> `Secrets` -> `+ 新規` をクリックし Secret の新規作成画面を開きます。
 
-1. コピーした Azure OpenAI の API キーを保存します。
+1. コピーした Azure OpenAI の API キーを Secret として保存します。
 
 ## Generative LLM の設定方法
 
