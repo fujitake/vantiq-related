@@ -105,8 +105,8 @@ OpenAI の LLM と同様に設定していきます。
    ```json
    {
        "class_name": "langchain.embeddings.AzureOpenAIEmbeddings"
-       , "azure_deployment": "text-embedding-ada-002"
-       , "azure_endpoint": "https://dev-openai-japaneast.openai.azure.com/"
+       , "azure_deployment": "【Azure OpenAI のデプロイ名】"
+       , "azure_endpoint": "【Azure OpenAI のエンドポイント】"
        , "openai_api_version": "2023-05-15"
    }
    ```
