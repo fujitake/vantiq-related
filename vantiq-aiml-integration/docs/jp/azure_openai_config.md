@@ -2,6 +2,15 @@
 
 Azure OpenAI でデプロイしたモデルを Vantiq で利用する方法の解説となります。
 
+## 目次
+
+- [Azure OpenAI のモデルを Vantiq で利用する方法](#azure-openai-のモデルを-vantiq-で利用する方法)
+  - [目次](#目次)
+  - [前提条件](#前提条件)
+  - [Azure OpenAI の API Key の設定](#azure-openai-の-api-key-の設定)
+  - [Generative LLM の設定方法](#generative-llm-の設定方法)
+  - [Embedding LLM の設定方法](#embedding-llm-の設定方法)
+
 ## 前提条件
 
 - Azure OpenAI で利用したいモデルのデプロイが出来ていること。
