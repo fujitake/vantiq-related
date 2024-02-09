@@ -1,6 +1,6 @@
 # Azure OpenAI のモデルを Vantiq で利用する方法
 
-LLM リソースでは、既定のモデル（OpenAI や HuggingFace）以外のモデルも使用することが可能です。  
+LLM リソースでは、既定のモデル（OpenAI や HuggingFace）以外のモデルも利用できます。  
 今回は Azure OpenAI でデプロイしたモデルを Vantiq で利用する方法を解説します。  
 
 > [!TIP]
