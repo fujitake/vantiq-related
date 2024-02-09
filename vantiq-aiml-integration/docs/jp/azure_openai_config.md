@@ -1,10 +1,32 @@
 # Azure OpenAI のモデルを Vantiq で利用する方法
 
-Azure OpenAI でデプロイしたモデルを Vantiq で利用する方法の解説となります。
+LLM リソースでは、既定のモデル（OpenAI や HuggingFace）以外も利用できます。  
+今回は Azure OpenAI でデプロイしたモデルを Vantiq で利用する方法を解説します。  
+
+> [!TIP]
+> LLM リソースを初めて扱う場合は、下記のトレーニングセッションを実施いただくとを推奨しています。  
+>
+> - [LLM（SubmitPrompt Activity）](/vantiq-introduction/apps-development/llm/submitprompt-activity/readme.md)
+
+## 目次
+
+- [Azure OpenAI のモデルを Vantiq で利用する方法](#azure-openai-のモデルを-vantiq-で利用する方法)
+  - [目次](#目次)
+  - [前提条件](#前提条件)
+  - [Azure OpenAI の API Key の設定](#azure-openai-の-api-key-の設定)
+  - [Generative LLM の設定方法](#generative-llm-の設定方法)
+  - [Embedding LLM の設定方法](#embedding-llm-の設定方法)
 
 ## 前提条件
 
-- Azure OpenAI で利用したいモデルのデプロイが出来ていること。
+- Azure Open AI Service のリソースが作成されていること。
+- Azure Open AI Service のリソースに、使用したいモデルがデプロイされていること。
+
+> [!NOTE]
+> この文書ではAzure OpenAI Service のリソース作成方法やデプロイ方法については解説しません。  
+> :globe_with_meridians: [公式のリファレンス](https://learn.microsoft.com/ja-JP/azure/ai-services/openai/overview) や以下のようなインターネット上の記事を参照して設定してください。  
+> - :globe_with_meridians: [Azure OpenAI ServiceをRESTで使う](https://qiita.com/vfuji/items/196c8bb31be0ebdc8886)
+> - :globe_with_meridians: [Azure OpenAI Serviceの世界へようこそ](https://note.com/fushiroyama/n/n584473dd57b2)
 
 ## Azure OpenAI の API Key の設定
 
@@ -56,11 +78,24 @@ OpenAI の LLM と同様に設定していきます。
 
    **config の設定値**
 
+   Vantiq r1.37.6 以降の場合
+
    ```json
    {
        "class_name": "langchain.chat_models.AzureChatOpenAI"
        , "azure_deployment": "【Azure OpenAI のデプロイ名】"
        , "azure_endpoint": "【Azure OpenAI のエンドポイント】"
+       , "openai_api_version": "2023-05-15"
+   }
+   ```
+
+   Vantiq r1.37.5 以前の場合
+
+   ```json
+   {
+       "class_name": "langchain.chat_models.azure_openai.AzureChatOpenAI"
+       , "deployment_name": "【Azure OpenAI のデプロイ名】"
+       , "openai_api_base": "【Azure OpenAI のエンドポイント】"
        , "openai_api_version": "2023-05-15"
    }
    ```
@@ -102,12 +137,26 @@ OpenAI の LLM と同様に設定していきます。
 
    **config の設定値**
 
+   Vantiq r1.37.6 以降の場合
+
    ```json
    {
        "class_name": "langchain.embeddings.AzureOpenAIEmbeddings"
        , "azure_deployment": "【Azure OpenAI のデプロイ名】"
        , "azure_endpoint": "【Azure OpenAI のエンドポイント】"
        , "openai_api_version": "2023-05-15"
+   }
+   ```
+
+   Vantiq r1.37.5 以前の場合
+
+   ```json
+   {
+       "class_name": "langchain.embeddings.OpenAIEmbeddings"
+       , "deployment": "【Azure OpenAI のデプロイ名】"
+       , "openai_api_base": "【Azure OpenAI のエンドポイント】"
+       , "openai_api_version": "2023-05-15"
+       , "openai_api_type": "azure"
    }
    ```
 
