@@ -41,3 +41,8 @@
 `docker compose up -d` を実行いただくとシンプルに作業頂けます。
 
 > Vantiqは[セマンティックバージョニング](https://semver.org/lang/ja/)を採用しております。
+
+## Vantiq Edge の保守
+- [SSL証明書更新手順](./docs/jp/update_vantiq_edge_certificate.md)  
+- [ライセンス更新手順](./docs/jp/update_vantiq_edge_license.md)
+
