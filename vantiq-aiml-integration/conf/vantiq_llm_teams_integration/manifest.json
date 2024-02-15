@@ -1,0 +1,59 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.16",
+    "version": "1.0.0",
+    "id": "microsoft app id",
+    "developer": {
+        "name": "Author's name",
+        "websiteUrl": "https://vantiq.co.jp/",
+        "privacyUrl": "https://vantiq.co.jp/",
+        "termsOfUseUrl": "https://vantiq.co.jp/"
+    },
+    "name": {
+        "short": "short name of your app",
+        "full": "full name of your app"
+    },
+    "description": {
+        "short": "Short description of your app",
+        "full": "Full description of your app"
+    },
+    "icons": {
+        "outline": "outline.png",
+        "color": "color.png"
+    },
+    "accentColor": "#000080",
+    "bots": [
+        {
+            "botId": "microsoft app id",
+            "scopes": [
+                "team",
+                "personal",
+                "groupChat"
+            ],
+            "needsChannelSelector": false,
+            "isNotificationOnly": false,
+            "supportsFiles": false,
+            "supportsCalling": false,
+            "supportsVideo": false
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "devicePermissions": [
+        "geolocation",
+        "media",
+        "notifications",
+        "midi",
+        "openExternal"
+    ],
+    "validDomains": [
+        "internal.vantiq.com"
+    ],
+    "defaultInstallScope": "team",
+    "defaultGroupCapability": {
+        "team": "bot",
+        "groupchat": "bot"
+    }
+}
