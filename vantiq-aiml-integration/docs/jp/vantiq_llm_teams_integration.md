@@ -97,59 +97,62 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 1. Source Event Handlerを実装します。以下のように実装します。
    ![EventHandler](../../imgs/vantiq_llm_teams_integration/eventhandler.png)
 
+   - Initiate : 作成したChatBot Source をEventStream に設定します。
+     - 以下のように設定します。
+      ![Initiate](../../imgs/vantiq_llm_teams_integration/source_event.png)
    - SplitByThread : 受信したEventの`conversation.id`をキーにして、スレッド毎に会話を管理します。
    - AccumulateState : 会話IDの生成・保持を行います。
      - 以下のように設定します。
       ![AccumulateState](../../imgs/vantiq_llm_slack_integration/accumulateState.png)
      - vailの記述内容は以下の通りです。Vantiqの会話コンテクスト管理に関しての詳細は、[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#conversationmemory) を参照してください。
 
-       ```javascript
-         // Update the value of state using event.
-         if(!state){
-         state = {}
-         }
-         if(!state.convId){
-            // convIdが存在しない場合、ConversationMemoryに会話を開始するようにリクエストする
-            var startConvo = []
-            state.convId = io.vantiq.ai.ConversationMemory.startConversation(startConvo)
-         } 
-       ```
+      ```javascript
+      // Update the value of state using event.
+      if(!state){
+      state = {}
+      }
+      if(!state.convId){
+         // convIdが存在しない場合、ConversationMemoryに会話を開始するようにリクエストする
+         var startConvo = []
+         state.convId = io.vantiq.ai.ConversationMemory.startConversation(startConvo)
+      } 
+      ```
 
    - SemanticSearch : `Procedure` アクティビティです。Semantic Indexに登録された情報を検索し、結果を返します。
      - 以下のService Procedureを作成してください。
 
-       ```javascript
-         package jp.vantiq
-         import service io.vantiq.ai.SemanticSearch
-         import service io.vantiq.text.Template
-         import service io.vantiq.ai.ConversationMemory
-         PROCEDURE TeamsService.SemanticSearch(question String REQUIRED, convId String): Object
+      ```javascript
+      package jp.vantiq
+      import service io.vantiq.ai.SemanticSearch
+      import service io.vantiq.text.Template
+      import service io.vantiq.ai.ConversationMemory
+      stateless PROCEDURE TeamsService.SemanticSearch(question String REQUIRED, convId String): Object
 
-         var INDEX_NAME = "Semantic Index Name"
-         var GENERATIVE_AI = "GenerativeLLM Name"
+      var INDEX_NAME = "Semantic Index Name"
+      var GENERATIVE_AI = "GenerativeLLM Name"
 
-         var ERROR_TEXT = "エラーが発生しました。"
-         var TEMPLATE = "質問です。「${question}」"
+      var ERROR_TEXT = "エラーが発生しました。"
+      var TEMPLATE = "質問です。「${question}」"
 
-         var input = {
-            "question": question
-         }
+      var input = {
+         "question": question
+      }
 
-         var prompt = Template.format(TEMPLATE, input)
-         var result
-         try {
-         result = SemanticSearch.answerQuestion(INDEX_NAME, prompt, GENERATIVE_AI, convId)
-         if convId {
-            var convMem = ConversationMemory.getConversation(convId)
-            log.info(stringify(convMem))
-         }
-         }catch(error) {
-            result = {"answer": ERROR_TEXT}
-            log.error(stringify(error))
-         }
+      var prompt = Template.format(TEMPLATE, input)
+      var result
+      try {
+      result = SemanticSearch.answerQuestion(INDEX_NAME, prompt, GENERATIVE_AI, convId)
+      if convId {
+         var convMem = ConversationMemory.getConversation(convId)
+         log.info(stringify(convMem))
+      }
+      }catch(error) {
+         result = {"answer": ERROR_TEXT}
+         log.error(stringify(error))
+      }
 
-         return result
-       ```
+      return result
+      ```
 
      - アクティビティの設定は以下の通りです。
        ![SemanticSearch](../../imgs/vantiq_llm_teams_integration/semantic_search.png)
@@ -157,56 +160,56 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
    - SendToTeams : `Procedure` アクティビティです。RemoteSourceにメッセージを送信します。
      - 以下のService Procedureを作成してください。
 
-       ```javascript
-         package jp.vantiq
-         stateless PROCEDURE TeamsService.SendToTeams(llmResponse Object, from Object, conversation Object)
+      ```javascript
+      package jp.vantiq
+      stateless PROCEDURE TeamsService.SendToTeams(llmResponse Object, from Object, conversation Object)
 
-         var source_config = {
-            "path": "/v3/conversations/" + conversation.id + "/activities"
-         }
+      var source_config = {
+         "path": "/v3/conversations/" + conversation.id + "/activities"
+      }
 
-         // see https://learn.microsoft.com/ja-jp/azure/bot-service/rest-api/bot-framework-rest-connector-add-rich-cards?view=azure-bot-service-4.0
-         var actions = []
-         var firstTwoItems = llmResponse.metadata.slice(0, 2)
-         for (item in firstTwoItems) {
-            var action = {
+      // see https://learn.microsoft.com/ja-jp/azure/bot-service/rest-api/bot-framework-rest-connector-add-rich-cards?view=azure-bot-service-4.0
+      var actions = []
+      var firstTwoItems = llmResponse.metadata.slice(0, 2)
+      for (item in firstTwoItems) {
+         var action = {
                "type": "Action.OpenUrl",
                "url": item.url,
                "title": item.url
-            }
-            actions.push(action)
          }
-         var references = [
+         actions.push(action)
+      }
+      var references = [
+         {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": {
+            "type": "AdaptiveCard",
+            "version": "1.0",
+            "body": [
                {
-               "contentType": "application/vnd.microsoft.card.adaptive",
-               "content": {
-               "type": "AdaptiveCard",
-               "version": "1.0",
-               "body": [
-                  {
-                     "type": "TextBlock",
-                     "text": "参照リンク",
-                     "size": "large"
-                  }
-               ],
-               "actions": actions
+                  "type": "TextBlock",
+                  "text": "参照リンク",
+                  "size": "large"
                }
+            ],
+            "actions": actions
             }
-         ]
-
-         var data = {
-            "type": "message",
-            "from": {
-               "id": from.id,
-               "name": from.name
-            },
-            "text": llmResponse.answer,
-            "attachments": references
          }
+      ]
 
-         PUBLISH { "body": data } TO SOURCE <Azure Bot Connector Source> USING source_config
-         return null
-       ```
+      var data = {
+         "type": "message",
+         "from": {
+            "id": from.id,
+            "name": from.name
+         },
+         "text": llmResponse.answer,
+         "attachments": references
+      }
+
+      PUBLISH { "body": data } TO SOURCE <Azure Bot Connector Source> USING source_config
+      return null
+      ```
 
      - アクティビティの設定・パラメータの設定は以下の通りです。
        ![SendToTeams](../../imgs/vantiq_llm_teams_integration/send_to_teams_activity.png)
@@ -290,7 +293,7 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 }
 ```
 
-- マニフェストとアイコン画像を含めてzipファイルを作成します。`zip pkg.zip manifest.json outline.png icolor.pngg`
+- マニフェストとアイコン画像を含めてzipファイルを作成します。`zip pkg.zip manifest.json outline.png color.ping`
 
 #### Microsoft Teams に作成したアプリをアップロード
 
