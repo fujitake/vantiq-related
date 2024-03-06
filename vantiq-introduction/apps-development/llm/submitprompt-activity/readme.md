@@ -7,6 +7,40 @@ Vantiq で LLM（大規模言語モデル） を利用する方法を学習し�
 
 Vantiq リソースや各用語について解説します。
 
+<details>
+<summary>アプリケーション開発ワークショップ（初級編）が未実施の場合</summary>
+
+### Topic
+
+![resource_topic.png](./imgs/resource_topic.png)
+
+Vantiq 内部でデータの受け渡しに利用するエンドポイントになります。  
+また、外部からデータを受け渡す際の REST API のエンドポイントとして用いることもできます。
+
+### Type
+
+![resource_type.png](./imgs/resource_type.png)
+
+Vantiq 内部でデータを保存するために利用します。  
+内部的には NoSQL の MongoDB を利用しています。  
+Activity Pattern や VAIL からデータの読み書きが出来ます。  
+外部から REST API を用いて、データの読み書きをすることも出来ます。  
+
+主にマスタデータの保存やデータの一時的な保存に利用されることが多いです。  
+
+> **注意**  
+> Type は NoSQL のため、 RDB とは異なり、リレーションシップやトランザクション処理は出来ません。  
+
+### App (App Builder)
+
+![resource_app.png](./imgs/resource_app.png)
+
+App は GUI でアプリケーションの作成ができるツールになります。  
+あらかじめ用意されている処理のパターンを組み合わせて開発を行います。  
+用意されたパターンで対応できない場合は、プログラミングも可能なため柔軟な実装ができます。
+
+</details>
+
 ### LLM
 
 ![resource_llm.png](./imgs/resource_llm.png)
@@ -35,6 +69,26 @@ App Builder を用いて、アプリケーションを作成していきます�
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
+
+<details>
+<summary>アプリケーション開発ワークショップ（初級編）が未実施の場合</summary>
+
+### EventStream Activity
+
+![activitypattern_eventstream.png](./imgs/activitypattern_eventstream.png)
+
+App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
+**EventStream** はデータの入り口となります。  
+**EventStream** の入力元に **Topic** を指定することで、 Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POST されたデータを受け取ることができます。
+
+### LogStream Activity
+
+![activitypattern_logstream.png](./imgs/activitypattern_logstream.png)
+
+イベントデータをログに出力します。  
+今回は仕分け指示が正しく行われているかを確認するために利用します。
+
+</details>
 
 ### SubmitPrompt Activity
 
