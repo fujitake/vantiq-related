@@ -154,7 +154,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 
 ## Vantiq Service の派生機能
 - **[Concurrent.Cache](https://dev.vantiq.co.jp/docs/system/rules/index.html#concurrent)** (v1.35~) – ConcurrentMapの派生で、メモリで保持するオブジェクト数上限、期間、超過時の通知イベントを設定できる。 
-- **Cache Service** (v1.35~) -  Type への読み書きを仲介することで、永続化の負荷を吸収する Service。 読み取り専用 (Lookup) or 読み書き両用 (Update)を設定可能。
+- **[Cache Service](./cache-service.md)** (v1.35~) -  Type への読み書きを仲介することで、永続化の負荷を吸収する Service。 読み取り専用 (Lookup) or 読み書き両用 (Update)を設定可能。
 - **[Storage Manager](https://dev.vantiq.co.jp/docs/system/storagemanagers/index.html)** (v1.35~) – 外部ストレージサービスへのCRUDオペレーションを VAIL SQLで行うラッパーを実装する Service. 
 
 

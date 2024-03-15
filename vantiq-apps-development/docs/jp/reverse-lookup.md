@@ -41,6 +41,7 @@ Vantiq アプリケーション開発時によく使われるパターンにつ�
     - [フォーム送信でPOSTしたい ](#フォーム送信でpostしたい-)
     - [XMLを処理したい](#xmlを処理したい)
     - [Objectをループさせて、keyとvalueをそれぞれ取得したい ](#objectをループさせてkeyとvalueをそれぞれ取得したい-)
+    - [正規表現でキャプチャグループを使って文字列を抽出したい](#正規表現でキャプチャグループを使って文字列を抽出したい)
   - [構成管理関連](#構成管理関連)
     - [作ったものをテンプレートとして配布したい](#作ったものをテンプレートとして配布したい)
     - [複数人で共同で作業したい](#複数人で共同で作業したい)
@@ -375,6 +376,9 @@ for prop in json {
 }
 return retStr
 ```
+Version 1.36 以降では、ビルトインの `Encode.formUrl(val)`を使用可能 
+
+
 
 ### XMLを処理したい<a id="handle_xml"></a>
 
@@ -551,6 +555,33 @@ for(kv in obj){
 
 return newObj
 ```
+
+### 正規表現でキャプチャグループを使って文字列を抽出したい <a id="正規表現でキャプチャグループを使って文字列を抽出したい"></a>
+
+サンプルコードは以下の通りです。
+
+
+```vail
+var str = "令和4年2月12日"
+
+var wareki_pattern = "(明治|大正|昭和|平成|令和)[^\d]*(\d{1,2})[^\d]+(\d{1,2})[^\d]+(\d{1,2})[^\d]+"
+
+var pattern = regExp(wareki_pattern)
+var matcher = pattern.matcher(str)
+var i = 0
+var array = matcher[i.intValue()]
+
+// patternの中で、()で囲まれたグループをそれぞれ抽出する。
+var gengo = array[1]
+var year = toInteger(array[2])
+var month = toInteger(array[3])
+var day = toInteger(array[4])
+
+format("元号:{0}, 年:{1}, 月:{2}, 日: {3}", gengo, year, month, day)
+```
+
+
+
 
 ## 構成管理関連<a id="構成管理関連"></a>
 

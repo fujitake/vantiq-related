@@ -168,6 +168,7 @@
 **Note**
 - _UpdateMaster Procedure_ - ServiceのScheduled Procecureや、Initializeで更新をする
 - _Purge Procedure_ - 古いデータをStateから定期的に消去する
+- V1.35以降であれば、[Cache Service](./cache-service.md)でも実現できる。
 
 **Sample Project**
 - [InMemoryMaster.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/InMemoryMaster.zip)

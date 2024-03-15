@@ -327,6 +327,7 @@ Vantiqがビルトインとして対応していないプロトコルによる�
     WITH code = python_code, presetValues = { current_time: now()}
     log.info("Got Result:{}", [result])
     ```
+    （追記）この問題はVersion 1.38.3以降で解消しています。
 - Python Execution Connector (PEC) で実行する Python スクリプトがimport必要とするライブラリは、予め Python実行環境で pip でインストールした上で、PECを実行すればよい。 同様に、環境変数のロードもPECを通じて行うことができる。
 - Python Execution Connector (PEC) は任意のPythonスクリプトを実行できる。悪意のあるコードも実行されうる。PECを実行をするユーザーの権限や、PECが接続する先のサービス（例えばDBサーバー）への権限等は適切に設定すること。
 - SELECTは30秒でタイムアウトする。よって、Pythonコードを実行できる時間は30秒。
