@@ -16,6 +16,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
 - [Python Execution Connector](./docs/jp/python-execution-connector.md)
 - [Camel Connector](./docs/jp/camel-connector.md)
+- [Cache Service](./docs/jp/cache-service.md)
 
 # Vantiq Application Development related
 
