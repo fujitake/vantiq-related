@@ -19,7 +19,7 @@ OpenAI、Azure OpenAI Service にて提供されるモデルを使う場合は�
 
 ## Source を作成
 
-REMOTE Source を作成します。Properties は Server URI の設定のみとなります。Qiita記事の`OpenAI-compatible API URL:`に記載されている URI を指定して下さい。
+REMOTE Source を作成します。Properties の Server URI 設定のみとなります。'http://{HOSTNAME or IP}:{PORT NUMBER}'となります。
 
 エンドポイントが用意されている状態でないと、Source 作成時にエラーが発生することになりますのでご注意下さい。
 
@@ -35,9 +35,7 @@ var body = {
         "role": "user",
         "content": "Tell me list of heart disease."
       }
-    ],
-    "mode": "chat",
-    "character": "Example"
+    ]
 }
 var response = SELECT ONE FROM SOURCE textgenapi WITH body = body, path = path
 ```
