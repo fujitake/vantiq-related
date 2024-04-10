@@ -4,7 +4,6 @@ output "Main_subscription_Name" {
 output "Main_subscription_ID" {
   value = data.azurerm_subscription.current.id
 }
-
 output "opnode_IP" {
   value = module.opnode.opnode_IP
 }

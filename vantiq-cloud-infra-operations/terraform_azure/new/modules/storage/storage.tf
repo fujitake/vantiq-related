@@ -15,8 +15,8 @@ resource "azurerm_storage_account" "vantiq" {
   access_tier              = "Hot"
 
   # security
-  enable_https_traffic_only = true
-  allow_blob_public_access  = false
+  enable_https_traffic_only       = true
+  allow_nested_items_to_be_public = false
 
   blob_properties {
     delete_retention_policy {

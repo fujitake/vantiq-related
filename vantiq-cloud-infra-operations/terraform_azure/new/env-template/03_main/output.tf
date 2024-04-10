@@ -1,6 +1,5 @@
-#####################
-###
-#   Main
+##
+## Main
 ###
 output "Main_subscription_Name" {
   value = data.azurerm_subscription.current.display_name
@@ -9,9 +8,9 @@ output "Main_subscription_ID" {
   value = data.azurerm_subscription.current.id
 }
 
-###
-#   VPC
-###
+##
+## VPC
+##
 output "vpc_vnet_id" {
   value = data.terraform_remote_state.network.outputs.vpc_vnet_id
 }
@@ -39,9 +38,9 @@ output "vpc_snet_aks_lb_name" {
   value = data.terraform_remote_state.network.outputs.vpc_snet_aks_lb_name
 }
 
-###
-#   storage
-###
+##
+## storage
+##
 output "storage_fqdn" {
   value = module.storage.storage_fqdn
 }
@@ -59,9 +58,9 @@ output "storage_account_name" {
   value = module.storage.storage_account_name
 }
 
-###
-#  RDB
-###
+##
+## RDB
+##
 output "rdb_postgres_fqdn" {
   value = module.rdb.postgres_fqdn
 }
@@ -77,7 +76,7 @@ output "rdb_postgres_db_name" {
 }
 
 ##
-##  opnode
+## opnode
 ##
 output "opnode_IP" {
   value = data.terraform_remote_state.opnode.outputs.opnode_IP
@@ -99,9 +98,9 @@ output "opnode_customdata" {
   sensitive = true
 }
 
-###
-#  AKS
-###
+##
+## AKS
+##
 
 output "aks_kube_config" {
   value     = module.aks.aks_private_cluster_enabled ? "N/A" : module.aks.aks_kube_config
@@ -191,4 +190,12 @@ output "aks_nodegroup_metric_vm_size" {
 
 output "aks_nodegroup_metric_node_count" {
   value = module.aks.aks_nodegroup_metric_node_count
+}
+
+output "aks_nodegroup_vantiq_ai_assistant_vm_size" {
+  value = module.aks.aks_nodegroup_vantiq_ai_assistant_vm_size
+}
+
+output "aks_nodegroup_vantiq_ai_assistant_node_count" {
+  value = module.aks.aks_nodegroup_vantiq_ai_assistant_node_count
 }

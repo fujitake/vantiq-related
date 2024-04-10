@@ -41,15 +41,11 @@ variable "dns_service_ip" {
   type        = string
   default     = null
 }
-variable "docker_bridge_cidr" {
-  description = "docker bridge cidr"
-  type        = string
-  default     = "172.17.0.1/16"
-}
+
 variable "load_balancer_sku" {
   description = "load balacer sku. must be standard or higher"
   type        = string
-  default     = "Standard"
+  default     = "standard"
 }
 variable "network_plugin" {
   description = "network plugin. azure or kubenet"
@@ -109,7 +105,7 @@ variable "ssh_key" {
   default     = null
 }
 
-# node ppol
+# node pool
 variable "availability_zones" {
   description = "availability zones for aks control plane and node pool"
   type        = list(number)
@@ -208,7 +204,21 @@ variable "metrics_node_pool_node_ephemeral_os_disk" {
   type        = bool
   default     = true
 }
-
+variable "vantiq_ai_assistant_node_pool_vm_size" {
+  description = "VM size for Vantiq ai assistant node pool"
+  type        = string
+  default     = null
+}
+variable "vantiq_ai_assistant_node_pool_node_count" {
+  description = "VM count for Vantiq ai assistant node pool"
+  type        = number
+  default     = 1
+}
+variable "vantiq_ai_assistant_node_pool_node_ephemeral_os_disk" {
+  description = "Use of Ephemeral OS Disk for Vantiq ai assistant node pool"
+  type        = bool
+  default     = true
+}
 variable "aks_node_subnet_id" {
   description = "subnet in which node group should be set up  "
   type        = string

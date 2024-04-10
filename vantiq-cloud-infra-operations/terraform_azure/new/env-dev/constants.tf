@@ -1,22 +1,3 @@
-# provider "azurerm" {
-#   features {}
-# }
-
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~>2.87.0"
-    }
-    azuread = {
-      version = "=2.11.0"
-    }
-    random = {
-      version = "~>3.1.0"
-    }
-  }
-}
-
 locals {
   tf_remote_backend = {
     resource_group_name  = "<INPUT-YOUR-RESOURCE-GROUP>"
@@ -30,8 +11,8 @@ locals {
     vantiq_cluster_name      = "vantiq"
     env_name                 = "dev"
     location                 = "japaneast"
-    cluster_version          = "1.24.9"
-    opnode_kubectl_version   = "1.24.9"
+    cluster_version          = "1.28.5"
+    opnode_kubectl_version   = "1.28.5"
     opnode_jdk_version       = "11"
     ssh_private_key_aks_node = "aks_node_id_rsa"
     ssh_public_key_aks_node  = "aks_node_id_rsa.pub"
@@ -43,7 +24,7 @@ locals {
   network_config = {
     vnet_address_cidr = ["10.1.0.0/16"]
     vnet_dns_servers  = null # default
-    #  vnet_dns_servers =  ["XX.X.X.3", "XX.X.X.4"]
+    # vnet_dns_servers =  ["XX.X.X.3", "XX.X.X.4"]
     snet_aks_node_address_cidr = ["10.1.48.0/20"]
     snet_aks_lb_address_cidr   = ["10.1.1.128/25"]
     snet_op_address_cidr       = ["10.1.2.0/27"]
@@ -117,7 +98,6 @@ locals {
     dns_service_ip = "10.1.1.10"
 
     # network profile (optional)
-    docker_bridge_cidr = "172.17.0.1/16"
     #  load_balancer_sku = "standard"
     #  network_plugin = "kubenet"
     #  network_policy = "calico"
@@ -138,25 +118,28 @@ locals {
     # "Standard_E4s_v3" (4vCPU + 32GiB) - equivalent to R5.xlarge
     # "Standard_B2S" (2vCPU + 4GiB)- equivalent to T3.medium
     # "Standard_E2_v3" (4vCPU + 32GiB) -  equivalent to M5.large
-    availability_zones                        = [1]
-    vantiq_node_pool_vm_size                  = "Standard_F4s_v2"
-    vantiq_node_pool_node_count               = 1 #3
-    vantiq_node_pool_node_ephemeral_os_disk   = true
-    mongodb_node_pool_vm_size                 = "Standard_E4s_v3"
-    mongodb_node_pool_node_count              = 1 #3
-    mongodb_node_pool_node_ephemeral_os_disk  = true
-    userdb_node_pool_vm_size                  = "Standard_E4s_v3"
-    userdb_node_pool_node_count               = 0
-    userdb_node_pool_node_ephemeral_os_disk   = true
-    grafana_node_pool_vm_size                 = "Standard_E4s_v3"
-    grafana_node_pool_node_count              = 1
-    grafana_node_pool_node_ephemeral_os_disk  = true
-    keycloak_node_pool_vm_size                = "Standard_B2S"
-    keycloak_node_pool_node_count             = 1 #3
-    keycloak_node_pool_node_ephemeral_os_disk = false
-    metrics_node_pool_vm_size                 = "Standard_F4s_v2"
-    metrics_node_pool_node_count              = 1
-    metrics_node_pool_node_ephemeral_os_disk  = true
+    availability_zones                                   = [1]
+    vantiq_node_pool_vm_size                             = "Standard_F4s_v2"
+    vantiq_node_pool_node_count                          = 1 #3
+    vantiq_node_pool_node_ephemeral_os_disk              = true
+    mongodb_node_pool_vm_size                            = "Standard_E4s_v3"
+    mongodb_node_pool_node_count                         = 1 #3
+    mongodb_node_pool_node_ephemeral_os_disk             = true
+    userdb_node_pool_vm_size                             = "Standard_E4s_v3"
+    userdb_node_pool_node_count                          = 0
+    userdb_node_pool_node_ephemeral_os_disk              = true
+    grafana_node_pool_vm_size                            = "Standard_E4s_v3"
+    grafana_node_pool_node_count                         = 1
+    grafana_node_pool_node_ephemeral_os_disk             = true
+    keycloak_node_pool_vm_size                           = "Standard_B2S"
+    keycloak_node_pool_node_count                        = 1 #3
+    keycloak_node_pool_node_ephemeral_os_disk            = false
+    metrics_node_pool_vm_size                            = "Standard_F4s_v2"
+    metrics_node_pool_node_count                         = 1
+    metrics_node_pool_node_ephemeral_os_disk             = true
+    vantiq_ai_assistant_node_pool_vm_size                = "Standard_F4s_v2"
+    vantiq_ai_assistant_node_pool_node_count             = 1
+    vantiq_ai_assistant_node_pool_node_ephemeral_os_disk = true
   }
 }
 
