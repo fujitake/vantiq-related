@@ -25,9 +25,12 @@ Configuration は次のような形で入力してください。api-key はロ�
    "class_name": "langchain_community.chat_models.ChatOpenAI",
    "model_name": "nekomata-7b-instruction.Q4_K_M",
    "base_url": "http://{HOSTNAME or IP}:{PORT NUMBER}/v1",
-   "api_key": "{YOUR API KEY}"
+   "api_key": "@secrets(YOUR SECRET NAME)"
 }
 ```
+
+api_keyは、'"api_key": "YOUR API KEY"`のように直接指定することもできます。
+
 
 ## 設定内容の確認
 
