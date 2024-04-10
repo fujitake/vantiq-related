@@ -25,16 +25,16 @@ Configuration は次のような形で入力してください。api-key はロ�
    "class_name": "langchain_community.chat_models.ChatOpenAI",
    "model_name": "nekomata-7b-instruction.Q4_K_M",
    "base_url": "http://{HOSTNAME or IP}:{PORT NUMBER}/v1",
-   "api_key": "@secrets(YOUR SECRET NAME)"
+   "api_key": "@secrets({YOUR SECRET NAME})"
 }
 ```
 
-api_keyは、'"api_key": "YOUR API KEY"`のように直接指定することもできます。
+api_keyは、'"api_key": "{YOUR API KEY}"`のように直接指定することもできます。
 
 
 ## 設定内容の確認
 
-次のような設定となります。確認の上、Save ボタンを押下します。
+次のような設定となります。Edit JSON Configuration の設定を確認の上、OK を押して閉じてください。その上で LLM の設定を再確認し、Save ボタンを押下します。
 
 ![LLM_use_local_model](../../imgs/vantiq_llm_use_local_models/LLM_local_model.png)
 
