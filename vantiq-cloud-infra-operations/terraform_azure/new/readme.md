@@ -6,26 +6,99 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 ![Configuration](imgs/terraform_azure_vantiq_config.png)
 
 ```
-├── env-xxx
+├── env-dev
 │   ├── 01_network
+│   │   ├── backend.tf
 │   │   ├── main.tf
-│   │   └── output.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
 │   ├── 02_opnode
+│   │   ├── backend.tf
 │   │   ├── main.tf
-│   │   └── output.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
 │   ├── 03_main
+│   │   ├── backend.tf
 │   │   ├── main.tf
-│   │   └── output.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
 │   ├── constants.tf
 │   └── output.tf
-└── modules
-    ├── aks
-    ├── opnode
-    ├── rdb
-    ├── storage
-    └── vpc
-
-
+├── env-prod
+│   ├── 01_network
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
+│   ├── 02_opnode
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
+│   ├── 03_main
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
+│   ├── constants.tf
+│   └── output.tf
+├── env-template
+│   ├── 01_network
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
+│   ├── 02_opnode
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
+│   ├── 03_main
+│   │   ├── backend.tf
+│   │   ├── main.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
+│   ├── constants.tf
+│   └── output.tf
+├── imgs
+│   ├── Terraform_workflow.png
+│   └── terraform_azure_vantiq_config.png
+├── modules
+│   ├── aks
+│   │   ├── README.md
+│   │   ├── aks.tf
+│   │   ├── loganalytics.tf
+│   │   ├── output.tf
+│   │   ├── service_principal.tf
+│   │   └── variables.tf
+│   ├── opnode
+│   │   ├── README.md
+│   │   ├── backup.tf
+│   │   ├── init-script.sh
+│   │   ├── opnode.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   ├── rdb
+│   │   ├── README.md
+│   │   ├── output.tf
+│   │   ├── rdb.tf
+│   │   └── variables.tf
+│   ├── storage
+│   │   ├── README.md
+│   │   ├── output.tf
+│   │   ├── storage.tf
+│   │   └── variables.tf
+│   └── vpc
+│       ├── README.md
+│       ├── natgw.tf
+│       ├── nsg.tf
+│       ├── output.tf
+│       ├── routetable.tf
+│       ├── snet.tf
+│       ├── variables.tf
+│       ├── vnet-peering.tf
+│       └── vnet.tf
+└── readme.md
 ```
 
 各環境(`env-prod`,`env-dev`,`env-template`)では、terraformのstateが以下の3つに分割されている。  
@@ -299,3 +372,43 @@ terraform output rdb_postgres_admin_password
 
 ## Reference
 - [Terraform_Vantiq_Azure_20201119.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ERVU5CRzSXZKvu-p-8XVC6MBPPl12cY0ymasQ0UdsJy8mw?e=n72iQZ)
+
+## VANTIQ 1.37バージョン以降インストールする変更箇所
+
+deploy.yaml
+```
+vantiq:
+  configuration:
+    # Set Vert.x system options
+    vertxOptions.json: { }
+    # Control which 3rd party components are loaded by the UI
+    webUIConfig.json:
+      loadGoogleComponents: true
+    io.vantiq.modelmgr.ModelManager.json:
+      config:
+        collectionMonitorInterval: "3 hours"
+        semanticIndexService:
+          vectorDB:
+            host: "vantiq-<FQDN>-vectordb.<FQDN>.svc.cluster.local"
+  mongodb:
+   image:
+     tag: 5.0.18
+  vectordb:
+    enabled: true
+    persistance:
+      size: 30Gi
+  worker:
+    enabled: true
+```
+
+secrets.yaml
+
+```
+vantiq:
+  vantiq-worker:
+   data:
+     token: e41KFgtV_mhlU7hd0vvWq42ZOK4H_9ym95X4qD_9pIU=
+  vantiq-ai-assistant-env:
+    files:
+      .env: deploy/sensitive/vantiq-ai-assistant-env.txt
+```
