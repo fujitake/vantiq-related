@@ -12,7 +12,7 @@ locals {
     env_name                 = "prod"
     location                 = "japaneast"
     cluster_version          = "1.28.5"
-    opnode_kubectl_version   = "1.24.5"
+    opnode_kubectl_version   = "1.28.5"
     opnode_jdk_version       = "11"
     ssh_private_key_aks_node = "aks_node_id_rsa"
     ssh_public_key_aks_node  = "aks_node_id_rsa.pub"
