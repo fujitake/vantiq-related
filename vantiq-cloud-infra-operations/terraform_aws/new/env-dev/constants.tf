@@ -138,7 +138,7 @@ locals {
         }
         node_workload_label = "compute"
       },
-      "vantiq_ai_assistant" = {
+      "ai_assistant" = {
         ami_type           = "AL2_x86_64"
         kubernetes_version = "1.28"
         instance_types     = ["t3.large"] # t3.large x 1
@@ -151,7 +151,7 @@ locals {
         node_workload_label = "orgCompute"
       },
     }
-    single_az_node_list          = ["VANTIQ", "MongoDB", "keycloak", "grafana", "metrics", "vantiq_ai_assistant"]
+    single_az_node_list          = ["VANTIQ", "MongoDB", "keycloak", "grafana", "metrics", "ai_assistant"]
     sg_ids_allowed_ssh_to_worker = []
   }
   eks_addon_config = {
