@@ -78,9 +78,9 @@ No modules.
 | <a name="input_userdb_node_pool_node_count"></a> [userdb\_node\_pool\_node\_count](#input\_userdb\_node\_pool\_node\_count) | VM count for monbodb node pool | `number` | `0` | no |
 | <a name="input_userdb_node_pool_node_ephemeral_os_disk"></a> [userdb\_node\_pool\_node\_ephemeral\_os\_disk](#input\_userdb\_node\_pool\_node\_ephemeral\_os\_disk) | Use of Ephemeral OS Disk for userdb node pool | `bool` | `true` | no |
 | <a name="input_userdb_node_pool_vm_size"></a> [userdb\_node\_pool\_vm\_size](#input\_userdb\_node\_pool\_vm\_size) | VM size for monbodb node pool | `string` | `null` | no |
-| <a name="input_vantiq_ai_assistant_node_pool_node_count"></a> [vantiq\_ai\_assistant\_node\_pool\_node\_count](#input\_vantiq\_ai\_assistant\_node\_pool\_node\_count) | VM count for Vantiq ai assistant node pool | `number` | `1` | no |
-| <a name="input_vantiq_ai_assistant_node_pool_node_ephemeral_os_disk"></a> [vantiq\_ai\_assistant\_node\_pool\_node\_ephemeral\_os\_disk](#input\_vantiq\_ai\_assistant\_node\_pool\_node\_ephemeral\_os\_disk) | Use of Ephemeral OS Disk for Vantiq ai assistant node pool | `bool` | `true` | no |
-| <a name="input_vantiq_ai_assistant_node_pool_vm_size"></a> [vantiq\_ai\_assistant\_node\_pool\_vm\_size](#input\_vantiq\_ai\_assistant\_node\_pool\_vm\_size) | VM size for Vantiq ai assistant node pool | `string` | `null` | no |
+| <a name="input_ai_assistant_node_pool_node_count"></a> [vantiq\_ai\_assistant\_node\_pool\_node\_count](#input\_vantiq\_ai\_assistant\_node\_pool\_node\_count) | VM count for Vantiq ai assistant node pool | `number` | `1` | no |
+| <a name="input_ai_assistant_node_pool_node_ephemeral_os_disk"></a> [vantiq\_ai\_assistant\_node\_pool\_node\_ephemeral\_os\_disk](#input\_vantiq\_ai\_assistant\_node\_pool\_node\_ephemeral\_os\_disk) | Use of Ephemeral OS Disk for Vantiq ai assistant node pool | `bool` | `true` | no |
+| <a name="input_ai_assistant_node_pool_vm_size"></a> [vantiq\_ai\_assistant\_node\_pool\_vm\_size](#input\_vantiq\_ai\_assistant\_node\_pool\_vm\_size) | VM size for Vantiq ai assistant node pool | `string` | `null` | no |
 | <a name="input_vantiq_node_pool_node_count"></a> [vantiq\_node\_pool\_node\_count](#input\_vantiq\_node\_pool\_node\_count) | VM count for vantiq node pool | `number` | `1` | no |
 | <a name="input_vantiq_node_pool_node_ephemeral_os_disk"></a> [vantiq\_node\_pool\_node\_ephemeral\_os\_disk](#input\_vantiq\_node\_pool\_node\_ephemeral\_os\_disk) | Use of Ephemeral OS Disk for vantiq node pool | `bool` | `true` | no |
 | <a name="input_vantiq_node_pool_vm_size"></a> [vantiq\_node\_pool\_vm\_size](#input\_vantiq\_node\_pool\_vm\_size) | VM size for vantiq node pool | `string` | `null` | no |
@@ -108,8 +108,8 @@ No modules.
 | <a name="output_aks_nodegroup_metric_vm_size"></a> [aks\_nodegroup\_metric\_vm\_size](#output\_aks\_nodegroup\_metric\_vm\_size) | n/a |
 | <a name="output_aks_nodegroup_mongodb_node_count"></a> [aks\_nodegroup\_mongodb\_node\_count](#output\_aks\_nodegroup\_mongodb\_node\_count) | n/a |
 | <a name="output_aks_nodegroup_mongodb_vm_size"></a> [aks\_nodegroup\_mongodb\_vm\_size](#output\_aks\_nodegroup\_mongodb\_vm\_size) | n/a |
-| <a name="output_aks_nodegroup_vantiq_ai_assistant_node_count"></a> [aks\_nodegroup\_vantiq\_ai\_assistant\_node\_count](#output\_aks\_nodegroup\_vantiq\_ai\_assistant\_node\_count) | n/a |
-| <a name="output_aks_nodegroup_vantiq_ai_assistant_vm_size"></a> [aks\_nodegroup\_vantiq\_ai\_assistant\_vm\_size](#output\_aks\_nodegroup\_vantiq\_ai\_assistant\_vm\_size) | n/a |
+| <a name="output_aks_nodegroup_ai_assistant_node_count"></a> [aks\_nodegroup\_vantiq\_ai\_assistant\_node\_count](#output\_aks\_nodegroup\_vantiq\_ai\_assistant\_node\_count) | n/a |
+| <a name="output_aks_nodegroup_ai_assistant_vm_size"></a> [aks\_nodegroup\_vantiq\_ai\_assistant\_vm\_size](#output\_aks\_nodegroup\_vantiq\_ai\_assistant\_vm\_size) | n/a |
 | <a name="output_aks_nodegroup_vantiq_node_count"></a> [aks\_nodegroup\_vantiq\_node\_count](#output\_aks\_nodegroup\_vantiq\_node\_count) | n/a |
 | <a name="output_aks_nodegroup_vantiq_vm_size"></a> [aks\_nodegroup\_vantiq\_vm\_size](#output\_aks\_nodegroup\_vantiq\_vm\_size) | n/a |
 | <a name="output_aks_private_cluster_enabled"></a> [aks\_private\_cluster\_enabled](#output\_aks\_private\_cluster\_enabled) | n/a |

@@ -83,28 +83,28 @@ module "aks" {
   # "Standard_E4s_v3" (4vCPU + 32GiB) - equivalent to R5.xlarge
   # "Standard_B2S" (2vCPU + 4GiB)- equivalent to T3.medium
   # "Standard_E2_v3" (4vCPU + 32GiB) -  equivalent to M5.large
-  availability_zones                                   = module.constants.aks_config.availability_zones
-  vantiq_node_pool_vm_size                             = module.constants.aks_config.vantiq_node_pool_vm_size
-  vantiq_node_pool_node_count                          = module.constants.aks_config.vantiq_node_pool_node_count
-  vantiq_node_pool_node_ephemeral_os_disk              = module.constants.aks_config.vantiq_node_pool_node_ephemeral_os_disk
-  mongodb_node_pool_vm_size                            = module.constants.aks_config.mongodb_node_pool_vm_size
-  mongodb_node_pool_node_count                         = module.constants.aks_config.mongodb_node_pool_node_count
-  mongodb_node_pool_node_ephemeral_os_disk             = module.constants.aks_config.mongodb_node_pool_node_ephemeral_os_disk
-  userdb_node_pool_vm_size                             = module.constants.aks_config.userdb_node_pool_vm_size
-  userdb_node_pool_node_count                          = module.constants.aks_config.userdb_node_pool_node_count
-  userdb_node_pool_node_ephemeral_os_disk              = module.constants.aks_config.userdb_node_pool_node_ephemeral_os_disk
-  grafana_node_pool_vm_size                            = module.constants.aks_config.grafana_node_pool_vm_size
-  grafana_node_pool_node_count                         = module.constants.aks_config.grafana_node_pool_node_count
-  grafana_node_pool_node_ephemeral_os_disk             = module.constants.aks_config.grafana_node_pool_node_ephemeral_os_disk
-  keycloak_node_pool_vm_size                           = module.constants.aks_config.keycloak_node_pool_vm_size
-  keycloak_node_pool_node_count                        = module.constants.aks_config.keycloak_node_pool_node_count
-  keycloak_node_pool_node_ephemeral_os_disk            = module.constants.aks_config.keycloak_node_pool_node_ephemeral_os_disk
-  metrics_node_pool_vm_size                            = module.constants.aks_config.metrics_node_pool_vm_size
-  metrics_node_pool_node_count                         = module.constants.aks_config.metrics_node_pool_node_count
-  metrics_node_pool_node_ephemeral_os_disk             = module.constants.aks_config.metrics_node_pool_node_ephemeral_os_disk
-  vantiq_ai_assistant_node_pool_vm_size                = module.constants.aks_config.vantiq_ai_assistant_node_pool_vm_size
-  vantiq_ai_assistant_node_pool_node_count             = module.constants.aks_config.vantiq_ai_assistant_node_pool_node_count
-  vantiq_ai_assistant_node_pool_node_ephemeral_os_disk = module.constants.aks_config.vantiq_ai_assistant_node_pool_node_ephemeral_os_disk
+  availability_zones                            = module.constants.aks_config.availability_zones
+  vantiq_node_pool_vm_size                      = module.constants.aks_config.vantiq_node_pool_vm_size
+  vantiq_node_pool_node_count                   = module.constants.aks_config.vantiq_node_pool_node_count
+  vantiq_node_pool_node_ephemeral_os_disk       = module.constants.aks_config.vantiq_node_pool_node_ephemeral_os_disk
+  mongodb_node_pool_vm_size                     = module.constants.aks_config.mongodb_node_pool_vm_size
+  mongodb_node_pool_node_count                  = module.constants.aks_config.mongodb_node_pool_node_count
+  mongodb_node_pool_node_ephemeral_os_disk      = module.constants.aks_config.mongodb_node_pool_node_ephemeral_os_disk
+  userdb_node_pool_vm_size                      = module.constants.aks_config.userdb_node_pool_vm_size
+  userdb_node_pool_node_count                   = module.constants.aks_config.userdb_node_pool_node_count
+  userdb_node_pool_node_ephemeral_os_disk       = module.constants.aks_config.userdb_node_pool_node_ephemeral_os_disk
+  grafana_node_pool_vm_size                     = module.constants.aks_config.grafana_node_pool_vm_size
+  grafana_node_pool_node_count                  = module.constants.aks_config.grafana_node_pool_node_count
+  grafana_node_pool_node_ephemeral_os_disk      = module.constants.aks_config.grafana_node_pool_node_ephemeral_os_disk
+  keycloak_node_pool_vm_size                    = module.constants.aks_config.keycloak_node_pool_vm_size
+  keycloak_node_pool_node_count                 = module.constants.aks_config.keycloak_node_pool_node_count
+  keycloak_node_pool_node_ephemeral_os_disk     = module.constants.aks_config.keycloak_node_pool_node_ephemeral_os_disk
+  metrics_node_pool_vm_size                     = module.constants.aks_config.metrics_node_pool_vm_size
+  metrics_node_pool_node_count                  = module.constants.aks_config.metrics_node_pool_node_count
+  metrics_node_pool_node_ephemeral_os_disk      = module.constants.aks_config.metrics_node_pool_node_ephemeral_os_disk
+  ai_assistant_node_pool_vm_size                = module.constants.aks_config.ai_assistant_node_pool_vm_size
+  ai_assistant_node_pool_node_count             = module.constants.aks_config.ai_assistant_node_pool_node_count
+  ai_assistant_node_pool_node_ephemeral_os_disk = module.constants.aks_config.ai_assistant_node_pool_node_ephemeral_os_disk
 }
 
 ###

@@ -204,17 +204,17 @@ variable "metrics_node_pool_node_ephemeral_os_disk" {
   type        = bool
   default     = true
 }
-variable "vantiq_ai_assistant_node_pool_vm_size" {
+variable "ai_assistant_node_pool_vm_size" {
   description = "VM size for Vantiq ai assistant node pool"
   type        = string
   default     = null
 }
-variable "vantiq_ai_assistant_node_pool_node_count" {
+variable "ai_assistant_node_pool_node_count" {
   description = "VM count for Vantiq ai assistant node pool"
   type        = number
   default     = 1
 }
-variable "vantiq_ai_assistant_node_pool_node_ephemeral_os_disk" {
+variable "ai_assistant_node_pool_node_ephemeral_os_disk" {
   description = "Use of Ephemeral OS Disk for Vantiq ai assistant node pool"
   type        = bool
   default     = true

@@ -137,9 +137,9 @@ locals {
     metrics_node_pool_vm_size                            = "Standard_F4s_v2"
     metrics_node_pool_node_count                         = 1
     metrics_node_pool_node_ephemeral_os_disk             = true
-    vantiq_ai_assistant_node_pool_vm_size                = "Standard_F4s_v2"
-    vantiq_ai_assistant_node_pool_node_count             = 3
-    vantiq_ai_assistant_node_pool_node_ephemeral_os_disk = true
+    ai_assistant_node_pool_vm_size                = "Standard_F4s_v2"
+    ai_assistant_node_pool_node_count             = 3
+    ai_assistant_node_pool_node_ephemeral_os_disk = true
   }
 }
 

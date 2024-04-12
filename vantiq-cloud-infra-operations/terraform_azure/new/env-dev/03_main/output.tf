@@ -192,10 +192,10 @@ output "aks_nodegroup_metric_node_count" {
   value = module.aks.aks_nodegroup_metric_node_count
 }
 
-output "aks_nodegroup_vantiq_ai_assistant_vm_size" {
-  value = module.aks.aks_nodegroup_vantiq_ai_assistant_vm_size
+output "aks_nodegroup_ai_assistant_vm_size" {
+  value = module.aks.aks_nodegroup_ai_assistant_vm_size
 }
 
-output "aks_nodegroup_vantiq_ai_assistant_node_count" {
-  value = module.aks.aks_nodegroup_vantiq_ai_assistant_node_count
+output "aks_nodegroup_ai_assistant_node_count" {
+  value = module.aks.aks_nodegroup_ai_assistant_node_count
 }

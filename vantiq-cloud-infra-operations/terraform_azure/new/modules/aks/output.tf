@@ -94,10 +94,10 @@ output "aks_nodegroup_metric_node_count" {
   value = var.metrics_node_pool_node_count == 0 ? 0 : azurerm_kubernetes_cluster_node_pool.metricsnp[0].node_count
 }
 
-output "aks_nodegroup_vantiq_ai_assistant_vm_size" {
-  value = var.vantiq_ai_assistant_node_pool_node_count == 0 ? "N/A" : azurerm_kubernetes_cluster_node_pool.vantiqaiasnp[0].vm_size
+output "aks_nodegroup_ai_assistant_vm_size" {
+  value = var.ai_assistant_node_pool_node_count == 0 ? "N/A" : azurerm_kubernetes_cluster_node_pool.vantiqaiasnp[0].vm_size
 }
 
-output "aks_nodegroup_vantiq_ai_assistant_node_count" {
-  value = var.vantiq_ai_assistant_node_pool_node_count == 0 ? 0 : azurerm_kubernetes_cluster_node_pool.vantiqaiasnp[0].node_count
+output "aks_nodegroup_ai_assistant_node_count" {
+  value = var.ai_assistant_node_pool_node_count == 0 ? 0 : azurerm_kubernetes_cluster_node_pool.vantiqaiasnp[0].node_count
 }
