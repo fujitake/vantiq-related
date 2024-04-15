@@ -6,43 +6,7 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 ![Configuration](imgs/terraform_azure_vantiq_config.png)
 
 ```
-├── env-dev
-│   ├── 01_network
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── 02_opnode
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── 03_main
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── constants.tf
-│   └── output.tf
-├── env-prod
-│   ├── 01_network
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── 02_opnode
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── 03_main
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── constants.tf
-│   └── output.tf
-├── env-template
+├── env-xxx
 │   ├── 01_network
 │   │   ├── backend.tf
 │   │   ├── main.tf
@@ -63,41 +27,12 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 ├── imgs
 │   ├── Terraform_workflow.png
 │   └── terraform_azure_vantiq_config.png
-├── modules
-│   ├── aks
-│   │   ├── README.md
-│   │   ├── aks.tf
-│   │   ├── loganalytics.tf
-│   │   ├── output.tf
-│   │   ├── service_principal.tf
-│   │   └── variables.tf
-│   ├── opnode
-│   │   ├── README.md
-│   │   ├── backup.tf
-│   │   ├── init-script.sh
-│   │   ├── opnode.tf
-│   │   ├── output.tf
-│   │   └── variables.tf
-│   ├── rdb
-│   │   ├── README.md
-│   │   ├── output.tf
-│   │   ├── rdb.tf
-│   │   └── variables.tf
-│   ├── storage
-│   │   ├── README.md
-│   │   ├── output.tf
-│   │   ├── storage.tf
-│   │   └── variables.tf
-│   └── vpc
-│       ├── README.md
-│       ├── natgw.tf
-│       ├── nsg.tf
-│       ├── output.tf
-│       ├── routetable.tf
-│       ├── snet.tf
-│       ├── variables.tf
-│       ├── vnet-peering.tf
-│       └── vnet.tf
+└── modules
+    ├── aks
+    ├── opnode
+    ├── rdb
+    ├── storage
+    └── vpc
 └── readme.md
 ```
 
