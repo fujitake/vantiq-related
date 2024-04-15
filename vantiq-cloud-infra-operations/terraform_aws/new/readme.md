@@ -8,7 +8,7 @@ Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプ�
 
 ```
 ├── bastion-setup-sample.sh
-├── env-dev
+├── env-xxx
 │   ├── 10_network
 │   │   ├── backend.tf
 │   │   ├── main.tf
@@ -21,63 +21,30 @@ Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプ�
 │   │   ├── provider.tf
 │   ├── constants.tf
 │   └── output.tf
-├── env-prod
-│   ├── 10_network
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── 20_main
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── constants.tf
-│   └── output.tf
-├── env-template
-│   ├── 10_network
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── 20_main
-│   │   ├── backend.tf
-│   │   ├── main.tf
-│   │   ├── output.tf
-│   │   └── provider.tf
-│   ├── constants.tf
-│   └── output.tf
-├── imgs
-│   └── terraform_aws_vantiq_config.png
 ├── modules
 │   ├── eks
-│   │   ├── README.md
 │   │   ├── eks.tf
 │   │   ├── output.tf
 │   │   └── variables.tf
 │   ├── eks_addon
-│   │   └── ebs_csi_driver
-│   │       ├── README.md
+│   |   └── ebs_csi_driver
 │   │       ├── csi_driver.tf
 │   │       ├── output.tf
 │   │       └── variables.tf
 │   ├── opnode
-│   │   ├── README.md
 │   │   ├── bastion-instance.tf
 │   │   ├── bastion-userdata.sh.tpl
 │   │   ├── output.tf
 │   │   └── variables.tf
 │   ├── rds-postgres
-│   │   ├── README.md
 │   │   ├── output.tf
 │   │   ├── postgresql.tf
 │   │   └── variables.tf
 │   └── vpc
-│       ├── README.md
 │       ├── output.tf
 │       ├── variables.tf
 │       └── vpc.tf
-└── readme.md
+└── bastion-setup-sample.sh
 ```
 
 各環境(`env-prod`,`env-dev`,`env-template`)では、terraformのstateが以下の3つに分割されている。  
@@ -328,51 +295,3 @@ terraform output postgres_admin_password
 ## Reference
 
 - [eks_configuration_for_VANTIQ_20200622.pptx](https://vantiq.sharepoint.com/:p:/s/jp-tech/ETzg5rfj5D9Hrjc71v5d5DYB3YS23pcvzh_9fy0lnQYMww?e=FKiAhG)
-
-
-## VANTIQ 1.37バージョン以降インストールする変更箇所
-
-deploy.yaml
-```
-vantiq:
-
-  configuration:
-    # Set Vert.x system options
-    vertxOptions.json: { }
-
-    # Control which 3rd party components are loaded by the UI
-    webUIConfig.json:
-      loadGoogleComponents: true
-
-    io.vantiq.modelmgr.ModelManager.json:
-      config:
-        collectionMonitorInterval: "3 hours"
-        semanticIndexService:
-          vectorDB:
-            host: "vantiq-<FQDN>-vectordb.<FQDN>.svc.cluster.local"
-
-  mongodb:
-   image:
-     tag: 5.0.18
-
-  vectordb:
-    enabled: true
-    persistance:
-      size: 30Gi
-
-  worker:
-    enabled: true
-```
-
-secrets.yaml
-
-```
-vantiq:
-
-  vantiq-worker:
-   data:
-     token: e41KFgtV_mhlU7hd0vvWq42ZOK4H_9ym95X4qD_9pIU=
-  vantiq-ai-assistant-env:
-    files:
-      .env: deploy/sensitive/vantiq-ai-assistant-env.txt
-```
