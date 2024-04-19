@@ -23,7 +23,7 @@
   - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。](#undeployとdeployを繰り返したらpvがreleaseされてしまった再利用したい)
     - [リカバリー手順](#リカバリー手順)
     - [リカバリーに関する留意事項](#リカバリーに関する留意事項)
-  - [Grafana でメトリクスが表示されない：System Namespace編](#grafana-でメトリクスが表示されない：System-Namespace編)
+  - [Grafana でメトリクスが表示されない【System Namespace編】](#grafana-でメトリクスが表示されない【System-Namespace編】)
     - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか診断する)
     - [telegraf でエラーが出ているか診断する](#telegraf-でエラーが出ているか診断する)
       - [telegraf-dsで「no space left on device」、といったエラーが発生する](#telegraf-dsでno-space-left-on-deviceといったエラーが発生する)
@@ -35,7 +35,7 @@
       - [MongoDB Monitoring Dashboard](#mongodb-monitoring-dashboard)
         - ["installation" and "Pod" Variable](#installation-and-pod-variable)
         - [CPU utilization](#cpu-utilization-1)
-  - [Grafana でメトリクスが表示されない：Organization Namespace編](#grafana-でメトリクスが表示されない：Organization-Namespace編)
+  - [Grafana でメトリクスが表示されない【Organization Namespace編】](#grafana-でメトリクスが表示されない【Organization-Namespace編】)
     - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか確認する)
   - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった ](#vantiqバージョンアップしたらgrafanaのdashboardがすべて消えてしまった-)
     - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
@@ -362,7 +362,7 @@ deployment.apps/grafana scaled
 ./gradlew -Pcluster=vantiq-vantiqjp-internal deployGrafanaDB
 ```
 
-## Grafana でメトリクスが表示されない：System Namespace編<a id="metrics_not_showing_up_in_grafana"></a>
+## Grafana でメトリクスが表示されない【System Namespace編】<a id="metrics_not_showing_up_in_grafana"></a>
 `Vantiq Resources` の `Request rate`、`Request duration` が表示されない。`MongoDB Monitoring Dashboard` が表示されない。
 ![Screen Shot 2021-08-30 at 21.31.17](../../imgs/vantiq-install-maintenance/grafana_not_showing.png)
 
@@ -543,7 +543,7 @@ To-Be
 SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE ("pod_name" =~ /^$pod$/ AND "container_name" = 'mongodb' AND "namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)
 ```
 
-## Grafana でメトリクスが表示されない：Organization Namespace編<a id="org_metrics_not_showing_up_in_grafana"></a>
+## Grafana でメトリクスが表示されない【Organization Namespace編】<a id="org_metrics_not_showing_up_in_grafana"></a>
 App Executionの `Executions` が表示されているにもかかわらず、`Execution Time` は `No data` となり表示されない。
 ![org_metrics_not_showing](../../imgs/vantiq-install-maintenance/org_grafana_not_showing.png)
 
