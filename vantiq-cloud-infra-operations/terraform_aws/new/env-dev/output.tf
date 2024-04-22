@@ -17,7 +17,3 @@ output "eks_config" {
 output "eks_addon_config" {
   value = local.eks_addon_config
 }
-
-output "tf_remote_backend" {
-  value = local.tf_remote_backend
-}

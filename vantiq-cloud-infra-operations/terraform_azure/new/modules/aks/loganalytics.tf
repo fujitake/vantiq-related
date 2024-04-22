@@ -1,4 +1,3 @@
-
 # LogAnalyticsワークスペースの有効化
 resource "azurerm_log_analytics_workspace" "k8s" {
   count               = var.loganalytics_enabled == true ? 1 : 0

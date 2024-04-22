@@ -1,69 +1,3 @@
-provider "azurerm" {
-  features {}
-}
-
-### Case by use local for terraform backend - start ###
-
-terraform {
-  backend "local" {
-    path = "terraform.tfstate"
-  }
-}
-
-data "terraform_remote_state" "network" {
-  backend = "local"
-  config = {
-    path = "../01_network/terraform.tfstate"
-  }
-}
-
-data "terraform_remote_state" "opnode" {
-  backend = "local"
-  config = {
-    path = "../02_opnode/terraform.tfstate"
-  }
-}
-
-### Case by use local for terraform backend - end ###
-
-
-### Case by use Azure Storage for terraform backend - start ###
-
-# # store the tf-state in blob.
-# # Note: variables cannot be used inside "backend" defintion
-
-# terraform {
-#     backend "azurerm" {
-#       resource_group_name  = "<INPUT-YOUR-RESOURCE-GROUP>"
-#       storage_account_name = "<INPUT-YOUR-STORAGE-ACCOUNT>"
-#       container_name       = "<INPUT-YOUR-CONTAINER-NAME>"
-#       key                  = "main.tfstate"
-#     }
-# }
-
-# data "terraform_remote_state" "network" {
-#   backend = "azurerm"
-#   config = {
-#       resource_group_name  = module.constants.tf_remote_backend.resource_group_name
-#       storage_account_name = module.constants.tf_remote_backend.storage_account_name
-#       container_name       = module.constants.tf_remote_backend.container_name
-#       key                  = "network.tfstate"
-#   }
-# }
-
-# data "terraform_remote_state" "opnode" {
-#   backend = "azurerm"
-#   config = {
-#       resource_group_name  = module.constants.tf_remote_backend.resource_group_name
-#       storage_account_name = module.constants.tf_remote_backend.storage_account_name
-#       container_name       = module.constants.tf_remote_backend.container_name
-#       key                  = "opnode.tfstate"
-#   }
-# }
-
-### Case by use S3 Bucket for terraform backend - end ###
-
-
 data "azurerm_subscription" "current" {}
 
 module "constants" {
@@ -129,7 +63,6 @@ module "aks" {
   #  vnet_subnet_id = data.terraform_remote_state.network.outputs.vantiq_aks_node_subnet_kubenet_id
 
   # network profile (optional)
-  docker_bridge_cidr = module.constants.aks_config.docker_bridge_cidr
   #  load_balancer_sku =  module.constants.aks_config.load_balancer_sku
   #  network_plugin =  module.constants.aks_config.network_plugin
   #  network_policy =  module.constants.aks_config.network_policy
@@ -150,25 +83,28 @@ module "aks" {
   # "Standard_E4s_v3" (4vCPU + 32GiB) - equivalent to R5.xlarge
   # "Standard_B2S" (2vCPU + 4GiB)- equivalent to T3.medium
   # "Standard_E2_v3" (4vCPU + 32GiB) -  equivalent to M5.large
-  availability_zones                        = module.constants.aks_config.availability_zones
-  vantiq_node_pool_vm_size                  = module.constants.aks_config.vantiq_node_pool_vm_size
-  vantiq_node_pool_node_count               = module.constants.aks_config.vantiq_node_pool_node_count
-  vantiq_node_pool_node_ephemeral_os_disk   = module.constants.aks_config.vantiq_node_pool_node_ephemeral_os_disk
-  mongodb_node_pool_vm_size                 = module.constants.aks_config.mongodb_node_pool_vm_size
-  mongodb_node_pool_node_count              = module.constants.aks_config.mongodb_node_pool_node_count
-  mongodb_node_pool_node_ephemeral_os_disk  = module.constants.aks_config.mongodb_node_pool_node_ephemeral_os_disk
-  userdb_node_pool_vm_size                  = module.constants.aks_config.userdb_node_pool_vm_size
-  userdb_node_pool_node_count               = module.constants.aks_config.userdb_node_pool_node_count
-  userdb_node_pool_node_ephemeral_os_disk   = module.constants.aks_config.userdb_node_pool_node_ephemeral_os_disk
-  grafana_node_pool_vm_size                 = module.constants.aks_config.grafana_node_pool_vm_size
-  grafana_node_pool_node_count              = module.constants.aks_config.grafana_node_pool_node_count
-  grafana_node_pool_node_ephemeral_os_disk  = module.constants.aks_config.grafana_node_pool_node_ephemeral_os_disk
-  keycloak_node_pool_vm_size                = module.constants.aks_config.keycloak_node_pool_vm_size
-  keycloak_node_pool_node_count             = module.constants.aks_config.keycloak_node_pool_node_count
-  keycloak_node_pool_node_ephemeral_os_disk = module.constants.aks_config.keycloak_node_pool_node_ephemeral_os_disk
-  metrics_node_pool_vm_size                 = module.constants.aks_config.metrics_node_pool_vm_size
-  metrics_node_pool_node_count              = module.constants.aks_config.metrics_node_pool_node_count
-  metrics_node_pool_node_ephemeral_os_disk  = module.constants.aks_config.metrics_node_pool_node_ephemeral_os_disk
+  availability_zones                            = module.constants.aks_config.availability_zones
+  vantiq_node_pool_vm_size                      = module.constants.aks_config.vantiq_node_pool_vm_size
+  vantiq_node_pool_node_count                   = module.constants.aks_config.vantiq_node_pool_node_count
+  vantiq_node_pool_node_ephemeral_os_disk       = module.constants.aks_config.vantiq_node_pool_node_ephemeral_os_disk
+  mongodb_node_pool_vm_size                     = module.constants.aks_config.mongodb_node_pool_vm_size
+  mongodb_node_pool_node_count                  = module.constants.aks_config.mongodb_node_pool_node_count
+  mongodb_node_pool_node_ephemeral_os_disk      = module.constants.aks_config.mongodb_node_pool_node_ephemeral_os_disk
+  userdb_node_pool_vm_size                      = module.constants.aks_config.userdb_node_pool_vm_size
+  userdb_node_pool_node_count                   = module.constants.aks_config.userdb_node_pool_node_count
+  userdb_node_pool_node_ephemeral_os_disk       = module.constants.aks_config.userdb_node_pool_node_ephemeral_os_disk
+  grafana_node_pool_vm_size                     = module.constants.aks_config.grafana_node_pool_vm_size
+  grafana_node_pool_node_count                  = module.constants.aks_config.grafana_node_pool_node_count
+  grafana_node_pool_node_ephemeral_os_disk      = module.constants.aks_config.grafana_node_pool_node_ephemeral_os_disk
+  keycloak_node_pool_vm_size                    = module.constants.aks_config.keycloak_node_pool_vm_size
+  keycloak_node_pool_node_count                 = module.constants.aks_config.keycloak_node_pool_node_count
+  keycloak_node_pool_node_ephemeral_os_disk     = module.constants.aks_config.keycloak_node_pool_node_ephemeral_os_disk
+  metrics_node_pool_vm_size                     = module.constants.aks_config.metrics_node_pool_vm_size
+  metrics_node_pool_node_count                  = module.constants.aks_config.metrics_node_pool_node_count
+  metrics_node_pool_node_ephemeral_os_disk      = module.constants.aks_config.metrics_node_pool_node_ephemeral_os_disk
+  ai_assistant_node_pool_vm_size                = module.constants.aks_config.ai_assistant_node_pool_vm_size
+  ai_assistant_node_pool_node_count             = module.constants.aks_config.ai_assistant_node_pool_node_count
+  ai_assistant_node_pool_node_ephemeral_os_disk = module.constants.aks_config.ai_assistant_node_pool_node_ephemeral_os_disk
 }
 
 ###
@@ -192,5 +128,4 @@ module "storage" {
   private_endpoint_vnet_ids = [data.terraform_remote_state.network.outputs.vpc_vnet_id]
 
   delete_after_days_since_modification_greater_than = module.constants.backup_storage_config.delete_after_days_since_modification_greater_than
-
 }
