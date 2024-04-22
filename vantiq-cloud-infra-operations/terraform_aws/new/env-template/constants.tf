@@ -1,29 +1,11 @@
-terraform {
-  required_version = ">= 1.1.8"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.10.0"
-    }
-  }
-}
-
-locals {
-  tf_remote_backend = {
-    bucket_name = "<INPUT-YOUR-BUCKET-NAME>"
-    key_prefix  = "<INPUT-YOUR-KEY-PREFIX>"
-    region      = "<INPUT-YOUR-BUCKET-REGION>"
-  }
-}
-
 ###
 ###  common config(Custom setting)
 ###
 locals {
   common_config = {
     cluster_name                   = "<INPUT-YOUR-CLUSTER-NAME>"
-    cluster_version                = "1.24"
-    bastion_kubectl_version        = "1.24.10"
+    cluster_version                = "1.28"
+    bastion_kubectl_version        = "1.28.5"
     env_name                       = "template"
     region                         = "<INPUT-YOUR-REGION>"
     worker_access_private_key      = "<INPUT-YOUR-SSH-PRIVATE-KEY-FILE-NAME>"
@@ -73,7 +55,7 @@ locals {
   }
 }
 
-### 
+###
 ### rds config
 ###
 locals {
@@ -82,10 +64,10 @@ locals {
     db_username = "keycloak"
     # db_password             = "password1234"
     db_password             = null
-    db_instance_class       = "db.t2.micro"
+    db_instance_class       = "db.t3.micro"
     db_storage_size         = 100
     db_storage_type         = "gp2"
-    postgres_engine_version = "12.7"
+    postgres_engine_version = "14.10"
     keycloak_db_expose_port = 5432
   }
 }
@@ -98,7 +80,7 @@ locals {
     managed_node_group_config = {
       "VANTIQ" = {
         ami_type           = "AL2_x86_64"
-        kubernetes_version = "1.24"
+        kubernetes_version = "1.28"
         instance_types     = ["c5.xlarge"] # c5.xlarge x 3
         disk_size          = 40
         scaling_config = {
@@ -110,7 +92,7 @@ locals {
       },
       "MongoDB" = {
         ami_type           = "AL2_x86_64"
-        kubernetes_version = "1.24"
+        kubernetes_version = "1.28"
         instance_types     = ["r5.xlarge"] # r5.xlarge x 3
         disk_size          = 40
         scaling_config = {
@@ -122,7 +104,7 @@ locals {
       },
       "keycloak" = {
         ami_type           = "AL2_x86_64"
-        kubernetes_version = "1.24"
+        kubernetes_version = "1.28"
         instance_types     = ["m5.large"] # m5.large x 3
         disk_size          = 40
         scaling_config = {
@@ -134,7 +116,7 @@ locals {
       },
       "grafana" = {
         ami_type           = "AL2_x86_64"
-        kubernetes_version = "1.24"
+        kubernetes_version = "1.28"
         instance_types     = ["r5.xlarge"] # r5.xlarge x 1
         disk_size          = 40
         scaling_config = {
@@ -146,7 +128,7 @@ locals {
       },
       "metrics" = {
         ami_type           = "AL2_x86_64"
-        kubernetes_version = "1.24"
+        kubernetes_version = "1.28"
         instance_types     = ["m5.xlarge"] # m5.xlarge x 1
         disk_size          = 40
         scaling_config = {
@@ -155,9 +137,21 @@ locals {
           min_size     = 0
         }
         node_workload_label = "compute"
-      }
+      },
+      "ai_assistant" = {
+        ami_type           = "AL2_x86_64"
+        kubernetes_version = "1.28"
+        instance_types     = ["t3.large"] # t3.large x 1
+        disk_size          = 40
+        scaling_config = {
+          desired_size = 1 # 3
+          max_size     = 6
+          min_size     = 0
+        }
+        node_workload_label = "orgCompute"
+      },
     }
-    single_az_node_list          = ["grafana"]
+    single_az_node_list          = ["VANTIQ", "MongoDB", "keycloak", "grafana", "metrics", "ai_assistant"]
     sg_ids_allowed_ssh_to_worker = []
   }
   eks_addon_config = {
