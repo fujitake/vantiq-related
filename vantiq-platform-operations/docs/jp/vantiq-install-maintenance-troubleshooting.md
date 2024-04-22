@@ -545,7 +545,7 @@ SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_po
 
 ## Grafana でメトリクスが表示されない【Organization Namespace編】<a id="org_metrics_not_showing_up_in_grafana"></a>
 App Executionの `Executions` が表示されているにもかかわらず、`Execution Time` は `No data` となり表示されない。
-![org_metrics_not_showing](../../imgs/vantiq-install-maintenance/org_grafana_not_showing.png)
+![org_metrics_not_showing](../../imgs/vantiq-install-maintenance/organization_grafana_not_showing.png)
 
 ### InfluxDB にメトリクスが存在するか確認する
 データが表示されていないパネルのクエリを調べると、`system` データベースにおける `resources_requests_percentile` メジャーメントの、 `resource` タグに `collaborationtypes` フィールドが存在するかどうかを検索していることがわかる。  
