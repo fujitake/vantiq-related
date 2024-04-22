@@ -4,7 +4,7 @@ resource "azurerm_subnet" "snet-aks-node" {
   resource_group_name                            = azurerm_resource_group.rg-vpc.name
   virtual_network_name                           = azurerm_virtual_network.vnet-vantiq.name
   address_prefixes                               = var.snet_aks_node_address_cidr
-  enforce_private_link_endpoint_network_policies = true
+  private_endpoint_network_policies_enabled = true
 }
 
 

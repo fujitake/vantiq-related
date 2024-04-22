@@ -15,8 +15,8 @@ resource "azuread_application" "aks" {
 
 # Create Service Principal
 resource "azuread_service_principal" "aks" {
-  count          = var.create_service_principal == false ? 0 : 1
-  application_id = azuread_application.aks[0].application_id
+  count     = var.create_service_principal == false ? 0 : 1
+  client_id = azuread_application.aks[0].client_id
 }
 
 # Create Service Principal password

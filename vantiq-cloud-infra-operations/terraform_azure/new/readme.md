@@ -8,24 +8,32 @@ Vantiq Public Cloudを構成するためのAzure Infrastructure構成。
 ```
 ├── env-xxx
 │   ├── 01_network
+│   │   ├── backend.tf
 │   │   ├── main.tf
-│   │   └── output.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
 │   ├── 02_opnode
+│   │   ├── backend.tf
 │   │   ├── main.tf
-│   │   └── output.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
 │   ├── 03_main
+│   │   ├── backend.tf
 │   │   ├── main.tf
-│   │   └── output.tf
+│   │   ├── output.tf
+│   │   └── provider.tf
 │   ├── constants.tf
 │   └── output.tf
+├── imgs
+│   ├── Terraform_workflow.png
+│   └── terraform_azure_vantiq_config.png
 └── modules
     ├── aks
     ├── opnode
     ├── rdb
     ├── storage
     └── vpc
-
-
+└── readme.md
 ```
 
 各環境(`env-prod`,`env-dev`,`env-template`)では、terraformのstateが以下の3つに分割されている。  
