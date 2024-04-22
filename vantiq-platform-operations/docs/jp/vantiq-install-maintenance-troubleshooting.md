@@ -23,7 +23,7 @@
   - [undeployとdeployを繰り返したら、PVがReleaseされてしまった。再利用したい。](#undeployとdeployを繰り返したらpvがreleaseされてしまった再利用したい)
     - [リカバリー手順](#リカバリー手順)
     - [リカバリーに関する留意事項](#リカバリーに関する留意事項)
-  - [Grafana でメトリクスが表示されない](#grafana-でメトリクスが表示されない)
+  - [Grafana でメトリクスが表示されない【System Namespace編】](#grafana-でメトリクスが表示されないsystem-namespace編)
     - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか診断する)
     - [telegraf でエラーが出ているか診断する](#telegraf-でエラーが出ているか診断する)
       - [telegraf-dsで「no space left on device」、といったエラーが発生する](#telegraf-dsでno-space-left-on-deviceといったエラーが発生する)
@@ -35,6 +35,8 @@
       - [MongoDB Monitoring Dashboard](#mongodb-monitoring-dashboard)
         - ["installation" and "Pod" Variable](#installation-and-pod-variable)
         - [CPU utilization](#cpu-utilization-1)
+  - [Grafana でメトリクスが表示されない【Organization Namespace編】](#grafana-でメトリクスが表示されないorganization-namespace編)
+    - [InfluxDB にメトリクスが存在するか診断する](#influxdb-にメトリクスが存在するか確認する)
   - [VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった ](#vantiqバージョンアップしたらgrafanaのdashboardがすべて消えてしまった-)
     - [診断：データベースmysqlが正しく設定されているか確認する](#診断データベースmysqlが正しく設定されているか確認する)
     - [リカバリー: sqlite3からmysqlへのデータ移行を行う](#リカバリー-sqlite3からmysqlへのデータ移行を行う)
@@ -360,7 +362,7 @@ deployment.apps/grafana scaled
 ./gradlew -Pcluster=vantiq-vantiqjp-internal deployGrafanaDB
 ```
 
-## Grafana でメトリクスが表示されない<a id="metrics_not_showing_up_in_grafana"></a>
+## Grafana でメトリクスが表示されない【System Namespace編】<a id="metrics_not_showing_up_in_grafana"></a>
 `Vantiq Resources` の `Request rate`、`Request duration` が表示されない。`MongoDB Monitoring Dashboard` が表示されない。
 ![Screen Shot 2021-08-30 at 21.31.17](../../imgs/vantiq-install-maintenance/grafana_not_showing.png)
 
@@ -540,6 +542,36 @@ To-Be
 ```sh:
 SELECT mean("cpu_usage_nanocores") / 10000000 AS "cpu usage" FROM "kubernetes_pod_container" WHERE ("pod_name" =~ /^$pod$/ AND "container_name" = 'mongodb' AND "namespace" =~ /^$installation$/) AND $timeFilter GROUP BY time($__interval) fill(none)
 ```
+
+## Grafana でメトリクスが表示されない【Organization Namespace編】<a id="org_metrics_not_showing_up_in_grafana"></a>
+App Executionの `Executions` が表示されているにもかかわらず、`Execution Time` は `No data` となり表示されない。
+![org_metrics_not_showing](../../imgs/vantiq-install-maintenance/organization_grafana_not_showing.png)
+
+### InfluxDB にメトリクスが存在するか確認する
+データが表示されていないパネルのクエリを調べると、`system` データベースにおける `resources_requests_percentile` メジャーメントの、 `resource` タグに `collaborationtypes` フィールドが存在するかどうかを検索していることがわかる。  
+これが InfluxDB にあるか確認する。
+
+```sh
+# influx-0 の pod のシェルに入る
+$ kubectl exec -it influxdb-0 -n shared -- /bin/sh
+
+# influx のシェルに入る
+$ influx -username <ユーザ名> -password <パスワード>
+Connected to http://localhost:8086 version 1.8.1
+InfluxDB shell version: 1.8.1
+
+# データベースの切り替え
+> use system
+Using database system
+
+# collaborationtypes の有無を確認
+# timeはUNIX時刻(ナノ秒)を指定
+# 時間間隔が長いと表示される行数が増大してしまうため、短い時間幅を指定
+> select * from resources_requests_percentile where time >= 1713482502000000000 and time <=1713482661000000000 and resource = 'collaborationtypes';
+```
+
+何も表示されない場合、InfluxDB にデータが存在しないことがわかる。  
+メトリクスの送信元である `metrics-collector` を再起動し、パネルにデータが表示されるか確認する。
 
 ## VantiqバージョンアップしたらGrafanaのDashboardがすべて消えてしまった <a id="metrics_gone_after_vantiq_update"></a>
 
