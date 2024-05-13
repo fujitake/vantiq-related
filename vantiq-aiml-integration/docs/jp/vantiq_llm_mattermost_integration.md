@@ -9,7 +9,7 @@ Vantiq LLMの機能と、Mattermostとの連携を実現するサンプルです
 
 ## 前提
 
-- Mattermostの動作環境が存在すること(新規構築する場合は[こちら](https://qiita.com/shun_so/private/127904a3482fb8e971fb)を参照)
+- Mattermostの動作環境が存在すること(新規構築する場合は[こちら](https://qiita.com/shun_so/items/127904a3482fb8e971fb)を参照)
 - Mattermost -> Vantiq の疎通が可能であること
 - Vantiq -> Mattermost API の疎通が可能であること
 - サンプルアプリにはLLMs,Semantic Index のリソースは含まれません。各自OpenAIなどの必要なAPI Keyを取得し、リソースの作成やSemantic Index Entryの追加などを行ってください
