@@ -30,16 +30,17 @@ MattermostからのEventを受信するためのTopicを作成します。
 Mattermostで、外部サーバとの通信に使用するBotアカウントを作成します。Botアカウントの詳細については[公式ドキュメント](https://developers.mattermost.com/integrate/reference/bot-accounts/) を参照してください。
 
 1. Mattermostの画面左上部をクリックし、メニューを開き、**統合機能** を選択します。
+
    ![BotAccount1](../../imgs/vantiq_llm_mattermost_integration/mattermost_menu_integration.png)
 
-1. Botアカウントを選択し、Botアカウントの追加ボタンをクリックします。
+2. Botアカウントを選択し、Botアカウントの追加ボタンをクリックします。
    ![BotAccount2](../../imgs/vantiq_llm_mattermost_integration/select_botaccount.png)
    ![BotAccount3](../../imgs/vantiq_llm_mattermost_integration/create_new_botaccount.png)
 
-1. 必要な情報を入力します。Botアカウントのユーザ名は任意、ロールにはメンバー、権限は**投稿：全て** を有効にします。
+3. 必要な情報を入力します。Botアカウントのユーザ名は任意、ロールにはメンバー、権限は**投稿：全て** を有効にします。
    ![BotAccount4](../../imgs/vantiq_llm_mattermost_integration/create_new_botaccount_2.png)
 
-1. 作成したBotアカウントにトークンを生成します。
+4. 作成したBotアカウントにトークンを生成します。
    ![BotAccount5](../../imgs/vantiq_llm_mattermost_integration/botaccount_gentoken1.png)
    トークンの説明を入力し、保存します。
    ![BotAccount6](../../imgs/vantiq_llm_mattermost_integration/botaccount_gentoken2.png)
