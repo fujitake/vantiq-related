@@ -23,6 +23,7 @@ Vantiq R1.37にて実装された新機能 LLM関連機能についての資料�
 - [Vantiq LLM とTeamsのインテグレーションサンプル](./docs/jp/vantiq_llm_teams_integration.md)
 - [Vantiq LLM とLINEのインテグレーションサンプル](./docs/jp/vantiq_llm_line_integration.md)
 - [Vantiq LLM とWeb UI(azure bot)のインテグレーションサンプル](./docs/jp/vantiq_llm_azurebot_webui_integration.md)
+- [Vantiq LLM とMattermostのインテグレーションサンプル](./docs/jp/vantiq_llm_mattermost_integration.md)
 
 ## 画像処理AI
 
