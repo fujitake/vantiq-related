@@ -47,6 +47,52 @@ OpenAI の API Key と同様に設定していきます。
 
 OpenAI の LLM と同様に設定していきます。
 
+<details>
+<summary>Vantiq r1.39 以降</summary>
+
+1. Azure Portal から Azure OpenAI を開きます。
+
+1. `リソース名` をコピーします。
+
+   ![azure_openai_resource_name.png](./../../imgs/azure_openai_config/azure_openai_resource_name.png)
+
+1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
+
+   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+
+1. 任意の `Generative LLM` の `デプロイ名` をコピーします。
+
+   ![generative_model.png](./../../imgs/azure_openai_config/generative_model.png)
+
+   > **補足**  
+   > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
+
+1. Vantiq IDE を開き、メニューバーの `追加` -> `LLMs` -> `+ 新規` をクリックし LLM の追加画面を開きます。
+
+1. 以下の内容を設定し、 `OK` をクリックします。
+
+   |項目|設定値|
+   |-|-|
+   |LLM Name|※任意の名前|
+   |Type|Generative|
+   |Model Name|azure-openai|
+   |Configuration|null|
+   |API Key Secret|※Azure OpenAI の Secret|
+   |Resource Name|※Azure OpenAI のリソース名|
+   |Deployment Name|※Azure OpenAI のデプロイ名|
+   |API Version|※Azure OpenAI の API バージョン|
+
+   ![generative_config.png](./../../imgs/azure_openai_config/vantiq_139_generative_config.png)
+
+> [!NOTE]
+> **Configuration について**  
+> Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
+
+</details>
+
+<details>
+<summary>Vantiq r1.37.6 ～ r1.38</summary>
+
 1. Azure Portal から Azure OpenAI を開きます。
 
 1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
@@ -78,8 +124,6 @@ OpenAI の LLM と同様に設定していきます。
 
    **config の設定値**
 
-   Vantiq r1.37.6 以降の場合
-
    ```json
    {
        "class_name": "langchain.chat_models.AzureChatOpenAI"
@@ -89,7 +133,43 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   Vantiq r1.37.5 以前の場合
+   ![generative_config.png](./../../imgs/azure_openai_config/vantiq_generative_config.png)
+
+</details>
+
+<details>
+<summary>Vantiq r1.37.5 以前</summary>
+
+1. Azure Portal から Azure OpenAI を開きます。
+
+1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
+
+   ![azure_openai_endpoint.png](./../../imgs/azure_openai_config/azure_openai_endpoint.png)
+
+1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
+
+   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+
+1. 任意の `Generative LLM` の `デプロイ名` をコピーします。
+
+   ![generative_model.png](./../../imgs/azure_openai_config/generative_model.png)
+
+   > **補足**  
+   > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
+
+1. Vantiq IDE を開き、メニューバーの `追加` -> `LLMs` -> `+ 新規` をクリックし LLM の追加画面を開きます。
+
+1. 以下の内容を設定し、 `OK` をクリックします。
+
+   |項目|設定値|
+   |-|-|
+   |LLM Name|※任意の名前|
+   |Type|Generative|
+   |Model Name|※任意のモデル|
+   |config|※下記参照|
+   |API Key Secret|※Azure OpenAI の Secret|
+
+   **config の設定値**
 
    ```json
    {
@@ -100,11 +180,59 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   ![generative_config.png](./../../imgs/azure_openai_config/generative_config.png)
+   ![generative_config.png](./../../imgs/azure_openai_config/vantiq_generative_config.png)
+
+</details>
 
 ## Embedding LLM の設定方法
 
 OpenAI の LLM と同様に設定していきます。
+
+<details>
+<summary>Vantiq r1.39 以降</summary>
+
+1. Azure Portal から Azure OpenAI を開きます。
+
+1. `リソース名` をコピーします。
+
+   ![azure_openai_resource_name.png](./../../imgs/azure_openai_config/azure_openai_resource_name.png)
+
+1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
+
+   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+
+1. 任意の `Embedding LLM` の `デプロイ名` をコピーします。
+
+   ![embedding_model.png](./../../imgs/azure_openai_config/embedding_model.png)
+
+   > **補足**  
+   > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
+
+1. Vantiq IDE を開き、メニューバーの `追加` -> `LLMs` -> `+ 新規` をクリックし LLM の追加画面を開きます。
+
+1. 以下の内容を設定し、 `OK` をクリックします。
+
+   |項目|設定値|
+   |-|-|
+   |LLM Name|※任意の名前|
+   |Type|Embedding|
+   |Model Name|azure-openai-embedding|
+   |Configuration|null|
+   |API Key Secret|※Azure OpenAI の Secret|
+   |Resource Name|※Azure OpenAI のリソース名|
+   |Deployment Name|※Azure OpenAI のデプロイ名|
+   |API Version|※Azure OpenAI の API バージョン|
+
+   ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_139_embedding_config.png)
+
+> [!NOTE]
+> **Configuration について**  
+> Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
+
+</details>
+
+<details>
+<summary>Vantiq r1.37.6 ～ r1.38</summary>
 
 1. Azure Portal から Azure OpenAI を開きます。
 
@@ -137,8 +265,6 @@ OpenAI の LLM と同様に設定していきます。
 
    **config の設定値**
 
-   Vantiq r1.37.6 以降の場合
-
    ```json
    {
        "class_name": "langchain.embeddings.AzureOpenAIEmbeddings"
@@ -148,7 +274,43 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   Vantiq r1.37.5 以前の場合
+   ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_embedding_config.png)
+
+</details>
+
+<details>
+<summary>Vantiq r1.37.5 以前</summary>
+
+1. Azure Portal から Azure OpenAI を開きます。
+
+1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
+
+   ![azure_openai_endpoint.png](./../../imgs/azure_openai_config/azure_openai_endpoint.png)
+
+1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
+
+   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+
+1. 任意の `Embedding LLM` の `デプロイ名` をコピーします。
+
+   ![embedding_model.png](./../../imgs/azure_openai_config/embedding_model.png)
+
+   > **補足**  
+   > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
+
+1. Vantiq IDE を開き、メニューバーの `追加` -> `LLMs` -> `+ 新規` をクリックし LLM の追加画面を開きます。
+
+1. 以下の内容を設定し、 `OK` をクリックします。
+
+   |項目|設定値|
+   |-|-|
+   |LLM Name|※任意の名前|
+   |Type|Embedding|
+   |Model Name|※任意のモデル|
+   |config|※下記参照|
+   |API Key Secret|※Azure OpenAI の Secret|
+
+   **config の設定値**
 
    ```json
    {
@@ -160,4 +322,6 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   ![embedding_config.png](./../../imgs/azure_openai_config/embedding_config.png)
+   ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_embedding_config.png)
+
+</details>
