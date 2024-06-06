@@ -84,8 +84,7 @@ OpenAI の LLM と同様に設定していきます。
 
    ![generative_config.png](./../../imgs/azure_openai_config/vantiq_139_generative_config.png)
 
-> [!NOTE]
-> **Configuration について**  
+> **補足：Configuration について**  
 > Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
 
 </details>
@@ -225,8 +224,7 @@ OpenAI の LLM と同様に設定していきます。
 
    ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_139_embedding_config.png)
 
-> [!NOTE]
-> **Configuration について**  
+> **補足：Configuration について**  
 > Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
 
 </details>
