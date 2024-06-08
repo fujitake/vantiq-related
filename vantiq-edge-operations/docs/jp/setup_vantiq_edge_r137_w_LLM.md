@@ -80,7 +80,7 @@ services:
 
   vantiq_edge_qdrant:
     container_name: vantiq_edge_qdrant
-    image: qdrant/qdrant
+    image: qdrant/qdrant:v1.7.4
     restart: unless-stopped
     volumes:
       - qdrantData:/qdrant/storage
