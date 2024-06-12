@@ -151,7 +151,7 @@ locals {
         node_workload_label = "orgCompute"
       },
     }
-    single_az_node_list          = ["VANTIQ", "MongoDB", "keycloak", "grafana", "metrics", "ai_assistant"]
+    single_az_node_list          = ["grafana"]
     sg_ids_allowed_ssh_to_worker = []
   }
   eks_addon_config = {
