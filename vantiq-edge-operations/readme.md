@@ -28,7 +28,8 @@
 ## Vantiq Edge のインストール手順
 
 - [Vantiq Edgeインストール手順(r1.36まで)](https://community.vantiq.com/wp-content/uploads/2022/06/edge-install-ja-2.html)
-- [Vantiq Edgeインストール手順(r1.37以降)](./docs/jp/setup_vantiq_edge_r137_w_LLM.md)
+- [Vantiq Edgeインストール手順(r1.37-r1.38)](./docs/jp/setup_vantiq_edge_r137_w_LLM.md)
+- [Vantiq Edgeインストール手順(r1.39以降)](./docs/jp/setup_vantiq_edge_r139_w_LLM.md)
 - [オフラインマシンへの Vantiq Edge のインストール手順](./docs/jp/setup_vantiq_edge_offline.md)
 
 ## Vantiq Edge のアップグレード手順
@@ -45,4 +46,3 @@
 ## Vantiq Edge の保守
 - [SSL証明書更新手順](./docs/jp/update_vantiq_edge_certificate.md)  
 - [ライセンス更新手順](./docs/jp/update_vantiq_edge_license.md)
-

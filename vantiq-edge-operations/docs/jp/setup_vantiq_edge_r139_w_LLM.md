@@ -1,4 +1,4 @@
-# Vantiq Edge R1.37-R1.38のインストールと大規模言語モデル関連機能の設定ガイド
+# Vantiq Edge R1.39のインストールと大規模言語モデル関連機能の設定ガイド
 
 # はじめに
 
@@ -10,11 +10,11 @@
 
 ## ハードウェア要件
 
-ハードウェアの最小要件は下記となります。Vantiq Edge R1.37-R1.38と大規模言語モデル関連機能を動作させると3GB程度のメモリを消費します。
+ハードウェアの最小要件は下記となります。Vantiq Edge R1.39と大規模言語モデル関連機能を動作させると8GB程度のメモリを消費します。
 
 - 64ビットx86プロセッサ
-- 2GB メインメモリ
-- 16GB程度の空きストレージ (コンテナイメージだけで8GB程度必要となります)
+- 8GB メインメモリ
+- 32GB程度の空きストレージ
 
 ## ソフトウェア要件
 
@@ -41,13 +41,13 @@ compose.yamlを配置するディレクトリにconfigディレクトリを作�
 ```
 
 下記をコピーしcompose.yamlを用意します。  
-・`vantiq-edge`と`vantiq_ai_assistant`は同じバージョンにして下さい。  
-・`vantiq-edge`と`vantiq_ai_assistant`のバージョンは適宜変更して下さい。 
+・`vantiq-edge`、`vantiq_ai_assistant`、`vantiq_genai_flow_service`は同じバージョンにして下さい。  
+・`vantiq-edge`、`vantiq_ai_assistant`、`vantiq_genai_flow_service`のバージョンは適宜変更して下さい。  
 ```yaml
 services:
   vantiq_edge:
     container_name: vantiq_edge_server
-    image: quay.io/vantiq/vantiq-edge:1.37.3
+    image: quay.io/vantiq/vantiq-edge:1.39.0
     ports:
       - 8080:8080
     depends_on:
@@ -76,13 +76,20 @@ services:
 
   vantiq_ai_assistant:
     container_name: vantiq_ai_assistant
-    image: quay.io/vantiq/ai-assistant:1.37.3
+    image: quay.io/vantiq/ai-assistant:1.39.0
     restart: unless-stopped
+    network_mode: "service:vantiq_edge"
+
+  vantiq_genai_flow_service:
+    container_name: vantiq_genai_flow_service
+    image: quay.io/vantiq/genaiflowservice:1.39.0
+    restart: unless-stopped
+    command: ["uvicorn", "app.genaiflow_service:app", "--host", "0.0.0.0", "--port", "8889"]
     network_mode: "service:vantiq_edge"
 
   vantiq_edge_qdrant:
     container_name: vantiq_edge_qdrant
-    image: qdrant/qdrant:v1.7.4
+    image: qdrant/qdrant:v1.9.2
     restart: unless-stopped
     volumes:
       - qdrantData:/qdrant/storage
@@ -122,14 +129,15 @@ volumes:
 docker compose up -d
 ```
 
-コマンド`docker compose ps`にて起動状態を確認できます。大規模言語モデル関連機能を利用する場合、4つのコンテナが起動します。
+コマンド`docker compose ps`にて起動状態を確認できます。大規模言語モデル関連機能を利用する場合、5つのコンテナが起動します。
 
 ```
-NAME                  COMMAND                  SERVICE               STATUS              PORTS
-vantiq_ai_assistant   "uvicorn app.ai_assi…"   vantiq_ai_assistant   running             
-vantiq_edge_mongo     "/opt/bitnami/script…"   vantiq_edge_mongo     running             27017/tcp
-vantiq_edge_qdrant    "./entrypoint.sh"        vantiq_edge_qdrant    running             6333-6334/tcp
-vantiq_edge_server    "/opt/vantiq/bin/van…"   vantiq_edge           running             0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
+NAME                        IMAGE                                    COMMAND                  SERVICE                     CREATED        STATUS              PORTS
+vantiq_ai_assistant         quay.io/vantiq/ai-assistant:1.39.0       "uvicorn app.ai_assi…"   vantiq_ai_assistant         33 seconds ago   Up 31 seconds
+vantiq_edge_server          quay.io/vantiq/vantiq-edge:1.39.0        "/opt/vantiq/bin/van…"   vantiq_edge                 33 seconds ago   Up 31 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
+vantiq_genai_flow_service   quay.io/vantiq/genaiflowservice:1.39.0   "uvicorn app.genaifl…"   vantiq_genai_flow_service   33 seconds ago   Up 31 seconds
+vantiq_edge_mongo           bitnami/mongodb:4.2.5                    "/opt/bitnami/script…"   vantiq_edge_mongo           37 seconds ago   Up 32 seconds   27017/tcp
+vantiq_edge_qdrant          qdrant/qdrant:v1.9.2                     "./entrypoint.sh"        vantiq_edge_qdrant          37 seconds ago   Up 32 seconds   6333-6334/tcp
 ```
 
 ## オプション: SSL設定
@@ -182,7 +190,7 @@ services:
 
   vantiq_edge:
     container_name: vantiq_edge_server
-    image: quay.io/vantiq/vantiq-edge:1.37.3
+    image: quay.io/vantiq/vantiq-edge:1.39.0
     ports:
       - 8080
     depends_on:
@@ -213,13 +221,20 @@ services:
 
   vantiq_ai_assistant:
     container_name: vantiq_ai_assistant
-    image: quay.io/vantiq/ai-assistant:1.37.3
+    image: quay.io/vantiq/ai-assistant:1.39.0
     restart: unless-stopped
+    network_mode: "service:vantiq_edge"
+
+  vantiq_genai_flow_service:
+    container_name: vantiq_genai_flow_service
+    image: quay.io/vantiq/genaiflowservice:1.39.0
+    restart: unless-stopped
+    command: ["uvicorn", "app.genaiflow_service:app", "--host", "0.0.0.0", "--port", "8889"]
     network_mode: "service:vantiq_edge"
 
   vantiq_edge_qdrant:
     container_name: vantiq_edge_qdrant
-    image: qdrant/qdrant
+    image: qdrant/qdrant:v1.9.2
     restart: unless-stopped
     volumes:
       - qdrantData:/qdrant/storage
