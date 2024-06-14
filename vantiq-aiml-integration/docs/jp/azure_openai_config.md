@@ -221,7 +221,7 @@ OpenAI の LLM と同様に設定していきます。
    |Resource Name|※Azure OpenAI のリソース名|
    |Deployment Name|※Azure OpenAI のデプロイ名|
    |API Version|※Azure OpenAI の API バージョン|
-   |Vector Size|1536|
+   |Vector Size|text-embedding-ada-002：1536<br>text-embedding-3-large：3072|
    |距離関数|Cosine|
 
    ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_139_embedding_config.png)
