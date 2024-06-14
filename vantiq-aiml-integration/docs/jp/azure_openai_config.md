@@ -80,7 +80,7 @@ OpenAI の LLM と同様に設定していきます。
    |API Key Secret|※Azure OpenAI の Secret|
    |Resource Name|※Azure OpenAI のリソース名|
    |Deployment Name|※Azure OpenAI のデプロイ名|
-   |API Version|※Azure OpenAI の API バージョン|
+   |API Version|※Azure OpenAI の API バージョン（:globe_with_meridians: [詳細](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)）|
 
    ![generative_config.png](./../../imgs/azure_openai_config/vantiq_139_generative_config.png)
 
@@ -220,7 +220,7 @@ OpenAI の LLM と同様に設定していきます。
    |API Key Secret|※Azure OpenAI の Secret|
    |Resource Name|※Azure OpenAI のリソース名|
    |Deployment Name|※Azure OpenAI のデプロイ名|
-   |API Version|※Azure OpenAI の API バージョン|
+   |API Version|※Azure OpenAI の API バージョン（:globe_with_meridians: [詳細](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#embeddings)）|
    |Vector Size|text-embedding-ada-002：1536<br>text-embedding-3-large：3072|
    |距離関数|Cosine|
 
