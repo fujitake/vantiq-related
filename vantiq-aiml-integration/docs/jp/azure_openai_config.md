@@ -229,7 +229,7 @@ OpenAI の LLM と同様に設定していきます。
 > **補足：Configuration について**  
 > Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
 
-> [!NOTE]
+> **Point：距離関数について**
 > 距離関数は下記から選択可能ですが、 `Cosine` が推奨されています。  
 > :globe_with_meridians: [Embeddings - OpenAI API](https://platform.openai.com/docs/guides/embeddings/which-distance-function-should-i-use)  
 > 
