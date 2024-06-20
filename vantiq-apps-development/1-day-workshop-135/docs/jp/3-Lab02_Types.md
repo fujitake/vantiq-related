@@ -100,7 +100,8 @@ Type には、データを格納するための Type である「**Standard**」
 1. **Pumps Type へのデータ登録**  
 Pumps Type にマスタデータを登録します。今回は複数件のデータをまとめてアップロードしたい場合に使用する手順でデータ登録を行います。  
     1. 「Projects」 > 「インポート...」 をクリックして「Project またはデータのインポート」ウィンドウを開き、「Select Import Type」を「Projects」から「Data From URL(CSV or JSON)」に変更します。  
-    2. 「[`Pumps.json`](https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/jp.co.vantiq.ws.Pumps.json)」のURLを指定し、Importをクリックします。
+    2. 「[`jp.co.vantiq.ws.Pumps.json`](https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/jp.co.vantiq.ws.Pumps.json)」のURLを指定し、Importをクリックします。  
+    URL：`https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/jp.co.vantiq.ws.Pumps.json`
    
 <img src="../../imgs/Lab02/image5.png" width=70%>
 <img src="../../imgs/Lab02/image6.png" width=70%>

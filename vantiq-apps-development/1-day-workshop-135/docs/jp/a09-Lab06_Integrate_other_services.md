@@ -69,7 +69,7 @@
         var body = "<div>修理担当者 様</div>"
         body += "<div>ポンプID　" + event.PumpID + " のポンプが故障しました</div>"
         body += "<div>温度: " + event.Temp + "℃</div>"
-        body += "<div>回転数: " + event.RPMS + "</div>"
+        body += "<div>回転数: " + event.RPM + "</div>"
         body += "<div>設置場所: " + "緯度: " + event.Location.coordinates[1] + "、経度: " + event.Location.coordinates[0] + "</div>"
         body += "<div>時刻: " + event.ReceivedAt + "</div>"
         // 送信
@@ -132,7 +132,7 @@ SMS 用の Source を作成し、ポンプの故障を検知した際にSMSを�
         //　送信内容
         var body = "ポンプID " + event.PumpID + "のポンプが故障しました \n"
         body += "温度: " + event.Temp + "℃ \n"
-        body += "回転数: " + event.RPMS + "\n"
+        body += "回転数: " + event.RPM + "\n"
         body += "設置場所: \n"
         body += "緯度: " + event.Location.coordinates[1] + "\n"
         body += "経度: " + event.Location.coordinates[0] + "\n"
@@ -195,7 +195,7 @@ Teams 用の Source を作成し、ポンプの故障を検知した際に Teams
         // 送信内容
         var message = "ポンプID " + event.PumpID + "のポンプが故障しました <br>"
         message += "温度: " + event.Temp + "℃ <br>"
-        message += "回転数: " + event.RPMS + "<br>"
+        message += "回転数: " + event.RPM + "<br>"
         message += "設置場所: <br>"
         message += "緯度: " + event.Location.coordinates[1] + "<br>"
         message += "経度: " + event.Location.coordinates[0] + "<br>"
@@ -264,7 +264,7 @@ LINE 用の Source を作成し、ポンプの故障を検知した際に LINE �
         // 送信内容
         var message = "ポンプID " + event.PumpID + "のポンプが故障しました \n"
         message += "温度: " + event.Temp + "℃ \n"
-        message += "回転数: " + event.RPMS + "\n"
+        message += "回転数: " + event.RPM + "\n"
         message += "設置場所: \n"
         message += "緯度: " + event.Location.coordinates[1] + "\n"
         message += "経度: " + event.Location.coordinates[0] + "\n"
@@ -336,7 +336,7 @@ Slack 用の Source を作成し、ポンプの故障を検知した際に Slack
         // 送信内容
         var message = "ポンプID " + event.PumpID + "のポンプが故障しました \n"
         message += "温度: " + event.Temp + "℃ \n"
-        message += "回転数: " + event.RPMS + "\n"
+        message += "回転数: " + event.RPM + "\n"
         message += "設置場所: \n"
         message += "緯度: " + event.Location.coordinates[1] + "\n"
         message += "経度: " + event.Location.coordinates[0] + "\n"

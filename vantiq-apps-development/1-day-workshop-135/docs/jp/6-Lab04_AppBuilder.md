@@ -85,12 +85,12 @@
 1. Activity Pattern のリストにある「Flow Control」から「`Join`」を `EnrichTemp` タスクに重なるようにドラッグ&ドロップします。そして名前を設定します。  
     1.  名前: _JoinEvents_  
 
-2. `EnrichRPMS` タスク を右クリックし 「_既存 Task とリンク_」 をクリックします。タスク名には「_JoinEvents_」を設定します。
+2. `EnrichRPM` タスク を右クリックし 「_既存 Task とリンク_」 をクリックします。タスク名には「_JoinEvents_」を設定します。
 
 3. `JoinEvents` タスク をクリックして設定を以下の通り行います。  
     1.  constraints: ＊ \<null> をクリックします。  
         1.  「_+ アイテムの追加_」をクリックして入力欄を表示します。  
-        2.  入力欄に「_EnrichTemp.Pumps.PumpID == EnrichRPMS.Pumps.PumpID_」と入力します。＊ 各要素はドロップダウンリストより選択することができます。
+        2.  入力欄に「_EnrichTemp.Pumps.PumpID == EnrichRPM.Pumps.PumpID_」と入力します。＊ 各要素はドロップダウンリストより選択することができます。
     2.  withinDuration に「_10 seconds_」と入力します。
 
 4. アプリケーションを保存してから、`JoinEvents` タスクをクリックし「Task Events の表示」にて `JoinEvents` タスクで処理したイベントの結果を確認し、下の画像のようになっているか確認してください。データジェネレーターが停止している場合は再度実行してください。
