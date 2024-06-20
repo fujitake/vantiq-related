@@ -60,7 +60,7 @@
 
     <img src="../../imgs/Lab03/image3.png" width=80%>
 
-3. `RPMSMQTT` でも同様の手順でデータが受信できていることを確認してください。
+3. `RPMMQTT` でも同様の手順でデータが受信できていることを確認してください。
 
 以上で、Source の受信テストは終了です。
 
@@ -72,7 +72,7 @@ Source に「**Schema**」の Type を設定し、受信イベントの構造と
 
     <img src="../../imgs/Lab03/image4.png" width=80%>
 
-2. 以下の画像を参考に Type 名を「_TempMQTTSchema_」に修正し「_保存_」をクリックします。これで `TempMQTT` の「Schema」Type が作成されます。
+2. 以下の画像を参考に Type 名を「_TempMQTTSchema_」に修正し、 Package 名に `jp.co.vantiq.ws` と入力し、「_保存_」をクリックします。これで `TempMQTT` の「Schema」Type が作成されます。
 
     <img src="../../imgs/Lab03/image5.png" width=45%>
 

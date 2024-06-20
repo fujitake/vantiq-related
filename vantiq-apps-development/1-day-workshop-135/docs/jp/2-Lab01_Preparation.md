@@ -18,8 +18,8 @@
 ＊ 複数台のポンプにそれぞれ取り付けられた温度センサーと回転数センサーからのデータを擬似的に発生させるデータジェネレーターを準備します。
 
 1. 「Projects」 > 「インポート...」 を開き、「URL から Project のインポート (zip)」ウィンドウを開きます。  
-     データジェネレーターの zip ファイル 「[`TrainingDataGen.zip`](https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/TrainingDataGen-135.zip)」のURLを入力し、ロードします。
-     URL: `https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/TrainingDataGen-135.zip`  
+     データジェネレーターの zip ファイル 「[`TrainingDataGen-135.zip`](https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/TrainingDataGen-135.zip)」のURLを入力し、ロードします。  
+     URL：`https://raw.githubusercontent.com/fujitake/vantiq-related/main/vantiq-apps-development/1-day-workshop-135/conf/TrainingDataGen-135.zip`
 
     <img src="../../imgs/Lab01/image006-2.png" width=70%>
     <img src="../../imgs/Lab01/image006.png" width=70%>

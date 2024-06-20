@@ -104,7 +104,7 @@ curl
 -X POST
 -H 'Content-Type:application/json'
 -H "Authorization: Bearer <アクセストークン>"
--d '{"Location": {"coordinates": [ 0, 0 ], "type": "Point" }, "PumpID": 7, "RPMS": 5000, "ReceivedAt": "2020-01-01T00:00:00Z", "Temp": 250 }'
+-d '{"Location": {"coordinates": [ 0, 0 ], "type": "Point" }, "PumpID": 7, "RPM": 5000, "ReceivedAt": "2020-01-01T00:00:00Z", "Temp": 250 }'
 https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus
 ```
 
@@ -242,7 +242,7 @@ curl -g -X DELETE
         }
         ```
 
-    2.  **データジェネレータ** を開き、「_Start RPMS Only_」ボタンをクリックします。このボタンを押すと回転数データのみ生成されます。
+    2.  **データジェネレータ** を開き、「_Start RPM Only_」ボタンをクリックします。このボタンを押すと回転数データのみ生成されます。
 
     3.  回転数データが生成されている状態で Postman に戻り、上記の設定済みの状態で _Send_ ボタンをクリックします。これで Temp データが `/jp.co.vantiq.ws/rest/temp` Topic に Publish されます。
 

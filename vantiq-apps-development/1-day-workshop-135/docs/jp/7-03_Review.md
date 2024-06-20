@@ -19,3 +19,9 @@
 
 ![VANTIQ を使ったシステムの処理とデータの流れ](../../imgs/03_Review/slide3.png)  
 ① **データを貯めることなく事前に判断をすることが可能**  
+
+## Vantiq 1-day Workshop 次のセッション  
+|Session #|Session      | Type  |Contents Description       |Duration (m)|Material               |
+|:-----:|--------------|:------:|---------------------------|:-:|--------------------------------|
+| 9 | Q&A | | 質疑応答 | 15 | |
+| 10 | VANTIQ REST API | Lab | Vantiq 1-day Workshop の次のステップ | | [Lab05_VANTIQ_REST_API](a08-Lab05_VANTIQ_REST_API.md) |
