@@ -80,7 +80,7 @@ OpenAI の LLM と同様に設定していきます。
    |API Key Secret|※Azure OpenAI の Secret|
    |Resource Name|※Azure OpenAI のリソース名|
    |Deployment Name|※Azure OpenAI のデプロイ名|
-   |API Version|※Azure OpenAI の API バージョン|
+   |API Version|※Azure OpenAI の API バージョン（[詳細](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)）|
 
    ![generative_config.png](./../../imgs/azure_openai_config/vantiq_139_generative_config.png)
 
@@ -220,12 +220,25 @@ OpenAI の LLM と同様に設定していきます。
    |API Key Secret|※Azure OpenAI の Secret|
    |Resource Name|※Azure OpenAI のリソース名|
    |Deployment Name|※Azure OpenAI のデプロイ名|
-   |API Version|※Azure OpenAI の API バージョン|
+   |API Version|※Azure OpenAI の API バージョン（[詳細](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#embeddings)）|
+   |Vector Size|text-embedding-ada-002：1536<br>text-embedding-3-large：3072|
+   |距離関数|Cosine|
 
    ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_139_embedding_config.png)
 
 > **補足：Configuration について**  
 > Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
+
+> **補足：距離関数について**  
+> 距離関数は下記から選択可能ですが、 `Cosine` が推奨されています。  
+> :globe_with_meridians: [Embeddings - OpenAI API](https://platform.openai.com/docs/guides/embeddings/which-distance-function-should-i-use)  
+> 
+> - Dot product: `Dot`
+> - Cosine similarity: `Cosine`
+> - Euclidean distance: `Euclid`
+> - Manhattan distance: `Manhattan`
+> 
+>:globe_with_meridians: [Collections - Qdrant](https://qdrant.tech/documentation/concepts/collections/)  
 
 </details>
 
