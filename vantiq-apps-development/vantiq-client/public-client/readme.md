@@ -47,7 +47,7 @@ Vantiq Client では通常、 Vantiq へのログイン認証を行ったあと�
 
 ## Public Client からプロシージャを実行するには？（Client 編）
 
-Public Client からプロシージャを実行するには以下の JavaScript コードを使用します。  
+**Public Client** からプロシージャを実行するには以下の JavaScript コードを使用します。  
 
 ```JavaScript
 var procedure = "PackageName.ServiceName.ProcedureName";
@@ -147,13 +147,13 @@ http.execute(
 プロシージャ成功時の処理は `function(response)` に記述します。  
 プロシージャ失敗時の処理は `function(error)` に記述します。  
 
-なお、 `Public Client` からプロシージャを実行するには、後述するプロシージャ側での設定も必要になります。  
+なお、 **Public Client** からプロシージャを実行するには、後述するプロシージャ側での設定も必要になります。  
 
 - :globe_with_meridians: [execute - Client Builder User's Guide](https://dev.vantiq.com/docs/system/cbuser/#executeprocedureargumentsany-procedurenamestring-successcallbackfunction-failurecallbackfunctionvoid)
 
 ## Public Client からプロシージャを実行するには？（Procedure 編）
 
-`Public Client` からプロシージャを実行するには、プロシージャに `WITH句` で追加設定をする必要があります。  
+**Public Client** からプロシージャを実行するには、プロシージャに `WITH句` で追加設定をする必要があります。  
 
 なお、呼び出せるのは `Public Procedure` のみになります。（`Private Procedure` は呼び出せません）  
 
