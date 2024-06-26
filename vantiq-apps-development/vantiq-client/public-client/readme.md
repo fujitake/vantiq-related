@@ -50,8 +50,8 @@ Vantiq Client では通常、 Vantiq へのログイン認証を行ったあと�
 **Public Client** からプロシージャを実行するには以下の JavaScript コードを使用します。  
 
 ```JavaScript
-var procedure = "PackageName.ServiceName.ProcedureName";
-var args = {};
+const procedure = "PackageName.ServiceName.ProcedureName";
+const args = {};
 
 var http = new Http();
 http.setVantiqUrlForSystemResource("procedures", client.getNamespace());
@@ -72,7 +72,7 @@ http.execute(
 #### プロシージャ
 
 ```JavaScript
-var procedure = "PackageName.ServiceName.ProcedureName";
+const procedure = "PackageName.ServiceName.ProcedureName";
 ```
 
 実行したいプロシージャ名をパッケージ名やサービス名を含めて指定します。  
@@ -80,7 +80,7 @@ var procedure = "PackageName.ServiceName.ProcedureName";
 #### プロシージャの引数
 
 ```JavaScript
-var args = {};
+const args = {};
 ```
 
 プロシージャの引数をオブジェクトで指定します。  
@@ -89,7 +89,7 @@ var args = {};
 ##### 引数があるプロシージャの例
 
 ```JavaScript
-var args = {
+const args = {
     id: client.data.id
     , message: "Hello World!"
     , timestamp: new Date()
@@ -99,7 +99,7 @@ var args = {
 ##### 引数がないプロシージャの例
 
 ```JavaScript
-var args = {};
+const args = {};
 ```
 
 #### HTTP インスタンス
