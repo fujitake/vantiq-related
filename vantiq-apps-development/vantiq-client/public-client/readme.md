@@ -116,7 +116,7 @@ var http = new Http();
 http.setVantiqUrlForSystemResource("procedures", client.getNamespace());
 ```
 
-プロシージャを実行するための `execute()` を実行する際には、あらかじめ http インスタンスに `setVantiqUrlForSystemResource()` を指定します。  
+プロシージャを実行するための `execute()` を実行する際には、あらかじめ `Http` インスタンスに `setVantiqUrlForSystemResource()` を指定します。  
 
 引数は固定値になります。  
 
@@ -126,7 +126,7 @@ http.setVantiqUrlForSystemResource("procedures", client.getNamespace());
 http.setVantiqHeaders();
 ```
 
-http インスタンスのヘッダーに Vantiq のヘッダー情報（Authorization ヘッダーなど）を追加します。  
+`Http` インスタンスのヘッダーに Vantiq のヘッダー情報（Authorization ヘッダーなど）を追加します。  
 
 #### Vantiq Header の追加
 
