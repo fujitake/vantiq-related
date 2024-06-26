@@ -149,7 +149,7 @@ http.execute(
 
 なお、 `Public Client` からプロシージャを実行するには、後述するプロシージャ側での設定も必要になります。  
 
-- [execute - Client Builder User's Guide](https://dev.vantiq.com/docs/system/cbuser/#executeprocedureargumentsany-procedurenamestring-successcallbackfunction-failurecallbackfunctionvoid)
+- :globe_with_meridians: [execute - Client Builder User's Guide](https://dev.vantiq.com/docs/system/cbuser/#executeprocedureargumentsany-procedurenamestring-successcallbackfunction-failurecallbackfunctionvoid)
 
 ## Public Client からプロシージャを実行するには？（Procedure 編）
 
