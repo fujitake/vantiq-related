@@ -8,6 +8,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./docs/jp/data_sending.md)
 - [アクセストークンとプロファイルを使った Vantiq のアクセス制御](./accesstoken_profile/readme.md)
 - [Vantiq Service](./docs/jp/vantiq-service.md)
+- [Vantiq Client](./vantiq-client/readme.md)
 - [再利用可能なアプリケーション デザインパターン](./docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
