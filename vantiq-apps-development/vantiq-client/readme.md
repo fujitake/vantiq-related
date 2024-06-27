@@ -1,6 +1,6 @@
 # Vantiq Cleint について
 
-`Cleint` は Vantiq で UI を実装するためのリソースです。  
+ここでは Vantiq のリソースの1つである `Cleint` について解説や補足を行います。  
 
 ## 目次
 
@@ -11,6 +11,7 @@
 
 ## 概要
 
+`Cleint` は Vantiq で UI を実装するためのリソースです。  
 `Client` は **MVC モデル** を採用しています。  
 
 - **Model（モデル）**  
