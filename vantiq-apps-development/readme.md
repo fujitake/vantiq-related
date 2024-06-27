@@ -18,6 +18,13 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Camel Connector](./docs/jp/camel-connector.md)
 - [Cache Service](./docs/jp/cache-service.md)
 
+## Vantiq Resources
+
+Vantiq Resource に関する解説やガイドです。
+
+- Vantiq Access Token
+  - [Vantiq Access Token の発行方法](./vantiq-resources/vantiq-access-token/create-access-token/readme.md)
+
 ## Vantiq CLI
 
 - [Vantiq CLI クイックリファレンス](./vantiq-cli/cli-quick-reference/readme.md)
