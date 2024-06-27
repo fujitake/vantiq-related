@@ -35,6 +35,18 @@ Vantiq Resource に関する解説やガイドです。
   - [Vantiq Cleint について](./vantiq-resources/vantiq-client/about-client/readme.md)
   - [Vantiq Public Client](./vantiq-resources/vantiq-client/public-client/readme.md)
 
+## Vantiq Resources
+
+Vantiq Resource に関する解説やガイドです。
+
+- Vantiq Access Token
+  - [Vantiq Access Token の発行方法](./vantiq-resources/vantiq-access-token/create-access-token/readme.md)
+
+## Vantiq CLI
+
+- [Vantiq CLI クイックリファレンス](./vantiq-cli/cli-quick-reference/readme.md)
+- [Semantic Index のダンプとロード](./vantiq-cli/semantic-index-dumpload/readme.md)
+
 # Vantiq Application Development related
 
 Guides and learning materials for developing and operating Vantiq Applications.
