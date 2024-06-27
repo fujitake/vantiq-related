@@ -31,7 +31,7 @@ Oracle社のホームページからダウンロードして、インストー�
 
 インストーラーを利用したインストールは不要で、zipファイルの展開と環境変数への追加のみで利用できます。
 
-> [!NOTE]
+> **補足**  
 > ※Windows 端末の操作例は PowerShell となっています。  
 
 ### ダウンロード
@@ -96,7 +96,7 @@ Oracle社のホームページからダウンロードして、インストー�
 
 profile ファイルの作成を行います。  
 
-> [!NOTE]
+> **補足**  
 > ※Windows 端末の操作例は PowerShell となっています。  
 
 ### Profile の作成
@@ -164,7 +164,7 @@ profile_name {
 > [!NOTE]
 > - `password` と `token` の両方を指定すると `password` が使用されます。
 > - トークンの作成方法はこちら
->   - [Vantiq Access Token の発行方法](/vantiq-apps-development\vantiq-resources\vantiq-access-token\create-access-token\readme.md)
+>   - [Vantiq Access Token の発行方法](/vantiq-apps-development/vantiq-resources/vantiq-access-token/create-access-token/readme.md)
 
 #### Profile の設定例
 
