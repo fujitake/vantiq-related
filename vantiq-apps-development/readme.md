@@ -22,7 +22,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 
 Vantiq Resource に関する解説やガイドです。
 
-- [Vantiq Client](./vantiq-client/readme.md)
+- Vantiq Client
   - [Vantiq Cleint について](./vantiq-client/about_client/readme.md)
   - [Vantiq Public Client](./vantiq-client/public_client/readme.md)
 
