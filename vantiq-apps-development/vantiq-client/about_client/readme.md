@@ -28,11 +28,3 @@
 - **Controller（コントローラ）**  
   ユーザからの入力をモデルに伝えるコンポーネントです。  
   Vantiq では JavaScript を使って記述できます。  
-
-## Public Cleint
-
-Vantiq Client では通常、 Vantiq へのログイン認証を行ったあとに利用することが前提となっています。  
-
-しかし、一定の制約はあるものの `Cleint` を **Public Cleint** として設定することで、 Vantiq へのログイン認証なしで利用することができます。  
-
-- [Vantiq Public Client](./public-client/readme.md)

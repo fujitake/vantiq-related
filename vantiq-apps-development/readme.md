@@ -23,6 +23,8 @@ Vantiq Resource に関する解説やガイドです。
 
 - [Vantiq Service](./docs/jp/vantiq-service.md)
 - [Vantiq Client](./vantiq-client/readme.md)
+  - [Vantiq Cleint について](./vantiq-client/about_client/readme.md)
+  - [Vantiq Public Client](./vantiq-client/public_client/readme.md)
 
 # Vantiq Application Development related
 
