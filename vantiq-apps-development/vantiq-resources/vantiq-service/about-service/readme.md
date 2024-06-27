@@ -1,4 +1,4 @@
-# Vantiq Service
+# Vantiq Service について
 
 ## 関連リソース
 
@@ -18,7 +18,7 @@
   - __イベントハンドラ__ – 非同期の処理ロジック
   - __State__ - インメモリで状態を保持する変数
 
-<img src="../../imgs/vantiq-service/vantiq-service.png" width=50%>
+<img src="./imgs/vantiq-service.png" width=50%>
 
 #### Procedure
 - Procedure をカプセル化し、同期処理のインタフェースを定義する
@@ -46,7 +46,7 @@ Source, Type, Topicから発生するイベントを受ける。
 - イベントのソースが変わるだけで、それ以外の機能は INBOUND/OUTBOUNDと同様。
 - V1.35 に導入された。V1.34以前は INBOUND Event Handler と Internal Event Handlerの区別はない。 
 
-<img src="../../imgs/vantiq-service/internal-event-handler.png" width=50%>
+<img src="./imgs/internal-event-handler.png" width=50%>
 
 ### カプセル化されたリソース
 
@@ -75,7 +75,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 - `global`修飾子の Procedure からアクセス可能である。Procedure 内に暗黙の変数となる。
 - [Global Stateのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#global-state)
 
-![global-state.png](../../imgs/vantiq-service/global-state.png)
+![global-state.png](./imgs/global-state.png)
 
 ### Partioned State + Partitioned Procedure
 - Vantiqクラスタメンバーごとに、Partition化した状態インスタンスを持つ
@@ -83,7 +83,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 - Paritioned Procedureは第1引数の __PartitionKey__ (String) が必須である。
 - ParitionKey から算出されたいずれか1つの Partition 上で Procedure が実行される。
 - [Partitioned Stateのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#partitioned-state)
-![partitioned-state.png](../../imgs/vantiq-service/partitioned-state.png)
+![partitioned-state.png](./imgs/partitioned-state.png)
 
 ### Partioned State + Multi-Partitioned Procedure
 - multi partitonedのProcedureは、すべてのPartitioned Stateインスタンスに対して、並行に処理を実行する
@@ -91,7 +91,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 - 用途としては、初期化、永続化処理など
 - [Multi-Partitioned Procedureのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#partitioned-state)
 
-![partitioned-state.png](../../imgs/vantiq-service/multi-partitioned-procedure.png)
+![partitioned-state.png](./imgs/multi-partitioned-procedure.png)
 
 ### Stateful なアクティビティパターン
 - いくつかのアクティビティパターンは、Stateに状態を保持する。そのため、Serviceは保存時に自動的に State変数や 関連する補助 Procedure を作成する。
@@ -134,12 +134,12 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 6. [Procedure を実装する](https://dev.vantiq.co.jp/docs/system/services/index.html#procedures)
 7. [State を設定する](https://dev.vantiq.co.jp/docs/system/services/index.html#stateful-services)
 
-![service-builder.png](../../imgs/vantiq-service/service-builder.png)
+![service-builder.png](./imgs/service-builder.png)
 
 ### 他のモジュール、外部サービスとの統合
 - Serviceの外部から、Service + インタフェース名でイベントを受けたり渡したりできる。
 
-![service-integration-135.png](../../imgs/vantiq-service/service-integration-135.png)
+![service-integration-135.png](./imgs/service-integration-135.png)
 
 ### Concurrent Service
 - Stateへのアクセスはスレッドまたがることが不可避である。スレッドセーフに行うため、**Concurrent Service** が提供されている。

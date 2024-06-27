@@ -21,7 +21,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 Vantiq Resource に関する解説やガイドです。
 
 - Vantiq Service
-  - [Vantiq Service](./docs/jp/vantiq-service.md)
+  - [Vantiq Service について](./vantiq-resources/vantiq-service/about-service/readme.md)
 - Vantiq Source
   - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./docs/jp/data_sending.md)
 
