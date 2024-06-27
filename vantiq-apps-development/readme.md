@@ -23,7 +23,7 @@ Vantiq Resource に関する解説やガイドです。
 - Vantiq Service
   - [Vantiq Service について](./vantiq-resources/vantiq-service/about-service/readme.md)
 - Vantiq Source
-  - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./docs/jp/data_sending.md)
+  - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-resources/vantiq-source/data-sending/readme.md)
 
 # Vantiq Application Development related
 
