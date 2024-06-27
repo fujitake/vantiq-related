@@ -1,0 +1,2 @@
+# Semantic Index のダンプとロード
+
