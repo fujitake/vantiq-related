@@ -7,8 +7,6 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [実例を通して Vantiq のリソースを理解する](./vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./docs/jp/data_sending.md)
 - [アクセストークンとプロファイルを使った Vantiq のアクセス制御](./accesstoken_profile/readme.md)
-- [Vantiq Service](./docs/jp/vantiq-service.md)
-- [Vantiq Client](./vantiq-client/readme.md)
 - [再利用可能なアプリケーション デザインパターン](./docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./docs/jp/reverse-lookup.md)
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
@@ -18,6 +16,13 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Python Execution Connector](./docs/jp/python-execution-connector.md)
 - [Camel Connector](./docs/jp/camel-connector.md)
 - [Cache Service](./docs/jp/cache-service.md)
+
+## Vantiq Resources
+
+Vantiq Resource に関する解説やガイドです。
+
+- [Vantiq Service](./docs/jp/vantiq-service.md)
+- [Vantiq Client](./vantiq-client/readme.md)
 
 # Vantiq Application Development related
 
