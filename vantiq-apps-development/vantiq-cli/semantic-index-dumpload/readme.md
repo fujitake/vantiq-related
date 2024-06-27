@@ -32,5 +32,3 @@ vantiq dump semanticindexes <semantic index name> -s <profile> -d <directory>
 ```PowerShell
 vantiq load semanticindexes -s <profile> <semantic index name>.dmp
 ```
-
-
