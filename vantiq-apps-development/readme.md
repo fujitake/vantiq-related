@@ -18,6 +18,10 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Camel Connector](./docs/jp/camel-connector.md)
 - [Cache Service](./docs/jp/cache-service.md)
 
+## Vantiq CLI
+
+- [Vantiq CLI クイックリファレンス](./vantiq-cli/cli-quick-reference.md)
+
 # Vantiq Application Development related
 
 Guides and learning materials for developing and operating Vantiq Applications.
