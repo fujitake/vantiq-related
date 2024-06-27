@@ -5,6 +5,8 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiq 1-day workshop (v1.34)](./1-day-workshop/docs/jp/readme.md)
 - [Vantiq 1-day workshop (v1.35)](./1-day-workshop-135/docs/jp/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
+- [Vantiq Sourceを使った外部へのデータ送信のまとめ](./docs/jp/data_sending.md)
+- [Vantiq Service](./docs/jp/vantiq-service.md)
 - [アクセストークンとプロファイルを使った Vantiq のアクセス制御](./accesstoken_profile/readme.md)
 - [再利用可能なアプリケーション デザインパターン](./docs/jp/reusable-design-patterns.md)
 - [Vantiqアプリ開発 逆引きリファレンス](./docs/jp/reverse-lookup.md)
@@ -24,6 +26,14 @@ Vantiq Resource に関する解説やガイドです。
   - [Cache Service](./vantiq-resources/vantiq-service/cache-service/readme.md)
 - Vantiq Source
   - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-resources/vantiq-source/data-sending/readme.md)
+
+## Vantiq Resources
+
+Vantiq Resource に関する解説やガイドです。
+
+- Vantiq Client
+  - [Vantiq Cleint について](./vantiq-resources/vantiq-client/about-client/readme.md)
+  - [Vantiq Public Client](./vantiq-resources/vantiq-client/public-client/readme.md)
 
 # Vantiq Application Development related
 
