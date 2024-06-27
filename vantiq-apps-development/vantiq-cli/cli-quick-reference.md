@@ -1,7 +1,7 @@
 # Vantiq CLI クイックリファレンス
 
 Vantiq Extension Source を利用する際などに必要になる Vantiq CLI の利用方法について説明します。  
-（※記事作成時のVANTIQバージョン：r1.39.3）
+（※記事作成時の Vantiq バージョン： r1.39.3）
 
 リファレンスはこちら  
 
@@ -31,14 +31,15 @@ Oracle社のホームページからダウンロードして、インストー�
 
 インストーラーを利用したインストールは不要で、zipファイルの展開と環境変数への追加のみで利用できます。
 
-※Windows 端末の操作例は PowerShell となっています。  
+> **補足**  
+> ※Windows 端末の操作例は PowerShell となっています。  
 
 ### ダウンロード
 
-1. まずはじめに VANTIQ CLI をダウンロードします。  
+1. まずはじめに Vantiq CLI をダウンロードします。  
 → [vantiq.zip](https://dev.vantiq.com/downloads/vantiq.zip)
 
-2. ダウンロードした vantiq.zip を解凍します。
+2. ダウンロードした `vantiq.zip` を解凍します。
 
 3. 解凍された `vantiq-x.x.x` フォルダを任意の場所に配置します。
 
@@ -75,8 +76,6 @@ Oracle社のホームページからダウンロードして、インストー�
    ```
 -->
 
-1. PCを再起動します。
-
 ### 動作確認
 
 1. バージョン情報の表示を表示し、Pathが通っていることを確認します。
@@ -97,7 +96,8 @@ Oracle社のホームページからダウンロードして、インストー�
 
 profile ファイルの作成を行います。  
 
-※Windows 端末の操作例は PowerShell となっています。  
+> **補足**  
+> ※Windows 端末の操作例は PowerShell となっています。  
 
 ### Profile の作成
 
@@ -125,6 +125,7 @@ profile ファイルの作成を行います。
    Invoke-Item ~\.vantiq\profile
    ```
 
+   > **補足**  
    > ※ `profile` ファイルはテキストエディタ（メモ帳や VS Code など）で開いてください。
 
    **Mac/Linux：**
@@ -155,9 +156,9 @@ profile_name {
 |---|---|---|
 |base|Object|`-s` コマンドで Profile を指定しなかった場合に利用されるデフォルト設定になります。|
 |profile_name|Object|Profileの名前になります。<br>任意の名前を命名できます。|
-|.url|String|VANTQのアドレスになります。|
-|.username|String|ログイン時のユーザー名になります。<br>※ `username` は Vantiq Edge でのみ使用できます。|
-|.password|String|ログイン時のパスワードになります。<br>※ `password` は Vantiq Edge でのみ使用できます。|
+|.url|String|Vantiq の URL になります。|
+|.username|String|Vantiq ログイン時のユーザー名になります。<br>※ `username` は Vantiq Edge でのみ使用できます。|
+|.password|String|Vantiq ログイン時のパスワードになります。<br>※ `password` は Vantiq Edge でのみ使用できます。|
 |.token|String|Namespace のアクセストークンになります。<br>※パブリッククラウドおよびキークロークアクセスを使用するサーバーでは `token` を使用する必要があります。|
 
 ※ `password` と `token` の両方を指定すると `password` が使用されます。  
