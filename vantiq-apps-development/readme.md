@@ -16,7 +16,16 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
 - [Python Execution Connector](./docs/jp/python-execution-connector.md)
 - [Camel Connector](./docs/jp/camel-connector.md)
-- [Cache Service](./docs/jp/cache-service.md)
+
+## Vantiq Resources
+
+Vantiq Resource に関する解説やガイドです。
+
+- Vantiq Service
+  - [Vantiq Service について](./vantiq-resources/vantiq-service/about-service/readme.md)
+  - [Cache Service](./vantiq-resources/vantiq-service/cache-service/readme.md)
+- Vantiq Source
+  - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-resources/vantiq-source/data-sending/readme.md)
 
 ## Vantiq Resources
 

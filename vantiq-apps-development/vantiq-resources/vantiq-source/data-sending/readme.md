@@ -101,14 +101,14 @@ PUBLISH { "body": event.value } TO SOURCE ExternalAPI USING source_config
 ```
 `ExternalAPI`はご自身のSource名に置き換えてください。
 
-<img src="../../imgs/data-sending/vail-ac-config-1.png" width="1000">
+<img src="./imgs/vail-ac-config-1.png" width="1000">
 
 記述したVAIL内で他のリソースを使用している場合はImportする必要があります。
-<img src="../../imgs/data-sending/vail-ac-config-2.png" width="1000">
+<img src="./imgs/vail-ac-config-2.png" width="1000">
 
 Procedure ActivityでProcedureを呼び出す場合の違いとしては前タスクの出力内容にアクセスする場合はeventではなく、`event.value`とする必要があります。また、このActivityが設定されたタスクの出力の内容も`event.value`となります。
 
-<img src="../../imgs/data-sending/vail-ac-output.png" width="1000">
+<img src="./imgs/vail-ac-output.png" width="1000">
 
 <br>
 
@@ -138,15 +138,15 @@ VAILの記述自体をしない場合は`PublishToSource` Activityを使用し�
 とする必要があります。
 Transformation Activityを使用して以下の画像の様に設定することで実装できます。
 
-<img src="../../imgs/data-sending/publishtosource-app-sample.png" width="1000">
+<img src="./imgs/publishtosource-app-sample.png" width="1000">
 
 次に、PublishToSource Activityの設定では以下の画像のように送信先として使用するSourceを設定します。
 
-<img src="../../imgs/data-sending/publishtosource-config.png" width="1000">
+<img src="./imgs/publishtosource-config.png" width="1000">
 
 送信先のTopicなど送信の際の設定がある場合は、`sourceConfig`にJSON形式で記述します。
 
-<img src="../../imgs/data-sending/source-config.png" width="500">
+<img src="./imgs/source-config.png" width="500">
 
 PublishToSource Activityの出力は、以下のように送信時に使用した内容となります。
 ```json
@@ -366,7 +366,7 @@ PROCEDURE post_data(event Object)
 var response = SELECT FROM SOURCE ExternalAPI WITH path = path, method = "POST", body = event
 ```
 
-<img src="../../imgs/data-sending/procedure-app-sample.png" width="1000">
+<img src="./imgs/procedure-app-sample.png" width="1000">
 
 1. `event`タスク（画面右側のApp）はイベントを処理し、出力を行う。
 2. `post_data_by_proc`タスクは、`post_data` Procedureを`Procedure Activity`を使って呼び出す。その際、`event`タスクの出力を引数`event`として渡す。
@@ -493,7 +493,7 @@ REMOTE Sourceの`Server URI`の値をベースとして`path`の値が追加さ�
 
 ### **2. Topicの設定の意味**
 
-<img src="../../imgs/data-sending/mqtt-topic.png" width="700">
+<img src="./imgs/mqtt-topic.png" width="700">
 
 ブローカー関連のSourceのTopicの設定はデータをSubscribeする際に使用するものであり、`送信時に使用されるものではありません。`
 
@@ -505,8 +505,8 @@ REMOTE Sourceの`Server URI`の値をベースとして`path`の値が追加さ�
 
 ### **3. QoSとDelivery Mode**
 
-<img src="../../imgs/data-sending/delivery-mode.png" width="500">
-<img src="../../imgs/data-sending/qos.png" width="500">
+<img src="./imgs/delivery-mode.png" width="500">
+<img src="./imgs/qos.png" width="500">
 
 MQTT SourceにはDelivery ModeとQoSの設定項目があり、それぞれ`AT LEAST ONCE`、`AT MOST ONCE`というような値を持つ設定項目です(KAFKA SourceにはQoSの設定項目がなくAMQPには両方存在しません)。それぞれが何のQoSかは以下の通りです。
 
@@ -525,8 +525,8 @@ MQTT SourceにはDelivery ModeとQoSの設定項目があり、それぞれ`AT L
 #### Active/Inactive
 1枚目の画像のようにチェックが入っている場合はActiveの状態でSourceが動作していることを表しています。チェックがない場合はInactiveとなり、Sourceは動作していません。
 
-<img src="../../imgs/data-sending/active.png" width="400">
-<img src="../../imgs/data-sending/inactive.png" width="400">
+<img src="./imgs/active.png" width="400">
+<img src="./imgs/inactive.png" width="400">
 
 #### Mock mode
 Sourceは Mock modeを使用すると外部との接続を行わず、そのSourceに設定されたMock用のProcedureの結果を出力するようになります。
@@ -534,7 +534,7 @@ Sourceは Mock modeを使用すると外部との接続を行わず、そのSour
 以下の画像ようにフラスコのアイコンに中身がある場合はON、空の場合はOFFとなっています。
 `外部と接続してSourceを使用する場合はOFFになっている必要があります`。
 
-<img src="../../imgs/data-sending/mock-on.png" width="400">
-<img src="../../imgs/data-sending/mock-off.png" width="400">
+<img src="./imgs/mock-on.png" width="400">
+<img src="./imgs/mock-off.png" width="400">
 
 Mock modeについての詳細は[こちら](https://dev.vantiq.co.jp/docs/system/sources/source/index.html#source-mocking)を参照してください。

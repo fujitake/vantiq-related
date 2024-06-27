@@ -16,32 +16,39 @@
   - それぞれ独立に外部システムとの接続部である **Source**
   - 流通するデータを柔軟につなぎビジネスロジックを実装する **App**
 
-- Vantiqデザインパターンは、**[Vantiq ”Service”](./vantiq-service.md)** リソースを活用することで複雑なロジックも基本形に準拠したアプリケーションを作成する。
+- Vantiqデザインパターンは、**[Vantiq ”Service”](./../../vantiq-resources/vantiq-service/about-service/readme.md)** リソースを活用することで複雑なロジックも基本形に準拠したアプリケーションを作成する。
 
 ![vantiq-ideal-architecture](../../imgs/reusable-design-patterns/vantiq-ideal-architecture.png)
 
 
 # デザインパターン例
 
-  - [Polling-To-Stream パターン](#polling-to-stream)
-  - [Observer パターン](#observer)  
-  - [Async API パターン](#async-api)
-  - [Cached Remote API パターン](#cached-remote-api)
-  - [In-Memory Master パターン](#in-memory-master)  
-  - [Echo Back パターン](#echo-back)
-  - [Loopwhile Batch パターン](#loopwhile-batch)  
-  - [Memento パターン](#memento)
-  - [Composite Entity パターン](#composite-entity)  
-  - [Transpose パターン](#transpose)  
-  - [Adapter/Bridge パターン](#adapter)   
-  - [Lookup パターン](#lookup)
-  - [Upsert State パターン](#upsert-state)
-  - [Constant パターン](#constant)
-  - [Stream-To-Bulk パターン](#stream-to-bulk)
-  - [External Datasink パターン](#external-datasink)
-  - [Websocket パターン](#websocket)
-  - [Journal パターン](#journal)
-  - [Smooth Remote Service パターン](#smooth-remote-service)
+- [再利用可能なアプリケーションデザインパターン](#再利用可能なアプリケーションデザインパターン)
+  - [デザインパターンの目的](#デザインパターンの目的)
+- [デザインパターン例](#デザインパターン例)
+    - [実装に関する注意点](#実装に関する注意点)
+  - [入力編](#入力編)
+    - [Polling-To-Stream ](#polling-to-stream-)
+    - [Observer ](#observer-)
+    - [Async API ](#async-api-)
+    - [Cached Remote API ](#cached-remote-api-)
+    - [In-Memory Master ](#in-memory-master-)
+    - [Echo Back ](#echo-back-)
+    - [Loopwhile Batch ](#loopwhile-batch-)
+    - [Memento ](#memento-)
+  - [App 編](#app-編)
+    - [Composite Entity ](#composite-entity-)
+    - [Transpose ](#transpose-)
+    - [Adapter / Bridge ](#adapter--bridge-)
+    - [Lookup ](#lookup-)
+    - [Upsert State ](#upsert-state-)
+    - [Constant ](#constant-)
+  - [出力編](#出力編)
+    - [Stream-To-Bulk ](#stream-to-bulk-)
+    - [External Datasink ](#external-datasink-)
+    - [WebSocket ](#websocket-)
+    - [Journal ](#journal-)
+    - [Smooth Remote Service ](#smooth-remote-service-)
 
 ### 実装に関する注意点
 - いくつかのデザインパターンは[バージョン1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/)の機能に依存しています。それ以前のバージョンにインポートするとコンパイルエラーとなったり、想定通り機能しない可能性があります。
@@ -168,7 +175,7 @@
 **Note**
 - _UpdateMaster Procedure_ - ServiceのScheduled Procecureや、Initializeで更新をする
 - _Purge Procedure_ - 古いデータをStateから定期的に消去する
-- V1.35以降であれば、[Cache Service](./cache-service.md)でも実現できる。
+- V1.35以降であれば、[Cache Service](./../../vantiq-resources/vantiq-service/cache-service/readme.md)でも実現できる。
 
 **Sample Project**
 - [InMemoryMaster.zip](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/conf/reusable-design-patterns/InMemoryMaster.zip)
