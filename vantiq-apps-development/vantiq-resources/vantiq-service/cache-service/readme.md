@@ -12,41 +12,41 @@ Cache Serviceは、Typeで扱うデータを一時的にメモリにキャッシ
 
 1. [追加] >> Type を作成します。 Index と Natural Key が設定しておきます。
 
-    ![type](../../imgs/cache-service/image-001.png)
-    ![type](../../imgs/cache-service/image-002.png)
+    ![type](./imgs/image-001.png)
+    ![type](./imgs/image-002.png)
 
 2. [追加] >> Service から Service を追加します。 Cache Serviceを選択します。
-    ![type](../../imgs/cache-service/image-003.png)
+    ![type](./imgs/image-003.png)
 
 3. Cacheの種類を `Lookup Cache`とし、前のステップで作成したTypeを指定します。
-    ![type](../../imgs/cache-service/image-004.png)
+    ![type](./imgs/image-004.png)
 
 4. Cache Service が自動作成されます。
 
-    ![type](../../imgs/cache-service/image-005.png)
-    ![type](../../imgs/cache-service/image-006.png)
+    ![type](./imgs/image-005.png)
+    ![type](./imgs/image-006.png)
     
     これ以降、この Service の `GetBy_XXX` Procedure を呼び出すことで、自動的にキャッシュされたデータにアクセスできます。
 
 ### Update Chache
 
 1. [追加] >> Type を作成します。 Index と Natural Key が設定しておきます。
-    ![type](../../imgs/cache-service/image-007.png)
-    ![type](../../imgs/cache-service/image-008.png)
+    ![type](./imgs/image-007.png)
+    ![type](./imgs/image-008.png)
 
 2. [追加] >> Service から Service を追加します。 Cache Serviceを選択します。
 
-    ![type](../../imgs/cache-service/image-003.png)
+    ![type](./imgs/image-003.png)
 
 3. Cacheの種類を `Update Cache`とし、前のステップで作成したTypeを指定します。キャッシュを定期的に Typeに書き込む時間を分単位で指定します。
 
-    ![type](../../imgs/cache-service/image-009.png)
+    ![type](./imgs/image-009.png)
 
 4. Cache Service が自動作成されます。
 
-    ![type](../../imgs/cache-service/image-010.png)
-    ![type](../../imgs/cache-service/image-011.png)
-    ![type](../../imgs/cache-service/image-012.png)
+    ![type](./imgs/image-010.png)
+    ![type](./imgs/image-011.png)
+    ![type](./imgs/image-012.png)
 
     これ以降、この Service の `UpdateBy_xxx` Procedureを呼び出すことで、メモリ上のデータを更新できます。設定した時間ごとに更新処理 (`WriteAll_xxx` Procedure) が起動し、一括で更新を行います。一括更新が終わると、メモリ上のキャッシュは削除されます。
 
