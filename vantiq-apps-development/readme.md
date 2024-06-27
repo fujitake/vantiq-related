@@ -20,8 +20,8 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 
 ## Vantiq CLI
 
-- [Vantiq CLI クイックリファレンス](./vantiq-cli/cli_quick_reference/readme.md)
-- [Semantic Index のダンプとロード](./vantiq-cli/semantic_index_dumpload/readme.md)
+- [Vantiq CLI クイックリファレンス](./vantiq-cli/cli-quick-reference/readme.md)
+- [Semantic Index のダンプとロード](./vantiq-cli/semantic-index-dumpload/readme.md)
 
 # Vantiq Application Development related
 
