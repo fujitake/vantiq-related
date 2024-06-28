@@ -3,7 +3,7 @@
 Vantiq マイナーバージョンアップ（ex. `1.34.x` -> `1.35.x`)に伴い機能追加されます。基本的に互換性は保証されますが、一部機能については互換性が保証されず、コンパイルエラー等になる場合があります。
 こちらの記事に解消方法について記載します。
 
-変更の一覧については、[Release Notes](https://dev.vantiq.co.jp/docs/system/releasenotes/index.html) を参照ください。
+変更の一覧については、[Release Notes](https://dev.vantiq.com/docs/system/releasenotes/index.html) を参照ください。
 
 ## 1.34 -> 1.35
 

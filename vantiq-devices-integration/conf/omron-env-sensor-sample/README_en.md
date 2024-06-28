@@ -39,7 +39,7 @@ C2:B7:E4:CC:FE:79 Rbt
 6. Edit the sample script and make the following settings.
     1. Endpoint of the Topic created in the "Preparation in Vantiq IDE".  
     <br/>e.g.
-    VANTIQ_ENDPOINT = 'https://dev.vantiq.co.jp/api/v1/resources/topics//devices/env'
+    VANTIQ_ENDPOINT = 'https://dev.vantiq.com/api/v1/resources/topics//devices/env'
     2. The Access Token created in the "Preparation in Vantiq IDE".  
     <br/>e.g.
     VANTIQ_ACCESS_TOKEN = 'abcdefg12345...='  

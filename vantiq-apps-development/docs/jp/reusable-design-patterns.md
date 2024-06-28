@@ -52,9 +52,9 @@
 
 ### 実装に関する注意点
 - いくつかのデザインパターンは[バージョン1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/)の機能に依存しています。それ以前のバージョンにインポートするとコンパイルエラーとなったり、想定通り機能しない可能性があります。
-  - [Stateful ServiceにおけるMap型](https://dev.vantiq.co.jp/docs/system/rules/index.html#map) - Stateful Serviceにて従来Object型を使用していたものが置き換えられた
+  - [Stateful ServiceにおけるMap型](https://dev.vantiq.com/docs/system/rules/index.html#map) - Stateful Serviceにて従来Object型を使用していたものが置き換えられた
   - Automatic Smoothing – アプリケーション内に過度に流れるイベントを自動的にバッファする
-  - [LoopWhile](https://dev.vantiq.co.jp/docs/system/apps/index.html#loop-while) – 複数のタスクに渡る一連の処理をシーケンシャルに実行する
+  - [LoopWhile](https://dev.vantiq.com/docs/system/apps/index.html#loop-while) – 複数のタスクに渡る一連の処理をシーケンシャルに実行する
 
 
 ## 入力編

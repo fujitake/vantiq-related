@@ -74,9 +74,9 @@ Vantiq システムを 1つの箱と捉えると、外部との入出力を行�
 4. データ連携のプロトコル (REST、MQTT、AMQP、Kafka etc.)
 
 データ連携のプロトコル種類により設定を行います。
-1. 入力 ([REST(POST)](../../1-day-workshop/docs/jp/a08-Lab05_VANTIQ_REST_API.md)、[REST(Polling)](https://dev.vantiq.co.jp/docs/system/tutorials/sourcetutorial/index.html#source))
+1. 入力 ([REST(POST)](../../1-day-workshop/docs/jp/a08-Lab05_VANTIQ_REST_API.md)、[REST(Polling)](https://dev.vantiq.com/docs/system/tutorials/sourcetutorial/index.html#source))
 1. 出力 ([REST(POST)](../../1-day-workshop/docs/jp/../../1-day-workshop/docs/jp/a08-Lab05_VANTIQ_REST_API.md))
-1. 双方向 ([WebSocket、MQTT、AMQP、Kafka](https://dev.vantiq.co.jp/docs/system/sources/source/index.html))
+1. 双方向 ([WebSocket、MQTT、AMQP、Kafka](https://dev.vantiq.com/docs/system/sources/source/index.html))
 
 ### ひとつの Source の定義でさまざまな Web サービスを呼び分けしたい<a id="ひとつのSourceの定義でさまざまなWebサービスを呼び分けしたい"></a>
 固定の Request URI と可変の Path を組み合わせて URL を生成します。Path の指定方法 (具体的には "/" から始まるかどうか) により URL 算出結果が変わるので注意してください。
@@ -154,7 +154,7 @@ return response
 ### Podの再起動時もMQTT SourceのQoSを保証したい<a id="Podの再起動時もmqtt-sourceのQoSを保証したい"></a>
 MQTT Source で `QoS: At least once` を設定していても、Vantiq Podの過負荷による再起動が発生した場合などにEventがDropされる可能性があります。この様な場合にも信頼性の高いメッセージングを有効にするには、設定パラメータ `clientId` と `cleanSession` を指定する必要があります。
 
-[MQTT Source Integration ： QoS](https://dev.vantiq.co.jp/docs/system/sources/mqtt/index.html#qos)
+[MQTT Source Integration ： QoS](https://dev.vantiq.com/docs/system/sources/mqtt/index.html#qos)
 
 `clientId` には固定のユニークな値を設定し、`cleanSession` は false に設定する必要があります。`clientId` 値により、ブローカーはクライアントセッションを識別できるため、ソースがオフラインの間にブローカーが保持したメッセージはすべて配信することができます。
 
@@ -189,7 +189,7 @@ Type に設定できるプロパティの一つである `NaturalKey` は、 `UP
   > そのため、現実的にありえないことですが完全に同じタイミングで処理が実行さるということがない限り、一意性が保証されます。
 
 #### 参考
-- [Resource Reference Guide - Type](https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#types)
+- [Resource Reference Guide - Type](https://dev.vantiq.com/docs/system/resourceguide/index.html#types)
 - [VAIL 入門 - UPSERT](./../../../docs/jp/vail_basics.md#upsert-既存レコードがない場合はinsert既存がある場合はupdate)
 
 
@@ -198,8 +198,8 @@ Type に設定できるプロパティの一つである `NaturalKey` は、 `UP
 
 ### 前後のイベント情報を蓄積して処理したい<a id="前後のイベント情報を蓄積して処理したい"></a>
 
-汎用的な用途には、[`AccumulateState`](https://dev.vantiq.co.jp/docs/system/apps/index.html#accumulate-state) taskを使います。
-もしくは特定の用途であれば、[`Window`](https://dev.vantiq.co.jp/docs/system/apps/index.html#window)、 [`ComputeStatistics`](https://dev.vantiq.co.jp/docs/system/apps/index.html#compute-statistics) を使用します。
+汎用的な用途には、[`AccumulateState`](https://dev.vantiq.com/docs/system/apps/index.html#accumulate-state) taskを使います。
+もしくは特定の用途であれば、[`Window`](https://dev.vantiq.com/docs/system/apps/index.html#window)、 [`ComputeStatistics`](https://dev.vantiq.com/docs/system/apps/index.html#compute-statistics) を使用します。
 
 
 ### デバッグしたい<a id="デバッグしたい"></a>
@@ -222,11 +222,11 @@ Grafana を使用する。
 
 
 ### 一定時間イベントが発生しない場合にアラートを出したい<a id="一定時間イベントが発生しない場合にアラートを出したい"></a>
-[`missing`](https://dev.vantiq.co.jp/docs/system/apps/index.html#missing) タスクを使用します。missing は一定時間入力がない場合にイベントが発火します。
+[`missing`](https://dev.vantiq.com/docs/system/apps/index.html#missing) タスクを使用します。missing は一定時間入力がない場合にイベントが発火します。
 
 ### 3つ以上のストリームデータを効率よく結合したい<a id="3つ以上のストリームデータを効率よく結合したい"></a>
 以下のいずれかの方法で実装します。
-- [`join`](https://dev.vantiq.co.jp/docs/system/apps/index.html#join) を使います。
+- [`join`](https://dev.vantiq.com/docs/system/apps/index.html#join) を使います。
 - `AccumulateState` を使い、一連のイベントのプロパティを同一イベントにトランスポーズします。（参考： [Transpose パターン](./reusable-design-patterns.md#transpose))
 
 
@@ -248,7 +248,7 @@ SELECT EXACTLY ONE + Try-catch + catch したら PUBLISH
 ![](../../imgs/reverse-lookup/eventstream-condition.png)
 
 ### テスト用のイベントを簡易的に使いたい<a id="テスト用のイベントを簡易的に使いたい"></a>
-[`Event Generator`](https://dev.vantiq.co.jp/docs/system/eventgenerators/index.html) を使って簡単な設定で `Source`、`Topic`、`Type` に対して任意のイベントを発生させることができます。
+[`Event Generator`](https://dev.vantiq.com/docs/system/eventgenerators/index.html) を使って簡単な設定で `Source`、`Topic`、`Type` に対して任意のイベントを発生させることができます。
 
 ### 定期的に動く処理を実装したい<a id="定期的に動く処理を実装したい"></a>
 以下のいずれかの方法で行います。
@@ -262,7 +262,7 @@ SELECT EXACTLY ONE + Try-catch + catch したら PUBLISH
 (ただし V1.33 現在、この方法では固定の URL に対する Polling のみ可能)
 
 ### JSON の配列になっている、もしくは JSON の配列を含む入力イベントを処理したい<a id="JSONの配列になっているもしくはJSONの配列を含む入力イベントを処理したい"></a>
-[`unwind`](https://dev.vantiq.co.jp/docs/system/apps/index.html#unwind) タスクを使用すると、入力イベント全体、もしくは一部が配列になっているプロパティを指定し、個別のイベントとしてバラすことができます。バラされたイベントはそれぞれ並列処理されるので、処理時間の短縮にも有効です。
+[`unwind`](https://dev.vantiq.com/docs/system/apps/index.html#unwind) タスクを使用すると、入力イベント全体、もしくは一部が配列になっているプロパティを指定し、個別のイベントとしてバラすことができます。バラされたイベントはそれぞれ並列処理されるので、処理時間の短縮にも有効です。
 
 ### 定数を使いたい<a id="定数を使いたい"></a>
 VAIL で Vantiq は定数を使うことはできません。Type などに保存した定数値を返す Procedure を記述することで実現します。
@@ -284,11 +284,11 @@ Type の Advanced 設定で、`Expires After` を設定します。
 - 共通処理を `Service` として実装し、Vantiq Catalog を通じて公開します。
 
 ### ある位置情報を元に、最寄りのオブジェクトを検索したい<a id="ある位置情報を元に最寄りのオブジェクトを検索したい"></a>
-- 比較したい情報を `GeoJSON` の `Polygon` や `Point` 型にしておき、[`geoNear`、`geoWithin` などの演算子を使ったクエリ](https://dev.vantiq.co.jp/docs/system/rules/index.html#select)を実装します。
+- 比較したい情報を `GeoJSON` の `Polygon` や `Point` 型にしておき、[`geoNear`、`geoWithin` などの演算子を使ったクエリ](https://dev.vantiq.com/docs/system/rules/index.html#select)を実装します。
 - 簡易的には Procedure でも実装できます。
 
 ### アプリケーションを再利用したい<a id="アプリケーションを再利用したい"></a>
-- App Builder の一部を汎用的に再利用するなら [`App Component`](https://dev.vantiq.co.jp/docs/system/apps/index.html#components) を作成します。
+- App Builder の一部を汎用的に再利用するなら [`App Component`](https://dev.vantiq.com/docs/system/apps/index.html#components) を作成します。
 - さまざまな Resource を再利用する場合は、対象の Resource を Project としてエクスポートするか、Assembly 化します。
 
 ### Type への書き込みでクレジットエラーが出るのを回避したい<a id="Typeへの書き込みでクレジットエラーが出るのを回避したい"></a>
@@ -329,7 +329,7 @@ for (i in range(0, bytes.length())) {
 ```
 
 また、バイナリデータを含むファイルを Vantiq Documentリソースとしてアップロードすることはできますが、この場合の扱いは基本的にメディアファイルであり、Vantiq Appの中でデータ加工はできません。
-https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#documents
+https://dev.vantiq.com/docs/system/resourceguide/index.html#documents
 
 ### 日付に1ヶ月足したり引いたりしたい<a id="add_months"> </a>
 `<date>.plusMillis(interval)`を使用できますが、1ヶ月の足し算は月によって日数が異なるので、以下のサンプルでは直接月数を増減します。
@@ -382,7 +382,7 @@ Version 1.36 以降では、ビルトインの `Encode.formUrl(val)`を使用可
 
 ### XMLを処理したい<a id="handle_xml"></a>
 
-VantiqでXML形式のデータを処理する場合はBuilt-inのProcedureである[parseXml(str)](https://dev.vantiq.co.jp/docs/system/rules/index.html#content-parsing-procedures)を使用します。
+VantiqでXML形式のデータを処理する場合はBuilt-inのProcedureである[parseXml(str)](https://dev.vantiq.com/docs/system/rules/index.html#content-parsing-procedures)を使用します。
 
 引数にはString型のデータが必要ですのでXMLのデータは文字列に変換されている必要があります。
 
@@ -618,13 +618,13 @@ Namespace が含む Resource の一覧は [すべての Resource] (メニュー�
 - Vantiq Node (デプロイ >> Nodes) にて、外部の Namespace を Node として設定しておく。VAIL の中で Procedure の呼び出しや Topic への Publish を行う時、`processed by` 句により、外部 Namespace の Resource を指定する。
 
 ### アクセストークンを定期的にリフレッシュさせたい<a id="アクセストークンを定期的にリフレッシュさせたい"></a>
-アクセストークンが有効なうちに、[アクセストークンを生成する API](https://dev.vantiq.co.jp/docs/system/resourceguide/index.html#tokens) から新トークンを取得し、保持しておく仕組みを、Vantiq と連携する外部アプリケーション側で実装します。
+アクセストークンが有効なうちに、[アクセストークンを生成する API](https://dev.vantiq.com/docs/system/resourceguide/index.html#tokens) から新トークンを取得し、保持しておく仕組みを、Vantiq と連携する外部アプリケーション側で実装します。
 
 ### Vantiq から外部への API 呼び出しの数を制限したい<a id="Vantiqから外部へのAPI呼び出しの数を制限したい"></a>
 一般的には Vantiq 側ではなく、外部サービスへの接続を仲介する API Gateway にてクォータを設定します。
 
 ### Source のリクエストヘッダー等に使うクレデンシャルを安全に保管したい<a id="Sourceのリクエストヘッダー等に使うクレデンシャルを安全に保管したい"></a>  
-`Secret` (管理 >> Advanced >> Secrets) を定義し、[Secret への参照を Source に埋め込み](https://dev.vantiq.co.jp/docs/system/sources/source/index.html#using-secrets) ます。Secret は一度作成すると内容を閲覧することができず、エクスポートもされないため、安全に運用することができます。
+`Secret` (管理 >> Advanced >> Secrets) を定義し、[Secret への参照を Source に埋め込み](https://dev.vantiq.com/docs/system/sources/source/index.html#using-secrets) ます。Secret は一度作成すると内容を閲覧することができず、エクスポートもされないため、安全に運用することができます。
 
 
 ### 自己証明書を使用したい<a id="自己証明書を使用したい"></a>
@@ -675,7 +675,7 @@ Vantiq ServerのGlobal IP（Internet GatewayのGlobal IP)を以下の方法で�
   ```
 
 ### 発生したVantiqアプリケーションのエラーを把握したい<a id="error_notify"></a>
-Vantiq アプリケーションでは通常、[IDE上](https://dev.vantiq.co.jp/docs/system/ide/index.html#unseen-errors)でエラー発生の状態を確認します。
+Vantiq アプリケーションでは通常、[IDE上](https://dev.vantiq.com/docs/system/ide/index.html#unseen-errors)でエラー発生の状態を確認します。
 
 ![](../../imgs/app-error/image1.png)
 
@@ -722,11 +722,11 @@ PUBLISH { html: body } TO SOURCE AppErrorNotifyEmailServer USING { from: fromAdd
 
 以下の2つの方法で、まとめて制御することができます。
 
-1.  [Active Resource Control Center](https://dev.vantiq.co.jp/docs/system/namespaces/index.html#active-resource-control-center) で対象を確認可能（v1.35〜）
+1.  [Active Resource Control Center](https://dev.vantiq.com/docs/system/namespaces/index.html#active-resource-control-center) で対象を確認可能（v1.35〜）
 2.  REST APIでActive状態を切り替える
 
 ```sh
-curl --location --request POST 'https://dev.vantiq.co.jp/api/v1/resources/sources' \
+curl --location --request POST 'https://dev.vantiq.com/api/v1/resources/sources' \
 --header 'Authorization: Bearer xxx' \
 --header 'Content-Type: application/json' \
 --data-raw '{  "name": "JsonPlaceHolder",  "active": true}'

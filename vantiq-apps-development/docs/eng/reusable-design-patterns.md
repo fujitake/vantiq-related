@@ -60,9 +60,9 @@ __Objective\.__
 
 ### Notes on implementation
 - Some design patterns depend on features in [Version 1.34](https://community.vantiq.com/forums/topic/1-3-4-release-notes-%e6%97%a5%e6%9c%ac%e8%aa%9e/). Importing into earlier versions may result in compile errors or may not function as expected.
-  - [Map type in Stateful Service](https://dev.vantiq.co.jp/docs/system/rules/index.html#map) - Replaced the use of Object types in Stateful Service
+  - [Map type in Stateful Service](https://dev.vantiq.com/docs/system/rules/index.html#map) - Replaced the use of Object types in Stateful Service
   - Automatic Smoothing – Automatically buffer events that flow excessively through the application
-  - [LoopWhile](https://dev.vantiq.co.jp/docs/system/apps/index.html#loop-while) – Sequential execution of a series of processes across multiple tasks
+  - [LoopWhile](https://dev.vantiq.com/docs/system/apps/index.html#loop-while) – Sequential execution of a series of processes across multiple tasks
 
 ## Input section
 

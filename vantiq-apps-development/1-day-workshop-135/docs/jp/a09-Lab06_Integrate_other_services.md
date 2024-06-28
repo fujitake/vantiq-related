@@ -364,9 +364,9 @@ Slack にメッセージを送信するまでの手順は以上です。
 ## ***▷確認ポイント***
 
 -   Source を使用することにより外部サービスと連携できます。  
-    ✔︎ Source の種類について[リファレンス](https://dev.vantiq.co.jp/docs/system/sources/source/index.html) をご確認ください。
+    ✔︎ Source の種類について[リファレンス](https://dev.vantiq.com/docs/system/sources/source/index.html) をご確認ください。
 
 -   `Procedure` を使用することにより連携先のサービスが求めるフォーマットに合わせた実装ができます。
 
 -   VANTIQ では「**VAIL**」という SQL と JavaScript を合わせたような独自言語でプログラミングすることができます。  
-    ✔︎ 詳細については [リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html) をご確認ください。
+    ✔︎ 詳細については [リファレンス](https://dev.vantiq.com/docs/system/rules/index.html) をご確認ください。

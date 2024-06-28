@@ -3,7 +3,7 @@
 この記事は、Vantiq クラウド間で Vantiq Organization をマイグレーションするための手順を説明します。
 
 ## シナリオ
-Vantiq Cloud (dev.vantiq.co.jp) を開発環境としていたが、自社のクラウド環境に Vantiq のプライベート環境を構築し、Organization、ユーザー、開発中のアプリケーション等を移行する。
+Vantiq Cloud (dev.vantiq.com) を開発環境としていたが、自社のクラウド環境に Vantiq のプライベート環境を構築し、Organization、ユーザー、開発中のアプリケーション等を移行する。
 
 ## 想定
 以下のモジュール、Resource は使用していない想定で説明し、手順には含まない (必要に応じて都度、手順に追記することとする)。
@@ -18,8 +18,8 @@ Vantiq Cloud (dev.vantiq.co.jp) を開発環境としていたが、自社のク
 ### 組織管理者 (Organization Admin)
 
 旧環境にて以下を行う。
-1. dev.vantiq.co.jp を使用中のユーザーを特定する。また、そのリストのうち、新環境に移行が必要なユーザーを特定する。
-1. dev.vantiq.co.jp の対象の Organizationg 配下で使用中の Namespace を特定する。また、そのうち新環境に移行が必要なものを特定し、それぞれに移行担当者 (Developer) をアサインする。
+1. dev.vantiq.com を使用中のユーザーを特定する。また、そのリストのうち、新環境に移行が必要なユーザーを特定する。
+1. dev.vantiq.com の対象の Organizationg 配下で使用中の Namespace を特定する。また、そのうち新環境に移行が必要なものを特定し、それぞれに移行担当者 (Developer) をアサインする。
 1. 移行対象のユーザーと Namespace について、移行ステータスをトラックする。ユーザーと Namespace の移行がすべて完了したら、旧環境の Organization の削除を Vantiq Support に依頼する。
 
 新環境にて以下を行う。

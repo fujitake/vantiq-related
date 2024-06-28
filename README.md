@@ -6,7 +6,7 @@
 このリポジトリは、Vantiq 製品に関わる技術的なガイドや設定手順、及び関連サービスとのインテグレーションに関するセットアップ手順などを共有するためのものです。
 
 
-Vantiq アプリケーション開発者向けの情報となります。初めて Vantiq を触る方向けの情報、Vantiq を使ってクラウドサービスとの連携のサンプルや手順を知りたい方、IoT デバイスやゲートウェイが生成するデータを Vantiq に送信する場合のサンプル、Google Colaboratoryで用意するデータジェネレータなど :globe_with_meridians: [製品リファレンス](https://dev.vantiq.co.jp/docs/system/index.html) ではカバーされていない範囲の情報を提供することを目的としています。
+Vantiq アプリケーション開発者向けの情報となります。初めて Vantiq を触る方向けの情報、Vantiq を使ってクラウドサービスとの連携のサンプルや手順を知りたい方、IoT デバイスやゲートウェイが生成するデータを Vantiq に送信する場合のサンプル、Google Colaboratoryで用意するデータジェネレータなど :globe_with_meridians: [製品リファレンス](https://dev.vantiq.com/docs/system/index.html) ではカバーされていない範囲の情報を提供することを目的としています。
 
 ## [Vantiq 入門](./vantiq-introduction/readme.md)
 

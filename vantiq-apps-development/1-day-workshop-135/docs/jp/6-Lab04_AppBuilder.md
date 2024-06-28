@@ -193,7 +193,7 @@
 
 -   今回のアプリで使用した以外の Activity pattern について  
     ✔︎   リファレンスに各 Activity pattern についての情報がございますので確認してみましょう。  
-    ✔︎   App Builder リファレンス: <https://dev.vantiq.co.jp/docs/system/apps/index.html>
+    ✔︎   App Builder リファレンス: <https://dev.vantiq.com/docs/system/apps/index.html>
 
 
 ## Vantiq 1-day Workshop 次のセッション  

@@ -2,7 +2,7 @@
 
 ## ***Step 1***
 
-Log in to the [VANTIQ IDE](https://dev.vantiq.co.jp).
+Log in to the [VANTIQ IDE](https://dev.vantiq.com).
 
 ## ***Step 2***
 
@@ -93,7 +93,7 @@ Use the Data Generator to simulate the situation.
 
 ## ***Step 6（Return to the IDE）***
 
-1. Return to the already opened tab（https://dev.vantiq.co.jp).
+1. Return to the already opened tab（https://dev.vantiq.com).
 
 2. Select "Administer" > "Namespaces", and click the _+ New_ button to open "New Namespace" window.
 

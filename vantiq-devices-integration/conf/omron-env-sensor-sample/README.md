@@ -39,7 +39,7 @@ C2:B7:E4:CC:FE:79 Rbt
 6. サンプルスクリプトを編集し、以下の設定を行う
     1. 準備手順で作成したTopicのエンドポイント
     <br/>例:
-    VANTIQ_ENDPOINT = 'https://dev.vantiq.co.jp/api/v1/resources/topics//devices/env'
+    VANTIQ_ENDPOINT = 'https://dev.vantiq.com/api/v1/resources/topics//devices/env'
     2. 準備手順で作成したアクセストークン
     <br/>例:
     VANTIQ_ACCESS_TOKEN = 'abcdefg12345...='

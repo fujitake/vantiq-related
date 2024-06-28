@@ -219,7 +219,7 @@
 
 - 今回のアプリで使用した以外の Activity pattern について  
   ✔︎ リファレンスに各 Activity pattern についての情報がございますので確認してみましょう。  
-  ✔︎ App Builder リファレンス: <https://dev.vantiq.co.jp/docs/system/apps/index.html>
+  ✔︎ App Builder リファレンス: <https://dev.vantiq.com/docs/system/apps/index.html>
 
 - Source からデータが受信できない場合  
   Source がアクティブになっているか確認してください。  

@@ -185,7 +185,7 @@ At this point, the project graph and App should have the elements shown in the i
 
 -   Activity patterns other than the ones used in this App.  
     ✔︎   There is information about each Activity pattern in the reference. So, please check it out.  
-    ✔︎   App Builder reference: <https://dev.vantiq.co.jp/docs/system/apps/index.html>
+    ✔︎   App Builder reference: <https://dev.vantiq.com/docs/system/apps/index.html>
 
 
 ## Vantiq 1-day Workshop; Next Session    

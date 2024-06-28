@@ -5,9 +5,9 @@ interval_sec = 2
 
 # VANTIQ Configurations
 ACCESS_TOKEN = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
-VANTIQ_TOPIC_URL = 'https://dev.vantiq.co.jp/api/v1/resources/topics//jp.co.vantiq.ws/detected/object'
+VANTIQ_TOPIC_URL = 'https://dev.vantiq.com/api/v1/resources/topics//jp.co.vantiq.ws/detected/object'
 VANTIQ_UPLOAD_PATH = 'public/detected/object/image/'
-VANTIQ_DOCUMENTS_URL = 'https://dev.vantiq.co.jp/api/v1/resources/documents'
+VANTIQ_DOCUMENTS_URL = 'https://dev.vantiq.com/api/v1/resources/documents'
 
 # モデルの入力パラメーターを設定する
 scale = 1.0 / 255.0     # スケールファクター

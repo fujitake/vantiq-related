@@ -19,7 +19,7 @@
 
 この説明では以下の環境の作業を例にしています。
 - Vantiq サーバー : 
-  - dev.vantiq.co.jp
+  - dev.vantiq.com
 - Python実行環境 : 
   - Macbook Pro M1 
   - Python 3.11 (venv使用)
@@ -74,7 +74,7 @@
 2. `server.config` を作成し、`config/`に配置します。
 
     ```properties
-    targetServer = https://dev.vantiq.co.jp  
+    targetServer = https://dev.vantiq.com  
     authToken = P91-WB0Gjs1-C7iM3VdYG70CeFRzPllS4tU_xxxxxxx=
     sources = jp.co.vantiq.test.pythonSource
     ```
@@ -129,8 +129,8 @@
     接続する Source が見つからないと、接続施行を繰り返す。
 
     ```sh
-    2023-10-19 14:43:49,937 - vantiqconnectorsdk - INFO - Connector for source jp.co.vantiq.test.pythonSource is connecting to Vantiq at: wss://dev.vantiq.co.jp/api/v1/wsock/websocket
-    2023-10-19 14:43:49,986 - vantiqconnectorsdk - INFO - Connector for source jp.co.vantiq.test.pythonSource is connecting to Vantiq at: wss://dev.vantiq.co.jp/api/v1/wsock/websocket
+    2023-10-19 14:43:49,937 - vantiqconnectorsdk - INFO - Connector for source jp.co.vantiq.test.pythonSource is connecting to Vantiq at: wss://dev.vantiq.com/api/v1/wsock/websocket
+    2023-10-19 14:43:49,986 - vantiqconnectorsdk - INFO - Connector for source jp.co.vantiq.test.pythonSource is connecting to Vantiq at: wss://dev.vantiq.com/api/v1/wsock/websocket
     ...
     ```
     Source と接続が確立できると施行がとまります。

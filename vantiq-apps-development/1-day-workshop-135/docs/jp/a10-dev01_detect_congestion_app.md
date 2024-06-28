@@ -6,9 +6,9 @@
 * 詳細な手順はありません。アプリケーションの実装に必要な `Type` や `Source` などリソースは全てご自身で追加してください。
 * 応用的な課題であり、これまでに使っていない `Activity Pattern` や `VAIL` でのプログラミングが必要になりますのでリファレンスを調べながら取り組んでください。
   * App Builder リファレンス
-    * [https://dev\.vantiq\.co\.jp/docs/system/app/index\.html](https://dev.vantiq.co.jp/docs/system/app/index.html)
+    * [https://dev\.vantiq\.co\.jp/docs/system/app/index\.html](https://dev.vantiq.com/docs/system/app/index.html)
   * VAIL リファレンス
-    * [https://dev\.vantiq\.co\.jp/docs/system/rules/index\.html](https://dev.vantiq.co.jp/docs/system/rules/index.html)
+    * [https://dev\.vantiq\.co\.jp/docs/system/rules/index\.html](https://dev.vantiq.com/docs/system/rules/index.html)
 * こちらの[素材ファイル](../../conf/AdditionalContents/dev01_detect_congestion_app)を使用してください。
 
 ## 本アプリケーションのシナリオ

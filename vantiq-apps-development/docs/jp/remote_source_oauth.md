@@ -41,7 +41,7 @@ Remote Sourceに指定するRESTサービスによっては、有効期限の短
 
 期限の切れたアクセストークンを手動で更新するのではなく、有効なアクセストークンを再取得するための専用のSourceを作成することができるようになりました。これが `OAuth Source` です。
 
-詳細については、[公式のリファレンス](https://dev.vantiq.co.jp/docs/system/sources/remote/index.html#fetching-access-tokens-on-demand)を参照してください。
+詳細については、[公式のリファレンス](https://dev.vantiq.com/docs/system/sources/remote/index.html#fetching-access-tokens-on-demand)を参照してください。
 
 Remote Source にOAuth Sourceからアクセストークンを取得するように設定するには、2つのSourceを作成する必要があります。
 - OAuth 認可サーバーのエンドポイントを定義する Remote Source(OAuth Source)
