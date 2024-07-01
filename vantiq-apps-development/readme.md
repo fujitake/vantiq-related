@@ -2,8 +2,6 @@
 
 Vantiqアプリケーションの開発や運用に関するガイドやマテリアルです。
 
-- [Vantiq 1-day workshop (v1.34)](./1-day-workshop/docs/jp/readme.md)
-- [Vantiq 1-day workshop (v1.35)](./1-day-workshop-135/docs/jp/readme.md)
 - [実例を通して Vantiq のリソースを理解する](./vantiq-resources-introduction/docs/jp/Vantiq_resources_introduction.md)
 - [アクセストークンとプロファイルを使った Vantiq のアクセス制御](./accesstoken_profile/readme.md)
 - [再利用可能なアプリケーション デザインパターン](./docs/jp/reusable-design-patterns.md)
