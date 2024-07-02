@@ -2,7 +2,7 @@
 
 Vantiqアプリケーション開発時に使用する言語である`VAIL`の基本についての説明です。
 
-詳細事項に関しては[リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html)をご参照ください。
+詳細事項に関しては[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html)をご参照ください。
 
 ## 基本事項
 
@@ -134,7 +134,7 @@ if length(stack) > 1 {
   }
 }
 ```
-参照: https://dev.vantiq.co.jp/docs/system/rules/index.html#logical-operators
+参照: https://dev.vantiq.com/docs/system/rules/index.html#logical-operators
 
 
 ## for文

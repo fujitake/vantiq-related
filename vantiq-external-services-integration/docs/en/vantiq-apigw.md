@@ -53,7 +53,7 @@ flowchart LR
   A[API Gateway]
   D[IoT GWs]
   D -->|'https://api.xxxxx.com'<br />Other than Vantiq Access Token<br />ex.Connection by device identification or certificate| A
-  A -->|`https://dev.vantiq.co.jp/api/v1/resources/yyy`<br />Connection by Vantiq Access Token| V
+  A -->|`https://dev.vantiq.com/api/v1/resources/yyy`<br />Connection by Vantiq Access Token| V
 ```
 - The 'api/v1/resources/yyy' may change in the future.  
 - Can manage authentication in an integrated manner with API Gateway.  

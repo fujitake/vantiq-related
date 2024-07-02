@@ -68,12 +68,12 @@ State  |  一時保存用途としてのType (クエリは使用不可)
   - __Global__ – Serviceごとに１つの状態インスタンスをもつ
   - __Partitioned__ – VantiqクラスタメンバーごとにPartition化した状態インスタンスをもつ
 - Stateを参照・更新できるのは、Serviceに実装したProcedureのみ。
-- [Stateful Serviceのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#stateful-services)
+- [Stateful Serviceのリファレンス](https://dev.vantiq.com/docs/system/services/index.html#stateful-services)
 
 ### Global State
 - Serviceごとに１つの状態インスタンスを持つ
 - `global`修飾子の Procedure からアクセス可能である。Procedure 内に暗黙の変数となる。
-- [Global Stateのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#global-state)
+- [Global Stateのリファレンス](https://dev.vantiq.com/docs/system/services/index.html#global-state)
 
 ![global-state.png](./imgs/global-state.png)
 
@@ -82,14 +82,14 @@ State  |  一時保存用途としてのType (クエリは使用不可)
 - `partitioned`修飾子の Procedure からアクセス可能である。Procedure 内に暗黙の変数となる。
 - Paritioned Procedureは第1引数の __PartitionKey__ (String) が必須である。
 - ParitionKey から算出されたいずれか1つの Partition 上で Procedure が実行される。
-- [Partitioned Stateのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#partitioned-state)
+- [Partitioned Stateのリファレンス](https://dev.vantiq.com/docs/system/services/index.html#partitioned-state)
 ![partitioned-state.png](./imgs/partitioned-state.png)
 
 ### Partioned State + Multi-Partitioned Procedure
 - multi partitonedのProcedureは、すべてのPartitioned Stateインスタンスに対して、並行に処理を実行する
 - Partition Keyの指定は不要
 - 用途としては、初期化、永続化処理など
-- [Multi-Partitioned Procedureのリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#partitioned-state)
+- [Multi-Partitioned Procedureのリファレンス](https://dev.vantiq.com/docs/system/services/index.html#partitioned-state)
 
 ![partitioned-state.png](./imgs/multi-partitioned-procedure.png)
 
@@ -99,13 +99,13 @@ State  |  一時保存用途としてのType (クエリは使用不可)
   - **_AccumulateState_**
   - _**CachedEnrich**_
   - _**ComputeStatistics**_
-- [Stateful Activity Pattern のリファレンス](https://dev.vantiq.co.jp/docs/system/apps/index.html#app-service)
+- [Stateful Activity Pattern のリファレンス](https://dev.vantiq.com/docs/system/apps/index.html#app-service)
 
 ### Replication Factor
 - Replication Factorを2以上に設定すると、クラスタメンバー間でデータを冗長化する。
   - クラスタメンバーに障害があってもデータが失われず、信頼性を向上できる。
 - **Map** 型または **Value** 型の State プロパティのみが複製される。
-- [Service Replication のリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#service-replication)
+- [Service Replication のリファレンス](https://dev.vantiq.com/docs/system/services/index.html#service-replication)
 
 ### Initializer
 - 定義しておくと、Partitionが変更されたり、再起動したときにSystemに呼び出される。以下のシグニチャで作成する。
@@ -114,7 +114,7 @@ State  |  一時保存用途としてのType (クエリは使用不可)
   - 修飾子はprivate, parameterはなし
   - アクセス修飾子(global, muti partitoned等）なし
 - State変数は初期化済みなので、Initializerで初期化する必要はない。
-- [Service Initializer のリファレンス](https://dev.vantiq.co.jp/docs/system/services/index.html#state-initialization)
+- [Service Initializer のリファレンス](https://dev.vantiq.com/docs/system/services/index.html#state-initialization)
 
 ## Vantiq Serviceの実装
 
@@ -126,13 +126,13 @@ State  |  一時保存用途としてのType (クエリは使用不可)
   - Test - テストケースを作成
 
 #### Service作成のフロー
-1. [Inbound を定義する](https://dev.vantiq.co.jp/docs/system/services/index.html#event-types)
-2. [Outbound を定義する](https://dev.vantiq.co.jp/docs/system/services/index.html#event-types)
-3. [Procedure を定義する](https://dev.vantiq.co.jp/docs/system/services/index.html#procedure-signatures)
-4. [Visual Event Handler で実装する](https://dev.vantiq.co.jp/docs/system/apps/index.html)
-5. [VAIL で実装する](https://dev.vantiq.co.jp/docs/system/rules/index.html#rules)
-6. [Procedure を実装する](https://dev.vantiq.co.jp/docs/system/services/index.html#procedures)
-7. [State を設定する](https://dev.vantiq.co.jp/docs/system/services/index.html#stateful-services)
+1. [Inbound を定義する](https://dev.vantiq.com/docs/system/services/index.html#event-types)
+2. [Outbound を定義する](https://dev.vantiq.com/docs/system/services/index.html#event-types)
+3. [Procedure を定義する](https://dev.vantiq.com/docs/system/services/index.html#procedure-signatures)
+4. [Visual Event Handler で実装する](https://dev.vantiq.com/docs/system/apps/index.html)
+5. [VAIL で実装する](https://dev.vantiq.com/docs/system/rules/index.html#rules)
+6. [Procedure を実装する](https://dev.vantiq.com/docs/system/services/index.html#procedures)
+7. [State を設定する](https://dev.vantiq.com/docs/system/services/index.html#stateful-services)
 
 ![service-builder.png](./imgs/service-builder.png)
 
@@ -150,12 +150,12 @@ State  |  一時保存用途としてのType (クエリは使用不可)
     - _compute(key, remappingFunction)_ – キーに対応するvalueを更新する
     - _computeIfAbsent(key, remappingFunction)_ - Mapにキーが存在しない場合にエントリーを作成する
     - _computeIfPresent(key, remappingFunction)_ - キーに対応するvalueを更新する
-- [Concurrent Service リファレンス](https://dev.vantiq.co.jp/docs/system/rules/index.html#concurrent)
+- [Concurrent Service リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#concurrent)
 
 ## Vantiq Service の派生機能
-- **[Concurrent.Cache](https://dev.vantiq.co.jp/docs/system/rules/index.html#concurrent)** (v1.35~) – ConcurrentMapの派生で、メモリで保持するオブジェクト数上限、期間、超過時の通知イベントを設定できる。 
+- **[Concurrent.Cache](https://dev.vantiq.com/docs/system/rules/index.html#concurrent)** (v1.35~) – ConcurrentMapの派生で、メモリで保持するオブジェクト数上限、期間、超過時の通知イベントを設定できる。 
 - **[Cache Service](./../cache-service.md)** (v1.35~) -  Type への読み書きを仲介することで、永続化の負荷を吸収する Service。 読み取り専用 (Lookup) or 読み書き両用 (Update)を設定可能。
-- **[Storage Manager](https://dev.vantiq.co.jp/docs/system/storagemanagers/index.html)** (v1.35~) – 外部ストレージサービスへのCRUDオペレーションを VAIL SQLで行うラッパーを実装する Service. 
+- **[Storage Manager](https://dev.vantiq.com/docs/system/storagemanagers/index.html)** (v1.35~) – 外部ストレージサービスへのCRUDオペレーションを VAIL SQLで行うラッパーを実装する Service. 
 
 
 ## Vantiq Service ベストプラクティス

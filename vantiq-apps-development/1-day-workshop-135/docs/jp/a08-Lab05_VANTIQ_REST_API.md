@@ -22,7 +22,7 @@ Postman（REST Client）を使用して `Topic` にデータを POST し、ア�
 - Vantiq Academy (要ログイン)
   - [2.4: 基本Resource: Source & Topic](https://community.vantiq.com/courses/%e3%82%a2%e3%83%97%e3%83%aa%e3%82%b1%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e9%96%8b%e7%99%ba%e8%80%85-level-1-%e3%82%b3%e3%83%bc%e3%82%b9-%e6%97%a5%e6%9c%ac%e8%aa%9e/lessons/lesson-2-vantiq-%e9%96%8b%e7%99%ba%e3%83%97%e3%83%a9%e3%83%83%e3%83%88%e3%83%95%e3%82%a9%e3%83%bc%e3%83%a0/topic/2-4-%e5%9f%ba%e6%9c%acresource-source-topic-copy-2/)
 - Vantiq Developer Guide
-  - [API Reference Guide](https://dev.vantiq.co.jp/docs/system/api/index.html#api-reference-guide)
+  - [API Reference Guide](https://dev.vantiq.com/docs/system/api/index.html#api-reference-guide)
 
 
 ## ***Step 1（外部から VANTIQ の `Type` へデータの登録・取得・更新・削除を行う）***
@@ -52,7 +52,7 @@ Postman (REST Client) からご自身の `Namespace` の `Type` を操作しま�
     1.  「GET」となっている部分をプルダウンから「POST」に変更し、メソッドを **POST** にします。  
     2.  「Enter request URL」となっている部分に以下の URL を入力します。  
 
-    | https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus |
+    | https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus |
     |-------------------------------------------------------------|  
 
     3.  Headers タブを開き、以下のように入力します。  
@@ -105,7 +105,7 @@ curl
 -H 'Content-Type:application/json'
 -H "Authorization: Bearer <アクセストークン>"
 -d '{"Location": {"coordinates": [ 0, 0 ], "type": "Point" }, "PumpID": 7, "RPM": 5000, "ReceivedAt": "2020-01-01T00:00:00Z", "Temp": 250 }'
-https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus
+https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus
 ```
 
 4.  以下の手順を行い、Postman から `PumpStatus` Type のデータを取得します。
@@ -120,7 +120,7 @@ https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus
 
 ```
 curl
--H "Authorization: Bearer <アクセストークン>" https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus
+-H "Authorization: Bearer <アクセストークン>" https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus
 ```
 
 5.  以下の手順を行い、Postman から `PumpStatus` Type のデータを更新します。
@@ -129,7 +129,7 @@ curl
 
     2.  URL の部分を以下の通り変更します。
 
-    |https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID": 7}|
+    |https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID": 7}|
     |---|  
 
     3.  Body タブの入力欄に以下の通り入力します。  
@@ -155,7 +155,7 @@ curl
 -g -X PUT
 -H 'Content-Type: application/json'
 -H 'Authorization: Bearer <アクセストークン>'
--d '{"Location": {"coordinates": [130,35],"type": "Point"}}' 'https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID":7}'
+-d '{"Location": {"coordinates": [130,35],"type": "Point"}}' 'https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID":7}'
 ```
 
 6.  以下の手順を行い、Postman から `PumpStatus` Type のデータを削除します。
@@ -164,7 +164,7 @@ curl
 
     2.  URL の部分が以下の通りになっていることを確認します。
 
-    |https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID": 7}|
+    |https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID": 7}|
     |---|
 
     3.  _Send_ ボタンをクリックします。
@@ -176,7 +176,7 @@ curl
 curl -g -X DELETE
 -H 'Content-Type: application/json'
 -H 'Authorization: Bearer <アクセストークン>'
-'https://dev.vantiq.co.jp/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID":7}'
+'https://dev.vantiq.com/api/v1/resources/custom/jp.co.vantiq.ws.PumpStatus?where={"PumpID":7}'
 ```
 
 
@@ -223,7 +223,7 @@ curl -g -X DELETE
 
         1.  Method: POST
 
-        2.  URL: https://dev.vantiq.co.jp/api/v1/resources/topics//jp.co.vantiq.ws/rest/temp
+        2.  URL: https://dev.vantiq.com/api/v1/resources/topics//jp.co.vantiq.ws/rest/temp
 
         3.  Headers:
 

@@ -202,7 +202,7 @@ PublishToSource Activityの出力は、以下のように送信時に使用し�
 }
 ```
 上記以外に設定できるプロパティもあります。必要に応じてリファレンスを参照ください。
-[Remote Source Integration](https://dev.vantiq.co.jp/docs/system/sources/remote/index.html)
+[Remote Source Integration](https://dev.vantiq.com/docs/system/sources/remote/index.html)
 </td>
 </tr>
 <tr>
@@ -537,4 +537,4 @@ Sourceは Mock modeを使用すると外部との接続を行わず、そのSour
 <img src="./imgs/mock-on.png" width="400">
 <img src="./imgs/mock-off.png" width="400">
 
-Mock modeについての詳細は[こちら](https://dev.vantiq.co.jp/docs/system/sources/source/index.html#source-mocking)を参照してください。
+Mock modeについての詳細は[こちら](https://dev.vantiq.com/docs/system/sources/source/index.html#source-mocking)を参照してください。

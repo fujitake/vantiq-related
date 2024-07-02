@@ -22,7 +22,7 @@ Use Postman (REST Client) to POST data to `Topic` and run the Application.
 - Vantiq Academy (Login required)
   - [4.2: Source & Topic](https://community.vantiq.com/courses/developer-level-1-course/lessons/4-analyze-enrich-data/topic/4-2-sources-topics-master/)  
 - Vantiq Developer Guide
-  - [API Reference Guide](https://dev.vantiq.co.jp/docs/system/api/index.html#api-reference-guide)
+  - [API Reference Guide](https://dev.vantiq.com/docs/system/api/index.html#api-reference-guide)
 
 ## ***Step 1（Register, retrieve, update, and delete data from outside to `Type` in VANTIQ）***
 
@@ -51,7 +51,7 @@ Use Postman (REST Client) to manipulate the `Type` of your `Namespace`.
     1.  Change the "GET" part to "POST" from the pulldown menu, and change the method to **POST**.  
     2.  Enter the following URL where it says "Enter request URL".  
 
-    | https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus |
+    | https://dev.vantiq.com/api/v1/resources/custom/PumpStatus |
     |-------------------------------------------------------------|  
 
     3.  Open the "Headers" tab and enter the following.  
@@ -104,7 +104,7 @@ curl
 -H 'Content-Type:application/json'
 -H "Authorization: Bearer <Access Token>"
 -d '{"Location": {"coordinates": [ 0, 0 ], "type": "Point" }, "PumpID": 7, "RPMS": 5000, "ReceivedAt": "2020-01-01T00:00:00Z", "Temp": 250 }'
-https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
+https://dev.vantiq.com/api/v1/resources/custom/PumpStatus
 ```
 
 4.  Follow the steps below and get data of `PumpStatus` Type via Postman.  
@@ -119,7 +119,7 @@ https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
 
 ```
 curl
--H "Authorization: Bearer <Access Token>" https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus
+-H "Authorization: Bearer <Access Token>" https://dev.vantiq.com/api/v1/resources/custom/PumpStatus
 ```
 
 5.  Follow the steps below and update the data of `PumpStatus` type via Postman.
@@ -128,7 +128,7 @@ curl
 
     2.  Change the URL part as following.
 
-    |https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID": 7}|
+    |https://dev.vantiq.com/api/v1/resources/custom/PumpStatus?where={"PumpID": 7}|
     |---|  
 
     3.  Enter the followings in the input field of "Body" tab.  
@@ -154,7 +154,7 @@ curl
 -g -X PUT
 -H 'Content-Type: application/json'
 -H 'Authorization: Bearer <Access Token>'
--d '{"Location": {"coordinates": [130,35],"type": "Point"}}' 'https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
+-d '{"Location": {"coordinates": [130,35],"type": "Point"}}' 'https://dev.vantiq.com/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
 ```
 
 6.  Follow the steps below and delete the data of `PumpStatus` type via Postman.
@@ -163,7 +163,7 @@ curl
 
     2.  Confirm that the URL part as following.
 
-    |https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID": 7}|
+    |https://dev.vantiq.com/api/v1/resources/custom/PumpStatus?where={"PumpID": 7}|
     |---|
 
     3.  Click the _Send_ button.
@@ -175,7 +175,7 @@ curl
 curl -g -X DELETE
 -H 'Content-Type: application/json'
 -H 'Authorization: Bearer <Access Token>'
-'https://dev.vantiq.co.jp/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
+'https://dev.vantiq.com/api/v1/resources/custom/PumpStatus?where={"PumpID":7}'
 ```
 
 
@@ -221,7 +221,7 @@ The above steps allow to register, retrieve, update, and delete data from an out
 
         1.  Method: POST
 
-        2.  URL: https://dev.vantiq.co.jp/api/v1/resources/topics//rest/temp
+        2.  URL: https://dev.vantiq.com/api/v1/resources/topics//rest/temp
 
         3.  Headers:
 

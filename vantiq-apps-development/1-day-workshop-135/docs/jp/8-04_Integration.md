@@ -31,7 +31,7 @@ Vantiqは、リソースへのRESTベースのHTTPSアクセスをサポート�
   - `PATCH` (UPDATE) はリソースを更新します。
 - 結果はJSONで戻る
 - 成功/失敗はHTTPステータスコードとして戻る
-- 詳細は[API Reference](https://dev.vantiq.co.jp/docs/system/api/index.html)を参照
+- 詳細は[API Reference](https://dev.vantiq.com/docs/system/api/index.html)を参照
 
 
 ## Vantiqから外部サービスへREST APIで接続 (Remote Source)

@@ -3,7 +3,7 @@
 This instruction describes the steps for migrating a Vantiq Organization from one Vantiq Cloud to another.
 
 ## Scenario
-One company is currently using Vantiq Cloud (dev.vantiq.co.jp)  as a development environment (As-Is), and is going to migrate the development space to a private Vantiq environment in its own cloud environment (To-Be), hence the need for migrating the Organization, its users, applications under development, etc.  
+One company is currently using Vantiq Cloud (dev.vantiq.com)  as a development environment (As-Is), and is going to migrate the development space to a private Vantiq environment in its own cloud environment (To-Be), hence the need for migrating the Organization, its users, applications under development, etc.  
 
 ## Assumptions
 The following Modules and Resources are described on the assumption that they are not used and are not included in the steps (They should be added to the steps as needed).   
@@ -18,8 +18,8 @@ The following Modules and Resources are described on the assumption that they ar
 ### Organization Admin
 
 In the AS-IS installation,
-1. Identify users who have the account in dev.vantiq.co.jp. Filter the ones to be migrated.  
-1. Identify the Namespaces in the Organization of dev.vantiq.co.jp. Filter the ones in use that are to be migrated. Assign the Developer for each Namespace.
+1. Identify users who have the account in dev.vantiq.com. Filter the ones to be migrated.  
+1. Identify the Namespaces in the Organization of dev.vantiq.com. Filter the ones in use that are to be migrated. Assign the Developer for each Namespace.
 1. Track the migration status of the target Users and Namespaces to be migrated. Once all the Users and Namespaces have been migrated, Request Vantiq Support to delete the Organization.  
 
 In the TO-BE Installation,

@@ -356,9 +356,9 @@ Up to here are the steps to send a message to Slack.
 ## ***▷Checkpoints***
 
 -   Using Source allows to integrate with external services.  
-    ✔︎ As for the information on types of sources, please refer to the [External Source Reference Guide](https://dev.vantiq.co.jp/docs/system/sources/source/index.html).  
+    ✔︎ As for the information on types of sources, please refer to the [External Source Reference Guide](https://dev.vantiq.com/docs/system/sources/source/index.html).  
 
 -   Using `Procedure`, it is possible to implement it according to the format required by the service to be cooperated with.  
 
 -   VANTIQ allows to code in an original language called "**VAIL**", which looks like a combination of SQL and JavaScript.    
-    ✔︎ As for the details, please refer to the [VAIL Reference Guide](https://dev.vantiq.co.jp/docs/system/rules/index.html).
+    ✔︎ As for the details, please refer to the [VAIL Reference Guide](https://dev.vantiq.com/docs/system/rules/index.html).

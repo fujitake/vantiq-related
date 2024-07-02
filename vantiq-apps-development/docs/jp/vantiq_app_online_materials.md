@@ -28,7 +28,7 @@ https://github.com/fujitake/vantiq-related/blob/main/vantiq-platform-operations/
 https://github.com/fujitake/vantiq-related/blob/main/vantiq-apps-development/1-day-workshop/docs/jp/readme.md
 
 - Vantiq Reference - 公開されている Vantiq 製品のリファレンスです。
-https://dev.vantiq.co.jp/docs/system/index.html
+https://dev.vantiq.com/docs/system/index.html
 
 - アプリケーション開発者認定コース（要ログイン）- Lecture、Hands-on、Examを含む、アプリケーション開発者認定オンデマンドコースです。 修了するには、Vantiq環境へのアクセスと10~20時間程度の時間が必要となります。
     - 日本語

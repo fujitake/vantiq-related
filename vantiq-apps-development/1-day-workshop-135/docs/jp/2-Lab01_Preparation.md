@@ -95,7 +95,7 @@ VANTIQ の開発環境にログインします。
 
 ## ***Step 6（開発画面に戻る）***
 
-1. 予め開いていたタブ（https://dev.vantiq.co.jp) に戻ります。
+1. 予め開いていたタブ（https://dev.vantiq.com) に戻ります。
 
 2. 「管理」 > 「Namespace」を開き、_+ 新規_ ボタンをクリックして、「新規 Namespace」ウィンドウを開きます。  
 

@@ -52,7 +52,7 @@ SORACOM Beam 設定のメニューを開き+から`UDP->HTTP/HTTPSエントリ�
 転送先に指定すべき内容のサンプルは下記となります。
 
 - プロトコル: https
-- ホスト名: 対象となるVantiq環境のFQDN (例: dev.vantiq.co.jp)
+- ホスト名: 対象となるVantiq環境のFQDN (例: dev.vantiq.com)
 - ポート番号: 443
 - パス: /api/v1/resources/topics/soracom/gpsmulti (Vantiq IDEにて作成したTopic名)
 

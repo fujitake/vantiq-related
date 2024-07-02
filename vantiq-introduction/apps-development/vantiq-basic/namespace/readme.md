@@ -44,7 +44,7 @@ Namespace や Project の作成にいくつかの方法があります。
 
 1. Vantiq へログインします。  
 
-   :link: [Vantiq 開発環境（https://dev.vantiq.co.jp）](https://dev.vantiq.co.jp)  
+   :link: [Vantiq 開発環境（https://dev.vantiq.com）](https://dev.vantiq.com)  
 
    > 上記の URL は Vantiq パブリッククラウド環境になります。  
    > Vantiq プライベートクラウドや Vantiq Edge などの他の環境を利用している場合は、 URL が異なりますのでご注意ください。  

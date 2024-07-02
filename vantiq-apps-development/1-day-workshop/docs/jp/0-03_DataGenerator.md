@@ -21,7 +21,7 @@
 
 ## ***Step 2***
 
-[VANTIQ の開発環境](https://dev.vantiq.co.jp) にログインします。  
+[VANTIQ の開発環境](https://dev.vantiq.com) にログインします。  
 
 ## ***Step 3***
 

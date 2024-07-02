@@ -217,7 +217,7 @@ spec:
                 value: fujik3s # name of Vantiq K8s cluster this worker should represent
 ```
 
-接続先Vantiq インスタンス (<https://dev.vantiq.co.jp>など)を指定
+接続先Vantiq インスタンス (<https://dev.vantiq.com>など)を指定
 
 ```sh
 vi kustomize/vantiq-k8sworker/overlays/worker/provideVantiqIP.yaml
@@ -242,7 +242,7 @@ spec:
           - name: vantiq-k8sworker
             env:
               - name: VANTIQ_URL
-                value: https://dev.vantiq.co.jp # https://dev.vantiq.com for example.
+                value: https://dev.vantiq.com # https://dev.vantiq.com for example.
 ```
 
 Kustomization targetをビルド

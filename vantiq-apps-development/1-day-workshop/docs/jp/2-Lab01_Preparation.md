@@ -2,7 +2,7 @@
 
 ## ***Step 1（ログイン）***
 
-[VANTIQ の開発環境](https://dev.vantiq.co.jp) にログインします。
+[VANTIQ の開発環境](https://dev.vantiq.com) にログインします。
 
 
 ## ***Step 2（作成する Namespace の解説）***
@@ -195,7 +195,7 @@ Namespace を **ポンプ故障検知システム** 用の Namespace に切り�
 <details>
 <summary>講師がいない場合</summary>
 
-1. データジェネレーター画面から、予め開いていたタブの **VANTIQ の開発環境画面（https://dev.vantiq.co.jp）** に戻ります。
+1. データジェネレーター画面から、予め開いていたタブの **VANTIQ の開発環境画面（https://dev.vantiq.com）** に戻ります。
 
 1. ナビゲーション バーで、現在の Namespace 名をクリックし、「Namespace の変更」ダイアログを表示して、 **ポンプ故障検知システム** 用の Namespace に切り替えます。
 
