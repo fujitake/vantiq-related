@@ -160,7 +160,7 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 	    [Add Grafana dashboard for System users](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/Installation.md#add_grafana_dashboards)に従い、設定を行う。
 	    `k8sdeploy_tools/vantiqSystem/deploy/vantiq/dashboards` にあるファイルを設定する。
 	     インポートすべきファイルは、適切な Branch を選択する必要がある (vantiq_system_release を指定)  
-       **それぞれのData Source設定する際、username/passwordは./gradlew createInfluxDBAdmin(deployShared内で実行されれいる)で作成されたREAD権限のものを利用すること。**  
+       **それぞれのData Source設定する際、username/passwordは./gradlew createInfluxDBAdmin(deployShared内で実行されれいる)で作成されたREAD権限のものを利用すること。もし、deployShared内でcreateInfluxDBAdminが実行されていない場合は、手動実行すること**  
        **各JsonファイルImport時のData source選択では同じData source名を指定すること**  
       - InfluxDB Internal.json -> internals
       - MongoDB Monitoring Dashboard.json -> kubernetes
@@ -179,5 +179,4 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 	    Namespace から、作成した organization の root namespace に移動する。
        [管理] -> [ユーザー] を選択し、[新規] をクリックする。
 	    Authorization プロパティのアイコンをクリックし、権限を Organization Admin にして [OK] をクリックする。追加するユーザーのメールアドレスを入力し、保存する
-
-
+23. LLM機能を利用する場合は、追加で[こちら](../jp/add_llm_component.md)の手順を実施し、LLM コンポーネントをデプロイすること。

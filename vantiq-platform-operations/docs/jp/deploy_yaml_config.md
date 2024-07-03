@@ -253,3 +253,56 @@ telegraf-prom:
   image:
     tag: 1.15.2-alpine
 ```
+
+## vantiq r1.37以降のMongoDBバージョン
+r1.37以降では、mongoDBのバージョンを5.0.18に指定する必要がある。
+```yaml
+  mongodb:
+    image:
+      tag: 5.0.18
+```
+
+## LLMコンポーネント
+vantiq 1.37以降でLLM機能を利用する場合に必要な設定
+
+#### secrets.yaml
+   ```
+   vantiq:
+     vantiq-ai-assistant-env:
+       files:
+         .env: deploy/sensitive/vantiq-ai-assistant-env.txt
+     vantiq-worker:
+       data:
+         token: <worker Access Token>
+   ```
+* `worker Access Token`はIDE画面のsystem namespaceで発行した`system.federatedK8sWorker`プロファイル権限を持ったアクセストークンを指定すること
+* `vantiq-ai-assistant-env.txt`の中身は次のようにすること  OPENAI_API_KEYの値は、実際のKeyでは無く、XXXXXXのようなダミーの値として構わない。  
+  実際のKeyはvantiqアプリケーション開発者がIDE画面にて設定可能なためである。
+
+   ```
+   OPENAI_API_KEY=XXXXXX
+   ```
+
+#### deploy.yaml
+a) vantiq workerと qdrant vectorDBのセクションを追加する。
+```
+vantiq:
+  vectordb:
+    enabled: true
+    persistence:
+      size: 30Gi
+
+  worker:
+    enabled: true
+```
+
+b) `vantiq.configuration`に下記のセクションを追加する。  
+   `<namespace name>` となっている箇所を書き換えること。
+```
+  configuration:
+    io.vantiq.modelmgr.ModelManager.json:
+      config:
+        collectionMonitorInterval: "3 hours"
+        semanticIndexService:
+          vectorDB:
+            host: "vantiq-<namespace name>-vectordb.<namespace 
