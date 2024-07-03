@@ -276,7 +276,7 @@ vantiq 1.37以降でLLM機能を利用する場合に必要な設定
          token: <worker Access Token>
    ```
 * `worker Access Token`はIDE画面のsystem namespaceで発行した`system.federatedK8sWorker`プロファイル権限を持ったアクセストークンを指定すること
-* `vantiq-ai-assistant-env.txt`の中身は次のようにすること  OPENAI_API_KEYの値は、実際のKeyでは無く、XXXXXXのようなダミーの値として構わない。  
+* `vantiq-ai-assistant-env.txt`の中身は次のようにすること。OPENAI_API_KEYの値は、実際のKeyでは無く、XXXXXXのようなダミーの値として構わない。  
   実際のKeyはvantiqアプリケーション開発者がIDE画面にて設定可能なためである。
 
    ```
