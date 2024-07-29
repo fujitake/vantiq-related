@@ -25,10 +25,12 @@ Vantiq LLMの機能と、Slack Appを使用して、Slackとの連携を実現�
 VantiqからSlackにメッセージを送信するためのRemoteSourceを作成します。
 
 1. Slack App のIncoming Webhook URLを取得します。Slack App のIncoming Webhook URLは、Slack App のIncoming Webhook の設定画面から取得できます。
-![WebhookUrl](../../imgs/vantiq_llm_slack_integration/slack_incomingwebhook.png)
+
+   ![WebhookUrl](../../imgs/vantiq_llm_slack_integration/slack_incomingwebhook.png)
 
 1. RemoteSource `jp.vantiq.SlackAPI`を作成し、Slack App のIncoming Webhook URLを設定します。
-![RemoteSource](../../imgs/vantiq_llm_slack_integration/remotesource.png)
+
+   ![RemoteSource](../../imgs/vantiq_llm_slack_integration/remotesource.png)
 
 ### Vantiq Service の作成
 
@@ -39,13 +41,15 @@ SlackからのEventを受信し、Semantic Indexに登録された情報を返�
 1. Service のInbound Event に、SlackからのEventを受信するための `inbound` を追加します。
 
 1. `inbound` のEvent Handlerを実装します。以下のように実装します。
-   
+
    ![EventHandler](../../imgs/vantiq_llm_slack_integration/eventhandler.png)
 
    - SplitByThread : `inbound` で受信したEventのthread_tsをキーにして、スレッド毎に会話を管理します。
    - AccumulateState : 会話IDの生成・保持を行います。
      - 以下のように設定します。
-      ![AccumulateState](../../imgs/vantiq_llm_slack_integration/accumulateState.png)
+
+       ![AccumulateState](../../imgs/vantiq_llm_slack_integration/accumulateState.png)
+
      - vailの記述内容は以下の通りです。Vantiqの会話コンテクスト管理に関しての詳細は、[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#conversationmemory) を参照してください。
 
        ```javascript
@@ -96,6 +100,7 @@ SlackからのEventを受信し、Semantic Indexに登録された情報を返�
        ```
 
      - アクティビティの設定は以下の通りです。
+
        ![SemanticSearch](../../imgs/vantiq_llm_slack_integration/semanticSearch.png)
 
    - SendToSlack : `Procedure` アクティビティです。RemoteSourceにメッセージを送信します。
@@ -135,6 +140,7 @@ SlackからのEventを受信し、Semantic Indexに登録された情報を返�
        ```
 
      - アクティビティの設定は以下の通りです。
+
        ![SendToSlack](../../imgs/vantiq_llm_slack_integration/sendToSlack.png)
 
 ### Slack Event のSubscribe
@@ -159,13 +165,14 @@ Procedureのサンプルは以下となります。`app_mention`Eventを受信�
 
 1. Slack App のEvent Subscriptions のRequest Url に、上記で作成したProcedureのURLを設定します。URLには、VantiqのREST APIのURLを設定します。クエリパラメータでVantiqのAPI Tokenを渡します。
  
- > **NOTE**
- > 通常、POSTリクエストではクエリパラメータを使用しませんが、VantiqのREST APIは認証が必要なため、クエリパラメータでAPI Tokenを渡します。クエリパラメータに認証情報を含めることはセキュリティ上問題があるため、プロダクション環境ではAPI GatewayでAuthorization Headerを付与するなどの対応が必要です。
+   > **NOTE**
+   > 通常、POSTリクエストではクエリパラメータを使用しませんが、VantiqのREST APIは認証が必要なため、クエリパラメータでAPI Tokenを渡します。クエリパラメータに認証情報を含めることはセキュリティ上問題があるため、プロダクション環境ではAPI GatewayでAuthorization Headerを付与するなどの対応が必要です。
 
    ```javascript
    https://dev.vantiq.com/api/v1/resources/SlackAppService/EventSubscriptions?token=<API Token>
    ```
-![EventSubscription](../../imgs/vantiq_llm_slack_integration/slack_event_subscription.png)
+
+   ![EventSubscription](../../imgs/vantiq_llm_slack_integration/slack_event_subscription.png)
 
 ## 実行
 
