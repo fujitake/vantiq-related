@@ -312,20 +312,20 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 
 ### SSL 証明書を更新する - Rollback<a id="renew_ssl_certificate_rollback"></a>
 1. バックアップしておいた証明書と秘密鍵 (それぞれ、`fullchain.crt.yyyyMMdd`、`private.key.yyyyMMdd` とする) を `targetCluster/deploy/sensitive` の下にリネームして戻す。
-1. `secrets.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
+2. `secrets.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
   - nginx.default-ssl-cert.files.tls.crt
   - nginx.default-ssl-cert.files.tls.key
   - vantiq.vantiq-ssl-cert.files.tls.crt
   - vantiq.vantiq-ssl-cert.files.tls.key
-1. `deploy.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのファイル名に更新する。
+3. `deploy.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのファイル名に更新する。
   - nginx.controller.tls.cert
   - nginx.controller.tls.key
   - vantiq.ingress.tls.cert
   - vantiq.ingress.tls.key
-1. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
-1. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`default-ssl-cert` が更新される。
-1. ブラウザーでアクセスし、証明書が変わっていることを確認する。
+4. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
+6. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`default-ssl-cert` が更新される。
+7. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
 
 ### License ファイルを更新する<a id="renew_license_files"></a>
@@ -346,12 +346,12 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 **Vantiq Podの再起動が必要**
 
 1. バックアップしておいた License ファイルを `targetCluster/deploy/sensitive` の下にリネームして戻す。
-1. `secrets.yaml` の下記項目をバックアップしておいた License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
+2. `secrets.yaml` の下記項目をバックアップしておいた License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
   - vantiq.vantiq-license.files.public.pem
   - vantiq.vantiq-license.files.license.key
-1. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
-1. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
+3. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+4. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
+5. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 
 Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.md _(要権限)_
