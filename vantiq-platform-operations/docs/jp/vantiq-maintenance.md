@@ -294,13 +294,13 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
   - 顧客調達の場合、必要なリードタイムを考慮し、前もって証明書の更新を依頼する。
   - Vantiq 内部で非本番用の場合、[SSLなう](https://sslnow.ml/)などを使って、"Let's Encrypt" の証明書を取得してもよい。
 2. SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間証明書がオリジナルの証明書のファイルにアペンドされていること)。
-3. 取得した証明書と秘密鍵 (それぞれ、`fullchain_yyyyMMdd.crt`、`private_yyyyMMdd.key` とする) を `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、日付のsuffixをつけてリネームしてバックアップとする。
+3. 取得した証明書と秘密鍵 (それぞれ、`fullchain_yyyyMMdd.crt`、`private_yyyyMMdd.key` とする) を `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、古いファイルは別ファイル名にリネームしてバックアップとする。
 4. `secrets.yaml` の下記項目を新しい証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
   - nginx.default-ssl-cert.files.tls.crt
   - nginx.default-ssl-cert.files.tls.key
   - vantiq.vantiq-ssl-cert.files.tls.crt
   - vantiq.vantiq-ssl-cert.files.tls.key
-5. `deploy.yaml` の下記項目を新しい証明書/秘密鍵ファイルのファイル名に更新する。
+5. `deploy.yaml`に証明書と秘密鍵が記載されている場合は、下記項目を新しい証明書/秘密鍵ファイルのファイル名に更新する。記載されていない場合は更新不要。
   - nginx.controller.tls.cert
   - nginx.controller.tls.key
   - vantiq.ingress.tls.cert
@@ -311,13 +311,13 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 9. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
 ### SSL 証明書を更新する - Rollback<a id="renew_ssl_certificate_rollback"></a>
-1. バックアップしておいた証明書と秘密鍵 (それぞれ、`fullchain.crt.yyyyMMdd`、`private.key.yyyyMMdd` とする) を `targetCluster/deploy/sensitive` の下にリネームして戻す。
+1. バックアップしておいた証明書と秘密鍵を `targetCluster/deploy/sensitive` の下にリネームして戻す。
 2. `secrets.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
   - nginx.default-ssl-cert.files.tls.crt
   - nginx.default-ssl-cert.files.tls.key
   - vantiq.vantiq-ssl-cert.files.tls.crt
   - vantiq.vantiq-ssl-cert.files.tls.key
-3. `deploy.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのファイル名に更新する。
+3. `deploy.yaml`に証明書と秘密鍵が記載されている場合は、下記項目をバックアップしておいた証明書/秘密鍵ファイルのファイル名に更新する。記載されていない場合は更新不要。
   - nginx.controller.tls.cert
   - nginx.controller.tls.key
   - vantiq.ingress.tls.cert
@@ -333,7 +333,7 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 **Vantiq Podの再起動が必要**
 
 1. Vantiq Support から License ファイル (それぞれ、`public_yyyyMMdd.pem`、`license_yyyyMMdd.key` とする) を取得する。
-2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、日付のsuffixをつけてリネームしてバックアップとする。
+2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、古いファイルは別ファイル名にリネームしてバックアップとする。
 3. `secrets.yaml` の下記項目を新しい License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
   - vantiq.vantiq-license.files.public.pem
   - vantiq.vantiq-license.files.license.key
