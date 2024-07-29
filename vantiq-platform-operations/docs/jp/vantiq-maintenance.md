@@ -293,18 +293,38 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 1. SSL 証明書を取得する。
   - 顧客調達の場合、必要なリードタイムを考慮し、前もって証明書の更新を依頼する。
   - Vantiq 内部で非本番用の場合、[SSLなう](https://sslnow.ml/)などを使って、"Let's Encrypt" の証明書を取得してもよい。
-2.  SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間証明書がオリジナルの証明書のファイルにアペンドされていること)。
-3. 取得した証明書と秘密鍵 (それぞれ、`fullchain.crt`、`private.key` とする) を `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
-4. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
-6. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`-n shared default-ssl-cert` が更新される。
-7. ブラウザーでアクセスし、証明書が変わっていることを確認する。
+2. SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間証明書がオリジナルの証明書のファイルにアペンドされていること)。
+3. 取得した証明書と秘密鍵 (それぞれ、`fullchain_yyyyMMdd.crt`、`private_yyyyMMdd.key` とする) を `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、日付のsuffixをつけてリネームしてバックアップとする。
+4. `secrets.yaml` の下記項目を新しい証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
+  - nginx.default-ssl-cert.files.tls.crt
+  - nginx.default-ssl-cert.files.tls.key
+  - vantiq.vantiq-ssl-cert.files.tls.crt
+  - vantiq.vantiq-ssl-cert.files.tls.key
+5. `deploy.yaml` の下記項目を新しい証明書/秘密鍵ファイルのファイル名に更新する。
+  - nginx.controller.tls.cert
+  - nginx.controller.tls.key
+  - vantiq.ingress.tls.cert
+  - vantiq.ingress.tls.key
+6. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+7. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
+8. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`default-ssl-cert` が更新される。
+9. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
 ### SSL 証明書を更新する - Rollback<a id="renew_ssl_certificate_rollback"></a>
 1. バックアップしておいた証明書と秘密鍵 (それぞれ、`fullchain.crt.yyyyMMdd`、`private.key.yyyyMMdd` とする) を `targetCluster/deploy/sensitive` の下にリネームして戻す。
+1. `secrets.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
+  - nginx.default-ssl-cert.files.tls.crt
+  - nginx.default-ssl-cert.files.tls.key
+  - vantiq.vantiq-ssl-cert.files.tls.crt
+  - vantiq.vantiq-ssl-cert.files.tls.key
+1. `deploy.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのファイル名に更新する。
+  - nginx.controller.tls.cert
+  - nginx.controller.tls.key
+  - vantiq.ingress.tls.cert
+  - vantiq.ingress.tls.key
 1. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
 1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
-1. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`-n shared default-ssl-cert` が更新される。
+1. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`default-ssl-cert` が更新される。
 1. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
 
@@ -312,17 +332,23 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 
 **Vantiq Podの再起動が必要**
 
-1. Vantiq Support から License ファイル (それぞれ、`public.pem`、`license.key` とする) を取得する。
-2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
-3. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-4. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
-5. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
+1. Vantiq Support から License ファイル (それぞれ、`public_yyyyMMdd.pem`、`license_yyyyMMdd.key` とする) を取得する。
+2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、日付のsuffixをつけてリネームしてバックアップとする。
+3. `secrets.yaml` の下記項目を新しい License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
+  - vantiq.vantiq-license.files.public.pem
+  - vantiq.vantiq-license.files.license.key
+4. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
+6. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 ### License ファイルを更新する - Rollback<a id="renew_license_files_rollback"></a>
 
 **Vantiq Podの再起動が必要**
 
 1. バックアップしておいた License ファイルを `targetCluster/deploy/sensitive` の下にリネームして戻す。
+1. `secrets.yaml` の下記項目をバックアップしておいた License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
+  - vantiq.vantiq-license.files.public.pem
+  - vantiq.vantiq-license.files.license.key
 1. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
 1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
 1. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
