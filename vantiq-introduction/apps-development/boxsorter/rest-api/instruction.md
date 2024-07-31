@@ -543,7 +543,12 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（REST API）の実装サンプル（Vantiq 1.34）](./../data/box_sorter_restapi_1.34.zip)
-- [ボックスソーター（REST API）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_restapi_1.37.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.40）](./../data/box_sorter_restapi_1.40.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.37）](./../data/box_sorter_restapi_1.37.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.34）](./../data/box_sorter_restapi_1.34.zip)
+
+> **注意**  
+> Vantiq r1.40 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
+> ドキュメント記載の手順と異なりますので注意してください。  
 
 以上
