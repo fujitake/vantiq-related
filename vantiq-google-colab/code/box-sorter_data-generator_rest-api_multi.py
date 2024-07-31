@@ -6,7 +6,7 @@ from typing import Final
 import schedule
 
 # 設定情報
-url = 'https://【VantiqのURL(FQDN)】/api/v1/resources/topics/【Topic名】'
+url = "https://dev.vantiq.com/api/v1/resources/services/com.example.BoxSorter/ReceiveBoxInfo"
 endpoints = [
     {'url': url, 'token': ''}
     , {'url': url, 'token': ''}
