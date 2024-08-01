@@ -238,7 +238,9 @@ OpenAI の LLM と同様に設定していきます。
 > - Euclidean distance: `Euclid`
 > - Manhattan distance: `Manhattan`
 > 
->:globe_with_meridians: [Collections - Qdrant](https://qdrant.tech/documentation/concepts/collections/)  
+>:globe_with_meridians: [Collections - Qdrant](https://qdrant.tech/documentation/concepts/collections/)
+> 
+> ※大文字・小文字が区別されるため、入力間違いに注意してください。
 
 </details>
 
