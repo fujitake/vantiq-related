@@ -108,13 +108,22 @@ helm ls -A
 
 **Vantiq Podの再起動が必要**
 
+> **補足説明**  
+> * 1.36→1.37バージョンアップでは追加の手順が必要です。  
+> [LLM機能を利用しない場合](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot37AltNonAI.md)  
+> [LLM機能を利用する場合](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot37Upgrade.md)  
+> * [1.38→1.39バージョンアップでは追加の手順が必要です。](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot39Upgrade.md)
+
 Vantiq の Minor Version がインクレメントされるアップグレード（e.g. `1.30.10` -> `1.31.0`)  
 Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが必要になる。
 1. 顧客の DTC にアップグレードに伴うサービス停止をアナウンスする (顧客 DTC はサービス停止による影響回避を社内で調整する)。
 1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで `git pull` を実行する。
 1. `deploy.yaml` の変更を行う (`vantiq.image.tag`)。
 1. `cluster.properties` の `vantiq_system_release` を vantiq バージョンをサポートするものに変更する。バージョンアップに伴いその他のパラメーターが変更が必要な場合もある。
-1. `cluster.properties` に変更があった場合、設定の更新を反映する。`./gradlew -Pcluster=<クラスタ名> setupCluster`
+1. `cluster.properties` に変更があった場合、設定の更新を反映する。  
+`./gradlew -Pcluster=<クラスタ名> setupCluster`  
+`./gradlew -Pcluster=<クラスタ名> deployShared`  
+`./gradlew -Pcluster=<クラスタ名> deployNginx`  
 1. Vantiq pod のサービスを停止する (`metrics-collector` と `vision-analytics` は構成している場合のみ)。ここからダウンタイムが開始される。
     ```sh
     kubectl scale sts -n <namespace name> vantiq --replicas=0
@@ -237,13 +246,15 @@ Vantiq の Sharedコンポーネント(k8sのshared Namespaceにデプロイさ�
 1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで `git pull` を実行する。
 2. `cluster.properties` の `vantiq_system_release` を 目的のバージョンに置き換える。
 3. `./gradlew -Pcluster=<CLUSTER-NAME> setupCluster` コマンドを実行する。
-4. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。
+4. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。  
+5. `./gradlew -Pcluster=<CLUSTER-NAME> deployNginx` コマンドを実行する。  
 
 ### Vantiq Shared Componen Version Upgrade - Rollback<a id="vantiq-shared-version-upgrade---rollback">
 切り戻しのためにsystem versionを変更前のバージョンに戻し再度deployコマンドまで実行する。  
 1. `cluster.properties` の `vantiq_system_release` を 変更前のバージョンに置き換える。
 2. `./gradlew -Pcluster=<CLUSTER-NAME> setupCluster` コマンドを実行する。
 3. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。
+4. `./gradlew -Pcluster=<CLUSTER-NAME> deployNginx` コマンドを実行する。
 
 
 ## Kubernetesバージョンアップ作業<a id="kubernetes_version_upgrade_operations"></a>
