@@ -214,4 +214,4 @@ c) `vantiq.configuration`に下記のセクションを追加する。
 
 4. `kubectl get pod -n <namespace>`を実行し、`GenAiFlowService Pod`が起動することを確認する。
 
-5. Organizationが複数存在する場合、Organizationの数だけGenAiFlowService Podをデプロイする(`3～4`の手順を繰り返す。)
+5. Organizationが複数存在する場合、Organizationの数だけGenAiFlowService Podをデプロイする(`2～4`の手順を繰り返す。)
