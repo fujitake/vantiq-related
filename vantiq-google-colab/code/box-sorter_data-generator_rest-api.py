@@ -3,7 +3,6 @@ import json
 import random
 import time
 from typing import Final
-import schedule
 
 # 設定情報
 url = "https://dev.vantiq.com/api/v1/resources/services/com.example.BoxSorter/ReceiveBoxInfo"
@@ -37,7 +36,6 @@ def data_post():
     print(response.text)
 
 # 定期実行
-schedule.every(2).seconds.do(data_post)
 while True:
-    schedule.run_pending()
+    data_post()
     time.sleep(1)
