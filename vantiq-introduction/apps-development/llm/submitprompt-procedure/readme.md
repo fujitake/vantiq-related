@@ -1,7 +1,7 @@
-# LLM（SubmitPrompt VAIL）
+# LLM（SubmitPrompt Procedure）
 
 Vantiq で LLM（大規模言語モデル） を利用する方法を学習します。  
-このセッションでは、 LLM アプリを改修し VAIL での実装に変更します。  
+このセッションでは、 LLM アプリを改修し VAIL で実装する方法を学習します。  
 
 ## Vantiq で実装するアプリケーションの概要
 

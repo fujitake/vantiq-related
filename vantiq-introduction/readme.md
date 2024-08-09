@@ -62,8 +62,8 @@ Vantiq の基本的な扱い方を解説しています。
 |△|[デバッグ方法](./apps-development/debug/readme.md)|なし|
 |△|[Vantiqの基本要素のおさらい](./apps-development/vantiq-basic/basic-resources/readme.md)||
 |△|[LLM（SubmitPrompt Activity）](./apps-development/llm/submitprompt-activity/readme.md)|なし|
-|△|[LLM（SubmitPrompt VAIL）](./apps-development/llm/submitprompt-vail/readme.md)|LLM（SubmitPrompt Activity）|
-|△|[LLM（AccumulateState Activity）](./apps-development/llm/accumulatestate-activity/readme.md)|LLM（SubmitPrompt VAIL）|
+|△|[LLM（SubmitPrompt Procedure）](./apps-development/llm/submitprompt-procedure/readme.md)|LLM（SubmitPrompt Activity）|
+|△|[LLM（AccumulateState Activity）](./apps-development/llm/accumulatestate-activity/readme.md)|LLM（SubmitPrompt Procedure）|
 |△|[ボックスソーター（Vantiq REST API・Topic）](./apps-development/boxsorter/vantiq-restapi-topic/readme.md)|ボックスソーター（初級編・REST API）|
 |△|[ボックスソーター（Vantiq REST API・Type）](./apps-development/boxsorter/vantiq-restapi-type/readme.md)|ボックスソーター（初級編・REST API）|
 

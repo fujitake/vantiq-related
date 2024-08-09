@@ -1,4 +1,4 @@
-# LLM（SubmitPrompt VAIL）
+# LLM（SubmitPrompt Procedure）
 
 ## 実装の流れ
 
@@ -15,7 +15,7 @@
 
 ## 目次
 
-- [LLM（SubmitPrompt VAIL）](#llmsubmitprompt-vail)
+- [LLM（SubmitPrompt Procedure）](#llmsubmitprompt-procedure)
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
@@ -269,6 +269,6 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 
 ### プロジェクトファイル
 
-- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-vail_1.37.zip)
+- [LLM（SubmitPrompt Procedure）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-procedure_1.37.zip)
 
 以上
