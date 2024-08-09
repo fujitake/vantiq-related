@@ -254,6 +254,15 @@ telegraf-prom:
     tag: 1.15.2-alpine
 ```
 
+## system version 3.14 以降のkeycloakパラメータ
+system version 3.14 以降では、deploy.yamlのkeycloak sectionを`keycloak.database.hostname`とする必要がある。
+```yaml
+keycloak:
+  database:
+    hostname: <PostgreSQL Endpoint>
+```
+※system version 3.13以前では`keycloak.persistence.dbHost`であった。  
+
 ## vantiq r1.37以降のMongoDBバージョン
 r1.37以降では、mongoDBのバージョンを5.0.18に指定する必要がある。
 ```yaml
@@ -295,6 +304,21 @@ vantiq:
   worker:
     enabled: true
 ```
+ただし、r1.37～r1.38に限り、vectordbのバージョンを次のようにv1.7.4とすること。  
+r1.39以降ではvectordbのバージョンの指定は不要
+```
+vantiq:
+  vectordb:
+    enabled: true
+    image:          
+      tag: v1.7.4
+    persistence:
+      size: 30Gi
+
+  worker:
+    enabled: true
+```
+
 
 b) `vantiq.configuration`に下記のセクションを追加する。  
    `<namespace name>` となっている箇所を書き換えること。
@@ -305,4 +329,5 @@ b) `vantiq.configuration`に下記のセクションを追加する。
         collectionMonitorInterval: "3 hours"
         semanticIndexService:
           vectorDB:
-            host: "vantiq-<namespace name>-vectordb.<namespace 
+            host: "vantiq-<namespace name>-vectordb.<namespace name>.svc.cluster.local"
+```

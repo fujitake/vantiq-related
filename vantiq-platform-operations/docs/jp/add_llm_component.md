@@ -1,15 +1,21 @@
 # LLM機能の追加
 
 LLM機能を利用する場合に必要となる手順を示します。  
-LLM機能を利用するにはvantiq R1.37以降である必要があります。
+LLM機能を利用するにはVantiq R1.37以降である必要があります。
 
-## AI Assistant用Nodegroup/Nodepool作成
-AI Assistant podをデプロイするために、NodeGroup or Nodepoolを作成する。  
+## LLM用Nodegroup/Nodepool作成
+AI Assistant Pod 及び GenAiFlowService Podをデプロイするために、NodeGroup or Nodepoolを作成する。  
+※GenAiFlowService Podは、Vantiq R1.39以降のみ対応。  
 既に作成済みの場合、この作業はスキップして良い。  
 作成する際のパラメータは次の通り。  
-* ラベル：vantiq.com/workload-preference=orgCompute
-* 台数：1台  
-* スペック：2CPU,8GB Memory 以上  
+* ラベル：vantiq.com/workload-preference=orgCompute  
+* スペック：下記の通り計算すること。
+  * AI Assistant podに必要なリソース：2CPU,8GB Memory 以上  
+  * GenAiFlowService Podに必要なリソース：1Podにつき1CPU,1GB Memory  
+   ※GenAiFlowService PodはOrganization単位で必要。  
+　 例：Organizationが2つの場合、GenAiFlowService Podは2つ起動させるため、2CPU,2GBのリソースが必要。  
+
+AI Assistant Pod と GenAiFlowService Pod は別々のNodeGroup/Nodepoolで起動させても構わない。
 
 ## Vantiq worker Access Token作成
 Vantiq IDE画面にアクセスし、system namespaceにてVantiq worker用のAccess Tokenを作成する。  
@@ -63,6 +69,21 @@ vantiq:
     enabled: true
 ```
 
+ただし、R1.37～R1.38に限り、vectordbのバージョンを次のようにv1.7.4とすること。  
+R1.39以降ではvectordbのバージョンの指定は不要。
+```
+vantiq:
+  vectordb:
+    enabled: true
+    image:          
+      tag: v1.7.4
+    persistence:
+      size: 30Gi
+
+  worker:
+    enabled: true
+```
+
 c) `vantiq.configuration`に下記のセクションを追加する。  
    `<namespace name>` となっている箇所を書き換えること。
 ```
@@ -75,7 +96,7 @@ c) `vantiq.configuration`に下記のセクションを追加する。
             host: "vantiq-<namespace name>-vectordb.<namespace name>.svc.cluster.local"
 ```
 
-## LLMコンポーネントデプロイ
+## AI Assistant Pod 及び VectorDB Pod デプロイ
 1. 次のコマンドにて、Vantiq pod のサービスを停止する (metrics-collector と vision-analytics は構成している場合のみ)。 
    ```
      kubectl scale sts -n <namespace name> vantiq --replicas=0
@@ -170,3 +191,27 @@ c) `vantiq.configuration`に下記のセクションを追加する。
  
 7) 動作確認として、次のページを参照し、LLM機能が利用できるかを確認する。
    https://github.com/fujitake/vantiq-related/blob/main/vantiq-aiml-integration/docs/jp/LLM_Platform_Support.md
+
+## GenAiFlowService Pod デプロイ
+※GenAiFlowService Podは、Vantiq R1.39以降のみ対応。
+
+1. [genAIFlowService.zip](https://dev.vantiq.com/downloads/genAIFlowService.zip)をダウンロードする。
+
+2. system Namespaceにて、`Administer` -> `Organization` -> `...` menu -> `Edit` -> `Edit Quotas`を押下する。    
+初回インストールのため、クオータは空となっているはずである。  
+次のように、k8sResourcesのクオータが`vCPU：1`、`memory：1Gi`になるように編集する。
+```
+{
+    "limits": {
+        "k8sResources": {
+            "vCPU": "1",
+            "memory": "1Gi"
+        }
+    }
+}
+```
+3. Organization Root NSに移動し、先ほどダウンロードしたzipファイルをインポートする。
+
+4. `kubectl get pod -n <namespace>`を実行し、`GenAiFlowService Pod`が起動することを確認する。
+
+5. Organizationが複数存在する場合、Organizationの数だけGenAiFlowService Podをデプロイする(`2～4`の手順を繰り返す。)

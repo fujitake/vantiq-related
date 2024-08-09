@@ -278,6 +278,10 @@ AI Design Assistantなど、大規模言語モデルによる開発アシスタ�
 
 本機能の動作確認は、ログアウトし、別途作成したOrganizationとユーザにてご確認下さい。手順は、`http://{your ip address}:8080/docs/system/tutorials/quickstart/index.html`にございます。
 
+## GenAI Flow 機能を使う場合
+R1.39から追加されたGenAI Flow機能を利用する場合、[genAIFlowServiceEdge.zip](https://dev.vantiq.com/downloads/genAIFlowServiceEdge.zip)をダウンロードし、Organization Root NameSpaceにてインポートして下さい。  
+GenAIFlowService Service Connectorが作成されます。
+
 # 停止方法
 
 作業ディレクトリにて以下のコマンドを実行します。
