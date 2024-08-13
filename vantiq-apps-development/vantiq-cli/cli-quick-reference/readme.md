@@ -24,6 +24,7 @@ Vantiq Extension Source を利用する際などに必要になる Vantiq CLI �
 
 Vantiq CLI を利用するには JDK11 が必要になります。  
 Oracle社のホームページからダウンロードして、インストールしてください。  
+※インストール後は再起動が必要になる場合があります。  
 
 - :globe_with_meridians: [Java Downloads | Oracle](https://www.oracle.com/java/technologies/downloads/#java11)
 
