@@ -148,6 +148,7 @@ profile_name {
     url = 'https://dev.vantiq.com'
     username = 'myUsername'
     password = 'myPassword'
+    namespace = 'myNamespace'
 }
 ```
 
@@ -191,5 +192,6 @@ edge_piyopiyo_namespace {
     url = 'xxx.xxx.xxx.xxx'
     username = 'myUsername'
     password = 'myPassword'
+    namespace = 'myNamespace'
 }
 ```
