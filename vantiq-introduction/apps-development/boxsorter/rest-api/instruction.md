@@ -66,7 +66,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ### 2-1. Vantiq Access Token の発行
 
-1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし Token の新規作成画面を開きます。
+1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックします。
 
    ![accesstoken_01](./imgs/accesstoken_01.png)
 
@@ -174,7 +174,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
    > ここまでの手順で、  
    > `Interface` の `Inbound Event` の `ReceiveBoxInfo Event Type` で受け取ったデータは、  
    > `Implement` の `Public Event Handler` の `ReceiveBoxInfo Event Handler` に紐づけられています。  
-   > `Event Handler` に紐づけられたデータは、ルートタスクである `EventStream Activity` に送られます。  
+   > `ReceiveBoxInfo Event Handler` に紐づけられたデータは、ルートタスクである `EventStream Activity` に送られます。  
 
 ## 4. Type を用いたマスタデータの作成
 
@@ -269,7 +269,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
 #### Enrich Activity の実装
 
-1. App ペイン左側の `Modifiers` の中から `Enrich` を選択し、 `EventStream` タスクの上にドロップします。
+1. Service ペイン左側の `Modifiers` の中から `Enrich` を選択し、 `EventStream` タスクの上にドロップします。
 
    ![app_enrich_01.gif](./imgs/app_enrich_01.gif)
 
@@ -361,7 +361,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
 #### Filter Activity の実装
 
-1. App ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクの上にドロップします。  
+1. Service ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクの上にドロップします。  
    この作業を3回繰り返し、3つの **Filter Activity** を配置します。
 
    ![app_filter_01.gif](./imgs/app_filter_01.gif)
@@ -454,7 +454,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
 #### LogStream Activity の実装
 
-1. App ペイン左側の `Actions` の中から `LogStream` を選択し、各 **Filter Activity** の上にドロップします。  
+1. Service ペイン左側の `Actions` の中から `LogStream` を選択し、各 **Filter Activity** の上にドロップします。  
    この作業を3回繰り返し、3つの **LogStream Activity** を配置します。
 
    ![app_logstream_01.gif](./imgs/app_logstream_01.gif)
