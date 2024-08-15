@@ -1,22 +1,8 @@
 # LLM（SubmitPrompt Activity）
 
-## 実装の流れ
-
-下記の流れで実装していきます。
-
-1. 【準備】Namespace の作成と Project の保存
-1. 【LLM】LLM リソースの作成
-1. 【Type】スキーマの作成
-1. 【Topic】App 用のエンドポイントの作成
-1. 【App Builder】LLM アプリケーションの実装
-1. 【動作確認】Log メッセージの確認
-
-> リソース名やタスク名は任意のものに変更しても構いません。
-
 ## 目次
 
 - [LLM（SubmitPrompt Activity）](#llmsubmitprompt-activity)
-  - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [1. Namespace の作成と Project の保存](#1-namespace-の作成と-project-の保存)
   - [2. Vantiq Access Token の発行](#2-vantiq-access-token-の発行)
