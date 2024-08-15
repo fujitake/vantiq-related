@@ -143,7 +143,7 @@ LLM リソースの作成を行います。
 ### 4-3. Public Visual Event Handler の作成
 
 1. `Implement` タブを開き、 `Unbound Event Types` をクリックして、アコーディオンを開きます。  
-   `ReceiveBoxInfo` の右側の `…` をクリックして、 `Public Visual Event Handler を追加` をクリックします。
+   `LlmInbound` の右側の `…` をクリックして、 `Public Visual Event Handler を追加` をクリックします。
 
    ![create_service_3-1.png](./imgs/create_service_3-1.png)
 
