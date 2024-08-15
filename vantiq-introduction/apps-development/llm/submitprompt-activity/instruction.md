@@ -5,8 +5,7 @@
 下記の流れで実装していきます。
 
 1. 【準備】Namespace の作成と Project の保存
-1. 【Secret】各種 LLM の API Key の設定
-1. 【LLM】LLM の設定
+1. 【LLM】LLM リソースの作成
 1. 【Type】スキーマの作成
 1. 【Topic】App 用のエンドポイントの作成
 1. 【App Builder】LLM アプリケーションの実装
@@ -20,26 +19,20 @@
   - [実装の流れ](#実装の流れ)
   - [目次](#目次)
   - [1. Namespace の作成と Project の保存](#1-namespace-の作成と-project-の保存)
-  - [2. Secret を用いた API Key の管理](#2-secret-を用いた-api-key-の管理)
-    - [2-1. Secret の作成](#2-1-secret-の作成)
-  - [3. LLM の設定](#3-llm-の設定)
-    - [3-1 LLM の追加](#3-1-llm-の追加)
-    - [3-2 プロジェクトへの追加](#3-2-プロジェクトへの追加)
-  - [4. スキーマの作成](#4-スキーマの作成)
-    - [4-1. Type (schema) の作成](#4-1-type-schema-の作成)
-    - [4-2. Property の追加](#4-2-property-の追加)
-  - [5. Topic を用いた Vantiq エンドポイントの作成](#5-topic-を用いた-vantiq-エンドポイントの作成)
-    - [5-1. Topic の作成](#5-1-topic-の作成)
-  - [6. App Builder を用いた App の開発](#6-app-builder-を用いた-app-の開発)
-    - [6-1. 【App Builder】アプリケーションの作成](#6-1-app-builderアプリケーションの作成)
-    - [6-2. 【EventStream】Topic データの取得](#6-2-eventstreamtopic-データの取得)
-    - [6-3. 【SubmitPrompt】LLM との会話機能の実装](#6-3-submitpromptllm-との会話機能の実装)
-    - [6-4. 【LogStream】ログ出力の実装](#6-4-logstreamログ出力の実装)
-  - [7. LLM との会話](#7-llm-との会話)
-    - [7-1. Log メッセージ画面の表示](#7-1-log-メッセージ画面の表示)
-    - [7-2. /Inbound Topic ペインの表示](#7-2-inbound-topic-ペインの表示)
-    - [7-3. メッセージの送信](#7-3-メッセージの送信)
-    - [7-4. アプリケーションとログの確認](#7-4-アプリケーションとログの確認)
+  - [2. Vantiq Access Token の発行](#2-vantiq-access-token-の発行)
+  - [3. LLM リソースの作成](#3-llm-リソースの作成)
+  - [4. Service の作成](#4-service-の作成)
+    - [4-1. Service の作成](#4-1-service-の作成)
+    - [4-2. Inbound Event の作成](#4-2-inbound-event-の作成)
+    - [4-3. Public Visual Event Handler の作成](#4-3-public-visual-event-handler-の作成)
+    - [4-4. テストデータの送信](#4-4-テストデータの送信)
+    - [4-5. データの受信テスト](#4-5-データの受信テスト)
+  - [5. Service Builder を用いたアプリケーションの開発](#5-service-builder-を用いたアプリケーションの開発)
+    - [5-1. 【SubmitPrompt】LLM との会話機能の実装](#5-1-submitpromptllm-との会話機能の実装)
+    - [5-2. 【LogStream】ログ出力の実装](#5-2-logstreamログ出力の実装)
+  - [6. LLM との会話](#6-llm-との会話)
+    - [6-1. Log メッセージ画面の表示](#6-1-log-メッセージ画面の表示)
+    - [6-2. メッセージの送信と確認](#6-2-メッセージの送信と確認)
   - [Project のエクスポート](#project-のエクスポート)
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
@@ -53,216 +46,244 @@
 詳細は下記をご確認ください。  
 [Vantiq の Namespace と Project について](/vantiq-introduction/apps-development/vantiq-basic/namespace/readme.md)
 
-## 2. Secret を用いた API Key の管理
+## 2. Vantiq Access Token の発行
 
-Secret を用いて、 各種 LLM サービスで発行した API Key を管理します。  
+REST クライアントから HTTP POST リクエストを行うために必要なアクセストークンを事前に発行しておきます。  
 
-### 2-1. Secret の作成
+1. メニューバーの `管理` -> `Advanced` -> `Access Tokens` -> `+ 新規` をクリックし ます。
 
-1. メニューバーの `管理` -> `Advanced` -> `Secrets` -> `+ 新規` をクリックし Secret の新規作成画面を開きます。
+   ![token_01](./imgs/token_01.png)
 
-   ![secret_01.png](./imgs/secret_01.png)
+1. 以下の内容を設定し、 `作成` をクリックします。
 
-1. 以下の内容を設定し、保存します。
+   |項目|設定値|備考|
+   |-|-|-|
+   |Name|RestApiToken||
 
-   |項目|設定値|
-   |-|-|
-   |Name|LlmApyKey|
-   |Secret|※各種 LLM サービスで発行した API Key|
+   ![token_02](./imgs/token_02.png)
 
-   ![secret_02](./imgs/secret_02.png)
+1. 発行された `Access Token` をクリックして、クリップボードにコピーされたアクセストークンをテキストエディタなどに保存しておきます。
 
-## 3. LLM の設定
+   ![token_03](./imgs/token_03.png)
 
-LLM の設定を行っていきます。  
-LLM の追加を行っただけでは、プロジェクトへの追加はされないので注意してください。
+## 3. LLM リソースの作成
 
-### 3-1 LLM の追加
+LLM リソースの作成を行います。  
 
 1. メニューバーの `追加` -> `LLMs` -> `+ 新規` をクリックし LLM の追加画面を開きます。
 
    ![llm_01.png](./imgs/llm_01.png)
 
-1. 以下の内容を設定し、 `OK` をクリックします。
+1. 以下の内容を設定します。  
+   ※OpenAI GPT 3.5 Turbo の例
 
    |項目|設定値|
    |-|-|
    |LLM Name|GenerativeLLM|
+   |Package|com.example|
    |Type|Generative|
    |Model Name|gpt-3.5-turbo|
-   |API Key Secret|LlmApiKey|
 
    ![llm_02.png](./imgs/llm_02.png)
 
-### 3-2 プロジェクトへの追加
-
-1. 追加した LLM にチェックを入れ、 `Project に追加` をクリックします。
+1. `API Key Secret` のプルダウンメニューから `-- 新規 Secret を追加--` を選択しましす。
 
    ![llm_03.png](./imgs/llm_03.png)
 
-## 4. スキーマの作成
-
-Type を使って Topic で使用するデータフォーマットを指定します。
-
-### 4-1. Type (schema) の作成
-
-1. メニューバーの `追加` -> `Type` -> `+ 新規 Type` をクリックし Type の作成画面を開きます。
-
-   ![create_type_01.png](./imgs/create_type_01.png)
-
-1. 以下の内容を設定し、保存します。
+1. 以下の内容を設定し、 `OK` をクリックして Secret を作成します。
 
    |項目|設定値|
    |-|-|
-   |Name|LlmSchema|
-   |Role|schema|
+   |Name|LlmApiKey|
+   |Package|com.example|
+   |Secret|※OpenAI などの LLM サービスで発行した API Key|
 
-   ![create_type_02.png](./imgs/create_type_02.png)
+   ![llm_04.png](./imgs/llm_04.png)
 
-### 4-2. Property の追加
+   > **補足：Secret の管理**  
+   > 作成した Secret は、メニューバーの `管理` -> `Advanced` -> `Secrets` から管理できます。  
 
-1. `LlmSchema` のペインが表示されるので、以下の設定を行い、保存します。
+1. 設定内容を確認し、 `保存` をクリックします。
 
-   **Properties タブ**
-   |プロパティ名|データ型|Required|
-   |-|-|-|
-   |message|String|-|
+   ![llm_05.png](./imgs/llm_05.png)
 
-   ![create_type_03.png](./imgs/create_type_03.png)
+   > **補足：Run Playground**  
+   > 作成した LLM は、画面右下の `Run Playground` から動作テストを行うことができます。  
+   >
+   > ![llm_playground.png](./imgs/llm_playground.png)
 
-   ![create_type_04.png](./imgs/create_type_04.png)
+## 4. Service の作成
 
-   ![create_type_05.png](./imgs/create_type_05.png)
+アプリケーションの基礎となる Service を作成します。  
 
-## 5. Topic を用いた Vantiq エンドポイントの作成
+### 4-1. Service の作成
 
-Vantiq 内部で利用するエンドポイントを Topic を用いて作成します。  
-
-### 5-1. Topic の作成
-
-1. メニューバーの `追加` -> `Advanced` -> `Topic...` -> `+ 新規 Topic` をクリックし Topic の新規作成画面を開きます。
+1. メニューバーの `追加` -> `Service...` -> `+ 新規 Service` をクリックし Service の新規作成画面を開きます。
    
-   ![create_topic_01.png](./imgs/create_topic_01.png)
+   ![create_service_1-1.png](./imgs/create_service_1-1.png)
 
-1. 以下の内容を設定し、保存します。
-
-   |項目|設定値|
-   |-|-|
-   |Name|/Inbound|
-   |Message Type|LlmSchema|
-
-   ![create_topic_02.png](./imgs/create_topic_02.png)
-
-## 6. App Builder を用いた App の開発
-
-この手順からアプリケーション開発を開始します。  
-
-### 6-1. 【App Builder】アプリケーションの作成
-
-App Builder を用いて、 App を新規作成します。
-
-#### App の新規作成
-
-1. メニューバーの `追加` -> `Advanced` -> `App...` -> `+ 新規 App` をクリックしアプリケーションの新規作成画面を開きます。
-   
-   ![create_app_01.png](./imgs/create_app_01.png)
-
-1. 以下の内容を設定し、保存します。
+1. 以下の内容を設定し、 `作成` をクリックします。
 
    |項目|設定値|
    |-|-|
    |Name|LlmApp|
+   |Package|com.example|
 
-   ![create_app_02.png](./imgs/create_app_02.png)
+   ![create_service_1-2.png](./imgs/create_service_1-2.png)
 
-### 6-2. 【EventStream】Topic データの取得
+### 4-2. Inbound Event の作成
 
-**EventStream Activity** を使って Topic からデータを受け取れるようにします。  
+1. `Interface` タブの中にある `Inbound` の右側の `＋` をクリックします。
 
-#### EventStream の設定
+   ![create_service_2-1.png](./imgs/create_service_2-1.png)
 
-1. `Initiate` タスクをクリックし、以下の内容を設定します。  
+1. 以下の内容を設定し、 `Event Schema` のプルダウンメニュー `New Type` を選択します。
 
-   |項目|設定値|
-   |-|-|
-   |Name|LlmInbound|
+   |項目|設定値|備考|
+   |-|-|-|
+   |Name|LlmInbound||
 
-   ![create_app_03.png](./imgs/create_app_03.png)
+   ![create_service_2-2.png](./imgs/create_service_2-2.png)
 
-1. `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックし、アプリケーションを保存します。
+1. 以下の内容を設定し、 `保存` をクリックします。
 
-   |Required Parameter|Value|
-   |-|-|
-   |inboundResource (Enumerated)|topics|
-   |inboundResourceId (String)|/Inbound|
+   |項目|設定値|備考|
+   |-|-|-|
+   |Name|message||
+   |Type|String||
 
-   ![create_app_04.png](./imgs/create_app_04.png)
+   ![create_service_2-3.png](./imgs/create_service_2-3.png)
 
-### 6-3. 【SubmitPrompt】LLM との会話機能の実装
+### 4-3. Public Visual Event Handler の作成
+
+1. `Implement` タブを開き、 `Unbound Event Types` をクリックして、アコーディオンを開きます。  
+   `ReceiveBoxInfo` の右側の `…` をクリックして、 `Public Visual Event Handler を追加` をクリックします。
+
+   ![create_service_3-1.png](./imgs/create_service_3-1.png)
+
+1. Service を保存します。
+
+   ![create_service_3-2.png](./imgs/create_service_3-2.png)
+
+### 4-4. テストデータの送信
+
+以下のエンドポイントに HTTP POST リクエストを行い、データの受信テストを行います。  
+※エンドポイントやアクセストークンは適宜書き換えてください。  
+
+`https://dev.vantiq.com/api/v1/resources/services/com.example.LlmApp/LlmInbound`
+
+#### Post Tester の例
+
+1. 下記の URL を Post Tester を開きます。  
+   - :globe_with_meridians: [Post Tester](https://posttester.fiiris.jp/)
+
+1. 以下の設定を行い、 `Send` をクリックします。
+
+   |項目|設定値|備考|
+   |-|-|-|
+   |URL|https://dev.vantiq.com/api/v1/resources/services/com.example.LlmApp/LlmInbound|※Edge やプライベードクラウドの場合は、 FQDN やプロトコルを適宜書き換えてください。|
+   |Token|YrAPMOgLczOEwcXznlNf2b4S7XSu2ynRKIRtPafm0ZE=|※[Vantiq Access Token の発行](#2-vantiq-access-token-の発行) で発行したアクセストークンを入力してください。|
+   |Body (JSON)|{"message":"こんにちは"}||
+
+   ![post_tester.png](./imgs/post_tester.png)
+
+#### cURL の例
+
+1. 以下のコマンドを参考にして、 HTTP POST リクエストを行います。  
+   
+   ```shell
+   curl \
+       -X POST \
+       -H "Content-Type: application/json" \
+       -H "Authorization: Bearer YrAPMOgLczOEwcXznlNf2b4S7XSu2ynRKIRtPafm0ZE=" \
+       -d '{"message":"こんにちは"}' \
+       "https://dev.vantiq.com/api/v1/resources/services/com.example.LlmApp/LlmInbound"
+   ```
+
+### 4-5. データの受信テスト
+
+データを受信するとタスクの右上にバッジが表示され、カウントアップされます。  
+データを確認するのは下記の操作を行います。  
+
+1. `Event Stream` タスクをクリックします。  
+   画面右下の `タスク Events を表示` をクリックします。
+
+   ![receive_test_data_01.png](./imgs/receive_test_data_01.png)
+
+1. 表示された青字の JSON Object をクリックします。  
+
+   ![receive_test_data_02.png](./imgs/receive_test_data_02.png)
+
+1. 想定通りのデータが受信できているか確認します。  
+
+   ![receive_test_data_03.png](./imgs/receive_test_data_03.png)
+
+   > **補足：データの流れについて**  
+   > ここまでの手順で、  
+   > `Interface` の `Inbound Event` の `LlmInbound Event Type` で受け取ったデータは、  
+   > `Implement` の `Public Event Handler` の `LlmInbound Event Handler` に紐づけられています。  
+   > `LlmInbound Event Handler` に紐づけられたデータは、ルートタスクである `EventStream Activity` に送られます。  
+
+## 5. Service Builder を用いたアプリケーションの開発
+
+この手順からアプリケーション開発を開始します。  
+`EventStream` Activity で取得したデータをイベントとして、処理を実装していきます。  
+
+### 5-1. 【SubmitPrompt】LLM との会話機能の実装
 
 **SubmitPrompt Activity** を使用して、 LLM との会話機能の実装を行います。
 
 #### SubmitPrompt Activity の実装
 
-1. App ペイン左側の `AI` の中から `SubmitPrompt` を選択し、 `LlmInbound` タスクの上にドロップします。
+1. Sevice ペイン左側の `GenAI` の中から `SubmitPrompt` を選択し、 `EventStream` タスクの上にドロップします。
 
-   ![create_app_05.png](./imgs/create_app_05.png)
+   ![service_submitprompt_01.gif](./imgs/service_submitprompt_01.gif)
 
 1. `SubmitPrompt` タスクをクリックし、 `Configuration` の `クリックして編集` を開き、以下の設定を行いアプリケーションを保存します。
 
    |Required Parameter|Value|
    |-|-|
-   |llm (Enumerated)|LLM (gpt-3.5-turbo)|
+   |llm (LLM)|com.example.GenerativeLLM (gpt-3.5-turbo)|
    |prompt (VAIL Expression)|event.message|
 
-   ![create_app_06.png](./imgs/create_app_06.png)
+   ![service_submitprompt_02.png](./imgs/service_submitprompt_02.png)
 
-### 6-4. 【LogStream】ログ出力の実装
+### 5-2. 【LogStream】ログ出力の実装
 
 LLM との会話をログに出力して、結果を確認できるようにします。  
 
 #### LogStream Activity の実装
 
-1. App ペイン左側の `Actions` の中から `LogStream` を選択し、 `SubmitPrompt` タスクの上にドロップします。  
+1. Service ペイン左側の `Actions` の中から `LogStream` を選択し、 `SubmitPrompt` タスクの上にドロップします。  
 
-   ![create_app_07.png](./imgs/create_app_07.png)
+   ![service_logstream_01.png](./imgs/service_logstream_01.png)
 
    > **補足**  
    > `Downstream イベント` は `event` を選択します。  
    >
-   > ![create_app_08.png](./imgs/create_app_08.png)
+   > ![service_logstream_02.png](./imgs/service_logstream_02.png)
 
-## 7. LLM との会話
+## 6. LLM との会話
 
-Topic からメッセージを送信し、 LLM との会話を行ってみます。  
+REST API を用いてメッセージを送信し、 LLM との会話を行ってみます。  
 
-### 7-1. Log メッセージ画面の表示
+### 6-1. Log メッセージ画面の表示
 
 1. 画面右下の `Debugging` をクリックします。
 
 1. 右側の `Errors` をクリックし、 `Log メッセージ` にチェックを入れます。
 
-### 7-2. /Inbound Topic ペインの表示
+### 6-2. メッセージの送信と確認
 
-1. 画面左側の `Project Contents` から `/Inbound` Topic を開きます。
-
-   ![project-contents_topic.png](./imgs/project-contents_topic.png)
-
-### 7-3. メッセージの送信
-
-1. `/Inbound` Topic ペインから任意のメッセージを入力し、 `Publish` をクリックします。
-
-   ![log_01.png](./imgs/log_01.png)
-
-### 7-4. アプリケーションとログの確認
+1. REST クライアントを用いて、任意のメッセージを送信します。
 
 1. アプリケーションが正しく動いているか確認します。
 
-   ![log_02.png](./imgs/log_02.png)
+   ![send_message_01.gif](./imgs/send_message_01.gif)
 
 1. LLM との会話の結果をログ画面で確認します。
 
-   ![log_03.png](./imgs/log_03.png)
+   ![send_message_02.png](./imgs/send_message_02.png)
 
 ## Project のエクスポート
 
@@ -280,15 +301,18 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
    1. **LLM** を用いて LLM の追加を行う方法を学習しました。
 1. **Type** 
    1. **Type** を用いてスキーマの設定を行う方法を学習しました。
-1. **Topic** 
-   1. **Topic** を用いて Vantiq アプリケーション用のエンドポイントを作成する方法を学習しました。
-1. **App**
+1. **Service**
    1. **SubmitPrompt Activity** を用いて LLM と対話する方法を学習しました。
 
 ## 参考情報
 
 ### プロジェクトファイル
 
+- [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.40）](./../data/llm_submitprompt-activity_1.40.zip)
 - [LLM（SubmitPrompt Activity）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-activity_1.37.zip)
+
+> **注意：プロジェクトのバージョンについて**  
+> Vantiq r1.40 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
+> ドキュメント記載の手順と異なりますので注意してください。  
 
 以上
