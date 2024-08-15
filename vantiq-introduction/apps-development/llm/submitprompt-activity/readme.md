@@ -26,7 +26,6 @@ Package 名を命名する際は、一意な名前を付けるようにしまし
 ![resource_service.png](./imgs/resource_service.png)
 
 Service とは、関連した機能をまとめてカプセル化し、1つにまとめるためのリソースです。  
-
 Service を用いることで様々なメリットがありますが、ここでは Java におけるクラスのような概念だと思っておいてください。  
 
 Service を用いることで、 GUI でアプリケーションの作成ができます。  
