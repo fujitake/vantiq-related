@@ -249,7 +249,7 @@ Procedure を作成します。
 
    ![add_procedure_01.gif](./imgs/add_procedure_01.gif)
 
-1. `Procedure` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を入力し、 `parameters (Object)` の `<null>` をクリックします。
+1. `Procedure` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を設定し、 `parameters (Object)` の `<null>` をクリックします。
 
    |Required Parameter|Value|
    |-|-|
@@ -257,7 +257,7 @@ Procedure を作成します。
 
    ![add_procedure_02.png](./imgs/add_procedure_02.png)
 
-1. 以下の内容を入力し、 `OK` クリックしてアプリケーションを保存します。
+1. 以下の内容を設定し、 `OK` クリックしてアプリケーションを保存します。
 
    |Parameter|VAIL Expression|
    |-|-|
@@ -319,8 +319,6 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 ## 参考情報
 
 ### プロジェクトファイル
-
-
 
 - [LLM（SubmitPrompt Procedure）の実装サンプル（Vantiq 1.40）](./../data/llm_submitprompt-procedure_1.40.zip)
 - [LLM（SubmitPrompt Procedure）の実装サンプル（Vantiq 1.37）](./../data/llm_submitprompt-procedure_1.37.zip)
