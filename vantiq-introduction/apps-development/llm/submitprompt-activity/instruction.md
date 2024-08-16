@@ -196,7 +196,7 @@ LLM リソースの作成を行います。
 
    ![receive_test_data_01.png](./imgs/receive_test_data_01.png)
 
-1. 表示された青字の JSON Object をクリックします。  
+1. もう一度データを送信し、表示された青字の JSON Object をクリックします。  
 
    ![receive_test_data_02.png](./imgs/receive_test_data_02.png)
 
