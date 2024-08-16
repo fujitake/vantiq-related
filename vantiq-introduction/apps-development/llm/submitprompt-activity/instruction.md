@@ -171,7 +171,7 @@ LLM リソースの作成を行います。
    |Token|YrAPMOgLczOEwcXznlNf2b4S7XSu2ynRKIRtPafm0ZE=|※[Vantiq Access Token の発行](#2-vantiq-access-token-の発行) で発行したアクセストークンを入力してください。|
    |Body (JSON)|{"message":"こんにちは"}||
 
-   ![post_tester.png](./imgs/post_tester.png)
+   ![post_tester_01.png](./imgs/post_tester_01.png)
 
 #### cURL の例
 
