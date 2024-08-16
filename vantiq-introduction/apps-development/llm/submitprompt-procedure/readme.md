@@ -11,9 +11,6 @@ Service Builder を用いて、アプリケーションを作成していきま�
 
 ![app_submitprompt_procedure.gif](./imgs/app_submitprompt_procedure.gif)
 
-
-
-
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
