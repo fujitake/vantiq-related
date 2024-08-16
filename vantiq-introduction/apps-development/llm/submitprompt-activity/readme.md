@@ -51,7 +51,7 @@ Type ではデータを保存する Standard 以外に、データ型のみを�
 Service Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
-![app_submitprompt_activity.png](./imgs/app_submitprompt_activity.png)
+![app_submitprompt_activity.gif](./imgs/app_submitprompt_activity.gif)
 
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
