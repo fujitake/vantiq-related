@@ -46,3 +46,6 @@
 ## Vantiq Edge の保守
 - [SSL証明書更新手順](./docs/jp/update_vantiq_edge_certificate.md)  
 - [ライセンス更新手順](./docs/jp/update_vantiq_edge_license.md)
+
+## その他
+- [VantiqEdgeのリソース利用状況を可視化する](./docs/jp/visualize_vantiq_edge_resource.md) 
