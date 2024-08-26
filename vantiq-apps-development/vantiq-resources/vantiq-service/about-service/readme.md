@@ -114,7 +114,7 @@ PUT https://dev.vantiq.com/api/v1/resources/services/<Package名>.<Service名>/<
 
 ## Inbound / Outbound
 
-ストリーム入出力（Inbound / Outbound）のインタフェースを定義できます。  
+イベントストリームの入出力（Inbound / Outbound）のインタフェースを定義できます。  
 
 Service の外部から、 `Package名` + `Service名` + `インターフェース名` でイベントストリームを受けたり渡したりできます。  
 
