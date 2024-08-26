@@ -120,7 +120,7 @@ Service の外部から、 `Package名` + `Service名` + `インターフェー�
 
 ## Event Handler
 
-ストリーム入出力（Inbound / Outbound）のインターフェイスで受け取ったイベントストリームの処理を担当します。  
+Inbound / Outbound のインターフェイスで受け取ったイベントストリームの処理を担当します。  
 以下の2種類の Event Handler を用いて、非同期にイベントストリームを処理します。  
 
 - Visual Event Handler
