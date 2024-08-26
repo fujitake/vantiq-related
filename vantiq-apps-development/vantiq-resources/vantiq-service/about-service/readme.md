@@ -108,7 +108,7 @@ PUT https://dev.vantiq.com/api/v1/resources/services/<Package名>.<Service名>/<
 ### 補足・注意点
 
 - Procedure は同期処理になります。
-- Procedure の実行が2分を超える場合は、タイムアウトになります。
+- Procedure の実行が2分を超える場合はタイムアウトになります。
 - Service Procedure は `<Package名>.<Service名>.<Procedure名>` で参照可能になります。
 - State のスコープを設定することで、**暗黙的に宣言された State 変数** にアクセスできるようになります。
 
