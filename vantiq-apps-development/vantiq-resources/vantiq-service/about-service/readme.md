@@ -23,12 +23,12 @@ Vantiq を利用するうえで欠かせない Service リソースについて�
   - [Event Handler](#event-handler)
     - [Visual Event Handler](#visual-event-handler)
     - [VAIL Event Handler](#vail-event-handler)
-    - [Public Event Handler](#public-event-handler)
-    - [Private Event Handler](#private-event-handler)
-    - [Source Event Handler](#source-event-handler)
-    - [Service Event Handler](#service-event-handler)
-    - [Topic Event Handler](#topic-event-handler)
-    - [Type Event Handler](#type-event-handler)
+    - [Public Event Handler（Public Visual Event Handler / Public VAIL Event Handler）](#public-event-handlerpublic-visual-event-handler--public-vail-event-handler)
+    - [Private Event Handler（Private Visual Event Handler / Private VAIL Event Handler）](#private-event-handlerprivate-visual-event-handler--private-vail-event-handler)
+    - [Source Event Handler（Source Visual Event Handler / Source VAIL Event Handler）](#source-event-handlersource-visual-event-handler--source-vail-event-handler)
+    - [Service Event Handler（Service Visual Event Handler / Service VAIL Event Handler）](#service-event-handlerservice-visual-event-handler--service-vail-event-handler)
+    - [Topic Event Handler（Topic Visual Event Handler / Topic VAIL Event Handler）](#topic-event-handlertopic-visual-event-handler--topic-vail-event-handler)
+    - [Type Event Handler（Type Visual Event Handler / Type VAIL Event Handler）](#type-event-handlertype-visual-event-handler--type-vail-event-handler)
     - [REST API](#rest-api-2)
   - [State](#state)
   - [カプセル化されたリソースの対照表](#カプセル化されたリソースの対照表)
@@ -157,23 +157,23 @@ VAIL を用いたプログラミングも可能なため、柔軟な実装がで
 
 VAIL を用いて実装できます。  
 
-### Public Event Handler
+### Public Event Handler（Public Visual Event Handler / Public VAIL Event Handler）
 
 自身の Service 以外からもイベントストリームを受け取れる Event Handler になります。  
 
-### Private Event Handler
+### Private Event Handler（Private Visual Event Handler / Private VAIL Event Handler）
 
 自身の Service からのみイベントストリームを受け取れる Event Handler になります。  
 
-### Source Event Handler
+### Source Event Handler（Source Visual Event Handler / Source VAIL Event Handler）
 
 外部システムとの接続ポイントである Source からイベントストリームを受け取る際に利用する Event Handler になります。  
 
-### Service Event Handler
+### Service Event Handler（Service Visual Event Handler / Service VAIL Event Handler）
 
 Service からイベントストリームを受け取る際に利用する Event Handler になります。  
 
-### Topic Event Handler
+### Topic Event Handler（Topic Visual Event Handler / Topic VAIL Event Handler）
 
 Topic からイベントストリームを受け取る際に利用する Event Handler になります。  
 
@@ -184,7 +184,7 @@ Topic からイベントストリームを受け取る際に利用する Event H
 > Topic Event Handler は初期状態では非表示になっています。  
 > Service Event Handler から設定を行うことで利用できるようになります。  
 
-### Type Event Handler
+### Type Event Handler（Type Visual Event Handler / Type VAIL Event Handler）
 
 Type に変化があった際のイベントストリームを受け取る際に利用する Event Handler になります。  
 
