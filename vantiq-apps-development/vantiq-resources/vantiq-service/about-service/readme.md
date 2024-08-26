@@ -232,4 +232,4 @@ Service にカプセル化されたリソースは、機能的に以下の要素
 |Visual Event Handler|App|
 |VAIL Event Handler|Rule|
 |Procedure|Procedure|
-|State|一時保存用途としてのType (クエリは使用不可)|
+|State|一時保存用途としての Type（クエリは使用不可）|
