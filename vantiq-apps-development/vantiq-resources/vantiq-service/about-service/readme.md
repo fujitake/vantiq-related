@@ -186,7 +186,7 @@ Topic からイベントストリームを受け取る際に利用する Event H
 
 ### Type Event Handler（Type Visual Event Handler / Type VAIL Event Handler）
 
-Type に変化があった際のイベントストリームを受け取る際に利用する Event Handler になります。  
+Type に変化があった場合のイベントストリームを受け取る際に利用する Event Handler になります。  
 
 > **補足**  
 > Type Event Handler は初期状態では非表示になっています。  
