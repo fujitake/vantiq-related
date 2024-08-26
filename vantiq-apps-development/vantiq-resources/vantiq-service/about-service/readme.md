@@ -29,6 +29,7 @@ Vantiq を利用するうえで欠かせない Service リソースについて�
     - [Service Event Handler](#service-event-handler)
     - [Topic Event Handler](#topic-event-handler)
     - [Type Event Handler](#type-event-handler)
+    - [REST API](#rest-api-2)
   - [State](#state)
   - [カプセル化されたリソースの対照表](#カプセル化されたリソースの対照表)
 
@@ -191,6 +192,17 @@ Type に変化があった際のイベントストリームを受け取る際に
 > **補足**  
 > Type Event Handler は初期状態では非表示になっています。  
 > Service Event Handler から設定を行うことで利用できるようになります。  
+
+### REST API
+
+Service の Inbound にイベントストリームを Publish できます。  
+
+```shell
+POST https://dev.vantiq.com/api/v1/resources/services/<Package名>.<Service名>/<Inbound名>
+{
+    <eventData>
+}
+```
 
 ## State
 
