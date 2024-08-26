@@ -171,7 +171,7 @@ VAIL を用いて実装できます。
 
 ### Service Event Handler（Service Visual Event Handler / Service VAIL Event Handler）
 
-Service からイベントストリームを受け取る際に利用する Event Handler になります。  
+Service の Outbound インターフェイスからイベントストリームを受け取る際に利用する Event Handler になります。  
 
 ### Topic Event Handler（Topic Visual Event Handler / Topic VAIL Event Handler）
 
