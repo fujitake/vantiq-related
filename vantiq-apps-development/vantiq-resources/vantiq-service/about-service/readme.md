@@ -203,6 +203,9 @@ POST https://dev.vantiq.com/api/v1/resources/services/<Package名>.<Service名>/
 }
 ```
 
+> **注意**  
+> イベントストリームデータが空の場合でも、空の JSON を送信するようにしてください。  
+
 ## State
 
 本来、イベントストリーム処理は Procedure の呼び出し間でメモリに状態を保持しません。  
