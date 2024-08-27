@@ -46,5 +46,5 @@ JAR形式でのご提供もございますので、必要に応じて担当者�
 
 ## その他
 
-- [Vantiq Edgeインストールおよび保守におけるトラブルシューティング過去事例/Tips](./docs/jp/tips_vantiq_edge)
+- [Vantiq Edgeインストールおよび保守におけるトラブルシューティング過去事例/Tips](./docs/jp/tips_vantiq_edge.md)
 - [Vantiq Edgeのリソース利用状況を可視化する](./docs/jp/visualize_vantiq_edge_resource.md) 
