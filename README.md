@@ -51,9 +51,9 @@ Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関す�
 
 別途用意されたAWS EKS、Azure AKS 環境に対し、Vantiq Private Cloud をインストールする手順や運用管理に関するガイドや手順を紹介しています。運用時に必要となる作業手順やトラブルシューティングガイドもございます。
 
-### [Vantiq Edge のインストール](./vantiq-edge-operations)
+### [Vantiq Edge のインストールと運用管理](./vantiq-edge-operations)
 
-Vantiq EdgeをセットアップするためのDocker composeのインストールやVantiq Edgeのインストール手順などを紹介しています。
+Vantiq EdgeをセットアップするためのDocker composeのインストールやVantiq Edgeのインストール手順・運用管理に関するガイドや手順を紹介しています。
 
 ***
 

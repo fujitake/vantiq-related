@@ -12,13 +12,8 @@ Vantiq Platformの構築や運用に関するガイドや手順です。
 - [Vantiq Cloud 運用におけるトラブルシューティングガイド](./docs/jp/vantiq_k8s_troubleshooting.md)
 - [Vantiq Private Cloud解体作業](./docs/jp/vantiq-teardown.md)
 
-
-## Vantiq Edge
-- [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
-- [Vantiq Edge Admin タスク](./docs/jp/vantiq-edge-admin.md)  
-- [Vantiq Organization, Namespace, User Role の関係](./docs/jp/org_user_management.md)
-
 ## その他/ツール
+- [Quay.io の新規アカウント作成手順](./docs/jp/create_quay.io_account.md)
 - [Vantiq Organizationのマイグレーション作業](./docs/jp/vantiq-org-migration.md)
 - [ネットワーク構成デバッグツール](./docs/jp/alpine-f.md)
 - [サーバー間時刻同期確認ツール](./docs/jp/timestamp_ds.md)
