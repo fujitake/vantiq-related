@@ -53,7 +53,7 @@ Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関す�
 
 ### [Vantiq Edge のインストールと運用管理](./vantiq-edge-operations)
 
-Vantiq Edgeのインストール手順・運用管理に関するガイドや手順を紹介しています。
+Vantiq Edgeのインストール手順や運用管理に関するガイドや手順を紹介しています。
 
 ***
 
