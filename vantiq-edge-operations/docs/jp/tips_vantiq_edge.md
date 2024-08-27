@@ -56,10 +56,12 @@ $ docker compose exec vantiq_edge_mongo rm -fr /tmp/ars02
 ### 2. MongoDBリストア
 
 VantiqEdgeのcompose.yamlが存在するディレクトリへ移動する。  
+`ars02`ディレクトリが存在することを確認する。  
 
 ```sh
 . (<- ここがルート)
 |-- compose.yaml
+|-- ars02/
 |-- config
     |-- license.key 
     |-- public.pem
@@ -73,12 +75,6 @@ $ docker compose cp ars02 vantiq_edge_mongo:/tmp/
 リストアを実行する。
 ```sh
 $ docker compose exec vantiq_edge_mongo mongorestore -u ars -p ars -d ars02 --gzip --drop /tmp/ars02
-```
-
-コンテナ上のダンプファイルを削除する。
-
-```sh
-$ docker compose exec vantiq_edge_mongo rm -fr /tmp/ars02
 ```
 
 ## 1.38→1.39バージョンアップに伴う追加作業
