@@ -8,7 +8,7 @@ VantiqEdgeのインストールが完了していることが前提となりま�
 
 # マイナーバージョンアップ
 
-1. MongoDBのバックアップを取る。[手順](backup_restore_mongodb.md)  
+1. MongoDBのバックアップを取る。[手順](tips_vantiq_edge.md#mongodbをバックアップリストアしたい)  
 （マイナーバージョンを古いバージョンへ切り戻す際に必要となります。）
 
 2. `componse.yaml` を開き、`vantiq_edge`の`image`のバージョンを編集する。  
