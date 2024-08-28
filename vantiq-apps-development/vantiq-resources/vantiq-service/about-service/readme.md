@@ -102,6 +102,13 @@ PUT https://dev.vantiq.com/api/v1/resources/services/<Package名>.<Service名>/<
 }
 ```
 
+```shell
+POST https://dev.vantiq.com/api/v1/resources/procedures/<Package名>.<Service名>.<Procedure名>
+{
+    <Procedure parameters>
+}
+```
+
 > **注意**  
 > リクエストボディが空の場合でも、空の JSON を送信するようにしてください。  
 
