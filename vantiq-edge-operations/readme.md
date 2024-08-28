@@ -1,20 +1,18 @@
 ## 目的
 
-こちらの手順は、コンテナ版のVantiq Edgeを本番環境にて動作させるための手順として案内します。JAR形式でのご提供もございますので、必要に応じて担当者にご相談下さい。
+Vantiq Edgeの構築や運用に関するガイドや手順です。
 
+## 動作環境
 
-## 本番環境向け
-
-こちらの手順は、本番環境にて動作させるための手順としてDocker Engineをインストールする手順を案内します。
-
+本番環境にて動作させるための手順としてDocker Engineをインストールする手順を案内します。
 - [Install Docker Engine](https://docs.docker.com/engine/install/)
 
 > **注意**
 > Docker DesktopはDocker社の有償プランの対象となります。
 
-## テスト目的の方向け
+JAR形式でのご提供もございますので、必要に応じて担当者にご相談下さい。
 
-様々な環境にてお試し頂けます。
+テスト目的の方向けには、様々な環境にてお試し頂けます。
 
 - [Windows 10/11](https://github.com/fujitake/vantiq-related/blob/main/vantiq-introduction/infrastructure-cloud/vantiqedge-on-windows/readme.md)
 - macOS Intelではpodmanなどを使うことで動作することを確認しております。
@@ -22,8 +20,6 @@
 
 > **注意**
 > Apple Siliconのmacにつきましては、LimaやPodmanを使うことでAMD64コンテナを動作させることができます。しかしながらこの環境ではVantiq Edgeは動作しないことを確認しております。
-
-
 
 ## Vantiq Edge のインストール手順
 
@@ -36,7 +32,7 @@
 
 既存の環境をアップグレードする場合は、2つの選択肢がございます。
 
-- ご利用環境の内容を継続して利用する場合: マイナーバージョンごとに、アップグレード作業をご対応頂く必要がございます。
+- ご利用環境の内容を継続して利用する場合: マイナーバージョンごとに、[アップグレード作業](./docs/jp/update_vantiq_edge_version.md)をご対応頂く必要がございます。
 (例: 1.33.1 -> 1.34.1、1.34.1 -> 1.35.1など)
 - 既存環境を破棄し、新規でセットアップする場合: 現在の環境とは別のディレクトリにて新しくyamlをご用意頂き、
 `docker compose up -d` を実行いただくとシンプルに作業頂けます。
@@ -44,5 +40,11 @@
 > Vantiqは[セマンティックバージョニング](https://semver.org/lang/ja/)を採用しております。
 
 ## Vantiq Edge の保守
+
 - [SSL証明書更新手順](./docs/jp/update_vantiq_edge_certificate.md)  
 - [ライセンス更新手順](./docs/jp/update_vantiq_edge_license.md)
+
+## その他
+
+- [Vantiq Edgeインストールおよび保守におけるトラブルシューティング過去事例/Tips](./docs/jp/tips_vantiq_edge.md)
+- [Vantiq Edgeのリソース利用状況を可視化する](./docs/jp/visualize_vantiq_edge_resource.md) 

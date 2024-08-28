@@ -9,16 +9,19 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Vantiq External Lifecycle Management の設定](./docs/jp/Vantiq_ExtLifecycleManagement_SetupProcedure.md)
 - [バージョンアップに伴う互換性について](./docs/jp/incompatibilities.md)
 - [ネットワークカメラ映像解析ハンズオン](./vantiq-videostream/docs/jp/hands-on-lab.md)
-- [LLM Platform Support](./docs/jp/LLM_Platform_Support.md)
+- [LLM Platform Support](/vantiq-aiml-integration/docs/jp/LLM_Platform_Support.md)
 - [Python Execution Connector](./docs/jp/python-execution-connector.md)
 - [Camel Connector](./docs/jp/camel-connector.md)
+- [UDP Source](./docs/jp/udp-source.md)
 
 ## Vantiq Resources
 
 Vantiq Resource に関する解説やガイドです。
 
 - Vantiq Service
-  - [Vantiq Service について](./vantiq-resources/vantiq-service/about-service/readme.md)
+  - [Vantiq Service の概要](./vantiq-resources/vantiq-service/about-service/readme.md)
+  - [Stateful Service とは](./vantiq-resources/vantiq-service/stateful-service/readme.md)
+  - [Vantiq Service の実装とベストプラクティス](./vantiq-resources/vantiq-service/Implement/readme.md)
   - [Cache Service](./vantiq-resources/vantiq-service/cache-service/readme.md)
 - Vantiq Source
   - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-resources/vantiq-source/data-sending/readme.md)

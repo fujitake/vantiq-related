@@ -108,13 +108,22 @@ helm ls -A
 
 **Vantiq Podの再起動が必要**
 
+> **補足説明**  
+> * 1.36→1.37バージョンアップでは追加の手順が必要です。  
+> [LLM機能を利用しない場合](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot37AltNonAI.md)  
+> [LLM機能を利用する場合](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot37Upgrade.md)  
+> * [1.38→1.39バージョンアップでは追加の手順が必要です。](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot39Upgrade.md)
+
 Vantiq の Minor Version がインクレメントされるアップグレード（e.g. `1.30.10` -> `1.31.0`)  
 Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが必要になる。
 1. 顧客の DTC にアップグレードに伴うサービス停止をアナウンスする (顧客 DTC はサービス停止による影響回避を社内で調整する)。
 1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで `git pull` を実行する。
 1. `deploy.yaml` の変更を行う (`vantiq.image.tag`)。
 1. `cluster.properties` の `vantiq_system_release` を vantiq バージョンをサポートするものに変更する。バージョンアップに伴いその他のパラメーターが変更が必要な場合もある。
-1. `cluster.properties` に変更があった場合、設定の更新を反映する。`./gradlew -Pcluster=<クラスタ名> setupCluster`
+1. `cluster.properties` に変更があった場合、設定の更新を反映する。  
+`./gradlew -Pcluster=<クラスタ名> setupCluster`  
+`./gradlew -Pcluster=<クラスタ名> deployShared`  
+`./gradlew -Pcluster=<クラスタ名> deployNginx`  
 1. Vantiq pod のサービスを停止する (`metrics-collector` と `vision-analytics` は構成している場合のみ)。ここからダウンタイムが開始される。
     ```sh
     kubectl scale sts -n <namespace name> vantiq --replicas=0
@@ -237,13 +246,15 @@ Vantiq の Sharedコンポーネント(k8sのshared Namespaceにデプロイさ�
 1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで `git pull` を実行する。
 2. `cluster.properties` の `vantiq_system_release` を 目的のバージョンに置き換える。
 3. `./gradlew -Pcluster=<CLUSTER-NAME> setupCluster` コマンドを実行する。
-4. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。
+4. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。  
+5. `./gradlew -Pcluster=<CLUSTER-NAME> deployNginx` コマンドを実行する。  
 
 ### Vantiq Shared Componen Version Upgrade - Rollback<a id="vantiq-shared-version-upgrade---rollback">
 切り戻しのためにsystem versionを変更前のバージョンに戻し再度deployコマンドまで実行する。  
 1. `cluster.properties` の `vantiq_system_release` を 変更前のバージョンに置き換える。
 2. `./gradlew -Pcluster=<CLUSTER-NAME> setupCluster` コマンドを実行する。
 3. `./gradlew -Pcluster=<CLUSTER-NAME> deployShared` コマンドを実行する。
+4. `./gradlew -Pcluster=<CLUSTER-NAME> deployNginx` コマンドを実行する。
 
 
 ## Kubernetesバージョンアップ作業<a id="kubernetes_version_upgrade_operations"></a>
@@ -293,39 +304,65 @@ SSL 証明書が期限切れになると、ブラウザーでアクセス時に�
 1. SSL 証明書を取得する。
   - 顧客調達の場合、必要なリードタイムを考慮し、前もって証明書の更新を依頼する。
   - Vantiq 内部で非本番用の場合、[SSLなう](https://sslnow.ml/)などを使って、"Let's Encrypt" の証明書を取得してもよい。
-2.  SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間証明書がオリジナルの証明書のファイルにアペンドされていること)。
-3. 取得した証明書と秘密鍵 (それぞれ、`fullchain.crt`、`private.key` とする) を `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
-4. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
-6. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`-n shared default-ssl-cert` が更新される。
-7. ブラウザーでアクセスし、証明書が変わっていることを確認する。
+2. SSL 証明書はすべての中間証明書を含む、フルチェーンであること (すべての必要な中間証明書がオリジナルの証明書のファイルにアペンドされていること)。
+3. 取得した証明書と秘密鍵 (それぞれ、`fullchain_yyyyMMdd.crt`、`private_yyyyMMdd.key` とする) を `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、古いファイルは別ファイル名にリネームしてバックアップとする。
+4. `secrets.yaml` の下記項目を新しい証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
+  - nginx.default-ssl-cert.files.tls.crt
+  - nginx.default-ssl-cert.files.tls.key
+  - vantiq.vantiq-ssl-cert.files.tls.crt
+  - vantiq.vantiq-ssl-cert.files.tls.key
+5. `deploy.yaml`に証明書と秘密鍵が記載されている場合は、下記項目を新しい証明書/秘密鍵ファイルのファイル名に更新する。記載されていない場合は更新不要。
+  - nginx.controller.tls.cert
+  - nginx.controller.tls.key
+  - vantiq.ingress.tls.cert
+  - vantiq.ingress.tls.key
+6. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+7. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
+8. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`default-ssl-cert` が更新される。
+9. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
 ### SSL 証明書を更新する - Rollback<a id="renew_ssl_certificate_rollback"></a>
-1. バックアップしておいた証明書と秘密鍵 (それぞれ、`fullchain.crt.yyyyMMdd`、`private.key.yyyyMMdd` とする) を `targetCluster/deploy/sensitive` の下にリネームして戻す。
-1. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
-1. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`-n shared default-ssl-cert` が更新される。
-1. ブラウザーでアクセスし、証明書が変わっていることを確認する。
+1. バックアップしておいた証明書と秘密鍵を `targetCluster/deploy/sensitive` の下にリネームして戻す。
+2. `secrets.yaml` の下記項目をバックアップしておいた証明書/秘密鍵ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.crt) で記載する。
+  - nginx.default-ssl-cert.files.tls.crt
+  - nginx.default-ssl-cert.files.tls.key
+  - vantiq.vantiq-ssl-cert.files.tls.crt
+  - vantiq.vantiq-ssl-cert.files.tls.key
+3. `deploy.yaml`に証明書と秘密鍵が記載されている場合は、下記項目をバックアップしておいた証明書/秘密鍵ファイルのファイル名に更新する。記載されていない場合は更新不要。
+  - nginx.controller.tls.cert
+  - nginx.controller.tls.key
+  - vantiq.ingress.tls.cert
+  - vantiq.ingress.tls.key
+4. k8sdeploy_tools のルートで`./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。`vantiq-ssl-cert` が更新される。
+6. `./gradlew -Pcluster=<cluster name> deployNginx` を実行する。`default-ssl-cert` が更新される。
+7. ブラウザーでアクセスし、証明書が変わっていることを確認する。
 
 
 ### License ファイルを更新する<a id="renew_license_files"></a>
 
 **Vantiq Podの再起動が必要**
 
-1. Vantiq Support から License ファイル (それぞれ、`public.pem`、`license.key` とする) を取得する。
-2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下の該当するファイルと置き換える。古いファイルがある場合、日付のsuffixをつけてリネームしてバックアップとする。
-3. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-4. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
-5. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
+1. Vantiq Support から License ファイル (それぞれ、`public_yyyyMMdd.pem`、`license_yyyyMMdd.key` とする) を取得する。
+2. 取得した License ファイルを `targetCluster/deploy/sensitive` の下へ配置する。古いファイルと名前が重複する場合、古いファイルは別ファイル名にリネームしてバックアップとする。
+3. `secrets.yaml` の下記項目を新しい License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
+  - vantiq.vantiq-license.files.public.pem
+  - vantiq.vantiq-license.files.license.key
+4. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+5. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
+6. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 ### License ファイルを更新する - Rollback<a id="renew_license_files_rollback"></a>
 
 **Vantiq Podの再起動が必要**
 
 1. バックアップしておいた License ファイルを `targetCluster/deploy/sensitive` の下にリネームして戻す。
-1. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
-1. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
-1. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
+2. `secrets.yaml` の下記項目をバックアップしておいた License ファイルのパスに更新する。パスは `targetCluster` を起点とした相対パス (例：deploy/sensitive/sample.pem) で記載する。
+  - vantiq.vantiq-license.files.public.pem
+  - vantiq.vantiq-license.files.license.key
+3. k8sdeploy_tools のルートで `./gradlew -Pcluster=<cluster name> generateSecrets` を実行する。
+4. `./gradlew -Pcluster=<cluster name> deployVantiq` を実行する。
+5. secrets を反映させるために、次のコマンドを実行し、vantiq pod の rolling restart をする。`kubectl rollout restart sts -n <vantiq namespace> vantiq`
 
 
 Reference: https://github.com/Vantiq/k8sdeploy_tools/blob/master/scripts/README.md _(要権限)_
