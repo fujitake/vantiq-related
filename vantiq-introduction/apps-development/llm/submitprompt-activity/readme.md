@@ -84,8 +84,14 @@ Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POS
 
 以下のいずれかを事前にご用意ください。
 
-- :globe_with_meridians: [OpenAI API Key](https://platform.openai.com/api-keys)
-- :globe_with_meridians: [Google AI Studio API Key](https://aistudio.google.com/app/apikey)
+- LLM API Key
+  - :globe_with_meridians: [OpenAI API Key](https://platform.openai.com/api-keys)
+  - :globe_with_meridians: [Google AI Studio API Key](https://aistudio.google.com/app/apikey)
+- REST クライアント（使い慣れているものでOK）
+  - cURL
+  - Postman
+  - Talend API Tester
+  - VSCode REST Client
 
 ## ワークショップの手順
 

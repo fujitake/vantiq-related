@@ -158,6 +158,7 @@ LLM リソースの作成を行います。
 
 `https://dev.vantiq.com/api/v1/resources/services/com.example.LlmApp/LlmInbound`
 
+<!--
 #### Post Tester の例
 
 1. 下記の URL を Post Tester を開きます。  
@@ -172,6 +173,7 @@ LLM リソースの作成を行います。
    |Body (JSON)|{"message":"こんにちは"}||
 
    ![post_tester_01.png](./imgs/post_tester_01.png)
+-->
 
 #### cURL の例
 

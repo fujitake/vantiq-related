@@ -114,6 +114,7 @@ Secret の設定をし直す必要があります。
 
 ### 4-2. HTTP POST リクエストの送信
 
+<!--
 #### Post Tester の例
 
 1. 下記の URL を Post Tester を開きます。  
@@ -128,6 +129,7 @@ Secret の設定をし直す必要があります。
    |Body (JSON)|{"message":"こんにちは"}||
 
    ![post_tester_01.png](./imgs/post_tester_01.png)
+-->
 
 #### cURL の例
 
