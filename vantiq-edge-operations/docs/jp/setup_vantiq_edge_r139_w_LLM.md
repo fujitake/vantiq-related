@@ -255,6 +255,13 @@ volumes:
 DNSなどの名前解決の設定はそれぞれの環境に合わせて設定を行ってください。  
 起動と名前解決の設定が完了したら`https://<YOUR-FQDN>`でVantiq EdgeのIDEにアクセスし、起動後の設定を行ってください。
 
+> **補足：マルチドメイン設定**  
+> 複数のドメインを割り当てたい場合は `VIRTUAL_HOST` をカンマ区切りで設定してください。  
+> 
+> ```yaml
+> VIRTUAL_HOST: example.com,www.example.com
+> ```  
+
 # Vantiq Edge起動後の設定
 
 `http://localhost:8080`など、設定したIPアドレスもしくはホスト名でアクセスします。
