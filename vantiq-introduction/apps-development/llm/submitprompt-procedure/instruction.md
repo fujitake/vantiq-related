@@ -148,11 +148,11 @@ Secret の設定をし直す必要があります。
 
 1. アプリケーションが正しく動いているか確認します。
 
-   ![send_message_01.gif](./imgs/send_message_01.gif)
+   ![check_message_01.gif](./imgs/check_message_01.gif)
 
 1. LLM との会話の結果をログ画面で確認します。
 
-   ![send_message_02.png](./imgs/send_message_02.png)
+   ![check_message_02.png](./imgs/check_message_02.png)
 
 ## 5. Procedure の作成
 
