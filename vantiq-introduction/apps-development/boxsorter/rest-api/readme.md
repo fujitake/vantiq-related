@@ -1,8 +1,9 @@
 # ボックスソーター（REST API）
 
-読み取った送り先コードで荷物を仕分けするアプリケーションの開発を体験します。  
+荷物を仕分けするアプリケーションの開発を通じて、 Vantiq の操作方法を体験します。  
+（※記事作成時の Vantiq バージョン： r1.39.7）  
 
-> **補足**  
+> **補足：荷物仕分けシステムの名前について**  
 > 物流センターで利用されている荷物仕分けシステムは下記の様に呼ばれています。
 >
 > - ボックスソーター (Box sorter)
@@ -29,12 +30,25 @@
 
 Vantiq リソースや各用語について解説します。
 
-### Topic
+### Package
 
-![resource_topic.png](./imgs/resource_topic.png)
+![resource_package.png](./imgs/resource_package.png)
 
-Vantiq 内部でデータの受け渡しに利用するエンドポイントになります。  
-また、外部からデータを受け渡す際の REST API のエンドポイントとして用いることもできます。
+Package とは、アプリケーションを目的に合わせてグループ化するための機能です。  
+Package を用いて、アプリケーションをグルーピングしておくことで、他のプロジェクトへの再利用がしやすくなります。  
+
+Package 名を命名する際は、一意な名前を付けるようにしましょう。  
+
+### Service
+
+![resource_service.png](./imgs/resource_service.png)
+
+Service とは、関連した機能をまとめてカプセル化し、1つにまとめるためのリソースです。  
+Service を用いることで様々なメリットがありますが、ここでは Java におけるクラスのような概念だと思っておいてください。  
+
+Service を用いることで、 GUI でアプリケーションの作成ができます。  
+アプリケーションの作成は、あらかじめ用意されている処理のパターン（Activity Pattern）を組み合わせて開発を行います。  
+用意されたパターンで対応できない場合は、 VAIL という独自言語を用いてプログラミングすることも可能なため、柔軟な実装ができます。  
 
 ### Type
 
@@ -47,20 +61,12 @@ Activity Pattern や VAIL からデータの読み書きが出来ます。
 
 主にマスタデータの保存やデータの一時的な保存に利用されることが多いです。  
 
-> **注意**  
+> **注意：データベースの特徴について**  
 > Type は NoSQL のため、 RDB とは異なり、リレーションシップやトランザクション処理は出来ません。  
-
-### App (App Builder)
-
-![resource_app.png](./imgs/resource_app.png)
-
-App は GUI でアプリケーションの作成ができるツールになります。  
-あらかじめ用意されている処理のパターンを組み合わせて開発を行います。  
-用意されたパターンで対応できない場合は、プログラミングも可能なため柔軟な実装ができます。
 
 ## Vantiq で実装するアプリケーションの概要
 
-App Builder を用いて、アプリケーションを作成していきます。  
+Service Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
 ![app_boxsorter_restapi.gif](./imgs/app_boxsorter_restapi.gif)
@@ -73,16 +79,16 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 ![activitypattern_eventstream.png](./imgs/activitypattern_eventstream.png)
 
-App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
+アプリケーションを作成する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
 **EventStream** はデータの入り口となります。  
-**EventStream** の入力元に **Topic** を指定することで、 Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POST されたデータを受け取ることができます。
+Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POST されたデータを受け取ることができます。  
 
 ### Enrich Activity
 
 ![activitypattern_enrich.png](./imgs/activitypattern_enrich.png)
 
 イベントに対して Type に保存されているレコードを追加します。  
-イベントが通過するたびに Type へのアクセスが発生するため、パフォーマンスの低下には注意してください。
+イベントが通過するたびに Type へのアクセスが発生するため、パフォーマンスの低下には注意してください。  
 
 ### Filter Activity
 
@@ -97,7 +103,7 @@ App を利用する際に必ずルートタスクとして設定されている 
 ![activitypattern_logstream.png](./imgs/activitypattern_logstream.png)
 
 イベントデータをログに出力します。  
-今回は仕分け指示が正しく行われているかを確認するために利用します。
+今回は仕分け指示が正しく行われているかを確認するために利用します。  
 
 ## 必要なマテリアル
 
@@ -116,7 +122,7 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ### 商品マスタデータ
 
-- [sorting_condition.csv](./../data/sorting_condition.csv)
+- [com.example.sorting_condition.csv](./../data/com.example.sorting_condition.csv)
 
 ## ワークショップの手順
 

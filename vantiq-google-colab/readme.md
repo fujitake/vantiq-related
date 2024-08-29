@@ -11,7 +11,7 @@ Vantiq アプリを開発する際に便利なデータジェネレータを簡�
 
 ## Google Colaboratory について
 
-- [:book: Google Colaboratory の基礎](./docs/colab_basic_knowledge.md)
+- [:book: Google Colaboratory の基礎](./colab_basic_knowledge/readme.md)
 
 ## Google Colaboratory サンプルコード
 

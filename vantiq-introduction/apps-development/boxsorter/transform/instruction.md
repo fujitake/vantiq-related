@@ -1,22 +1,19 @@
 # ボックスソーター（Transformation）
 
-## 実装の流れ
+## アプリケーションが想定している受信内容
 
-下記の流れで実装していきます。
-
-1. 【準備】Namespace の作成と Project のインポート、データジェネレータの準備
-1. 【動作確認】既存のアプリケーションの動作確認
-1. 【App Builder】ボックスソーターアプリの改修
-1. 【動作確認】仕分け結果の確認
-
-> リソース名やタスク名は任意のものに変更しても構いません。
+```json
+{
+    "code": "14961234567890",
+    "name": "お茶 24本"
+}
+```
 
 ## 目次
 
 - [ボックスソーター（Transformation）](#ボックスソーターtransformation)
-  - [実装の流れ](#実装の流れ)
+  - [アプリケーションが想定している受信内容](#アプリケーションが想定している受信内容)
   - [目次](#目次)
-  - [アプリケーションが前提とする受信内容](#アプリケーションが前提とする受信内容)
   - [1. Namespace の作成と Project のインポート](#1-namespace-の作成と-project-のインポート)
     - [1-1. Namespace の作成](#1-1-namespace-の作成)
     - [1-2. Project のインポート](#1-2-project-のインポート)
@@ -24,11 +21,10 @@
     - [2-1. Vantiq Access Token の発行](#2-1-vantiq-access-token-の発行)
     - [2-2. Google Colaboratory の設定](#2-2-google-colaboratory-の設定)
   - [3. 既存のアプリケーションの動作確認](#3-既存のアプリケーションの動作確認)
-    - [3-1. Topic ペインの表示](#3-1-topic-ペインの表示)
-    - [3-2. Topic のデータ受信テスト](#3-2-topic-のデータ受信テスト)
-  - [4. App Builder を用いたボックスソーターアプリの改修](#4-app-builder-を用いたボックスソーターアプリの改修)
-    - [4-1. 【App Builder】App ペインの表示](#4-1-app-builderapp-ペインの表示)
-    - [4-2. 【Transformation】イベントデータの整形](#4-2-transformationイベントデータの整形)
+    - [3-1. EventHandler の表示](#3-1-eventhandler-の表示)
+    - [3-2. データの受信テスト](#3-2-データの受信テスト)
+  - [4. Service Builder を用いたボックスソーターアプリの改修](#4-service-builder-を用いたボックスソーターアプリの改修)
+    - [4-1. 【Transformation】イベントデータの整形](#4-1-transformationイベントデータの整形)
     - [4-3. 【Filter】仕分け条件の修正](#4-3-filter仕分け条件の修正)
   - [5. 仕分け結果の確認](#5-仕分け結果の確認)
     - [5-1. Log メッセージ画面の表示](#5-1-log-メッセージ画面の表示)
@@ -37,15 +33,6 @@
   - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
-
-## アプリケーションが前提とする受信内容
-
-```json
-{
-    "code": "14961234567890",
-    "name": "お茶 24本"
-}
-```
 
 ## 1. Namespace の作成と Project のインポート
 
@@ -99,13 +86,13 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開きます。
 
-   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
+   ![colab-badge.svg](./imgs/colab-badge.svg)
 
-1. `# 設定情報` に以下の内容を入力します。
+1. `# 設定情報` に以下を参考にして、必要な内容を入力します。
 
    |項目|設定値|備考|
    |-|-|-|
-   |url|https://【VantiqのURL(FQDN)】/api/v1/resources/topics//BoxInfoApi|SSL化されていないサーバーの場合は、 `https://` を `http://` に置き換えてください。|
+   |url|https://dev.vantiq.com/api/v1/resources/services/com.example.BoxSorter/ReceiveBoxInfo|SSL化されていないサーバーの場合は、 `https://` を `http://` に置き換えてください。|
    |accesstoken|7tFxPj4JuNFnuwmGcEadU_6apA1r3Iji2N7AZS5HuVU=|上記で発行した Access Token|
 
    ![google_colab_setting](./imgs/google_colab_setting.png)
@@ -117,35 +104,34 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ## 3. 既存のアプリケーションの動作確認
 
-**Topic** の **データの受信テスト** からデータが正しく受信できているか確認します。  
+**Service** の **EventHandler** からデータが正しく受信できているか確認します。  
 
-### 3-1. Topic ペインの表示
+### 3-1. EventHandler の表示
 
-1. 画面左側の **Project Contents** から `/BoxInfoApi` Topic を開きます。
-   
-   ![project-contents_topic.png](./imgs/project-contents_topic.png)
+1. 画面左側の **Project Contents** から `ReceiveBoxInfo` Event Handler を開きます。
 
-### 3-2. Topic のデータ受信テスト
+   ![project_contents_service.png](./imgs/project_contents_service.png)
 
-1. 左上の `データの受信テスト` をクリックします。
+### 3-2. データの受信テスト
 
-   ![boxinfoapi.png](./imgs/boxinfoapi.png)
+1. `Event Stream` タスクをクリックします。  
+   画面右下の `タスク Events を表示` をクリックします。
 
-1. データが受信できていることを確認します。
+   ![receive_test_data_01.png](./imgs/receive_test_data_01.png)
 
-   ![boxinfoapi_subscribe.png](./imgs/boxinfoapi_subscribe.png)
+1. 表示された青字の JSON Object をクリックします。  
 
-## 4. App Builder を用いたボックスソーターアプリの改修
+   ![receive_test_data_02.png](./imgs/receive_test_data_02.png)
+
+1. 想定通りのデータが受信できているか確認します。  
+
+   ![receive_test_data_03.png](./imgs/receive_test_data_03.png)
+
+## 4. Service Builder を用いたボックスソーターアプリの改修
 
 この手順からアプリケーションの改修を開始します。  
 
-### 4-1. 【App Builder】App ペインの表示
-
-1. 画面左側の **Project Contents** から `BoxSorter` App を開きます。
-
-   ![project-contents_app.png](./imgs/project-contents_app.png)
-
-### 4-2. 【Transformation】イベントデータの整形
+### 4-1. 【Transformation】イベントデータの整形
 
 **Transformation Activity** を追加して、イベントデータを整形をします。  
 
@@ -217,14 +203,19 @@ Log 画面から `LogStream` のログデータを確認します。
    1. Namespace に Project をインポートする方法を学習しました。
 1. **Vantiq Access Token** 
    1. Namespace ごとに Vantiq Access Token が必要なことを学習しました。
-1. **App**
-   1. App の修正方法を学習しました。
+1. **Service**
+   1. Service の修正方法を学習しました。
    1. **Transformation Activity** を用いて、データの整形方法を学習しました。
 
 ## 参考情報
 
 ### プロジェクトファイル
 
+- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.40）](./../data/box_sorter_transform_1.40.zip)
 - [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
+
+> **注意：プロジェクトのバージョンについて**  
+> Vantiq r1.40 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
+> ドキュメント記載の手順と異なりますので注意してください。  
 
 以上

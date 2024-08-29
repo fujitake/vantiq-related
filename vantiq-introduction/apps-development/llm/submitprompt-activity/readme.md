@@ -2,44 +2,35 @@
 
 Vantiq で LLM（大規模言語モデル） を利用する方法を学習します。  
 このセッションでは、 LLM との対話を行うアプリケーションの実装を行います。  
+（※記事作成時の Vantiq バージョン： r1.39.7）  
 
 ## Vantiq で利用するリソースなどの解説
 
 Vantiq リソースや各用語について解説します。
 
-<details>
-<summary>アプリケーション開発ワークショップ（初級編）が未実施の場合</summary>
+### Secret
 
-### Topic
+Secret リソースを用いることで、 API Key や Token など安全に管理することができます。  
 
-![resource_topic.png](./imgs/resource_topic.png)
+### Package
 
-Vantiq 内部でデータの受け渡しに利用するエンドポイントになります。  
-また、外部からデータを受け渡す際の REST API のエンドポイントとして用いることもできます。
+![resource_package.png](./imgs/resource_package.png)
 
-### Type
+Package とは、アプリケーションを目的に合わせてグループ化するための機能です。  
+Package を用いて、アプリケーションをグルーピングしておくことで、他のプロジェクトへの再利用がしやすくなります。  
 
-![resource_type.png](./imgs/resource_type.png)
+Package 名を命名する際は、一意な名前を付けるようにしましょう。  
 
-Vantiq 内部でデータを保存するために利用します。  
-内部的には NoSQL の MongoDB を利用しています。  
-Activity Pattern や VAIL からデータの読み書きが出来ます。  
-外部から REST API を用いて、データの読み書きをすることも出来ます。  
+### Service
 
-主にマスタデータの保存やデータの一時的な保存に利用されることが多いです。  
+![resource_service.png](./imgs/resource_service.png)
 
-> **注意**  
-> Type は NoSQL のため、 RDB とは異なり、リレーションシップやトランザクション処理は出来ません。  
+Service とは、関連した機能をまとめてカプセル化し、1つにまとめるためのリソースです。  
+Service を用いることで様々なメリットがありますが、ここでは Java におけるクラスのような概念だと思っておいてください。  
 
-### App (App Builder)
-
-![resource_app.png](./imgs/resource_app.png)
-
-App は GUI でアプリケーションの作成ができるツールになります。  
-あらかじめ用意されている処理のパターンを組み合わせて開発を行います。  
-用意されたパターンで対応できない場合は、プログラミングも可能なため柔軟な実装ができます。
-
-</details>
+Service を用いることで、 GUI でアプリケーションの作成ができます。  
+アプリケーションの作成は、あらかじめ用意されている処理のパターン（Activity Pattern）を組み合わせて開発を行います。  
+用意されたパターンで対応できない場合は、 VAIL という独自言語を用いてプログラミングすることも可能なため、柔軟な実装ができます。  
 
 ### LLM
 
@@ -52,43 +43,27 @@ LLM を利用する際に必要となるリソースです。
 
 ![resource_type.png](./imgs/resource_type.png)
 
-Type では データ型のみを定義する Schema が利用できます。
-スキーマを作成し、 Topic に設定して利用します。
-
-### Secret
-
-Secret リソースを用いることで、 API Key や Token など安全に管理することができます。  
+Type ではデータを保存する Standard 以外に、データ型のみを定義する Schema が利用できます。  
+今回は Service の Interface の作成時にあわせてスキーマを作成します。  
 
 ## Vantiq で実装するアプリケーションの概要
 
-App Builder を用いて、アプリケーションを作成していきます。  
+Service Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
-![app.png](./imgs/app.png)
+![app_submitprompt_activity.gif](./imgs/app_submitprompt_activity.gif)
 
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
 このワークショップでは下記の Activity Pattern を利用します。
 
-<details>
-<summary>アプリケーション開発ワークショップ（初級編）が未実施の場合</summary>
-
 ### EventStream Activity
 
 ![activitypattern_eventstream.png](./imgs/activitypattern_eventstream.png)
 
-App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
+アプリケーションを作成する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
 **EventStream** はデータの入り口となります。  
-**EventStream** の入力元に **Topic** を指定することで、 Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POST されたデータを受け取ることができます。
-
-### LogStream Activity
-
-![activitypattern_logstream.png](./imgs/activitypattern_logstream.png)
-
-イベントデータをログに出力します。  
-今回は仕分け指示が正しく行われているかを確認するために利用します。
-
-</details>
+Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POST されたデータを受け取ることができます。  
 
 ### SubmitPrompt Activity
 
@@ -96,13 +71,27 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 指定した LLM にプロンプ​​トを送信することができます。
 
+### LogStream Activity
+
+![activitypattern_logstream.png](./imgs/activitypattern_logstream.png)
+
+イベントデータをログに出力します。  
+今回は仕分け指示が正しく行われているかを確認するために利用します。  
+
 ## 必要なマテリアル
 
 ### 各自で準備する Vantiq 以外の要素
 
 以下のいずれかを事前にご用意ください。
 
-- :globe_with_meridians:[OpenAI API Key](https://platform.openai.com/api-keys)
+- LLM API Key
+  - :globe_with_meridians: [OpenAI API Key](https://platform.openai.com/api-keys)
+  - :globe_with_meridians: [Google AI Studio API Key](https://aistudio.google.com/app/apikey)
+- REST クライアント（使い慣れているものでOK）
+  - cURL
+  - Postman
+  - Talend API Tester
+  - VSCode REST Client
 
 ## ワークショップの手順
 

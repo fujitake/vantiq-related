@@ -8,7 +8,7 @@
 
 ## Vantiq で実装するアプリケーションの概要
 
-App Builder を用いて、アプリケーションを作成していきます。  
+Service Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
 ![app_boxsorter_transform.gif](./imgs/app_boxsorter_transform.gif)
@@ -43,12 +43,17 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 ### 商品マスタデータ
 
-- [sorting_condition.csv](./../data/sorting_condition.csv)
+- [com.example.sorting_condition.csv](./../data/com.example.sorting_condition.csv)
 
 ### プロジェクトファイル
 
-- [ボックスソーター（REST API）の実装サンプル（Vantiq 1.34）](./../data/box_sorter_restapi_1.34.zip)
-- [ボックスソーター（REST API）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_restapi_1.37.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.40）](./../data/box_sorter_restapi_1.40.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.37）](./../data/box_sorter_restapi_1.37.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.34）](./../data/box_sorter_restapi_1.34.zip)
+
+> **注意：プロジェクトのバージョンについて**  
+> Vantiq r1.40 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
+> ドキュメント記載の手順と異なりますので注意してください。  
 
 ## ワークショップの手順
 
