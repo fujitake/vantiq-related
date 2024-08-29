@@ -110,7 +110,7 @@ Google Colab を利用する際は、事前に Google にログインする必�
 
 Github 上に保存されている Google Colab を開くには、 Google Colab が保存されている Github のページを開き、ページ内にある下記のボタンをクリックします。
 
-![Open in Colab](./../../imgs/colab_basic_knowledge/open_in_colab_button.png)
+![Open in Colab](./imgs/colab-badge.svg)
 
 ## Python ライブラリについて
 
@@ -121,13 +121,13 @@ Google Colab には、主要ライブラリがプリインストールされて�
 
 プリインストールされている Python ライブラリのインポートを行う際は、通常の Python コードと同様に `import` 文をコードセルに記述します。  
 
-![ライブラリのインポート](./../../imgs/colab_basic_knowledge/library_import.png)
+![ライブラリのインポート](./imgs/library_import.png)
 
 ### 外部ライブラリのインストール方法
 
 プリインストールされていない外部のライブラリをインストールする際は、 `!` をつけてコマンドを記述すると実行できるようになります。
 
-![ライブラリのインストール](./../../imgs/colab_basic_knowledge/library_install.png)
+![ライブラリのインストール](./imgs/library_install.png)
 
 外部ライブラリは、一定期間が経つと破棄されてしまいます。  
 破棄された場合は再度、外部ライブラリのインストールを行ってください。  
