@@ -80,7 +80,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開きます。
 
-   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
+   ![colab-badge.svg](./imgs/colab-badge.svg)
 
 1. `# 設定情報` に以下を参考にして、必要な内容を入力します。
 

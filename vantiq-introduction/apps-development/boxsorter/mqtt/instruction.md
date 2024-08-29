@@ -91,7 +91,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開きます。
 
-   ![OpenGoogleColab](./imgs/open_in_colab_button.png)
+   ![colab-badge.svg](./imgs/colab-badge.svg)
 
 1. `# MQTTブローカー設定` に以下の内容を入力します。
 
