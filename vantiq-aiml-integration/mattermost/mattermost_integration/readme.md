@@ -1,5 +1,19 @@
 # Vantiq LLM とMattermostのインテグレーションサンプル
 
+## 目次
+
+- [Vantiq LLM とMattermostのインテグレーションサンプル](#vantiq-llm-とmattermostのインテグレーションサンプル)
+  - [目次](#目次)
+  - [概要](#概要)
+  - [前提](#前提)
+  - [手順](#手順)
+    - [Vantiq Topic の作成](#vantiq-topic-の作成)
+    - [Mattermost の外部連携の設定](#mattermost-の外部連携の設定)
+    - [Vantiq Source の作成](#vantiq-source-の作成)
+    - [Vantiq Service の作成](#vantiq-service-の作成)
+  - [実行](#実行)
+  - [リソース](#リソース)
+
 ## 概要
 
 Vantiq LLMの機能と、Mattermostとの連携を実現するサンプルです。社内の独自情報をSemantic Indexに登録し、MattermostからSemantic Indexに登録した情報を問い合わせることができます。
