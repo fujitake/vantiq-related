@@ -89,33 +89,33 @@ Interactive messages を利用することで、メッセージにボタンや�
     , "props": {
         "attachments": [
             {
-                "pretext": "ボタンのサンプル",
-                "color": "#ffa500",
-                "title": "カードのタイトル",
-                "actions": [
+                "pretext": "ボタンのサンプル"
+                , "color": "#ffa500"
+                , "title": "カードのタイトル"
+                , "actions": [
                     {
-                        "id": "id1",
-                        "type": "button",
-                        "name": "Button1",
-                        "integration": {
-                        "url": "https://dev.vantiq.com/api/v1/resources/services/jp.vantiq.mattermost.Mattermost/InboundButtonEvent?token=xxxxxx=",
-                        "context": {
-                            "id": "id1"
+                        "id": "id1"
+                        , "type": "button"
+                        , "name": "Button1"
+                        , "integration": {
+                            "url": "https://dev.vantiq.com/api/v1/resources/services/jp.vantiq.mattermost.Mattermost/InboundButtonEvent?token=xxxxxx="
+                            , "context": {
+                                "id": "id1"
+                            }
                         }
-                        },
-                        "style": "primary"
-                    },
-                    {
-                        "id": "id2",
-                        "type": "button",
-                        "name": "Button2",
-                        "integration": {
-                        "url": "https://dev.vantiq.com/api/v1/resources/services/jp.vantiq.mattermost.Mattermost/InboundButtonEvent?token=xxxxxx",
-                        "context": {
-                            "id": "id2"
+                        , "style": "primary"
+                    }
+                    , {
+                        "id": "id2"
+                        , "type": "button"
+                        , "name": "Button2"
+                        , "integration": {
+                            "url": "https://dev.vantiq.com/api/v1/resources/services/jp.vantiq.mattermost.Mattermost/InboundButtonEvent?token=xxxxxx"
+                            , "context": {
+                                "id": "id2"
+                            }
                         }
-                        },
-                        "style": "danger"
+                        , "style": "danger"
                     }
                 ]
             }
