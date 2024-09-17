@@ -56,8 +56,10 @@ Mattermostで、外部サーバとの通信に使用するBotアカウントを�
 
 4. 作成したBotアカウントにトークンを生成します。
    ![BotAccount5](./imgs/botaccount_gentoken1.png)
+
    トークンの説明を入力し、保存します。
    ![BotAccount6](./imgs/botaccount_gentoken2.png)
+
    生成されたトークンを保存します。生成直後しか表示されないため、必ず保存してください。
    ![BotAccount7](./imgs/botaccount_gentoken3.png)
 
