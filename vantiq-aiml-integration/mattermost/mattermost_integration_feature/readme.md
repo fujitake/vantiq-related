@@ -52,7 +52,7 @@ var params = {
 }
 var path = Template.format(ENDPOINT, params)
 var headers = {
-    "Authorization": "Bearer @secrets(MattermostPersonalToken)"
+    "Authorization": "Bearer " + TOKEN
     , "Content-type": "application/json"
 }
 var response = SELECT ONE * FROM SOURCE jp.vantiq.mattermost.Mattermost WITH path=path, headers=headers
