@@ -55,7 +55,7 @@ var headers = {
     "Authorization": "Bearer " + TOKEN
     , "Content-type": "application/json"
 }
-var response = SELECT ONE * FROM SOURCE jp.vantiq.mattermost.Mattermost WITH path=path, headers=headers
+var response = SELECT ONE * FROM SOURCE @SOURCE_NAME WITH path=path, headers=headers
 
 if(response.root_id){
     return response.root_id
