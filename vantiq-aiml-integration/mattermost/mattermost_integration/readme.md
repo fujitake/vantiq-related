@@ -51,16 +51,16 @@ Mattermostで、外部サーバとの通信に使用するBotアカウントを�
    ![BotAccount2](./imgs/select_botaccount.png)
    ![BotAccount3](./imgs/create_new_botaccount.png)
 
-3. 必要な情報を入力します。Botアカウントのユーザ名は任意、ロールにはメンバー、権限は**投稿：全て** を有効にします。
+3. 必要な情報を入力します。Botアカウントのユーザ名は任意、ロールにはメンバー、権限は**投稿：全て** を有効にします。  
    ![BotAccount4](./imgs/create_new_botaccount_2.png)
 
-4. 作成したBotアカウントにトークンを生成します。
+4. 作成したBotアカウントにトークンを生成します。  
    ![BotAccount5](./imgs/botaccount_gentoken1.png)
 
-   トークンの説明を入力し、保存します。
+   トークンの説明を入力し、保存します。  
    ![BotAccount6](./imgs/botaccount_gentoken2.png)
 
-   生成されたトークンを保存します。生成直後しか表示されないため、必ず保存してください。
+   生成されたトークンを保存します。生成直後しか表示されないため、必ず保存してください。  
    ![BotAccount7](./imgs/botaccount_gentoken3.png)
 
 #### OutgoingWebhookの作成
