@@ -176,6 +176,9 @@ MattermostからのEventを受信し、Semantic Indexに登録された情報を
 
 - [OutgoingWebhookの作成](#outgoingwebhookの作成) で指定したチャンネルで、`@bot名` で質問してください。スレッドで返信が行われます。スレッド内では会話コンテクストが維持されます。
 
+> **補足**  
+> スレッドへの返信方法は [こちら](../mattermost_integration_feature/readme.md#スレッドへの返信) を参照してください。  
+
 ## リソース
 
 - [サンプルプロジェクト](../../conf/vantiq_llm_mattermost_integration/mattermost_integration.zip)
