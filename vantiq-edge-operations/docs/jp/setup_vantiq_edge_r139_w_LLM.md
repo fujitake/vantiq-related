@@ -10,11 +10,12 @@
 
 ## ハードウェア要件
 
-ハードウェアの最小要件は下記となります。Vantiq Edge R1.39と大規模言語モデル関連機能を動作させると8GB程度のメモリを消費します。
+ハードウェアの最小要件は下記となります。  
+Qdrant VectorDBへ登録するファイルサイズが100MBを超える場合は、メインメモリは16GB以上が推奨です。
 
 - 64ビットx86プロセッサ
 - 8GB メインメモリ
-- 32GB程度の空きストレージ
+- 32GBの空きストレージ
 
 ## ソフトウェア要件
 
@@ -43,6 +44,8 @@ compose.yamlを配置するディレクトリにconfigディレクトリを作�
 下記をコピーしcompose.yamlを用意します。  
 ・`vantiq-edge`、`vantiq_ai_assistant`、`vantiq_genai_flow_service`は同じバージョンにして下さい。  
 ・`vantiq-edge`、`vantiq_ai_assistant`、`vantiq_genai_flow_service`のバージョンは適宜変更して下さい。  
+・`vantiq_edge_qdrant.image`のバージョンが`v1.9.2`となっていることを確認して下さい。※Vantiq R1.37-R1.38ではQdrantのバージョンは`1.7.4`でしたが、R1.39から`v1.9.2`に変更となっています。
+
 ```yaml
 services:
   vantiq_edge:
@@ -265,6 +268,10 @@ DNSなどの名前解決の設定はそれぞれの環境に合わせて設定�
 Username: system
 Password: fxtrt$1492
 ```
+
+画面上にて、エラーが発生していないことを確認して下さい。  
+エラーが発生していると、ナビゲーションバーにて、赤くカウントされた数字が表示されます。これが表示されないのが正しい状態です。  
+![](./picture/warningsign.png)
 
 [こちら](https://community.vantiq.com/wp-content/uploads/2022/06/edge-install-ja-2.html#admin_tasks)を参照の上、システム管理者としてOrganizationとユーザとを作成して下さい。
 

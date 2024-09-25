@@ -77,6 +77,7 @@
     - [Vantiqで構成しているMongoDBの可用性について](#vantiqで構成しているmongodbの可用性について)
     - [mongodb backup jobの削除のタイミング](#mongodb-backup-jobの削除のタイミング)
   - [データの暗号化がどうなっているか知りたい](#データの暗号化がどうなっているか知りたい)
+  - [MongoDBに対してフルスキャンしているかどうかを確認したい](#mongodbに対してフルスキャンしているかどうかを確認したい)
 
 
 
@@ -1307,4 +1308,75 @@ mongodb-1                      2/2     Running     0          15d
   - https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/EBSEncryption.html
   - https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Overview.Encryption.html  
 
+## MongoDBに対してフルスキャンしているかどうかを確認したい
 
+MongoDBの負荷が高くなってしまうケースにおいて、その原因の1つに"TypeのIndexが効いていない(=Indexが正しく設定されていない)ために、MongoDBに対してフルスキャンしてしまっている"ことがあります。  
+
+そこで、フルスキャンしているかどうかを確認する方法を紹介します。  
+VantiqのUIからはクエリ計画を確認する方法が無いため、MongoDBのexplainコマンドを使う方法となります。
+
+MongoDB Podにログインします。
+```
+$ kubectl exec -it pod/mongodb-0 -n <NS名> /bin/bash
+```
+
+MongoDBに接続します。
+```
+$ mongo -u ars -p ars --authenticationDatabase ars02
+```
+
+ars02データベースを選択します。
+```
+> use ars02
+```
+
+Collectionの一覧を表示します。
+```
+> show collections
+```
+表示された一覧の中から、調査したいTypeのCollection名を確認して下さい。  
+> **Collection名の確認方法**  
+> TypeはMongoDBではCollectionと呼ばれる単位で管理されています。
+Collection名の命名規則は、`<Type名>__<Typeが所属するNamaespace名>`、となっています。
+例えば、Namespace「testns」の中に「sensors」というTypeがある場合、Collection名は「sensors__testns」となります。
+
+> **Collection名に関する補足事項**  
+> Collection名が64文字以上になる場合、Collection名はzから始まるランダム文字列化されます。(例：zf924fc2bfbdd5f10d7c94de45f969e3cd7768131be6a0371)  
+Typeがどのような名前のランダム文字列となっているのかを、`db.ArsType.find({'name': '<Type名>'},{'name':1, 'storageName':1})`コマンドで確認することが可能です。
+
+explainコマンドを実行します。
+```
+$ db.<collection名>.explain( "allPlansExecution" ).find({ <条件指定> })
+```
+> **<条件指定>について**  
+> VantiqにおけるSELECTは、MongoDBではfindになります。
+そしてfindの中に検索条件を書きます。
+例えば「sensors」というTypeに「sensor_id」プロパティがあるような場合、Vantiqでは、「SELECT FROM sensors WHERE sensor_id == 1」のようになりますが、MongoDBの場合は「db.sensors__testns.find({ sensor_id:1 })」となります。
+それにexplainをつけて、
+db.sensors__testns.explain( "allPlansExecution" ).find({ sensor_id:1 })を実行する、ということになります。
+
+explainコマンドの実行結果は次のように表示されるはずです。※一部抜粋  
+```
+{
+        "queryPlanner" : {
+                "plannerVersion" : 1,
+                "namespace" : "ars02.jp.vantiq.sensors__testns",
+                "indexFilterSet" : false,
+                "parsedQuery" : {
+                        "sensor_id" : {
+                                "$eq" : 1
+                        }
+                },
+                "winningPlan" : {
+                        "stage" : "FETCH",
+                        "inputStage" : {
+                                "stage" : "IXSCAN",
+                                "keyPattern" : {
+                                        "sensor_id" : 1
+                                },
+```
+
+この中の、`winningPlan.inputStage.stage`の値を確認して下さい。  
+`IXSCAN`となっていれば、Indexを使ってスキャンしていることになります。
+`COLLSCAN`となっていれば、フルスキャンしていることになります。  
+もし、フルスキャンしている場合は、当該TypeのIndex設定を見直して下さい。

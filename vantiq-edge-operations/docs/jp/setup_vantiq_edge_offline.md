@@ -148,11 +148,8 @@ $ sudo docker save qdrant/qdrant | gzip > qdrant.tar.gz
 ```
 
 ## 2.2 Vantiq Edge起動
-以下のドキュメントを参照してください。
-- r1.36以前  
-  [Vantiq Edgeインストールガイド - Docker環境のインストール手順](https://community.vantiq.com/wp-content/uploads/2022/06/edge-install-ja-2.html#docker%E7%92%B0%E5%A2%83%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86-a-iddocker_image_installationa)  
-- r1.37以降
-  [Vantiq Edge R1.37のインストールと大規模言語モデル関連機能の設定ガイド](./setup_vantiq_edge_r137_w_LLM.md)
+[こちら](../../readme.md#vantiq-edge-のインストール手順)から、インストールしたいバージョンの手順を参照して下さい。
+
 なおコンテナイメージはファイルでload済みのため、Vantiq Edgeマシンではquay.ioへのログインは不要です。  
 
 
