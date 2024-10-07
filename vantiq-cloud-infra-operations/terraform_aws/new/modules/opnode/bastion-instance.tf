@@ -45,6 +45,10 @@ resource "aws_instance" "bastion" {
   key_name               = aws_key_pair.bastion[0].key_name
   instance_type          = var.bastion_instance_type
   user_data              = data.template_file.bastion.rendered
+  root_block_device {
+    volume_type = "gp3"
+    volume_size = 30
+  }
 
   tags = {
     Name              = "${var.env_name}-bastion-instance-for-${var.cluster_name}"
