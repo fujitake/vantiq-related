@@ -543,5 +543,7 @@ return results
 
 ## 実装サンプル
 
-- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.34）](./data/vail_basic_1.34.zip)
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.40）](./data/vail_basic_1.40.zip)
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.39）](./data/vail_basic_1.39.zip)
 - [VAIL 入門（基礎）の実装サンプル（Vantiq 1.37）](./data/vail_basic_1.37.zip)
+- [VAIL 入門（基礎）の実装サンプル（Vantiq 1.34）](./data/vail_basic_1.34.zip)

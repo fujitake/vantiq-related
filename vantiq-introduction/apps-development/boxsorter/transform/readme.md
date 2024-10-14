@@ -1,6 +1,7 @@
 # ボックスソーター（Transformation）
 
 ボックスソーターアプリを改修して、データを整形する方法を体験します。  
+（※記事作成時の Vantiq バージョン： r1.39.7）  
 
 > **注意**  
 > ボックスソーター（REST API）を実施していない場合は、先にそちらを実施してください。  
@@ -48,11 +49,12 @@ Service Builder を用いて、アプリケーションを作成していきま�
 ### プロジェクトファイル
 
 - [ボックスソーター（REST API）の実装サンプル（Vantiq r1.40）](./../data/box_sorter_restapi_1.40.zip)
+- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.39）](./../data/box_sorter_restapi_1.39.zip)
 - [ボックスソーター（REST API）の実装サンプル（Vantiq r1.37）](./../data/box_sorter_restapi_1.37.zip)
 - [ボックスソーター（REST API）の実装サンプル（Vantiq r1.34）](./../data/box_sorter_restapi_1.34.zip)
 
 > **注意：プロジェクトのバージョンについて**  
-> Vantiq r1.40 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
+> Vantiq r1.39 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
 > ドキュメント記載の手順と異なりますので注意してください。  
 
 ## ワークショップの手順
