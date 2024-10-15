@@ -24,7 +24,7 @@
 
 ワークショップでは Vantiq の担当部分である No.3〜4 を実装します。
 > No.1〜2 は、 Google Colaboratory を利用し、 TOPIC に読み取り結果のサンプル情報を送信することで代用します。  
-> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/docs/colab_basic_knowledge.md) で解説しています。
+> Google Colaboratory の詳細は [こちら](/vantiq-google-colab/colab_basic_knowledge/readme.md) で解説しています。
 
 ## Vantiq で利用するリソースなどの解説
 
