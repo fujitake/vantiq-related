@@ -213,10 +213,5 @@ Log 画面から `LogStream` のログデータを確認します。
 
 - [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.40）](./../data/box_sorter_transform_1.40.zip)
 - [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.39）](./../data/box_sorter_transform_1.39.zip)
-- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
-
-> **注意：プロジェクトのバージョンについて**  
-> Vantiq r1.39 以前のプロジェクトファイルは Service 非対応の古いサンプルになります。  
-> ドキュメント記載の手順と異なりますので注意してください。  
 
 以上
