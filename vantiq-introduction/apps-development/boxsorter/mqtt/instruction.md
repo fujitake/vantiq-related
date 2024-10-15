@@ -340,6 +340,8 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
    |Package|com.example|-|
    |Source Type|MQTT|-|
    |Server URI|<ご自身のブローカー>|プロトコルとポートが必要<br/>**例：**<br/>非SSL：`mqtt://your-broker.com:1883`<br/>SSL：`mqtts://your-broker.com:8883`|
+
+   > **補足**  
    > 送信のみに使用しますので Topic の設定は必要ありません。  
    > Topic は送信時に指定します。
 
