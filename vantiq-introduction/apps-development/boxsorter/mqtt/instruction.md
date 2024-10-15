@@ -104,7 +104,7 @@ Google Colaboratory を使用して、ダミーデータの生成します。
 
 ## 3. Source を用いた MQTT ブローカーからのサブスクライブ
 
-MQTTブローカーと接続したい場合、 MQTTクライアントが必要です。  
+MQTT ブローカーと接続したい場合、 MQTT クライアントが必要です。  
 これは Vantiq でも同じです。  
 Vantiq の Source は MQTT に対応しており、これがクライアントになります。
 
