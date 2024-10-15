@@ -142,11 +142,11 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 1. 下記の内容を設定し、 `OK` をクリックします。
 
-   ![create_source_06.png](./imgs/create_source_06.png)
-
    |項目|設定値|備考|
    |-|-|-|
    |Topic|/workshop/jp/**yourname**/boxinfo|※`yourname` の箇所には Google Colaboratory の設定時に設定した値を使用する|`Topic` タブ -> `+ Topic を追加`|
+
+   ![create_source_06.png](./imgs/create_source_06.png)
 
 1. 全ての設定が終わったら、 Source を保存します。
 
