@@ -210,7 +210,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 ### 4-4. 【Transformation】イベントデータの修正
 
-今の状態では、新しく追加された `time` が欠落してしまっているため **Transformation Activity** を修正します。  
+今の状態では、新しく追加された `time` が欠落してしまっているため `Transformation` タスクを修正します。  
 
 1. `Transformation` タスクをクリックし、 `Configuration` の `クリックして編集` を開きます。  
    `transformation (Union)` から以下の内容を入力し、 `OK` をクリックします。
