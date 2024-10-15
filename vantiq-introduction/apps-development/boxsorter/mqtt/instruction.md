@@ -314,9 +314,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 今回は **LogStream Activity** に代わり、 **PublishToSource Activity** を利用します。  
 既存の **LogStream Activity** は利用しないため、削除します。  
 
-1. 各 `LogStream` タスクを選択し、 `Delete` キーを押下します。
-
-1. 全ての `LogStream` タスクを削除します。
+1. 各 `LogStream` タスクを選択し、 `Delete` キーを押下し、全ての `LogStream` タスクを削除します。
 
    ![service_logstream_01.png](./imgs/service_logstream_01.png)
 
