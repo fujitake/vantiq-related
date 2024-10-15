@@ -37,7 +37,6 @@
     - [5-1. Google Colaboratory の設定](#5-1-google-colaboratory-の設定)
     - [5-2. サブスクライブしたメッセージの確認](#5-2-サブスクライブしたメッセージの確認)
   - [Project のエクスポート](#project-のエクスポート)
-  - [ワークショップの振り返り](#ワークショップの振り返り)
   - [参考情報](#参考情報)
     - [プロジェクトファイル](#プロジェクトファイル)
 
@@ -298,8 +297,6 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 **Transformation Activity** を利用して、イベントのデータフォーマットを変更したため、後続タスクの **Filter Activity** の条件式を修正する必要があります。
 
-#### Filter Activity の修正
-
 1. 各 `Filter Activity` を選択し、 `Configuration` の `クリックして編集` を開きます。  
    `condition (Union)` の `条件式` をクリックして、以下の内容を入力し、 `OK` をクリックします。
 
@@ -315,8 +312,6 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
 今回は **LogStream Activity** に代わり、 **PublishToSource Activity** を利用します。  
 既存の **LogStream Activity** は利用しないため、削除します。  
-
-#### LogStream Activity の削除
 
 1. 各 `LogStream` タスクを選択し、 `Delete` キーを押下します。
 
@@ -460,16 +455,6 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 詳細は下記を参照してください。  
 [Project の管理について - Project のエクスポート](/vantiq-introduction/apps-development/vantiq-basic/project/readme.md#project-のエクスポート)
-
-## ワークショップの振り返り
-
-1. **MQTT**
-   1. MQTT プロトコルについて学習しました。
-1. **Source** 
-   1. Source を用いることで、様々なプロトコルでデータの送受信ができることを学習しました。
-1. **App**
-   1. **Transformation Activity** を用いて、データフォーマットを変換する方法を学習しました。
-   1. **PublishToSource Activity** を用いて、外部にデータを送信する方法を学習しました。
 
 ## 参考情報
 
