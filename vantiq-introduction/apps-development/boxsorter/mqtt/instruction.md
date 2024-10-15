@@ -192,6 +192,9 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
 
    ![service_handler_03.png](./imgs/service_handler_03.png)
 
+   > **注意**  
+   > この時点ではアプリケーションを保存しないでください。  
+
 ### 4-3. 【EventStream】EventStream の修正
 
 1. `EventStream` タスクをクリックし、 `Configuration` の `クリックして編集` から以下の内容を入力し、 `OK` をクリックします。
