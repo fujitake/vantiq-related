@@ -1,6 +1,7 @@
 # ボックスソーター（MQTT）
 
 ボックスソーターアプリを改修して、 MQTT でデータを送受信する方法を体験します。  
+（※記事作成時の Vantiq バージョン： r1.40.2）  
 
 > **注意**  
 > ボックスソーター（Transformation）を実施していない場合は、先にそちらを実施してください。  
@@ -61,13 +62,13 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
 **EventStream** はデータの入り口となります。  
-今回は **Topic** ではなく、 **Source** からデータを受け取ります。
+今回は **Inbound** ではなく、 **Source** からデータを受け取ります。  
 
 ### PublishToSource Activity
 
 ![activitypattern_publishtosource.png](./imgs/activitypattern_publishtosource.png)
 
-イベントデータを **Source** 経由で外部に送信するために **PublishToSource** を用います。
+**Source** 経由でイベントデータを外部に送信するための Activity Pattern になります。  
 
 ## 必要なマテリアル
 
@@ -96,11 +97,12 @@ App を利用する際に必ずルートタスクとして設定されている 
 
 ### 商品マスタデータ
 
-- [sorting_condition.csv](./../data/sorting_condition.csv)
+- [com.example.sorting_condition.csv](./../data/com.example.sorting_condition.csv)
 
 ### プロジェクトファイル
 
-- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.37）](./../data/box_sorter_transform_1.37.zip)
+- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.40）](./../data/box_sorter_transform_1.40.zip)
+- [ボックスソーター（Transformation）の実装サンプル（Vantiq 1.39）](./../data/box_sorter_transform_1.39.zip)
 
 ### ドキュメント
 
