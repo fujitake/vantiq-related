@@ -32,7 +32,7 @@
     - [4-6. 【Filter】仕分け条件の修正](#4-6-filter仕分け条件の修正)
     - [4-7. 【LogStream】デバッグ用のログの削除](#4-7-logstreamデバッグ用のログの削除)
     - [4-8. 【Source】送信用の MQTT Source の作成](#4-8-source送信用の-mqtt-source-の作成)
-    - [4-8. 【PublishToSource】MQTT ブローカーへのパブリッシュ](#4-8-publishtosourcemqtt-ブローカーへのパブリッシュ)
+    - [4-9. 【PublishToSource】MQTT ブローカーへのパブリッシュ](#4-9-publishtosourcemqtt-ブローカーへのパブリッシュ)
   - [5. 仕分け結果の確認](#5-仕分け結果の確認)
     - [5-1. Google Colaboratory の設定](#5-1-google-colaboratory-の設定)
     - [5-2. サブスクライブしたメッセージの確認](#5-2-サブスクライブしたメッセージの確認)
@@ -346,7 +346,7 @@ Vantiq の Source は MQTT に対応しており、これがクライアント�
    > 送信のみに使用しますので Topic の設定は必要ありません。  
    > Topic は送信時に指定します。
 
-### 4-8. 【PublishToSource】MQTT ブローカーへのパブリッシュ
+### 4-9. 【PublishToSource】MQTT ブローカーへのパブリッシュ
 
 仕分け結果を外部の MQTT ブローカーに送信するために **PublishToSource Activity** を利用します。  
 
