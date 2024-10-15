@@ -384,8 +384,8 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
 本ワークショップでは、 Google Colaboratory を利用して、サブスクライブを行います。  
 
+> **補足**  
 > MQTTクライアントは Google Colaboratory の Python スクリプト以外でも大丈夫です。  
->  
 > 例：
 > - :globe_with_meridians: [MQTTX](https://mqttx.app/)
 > - :globe_with_meridians: [Try MQTT Browser Client](https://www.hivemq.com/demos/websocket-client/) （HiveMQ が提供する Web アプリ）
@@ -396,6 +396,7 @@ MQTT クライアントで送信先の Topic をサブスクライブしてお�
 
    - [BoxSorterDataSubscriber（MQTT）](/vantiq-google-colab/code/box-sorter_data-subscriber_mqtt.ipynb)
 
+      > **注意**  
       > Google Colaboratory を利用する際は Google アカウントへのログインが必要になります。
 
 1. Github のページ内に表示されている、下記の `Open in Colab` ボタンをクリックして、 Google Colaboratory を開きます。
