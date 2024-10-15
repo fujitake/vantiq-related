@@ -46,7 +46,7 @@ Source を利用することで、様々な通信プロトコルを用いたデ�
 
 ## Vantiq で実装するアプリケーションの概要
 
-App Builder を用いて、アプリケーションを作成していきます。  
+Service Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
 ![app_boxsorter_mqtt.gif](./imgs/app_boxsorter_mqtt.gif)
@@ -60,9 +60,9 @@ App Builder を用いて、アプリケーションを作成していきます�
 
 ![activitypattern_eventstream.png](./imgs/activitypattern_eventstream.png)
 
-App を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
+Visual Event Handler を利用する際に必ずルートタスクとして設定されている Activity Pattern が **EventStream** になります。  
 **EventStream** はデータの入り口となります。  
-今回は **Inbound** ではなく、 **Source** からデータを受け取ります。  
+今回は **Service Inbound** ではなく、 **Source** からデータを受け取ります。  
 
 ### PublishToSource Activity
 
