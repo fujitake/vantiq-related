@@ -51,8 +51,8 @@ apt-get install helm
 ln -s /usr/sbin/helm /usr/sbin/helm3
 
 # install kubeseal
-wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.9.5/kubeseal-linux-amd64 -O kubeseal
-install -m 755 kubeseal /usr/local/bin/kubeseal
+#wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.9.5/kubeseal-linux-amd64 -O kubeseal
+#install -m 755 kubeseal /usr/local/bin/kubeseal
 
 # install az-cli
 apt-get update

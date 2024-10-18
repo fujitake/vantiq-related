@@ -79,7 +79,7 @@ locals {
   eks_config = {
     managed_node_group_config = {
       "VANTIQ" = {
-        ami_type           = "AL2_x86_64"
+        ami_type           = "AL2023_x86_64_STANDARD"
         kubernetes_version = "1.28"
         instance_types     = ["c5.xlarge"] # c5.xlarge x 3
         disk_size          = 40
@@ -91,7 +91,7 @@ locals {
         node_workload_label = "compute"
       },
       "MongoDB" = {
-        ami_type           = "AL2_x86_64"
+        ami_type           = "AL2023_x86_64_STANDARD"
         kubernetes_version = "1.28"
         instance_types     = ["r5.xlarge"] # r5.xlarge x 3
         disk_size          = 40
@@ -103,7 +103,7 @@ locals {
         node_workload_label = "database"
       },
       "keycloak" = {
-        ami_type           = "AL2_x86_64"
+        ami_type           = "AL2023_x86_64_STANDARD"
         kubernetes_version = "1.28"
         instance_types     = ["t3.medium"] # t3.medium x 3
         disk_size          = 40
@@ -115,7 +115,7 @@ locals {
         node_workload_label = "shared"
       },
       "grafana" = {
-        ami_type           = "AL2_x86_64"
+        ami_type           = "AL2023_x86_64_STANDARD"
         kubernetes_version = "1.28"
         instance_types     = ["r5.xlarge"] # r5.xlarge x 1
         disk_size          = 40
@@ -127,7 +127,7 @@ locals {
         node_workload_label = "influxdb"
       },
       "metrics" = {
-        ami_type           = "AL2_x86_64"
+        ami_type           = "AL2023_x86_64_STANDARD"
         kubernetes_version = "1.28"
         instance_types     = ["m5.xlarge"] # m5.xlarge x 1
         disk_size          = 40
@@ -139,12 +139,12 @@ locals {
         node_workload_label = "compute"
       },
       "ai_assistant" = {
-        ami_type           = "AL2_x86_64"
+        ami_type           = "AL2023_x86_64_STANDARD"
         kubernetes_version = "1.28"
-        instance_types     = ["t3.large"] # t3.large x 1
+        instance_types     = ["c5.xlarge"] # c5.xlarge x 1
         disk_size          = 40
         scaling_config = {
-          desired_size = 1 # 3
+          desired_size = 1
           max_size     = 6
           min_size     = 0
         }
