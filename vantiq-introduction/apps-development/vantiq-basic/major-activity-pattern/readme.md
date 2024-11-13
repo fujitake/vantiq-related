@@ -486,7 +486,7 @@ return event
 
 - VAILで自由に処理を記述することができる
 - Procedureを別途用意する必要はなく、タスクのプロパティに直接VAILを記述できる
-- `event.value`が入出力データの中身に当たる部分となる
+- `event.value` が入出力データの中身に当たる部分となる
 
 :globe_with_meridians: [VAIL | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#vail)
 
