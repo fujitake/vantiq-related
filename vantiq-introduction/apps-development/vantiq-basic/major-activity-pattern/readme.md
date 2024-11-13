@@ -80,10 +80,10 @@
 
 ```JSON
 {
-    "RPMSensorID": "rpmSensor3",            //  ① "RPMStream" タスクの出力結果
-    "RPM": 3222,                            //  ① "RPMStream" タスクの出力結果
-    "Time": "2020-03-19T04:42:24.021Z",     //  ① "RPMStream" タスクの出力結果
-    "Pumps": {                              // これ以降はイベントに追加された Type が持つデータ
+    "RPMSensorID": "rpmSensor3",            # ① "RPMStream" タスクの出力結果
+    "RPM": 3222,                            # ① "RPMStream" タスクの出力結果
+    "Time": "2020-03-19T04:42:24.021Z",     # ① "RPMStream" タスクの出力結果
+    "Pumps": {                              # これ以降はイベントに追加された Type が持つデータ
         "_id": "5e70949fc714e2125bbb8854",
         "Location": {
             "coordinates": [
@@ -369,12 +369,12 @@
 
 ```JSON
 {
-    "count": 2,                           // カウント
-    "mean": 211.5,                        // 平均
-    "min": 211,                           // 最小値
-    "max": 212,                           // 最大値
-    "median": 211.5,                      // 中央値
-    "stdDeviation": 0.7071067811865476    // 標準偏差
+    "count": 2,                           # カウント
+    "mean": 211.5,                        # 平均
+    "min": 211,                           # 最小値
+    "max": 212,                           # 最大値
+    "median": 211.5,                      # 中央値
+    "stdDeviation": 0.7071067811865476    # 標準偏差
 }
 ```
 
