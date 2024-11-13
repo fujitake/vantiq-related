@@ -253,9 +253,7 @@
 
 ② 必要な項目のみに変換  
 
-![slide16_1.png](./imgs/slide16_1.png)
-
-＊ Procedure 呼び出し  
+![slide16_1.png](./imgs/slide16_1.png)＊ Procedure 呼び出し  
 
 `Transformation` の出力  
 
