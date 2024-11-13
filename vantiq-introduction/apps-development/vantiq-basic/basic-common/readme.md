@@ -83,14 +83,14 @@ Vantiq の開発画面の表示方法は複数のレイアウトがあります�
 - Project の保存
   - Project のレイアウトの状態やその Project でどの Resource を扱うのかを保存します。
   - Project に名前をつけて保存しておくと、自動的に変更内容が保存されるようになります。
-  - 画面左上の入力ボックスに任意の Project 名を入力し `保存` アイコンをクリックして保存します。  
+  - 画面左上の入力ボックスに任意の Project 名を入力し `フロッピーディスク` アイコンをクリックして保存します。  
 
   ![project_save.png](./imgs/project_save.png)  
   （「BoxSorter」という Project 名で保存する例）
 
 - 各 Resource の保存
   - Type や Source などの各 Resource を作成すると Namespace に保存されます。
-  - 各 Resource 編集ダイアログの `保存` ボタンをクリックして保存します。  
+  - 各 Resource 編集ダイアログの `フロッピーディスク` ボタンをクリックして保存します。  
 
   ![resource_save](./imgs/resource_save.png)
 
