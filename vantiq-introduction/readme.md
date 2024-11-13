@@ -37,6 +37,7 @@ Vantiq の基本的な扱い方を解説しています。
 |◯|[ボックスソーター（Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（REST API）|r1.39 ~ r1.40|
 |◯|[ボックスソーター（MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（Transformation）|r1.39 ~ r1.40|
 |◯|[VAIL 入門（基礎）](./apps-development/vail-introductory/vail_basic/vail_basic.md)|なし|r1.39 ~ r1.40|
+|◯|[主要な Activity Pattern の紹介](./apps-development/vantiq-basic/major-activity-pattern/readme.md)|なし|-|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
