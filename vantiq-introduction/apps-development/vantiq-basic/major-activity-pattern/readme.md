@@ -326,7 +326,7 @@
 - 統計内容を取得するには、自動生成される統計内容へのアクセス用Procedureを使用する
 - 統計の項目はイベント数、最小値、最大値、中央値、平均値、標準偏差
 
-:globe_with_meridians: [SaveToType | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#savetotype)
+:globe_with_meridians: [Compute Statistics | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#compute-statistics)
 
 ### ComputeStatistics 例
 
