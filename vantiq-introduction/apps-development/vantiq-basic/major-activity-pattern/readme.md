@@ -3,7 +3,7 @@
 よく使う主要な Activity Pattern について紹介します。  
 その他の Activity Pattern や詳しい内容はリファレンスを参照してください。  
 
-- :globe_with_meridians: [App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/)
+:globe_with_meridians: [App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/)
 
 ## 目次
 
@@ -18,13 +18,18 @@
     - [Transformation 例](#transformation-例)
   - [SplitByGroup](#splitbygroup)
   - [Dwell](#dwell)
+    - [Dwell 例](#dwell-例)
   - [SaveToType](#savetotype)
   - [ComputeStatistics](#computestatistics)
+    - [ComputeStatistics 例](#computestatistics-例)
   - [Unwind](#unwind)
     - [Unwind 例](#unwind-例)
   - [Procedure](#procedure)
+    - [Procedure 例](#procedure-例)
   - [VAIL](#vail)
+    - [VAIL 例](#vail-例)
   - [Filter](#filter)
+    - [Filter 例](#filter-例)
   - [AccumulateState](#accumulatestate)
     - [AccumulateState 例: 通過したイベント数をカウントしてみる❶](#accumulatestate-例-通過したイベント数をカウントしてみる)
     - [AccumulateState 例: 通過したイベント数をカウントしてみる❷](#accumulatestate-例-通過したイベント数をカウントしてみる-1)
@@ -51,6 +56,9 @@
 - イベントに Type に保存されたデータを追加する
 - `Cached Enrich` は Type の値キャッシュしておくことによりパフォーマンスを向上させた `Enrich` です。その代わり Type の値を変更しても、次に Type の値を取得するタイミングまではイベントに追加される値として反映されません
   - `Cached Enrich` を使用する場合は事前に `SplitByGroup` を使用してストリームを分割しておく必要があります。
+
+:globe_with_meridians: [Enrich | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#enrich)  
+:globe_with_meridians: [Cached Enrich | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#cached-enrich)
 
 ### Enrich, Cashed Enrich 例
 
@@ -100,6 +108,8 @@
 - 複数のストリームのイベント同士を結合する
 - タイムスタンプが異なるイベント同士でも結合することができる
 - 左側に位置するストリームのイベントが基準となる
+
+:globe_with_meridians: [Join | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#join)
 
 ### Join 例
 
@@ -193,6 +203,8 @@
 - イベントの変換を行うことができる
 - 項目の追加・削除、`Procedure` の呼び出しなどをして変換する
 
+:globe_with_meridians: [Transformation | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#transformation)
+
 ### Transformation 例
 
 ![slide16.png](./imgs/slide16.png)
@@ -267,11 +279,17 @@
 - グループごとにストリームを分割する
 - `Dwell`、`ComputeStatistics`、`AccumulateState` などイベントごとではなく特定のグループごとに処理する必要があるアクティビティの前などで使用する
 
+:globe_with_meridians: [Split By Group | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#split-by-group)
+
 ![slide17.png](./imgs/slide17.png)
 
 ## Dwell
 
 - 設定した条件に合致するイベントを、設定した期間継続して検出した場合にイベントを発行する
+
+:globe_with_meridians: [Dwell | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#dwell)
+
+### Dwell 例
 
 ![slide18.png](./imgs/slide18.png)
 
@@ -299,12 +317,18 @@
 - Type にイベントを保存・更新する
 - 更新させる場合は `Upsert` 設定を行う
 
+:globe_with_meridians: [SaveToType | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#savetotype)
+
 ## ComputeStatistics
 
 - タスクを通過するイベントに含まれる 1つのプロパティの統計を行う
 - 統計処理はメモリ上で行われ、タスクの出力としては入力されたイベントがそのまま出力される
 - 統計内容を取得するには、自動生成される統計内容へのアクセス用Procedureを使用する
 - 統計の項目はイベント数、最小値、最大値、中央値、平均値、標準偏差
+
+:globe_with_meridians: [SaveToType | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#savetotype)
+
+### ComputeStatistics 例
 
 ![ComputeStatistics](./imgs/computestatistics_01.png)
 
@@ -358,6 +382,8 @@
 
 - 1つのイベントを複数に分ける
 - サイズの大きいイベントをそのまま処理するのではなく、`Unwind` を使う事で、分割してから個々のイベントを並列処理するようになるため負荷分散になる
+
+:globe_with_meridians: [Unwind | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#unwind)
 
 ### Unwind 例
 
@@ -427,6 +453,10 @@
 - 用意されている Activity Pattern にない処理を App Builder で使用したい時に使用する
 - 自作の Procedure（VAILコード）を呼び出して使うことができる
 
+:globe_with_meridians: [Procedure | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#procedure)
+
+### Procedure 例
+
 ![slide24.png](./imgs/slide24.png)
 
 ① 入力となる前のタスクの出力  
@@ -458,6 +488,10 @@ return event
 - VAILで自由に処理を記述することができる
 - Procedureを別途用意する必要はなく、タスクのプロパティに直接VAILを記述できる
 - `event.value`が入出力データの中身に当たる部分となる
+
+:globe_with_meridians: [VAIL | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#vail)
+
+### VAIL 例
 
 ![VAIL](./imgs/vail_01.png)
 
@@ -500,6 +534,10 @@ event.value.CurrentTime = now()
 
 - 設定した条件に合致するイベントのみ通過させる
 
+:globe_with_meridians: [Filter | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#filter)
+
+### Filter 例
+
 ![slide25.png](./imgs/slide25.png)
 
 ① 入力となる前のタスクの出力  
@@ -526,7 +564,9 @@ event.value == 100
 
 - この Activity Pattern が設定されたタスクを通過するイベントを追跡し続ける
 - `AccumulateState` 用の Procedure を作成して設定するため、通過していくイベントに対して任意の処理を実行することができる
-  - `AccumulateState` を使用する場合は事前に `SplitByGroup` を使用してストリームを分割しておく必要があります。
+- `AccumulateState` を使用する場合は事前に `SplitByGroup` を使用してストリームを分割しておく必要があります。
+
+:globe_with_meridians: [Accumulate State | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#accumulate-state)
 
 ### AccumulateState 例: 通過したイベント数をカウントしてみる❶
 
