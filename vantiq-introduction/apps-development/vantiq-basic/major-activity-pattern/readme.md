@@ -54,7 +54,8 @@
 ## Enrich, Cached Enrich
 
 - イベントに Type に保存されたデータを追加する
-- `Cached Enrich` は Type の値キャッシュしておくことによりパフォーマンスを向上させた `Enrich` です。その代わり Type の値を変更しても、次に Type の値を取得するタイミングまではイベントに追加される値として反映されません
+- `Cached Enrich` は Type の値キャッシュしておくことによりパフォーマンスを向上させた `Enrich` です。  
+  その代わり Type の値を変更しても、次に Type の値を取得するタイミングまではイベントに追加される値として反映されません。
   - `Cached Enrich` を使用する場合は事前に `SplitByGroup` を使用してストリームを分割しておく必要があります。
 
 :globe_with_meridians: [Enrich | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#enrich)  
@@ -74,7 +75,7 @@
 }
 ```
 
-*Type とイベントが持つ共通のプロパティ (`RPMSensorID`) を Key として設定する-  
+*Type とイベントが持つ共通のプロパティ (`RPMSensorID`) を Key として設定する*  
 
 ② `Enrich` の出力  
 
