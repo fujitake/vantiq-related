@@ -571,7 +571,7 @@ event.value == 100
 
 ![slide27.png](./imgs/slide27.png)
 
-- `SampleAccumulateState` における ***1**- 件目のイベント
+- `SampleAccumulateState` における ***1*** 件目のイベント
 
 ```JSON
 {
@@ -592,7 +592,7 @@ event.value == 100
 }
 ```
 
-- `SampleAccumulateState` における ***5**- 件目のイベント
+- `SampleAccumulateState` における ***5*** 件目のイベント
 
 ```JSON
 {
