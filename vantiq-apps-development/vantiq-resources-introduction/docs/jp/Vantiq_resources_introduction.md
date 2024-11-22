@@ -175,7 +175,7 @@
 |Service<br />Event Handler|用意されたパターンや Procedure を組み合わせながら GUI 上で開発することができるアプリケーション本体。|
 |Procedure|任意のロジックを実装することができるリソース。<br />Service や他の Procedure から呼び出すことができる。|
 
-<img src="../../imgs/Vantiq_resources_introduction/slide14.png" width=73%>  
+![slide14.png](../../imgs/Vantiq_resources_introduction/slide14.png)
 
 ① 外部とデータを送受信したり、外部サービスの API をコールする  
 ② 用意されたパターンを組み合わせて処理を実装  
