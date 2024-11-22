@@ -6,11 +6,12 @@
 
 ➡️ 不審者を検出した  **AI カメラの位置情報** と **全警備員の位置情報** を比較して最も距離が近い警備員に通知する  
 
+<!--
 この記事で説明しているサンプルアプリは [**こちら**](../../conf/ai-camera-demo) から取得できます。以下は直リンク。
 
   - [App](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/ai-camera-demo/suspicious_person_detection.zip)
   - [データジェネレーター](https://github.com/fujitake/vantiq-related/raw/main/vantiq-apps-development/vantiq-resources-introduction/conf/ai-camera-demo/event_generator.zip)
-
+-->
 
 <img src="../../imgs/Vantiq_resources_introduction/slide2.png" width=70%>
 
@@ -23,15 +24,15 @@
 
 ```sh
 {
-“camera_id”: "camera_001",    # AI カメラの ID
-“event_type”: "notice_001",
-“image”: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMC...."    # Base64 エンコードした画像
+"camera_id": "camera_001",    # AI カメラの ID
+"event_type": "notice_001",
+"image": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMC...."    # Base64 エンコードした画像
 }
 ```
 
-***※ 一般的に AI カメラは位置情報を持たない  
-また、持たせる場合は交換の際に工事業者のほかに AI カメラのエンジニアが必要になる***
-
+> 補足  
+> 一般的に AI カメラは位置情報を持たない  
+> また、持たせる場合は交換の際に工事業者のほかに AI カメラのエンジニアが必要になる
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>警備員の位置情報取得方法  
 
@@ -65,56 +66,59 @@
 1. 最も近い警備員への通知  
    * E-mail、SMS、LINE、Slack など任意の方法で通知を行う  
 
-
 # 実装方法
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>1. Vantiq へのデータ入力
 
-<img src="../../imgs/Vantiq_resources_introduction/slide8.png" width=70%>
+![slide8.png](../../imgs/Vantiq_resources_introduction/slide8.png)
 
-
-①　Vantiq は受信するデータのスキーマが定まっていなくても処理することができる  
-②　Source は様々なプロトコルでデータを受信する  
-③　Topic は REST API のエンドポイント経由でデータを受信する  
+① Vantiq は受信するデータのスキーマが定まっていなくても処理することができる  
+② Source は様々なプロトコルでデータを受信する  
+③ Service Interface の Inbound Event は REST API のエンドポイント経由でデータを受信する  
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>2. AI カメラからのデータへ情報付加
 
-<img src="../../imgs/Vantiq_resources_introduction/slide9.png" width=70%>
+![slide9.png](../../imgs/Vantiq_resources_introduction/slide9.png)
 
-①　送信されるデータ
+① 送信されるデータ
+
 ```sh
 {
-👉“camera_id”: "camera_001",
-“event_type”: "notice_001",
-“image”: "data:image/jpe...."
+👉"camera_id": "camera_001",
+"event_type": "notice_001",
+"image": "data:image/jpe...."
 }
-```  
+```
+
 ② パラメーター変更・削除など必要なデータ整形は随時行う (Transformation)  
-③
-アプリは Type の情報を取得して AI カメラからのストリームデータに付加する (Enrich)  
+　 Service Implement の Event Handler は Type の情報を取得して AI カメラからのストリームデータに付加する (Enrich)  
+
 ```sh
 {
-👉“camera_id”: "camera_001",
-👉“lan”: 35.6864604,
-👉“lon”: 139.7635769,
-“event_type”: "notice001",
-“image”: "data:image/jpe...."
+👉"camera_id": "camera_001",
+👉"lan": 35.6864604,
+👉"lon": 139.7635769,
+"event_type": "notice001",
+"image": "data:image/jpe...."
 }
 ```  
-④ AI カメラの位置情報など追加したい情報は、予めTypeで保持されている。
+
+③ AI カメラの位置情報など追加したい情報は、予め Type で保持されている。
+
 ``` sh
 {
-👉“camera_id”: "camera_001",
-“lan”: 35.6864604,
-“lon”: 139.7635769
+👉"camera_id": "camera_001",
+"lan": 35.6864604,
+"lon": 139.7635769
 }
 ```
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>3. 警備員の最新の位置情報保存・更新
 
-<img src="../../imgs/Vantiq_resources_introduction/slide10.png" width=70%>  
+![slide10.png](../../imgs/Vantiq_resources_introduction/slide10.png)
 
-①　送信されるデータ
+① 送信されるデータ
+
 ```sh
 {
 "guard_id": "134678493_1",
@@ -123,33 +127,34 @@
 "lon": 139.7635769,
 "time": 1631083251
 }
-```  
+```
+
 ② 通知時にメールアドレス、電話番号などが必要な情報を、`Enrich` を使って追加する  
-③ アプリで `SaveToType` を `Upsert` 設定で使用することで最新の一件のみを *Type* に保存する
+③ Event Handler で `SaveToType` を `Upsert` 設定で使用することで最新の一件のみを *Type* に保存する
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>4. AI カメラと警備員の位置を比較
 
-<img src="../../imgs/Vantiq_resources_introduction/slide11.png" width=70%>  
+![slide11.png](../../imgs/Vantiq_resources_introduction/slide11.png)
 
-①
-Procedure へ渡すデータ
+① Procedure へ渡すデータ
+
 ```sh
 {
-“camera_id”: "camera_001",
-👉“lan”: 35.6864604,
-👉“lon”: 139.7635769,
-“event_type”: "notice_001",
-“image”: "data:image/jpe...."
+"camera_id": "camera_001",
+👉"lan": 35.6864604,
+👉"lon": 139.7635769,
+"event_type": "notice_001",
+"image": "data:image/jpe...."
 }
 ```
-② 位置を比較するロジックを実装した処理をアプリから呼び出し  
-③ _ストリーム処理中の AI カメラのデータ_ に含まれる位置情報と、_Type で保存されている警備員のデータ_ の位置情報を比較して最も近い警備員を特定する  
-④ 警備員の最新の位置情報が保存されたType
 
+② 位置を比較するロジックを実装した処理を Event Handler から呼び出し  
+③ _ストリーム処理中の AI カメラのデータ_ に含まれる位置情報と、_Type で保存されている警備員のデータ_ の位置情報を比較して最も近い警備員を特定する  
+④ 警備員の最新の位置情報が保存された Type
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>5. 特定した警備員へ通知
 
-<img src="../../imgs/Vantiq_resources_introduction/slide12.png" width=70%>  
+![slide12.png](../../imgs/Vantiq_resources_introduction/slide12.png)
 
 
 ① 通知時に必要な形式に合わせてデータ整形を行う (Transformation)  
@@ -158,21 +163,19 @@ Procedure へ渡すデータ
 
 ## <img src="../../imgs/Vantiq_resources_introduction/slide1.png" width=1.8%>Vantiq アプリケーション全体図
 
-<img src="../../imgs/Vantiq_resources_introduction/slide13.png" width=70%>
-
-
+![slide13.png](../../imgs/Vantiq_resources_introduction/slide13.png)
 
 # 基本リソースの紹介
 
 |Reource|説明|
 |:-----|:---|
-|Source|データの送受信を行うクライアント。送受信: MQTT、AMQP、Kafka &emsp;  送信のみ: HTTP(S) REST、E-mail、SMS|
-|Topic|Vantiq 内のApp間などでイベントの受け渡しをするイベントバス。 REST API のエンドポイント経由でデータを受信することもできる。|
-|Type|データを保存する。Vantiq で データベースのテーブルに相当するリソース。|
-|App|用意されたパターンや Procedure を組み合わせながら GUI 上で開発することができるアプリケーション本体。|
-|Procedure|任意のロジックを実装することができるリソース。App や他の Procedureから呼び出すことができる。|
+|Source|データの送受信を行うクライアント。<br />送受信：MQTT、AMQP、Kafka<br />送信のみ：HTTP(S) REST、E-mail、SMS|
+|Type|データを保存する。<br />Vantiq で データベースのテーブルに相当するリソース。|
+|Service<br />Inbound Event|Vantiq 内の Service 間などでイベントの受け渡しをするイベントバス。<br />REST API のエンドポイント経由でデータを受信することもできる。|
+|Service<br />Event Handler|用意されたパターンや Procedure を組み合わせながら GUI 上で開発することができるアプリケーション本体。|
+|Procedure|任意のロジックを実装することができるリソース。<br />Service や他の Procedure から呼び出すことができる。|
 
-<img src="../../imgs/Vantiq_resources_introduction/slide14.png" width=73%>  
+![slide14.png](../../imgs/Vantiq_resources_introduction/slide14.png)
 
 ① 外部とデータを送受信したり、外部サービスの API をコールする  
 ② 用意されたパターンを組み合わせて処理を実装  
