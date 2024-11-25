@@ -45,7 +45,6 @@
 - SaveToType  
 - ComputeStatistics
 - Unwind  
-- Smooth  
 - Procedure  
 - VAIL
 - Filter  
