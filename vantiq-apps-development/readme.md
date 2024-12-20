@@ -13,6 +13,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [Python Execution Connector](./docs/jp/python-execution-connector.md)
 - [Camel Connector](./docs/jp/camel-connector.md)
 - [UDP Source](./docs/jp/udp-source.md)
+- [Vantiq Test Tools](./docs/jp/test-tools.md)
 
 ## Vantiq Resources
 
