@@ -262,7 +262,17 @@ keycloak:
     hostname: <PostgreSQL Endpoint>
 ```
 ※system version 3.13以前では`keycloak.persistence.dbHost`であった。  
-
+  
+また、keycloakの初期管理ユーザーが`keycloak`から`admin`に変わったため、以下のようにユーザー名を明示的に指定する必要がある。
+```yaml
+keycloak:
+  username: admin
+```
+```yaml
+vantiq:
+  keycloak:
+    username: admin
+```
 ## vantiq r1.37以降のMongoDBバージョン
 r1.37以降では、mongoDBのバージョンを5.0.18に指定する必要がある。
 ```yaml
