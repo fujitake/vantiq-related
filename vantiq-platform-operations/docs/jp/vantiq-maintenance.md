@@ -118,7 +118,10 @@ Vantiq の Minor Version がインクレメントされるアップグレード�
 Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが必要になる。
 1. 顧客の DTC にアップグレードに伴うサービス停止をアナウンスする (顧客 DTC はサービス停止による影響回避を社内で調整する)。
 1. 最新の k8sdeploy_tools に更新する。k8sdeploy_tools のルートで `git pull` を実行する。
-1. `deploy.yaml` の変更を行う (`vantiq.image.tag`)。
+1. `deploy.yaml` の変更を行う (`vantiq.image.tag`)。※  
+  ※1.38→1.39バージョンアップの場合は、以下の設定変更も実施する。  
+    - `keycloak.username`の追加。設定値は`admin`。
+    - `keycloak.persistence.dbHost`を`keycloak.database.hostname`に変更。
 1. `cluster.properties` の `vantiq_system_release` を vantiq バージョンをサポートするものに変更する。バージョンアップに伴いその他のパラメーターが変更が必要な場合もある。
 1. `cluster.properties` に変更があった場合、設定の更新を反映する。  
 `./gradlew -Pcluster=<クラスタ名> setupCluster`  
