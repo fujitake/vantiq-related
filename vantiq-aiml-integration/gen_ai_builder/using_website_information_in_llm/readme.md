@@ -110,6 +110,10 @@ Webサイトの情報をLLMで利用するには GenAI Builder の `Unstructured
 
 1. 画面右上の `保存` をクリックして Service を保存します。
 
+> **補足**  
+> プロンプト内で指定している変数 `${context}` はその直前の AI Task のタスク名と一致している必要があります。  
+> そのため、この実装手順では `UnstructuredURL` タスク名を `context` に変更しています。  
+
 ### Public GenAI Procedure の実行
 
 1. 画面左上の `実行ボタン` をクリックします。
