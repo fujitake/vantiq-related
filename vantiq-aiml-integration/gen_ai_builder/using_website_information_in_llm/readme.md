@@ -17,6 +17,7 @@
   - [Public GenAI Procedure の呼び出し方](#public-genai-procedure-の呼び出し方)
     - [Event Handler の場合](#event-handler-の場合)
     - [VAIL Procedure の場合](#vail-procedure-の場合)
+  - [サンプルプロジェクト](#サンプルプロジェクト)
 
 ## 概要
 
@@ -175,3 +176,7 @@ return summary
 #### Procedure の実行結果
 
 ![vailprocedure-03.png](./imgs/vailprocedure-03.png)
+
+## サンプルプロジェクト
+
+- [using_website_information_in_llm_1.40.13.zip](./data/using_website_information_in_llm_1.40.13.zip)
