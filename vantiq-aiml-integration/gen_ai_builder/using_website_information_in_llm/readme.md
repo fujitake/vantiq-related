@@ -179,4 +179,6 @@ return summary
 
 ## サンプルプロジェクト
 
+下記のプロジェクトファイルを利用する場合は、 LLM リソースの設定を再設定してください。  
+
 - [using_website_information_in_llm_1.40.13.zip](./data/using_website_information_in_llm_1.40.13.zip)
