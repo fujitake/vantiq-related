@@ -21,7 +21,7 @@
 
 ## 概要
 
-Webサイトの情報をLLMで利用するには GenAI Builder の `UnstructuredURL` コンポーネントを利用します。  
+Webサイトの情報をLLMで利用するには GenAI の `UnstructuredURL` コンポーネントを利用します。  
 
 ![about.png](./imgs/about.png)
 
