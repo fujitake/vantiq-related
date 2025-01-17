@@ -95,7 +95,7 @@ Azure Bot Service WebChatからのメッセージを受信し、Semantic Index�
 
 1. Service `jp.vantiq.AzureWebChatService` を作成します。
 
-2. `Source Event Handler` を追加します。
+2. `Source Event Handler` を追加します。  
 ![SourceEventHandler](./imgs/source_event_handler.png)
 1. Source Event Handlerを実装します。以下のように実装します。
    ![EventHandler](./imgs/event_handler.png)
@@ -104,11 +104,11 @@ Azure Bot Service WebChatからのメッセージを受信し、Semantic Index�
      - 以下のように設定します。
       ![Initiate](./imgs/source_event.png)
    - Filter : EventStream から受信したEventをフィルタリングします。Userからのメッセージのみを処理するように、Conditionを設定します。 `event.from.role == "user"`
-     - 以下のように設定します。
+     - 以下のように設定します。  
       ![Filter](./imgs/filter.png)
    - SplitByChat : 受信したEventの`conversation.id`をキーにして、スレッド毎に会話を管理します。
    - AccumulateState : 会話IDの生成・保持を行います。
-     - 以下のように設定します。
+     - 以下のように設定します。  
       ![AccumulateState](./imgs/accumulateState.png)
      - vailの記述内容は以下の通りです。Vantiqの会話コンテクスト管理に関しての詳細は、[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#conversationmemory) を参照してください。
 
