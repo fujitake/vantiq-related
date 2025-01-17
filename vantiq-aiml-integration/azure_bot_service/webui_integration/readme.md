@@ -97,7 +97,7 @@ Azure Bot Service WebChatからのメッセージを受信し、Semantic Index�
 
 2. `Source Event Handler` を追加します。  
 ![SourceEventHandler](./imgs/source_event_handler.png)
-1. Source Event Handlerを実装します。以下のように実装します。
+1. Source Event Handlerを実装します。以下のように実装します。  
    ![EventHandler](./imgs/event_handler.png)
 
    - Initiate : 作成したChatBot Source をEventStream に設定します。
