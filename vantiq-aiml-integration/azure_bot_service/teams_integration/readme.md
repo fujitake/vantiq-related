@@ -5,7 +5,7 @@
 Vantiq LLMの機能と、Azure Bot、Teams アプリを使用して、Microsoft Teamsとの連携を実現するサンプルです。社内の独自情報をSemantic Indexに登録し、TeamsからSemantic Indexに登録した情報を問い合わせることができます。
 
 全体構成は以下の通りです。
-![Architecture](../../imgs/vantiq_llm_teams_integration/vantiq_teams_architecture.png)
+![Architecture](./imgs/vantiq_teams_architecture.png)
 
 ## 前提
 
@@ -25,7 +25,7 @@ Azure Bot Service のリソースを作成します。
 
 1. Azure Portal にログインし、検索バーで`Azure Bot`を検索します。Marketplace から `Azure Bot` を選択します。
 
-   ![AzureBotSearch](../../imgs/vantiq_llm_teams_integration/azure_bot_search.png)
+   ![AzureBotSearch](./imgs/azure_bot_search.png)
 
 1. Azure Bot を作成します。
    - ボットハンドル : 任意の名前を入力します。
@@ -34,27 +34,27 @@ Azure Bot Service のリソースを作成します。
    - アプリの種類 : 今回は`シングルテナント`を選択します。
    - 作成の種類 : 今回は`新しい Microsoft アプリID の作成` を選択します。
 
-   ![AzureBotCreate](../../imgs/vantiq_llm_teams_integration/azure_bot_create.png)
+   ![AzureBotCreate](./imgs/azure_bot_create.png)
 
 1. 作成したBotのリソースに移動し、`チャンネル` から `Teams` を選択します。
 
    チャンネルの選択
-   ![AzureBotAddChannel1](../../imgs/vantiq_llm_teams_integration/azure_bot_add_channel1.png)
+   ![AzureBotAddChannel1](./imgs/azure_bot_add_channel1.png)
 
    追加後
-   ![AzureBotAddChannel2](../../imgs/vantiq_llm_teams_integration/azure_bot_add_channel2.png)
+   ![AzureBotAddChannel2](./imgs/azure_bot_add_channel2.png)
 
 1. Botリソースの`構成` を選択し、Microsoft App ID の `パスワードの管理` を選択します。
 
-   ![AzureBotPassword](../../imgs/vantiq_llm_teams_integration/azure_bot_add_password_management.png)
+   ![AzureBotPassword](./imgs/azure_bot_add_password_management.png)
 
 1. `新しいクライアントシークレット` を選択し、クライアントシークレットを追加します。
 
-   ![AzureBotNewSecret](../../imgs/vantiq_llm_teams_integration/azure_bot_new_secret.png)
+   ![AzureBotNewSecret](./imgs/azure_bot_new_secret.png)
 
 1. 新しいクライアントシークレットが作成されます。作成直後しか確認できないため、必ずここでクライアントシークレットを保存してください。
 
-   ![AzureBotCreateSecrete](../../imgs/vantiq_llm_teams_integration/azure_bot_new_secret_create.png)
+   ![AzureBotCreateSecrete](./imgs/azure_bot_new_secret_create.png)
 
 ### Vantiq Source の作成
 
@@ -73,12 +73,12 @@ Azure Bot Service のリソースを作成します。
    - Microsoft App Secret : Azure Bot リソース の作成 で作成したクライアントシークレットを入力します。
    - Direct Line Secret Key : Azure Bot の Direct Line Secret Key を入力します。
 
-   ![DirectLine](../../imgs/vantiq_llm_teams_integration/azure_bot_add_directline.png)
+   ![DirectLine](./imgs/azure_bot_add_directline.png)
 
 1. Azure Portal で、Azure Bot のリソースに移動し、[構成]を選択します。メッセージエンドポイントに以下のURLを入力します。  
 `<Vantiq Server>/private/chatbot/<namespaceName>/<sourceName>`
 
-   ![AzureBotMessageEndpoint](../../imgs/vantiq_llm_teams_integration/azure_bot_add_endpoint.png)
+   ![AzureBotMessageEndpoint](./imgs/azure_bot_add_endpoint.png)
 
 #### OAuth Source の作成
 
@@ -88,7 +88,7 @@ Azure Bot Service のリソースを作成します。
    `https://login.microsoftonline.com/<アプリ テナント ID>/oauth2/v2.0/token`  
    アプリ テナント ID はAzure Portal で確認できます。
 
-   ![AzureBotTennant](../../imgs/vantiq_llm_teams_integration/azure_bot_tenant.png)
+   ![AzureBotTennant](./imgs/azure_bot_tenant.png)
 
 #### Azure Bot Connector  Source の作成
 
@@ -102,7 +102,7 @@ Azure Bot Service のリソースを作成します。
    - OAuth Properties.Client ID : Azure Bot の Microsoft App ID
    - OAuth Properties.Client Secret :  Azure Bot リソース の作成 で作成したクライアントシークレット
 
-   ![AzureBotConnector](../../imgs/vantiq_llm_teams_integration/azure_bot_connector_source.png)
+   ![AzureBotConnector](./imgs/azure_bot_connector_source.png)
 
 ### Vantiq Service の作成
 
@@ -112,23 +112,23 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 
 1. `Source Event Handler` を追加します。
 
-   ![SourceEventHandler](../../imgs/vantiq_llm_teams_integration/source_event_handler.png)
+   ![SourceEventHandler](./imgs/source_event_handler.png)
 
 1. Source Event Handlerを実装します。以下のように実装します。
 
-   ![EventHandler](../../imgs/vantiq_llm_teams_integration/eventhandler.png)
+   ![EventHandler](./imgs/eventhandler.png)
 
    - Initiate : 作成したChatBot Source をEventStream に設定します。
      - 以下のように設定します。
 
-       ![Initiate](../../imgs/vantiq_llm_teams_integration/source_event.png)
+       ![Initiate](./imgs/source_event.png)
 
    - SplitByThread : 受信したEventの`conversation.id`をキーにして、スレッド毎に会話を管理します。
 
    - AccumulateState : 会話IDの生成・保持を行います。
      - 以下のように設定します。
   
-       ![AccumulateState](../../imgs/vantiq_llm_slack_integration/accumulateState.png)
+       ![AccumulateState](./imgs/accumulateState.png)
 
      - vailの記述内容は以下の通りです。Vantiqの会話コンテクスト管理に関しての詳細は、[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#conversationmemory) を参照してください。
 
@@ -182,7 +182,7 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 
      - アクティビティの設定は以下の通りです。
 
-       ![SemanticSearch](../../imgs/vantiq_llm_teams_integration/semantic_search.png)
+       ![SemanticSearch](./imgs/semantic_search.png)
 
    - SendToTeams : `Procedure` アクティビティです。RemoteSourceにメッセージを送信します。
      - 以下のService Procedureを作成してください。
@@ -240,9 +240,9 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 
      - アクティビティの設定・パラメータの設定は以下の通りです。
   
-       ![SendToTeams](../../imgs/vantiq_llm_teams_integration/send_to_teams_activity.png)
+       ![SendToTeams](./imgs/send_to_teams_activity.png)
 
-       ![Parameter](../../imgs/vantiq_llm_teams_integration/send_to_teams.png)
+       ![Parameter](./imgs/send_to_teams.png)
 
 ### Teams App のインストール
 
@@ -258,7 +258,7 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 - 以下のファイルが必要です。
   - アプリのマニフェスト
   - アプリのアイコン画像
-- マニフェストのサンプルは [manifest.json](../../conf/vantiq_llm_teams_integration/manifest.json) です。マニフェストのスキーマは、[こちら](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) です。
+- マニフェストのサンプルは [manifest.json](./conf/manifest.json) です。マニフェストのスキーマは、[こちら](https://learn.microsoft.com/en-us/microsoftteams/platform/resources/schema/manifest-schema) です。
 
   ```json
   {
@@ -342,4 +342,4 @@ Teamsからのメッセージを受信し、Semantic Indexに登録された情�
 
 ## リソース
 
-- [サンプルプロジェクト](../../conf/vantiq_llm_teams_integration/llm_teams_integration.zip)
+- [サンプルプロジェクト](./conf/llm_teams_integration.zip)

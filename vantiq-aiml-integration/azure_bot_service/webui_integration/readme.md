@@ -5,7 +5,7 @@
 Vantiq LLMの機能と、Azure Bot、Bot Framework Web Chatとの連携を実現するサンプルです。TeamsやSlackのようなクラウドサービスではなく、独自のWebサイトの中にWeb Chatをコンポーネントとして埋め込むことで、Vantiq LLMとの会話が可能となります。
 
 全体構成は以下の通りです。
-![Architecture](../../imgs/vantiq_llm_azurebot_webui_integration/architecture.png)
+![Architecture](./imgs/architecture.png)
 
 ## 前提
 
@@ -23,30 +23,30 @@ Vantiq LLMの機能と、Azure Bot、Bot Framework Web Chatとの連携を実現
 Azure Bot Service のリソースを作成します。
 
 1. Azure Portal にログインし、検索バーで`Azure Bot`を検索します。Marketplace から `Azure Bot` を選択します。
-![AzureBotSearch](../../imgs/vantiq_llm_teams_integration/azure_bot_search.png)
+![AzureBotSearch](./imgs/azure_bot_search.png)
 1. Azure Bot を作成します。
    - ボットハンドル : 任意の名前を入力します。
    - サブスクリプション : 使用するサブスクリプションを選択します。
    - リソースグループ : 任意のリソースグループを選択します。
    - アプリの種類 : 今回は`シングルテナント`を選択します。
    - 作成の種類 : 今回は`新しい Microsoft アプリID の作成` を選択します。
-![AzureBotCreate](../../imgs/vantiq_llm_teams_integration/azure_bot_create.png)
+![AzureBotCreate](./imgs/azure_bot_create.png)
 1. 作成したBotのリソースに移動し、`チャネル` に `Web Chat` が選択済みであることを確認します
-![AzureBotAddChannel](../../imgs/vantiq_llm_azurebot_webui_integration/azure_bot_add_channel1.png)
+![AzureBotAddChannel](./imgs/azure_bot_add_channel1.png)
 1. `Web Chat` -> `Default Site` を選択し、`秘密キー`と `埋め込まれたコード`をコピーし保存します。
-![AzureBotSecretKey](../../imgs/vantiq_llm_azurebot_webui_integration/webchat_defaultsite.png)
+![AzureBotSecretKey](./imgs/webchat_defaultsite.png)
 1. Botリソースの`構成` を選択し、Microsoft App ID の `パスワードの管理` を選択します。
-![AzureBotPassword](../../imgs/vantiq_llm_teams_integration/azure_bot_add_password_management.png)
+![AzureBotPassword](./imgs/azure_bot_add_password_management.png)
 1. `新しいクライアントシークレット` を選択し、クライアントシークレットを追加します。
-![AzureBotNewSecret](../../imgs/vantiq_llm_teams_integration/azure_bot_new_secret.png)
+![AzureBotNewSecret](./imgs/azure_bot_new_secret.png)
 1. 新しいクライアントシークレットが作成されます。作成直後しか確認できないため、必ずここでクライアントシークレットを保存してください。
-![AzureBotCreateSecrete](../../imgs/vantiq_llm_teams_integration/azure_bot_new_secret_create.png)
+![AzureBotCreateSecrete](./imgs/azure_bot_new_secret_create.png)
 
 ### HTML の作成
 
 上記で取得したWeb Chatの秘密キーと埋め込まれたコードを使用して、WebサイトにWeb Chatを埋め込みます。
 
-- [サンプル](../../conf/vantiq_llm_azurebot_webui_integration/app/ui_sample/index.html)
+- [サンプル](./conf/app/ui_sample/index.html)
 
 ```html
 <!DOCTYPE html>
@@ -78,9 +78,9 @@ Azure Bot Service のリソースを作成します。
    - Microsoft App ID : Azure Bot の Microsoft App ID を入力します。
    - Microsoft App Secret : Azure Bot リソース の作成 で作成したクライアントシークレットを入力します。
    - Direct Line Secret Key : Azure Bot の Direct Line Secret Key を入力します。
-   ![DirectLine](../../imgs/vantiq_llm_teams_integration/azure_bot_add_directline.png)
+   ![DirectLine](./imgs/azure_bot_add_directline.png)
 1. Azure Portal で、Azure Bot のリソースに移動し、[構成]を選択します。メッセージエンドポイントに以下のURLを入力します。`<Vantiq Server>/private/chatbot/<namespaceName>/<sourceName>`
-![AzureBotMessageEndpoint](../../imgs/vantiq_llm_teams_integration/azure_bot_add_endpoint.png)
+![AzureBotMessageEndpoint](./imgs/azure_bot_add_endpoint.png)
 
 #### Azure Bot WebChat Source の作成
 
@@ -96,20 +96,20 @@ Azure Bot Service WebChatからのメッセージを受信し、Semantic Index�
 1. Service `jp.vantiq.AzureWebChatService` を作成します。
 
 2. `Source Event Handler` を追加します。
-![SourceEventHandler](../../imgs/vantiq_llm_azurebot_webui_integration/source_event_handler.png)
+![SourceEventHandler](./imgs/source_event_handler.png)
 1. Source Event Handlerを実装します。以下のように実装します。
-   ![EventHandler](../../imgs/vantiq_llm_azurebot_webui_integration/event_handler.png)
+   ![EventHandler](./imgs/event_handler.png)
 
    - Initiate : 作成したChatBot Source をEventStream に設定します。
      - 以下のように設定します。
-      ![Initiate](../../imgs/vantiq_llm_teams_integration/source_event.png)
+      ![Initiate](./imgs/source_event.png)
    - Filter : EventStream から受信したEventをフィルタリングします。Userからのメッセージのみを処理するように、Conditionを設定します。 `event.from.role == "user"`
      - 以下のように設定します。
-      ![Filter](../../imgs/vantiq_llm_azurebot_webui_integration/filter.png)
+      ![Filter](./imgs/filter.png)
    - SplitByChat : 受信したEventの`conversation.id`をキーにして、スレッド毎に会話を管理します。
    - AccumulateState : 会話IDの生成・保持を行います。
      - 以下のように設定します。
-      ![AccumulateState](../../imgs/vantiq_llm_slack_integration/accumulateState.png)
+      ![AccumulateState](./imgs/accumulateState.png)
      - vailの記述内容は以下の通りです。Vantiqの会話コンテクスト管理に関しての詳細は、[リファレンス](https://dev.vantiq.com/docs/system/rules/index.html#conversationmemory) を参照してください。
 
       ```javascript
@@ -161,7 +161,7 @@ Azure Bot Service WebChatからのメッセージを受信し、Semantic Index�
       ```
 
      - アクティビティの設定は以下の通りです。
-       ![SemanticSearch](../../imgs/vantiq_llm_azurebot_webui_integration/semantic_search.png)
+       ![SemanticSearch](./imgs/semantic_search.png)
 
    - SendToChat : `Procedure` アクティビティです。RemoteSourceにメッセージを送信します。
      - 以下のService Procedureを作成してください。
@@ -227,14 +227,14 @@ Azure Bot Service WebChatからのメッセージを受信し、Semantic Index�
       ```
 
      - アクティビティの設定・パラメータの設定は以下の通りです。
-       ![SendToChat](../../imgs/vantiq_llm_azurebot_webui_integration/send_to_chat.png)
-       ![Parameter](../../imgs/vantiq_llm_azurebot_webui_integration/send_to_chat_params.png)
+       ![SendToChat](./imgs/send_to_chat.png)
+       ![Parameter](./imgs/send_to_chat_params.png)
 
 ## 実行
 
 - HTMLの作成で作成したファイルをブラウザで開き、Web Chat が表示されることを確認します。
- ![WebChat](../../imgs/vantiq_llm_azurebot_webui_integration/%20webchat_ui.png)
+ ![WebChat](./imgs/webchat_ui.png)
 
 ## リソース
 
-- [サンプルプロジェクト](../../conf/vantiq_llm_azurebot_webui_integration/llm_azurebot_webchat_integration.zip)
+- [サンプルプロジェクト](./conf/llm_azurebot_webchat_integration.zip)
