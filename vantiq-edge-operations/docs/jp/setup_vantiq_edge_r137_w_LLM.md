@@ -1,4 +1,4 @@
-# Vantiq Edge R1.37-R1.38のインストールと大規模言語モデル関連機能の設定ガイド
+# Vantiq Edge(R1.37以降)のインストールと大規模言語モデル関連機能の設定ガイド
 
 # はじめに
 
@@ -11,11 +11,13 @@
 ## ハードウェア要件
 
 ハードウェアの最小要件は下記となります。  
-Qdrant VectorDBへ登録するファイルサイズが100MBを超える場合は、メインメモリは16GB以上が推奨です。
 
 - 64ビットx86プロセッサ
 - 8GB メインメモリ
 - 32GBの空きストレージ
+
+・Qdrant VectorDBへ登録するファイルサイズが100MBを超える場合は、メインメモリは16GB以上が推奨です。  
+・Unstructured APIを利用する場合、コンテナイメージのサイズが約10GBのため、上記のストレージサイズに10GBを追加して下さい。
 
 ## ソフトウェア要件
 
@@ -42,15 +44,22 @@ compose.yamlを配置するディレクトリにconfigディレクトリを作�
 ```
 
 下記をコピーしcompose.yamlを用意します。  
+・`vantiq-edge`のバージョンは適宜変更して下さい。  
 ・`vantiq-edge`と`vantiq_ai_assistant`は同じバージョンにして下さい。  
-・`vantiq-edge`と`vantiq_ai_assistant`のバージョンは適宜変更して下さい。  
-・`vantiq_edge_qdrant.image`のバージョンが`v1.7.4`となっていることを確認して下さい。
+・`vantiq_genai_flow_service`と`vantiq_unstructured_api`を利用する場合はコメントアウトを外してください。その場合`vantiq_genai_flow_service`は`vantiq-edge`と同じバージョンにして下さい。  
+・`vantiq_edge_qdrant`のバージョンは`vantiq-edge`のバージョンにより異なります。下記の表を参照下さい。
+|  vantiq-edge  |  vantiq_edge_qdrant  |
+| ---- | ---- |
+|  R1.37 and R1.38  |  v1.7.4  |
+|  R1.39 and up to R1.40.9  |  v1.9.2  |
+|  R1.40.10 and later  |  v1.12.5  |
+
 
 ```yaml
 services:
   vantiq_edge:
     container_name: vantiq_edge_server
-    image: quay.io/vantiq/vantiq-edge:1.37.3
+    image: quay.io/vantiq/vantiq-edge:1.xx.xx
     ports:
       - 8080:8080
     depends_on:
@@ -79,19 +88,39 @@ services:
 
   vantiq_ai_assistant:
     container_name: vantiq_ai_assistant
-    image: quay.io/vantiq/ai-assistant:1.37.3
+    image: quay.io/vantiq/ai-assistant:1.xx.xx
     restart: unless-stopped
     network_mode: "service:vantiq_edge"
 
+#  vantiq_genai_flow_service:
+#    container_name: vantiq_genai_flow_service
+#    image: quay.io/vantiq/genaiflowservice:1.xx.xx
+#    restart: unless-stopped
+#    command: ["uvicorn", "app.genaiflow_service:app", "--host", "0.0.0.0", "--port", "8889"]
+#    network_mode: "service:vantiq_edge"
+
   vantiq_edge_qdrant:
     container_name: vantiq_edge_qdrant
-    image: qdrant/qdrant:v1.7.4
+    image: qdrant/qdrant:v1.yy.yy
     restart: unless-stopped
     volumes:
       - qdrantData:/qdrant/storage
     networks:
       vantiq_edge:
         aliases: [edge-qdrant]
+
+#  vantiq_unstructured_api:
+#    container_name: vantiq_unstructured_api
+#    image: quay.io/vantiq/unstructured-api:0.0.73
+#    restart: unless-stopped
+#    environment:
+#      - PORT=18000
+#      - UNSTRUCTURED_PARALLEL_MODE_ENABLED=true
+#      - UNSTRUCTURED_PARALLEL_MODE_URL=http://localhost:18000/general/v0/general
+#      - UNSTRUCTURED_PARALLEL_MODE_SPLIT_SIZE=20
+#      - UNSTRUCTURED_PARALLEL_MODE_THREADS=4
+#      - UNSTRUCTURED_DOWNLOAD_THREADS=4
+#    network_mode: "service:vantiq_edge"
 
 networks:
   vantiq_edge:
@@ -125,14 +154,16 @@ volumes:
 docker compose up -d
 ```
 
-コマンド`docker compose ps`にて起動状態を確認できます。大規模言語モデル関連機能を利用する場合、4つのコンテナが起動します。
+コマンド`docker compose ps`にて起動状態を確認できます。
 
 ```
-NAME                  COMMAND                  SERVICE               STATUS              PORTS
-vantiq_ai_assistant   "uvicorn app.ai_assi…"   vantiq_ai_assistant   running             
-vantiq_edge_mongo     "/opt/bitnami/script…"   vantiq_edge_mongo     running             27017/tcp
-vantiq_edge_qdrant    "./entrypoint.sh"        vantiq_edge_qdrant    running             6333-6334/tcp
-vantiq_edge_server    "/opt/vantiq/bin/van…"   vantiq_edge           running             0.0.0.0:8080->8080/tcp, :::8080->8080/tcp
+NAME                        IMAGE                                    COMMAND                  SERVICE                     CREATED       STATUS              PORTS
+vantiq_ai_assistant         quay.io/vantiq/ai-assistant:1.40.2       "uvicorn app.ai_assi…"   vantiq_ai_assistant         3 hours ago   Up About a minute
+vantiq_edge_mongo           bitnami/mongodb:4.2.5                    "/opt/bitnami/script…"   vantiq_edge_mongo           4 hours ago   Up About a minute   27017/tcp
+vantiq_edge_qdrant          qdrant/qdrant:v1.9.2                     "./entrypoint.sh"        vantiq_edge_qdrant          4 hours ago   Up About a minute   6333-6334/tcp
+vantiq_edge_server          quay.io/vantiq/vantiq-edge:1.40.2        "/opt/vantiq/bin/van…"   vantiq_edge                 3 hours ago   Up About a minute   0.0.0.0:32768->8080/tcp, [::]:32768->8080/tcp
+vantiq_genai_flow_service   quay.io/vantiq/genaiflowservice:1.40.2   "uvicorn app.genaifl…"   vantiq_genai_flow_service   3 hours ago   Up About a minute
+vantiq_unstructured_api     quay.io/vantiq/unstructured-api:0.0.73   "scripts/app-start.sh"   vantiq_unstructured_api     3 hours ago   Up About a minute
 ```
 
 ## オプション: SSL設定
@@ -146,7 +177,7 @@ https://vantiq.example.comでアクセスしたい場合、SSL証明書と秘密
 - 秘密鍵  
   vantiq.example.com.key
 
-また、nginxを構成する場合には、アップロードするファイルサイズの上限がデフォルトで1MBとなります。ProejctやLLMのドキュメント読み込みにてエラーが発生する可能性があるため、上限を引き上げておきます。本手順では例として20MBを設定します。
+また、nginxを構成する場合には、アップロードするファイルサイズの上限がデフォルトで1MBとなります。ProejctやLLMのドキュメント読み込みにてエラーが発生する可能性があるため、上限を引き上げておきます。本手順では例として100MBを設定します。
 configディレクトリにmy_proxy.confを配置します。  
 
 ```
@@ -162,7 +193,7 @@ configディレクトリにmy_proxy.confを配置します。
 
 my_proxy.confの内容は次の通りです。  
 ```
-client_max_body_size 20m;
+client_max_body_size 100m;
 ```
 
 compose.yamlを編集します。  
@@ -185,7 +216,7 @@ services:
 
   vantiq_edge:
     container_name: vantiq_edge_server
-    image: quay.io/vantiq/vantiq-edge:1.37.3
+    image: quay.io/vantiq/vantiq-edge:1.xx.xx
     ports:
       - 8080
     depends_on:
@@ -216,19 +247,39 @@ services:
 
   vantiq_ai_assistant:
     container_name: vantiq_ai_assistant
-    image: quay.io/vantiq/ai-assistant:1.37.3
+    image: quay.io/vantiq/ai-assistant:1.xx.xx
     restart: unless-stopped
     network_mode: "service:vantiq_edge"
 
+#  vantiq_genai_flow_service:
+#    container_name: vantiq_genai_flow_service
+#    image: quay.io/vantiq/genaiflowservice:1.xx.xx
+#    restart: unless-stopped
+#    command: ["uvicorn", "app.genaiflow_service:app", "--host", "0.0.0.0", "--port", "8889"]
+#    network_mode: "service:vantiq_edge"
+
   vantiq_edge_qdrant:
     container_name: vantiq_edge_qdrant
-    image: qdrant/qdrant
+    image: qdrant/qdrant:v1.yy.yy
     restart: unless-stopped
     volumes:
       - qdrantData:/qdrant/storage
     networks:
       vantiq_edge:
         aliases: [edge-qdrant]
+
+#  vantiq_unstructured_api:
+#    container_name: vantiq_unstructured_api
+#    image: quay.io/vantiq/unstructured-api:0.0.73
+#    restart: unless-stopped
+#    environment:
+#      - PORT=18000
+#      - UNSTRUCTURED_PARALLEL_MODE_ENABLED=true
+#      - UNSTRUCTURED_PARALLEL_MODE_URL=http://localhost:18000/general/v0/general
+#      - UNSTRUCTURED_PARALLEL_MODE_SPLIT_SIZE=20
+#      - UNSTRUCTURED_PARALLEL_MODE_THREADS=4
+#      - UNSTRUCTURED_DOWNLOAD_THREADS=4
+#    network_mode: "service:vantiq_edge"
 
 networks:
   vantiq_edge:
