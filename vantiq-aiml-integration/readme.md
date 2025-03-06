@@ -26,6 +26,7 @@ Vantiq R1.37にて実装された新機能 LLM関連機能についての資料�
 - [Vantiq LLM とWeb UI(azure bot)のインテグレーションサンプル](./azure_bot_service/webui_integration/readme.md)
 - [Vantiq LLM とMattermostのインテグレーションサンプル](./mattermost/mattermost_integration/readme.md)
 - [Vantiq LLM とMattermostのインテグレーションサンプル（機能編）](./mattermost/mattermost_integration_feature/readme.md)
+- [Vantiq と Microsoft 365 のEメールのインテグレーション方法](./azure_bot_service/email_integration/readme.md)
 
 ## 画像処理AI
 
