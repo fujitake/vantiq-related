@@ -137,19 +137,17 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 	   Keycloak ページが表示されるので、`Administrator Console` をクリックする  
 	   Keycloak の管理者名とパスワード (`secrets.yaml` の `shared.keycloak.data.password` にて指定した内容) を使いログインする  
 	   作成するユーザーは、利用ユーザーとは違い、”System Admin” のため、取り扱いには注意が必要 (Org を自由に作成可能) となる  
-    2. メニューにある Manage 配下の Users に移動する
-    3. Add User ボタンをクリック
-    4. Username を入力し、Save をクリック
-    5. 作成したユーザーの Credential タブをクリック
-    6. パスワードを設定し、Temporary を off にして Reset Password をクリック
-    7. Details タブに移動し、Email verified を ON に変更し Save をクリック
-    8. Role mapping タブに移動し、Client roles の realm management を選択する
-    9. 全ての Available roles を選択し、Add selected ボタンをクリック
-    10. 右上のユーザー名アイコンからログアウト
-21. Keycloakの`Frontend URL`を設定する
-    1. 対象のRealmの Realm Settings -> Generalタブ に移動する
-    2. Frontend URLに`https://<ドメイン名>/auth/`と設定する
-22. Vantiq IDE で system namespace の初期設定をする。
+    2. メニューにあるRealm一覧から [Vantiq Platform Deployment] を選択する。
+    3. メニューにある Users に移動する
+    4. Create new User ボタンをクリック
+    5. Username を入力し、Save をクリック
+    6. 作成したユーザーの Credential タブをクリック
+    7. パスワードを設定し、Temporary を off にして Save Password をクリック
+    8. Details タブに移動し、Email verified を ON に変更し Save をクリック
+    9. Role mapping タブに移動し、[Assign role]をクリックし、[Filter by clients]を選択する
+    10. 全ての role を選択し、Assign ボタンをクリック
+    11. 右上のユーザー名アイコンからログアウト
+21. Vantiq IDE で system namespace の初期設定をする。
     1. 次のページにアクセスし、作成したユーザー名、パスワードでログインする。
   	    `https://<ドメイン名>/`  
        ※上記ステップでログアウトした画面からはログインできないため、先のページ `https://<ドメイン名>/` に移動すること。
@@ -179,4 +177,4 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
 	    Namespace から、作成した organization の root namespace に移動する。
        [管理] -> [ユーザー] を選択し、[新規] をクリックする。
 	    Authorization プロパティのアイコンをクリックし、権限を Organization Admin にして [OK] をクリックする。追加するユーザーのメールアドレスを入力し、保存する
-23. LLM機能を利用する場合は、追加で[こちら](../jp/add_llm_component.md)の手順を実施し、LLM コンポーネントをデプロイすること。
+22. LLM機能を利用する場合は、追加で[こちら](../jp/add_llm_component.md)の手順を実施し、LLM コンポーネントをデプロイすること。
