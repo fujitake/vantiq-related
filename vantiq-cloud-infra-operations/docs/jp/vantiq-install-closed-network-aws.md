@@ -2,46 +2,26 @@
 
 
 ## Internal Load Balancer
-EKSの場合、`nginx.controller.service`に`annotations`を追加することで、でInternal LBを構成する。
-`service.beta.kubernetes.io/aws-load-balancer-internal`を指定する。
+EKSの場合、`nginx.controller.service.annotations`に`service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"`を指定することで、Internal LBを構成することができる。
 
 **deploy.yaml**
 ```
 nginx:
   controller:
-    tls:
-      cert: xxxxxxxx.cer.pem
-      key: xxxxxxxx.key.pem
-      selfSigned: false
     service:
       annotations:
         service.beta.kubernetes.io/aws-load-balancer-internal: "0.0.0.0/0"
-        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
-        service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
-        service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '3600'
 ```
-それ以外のannotationについて
-- `service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled` - Specifies whether cross-zone load balancing is enabled for the load balancer
-- `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol` - To enable PROXY protocol support for clusters running on AWS
-- `service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout` - The time, in seconds, that the connection is allowed to be idle (no data has been sent over the connection) before it is closed by the load balancer
-
-#### Reference
-- https://kubernetes.io/docs/concepts/services-networking/_print/
-- https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.2/guide/service/annotations/
-
 
 ## Private Endpointの設定
-AWSのサービス（S3, RDS, EKS, ECR)のエンドポイントはデフォルトはpublicであり、閉域網からはアクセスできない。Private Endpointを有効にする必要がある。
+Vantiq Private Cloudにおいて利用しているAWSサービスはRDS(Keycloak用DB)とS3である。
+RDSはprivateでアクセス可能だが、S3のエンドポイントはpublicであり、閉域網からはアクセスできない。Private Endpointを有効にする必要がある。
 
-- EKSワーカーノードがホストされているVPCの「DNSホスト名(`enableDnsHostnames`)」と「DNS解決(`enableDnsSupport`)」を有効にする。 -> これにより、このPVCからPrivate EndpointをsubnetのIPに解決できる。
-- VPC endpointメニューでPrivate Linkの作成をする。
-  - `s3.ap-northeast-1.amazonaws.com`
-- EKSワーカーノードがホストされているサブネットのルートテーブルにs3へのprivate linkを設定する。
-- VPC EndpointメニューでEndpointを作成する。 -> Private DNS Zoneが有効になる。
-  - `ec2.ap-northeast-1.amazonaws.com`
-  - `dkr.ecr.ap-northeast-1.amazonaws.com`
-  - `api.ecr.ap-northeast-1.amazonaws.com`
-  - EKSのエンドポイント(`ap-northeast-1.eks.amazonaws.com`), RDSのエンドポイント(`ap-northeast-1.rds.amazonaws.com`)は構築の設定でprivateで解決できるようになっているはずだが、念の為VPC内から nslookup 確認をしておくこと。
+- EKSワーカーノードがホストされているVPCの「DNSホスト名(`enableDnsHostnames`)」と「DNS解決(`enableDnsSupport`)」を有効にする。 -> これにより、このVPCからPrivate EndpointをsubnetのIPに解決できる。
+- VPC エンドポイント(インターフェース型)を作成する。
+  - com.amazonaws.`<YOUR-REGION>`.s3
+  - EKSワーカーノードがホストされているVPCおよびプライベートサブネットを指定
+  - `インバウンドエンドポイントのためにのみプライベートDNSゾーンを有効にする`のチェックを外す
 
 ## Proxyサーバーの利用について
 Proxyを設定する場合、ProxyへのアクセスはDNS解決より前に行われる。つまり、何もしないとPrivate EndpointのDNS解決が、DNSサーバー上で行われてしまう。（参考：https://milestone-of-se.nesuke.com/nw-basic/grasp-nw/proxy/)
