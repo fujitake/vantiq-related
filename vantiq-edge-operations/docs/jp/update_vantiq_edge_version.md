@@ -6,9 +6,13 @@
 
 VantiqEdgeのインストールが完了していることが前提となります。
 
+# 注意事項
+本手順ではQdrantに格納されるSemanticIndexのデータはバックアップ・リストア対象となりません。  
+必要に応じてアプリ側でバックアップを取るよう、アプリ担当者へ事前連絡して下さい。[SemanticIndexバックアップ手順](tips_vantiq_edge.md#semanticindexqdrant-collectionをバックアップリストアしたい)
+
 # マイナーバージョンアップ
 
-1. MongoDBのバックアップを取る。[手順](tips_vantiq_edge.md#mongodbをバックアップリストアしたい)  
+1. MongoDBのバックアップを取る。[MongoDBバックアップ手順](tips_vantiq_edge.md#mongodbをバックアップリストアしたい)  
 
 2. `componse.yaml` を開き、`vantiq_edge`の`image`のバージョンを編集する。  
 `vantiq_ai_assistant`、`vantiq_genai_flow_service`を構成している場合、これらのバージョンを`vantiq_edge`と同じバージョンを指定して下さい。  
@@ -20,7 +24,7 @@ VantiqEdgeのインストールが完了していることが前提となりま�
 
 # マイナーバージョンアップ - Rollback
 
-1. MongoDBのバックアップからリストアする。[手順](tips_vantiq_edge.md#mongodbをバックアップリストアしたい)  
+1. MongoDBのバックアップからリストアする。[MongoDBリストア手順](tips_vantiq_edge.md#mongodbをバックアップリストアしたい)  
 
 2. `compose.yaml` を開き、`vantiq_edge`の`image`のバージョンを元に戻す。  
 `vantiq_ai_assistant`、`vantiq_genai_flow_service`を構成している場合、これらのバージョンを`vantiq_edge`と同じバージョンを指定して下さい。  
