@@ -33,6 +33,7 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|対応バージョン|
 |:-:|-|-|-|
+|◯|[ボックスソーター（Short ver）](./apps-development/boxsorter/short/readme.md)|なし|r1.42|
 |◯|[ボックスソーター（REST API）](./apps-development/boxsorter/rest-api/readme.md)|なし|r1.39 ~ r1.41|
 |◯|[ボックスソーター（Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（REST API）|r1.39 ~ r1.41|
 |◯|[ボックスソーター（MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（Transformation）|r1.39 ~ r1.40|
