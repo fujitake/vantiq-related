@@ -122,7 +122,7 @@ Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POS
 
 ### 商品マスタデータ
 
-- [com.example.sorting_condition.csv](./blob/85e84116f806b35b2bde44e8d10f5e8dacf6d0ac/vantiq-introduction/apps-development/boxsorter/data/com.example.sorting_condition.csv)
+- [com.example.sorting_condition.csv](./../data/com.example.sorting_condition.csv)
 
 ## ワークショップの手順
 

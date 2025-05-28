@@ -1,4 +1,4 @@
-# ボックスソーター（REST API）
+# ボックスソーター（Short ver）
 
 ## アプリケーションが想定している受信内容
 
@@ -11,7 +11,7 @@
 
 ## 目次
 
-- [ボックスソーター（REST API）](#ボックスソーターrest-api)
+- [ボックスソーター（Short ver）](#ボックスソーターshort-ver)
   - [アプリケーションが想定している受信内容](#アプリケーションが想定している受信内容)
   - [目次](#目次)
   - [1. Namespace の作成と Project の保存](#1-namespace-の作成と-project-の保存)
@@ -29,8 +29,9 @@
   - [5. Service Builder を用いたアプリケーションの開発](#5-service-builder-を用いたアプリケーションの開発)
     - [5-1. 【Service Builder】Service ペインの表示](#5-1-service-builderservice-ペインの表示)
     - [5-2. 【Enrich】仕分け条件の追加](#5-2-enrich仕分け条件の追加)
-    - [5-4. 【Filter】仕分け処理の実装](#5-4-filter仕分け処理の実装)
-    - [5-5. 【LogStream】仕分け指示のログ出力の実装](#5-5-logstream仕分け指示のログ出力の実装)
+    - [5-4. 【Transformation】イベントデータの整形](#5-4-transformationイベントデータの整形)
+    - [5-5. 【Filter】仕分け処理の実装](#5-5-filter仕分け処理の実装)
+    - [5-6. 【LogStream】仕分け指示のログ出力の実装](#5-6-logstream仕分け指示のログ出力の実装)
   - [6. 仕分け結果の確認](#6-仕分け結果の確認)
     - [6-1. Log メッセージ画面の表示](#6-1-log-メッセージ画面の表示)
     - [6-2. Log の確認](#6-2-log-の確認)
@@ -131,7 +132,7 @@ Google Colaboratory を利用するにあたり、事前に **Vantiq Access Toke
 
 ### 3-3. Public Visual Event Handler の作成
 
-1. `Implement` タブを開き、 `Unbound Event Types` をクリックして、アコーディオンを開きます。  
+1. `Implement` タブをクリックし、 `Unbound Event Types` をクリックして、アコーディオンを開きます。  
    `ReceiveBoxInfo` の右側の `…` をクリックして、 `Public Visual Event Handler を追加` をクリックします。
 
    ![create_service_3-1.png](./imgs/create_service_3-1.png)
@@ -204,11 +205,11 @@ Type を作成し、 CSV ファイルのインポートを行います。
 1. `com.example.sorting_condition` のペインが表示されるので、以下の設定を行い、保存します。
 
    **Properties タブ**
-   |プロパティ名|データ型|Required|
-   |-|-|-|
-   |code|String|✅|
-   |center_id|Integer|✅|
-   |center_name|String|✅|
+   |プロパティ名|データ型|
+   |-|-|
+   |code|String|
+   |center_id|Integer|
+   |center_name|String|
 
    ![create_type_03.png](./imgs/create_type_03.png)
 
@@ -263,25 +264,6 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
 1. `Configuration` の `クリックして編集` を開き、以下の設定を行いアプリケーションを保存します。
 
-   <details>
-   <summary>Vantiq Version 1.35 以前の場合</summary>
-
-   |項目|設定値|
-   |-|-|
-   |associatedType|com.example.sorting_condition|
-
-   `foreignKeys` の `<null>` をクリックし、下記の設定を行います。
-
-   1. `+ アイテムの追加` をクリックします。
-
-      |項目|設定値|備考|
-      |-|-|-|
-      |Value|code|この項目に設定したプロパティがクエリの条件になる|
-   </details>
-   
-   <details>
-   <summary>Vantiq Version 1.36 以降の場合</summary>
-   
    |項目|設定値|
    |-|-|
    |associatedType|com.example.sorting_condition|
@@ -298,7 +280,6 @@ Type を作成し、 CSV ファイルのインポートを行います。
       |Foreign Key Expression|event.code|イベント側のプロパティ|
 
       ![app_enrich_03.png](./imgs/app_enrich_03.png)
-   </details>
 
    > **補足：条件について**  
    > ここで設定した条件は VAIL で書くとすると  
@@ -333,12 +314,35 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
-### 5-4. 【Filter】仕分け処理の実装
+### 5-4. 【Transformation】イベントデータの整形
+
+**Transformation Activity** を追加して、イベントデータを必要なデータのみになるように整形をします。  
+
+#### Transformation Activity の実装
+
+1. Service ペイン左側の `Modifiers` の中から `Transformation` を選択し、 `Enrich` タスクの上にドロップします。
+
+   ![boxsorter_transform.gif](./imgs/boxsorter_transform.gif)
+
+1. `Transformation` タスクをクリックし、 `Configuration` の `クリックして編集` を開きます。  
+   `transformation (Union)` の `<null>` をクリックして、以下の内容を入力し、 `OK` をクリックします。
+
+   |Outbound Property|Transformation Expression|
+   |-|-|
+   |code|event.code|
+   |name|event.name|
+   |center_id|event.sorting_condition.center_id|
+   |center_name|event.sorting_condition.center_name|
+
+   ![transformation_setting.png](./imgs/transformation_setting.png)
+
+### 5-5. 【Filter】仕分け処理の実装
 
 特定の物流センターのイベントのみが通過できるフローを実装することで、仕分けを行います。  
 今回は「東京」「神奈川」「埼玉」の3つの物流センター単位で仕分けをしますので、 **Filter Activity** を設定したタスクを3つ実装します。
 
 物流センターとその ID は以下の関係になっています。
+
 |物流センター|物流センターID|
 |-|-|
 |東京|1|
@@ -349,7 +353,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
 #### Filter Activity の実装
 
-1. Service ペイン左側の `Filters` の中から `Filter` を選択し、 `AttachCondition` タスクの上にドロップします。  
+1. Service ペイン左側の `Filters` の中から `Filter` を選択し、 `Transformation` タスクの上にドロップします。  
    この作業を3回繰り返し、3つの **Filter Activity** を配置します。
 
    ![app_filter_01.gif](./imgs/app_filter_01.gif)
@@ -361,21 +365,21 @@ Type を作成し、 CSV ファイルのインポートを行います。
       |項目|設定値|
       |-|-|
       |Name|ExtractToTokyo|
-      |condition (Union)|event.sorting_condition.center_id == 1|
+      |condition (Union)|event.center_id == 1|
 
    1. 神奈川物流センター
 
       |項目|設定値|
       |-|-|
       |Name|ExtractToKanagawa|
-      |condition (Union)|event.sorting_condition.center_id == 2|
+      |condition (Union)|event.center_id == 2|
 
    1. 埼玉物流センター
 
       |項目|設定値|
       |-|-|
       |Name|ExtractToSaitama|
-      |condition (Union)|event.sorting_condition.center_id == 3|
+      |condition (Union)|event.center_id == 3|
 
 1. 各 **Filter Activity** で `タスク Events を表示` を行い、それぞれ適切なイベントのみが通過しているか確認します。
 
@@ -436,7 +440,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
      }
      ```
 
-### 5-5. 【LogStream】仕分け指示のログ出力の実装
+### 5-6. 【LogStream】仕分け指示のログ出力の実装
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
 
@@ -447,28 +451,25 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    ![app_logstream_01.gif](./imgs/app_logstream_01.gif)
 
-1. 各 **LogStream Activity** の `タスク名` の設定と `Configuration` の `クリックして編集` から `level` の設定を行い、アプリケーションを保存します。  
+1. 各 **LogStream Activity** の `タスク名` の設定を行い、アプリケーションを保存します。  
 
    1. 東京物流センター
 
       |項目|設定値|
       |-|-|
       |Name|LogToTokyo|
-      |level (Enumerated)|info|
 
    1. 神奈川物流センター
 
       |項目|設定値|
       |-|-|
       |Name|LogToKanagawa|
-      |level (Enumerated)|info|
 
    1. 埼玉物流センター
 
       |項目|設定値|
       |-|-|
       |Name|LogToSaitama|
-      |level (Enumerated)|info|
 
 ## 6. 仕分け結果の確認
 
@@ -514,7 +515,6 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 
 ### プロジェクトファイル
 
-- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.40）](./../data/box_sorter_restapi_1.40.zip)
-- [ボックスソーター（REST API）の実装サンプル（Vantiq r1.39）](./../data/box_sorter_restapi_1.39.zip)
+- [ボックスソーター（Short ver）の実装サンプル（Vantiq r1.42）](./../data/box_sorter_short_1.42.zip)
 
 以上
