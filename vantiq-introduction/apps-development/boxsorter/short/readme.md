@@ -69,7 +69,7 @@ Activity Pattern や VAIL からデータの読み書きが出来ます。
 Service Builder を用いて、アプリケーションを作成していきます。  
 アプリケーションの完成イメージは下記のとおりです。  
 
-![app_boxsorter_restapi.gif](./imgs/app_boxsorter_restapi.gif)
+![app_boxsorter_restapi.gif](./imgs/app_boxsorter_short.gif)
 
 ## アプリケーションの開発で利用する Activity Pattern の紹介
 
@@ -89,6 +89,14 @@ Vantiq 内部からのデータを受け取ったり、 外部からの HTTP POS
 
 イベントに対して Type に保存されているレコードを追加します。  
 イベントが通過するたびに Type へのアクセスが発生するため、パフォーマンスの低下には注意してください。  
+
+### Transformation Activity
+
+![activitypattern_transformation.png](./imgs/activitypattern_transformation.png)
+
+イベントのデータ整形やフォーマットを変換するために **Transformation** を用います。  
+
+入力データや出力データのスキーマが未定な場合やスキーマが変更になった場合にも活用することができ、スキーマに対して柔軟な対応が可能になります。  
 
 ### Filter Activity
 
