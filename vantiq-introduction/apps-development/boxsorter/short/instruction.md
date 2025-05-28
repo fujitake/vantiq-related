@@ -508,6 +508,7 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
    1. **Service Builder** を用いて GUI ベースでアプリケーションを開発しました。
    1. **タスクイベントの表示** からイベントデータを逐次確認する方法を学習しました。
    1. **Enrich Activity** を用いて **Type** のデータをイベントデータに結合しました。
+   1. **Transformation Activity** を用いてデータの整形を行いました。
    1. **Filter Activity** を用いてセンターIDごとにイベントを仕分けしました。
    1. **LogStream Activity** を用いてデータの確認方法を学習しました。
 
