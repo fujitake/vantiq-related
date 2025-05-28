@@ -29,9 +29,9 @@
   - [5. Service Builder を用いたアプリケーションの開発](#5-service-builder-を用いたアプリケーションの開発)
     - [5-1. 【Service Builder】Service ペインの表示](#5-1-service-builderservice-ペインの表示)
     - [5-2. 【Enrich】仕分け条件の追加](#5-2-enrich仕分け条件の追加)
-    - [5-4. 【Transformation】イベントデータの整形](#5-4-transformationイベントデータの整形)
-    - [5-5. 【Filter】仕分け処理の実装](#5-5-filter仕分け処理の実装)
-    - [5-6. 【LogStream】仕分け指示のログ出力の実装](#5-6-logstream仕分け指示のログ出力の実装)
+    - [5-3. 【Transformation】イベントデータの整形](#5-3-transformationイベントデータの整形)
+    - [5-4. 【Filter】仕分け処理の実装](#5-4-filter仕分け処理の実装)
+    - [5-5. 【LogStream】仕分け指示のログ出力の実装](#5-5-logstream仕分け指示のログ出力の実装)
   - [6. 仕分け結果の確認](#6-仕分け結果の確認)
     - [6-1. Log メッセージ画面の表示](#6-1-log-メッセージ画面の表示)
     - [6-2. Log の確認](#6-2-log-の確認)
@@ -314,7 +314,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    `sorting_condition` というプロパティが追加されており、物流センターに関する情報を追加することができました。
 
-### 5-4. 【Transformation】イベントデータの整形
+### 5-3. 【Transformation】イベントデータの整形
 
 **Transformation Activity** を追加して、イベントデータを必要なデータのみになるように整形をします。  
 
@@ -336,7 +336,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    ![transformation_setting.png](./imgs/transformation_setting.png)
 
-### 5-5. 【Filter】仕分け処理の実装
+### 5-4. 【Filter】仕分け処理の実装
 
 特定の物流センターのイベントのみが通過できるフローを実装することで、仕分けを行います。  
 今回は「東京」「神奈川」「埼玉」の3つの物流センター単位で仕分けをしますので、 **Filter Activity** を設定したタスクを3つ実装します。
@@ -440,7 +440,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
      }
      ```
 
-### 5-6. 【LogStream】仕分け指示のログ出力の実装
+### 5-5. 【LogStream】仕分け指示のログ出力の実装
 
 ここまでの実装で仕分けができるようになりましたので、その結果を **Log メッセージ** に表示します。
 
