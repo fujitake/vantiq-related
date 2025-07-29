@@ -14,6 +14,9 @@ VantiqEdgeのインストールが完了していることが前提となりま�
 
 1. MongoDBのバックアップを取る。[MongoDBバックアップ手順](tips_vantiq_edge.md#mongodbをバックアップリストアしたい)  
 
+> **補足説明**  
+> * [1.41→1.42バージョンアップでは追加の手順が必要です。](tips_vantiq_edge.md#vantiqedge-r142アップグレードの追加手順)MongoDBバックアップ後に実施して下さい。
+
 2. `componse.yaml` を開き、`vantiq_edge`の`image`のバージョンを編集する。  
 `vantiq_ai_assistant`、`vantiq_genai_flow_service`を構成している場合、これらのバージョンを`vantiq_edge`と同じバージョンを指定して下さい。  
 （最新のバージョンについては、サポート担当にお尋ねください）  
