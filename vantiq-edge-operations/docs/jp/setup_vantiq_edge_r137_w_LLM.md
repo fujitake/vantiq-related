@@ -80,6 +80,8 @@ services:
       - MONGODB_USERNAME=ars
       - MONGODB_PASSWORD=ars
       - MONGODB_DATABASE=ars02
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=ars
     volumes:
       - vantiq_edge_data:/bitnami:rw
     networks:
@@ -239,6 +241,8 @@ services:
       - MONGODB_USERNAME=ars
       - MONGODB_PASSWORD=ars
       - MONGODB_DATABASE=ars02
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=ars
     volumes:
       - vantiq_edge_data:/bitnami:rw
     networks:
