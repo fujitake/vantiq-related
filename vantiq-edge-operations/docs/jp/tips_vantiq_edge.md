@@ -179,7 +179,7 @@ $ docker ps
 $ docker stop vantiq_edge_server
 ```
 
-### 4. Vantiq Server停止
+### 4. マイグレーションスクリプト実行
 `upgrade`ディレクトリにて、マイグレーションスクリプトを実行して下さい。
 ```
 $ ./upgrade.sh
