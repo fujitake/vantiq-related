@@ -1,6 +1,6 @@
 # VANTIQ on EKS with Terraform
 
-Vantiq Public Cloudを構成するためのAWS Infrastructureの最もシンプルな構成。
+Vantiq Private Cloudを構成するためのAWS Infrastructureの最もシンプルな構成。
 
 ## 構成
 

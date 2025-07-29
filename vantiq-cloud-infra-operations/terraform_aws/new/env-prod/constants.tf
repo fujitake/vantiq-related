@@ -4,8 +4,8 @@
 locals {
   common_config = {
     cluster_name                   = "<INPUT-YOUR-CLUSTER-NAME>"
-    cluster_version                = "1.28"
-    bastion_kubectl_version        = "1.28.5"
+    cluster_version                = "<INPUT-YOUR-CLUSTER-VERSION>"
+    bastion_kubectl_version        = "<INPUT-YOUR-KUBECTL-VERSION>"
     env_name                       = "prod"
     region                         = "<INPUT-YOUR-REGION>"
     worker_access_private_key      = "<INPUT-YOUR-SSH-PRIVATE-KEY-FILE-NAME>"
@@ -67,7 +67,7 @@ locals {
     db_instance_class       = "db.t3.medium"
     db_storage_size         = 100
     db_storage_type         = "gp2"
-    postgres_engine_version = "14.10"
+    postgres_engine_version = "17.5"
     keycloak_db_expose_port = 5432
   }
 }
@@ -80,8 +80,8 @@ locals {
     managed_node_group_config = {
       "VANTIQ" = {
         ami_type           = "AL2023_x86_64_STANDARD"
-        kubernetes_version = "1.28"
-        instance_types     = ["c5.xlarge"] # c5.xlarge x 3
+        kubernetes_version = "${local.common_config.cluster_version}"
+        instance_types     = ["c5.xlarge"]
         disk_size          = 40
         scaling_config = {
           desired_size = 3
@@ -92,8 +92,8 @@ locals {
       },
       "MongoDB" = {
         ami_type           = "AL2023_x86_64_STANDARD"
-        kubernetes_version = "1.28"
-        instance_types     = ["r5.xlarge"] # r5.xlarge x 3
+        kubernetes_version = "${local.common_config.cluster_version}"
+        instance_types     = ["r5.xlarge"]
         disk_size          = 40
         scaling_config = {
           desired_size = 3
@@ -102,10 +102,10 @@ locals {
         }
         node_workload_label = "database"
       },
-      "keycloak" = {
+      "Keycloak" = {
         ami_type           = "AL2023_x86_64_STANDARD"
-        kubernetes_version = "1.28"
-        instance_types     = ["t3.medium"] # t3.medium x 3
+        kubernetes_version = "${local.common_config.cluster_version}"
+        instance_types     = ["t3.medium"]
         disk_size          = 40
         scaling_config = {
           desired_size = 3
@@ -114,10 +114,10 @@ locals {
         }
         node_workload_label = "shared"
       },
-      "grafana" = {
+      "Grafana" = {
         ami_type           = "AL2023_x86_64_STANDARD"
-        kubernetes_version = "1.28"
-        instance_types     = ["r5.xlarge"] # r5.xlarge x 1
+        kubernetes_version = "${local.common_config.cluster_version}"
+        instance_types     = ["r5.xlarge"]
         disk_size          = 40
         scaling_config = {
           desired_size = 1
@@ -126,10 +126,10 @@ locals {
         }
         node_workload_label = "influxdb"
       },
-      "metrics" = {
+      "Metrics" = {
         ami_type           = "AL2023_x86_64_STANDARD"
-        kubernetes_version = "1.28"
-        instance_types     = ["m5.xlarge"] # m5.xlarge x 1
+        kubernetes_version = "${local.common_config.cluster_version}"
+        instance_types     = ["m5.xlarge"]
         disk_size          = 40
         scaling_config = {
           desired_size = 1
@@ -138,10 +138,10 @@ locals {
         }
         node_workload_label = "compute"
       },
-      "ai_assistant" = {
+      "Ai_assistant" = {
         ami_type           = "AL2023_x86_64_STANDARD"
-        kubernetes_version = "1.28"
-        instance_types     = ["c5.xlarge"] # c5.xlarge x 1
+        kubernetes_version = "${local.common_config.cluster_version}"
+        instance_types     = ["c5.xlarge"]
         disk_size          = 40
         scaling_config = {
           desired_size = 1
@@ -151,7 +151,7 @@ locals {
         node_workload_label = "orgCompute"
       },
     }
-    single_az_node_list          = ["grafana"]
+    single_az_node_list          = ["Grafana", "Metrics", "Ai_assistant"]
     sg_ids_allowed_ssh_to_worker = []
   }
   eks_addon_config = {
