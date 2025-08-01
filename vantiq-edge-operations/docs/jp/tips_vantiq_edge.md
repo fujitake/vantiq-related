@@ -12,6 +12,7 @@
 - [Tips](#tips)
   - [MongoDBをバックアップ・リストアしたい](#mongodbをバックアップリストアしたい)
   - [Qdrantをバックアップ・リストアしたい](#semanticindexqdrant-collectionをバックアップリストアしたい)
+  - [VantiqEdge R1.42アップグレードの追加手順](#vantiqedge-r142アップグレードの追加手順)
 
 # トラブルシューティング過去事例
 
@@ -149,3 +150,39 @@ vantiq dump semanticindexes <semanticindex名> -s <profile名> -d <バックア�
 vantiq load semanticindexes -s <profile名> <dmpファイル>
 ```
 ※5MB分のテキストファイルでは、10分ほどでリストアが完了することを確認しております。
+
+## VantiqEdge R1.42アップグレードの追加手順
+Vantiq Edgeを1.41から1.42にアップグレードするには、Qdrantベクターデータベースのマイグレーションが必要です。マイグレーションスクリプトをご利用下さい。
+
+### 1. マイグレーションスクリプトのダウンロード
+[`edgeQDrantUpgrade.zip`](https://dev.vantiq.com/downloads/edgeQDrantUpgrade.zip)をダウンロードして下さい。
+
+### 2. マイグレーションスクリプトのセットアップ
+`compose.yaml`が存在するディレクトリに、`upgrade`ディレクトリを作成して下さい。  
+その後、`upgrade`ディレクトリに、`edgeQDrantUpgrade.zip`を格納して下さい。
+```
+. (<- ここがルート)
+|-- compose.yaml
+|-- config
+|-- upgrade
+    |-- edgeQDrantUpgrade.zip
+```
+その後、`edgeQDrantUpgrade.zip`を解凍して下さい。
+
+### 3. Vantiq Server停止
+Vantiq Serverの状態を確認してください。
+```
+$ docker ps
+```
+もし`vantiq_edge_server`が起動している場合は、停止して下さい。
+```
+$ docker stop vantiq_edge_server
+```
+
+### 4. マイグレーションスクリプト実行
+`upgrade`ディレクトリにて、マイグレーションスクリプトを実行して下さい。
+```
+$ ./upgrade.sh
+```
+
+`Migration complete.`のメッセージが出力されれば完了となりますので、[バージョンアップ手順](update_vantiq_edge_version.md#マイナーバージョンアップ)に戻って下さい。

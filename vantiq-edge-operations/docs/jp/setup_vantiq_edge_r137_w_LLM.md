@@ -52,8 +52,8 @@ compose.yamlを配置するディレクトリにconfigディレクトリを作�
 | ---- | ---- |
 |  R1.37 and R1.38  |  v1.7.4  |
 |  R1.39 and up to R1.40.9  |  v1.9.2  |
-|  R1.40.10 and later  |  v1.12.5  |
-
+|  R1.40.10 and up to R1.41  |  v1.12.5  |
+|  R1.42 and later  |  v1.13.4  |
 
 ```yaml
 services:
@@ -74,12 +74,14 @@ services:
 
   vantiq_edge_mongo:
     container_name: vantiq_edge_mongo
-    image: bitnami/mongodb:4.2.5
+    image: bitnami/mongodb:4.2.21
     restart: unless-stopped
     environment:
       - MONGODB_USERNAME=ars
       - MONGODB_PASSWORD=ars
       - MONGODB_DATABASE=ars02
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=ars
     volumes:
       - vantiq_edge_data:/bitnami:rw
     networks:
@@ -111,7 +113,7 @@ services:
 
 #  vantiq_unstructured_api:
 #    container_name: vantiq_unstructured_api
-#    image: quay.io/vantiq/unstructured-api:0.0.73
+#    image: quay.io/vantiq/unstructured-api:0.0.82
 #    restart: unless-stopped
 #    environment:
 #      - PORT=18000
@@ -233,12 +235,14 @@ services:
 
   vantiq_edge_mongo:
     container_name: vantiq_edge_mongo
-    image: bitnami/mongodb:4.2.5
+    image: bitnami/mongodb:4.2.21
     restart: unless-stopped
     environment:
       - MONGODB_USERNAME=ars
       - MONGODB_PASSWORD=ars
       - MONGODB_DATABASE=ars02
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=ars
     volumes:
       - vantiq_edge_data:/bitnami:rw
     networks:
@@ -270,7 +274,7 @@ services:
 
 #  vantiq_unstructured_api:
 #    container_name: vantiq_unstructured_api
-#    image: quay.io/vantiq/unstructured-api:0.0.73
+#    image: quay.io/vantiq/unstructured-api:0.0.82
 #    restart: unless-stopped
 #    environment:
 #      - PORT=18000

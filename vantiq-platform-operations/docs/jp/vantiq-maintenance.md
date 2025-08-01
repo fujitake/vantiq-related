@@ -114,6 +114,7 @@ helm ls -A
 > [LLM機能を利用する場合](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot37Upgrade.md)  
 > * [1.38→1.39バージョンアップでは追加の手順が必要です。](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot39Upgrade.md)
 > * [1.39→1.40バージョンアップでは追加の手順が必要です。](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot40Upgrade.md)
+> * [1.41→1.42バージョンアップでは追加の手順が必要です。](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/R1dot42Upgrade.md)
 
 Vantiq の Minor Version がインクレメントされるアップグレード（e.g. `1.30.10` -> `1.31.0`)  
 Enhancement のための DB Schema 拡張を伴うため、ダウンタイムが必要になる。
