@@ -69,26 +69,24 @@ SubmitPrompt Activity に似ています。
 
 ![resource_llm.png](./imgs/resource_llm.png)
 
-```json
-// Configuration の例
-{
-    "llm (LLM)": "Choose Your LLM Resources"
-    , "outputType (Enumerated)": "String"
-    , "outputTypeSchema (Type)": null
-}
+```yaml
+# Configuration の例
+Required Parameter:
+    llm (LLM): "Choose Your LLM Resources"
+Optional Parameter:
+    outputType (Enumerated): "String"
+    outputTypeSchema (Type):
 ```
 
 #### Input Type
 
 Input Type は `String`, `langchain_core.prompt_values.PromptValue`, `io.vantiq.ai.ChatMessage[]` のいずれかになります。  
-単体での利用もできますが、 PromptFromTemplate と組み合わせて利用する場合が多いです。  
+単体での利用もできますが、 PromptFromTemplate Component と組み合わせて利用する場合が多いです。  
 
-```json
-// input の例
-{
-    "input": "こんにちは"
-    , "config": {}
-}
+```yaml
+# input の例
+input: "こんにちは"
+config: {}
 ```
 
 #### Output Type
@@ -96,9 +94,9 @@ Input Type は `String`, `langchain_core.prompt_values.PromptValue`, `io.vantiq.
 デフォルトの Output Type は `String` になります。  
 LLM からのレスポンスを解析して JSON などの形式にフォーマットすることもできます。
 
-```json
-// return の例
-"こんにちは！今日はどんなお手伝いができますか？"
+```yaml
+# return の例
+こんにちは！今日はどんなお手伝いができますか？
 ```
 
 ### Procedure
@@ -118,6 +116,16 @@ Transformation Activity に似ています。
 
 ![resource_promptfromtemplate.png](./imgs/resource_promptfromtemplate.png)
 
+```yaml
+# Configuration の例
+Required Parameter:
+    promptTemplate Type: "Template"
+    promptTemplate: "小説のセリフを考えています。 ${topic} についてブラックジョークを考えてください。レスポンスは作成したブラックジョークのみ返してください。"
+Optional Parameter:
+    defaultValues（Array of Labeled Expression）: <null>
+    isSystemPrompt (Boolean): false
+```
+
 #### Input Type
 
 テンプレートは `String`, `Vantiqドキュメント`, `URL` から指定します。  
@@ -125,26 +133,22 @@ Transformation Activity に似ています。
 Input Type は `String`, `Object`, `langchain_core.documents.Document` のいずれかになります。  
 入力値は、Vantiqテンプレート構文または Python f文字列構文を使用します。  
 
-##### 例：
-
-```json
-{
-    "promptTemplate Type": "Template"
-    , "promptTemplate": "小説のセリフを考えています。 ${topic} についてブラックジョークを考えてください。レスポンスは作成したブラックジョークのみ返してください。"
-}
-```
-
-```json
-{
-    "input": {
-        "topic": "上司"
-    }
-    , "config": {}
-}
+```yaml
+# input の例
+"input":
+    "topic": "上司"
+"config": {}
 ```
 
 #### Output Type
 
+Output Type は `langchain_core.prompt_values.PromptValue` になります。  
+LLM Component が `langchain_core.prompt_values.PromptValue` に対応しているため、そのまま受け渡すことができます。  
+
+```yaml
+# return の例
+「うちの上司、仕事ができるって言うけど、実際にはただのプロのメール転送屋だよ。」
+```
 
 ### SemanticIndex
 
