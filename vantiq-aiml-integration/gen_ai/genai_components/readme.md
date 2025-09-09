@@ -95,7 +95,7 @@ Input Type は `String`, `langchain_core.prompt_values.PromptValue`, `io.vantiq.
 LLM からのレスポンスを解析して JSON などの形式にフォーマットすることもできます。
 
 ```json:例（return）.json
-こんにちは！今日はどんなお手伝いができますか？
+"こんにちは！今日はどんなお手伝いができますか？"
 ```
 
 ### Procedure
