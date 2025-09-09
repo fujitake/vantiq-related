@@ -29,8 +29,9 @@ Vantiq R1.37にて実装された新機能 LLM関連機能についての資料�
 
 ### GenAI に関する手順
 
+- [GenAI Builder について](./gen_ai/about_genai_builder/readme.md)
 - [GenAI Flow Service Connector の導入方法](./gen_ai/genai_flow_service_connector/readme.md)
-- [GenAI Procedures の呼び出し方](./gen_ai/call_genai_procedures/readme.md)
+- [GenAI コンポーネント](./gen_ai/genai_components/readme.md)
 - [Webサイトの情報をLLMで利用する方法](./gen_ai/using_website_information_in_llm/readme.md)
 
 ## 画像処理AI
