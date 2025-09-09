@@ -69,7 +69,8 @@ SubmitPrompt Activity に似ています。
 
 ![resource_llm.png](./imgs/resource_llm.png)
 
-```json:例（Configuration）.json
+```json
+// Configuration の例
 {
     "llm (LLM)": "Choose Your LLM Resources"
     , "outputType (Enumerated)": "String"
@@ -82,7 +83,8 @@ SubmitPrompt Activity に似ています。
 Input Type は `String`, `langchain_core.prompt_values.PromptValue`, `io.vantiq.ai.ChatMessage[]` のいずれかになります。  
 単体での利用もできますが、 PromptFromTemplate と組み合わせて利用する場合が多いです。  
 
-```json:例（input）.json
+```json
+// input の例
 {
     "input": "こんにちは"
     , "config": {}
@@ -94,7 +96,8 @@ Input Type は `String`, `langchain_core.prompt_values.PromptValue`, `io.vantiq.
 デフォルトの Output Type は `String` になります。  
 LLM からのレスポンスを解析して JSON などの形式にフォーマットすることもできます。
 
-```json:例（return）.json
+```json
+// return の例
 "こんにちは！今日はどんなお手伝いができますか？"
 ```
 
