@@ -34,43 +34,43 @@ Vantiq r1.37以降では、大規模言語モデル (LLM) との対話をプラ�
 > 既定モデル以外のモデルを使用したい場合は設定内容が一部異なります。  
 > 下記のページを参照してください。  
 > 
-> - [Azure OpenAI のモデルを Vantiq で利用する方法](./azure_openai_config.md)
+> - [Azure OpenAI のモデルを Vantiq で利用する方法](/vantiq-aiml-integration/azure-openai-config/readme.md)
 
 IDEのメニューから、[追加] > [LLMs] を選択します。
 
-![AddLLMs](../../imgs/LLM_Platform_Support/add_llms.png)
+![AddLLMs](./imgs/add_llms.png)
 
 LLMsの一覧が表示されます。「新規」をクリックし、新しいLLMリソースを作成します。
 
-![CreateNewLLM](../../imgs/LLM_Platform_Support/create_new_llm.png)
+![CreateNewLLM](./imgs/create_new_llm.png)
 
 ### Generative LLM
 
 1. LLM Name, Package を入力し、Typeは `Generative` を選択します。API Key Secret にはあらかじめ作成しておいたOpenAI API KeyのSecretを選択します。
 
-   ![CreateGenerativeLLM_01](../../imgs/LLM_Platform_Support/create_new_generativellm_01.png)
+   ![CreateGenerativeLLM_01](./imgs/create_new_generativellm_01.png)
 
 1. Model Name を選択します。Generative LLM の既定のモデルは、OpenAIの[GPT3.5](https://platform.openai.com/docs/models/gpt-3-5)、[GPT-4](https://platform.openai.com/docs/models/gpt-4) のモデルとなります。設定したOpenAI API Keyで利用可能なモデルを選択してください。
 
-   ![CreateGenerativeLLM_02](../../imgs/LLM_Platform_Support/create_new_generativellm_02.png)
+   ![CreateGenerativeLLM_02](./imgs/create_new_generativellm_02.png)
 
 1. [OK]をクリックし、作成を完了します。作成したLLMリソースが一覧に表示されます。
 
-   ![CreateGenerativeLLM_03](../../imgs/LLM_Platform_Support/create_new_generativellm_03.png)
+   ![CreateGenerativeLLM_03](./imgs/create_new_generativellm_03.png)
 
 ### Embedding LLM
 
 1. LLM Name, Package を入力し、Typeは `Embedding` を選択します。API Key Secret にはあらかじめ作成しておいたOpenAI API KeyのSecretを選択します。
 
-   ![CreateEmbeddingLLM_01](../../imgs/LLM_Platform_Support/create_new_embeddingllm_01.png)
+   ![CreateEmbeddingLLM_01](./imgs/create_new_embeddingllm_01.png)
 
 1. Model Name を選択します。Embedding LLM の既定のモデルは、OpenAI の [text-embedding-ada-002モデル](https://platform.openai.com/docs/models/embeddings)と、HuggingFace の[Sentence Transformers モデル](https://www.sbert.net/docs/pretrained_models.html#model-overview)となります。ここでは`text-embedding-ada-002` を選択します。既定のモデルを使用する場合、Vector Size・Dinstance Functionは設定不要です。
 
-   ![CreateEmbeddingLLM_02](../../imgs/LLM_Platform_Support/create_new_embeddingllm_02.png)
+   ![CreateEmbeddingLLM_02](./imgs/create_new_embeddingllm_02.png)
 
 1. [OK]をクリックし、作成を完了します。作成したLLMリソースが一覧に表示されます。
 
-   ![CreateEmbeddingLLM_03](../../imgs/LLM_Platform_Support/create_new_embeddingllm_03.png)
+   ![CreateEmbeddingLLM_03](./imgs/create_new_embeddingllm_03.png)
 
 ## Semantic Index の作成
 
@@ -78,15 +78,15 @@ LLMsの一覧が表示されます。「新規」をクリックし、新しいL
 
 1. IDEのメニューから、[追加] > [Semantic Indexes] を選択します。
 
-   ![AddSemanticIndexess](../../imgs/LLM_Platform_Support/add_smtcidx.png)
+   ![AddSemanticIndexess](./imgs/add_smtcidx.png)
 
 1. Semantic Indexesの一覧が表示されます。「新規」をクリックし、新しいSemantic Indexリソースを作成します。
 
-   ![CreateNewSemanticIndex](../../imgs/LLM_Platform_Support/crate_smtcidx.png)
+   ![CreateNewSemanticIndex](./imgs/crate_smtcidx.png)
 
 1. Semantic Index Name, Package を入力し、Embedding LLM Nameは 作成したEmbedding LLM を選択します。Default Q&A LLM Nameは、質問に対する回答に使用されるGenerative LLMを選択します。ここでは、作成したGenerative LLMを選択します。設定しなくても構いません。
 
-   ![CreateSemanticIndex_01](../../imgs/LLM_Platform_Support/create_new_semanticindex_01.png)
+   ![CreateSemanticIndex_01](./imgs/create_new_semanticindex_01.png)
 
 ### Semantic Index Entry の作成
 
@@ -94,27 +94,26 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
 
 1. Semantic Indexの一覧から、Entryを追加するSemantic Indexを選択します。
 
-   ![CreateSemanticIndexEntry_01](../../imgs/LLM_Platform_Support/create_new_entry_01.png)
+   ![CreateSemanticIndexEntry_01](./imgs/create_new_entry_01.png)
 
 1. Semantic Index Entries のセクションで、「新規」をクリックします。
 
-   ![CreateSemanticIndexEntry_02](../../imgs/LLM_Platform_Support/create_new_entry_02.png)
+   ![CreateSemanticIndexEntry_02](./imgs/create_new_entry_02.png)
 
 1. Semantic Index Entries のセクションで、「新規」をクリックします。
 
-   ![CreateSemanticIndexEntry_03](../../imgs/LLM_Platform_Support/create_new_entry_03.png)
+   ![CreateSemanticIndexEntry_03](./imgs/create_new_entry_03.png)
 
-2. Entry Typeは `Upload`, `Remote`, `Resource`, `Embedded` から選択可能です。ここでは、`Upload` を選択し、ファイルをアップロードします。ここでは、gpt-3.5-turboが持っていない情報をコンテキストに追加するため、2023年の[日本国内の裁判の判例](https://www.courts.go.jp/app/hanrei_jp/search1?reload=1)をアップロードします。[アップロードファイル](../../conf/LLM_Platform_Support/092381_hanrei.pdf)
+2. Entry Typeは `Upload`, `Remote`, `Resource`, `Embedded` から選択可能です。ここでは、`Upload` を選択し、ファイルをアップロードします。ここでは、gpt-3.5-turboが持っていない情報をコンテキストに追加するため、2023年の[日本国内の裁判の判例](https://www.courts.go.jp/app/hanrei_jp/search1?reload=1)をアップロードします。[アップロードファイル](./conf/092381_hanrei.pdf)
 
-   ![CreateSemanticIndexEntry_04](../../imgs/LLM_Platform_Support/create_new_entry_05.png)
+   ![CreateSemanticIndexEntry_04](./imgs/create_new_entry_05.png)
 
 1．正常にアップロードされました。
 
-   ![CreateSemanticIndexEntry_05](../../imgs/LLM_Platform_Support/create_new_entry_06.png)
+   ![CreateSemanticIndexEntry_05](./imgs/create_new_entry_06.png)
 
 > [!NOTE]
-> ここでは、IDE上で一つずつSemantic Index Entryを作成していますが、[Semantic Index へのEntry追加方法](./load_semantic_index_entry.md) を参照することで、CLIを使用して一括でSemantic Index Entryを作成することも可能です。
-
+> ここでは、IDE上で一つずつSemantic Index Entryを作成していますが、[Semantic Index へのEntry追加方法](/vantiq-aiml-integration/load-semantic-index-entry/readme.md) を参照することで、CLIを使用して一括でSemantic Index Entryを作成することも可能です。
 
 ### Vantiqアプリ内での使用
 
@@ -122,15 +121,15 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
 
 1. 新規サービスを作成し、Submit Prompt アクティビティを使用したEvent Handlerを作成します。
 
-   ![submitpromptapp_01](../../imgs/LLM_Platform_Support/submitpromptapp_01.png)
+   ![submitpromptapp_01](./imgs/submitpromptapp_01.png)
 
 2. Event Stream には Topic を作成し、設定します。
 
-   ![submitpromptapp_02](../../imgs/LLM_Platform_Support/submitpromptapp_02.png)
+   ![submitpromptapp_02](./imgs/submitpromptapp_02.png)
 
 3. Submit Prompt アクティビティの設定をします。llm には作成したGenerative LLMを、promptにはLLMに送信するプロンプトをイベントから取得するように設定します。
 
-   ![submitpromptapp_03](../../imgs/LLM_Platform_Support/submitpromptapp_03.png)
+   ![submitpromptapp_03](./imgs/submitpromptapp_03.png)
 
 4. Topicにメッセージを発行します。
 
@@ -138,33 +137,33 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
    {"question":"ストリーミングプロセッシングについて解説してください。"}
    ```
 
-   ![submitpromptapp_04](../../imgs/LLM_Platform_Support/submitpromptapp_04.png)
+   ![submitpromptapp_04](./imgs/submitpromptapp_04.png)
 
 5. ログに、LLMからの回答が出力されていることを確認します。
 
-   ![submitpromptapp_05](../../imgs/LLM_Platform_Support/submitpromptapp_05.png)
+   ![submitpromptapp_05](./imgs/submitpromptapp_05.png)
 
 6. questionに、LLM(gpt-3.5-turbo)が持っていない情報に対する質問を設定し、Topicにメッセージを発行します。
 
-   ![submitpromptapp_06](../../imgs/LLM_Platform_Support/submitpromptapp_06.png)
+   ![submitpromptapp_06](./imgs/submitpromptapp_06.png)
 
 7. 今回設定しているGenerative LLMのモデル `GPT-3.5-turbo` は 2021年9月までのデータを学習しています。この質問に関する情報は有していないため、回答は得られません。これは正しい動作です。
 
-   ![submitpromptapp_07](../../imgs/LLM_Platform_Support/submitpromptapp_07.png)
+   ![submitpromptapp_07](./imgs/submitpromptapp_07.png)
 
 ### Answer Question
 
 1. 新規サービスを作成し、Answer Question アクティビティを使用したEvent Handlerを作成します。
 
-   ![answerquestionapp_01](../../imgs/LLM_Platform_Support/answerquestionapp_01.png)
+   ![answerquestionapp_01](./imgs/answerquestionapp_01.png)
 
 2. Event Stream には Topic を作成し、設定します。
 
-   ![answerquestionapp_02](../../imgs/LLM_Platform_Support/submitpromptapp_02.png)
+   ![answerquestionapp_02](./imgs/submitpromptapp_02.png)
 
 3. Answer Question アクティビティの設定をします。semanticIndex には作成したSemantic Indexを、questionにはSemantic Indexに送信する質問をイベントから取得するように設定します。その他はオプションですが、qaLLMは回答の文章を生成するためのGenerative LLMを設定します。未設定の場合、Semantic IndexのDefault Q&A LLM Name に設定したLLMが使用されます。
 
-   ![answerquestionapp_03](../../imgs/LLM_Platform_Support/answerquestionapp_02.png)
+   ![answerquestionapp_03](./imgs/answerquestionapp_02.png)
 
 4. Topicにメッセージを発行します。
 
@@ -172,7 +171,7 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
    {"question":"令和５年（ネ）第１００５０号 損害賠償請求控訴事件の被控訴人の名前を回答してください。回答は日本語で行ってください。"}
    ```
 
-   ![submitpromptapp_04](../../imgs/LLM_Platform_Support/submitpromptapp_06.png)
+   ![submitpromptapp_04](./imgs/submitpromptapp_06.png)
 
 5. ログに、LLMからの回答が出力されていることを確認します。Semantic Index Entry に追加された情報から回答が生成されていることがわかります。
 
@@ -191,7 +190,6 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
       filetype=application/pdf, 
    ```
 
-   ![answerquestionapp_05](../../imgs/LLM_Platform_Support/answerquestionapp_03.png)
+   ![answerquestionapp_05](./imgs/answerquestionapp_03.png)
 
-
-[サンプルプロジェクト](../../conf/LLM_Platform_Support/llm_demo.zip)
+[サンプルプロジェクト](./conf/llm_demo.zip)
