@@ -19,18 +19,18 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 
 Vantiq Resource に関する解説やガイドです。
 
-- Vantiq Service
-  - [Vantiq Service の概要](./vantiq-resources/vantiq-service/about-service/readme.md)
-  - [Stateful Service とは](./vantiq-resources/vantiq-service/stateful-service/readme.md)
-  - [Vantiq Service の実装とベストプラクティス](./vantiq-resources/vantiq-service/Implement/readme.md)
-  - [Cache Service](./vantiq-resources/vantiq-service/cache-service/readme.md)
-- Vantiq Source
-  - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-resources/vantiq-source/data-sending/readme.md)
-- Vantiq Client
-  - [Vantiq Cleint について](./vantiq-resources/vantiq-client/about-client/readme.md)
-  - [Vantiq Public Client](./vantiq-resources/vantiq-client/public-client/readme.md)
-- Vantiq Access Token
-  - [Vantiq Access Token の発行方法](./vantiq-resources/vantiq-access-token/create-access-token/readme.md)
+- Service
+  - [Vantiq Service の概要](./vantiq-resources/service/about-service/readme.md)
+  - [Stateful Service とは](./vantiq-resources/service/stateful-service/readme.md)
+  - [Vantiq Service の実装とベストプラクティス](./vantiq-resources/service/Implement/readme.md)
+  - [Cache Service](./vantiq-resources/service/cache-service/readme.md)
+- Source
+  - [Vantiq Sourceを使った外部へのデータ送信のまとめ](./vantiq-resources/source/data-sending/readme.md)
+- Client
+  - [Vantiq Cleint について](./vantiq-resources/client/about-client/readme.md)
+  - [Vantiq Public Client](./vantiq-resources/client/public-client/readme.md)
+- Access Token
+  - [Vantiq Access Token の発行方法](./vantiq-resources/access-token/create-access-token/readme.md)
 
 ## Vantiq CLI
 
