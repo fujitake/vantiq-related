@@ -1,8 +1,8 @@
-# Vantiq LLM とMattermostのインテグレーションサンプル（機能編）
+# Vantiq LLM と Mattermost のインテグレーションサンプル（機能編）
 
 ## 目次
 
-- [Vantiq LLM とMattermostのインテグレーションサンプル（機能編）](#vantiq-llm-とmattermostのインテグレーションサンプル機能編)
+- [Vantiq LLM と Mattermost のインテグレーションサンプル（機能編）](#vantiq-llm-と-mattermost-のインテグレーションサンプル機能編)
   - [目次](#目次)
   - [概要](#概要)
   - [スレッドへの返信](#スレッドへの返信)
