@@ -48,9 +48,9 @@ Edit JSON Configuration の設定を確認の上、OK を押して閉じてく�
 
 ## その後の手順
 
-続きの設定については [LLM Platform Support](/vantiq-aiml-integration/documents/llm-platform-support/readme.md) を参照の上、進めてください。
+続きの設定については [LLM Platform Support](/vantiq-aiml-integration/llm-platform-support/readme.md) を参照の上、進めてください。
 
 ## オプション: Source を使った設定
 
-LLM 機能ではなく、Vantiq Source を使った設定を行う必要がある場合は、 [こちらの記事](/vantiq-aiml-integration/documents/vantiq-llm-use-local-models-via-source/readme.md) をご参照ください。  
+LLM 機能ではなく、Vantiq Source を使った設定を行う必要がある場合は、 [こちらの記事](/vantiq-aiml-integration/vantiq-llm-use-local-models-via-source/readme.md) をご参照ください。  
 特別な理由がない限り LLM リソースとして利用することを推奨します。  
