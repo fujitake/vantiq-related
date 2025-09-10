@@ -31,6 +31,11 @@ Vantiq Resource に関する解説やガイドです。
   - [Vantiq Public Client](./vantiq-resources/vantiq-client/public-client/readme.md)
 - Vantiq Access Token
   - [Vantiq Access Token の発行方法](./vantiq-resources/vantiq-access-token/create-access-token/readme.md)
+- GenAI
+  - [GenAI Builder について](./vantiq-resources/vantiq_genai/about_genai_builder/readme.md)
+  - [GenAI Flow Service Connector の導入方法](./vantiq-resources/vantiq_genai/genai_flow_service_connector/readme.md)
+  - [GenAI コンポーネント](./vantiq-resources/vantiq_genai/genai_components/readme.md)
+  - [Webサイトの情報をLLMで利用する方法](./vantiq-resources/vantiq_genai/using_website_information_in_llm/readme.md)
 
 ## Vantiq CLI
 
