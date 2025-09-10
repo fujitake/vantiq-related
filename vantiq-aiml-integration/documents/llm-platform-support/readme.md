@@ -34,7 +34,7 @@ Vantiq r1.37以降では、大規模言語モデル (LLM) との対話をプラ�
 > 既定モデル以外のモデルを使用したい場合は設定内容が一部異なります。  
 > 下記のページを参照してください。  
 > 
-> - [Azure OpenAI のモデルを Vantiq で利用する方法](/vantiq-aiml-integration/azure-openai-config/readme.md)
+> - [Azure OpenAI のモデルを Vantiq で利用する方法](/vantiq-aiml-integration/documents/azure-openai-config/readme.md)
 
 IDEのメニューから、[追加] > [LLMs] を選択します。
 
@@ -113,7 +113,7 @@ Semantic Indexに追加のコンテクストを提供するために、Semantic 
    ![CreateSemanticIndexEntry_05](./imgs/create_new_entry_06.png)
 
 > [!NOTE]
-> ここでは、IDE上で一つずつSemantic Index Entryを作成していますが、[Semantic Index へのEntry追加方法](/vantiq-aiml-integration/load-semantic-index-entry/readme.md) を参照することで、CLIを使用して一括でSemantic Index Entryを作成することも可能です。
+> ここでは、IDE上で一つずつSemantic Index Entryを作成していますが、[Semantic Index へのEntry追加方法](/vantiq-aiml-integration/documents/load-semantic-index-entry/readme.md) を参照することで、CLIを使用して一括でSemantic Index Entryを作成することも可能です。
 
 ### Vantiqアプリ内での使用
 

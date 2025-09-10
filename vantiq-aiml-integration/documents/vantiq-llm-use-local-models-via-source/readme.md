@@ -16,7 +16,7 @@ OpenAI API 互換の REST エンドポイントを用意する方法はいくつ
 ### 対象外のモデルについて
 
 OpenAI、Azure OpenAI Service にて提供されるモデルを使う場合は、専用のアクティビティパターンが提供されています。  
-利用方法は [こちらの記事](/vantiq-aiml-integration/llm-platform-support/readme.md) をご参照下さい。  
+利用方法は [こちらの記事](/vantiq-aiml-integration/documents/llm-platform-support/readme.md) をご参照下さい。  
 本記事の手順でもご利用頂けますが、専用アクティビティパターンでは最適化が図られており、そちらの利用をオススメします。  
 
 ## 手順

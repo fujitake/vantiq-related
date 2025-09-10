@@ -191,7 +191,7 @@ Mattermost からの Event を受信し、 Semantic Index に登録された情�
 スレッド内では会話コンテクストが維持されます。  
 
 > **補足**  
-> スレッドへの返信方法は [こちら](/vantiq-aiml-integration/mattermost/mattermost-integration-feature/readme.md#スレッドへの返信) を参照してください。  
+> スレッドへの返信方法は [こちら](/vantiq-aiml-integration/documents/mattermost/mattermost-integration-feature/readme.md#スレッドへの返信) を参照してください。  
 
 ## リソース
 

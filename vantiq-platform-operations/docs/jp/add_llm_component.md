@@ -189,8 +189,9 @@ c) `vantiq.configuration`に下記のセクションを追加する。
    最初のコマンドは失敗し、2番目のコマンドは成功するはず。
 
  
-7) 動作確認として、次のページを参照し、LLM機能が利用できるかを確認する。
-   https://github.com/fujitake/vantiq-related/blob/main/vantiq-aiml-integration/docs/jp/LLM_Platform_Support.md
+7) 動作確認として、次のページを参照し、LLM機能が利用できるかを確認する。  
+   [LLM Platform Support](/vantiq-aiml-integration/documents/llm-platform-support/readme.md)
+
 
 ## GenAiFlowService Pod デプロイ
 ※GenAiFlowService Podは、Vantiq R1.39以降のみ対応。
