@@ -18,24 +18,24 @@ Vantiq を用いたアプリケーションの開発を行う上で、必要と�
 
 ## Vantiq アプリケーション開発関連
 
-### [Vantiq のアプリケーション開発を学ぶ](./vantiq-apps-development)
+### [Vantiq のアプリケーション開発を学ぶ](./vantiq-apps-development/readme.md)
 
 [Vantiq 入門](./vantiq-introduction/readme.md)の次のステップとして、アプリ開発に関するガイドや運用に関する情報をまとめています。
 
-### [Google Colaboratory を使ったデータジェネレータ](./vantiq-google-colab)
+### [Google Colaboratory を使ったデータジェネレータ](./vantiq-google-colab/readme.md)
 
 Google Colaboratory の基本的な使い方やデータジェネレータのサンプルコードを紹介しています。  
 Vantiq アプリを開発する際に便利なデータジェネレータを簡単にご用意頂けます。
 
-### [Vantiq とパブリッククラウド サービスとの連携](./vantiq-external-services-integration)
+### [Vantiq とパブリッククラウド サービスとの連携](./vantiq-external-services-integration/readme.md)
 
 Vantiq アプリケーション開発チーム向けの Vantiq とパブリッククラウド サービスとの連携に関するガイドや設定手順を紹介しています。MQTT や Kafka といったブローカー、データベースサービス、メールサービスとの連携に関するガイドや手順となります。
 
-### [Vantiq とデバイスとの連携](./vantiq-devices-integration)
+### [Vantiq とデバイスとの連携](./vantiq-devices-integration/readme.md)
 
 Vantiq アプリケーション開発チーム向けのVantiqとデバイスを連携させるガイドラインやサンプルコードです。
 
-### [Vantiq とAI/MLとの連携](./vantiq-aiml-integration)
+### [Vantiq とAI/MLとの連携](./vantiq-aiml-integration/readme.md)
 
 Vantiq アプリケーション開発チーム向けのVantiqとAI/MLを連携させるガイドラインやサンプルコードです。
 
@@ -43,15 +43,15 @@ Vantiq アプリケーション開発チーム向けのVantiqとAI/MLを連携�
 
 Vantiq Private Cloud のインストールと運用管理における対応手順など、インフラチームの方々向けの情報をまとめました。
 
-### [Vantiq Private Cloud 構築のための AWS EKS / Azure AKS インフラ関連情報](./vantiq-cloud-infra-operations)
+### [Vantiq Private Cloud 構築のための AWS EKS / Azure AKS インフラ関連情報](./vantiq-cloud-infra-operations/readme.md)
 
 Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関するガイドや手順となります。こちらで紹介している Terraform スクリプトを実行頂くと、Vantiq Private Cloud に必要な設定一式をご用意頂けます。また、AWS EKS、Azure AKS のバージョンアップの手順も記載しております。
 
-### [Vantiq Private Cloud のインストールと運用管理](./vantiq-platform-operations)
+### [Vantiq Private Cloud のインストールと運用管理](./vantiq-platform-operations/readme.md)
 
 別途用意されたAWS EKS、Azure AKS 環境に対し、Vantiq Private Cloud をインストールする手順や運用管理に関するガイドや手順を紹介しています。運用時に必要となる作業手順やトラブルシューティングガイドもございます。
 
-### [Vantiq Edge のインストールと運用管理](./vantiq-edge-operations)
+### [Vantiq Edge のインストールと運用管理](./vantiq-edge-operations/readme.md)
 
 Vantiq Edgeのインストール手順や運用管理に関するガイドや手順を紹介しています。
 
