@@ -52,7 +52,7 @@ App Builder に似ていますが異なる点が多々あります。
 
 ## Resources
 
-The resource components perform the basic functions in a flow and are configured from an associated Vantiq resource.
+Resources は、フローの基本機能を担い、 Vantiq の関連リソースを使って設定します。  
 
 ### Conversation
 
@@ -181,7 +181,7 @@ used to send requests to a Large Language Model (LLM) configured for tool callin
 
 ## Primitives
 
-The primitive components (aka primitives) provide various utility/control functions such as decision making and invoking custom code.
+Primitives は、意思決定やカスタムコードの呼び出しといった、各種のユーティリティ機能や制御機能を持つコンポーネントです。
 
 ### Assign
 
@@ -233,7 +233,8 @@ transforms the event passing through the component based on the provided code.
 
 ## AI Patterns
 
-The AI Patterns are implementations of several common GenAI algorithms (aka patterns) which are provided by Vantiq. These can be used as-is or as the basis for further customization in the creation of your own GenAI Flows.
+AI Patterns は、 Vantiq が用意したよく使われる GenAI のアルゴリズム（パターン）集です。  
+これらのコンポーネントは、そのまま使うだけでなく、独自の GenAI フローを開発する際の土台として、さらにカスタマイズすることも可能です。  
 
 ### Categorize
 
@@ -261,7 +262,9 @@ uses a given prompt and LLM to reduce an array of documents to a single result.
 
 ## Document Loaders
 
-The document loaders support reading content from some source and producing an Array of LangChain Documents (these are not instances of the Vantiq Documents resource). The loaders differ in the source of the content and/or the techniques used to extract their content.
+Document Loaders の役割は、データソースからコンテンツを読み取り、 LangChain ドキュメントの配列を作成することです。  
+（※これは Vantiq が標準で持つ Documents リソースとは別物なのでご注意ください。）  
+どのローダーを使うかによって、読み込むデータの種類や、そこから情報を取り出す方法が異なります。  
 
 ### ConversationMemory
 
@@ -279,7 +282,8 @@ reads from a URL (or an array of URLs) and uses the unstructured library to extr
 
 ## Document Transformers
 
-Document transformers accept content as input (typically as an Array of LangChain Documents) and perform the specified transformation, producing the result as an Array of LangChain Documents. Typically these are used to prepare previously ingested content for storage in a Semantic Index.
+Document Transformers の役割は、入力コンテンツ（主に LangChain ドキュメントの配列）に指定の変換処理を行い、その結果を再び LangChain ドキュメントの配列として出力することです。  
+主な用途は、取り込み済みのコンテンツに対して、セマンティックインデックスへ格納するための前処理を施すことです。  
 
 ### CodeSplitter
 
@@ -307,7 +311,9 @@ analyzes text (ignoring any formatting) and divides it into paragraphs based on 
 
 ## Document Compressors
 
-Document compressors are used to perform contextual compression of content to improve the performance of retrieval algorithms. They can be used as standalone components or as part of a SemanticIndexWithCompression task to create a Contextual Compression Retriever. To do this work the compressor is provided with a list of LangChain Documents and the query being processed.
+Document Compressors は、検索の精度や速度を上げることを目的として、コンテンツを文脈に応じて圧縮（コンテキスト圧縮）する機能です。  
+これは、単体の部品として使うこともできますし、 SemanticIndexWithCompression というタスクと組み合わせて、より高度な検索機能である Contextual Compression Retriever を作ることもできます。  
+この圧縮処理の際、コンプレッサーはインプットとして LangChain ドキュメントの配列と、検索に使われているクエリを受け取ります。  
 
 ### CohereRerank
 
@@ -330,7 +336,7 @@ Filters the documents to remove any that lack content relevant to the query.
 ### ListwiseRerank
 
 Uses an LLM to perform a “listwise” re-ranking of the documents based on their relevance to the query.
-  
+
 ---
 
 ## Guardrails
@@ -349,7 +355,8 @@ An implementation of Nvidia’s NeMo Guardrails toolkit. Used to protect against
 
 ## Configuration Processors
 
-The configuration processors are designed to assist in the creation of user defined GenAI Components. They define behaviors that are based on the initial configuration values provided when a user defined component is used to create a task.
+Configuration Processors は、ユーザーが独自の GenAI コンポーネントを作成するのを手助けするための機能です。  
+このプロセッサが定義する動作内容は、ユーザー定義コンポーネントからタスクを作る際に最初に指定した設定値によって決まります。  
 
 ### Optional
 
@@ -365,6 +372,6 @@ defines a sub-flow that will be executed multiple times, based on how many initi
 
 ## Components
 
-This is where any standalone GenAI Components created by the user are shown.
+Components は、ユーザーが作成した GenAI コンポーネントが表示される場所です。
 
 ---
