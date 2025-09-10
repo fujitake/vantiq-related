@@ -25,7 +25,7 @@ variable "bastion_jdk_version" {
 variable "bastion_kubectl_version" {
   description = "install kubectl version"
   type        = string
-  default     = "$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"
+  default     = "$(curl -s https://dl.k8s.io/release/stable.txt)"
 }
 
 variable "bastion_vpc_id" {

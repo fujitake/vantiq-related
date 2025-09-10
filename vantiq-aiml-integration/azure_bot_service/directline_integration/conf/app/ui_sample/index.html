@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>Azure Bot Web Chat</title>
+    <!-- Bot Framework Web Chat の最新バージョンを読み込み -->
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      #webchat {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Web チャットが描画されるコンテナ -->
+    <div id="webchat" role="main"></div>
+    <script>
+      // Direct Line を使って Bot と通信するための設定
+      window.WebChat.renderWebChat({
+        directLine: window.WebChat.createDirectLine({
+          // ※ここに Azure Portal で取得した Direct Line シークレットキーを入力してください
+          secret: 'DIRECT_LINE_SECRET'
+        }),
+        // ユーザー情報（任意設定）
+        userID: 'USER_ID',      // 任意のユーザーID
+        username: '訪問者',     // 任意のユーザー名
+        locale: 'ja-JP',         // 日本語に設定
+        styleOptions: {
+          hideUploadButton: true  // アップロードボタンを非表示にする設定
+        }
+      }, document.getElementById('webchat'));
+    </script>
+  </body>
+</html>

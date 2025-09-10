@@ -12,8 +12,7 @@
 - [Tips](#tips)
   - [MongoDBをバックアップ・リストアしたい](#mongodbをバックアップリストアしたい)
   - [Qdrantをバックアップ・リストアしたい](#semanticindexqdrant-collectionをバックアップリストアしたい)
-  - [1.38→1.39バージョンアップに伴う追加作業](#138139バージョンアップに伴う追加作業)
-  - [1.39→1.40バージョンアップに伴う追加作業](#139140バージョンアップに伴う追加作業)
+  - [VantiqEdge R1.42アップグレードの追加手順](#vantiqedge-r142アップグレードの追加手順)
 
 # トラブルシューティング過去事例
 
@@ -152,57 +151,38 @@ vantiq load semanticindexes -s <profile名> <dmpファイル>
 ```
 ※5MB分のテキストファイルでは、10分ほどでリストアが完了することを確認しております。
 
+## VantiqEdge R1.42アップグレードの追加手順
+Vantiq Edgeを1.41から1.42にアップグレードするには、Qdrantベクターデータベースのマイグレーションが必要です。マイグレーションスクリプトをご利用下さい。
 
-## 1.38→1.39バージョンアップに伴う追加作業
-1.38→1.39バージョンアップでは、通常のバージョンアップに加えて次の作業を実施する必要があります。  
-* vantiq_genai_flow_serviceコンテナを追加する必要がある。
-* Qdrantのバージョンをv1.9.2に変更する必要がある。
+### 1. マイグレーションスクリプトのダウンロード
+[`edgeQDrantUpgrade.zip`](https://dev.vantiq.com/downloads/edgeQDrantUpgrade.zip)をダウンロードして下さい。
 
-vantiq_genai_flow_serviceコンテナを追加するため、`compose.yaml`の編集時に、`services`セクションに次の内容を挿入して下さい。  
-<バージョン>の箇所は希望するバージョンに書き換えて下さい。  
+### 2. マイグレーションスクリプトのセットアップ
+`compose.yaml`が存在するディレクトリに、`upgrade`ディレクトリを作成して下さい。  
+その後、`upgrade`ディレクトリに、`edgeQDrantUpgrade.zip`を格納して下さい。
 ```
-  vantiq_genai_flow_service:
-    container_name: vantiq_genai_flow_service
-    image: quay.io/vantiq/genaiflowservice:<バージョン>
-    restart: unless-stopped
-    command: ["uvicorn", "app.genaiflow_service:app", "--host", "0.0.0.0", "--port", "8889"]
-    network_mode: "service:vantiq_edge"
+. (<- ここがルート)
+|-- compose.yaml
+|-- config
+|-- upgrade
+    |-- edgeQDrantUpgrade.zip
 ```
+その後、`edgeQDrantUpgrade.zip`を解凍して下さい。
 
-また、Qdrantのバージョンをv1.9.2とするため、次のように、Qdrantの`image`タグを`v1.9.2`として下さい。
-
+### 3. Vantiq Server停止
+Vantiq Serverの状態を確認してください。
 ```
-  vantiq_edge_qdrant:
-    container_name: vantiq_edge_qdrant
-    image: qdrant/qdrant:v1.9.2
-    restart: unless-stopped
-    volumes:
-      - qdrantData:/qdrant/storage
-    networks:
-      vantiq_edge:
-        aliases: [edge-qdrant]
+$ docker ps
+```
+もし`vantiq_edge_server`が起動している場合は、停止して下さい。
+```
+$ docker stop vantiq_edge_server
 ```
 
-編集が完了すると、[こちら](setup_vantiq_edge_r139_w_LLM.md)に記載された`compose.yaml`と同じような内容になるはずです。  
-
-## 1.39→1.40バージョンアップに伴う追加作業
-1.39→1.40バージョンアップでは、通常のバージョンアップに加えて次の作業を実施する必要があります。  
-* vantiq_unstructured_apiコンテナを追加する必要がある。
-
-vantiq_unstructured_apiコンテナを追加するため、`compose.yaml`の編集時に、`services`の最終セクションに次の内容を挿入して下さい。  
+### 4. マイグレーションスクリプト実行
+`upgrade`ディレクトリにて、マイグレーションスクリプトを実行して下さい。
 ```
-  vantiq_unstructured_api:
-    container_name: vantiq_unstructured_api
-    image: quay.io/vantiq/unstructured-api:0.0.73
-    restart: unless-stopped
-    environment:
-      - PORT=18000
-      - UNSTRUCTURED_PARALLEL_MODE_ENABLED=true
-      - UNSTRUCTURED_PARALLEL_MODE_URL=http://localhost:18000/general/v0/general
-      - UNSTRUCTURED_PARALLEL_MODE_SPLIT_SIZE=20
-      - UNSTRUCTURED_PARALLEL_MODE_THREADS=4
-      - UNSTRUCTURED_DOWNLOAD_THREADS=4
-    network_mode: "service:vantiq_edge"
+$ ./upgrade.sh
 ```
 
-編集が完了すると、[こちら](setup_vantiq_edge_r140_w_LLM.md)に記載された`compose.yaml`と同じような内容になるはずです。  
+`Migration complete.`のメッセージが出力されれば完了となりますので、[バージョンアップ手順](update_vantiq_edge_version.md#マイナーバージョンアップ)に戻って下さい。
