@@ -37,7 +37,7 @@ OpenAI の API Key と同様に設定していきます。
 
 1. `キーとエンドポイント` を開き、 `キー　1` をコピーします。
 
-   ![azure_openai_apikey.png](./../../imgs/azure_openai_config/azure_openai_apikey.png)
+   ![azure_openai_apikey.png](./imgs/azure_openai_apikey.png)
 
 1. Vantiq IDE を開き、メニューバーの `管理` -> `Advanced` -> `Secrets` -> `+ 新規` をクリックし Secret の新規作成画面を開きます。
 
@@ -54,15 +54,15 @@ OpenAI の LLM と同様に設定していきます。
 
 1. `リソース名` をコピーします。
 
-   ![azure_openai_resource_name.png](./../../imgs/azure_openai_config/azure_openai_resource_name.png)
+   ![azure_openai_resource_name.png](./imgs/azure_openai_resource_name.png)
 
 1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
 
-   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+   ![model_deploy.png](./imgs/model_deploy.png)
 
 1. 任意の `Generative LLM` の `デプロイ名` をコピーします。
 
-   ![generative_model.png](./../../imgs/azure_openai_config/generative_model.png)
+   ![generative_model.png](./imgs/generative_model.png)
 
    > **補足**  
    > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
@@ -82,7 +82,7 @@ OpenAI の LLM と同様に設定していきます。
    |Deployment Name|※Azure OpenAI のデプロイ名|
    |API Version|※Azure OpenAI の API バージョン（[詳細](https://learn.microsoft.com/en-us/azure/ai-services/openai/reference#chat-completions)）|
 
-   ![generative_config.png](./../../imgs/azure_openai_config/vantiq_139_generative_config.png)
+   ![generative_config.png](./imgs/vantiq_139_generative_config.png)
 
 > **補足：Configuration について**  
 > Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
@@ -96,15 +96,15 @@ OpenAI の LLM と同様に設定していきます。
 
 1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
 
-   ![azure_openai_endpoint.png](./../../imgs/azure_openai_config/azure_openai_endpoint.png)
+   ![azure_openai_endpoint.png](./imgs/azure_openai_endpoint.png)
 
 1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
 
-   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+   ![model_deploy.png](./imgs/model_deploy.png)
 
 1. 任意の `Generative LLM` の `デプロイ名` をコピーします。
 
-   ![generative_model.png](./../../imgs/azure_openai_config/generative_model.png)
+   ![generative_model.png](./imgs/generative_model.png)
 
    > **補足**  
    > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
@@ -132,7 +132,7 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   ![generative_config.png](./../../imgs/azure_openai_config/vantiq_generative_config.png)
+   ![generative_config.png](./imgs/vantiq_generative_config.png)
 
 </details>
 
@@ -143,15 +143,15 @@ OpenAI の LLM と同様に設定していきます。
 
 1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
 
-   ![azure_openai_endpoint.png](./../../imgs/azure_openai_config/azure_openai_endpoint.png)
+   ![azure_openai_endpoint.png](./imgs/azure_openai_endpoint.png)
 
 1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
 
-   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+   ![model_deploy.png](./imgs/model_deploy.png)
 
 1. 任意の `Generative LLM` の `デプロイ名` をコピーします。
 
-   ![generative_model.png](./../../imgs/azure_openai_config/generative_model.png)
+   ![generative_model.png](./imgs/generative_model.png)
 
    > **補足**  
    > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
@@ -179,7 +179,7 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   ![generative_config.png](./../../imgs/azure_openai_config/vantiq_generative_config.png)
+   ![generative_config.png](./imgs/vantiq_generative_config.png)
 
 </details>
 
@@ -194,15 +194,15 @@ OpenAI の LLM と同様に設定していきます。
 
 1. `リソース名` をコピーします。
 
-   ![azure_openai_resource_name.png](./../../imgs/azure_openai_config/azure_openai_resource_name.png)
+   ![azure_openai_resource_name.png](./imgs/azure_openai_resource_name.png)
 
 1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
 
-   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+   ![model_deploy.png](./imgs/model_deploy.png)
 
 1. 任意の `Embedding LLM` の `デプロイ名` をコピーします。
 
-   ![embedding_model.png](./../../imgs/azure_openai_config/embedding_model.png)
+   ![embedding_model.png](./imgs/embedding_model.png)
 
    > **補足**  
    > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
@@ -224,7 +224,7 @@ OpenAI の LLM と同様に設定していきます。
    |Vector Size|text-embedding-ada-002：1536<br>text-embedding-3-large：3072|
    |距離関数|Cosine|
 
-   ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_139_embedding_config.png)
+   ![embedding_config.png](./imgs/vantiq_139_embedding_config.png)
 
 > **補足：Configuration について**  
 > Configuration が `null` 以外になっていると正しく動作しないので注意してください。  
@@ -251,15 +251,15 @@ OpenAI の LLM と同様に設定していきます。
 
 1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
 
-   ![azure_openai_endpoint.png](./../../imgs/azure_openai_config/azure_openai_endpoint.png)
+   ![azure_openai_endpoint.png](./imgs/azure_openai_endpoint.png)
 
 1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
 
-   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+   ![model_deploy.png](./imgs/model_deploy.png)
 
 1. 任意の `Embedding LLM` の `デプロイ名` をコピーします。
 
-   ![embedding_model.png](./../../imgs/azure_openai_config/embedding_model.png)
+   ![embedding_model.png](./imgs/embedding_model.png)
 
    > **補足**  
    > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
@@ -287,7 +287,7 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_embedding_config.png)
+   ![embedding_config.png](./imgs/vantiq_embedding_config.png)
 
 </details>
 
@@ -298,15 +298,15 @@ OpenAI の LLM と同様に設定していきます。
 
 1. `キーとエンドポイント` を開き、 `エンドポイント` をコピーします。
 
-   ![azure_openai_endpoint.png](./../../imgs/azure_openai_config/azure_openai_endpoint.png)
+   ![azure_openai_endpoint.png](./imgs/azure_openai_endpoint.png)
 
 1. `モデル デプロイ` を開き、 `展開の管理` をクリックします。
 
-   ![model_deploy.png](./../../imgs/azure_openai_config/model_deploy.png)
+   ![model_deploy.png](./imgs/model_deploy.png)
 
 1. 任意の `Embedding LLM` の `デプロイ名` をコピーします。
 
-   ![embedding_model.png](./../../imgs/azure_openai_config/embedding_model.png)
+   ![embedding_model.png](./imgs/embedding_model.png)
 
    > **補足**  
    > デプロイ済みのモデルが存在しない場合は、 `+ 新しいデプロイの作成` からモデルをデプロイしてください。
@@ -335,6 +335,6 @@ OpenAI の LLM と同様に設定していきます。
    }
    ```
 
-   ![embedding_config.png](./../../imgs/azure_openai_config/vantiq_embedding_config.png)
+   ![embedding_config.png](./imgs/vantiq_embedding_config.png)
 
 </details>
