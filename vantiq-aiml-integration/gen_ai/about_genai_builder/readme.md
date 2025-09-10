@@ -22,7 +22,7 @@ App Builder では SubmitPrompt Activity や AnswerQuestion Activity を利用�
 しかしその一方で、これらの Activity Pattern の動作は比較的固定されています。  
 これは、これらの Activity Pattern が最も広範なユースケースに対応することを目的としているためです。  
 
-アプリケーションによってはより特殊な GenAI 機能が必要な場合や最新の GenAI アルゴリズムを活用する必要がある場合もあります。  
+アプリケーションによっては、より特殊な GenAI 機能が必要な場合や最新の GenAI アルゴリズムを活用する必要がある場合もあります。  
 これらの要件に対応することが GenAI Builder の目的です。  
 
 ## 注意すべき事前知識
