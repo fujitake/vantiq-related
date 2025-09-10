@@ -54,8 +54,6 @@ App Builder に似ていますが異なる点が多々あります。
 
 The resource components perform the basic functions in a flow and are configured from an associated Vantiq resource.
 
----
-
 ### Conversation
 
 maintains a conversation for the specified sub-flow. The conversation is managed via the Vantiq ConversationMemory service.
@@ -185,8 +183,6 @@ used to send requests to a Large Language Model (LLM) configured for tool callin
 
 The primitive components (aka primitives) provide various utility/control functions such as decision making and invoking custom code.
 
----
-
 ### Assign
 
 adds additional properties to an initial Object input value.
@@ -239,8 +235,6 @@ transforms the event passing through the component based on the provided code.
 
 The AI Patterns are implementations of several common GenAI algorithms (aka patterns) which are provided by Vantiq. These can be used as-is or as the basis for further customization in the creation of your own GenAI Flows.
 
----
-
 ### Categorize
 
 analyzes the given input and places it in one of the categories that are part of its configuration.
@@ -269,8 +263,6 @@ uses a given prompt and LLM to reduce an array of documents to a single result.
 
 The document loaders support reading content from some source and producing an Array of LangChain Documents (these are not instances of the Vantiq Documents resource). The loaders differ in the source of the content and/or the techniques used to extract their content.
 
----
-
 ### ConversationMemory
 
 reads the current state of a specified conversation.
@@ -288,8 +280,6 @@ reads from a URL (or an array of URLs) and uses the unstructured library to extr
 ## Document Transformers
 
 Document transformers accept content as input (typically as an Array of LangChain Documents) and perform the specified transformation, producing the result as an Array of LangChain Documents. Typically these are used to prepare previously ingested content for storage in a Semantic Index.
-
----
 
 ### CodeSplitter
 
@@ -319,8 +309,6 @@ analyzes text (ignoring any formatting) and divides it into paragraphs based on 
 
 Document compressors are used to perform contextual compression of content to improve the performance of retrieval algorithms. They can be used as standalone components or as part of a SemanticIndexWithCompression task to create a Contextual Compression Retriever. To do this work the compressor is provided with a list of LangChain Documents and the query being processed.
 
----
-
 ### CohereRerank
 
 Uses the specified Cohere re-ranking model to order the documents based on their relevance to the query.
@@ -342,7 +330,7 @@ Filters the documents to remove any that lack content relevant to the query.
 ### ListwiseRerank
 
 Uses an LLM to perform a “listwise” re-ranking of the documents based on their relevance to the query.
-
+  
 ---
 
 ## Guardrails
@@ -362,8 +350,6 @@ An implementation of Nvidia’s NeMo Guardrails toolkit. Used to protect against
 ## Configuration Processors
 
 The configuration processors are designed to assist in the creation of user defined GenAI Components. They define behaviors that are based on the initial configuration values provided when a user defined component is used to create a task.
-
----
 
 ### Optional
 
