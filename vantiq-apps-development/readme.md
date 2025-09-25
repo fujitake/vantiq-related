@@ -34,7 +34,6 @@ Vantiq Resource に関する解説やガイドです。
 - GenAI
   - [GenAI Builder について](./vantiq-resources/genai/about-genai-builder/readme.md)
   - [GenAI Flow Service Connector の導入方法](./vantiq-resources/genai/genai-flow-service-connector/readme.md)
-  - [GenAI コンポーネント](./vantiq-resources/genai/genai-components/readme.md)
   - [Webサイトの情報をLLMで利用する方法](./vantiq-resources/genai/using-website-information-in-llm/readme.md)
 
 ## Vantiq CLI
