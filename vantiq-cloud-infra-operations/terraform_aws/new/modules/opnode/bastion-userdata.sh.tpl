@@ -10,13 +10,15 @@ apt-get -y install \
     software-properties-common
 
 # install docker
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt-get update
-apt-get install -y docker-ce docker-ce-cli containerd.io
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 # add user to docker group to make docker accessible without sudo
 gpasswd -a ubuntu docker
 
@@ -28,11 +30,8 @@ EOF
 chmod 444 /home/ubuntu/.ssh/id_rsa
 
 # install java
-apt-key adv \
-  --keyserver hkp://keyserver.ubuntu.com:80 \
-  --recv-keys 0xB1998361219BD9C9
-curl -O https://cdn.azul.com/zulu/bin/zulu-repo_1.0.0-3_all.deb
-apt-get install -y ./zulu-repo_1.0.0-3_all.deb
+curl -s https://repos.azul.com/azul-repo.key | sudo gpg --dearmor -o /usr/share/keyrings/azul.gpg
+echo "deb [signed-by=/usr/share/keyrings/azul.gpg] https://repos.azul.com/zulu/deb stable main" | sudo tee /etc/apt/sources.list.d/zulu.list
 apt-get -q update
 apt-get install -y zulu${jdk_version}-jdk
 
@@ -42,11 +41,10 @@ chmod +555 ./kubectl
 mv ./kubectl /usr/local/bin/kubectl
 
 # install helm 3 latest
-curl https://helm.baltorepo.com/organization/signing.asc | apt-key add -
-apt-get install apt-transport-https --yes
-echo "deb https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+curl -fsSL https://packages.buildkite.com/helm-linux/helm-debian/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/helm.gpg] https://packages.buildkite.com/helm-linux/helm-debian/any/ any main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
 apt-get update
-apt-get install helm
+apt-get install -y helm
 ln -s /usr/sbin/helm /usr/sbin/helm3
 
 # install kubeseal
