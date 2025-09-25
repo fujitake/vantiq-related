@@ -5,6 +5,9 @@
 
 - [GenAI Builder について](#genai-builder-について)
   - [GenAI ビルダーとは？](#genai-ビルダーとは)
+  - [タスクの出力のデータフォーマットについて](#タスクの出力のデータフォーマットについて)
+    - [PromptFromTemplate](#promptfromtemplate)
+    - [LLM](#llm)
   - [注意すべき事前知識](#注意すべき事前知識)
     - [タスク出力のマージ](#タスク出力のマージ)
     - [ターミナルタスクのマージ](#ターミナルタスクのマージ)
@@ -24,6 +27,99 @@ App Builder では SubmitPrompt Activity や AnswerQuestion Activity を利用�
 
 アプリケーションによっては、より特殊な GenAI 機能が必要な場合や最新の GenAI アルゴリズムを活用する必要がある場合もあります。  
 これらの要件に対応することが GenAI Builder の目的です。  
+
+## タスクの出力のデータフォーマットについて
+
+GenAI コンポーネントは Activity Pattern とは異なり、出力されるデータフォーマットが JSON オブジェクト形式とは限りません。  
+
+ここでは `PromptFromTemplate` と `LLM` を利用した GenAI を例に、各タスクに流れるデータを見ていきます。
+
+### PromptFromTemplate
+
+指定されたテンプレートを使用して、プロンプトをフォーマットします。  
+Transformation Activity に似ています。  
+
+:globe_with_meridians: [PromptFromTemplate](https://dev.vantiq.com/docs/system/genaibuilder/#promptfromtemplate)
+
+![resource_promptfromtemplate.png](./imgs/resource_promptfromtemplate.png)
+
+```yaml
+# Configuration の例
+Required Parameter:
+    promptTemplate Type: "Template"
+    promptTemplate: "小説のセリフを考えています。 ${topic} についてブラックジョークを考えてください。レスポンスは作成したブラックジョークのみ返してください。"
+Optional Parameter:
+    defaultValues（Array of Labeled Expression）: <null>
+    isSystemPrompt (Boolean): false
+```
+
+#### Input Type
+
+テンプレートは `String`, `Vantiqドキュメント`, `URL` から指定します。  
+
+Input Type は `String`, `Object`, `langchain_core.documents.Document` のいずれかになります。  
+入力値は、Vantiqテンプレート構文または Python f文字列構文を使用します。  
+
+```yaml
+# input の例
+"input":
+    "topic": "上司"
+"config": {}
+```
+
+#### Output Type
+
+Output Type は `langchain_core.prompt_values.PromptValue` になります。  
+LLM Component が `langchain_core.prompt_values.PromptValue` に対応しているため、そのまま受け渡すことができます。  
+
+```yaml
+# return の例
+「うちの上司、仕事ができるって言うけど、実際にはただのプロのメール転送屋だよ。」
+```
+
+
+
+### LLM
+
+大規模言語モデル（LLM）にリクエストを送信します。  
+SubmitPrompt Activity に似ています。  
+またレスポンスを解析／フォーマットすることもできます。  
+別途 LLM リソースが必要になります。  
+
+:globe_with_meridians: [LLM](https://dev.vantiq.com/docs/system/genaibuilder/#llm)
+
+![resource_llm.png](./imgs/resource_llm.png)
+
+```yaml
+# Configuration の例
+Required Parameter:
+    llm (LLM): "Choose Your LLM Resources"
+Optional Parameter:
+    outputType (Enumerated): "String"
+    outputTypeSchema (Type):
+```
+
+#### Input Type
+
+Input Type は `String`, `langchain_core.prompt_values.PromptValue`, `io.vantiq.ai.ChatMessage[]` のいずれかになります。  
+単体での利用もできますが、 PromptFromTemplate Component と組み合わせて利用する場合が多いです。  
+`langchain_core.prompt_values.PromptValue` での入力が可能なため、 PromptFromTemplate Component からデータフォーマットの変換等をせずに直接受け取ることができます。   
+
+```yaml
+# input の例
+input: "こんにちは"
+config: {}
+```
+
+#### Output Type
+
+デフォルトの Output Type は `String` になります。  
+LLM からのレスポンスを解析して JSON などの形式にフォーマットすることもできます。
+
+```yaml
+# return の例
+こんにちは！今日はどんなお手伝いができますか？
+```
 
 ## 注意すべき事前知識
 
