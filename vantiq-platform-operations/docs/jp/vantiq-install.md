@@ -1,7 +1,10 @@
 # はじめに
 
-本記事は Vantiq Private Cloiud 初回構築作業のクイックリファレンスです。  
-詳細に関しては[k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools) _(要権限)_ のドキュメントを参照してください。
+本記事は Vantiq Private Cloud 初回構築作業のクイックリファレンスです。  
+詳細に関しては[k8sdeploy_tools](https://github.com/Vantiq/k8sdeploy_tools) _(要権限)_ のドキュメントを参照してください。  
+
+**注：本ドキュメントに記載されている手順はクラスタ定義をローカル管理する構築方法になります。
+クラスタ定義をリモートリポジトリで管理する場合は、[こちら](./vantiq-install(manage-clusterdef-in-remoterepo).md)の手順を参照してください。**  
 
 ## 前提
 
