@@ -1,17 +1,18 @@
-[English follows Japanese:](https://github.com/fujitake/vantiq-related/tree/main#purpose)
+[English follows Japanese:](#purpose)
 ***
 
-## 目的
+# 目的
 
 このリポジトリは、Vantiq 製品に関わる技術的なガイドや設定手順、及び関連サービスとのインテグレーションに関するセットアップ手順などを共有するためのものです。
 
+Vantiq アプリケーション開発者向けの情報となります。  
+初めて Vantiq を触る方向けの情報、Vantiq を使ってクラウドサービスとの連携のサンプルや手順を知りたい方、IoT デバイスやゲートウェイが生成するデータを Vantiq に送信する場合のサンプル、Google Colaboratoryで用意するデータジェネレータなど :globe_with_meridians: [製品リファレンス](https://dev.vantiq.com/docs/system/index.html) ではカバーされていない範囲の情報を提供することを目的としています。
 
-Vantiq アプリケーション開発者向けの情報となります。初めて Vantiq を触る方向けの情報、Vantiq を使ってクラウドサービスとの連携のサンプルや手順を知りたい方、IoT デバイスやゲートウェイが生成するデータを Vantiq に送信する場合のサンプル、Google Colaboratoryで用意するデータジェネレータなど :globe_with_meridians: [製品リファレンス](https://dev.vantiq.com/docs/system/index.html) ではカバーされていない範囲の情報を提供することを目的としています。
+## Vantiq 入門
 
-## [Vantiq 入門](./vantiq-introduction/readme.md)
+Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式などで解説しています。  
 
-Vantiq を用いたアプリケーションの開発を行う上で、必要となる知識をワークショップ形式などで解説しています。
-
+- [Vantiq 入門の概要](./vantiq-introduction/readme.md)
 - [開発環境の準備](./vantiq-introduction/readme.md#開発環境の準備)
 - [アプリケーション開発](./vantiq-introduction/readme.md#アプリケーション開発)
 - [インフラ／クラウド入門](./vantiq-introduction/readme.md#インフラクラウド入門)
@@ -29,7 +30,8 @@ Vantiq アプリを開発する際に便利なデータジェネレータを簡�
 
 ### [Vantiq とパブリッククラウド サービスとの連携](./vantiq-external-services-integration/readme.md)
 
-Vantiq アプリケーション開発チーム向けの Vantiq とパブリッククラウド サービスとの連携に関するガイドや設定手順を紹介しています。MQTT や Kafka といったブローカー、データベースサービス、メールサービスとの連携に関するガイドや手順となります。
+Vantiq アプリケーション開発チーム向けの Vantiq とパブリッククラウド サービスとの連携に関するガイドや設定手順を紹介しています。  
+MQTT や Kafka といったブローカー、データベースサービス、メールサービスとの連携に関するガイドや手順となります。
 
 ### [Vantiq とデバイスとの連携](./vantiq-devices-integration/readme.md)
 
@@ -45,11 +47,14 @@ Vantiq Private Cloud のインストールと運用管理における対応手�
 
 ### [Vantiq Private Cloud 構築のための AWS EKS / Azure AKS インフラ関連情報](./vantiq-cloud-infra-operations/readme.md)
 
-Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関するガイドや手順となります。こちらで紹介している Terraform スクリプトを実行頂くと、Vantiq Private Cloud に必要な設定一式をご用意頂けます。また、AWS EKS、Azure AKS のバージョンアップの手順も記載しております。
+Vantiq Private Cloud を稼働させるための AWS EKS、Azure AKS に関するガイドや手順となります。  
+こちらで紹介している Terraform スクリプトを実行頂くと、Vantiq Private Cloud に必要な設定一式をご用意頂けます。  
+また、AWS EKS、Azure AKS のバージョンアップの手順も記載しております。
 
 ### [Vantiq Private Cloud のインストールと運用管理](./vantiq-platform-operations/readme.md)
 
-別途用意されたAWS EKS、Azure AKS 環境に対し、Vantiq Private Cloud をインストールする手順や運用管理に関するガイドや手順を紹介しています。運用時に必要となる作業手順やトラブルシューティングガイドもございます。
+別途用意されたAWS EKS、Azure AKS 環境に対し、Vantiq Private Cloud をインストールする手順や運用管理に関するガイドや手順を紹介しています。  
+運用時に必要となる作業手順やトラブルシューティングガイドもございます。
 
 ### [Vantiq Edge のインストールと運用管理](./vantiq-edge-operations/readme.md)
 
@@ -58,27 +63,60 @@ Vantiq Edgeのインストール手順や運用管理に関するガイドや手
 ***
 
 # Purpose
-This repository is for sharing various technical guidance and instructions of Vantiq product related knowledges. It also contains public cloud services which potentially integrate with Vantiq.
 
-## Vantiq Application Development related
+This repository is for sharing technical guides, configuration procedures, and setup instructions for Vantiq products and their integration with related services.
 
- Articles for Vantiq beiginners, sample codes and procedure for Vantiq apps Developers who want to integrate with public cloud services, and Python programmers are using IoT Sensors / Gateways / Google Colaboratory send messages to Vantiq.
+This information is intended for Vantiq application developers.  
+It aims to provide information in areas not covered by the official :globe_with_meridians: [Product Reference](https://dev.vantiq.com/docs/system/index.html), such as information for those new to Vantiq, samples and procedures for those who want to learn about integrating with cloud services using Vantiq, examples for sending data generated by IoT devices or gateways to Vantiq, and data generators prepared with Google Colaboratory.
 
-### [Learning developing Vantiq applications](./vantiq-apps-development)
-Guides and learning materials for developing and operating Vantiq Applications.
+## Getting Started with Vantiq
 
-### [Integration with External Services and Vantiq](./vantiq-external-services-integration/readme_en.md)
-Guides and procedures for integrating Vantiq with cloud web services, brokers, and database services.  
+This section explains the essential knowledge needed to develop applications with Vantiq, presented in formats like workshops.  
 
-### [Integration with IoT devices with Vantiq](./vantiq-devices-integration/readme_en.md)
-Guidelines and sample code for integrating Vantiq with devices.
+- [Overview of Getting Started with Vantiq](./vantiq-introduction/readme.md)
+- [Preparing the Development Environment](./vantiq-introduction/readme.md#開発環境の準備)
+- [Application Development](./vantiq-introduction/readme.md#アプリケーション開発)
+- [Introduction to Infrastructure/Cloud](./vantiq-introduction/readme.md#インフラクラウド入門)
+
+## Vantiq Application Development
+
+### [Learning developing Vantiq applications](./vantiq-apps-development/readme.md)
+
+As the next step after the [Getting Started with Vantiq](./vantiq-introduction/readme.md) guide, this section contains guides on application development and operations.
+
+### [Data Generators using Google Colaboratory](./vantiq-google-colab/readme.md)
+
+This introduces the basic usage of Google Colaboratory and provides sample code for data generators.  
+You can easily prepare convenient data generators for developing Vantiq applications.
+
+### [Integrating Vantiq with Public Cloud Services](./vantiq-external-services-integration/readme.md)
+
+This section provides guides and configuration procedures for integrating Vantiq with public cloud services, intended for Vantiq application development teams.  
+It includes guides for integrating with brokers like MQTT and Kafka, as well as with database and email services.
+
+### [Integrating Vantiq with Devices](./vantiq-devices-integration/readme.md)
+
+This section contains guidelines and sample code for integrating Vantiq with devices, intended for Vantiq application development teams.
+
+### [Integrating Vantiq with AI/ML](./vantiq-aiml-integration/readme.md)
+
+This section contains guidelines and sample code for integrating Vantiq with AI/ML, intended for Vantiq application development teams.
 
 ## Vantiq Private Cloud related
 
-Articles for infrastructure management guys include installation preparation of Vantiq Private Cloud and operations.
+This section contains information for infrastructure teams, covering procedures for the installation and operational management of Vantiq Private Cloud.
 
-### [AWS EKS/Azure AKS Infrastructure for Vantiq Private Cloud](./vantiq-cloud-infra-operations)
-Terraform codes for setting up AWS ESK and Azure AKS infrastructure run Vantiq Private Cloud instance.
+### [AWS EKS / Azure AKS Infrastructure Information for Building Vantiq Private Cloud](./vantiq-cloud-infra-operations/readme.md)
 
-### [Vantiq Private Cloud Installation and Management](./vantiq-platform-operations)
-Guides and procedures for the Vantiq Private Cloud Management Team on installing and operating of Vantiq Private Cloud on cloud infrastructure.
+This provides guides and procedures for AWS EKS and Azure AKS to run Vantiq Private Cloud.  
+By executing the Terraform scripts introduced here, you can prepare a complete set of configurations required for Vantiq Private Cloud.  
+It also includes procedures for upgrading AWS EKS and Azure AKS versions.  
+
+### [Installation and Operational Management of Vantiq Private Cloud](./vantiq-platform-operations/readme.md)
+
+This section provides guides for installing Vantiq Private Cloud on a separately prepared AWS EKS or Azure AKS environment, as well as its operational management.  
+It also includes operational task procedures and a troubleshooting guide.
+
+### [Installation and Operational Management of Vantiq Edge](./vantiq-edge-operations/readme.md)
+
+This section provides guides and procedures for Vantiq Edge installation and operational management.
