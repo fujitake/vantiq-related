@@ -36,7 +36,7 @@ Vantiq の基本的な扱い方を解説しています。
 
 |必須|ワークショップ|前提となるワークショップ|対応バージョン|
 |:-:|-|-|-|
-|◯|[ボックスソーター（Short ver）](./apps-development/boxsorter/short/readme.md)|なし|r1.42|
+|◯|[ボックスソーター（Short ver）](./apps-development/boxsorter/short/readme.md)|なし|r1.42 ~ r1.43.4|
 |◯|[ボックスソーター（REST API）](./apps-development/boxsorter/rest-api/readme.md)|なし|r1.39 ~ r1.41|
 |◯|[ボックスソーター（Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（REST API）|r1.39 ~ r1.41|
 |◯|[ボックスソーター（MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（Transformation）|r1.39 ~ r1.40|
@@ -123,7 +123,7 @@ It is recommended to follow the steps in order from the top of the table.
 
 |Required|Workshop|Prerequisites|Supported Version|
 |:-:|-|-|-|
-|Yes|[Box Sorter (Short ver)](./apps-development/boxsorter/short/readme_en.md)|None|r1.42|
+|Yes|[Box Sorter (Short ver)](./apps-development/boxsorter/short/readme_en.md)|None|r1.42 ~ r1.43.4|
 |Yes|[Box Sorter (REST API)](./apps-development/boxsorter/rest-api/readme.md)|None|r1.39 ~ r1.41|
 |Yes|[Box Sorter (Transformation)](./apps-development/boxsorter/transform/readme.md)|Box Sorter (REST API)|r1.39 ~ r1.41|
 |Yes|[Box Sorter (MQTT)](./apps-development/boxsorter/mqtt/readme.md)|Box Sorter (Transformation)|r1.39 ~ r1.40|

@@ -517,6 +517,7 @@ For more details, please see the following link: [About Project Management - Exp
 
 ### Project File
 
-- [BoxSorter (Short ver) Implementation Sample (Vantiq r1.42)](./../data/box_sorter_short_1.42.zip)
+- [BoxSorter (Short ver) Implementation Sample (Vantiq r1.42)](./../data/box_sorter_short_en_1.42.zip)
+- [BoxSorter (Short ver) Implementation Sample (Vantiq r1.43.4)](./../data/box_sorter_short_en_1.43.4.zip)
 
 That's all.

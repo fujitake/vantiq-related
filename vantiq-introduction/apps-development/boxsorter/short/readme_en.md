@@ -1,7 +1,7 @@
 # Box Sorter (Short ver)
 
 Experience how to operate Vantiq by developing an application that sorts packages.  
-(* Vantiq version at the time of article creation: r1.42.0)
+(* Vantiq version at the time of article creation: r1.43.4)
 
 > **Note: About the name of the package sorting system**  
 > Package sorting systems used in logistics centers are referred to as follows:
