@@ -147,7 +147,7 @@ When data is received, a badge with a counter will appear in the top-right corne
 To check the data, perform the following steps:  
 
 1. Click the `Event Stream` task.  
-   In the bottom-right of the screen, click `Show Task Events`.
+   In the bottom-right of the screen, click `View Task Events`.
 
    ![receive_test_data_01.png](./imgs/receive_test_data_01.png)
 
@@ -291,7 +291,7 @@ Use the **Enrich Activity** to add data from the Type to the event.
    > SELECT ONE FROM com.example.sorting_condition WHERE code == event.code
    > ```
 
-1. Click the `AttachCondition` task and use `Show Task Events` to verify the Enrich activity's behavior.  
+1. Click the `AttachCondition` task and use `View Task Events` to verify the Enrich activity's behavior.  
    Confirm that the event looks like the following:  
 
    ```json
@@ -383,7 +383,7 @@ We will sort using the `center_id`.
       |Name|ExtractToSaitama|
       |condition (Union)|event.center_id == 3|
 
-1. For each **Filter Activity**, use `Show Task Events` to verify that only the appropriate events are passing through.
+1. For each **Filter Activity**, use `View Task Events` to verify that only the appropriate events are passing through.
 
    - Tokyo Logistics Center: `ExtractToTokyo`
 
@@ -507,7 +507,7 @@ For more details, please see the following link: [About Project Management - Exp
    1. Confirmed that data was imported correctly using **Show All Records**.
 1. **Service**
    1. Developed an application using the GUI-based **Service Builder**.
-   1. Learned how to sequentially check event data using **Show Task Events**.
+   1. Learned how to sequentially check event data using **View Task Events**.
    1. Joined data from a **Type** to event data using **Enrich Activity**.
    1. Formatted data using **Transformation Activity**.
    1. Sorted events by center ID using **Filter Activity**.
