@@ -22,7 +22,7 @@ Vantiq アプリケーションの開発方法をワークショップ形式で�
 Vantiq の基本的な扱い方を解説しています。  
 
 1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/readme.md)
-1. [Project の管理について](./apps-development/vantiq-basic/project/readme.md)
+1. [Project の管理について](./apps-development/vantiq-basic/project/readme_en.md)
 1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/readme.md)
 
 ### アプリケーション開発ワークショップ（初級編）
@@ -41,7 +41,7 @@ Vantiq の基本的な扱い方を解説しています。
 |◯|[ボックスソーター（Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（REST API）|r1.39 ~ r1.41|
 |◯|[ボックスソーター（MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（Transformation）|r1.39 ~ r1.40|
 |◯|[VAIL 入門（基礎）](./apps-development/vail-introductory/vail_basic/vail_basic.md)|なし|r1.39 ~ r1.40|
-|◯|[主要な Activity Pattern の紹介](./apps-development/vantiq-basic/major-activity-pattern/readme.md)|なし|-|
+|◯|[主要な Activity Pattern の紹介](./apps-development/vantiq-basic/major-activity-pattern/readme_en.md)|なし|-|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
@@ -108,9 +108,9 @@ This section explains how to develop Vantiq applications in a workshop format.
 
 Here, we explain the fundamental concepts of using Vantiq.  
 
-1. [About Vantiq Namespaces and Projects](./apps-development/vantiq-basic/namespace/readme.md)
-1. [About Project Management](./apps-development/vantiq-basic/project/readme.md)
-1. [Basic Principles for Developing with Vantiq](./apps-development/vantiq-basic/basic-common/readme.md)
+1. [About Vantiq Namespaces and Projects](./apps-development/vantiq-basic/namespace/readme_en.md)
+1. [About Project Management](./apps-development/vantiq-basic/project/readme_en.md)
+1. [Basic Principles for Developing with Vantiq](./apps-development/vantiq-basic/basic-common/readme_en.md)
 
 ### Application Development Workshop (Beginner Level)
 
@@ -123,7 +123,7 @@ It is recommended to follow the steps in order from the top of the table.
 
 |Required|Workshop|Prerequisites|Supported Version|
 |:-:|-|-|-|
-|Yes|[Box Sorter (Short ver)](./apps-development/boxsorter/short/readme.md)|None|r1.42|
+|Yes|[Box Sorter (Short ver)](./apps-development/boxsorter/short/readme_en.md)|None|r1.42|
 |Yes|[Box Sorter (REST API)](./apps-development/boxsorter/rest-api/readme.md)|None|r1.39 ~ r1.41|
 |Yes|[Box Sorter (Transformation)](./apps-development/boxsorter/transform/readme.md)|Box Sorter (REST API)|r1.39 ~ r1.41|
 |Yes|[Box Sorter (MQTT)](./apps-development/boxsorter/mqtt/readme.md)|Box Sorter (Transformation)|r1.39 ~ r1.40|

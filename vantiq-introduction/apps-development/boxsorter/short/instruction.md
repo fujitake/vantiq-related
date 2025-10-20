@@ -487,7 +487,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    **例: 各物流センターごとに Log メッセージ が表示されている**
 
-   ![Log メッセージ](./imgs/log-message.png)
+   ![log-message.png](./imgs/log-message.png)
 
 ## Project のエクスポート
 
