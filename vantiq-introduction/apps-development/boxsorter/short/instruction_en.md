@@ -223,7 +223,7 @@ We will create a Type and import a CSV file into it.
 
    ![csv_import_01.png](./imgs/csv_import_01.png)
 
-1. Drag and drop the [com.example.sorting_condition_en.csv](./../data/com.example.sorting_condition_en.csv) file into the `Drop a CSV or JSON file here to import` area and click `Import`.
+1. Drag and drop the [com.example.sorting_condition_en.csv](./../data/com.example.sorting_condition_en.csv) file into the `Drop CSV or JSON file for import here` area and click `Import`.
 
    > **Caution**  
    > Please rename the CSV file name from `com.example.sorting_condition_en.csv` to `com.example.sorting_condition.csv` in advance.
