@@ -73,10 +73,10 @@ It aims to provide information in areas not covered by the official :globe_with_
 
 This section explains the essential knowledge needed to develop applications with Vantiq, presented in formats like workshops.  
 
-- [Overview of Getting Started with Vantiq](./vantiq-introduction/readme.md)
-- [Preparing the Development Environment](./vantiq-introduction/readme.md#開発環境の準備)
-- [Application Development](./vantiq-introduction/readme.md#アプリケーション開発)
-- [Introduction to Infrastructure/Cloud](./vantiq-introduction/readme.md#インフラクラウド入門)
+- [Overview of Getting Started with Vantiq](./vantiq-introduction/readme.md#overview-of-getting-started-with-vantiq)
+- [Preparing the Development Environment](./vantiq-introduction/readme.md#development-environment-setup)
+- [Application Development](./vantiq-introduction/readme.md#application-development)
+- [Introduction to Infrastructure/Cloud](./vantiq-introduction/readme.md#introduction-to-infrastructure--cloud)
 
 ## Vantiq Application Development
 
