@@ -130,7 +130,7 @@ Please prepare one of the following in advance:
 
 ### Product Master Data
 
-- [com.example.sorting_condition.csv](./../data/com.example.sorting_condition.csv)
+- [com.example.sorting_condition.csv](./../data/com.example.sorting_condition_en.csv)
 
 ## Workshop Procedure
 
