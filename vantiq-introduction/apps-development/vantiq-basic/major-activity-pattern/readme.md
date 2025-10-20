@@ -354,14 +354,14 @@
 
 ③統計内容へのアクセス用Procedure
 
-- <タスク名>StateGet、<タスク名>StateReset、<タスク名>StateGetUpdateというProcedureが自動で生成される
-- 統計内容の取得には任意の場所のVAILコード（Procedure内、Rule内、Transformタスクなど）から、<タスク名>StateGetを実行する
-- 事前に「SplitByGroup」を使っている場合、統計内容はパーティションごとに保持されるため実行時の引数に「partitionKey」が必要となり、この値にはSplitByGroupの「groupBy」プロパティで使用した値を入力する
+- `<タスク名>StateGet`、`<タスク名>StateReset`、`<タスク名>StateGetUpdate` という Procedure が自動で生成される
+- 統計内容の取得には任意の場所の VAIL コード（Procedure 内、Rule 内、 Transform タスクなど）から、 `<タスク名>StateGet` を実行する
+- 事前に `SplitByGroup` を使っている場合、統計内容はパーティションごとに保持されるため実行時の引数に `partitionKey` が必要となり、この値には `SplitByGroup` の `groupBy` プロパティで使用した値を入力する
 - 使用していない場合はグローバルとなる
 
-![ComputeStatisticsの自動生成Procedure](./imgs/computestatistics_02.png)
+![computestatistics_02.png](./imgs/computestatistics_02.png)
 
-④<タスク名>StateGetの実行結果
+④ `<TaskName>StateGet` の実行結果
 
 ***この例では Tempの統計を取っています。***
 
@@ -473,7 +473,7 @@ event.value += 1
 return event
 ```
 
-③ Procedure の出力  
+③ `Procedure` の出力  
 
 ```JSON
 {
@@ -483,8 +483,8 @@ return event
 
 ## VAIL
 
-- VAILで自由に処理を記述することができる
-- Procedureを別途用意する必要はなく、タスクのプロパティに直接VAILを記述できる
+- VAIL で自由に処理を記述することができる
+- Procedure を別途用意する必要はなく、タスクのプロパティに直接 VAIL を記述できる
 - `event.value` が入出力データの中身に当たる部分となる
 
 :globe_with_meridians: [VAIL | App Builder Reference Guide](https://dev.vantiq.com/docs/system/apps/#vail)
@@ -517,7 +517,7 @@ deleteKey(event.value, "Time")
 event.value.CurrentTime = now()
 ```
 
-③ VAILの出力  
+③ `VAIL` の出力  
 
 ```JSON
 {

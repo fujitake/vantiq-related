@@ -487,7 +487,7 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    **例: 各物流センターごとに Log メッセージ が表示されている**
 
-   ![Log メッセージ](./imgs/log-message.png)
+   ![log-message.png](./imgs/log-message.png)
 
 ## Project のエクスポート
 
@@ -517,5 +517,6 @@ Project のエクスポートを行うことで、他の Namespace にインポ�
 ### プロジェクトファイル
 
 - [ボックスソーター（Short ver）の実装サンプル（Vantiq r1.42）](./../data/box_sorter_short_1.42.zip)
+- [ボックスソーター（Short ver）の実装サンプル（Vantiq r1.43.4）](./../data/box_sorter_short_1.43.4.zip)
 
 以上
