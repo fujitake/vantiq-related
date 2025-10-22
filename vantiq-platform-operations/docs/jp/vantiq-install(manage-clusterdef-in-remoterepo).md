@@ -28,7 +28,7 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
    新規の zone であれば、最大 48時間程度かかることになる  
 - `k8sdeploy_tools`、`k8sdeploy` リポジトリへのアクセス権限 (Vantiq Support より入手)
 - `k8sdeploy_clusters_jp` リポジトリへのアクセス権限 (JapanVirtualSRE より入手。Vantiq社内管理の場合のみ)
-- *quay.io* への vantiq リポジトリへのアクセス権限（Vantiq Support より入手）
+- *quay.io* への vantiq リポジトリへのアクセス権限 (Vantiq Support より入手)
 - SMTPサービスのエンドポイント、および資格情報
 - APNs認証キー、FCM用アクセストークン（iOS, AndroidのVantiq Mobileを使用する場合のみ）
 - 踏み台サーバのIPアドレス、ユーザー名、ssh秘密鍵（本記事のこれ以降の作業は踏み台サーバ上で行うことを想定する）
@@ -44,7 +44,7 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
   - kubectl - 有効なバージョン (Cloud 側の K8s バージョン ± 1以内),kubeconfigの設定を行っておく
   - helm 3 - 最新バージョン
   - aws CLI - EKSの場合
-  - kubeseal - 機密情報の暗号化にSealedSecretsを利用するため必須
+  - kubeseal - SealedSecretsでの機密情報の暗号化に利用
 
 - 任意ツール
   - stern - ログを pod 横断的に確認するのに便利
@@ -95,8 +95,9 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
     `kube-system` Namespace に SealedSecrets コントローラーがデプロイされる。  
 1. `kubectl get pod -n kube-system` コマンドを実行し、 SealedSecrets コントローラーが実行中（Running）であることを確認する。  
 1. `./gradlew -Pcluster=<クラスタ名> configureSealedSecrets` コマンドを実行する。  
-    **クラスタ内のシーリングキーを抽出し、安全な場所に保管する。シーリングキーは、クラスタを再構築する場合に必要。**  
-    **キーが漏洩するとシークレットが危険に晒されるため、認証情報等と同様に安全な方法で保管する。**
+1. `kubectl get secret/sealed-secrets-XXXX -n kube-system -o yaml > <出力先ファイルパス>` コマンドを実行してクラスタ内のシーリングキーを抽出し、安全な場所に保管する。  
+    **シーリングキーは、クラスタを再構築する場合に必要。**  
+    **キーが漏洩するとシークレットが危険に晒されるため、認証情報等と同様に安全な方法で保管する。**  
 1. `deploy.yaml` と `secrets.yaml` を編集する。  
     secrets.yamlで指定しているSSL証明書やライセンスファイルなどは `targetCluster/deploy/sensitive` ディレクトリより下に配置しておく。  
     設定項目の詳細に関しては [Installing Vantiq - Deployment Tasks](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/Installation.md#deployment-tasks) _(要権限)_ や [deploy.yamlのカスタマイズ構成](./deploy_yaml_config.md) を参照。  
@@ -113,7 +114,7 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
     - `./gradlew -Pcluster=<クラスタ名> deployShared`  
     - `./gradlew -Pcluster=<クラスタ名> createInfluxDBAdmin`  
     - `./gradlew -Pcluster=<クラスタ名> deployVantiq`  
-    - `./gradlew -Pcluster=<クラスタ名> grafanaPostInstallSetup`  
+    - `./gradlew -Pcluster=<クラスタ名> grafanaPostInstallSetup` **※2025年6月以前のバージョンの場合は実行不要**  
 
     まとめて実行する`deploy`コマンドもあるが、podが正しいnodeに配置されるか等、スモールステップで確認する方が無難である。正常に終わらない場合は、deploy.yaml、secrets.yaml の設定を確認する。
 1. `kubectl get pod -A` コマンドにて各種 pod が動作していることを確認する。  
@@ -142,8 +143,8 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
       LB にて設定されたホスト名を CNAME (AWS CLB) もしくは Aレコード (Azure LB) で解決できるように設定する  
       Internet-facing: インターネットにて名前解決ができること  
       Internal: Internal ネットワーク内にあるホストから名前解決できること
-    2. 上記で確認した DNS 名の CNAME/Aレコードとして、計画している DNS 名を設定する。DNS Zone 管理者に確認すること。  
-    3. DNS 登録ができたことを確認する。  
+    1. 上記で確認した DNS 名の CNAME/Aレコードとして、計画している DNS 名を設定する。DNS Zone 管理者に確認すること。  
+    1. DNS 登録ができたことを確認する。  
 
 1. Keycloak で system admin ユーザーを作成する。
     1. 次のページにアクセスする。  
@@ -167,28 +168,43 @@ kubectl コマンドの簡易的な使い方については[kubectlコマンド�
   	   Keycloakで作成した ”System Admin” 権限のユーザー名、パスワードでログインする。  
        初回ログイン時、Request Code を送信する画面が表示される。  
        Box内に`Vantiq Podのlogで確認しておいたkey`を入力し、[送信]ボタンをクリックする。
-    1. System Admin の Grafana 設定を確認する。  
-	    **[Grafana System Dashboards and Data Sources](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/Installation.md#grafana-system-dashboards-and-data-sources) _(要権限)_ に記載されている通り、2025年6月以降 k8sdeploy_tools にシステムダッシュボードとデータソースを作成するタスク `grafanaPostInstallSetup` が実装されたため、手動での設定は不要。 system namespace の Grafana に以下の設定が追加済であることを確認する。**  
-        - data sources  
-          - systemDB
-          - vantiqServer
-          - kubernetes
-          - internals
-        - dashboards
-          - InfluxDB Internals
-          - Metric Collection Resources
-          - MongoDB Monitoring Dashboard
-          - UserDB Monitoring Dashboard
-          - Organization Activity
-          - Organization Activity with Top Namespaces
-          - Vantiq Resources
-          - Vantiq ISO Resources
+    1. System admin の Grafana 設定を実施する。 ※   
+    **※[Grafana System Dashboards and Data Sources](https://github.com/Vantiq/k8sdeploy_tools/blob/master/docs/Installation.md#grafana-system-dashboards-and-data-sources) _(要権限)_ に記載されている通り、2025年6月以降にリリースされた k8sdeploy_tools ではシステムダッシュボードとデータソースを作成するタスク `grafanaPostInstallSetup` が実装されたため、手動での設定は不要。**  
+    **2025年6月以前のバージョンを利用する場合は、以下の手順に従い設定する。**  
+       1. system namespaceのメニューから [管理] -> [Grafana] を選択し、Grafana画面を起動する。
+       1. Grafana画面のメニューから [Administration] -> [Data sources] を選択する。
+       1. [Add data source] ボタンをクリックする。  
+       1. データソースタイプとして [InfluxDB] を選択し、以下の表を参考に各パラメータを設定する。  
+
+          | Name | URL | Database | Credentials | Min Time Interval |  
+          |------|-----|----------|-------------|-------------------|  
+          | systemDB | http://influxdb:8086 | system | ※ | 30s |  
+          | vantiqServer| http://influxdb:8086 | vantiq_server | ※ | 30s |  
+          | kubernetes | http://influxdb:8086 | kubernetes |  ※ | 30s |  
+          | internals | http://influxdb:8086 | \_internal | ※ | 10s |  
+
+          **※それぞれのデータソースを設定する際、username/passwordは`createInfluxDBAdmin`タスクで作成されたREAD権限のものを利用すること。詳細は [k8sdeploy repo](https://github.com/Vantiq/k8sdeploy/blob/master/deploy/shared/influxdb/createAdminJob.yaml) _(要権限)_ を参照。**  
+
+       1. [Save & Test] ボタンをクリックし、「Data source is working」というメッセージが表示されることを確認する。  
+       1. Grafana画面のメニューから [Dashboards] を選択する。  
+       1. [New] ボタンをクリックし、表示されたプルダウンリストから [Import] を選択する。  
+       1. `k8sdeploy_tools/vantiqSystem/deploy/vantiq/dashboards` ディレクトリ配下にある以下のファイルを [Upload dashboard JSON file] にドラッグ&ドロップする。  
+             - InfluxDB Internals.json
+             - Metric Collection Resources.json
+             - MongoDB Monitoring Dashboard.json
+             - UserDB Monitoring Dashboard.json
+             - Organization Activity.json
+             - Organization Activity with Top Namespaces.json
+             - Vantiq Resources.json
+             - Vantiq Iso Resources.json
+       1. ダッシュボード設定画面下部の Options セクションで必要なデータソースを選択し、[Import] ボタンをクリックする。※  
+       **※各JsonファイルImport時のデータソース選択では、画面に表示されているデータソース名と同じデータソースを指定すること。**  
 
     1. Source: `GenericEmailSender` を修正する  
 	    Search box に ”generic” と入力し、enter を押下する。 検索結果 Window が表示されるので、[system] にチェックをつけ、"GenericEmailSender" をクリックする。 適切な email server の設定を行い、[変更の保存] をクリックする  
     1. ノードのプロパティを更新する  
 	    [デプロイ] -> [Nodes] で、"self" を選択する。
-	    デフォルトの http://localhost:8080 を、デプロイされているドメイン名に変更する（例：https://hr-vantiq.co.jp）
+	    デフォルトの http://localhost:8080 を、デプロイされているドメイン名に変更する (例：https://hr-vantiq.co.jp)
     1. ユーザー向け Organization を作成する  
 	    [管理] -> [Organization] を選択し、[新規] アイコンをクリックする。
 	    Org Name、Org Description、Namespace (root namespace)、Invite Destination (Org Adminのメールアドレス)、[Make Me The Administrator] をチェック（自分が Org 管理者になる場合）し、[変更の保存] をクリック
