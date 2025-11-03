@@ -337,6 +337,18 @@ Add a **Transformation Activity** to format the event data so it contains only t
 
    ![transformation_setting.png](./imgs/transformation_setting.png)
 
+1. Click the `Transformation` task and use `View Task Events` to verify the Transformation activity's behavior.  
+   Confirm that the event looks like the following:  
+
+   ```json
+   {
+       "code": "14961234567890",
+       "name": "Green Tea, 24 bottles",
+       "center_id": 1,
+       "center_name": "Tokyo Logistics Center"
+   }
+   ```
+
 ### 5-4. [Filter] Implementing the Sorting Logic
 
 We will implement the sorting logic by creating a flow that only allows events for specific logistics centers to pass through.  
