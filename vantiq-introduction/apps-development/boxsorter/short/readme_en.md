@@ -131,8 +131,8 @@ Please prepare one of the following in advance:
 
 - [com.example.sorting_condition.csv](./../data/com.example.sorting_condition_en.csv)
 
-## Workshop Procedure
+## Workshop Procedures
 
 Please refer to the link below for details on application development.  
 
-- [Procedure](./instruction_en.md)
+- [Step-by-Step guide](./instruction_en.md)
