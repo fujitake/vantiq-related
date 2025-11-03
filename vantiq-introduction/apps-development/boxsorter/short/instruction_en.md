@@ -391,16 +391,8 @@ We will sort using the `center_id`.
      {
          "code": "14961234567890",
          "name": "Green Tea, 24 bottles",
-         "sorting_condition": {
-             "_id": "649d30c7c32b66791581af76",
-             "center_id": 1,
-             "center_name": "Tokyo Logistics Center",
-             "code": "14961234567890",
-             "ars_namespace": "BoxSorter",
-             "ars_version": 1,
-             "ars_createdAt": "2023-06-29T07:20:39.157Z",
-             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-         }
+         "center_id": 1,
+         "center_name": "Tokyo Logistics Center"
      }
      ```
 
@@ -410,16 +402,8 @@ We will sort using the `center_id`.
      {
          "code": "14961234567892",
          "name": "Skincare Lotion, 36 bottles",
-         "sorting_condition": {
-             "_id": "649d30c7c32b66791581af77",
-             "center_id": 2,
-             "center_name": "Kanagawa Logistics Center",
-             "code": "14961234567892",
-             "ars_namespace": "BoxSorter",
-             "ars_version": 1,
-             "ars_createdAt": "2023-06-29T07:20:39.200Z",
-             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-         }
+         "center_id": 2,
+         "center_name": "Kanagawa Logistics Center"
      }
      ```
 
@@ -429,16 +413,8 @@ We will sort using the `center_id`.
      {
          "code": "14961234567893",
          "name": "Wine, 12 bottles",
-         "sorting_condition": {
-             "_id": "649d30c7c32b66791581af78",
-             "center_id": 3,
-             "center_name": "Saitama Logistics Center",
-             "code": "14961234567893",
-             "ars_namespace": "BoxSorter",
-             "ars_version": 1,
-             "ars_createdAt": "2023-06-29T07:20:39.244Z",
-             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-         }
+         "center_id": 3,
+         "center_name": "Saitama Logistics Center"
      }
      ```
 
