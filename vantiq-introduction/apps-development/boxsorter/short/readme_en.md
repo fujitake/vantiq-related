@@ -14,18 +14,17 @@ Experience how to operate Vantiq by developing an application that sorts package
 
 <img src="./imgs/overview.png" width="800">
 
-1. A barcode reader scans the package barcode.
-1. The scanned result is sent to Vantiq using a REST API.
-1. Vantiq performs sorting based on the result.
-1. Vantiq sends the sorting instruction to the control system.
-1. The control system controls the sorter according to the sorting instruction.
+1. Read the barcode on the package.
+1. Send the scanned information to Vantiq via REST API.
+1. Identify shipping centers based on barcode and center information.
+1. Sends the sorting instruction to the control system.
+1. The control system manipulates sorters according to the sorting instruction.
 
 :globe_with_meridians: [See the actual image here](https://www.youtube.com/watch?v=1LvaiA3N0E8&t=282s)
 
-In this workshop, we will implement numbers 3-4, which are Vantiq's responsibilities.
+This workshop covered step 3 and 4, which are Vantiq's responsibilities.
 
-> Numbers 1-2 will be simulated by sending sample read results to a TOPIC using Google Colaboratory.  
-> Details on Google Colaboratory are explained [here](/vantiq-google-colab/colab_basic_knowledge/readme.md) .
+> Step 1 and 2 are simulated in Google Colaboratory, for example by sending scanned messages to your Namespace.
 
 ## Explanation of Resources Used in Vantiq
 
