@@ -48,6 +48,8 @@ compose.yamlを配置するディレクトリにconfigディレクトリを作�
 ・`vantiq-edge`と`vantiq_ai_assistant`は同じバージョンにして下さい。  
 ・`vantiq_genai_flow_service`と`vantiq_unstructured_api`を利用する場合はコメントアウトを外してください。その場合`vantiq_genai_flow_service`は`vantiq-edge`と同じバージョンにして下さい。  
 ・`vantiq_edge_qdrant`のバージョンは`vantiq-edge`のバージョンにより異なります。下記の表を参照下さい。
+・`mongodb`のイメージは`bignamilegacy`に移動しています。
+
 |  vantiq-edge  |  vantiq_edge_qdrant  |
 | ---- | ---- |
 |  R1.37 and R1.38  |  v1.7.4  |
@@ -74,7 +76,7 @@ services:
 
   vantiq_edge_mongo:
     container_name: vantiq_edge_mongo
-    image: bitnami/mongodb:4.2.21
+    image: bitnamilegacy/mongodb:4.2.21
     restart: unless-stopped
     environment:
       - MONGODB_USERNAME=ars
