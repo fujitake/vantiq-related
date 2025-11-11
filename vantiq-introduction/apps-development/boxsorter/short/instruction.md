@@ -336,6 +336,18 @@ Type を作成し、 CSV ファイルのインポートを行います。
 
    ![transformation_setting.png](./imgs/transformation_setting.png)
 
+1. `Transformation` タスクをクリックし、 `タスクイベントの表示` をクリックして Transformation Activity の動作を確認します。  
+   イベントが次のようになっていることを確認します。
+
+   ```json
+   {
+       "code": "14961234567890",
+       "name": "お茶 24本",
+       "center_id": 1,
+       "center_name": "東京物流センター"
+   }
+   ```
+
 ### 5-4. 【Filter】仕分け処理の実装
 
 特定の物流センターのイベントのみが通過できるフローを実装することで、仕分けを行います。  
@@ -389,16 +401,8 @@ Type を作成し、 CSV ファイルのインポートを行います。
      {
          "code": "14961234567890",
          "name": "お茶 24本",
-         "sorting_condition": {
-             "_id": "649d30c7c32b66791581af76",
-             "center_id": 1,
-             "center_name": "東京物流センター",
-             "code": "14961234567890",
-             "ars_namespace": "BoxSorter",
-             "ars_version": 1,
-             "ars_createdAt": "2023-06-29T07:20:39.157Z",
-             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-         }
+         "center_id": 1,
+         "center_name": "東京物流センター"
      }
      ```
 
@@ -408,16 +412,8 @@ Type を作成し、 CSV ファイルのインポートを行います。
      {
          "code": "14961234567892",
          "name": "化粧水 36本",
-         "sorting_condition": {
-             "_id": "649d30c7c32b66791581af77",
-             "center_id": 2,
-             "center_name": "神奈川物流センター",
-             "code": "14961234567892",
-             "ars_namespace": "BoxSorter",
-             "ars_version": 1,
-             "ars_createdAt": "2023-06-29T07:20:39.200Z",
-             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-         }
+         "center_id": 2,
+         "center_name": "神奈川物流センター"
      }
      ```
 
@@ -427,16 +423,8 @@ Type を作成し、 CSV ファイルのインポートを行います。
      {
          "code": "14961234567893",
          "name": "ワイン 12本",
-         "sorting_condition": {
-             "_id": "649d30c7c32b66791581af78",
-             "center_id": 3,
-             "center_name": "埼玉物流センター",
-             "code": "14961234567893",
-             "ars_namespace": "BoxSorter",
-             "ars_version": 1,
-             "ars_createdAt": "2023-06-29T07:20:39.244Z",
-             "ars_createdBy": "e9cc46d7-77cc-4929-8261-40ddceb8b143"
-         }
+         "center_id": 3,
+         "center_name": "埼玉物流センター"
      }
      ```
 

@@ -41,7 +41,7 @@ Vantiq の基本的な扱い方を解説しています。
 |◯|[ボックスソーター（Transformation）](./apps-development/boxsorter/transform/readme.md)|ボックスソーター（REST API）|r1.39 ~ r1.41|
 |◯|[ボックスソーター（MQTT）](./apps-development/boxsorter/mqtt/readme.md)|ボックスソーター（Transformation）|r1.39 ~ r1.40|
 |◯|[VAIL 入門（基礎）](./apps-development/vail-introductory/vail_basic/vail_basic.md)|なし|r1.39 ~ r1.40|
-|◯|[主要な Activity Pattern の紹介](./apps-development/vantiq-basic/major-activity-pattern/readme_en.md)|なし|-|
+|◯|[主要な Activity Pattern の紹介](./apps-development/vantiq-basic/major-activity-pattern/readme.md)|なし|-|
 
 > **必須の解説**  
 > ◯：必ず実施していただくことを推奨しています。  
@@ -128,7 +128,7 @@ It is recommended to follow the steps in order from the top of the table.
 |Yes|[Box Sorter (Transformation)](./apps-development/boxsorter/transform/readme.md)|Box Sorter (REST API)|r1.39 ~ r1.41|
 |Yes|[Box Sorter (MQTT)](./apps-development/boxsorter/mqtt/readme.md)|Box Sorter (Transformation)|r1.39 ~ r1.40|
 |Yes|[Introduction to VAIL (Basic)](./apps-development/vail-introductory/vail_basic/vail_basic.md)|None|r1.39 ~ r1.40|
-|Yes|[Introduction to Major Activity Patterns](./apps-development/vantiq-basic/major-activity-pattern/readme.md)|None|-|
+|Yes|[Introduction to Major Activity Patterns](./apps-development/vantiq-basic/major-activity-pattern/readme_en.md)|None|-|
 
 > **Explanation of "Required"**  
 > Yes: Completion is strongly recommended.  
