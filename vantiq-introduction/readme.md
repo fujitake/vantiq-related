@@ -22,7 +22,7 @@ Vantiq アプリケーションの開発方法をワークショップ形式で�
 Vantiq の基本的な扱い方を解説しています。  
 
 1. [Vantiq の Namespace と Project について](./apps-development/vantiq-basic/namespace/readme.md)
-1. [Project の管理について](./apps-development/vantiq-basic/project/readme_en.md)
+1. [Project の管理について](./apps-development/vantiq-basic/project/readme.md)
 1. [Vantiq で開発する上での基本事項](./apps-development/vantiq-basic/basic-common/readme.md)
 
 ### アプリケーション開発ワークショップ（初級編）
