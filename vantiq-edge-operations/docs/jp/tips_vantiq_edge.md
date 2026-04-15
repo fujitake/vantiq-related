@@ -65,6 +65,69 @@ Vantiq IDE画面にて、"Could not reach service connector AIAssistantService t
 docker restart vantiq_ai_assistant
 ```
 
+## "Could not reach service connector AIAssistantService to excute procedure submit_prompt due to error Connection refused"エラーが発生した
+
+Vantiq IDE画面でLLMリソースを使った処理を実行した際、"Could not reach service connector AIAssistantService to excute procedure submit_prompt due to error Connection refused"というエラーが発生するケースがあります。
+
+![](./picture/llm_connection_refused_error.png)
+
+この場合、VantiqEdgeServerとAI Assistantのコネクション確立に失敗している可能性があるため、VantiqEdgeServerとAI Assistantのコンテナを合わせて再起動して下さい。
+```
+docker restart vantiq_edge_server vantiq_ai_assistant
+```
+
+## SemanticIndexへのドキュメント登録が失敗し、"received an error: requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"エラーが発生した
+
+SemanticIndexリソースのドキュメント登録が失敗（Status が```Failed```）し、"received an error: requests.exceptions.ConnectionError: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer'))"というエラーが発生するケースがあります。
+
+登録対象ドキュメントのファイルサイズが大きいために処理に長時間掛かったことで、通信相手（ピア）によってTCP接続がリセットされた可能性があります。  
+ドキュメント登録の処理時間は処理量とリソースに依存するため、以下の対応を検討してください。
+- 登録ドキュメントの分割
+- VantiqEdge実行ノードのリソース増設
+
+## Vantiq IDE画面へアクセスできなくなった
+
+Vantiq IDE画面での操作/処理実行中に応答がなくなり、接続できなくなった場合、VantiqEdge関連コンテナが異常停止した可能性があります。   
+Dockerコンテナが予期せず終了した場合、主にリソース不足（メモリなど）、アプリケーション内部のエラー、または外部からのシグナルが原因であることが考えられます。   
+コンテナの停止原因を特定、解消した後、```docker compose up -d```コマンドでVantiqEdge関連コンテナを再起動する必要があります。   
+コンテナの停止原因を特定するための主な方法は以下の通りです。   
+### コンテナ終了ステータス確認
+VantiqEdgeコンテナの状態および停止原因を確認するためには、VantiqEdge実行ノードへログインし、VantiqEdge用マニフェストが配置されているディレクトリで```docker compose ps -a```コマンドを実行します。   
+停止したコンテナの場合、```STATUS```項目に```Exited (137) 5 minutes ago```のように**終了コード**と**いつ停止したか**が表示されます。   
+代表的な終了コードの意味は以下の通りです。   
+| 終了コード | 意味 | 主な原因 |
+|---|---|---|
+| 0 | 正常終了 | プロセスが意図通りに完了した状態。 |
+| 1 | 一般的なエラー | アプリケーション内部のエラーや、設定ファイルの間違い（パスミス等）。 |
+| 125 | Docker起動失敗 | Dockerデーモン自体の問題や、指定したオプションが不正な場合に発生。 |
+| 126 | 実行不可 | 実行ファイルに実行権限がない、または指定したコマンドがディレクトリである場合。 |
+| 127 | コマンド未定義 | 指定した実行ファイルやパスがコンテナ内に見つからない。 |
+| 130 | 中断 (SIGINT) | Ctrl+C などにより、外部からプロセスが手動で中断された。 |
+| 137 | 強制終了 (SIGKILL) | メモリ不足（OOM Killer）によりシステムが停止させた。または ```docker kill``` コマンドによる明示的な強制停止。 |
+| 139 | セグメンテーション違反 | メモリアクセスエラーなど、プログラムが不正なメモリ操作を試みた。 |
+| 143 | 正常な停止要求 (SIGTERM) | ```docker stop``` コマンドを受け取り、アプリが正常に終了処理を行った。 |
+| 255 | 原因不明の異常終了 | 原因不明の異常終了、またはアプリケーション固有の致命的なエラー。 |
+### コンテナログ確認
+```docker logs```コマンドを使って、コンテナログに関連するメッセージが出力されているか確認します。   
+ログが大量に出力されている場合は、以下のようなオプションで表示ログを制限します。   
+```bash
+# 停止直前のログ100行を表示
+docker compose logs --tail 100 ＜コンテナ名＞
+# 過去30分間のログを表示
+docker compose logs --since 30m ＜コンテナ名＞
+# 異常発生日時以降のログを表示
+docker compose logs --since ＜異常発生日時＞ ＜コンテナ名＞
+```
+### VantiqEdge実行ノードシステムログ確認
+コンテナ側のログに何も出ていない場合、実行ノードのカーネルがコンテナを強制終了させていることがあるため、コンテナ関連のログが出力されていないか確認します。   
+```bash
+# カーネルログからコンテナ関連（oom-killなど）の記録を探す
+dmesg -T | grep -i "oom"
+```
+### VantiqEdge実行ノードリソース使用状況確認
+エラーの再現が可能な場合は、VantiqEdge実行ノード上で```htop```コマンドを実行し、ノード全体のリソース使用状況をリアルタイム監視します。   
+
+
 # Tips
 
 ## MongoDBをバックアップ・リストアしたい
