@@ -171,7 +171,134 @@ vantiq_unstructured_api     quay.io/vantiq/unstructured-api:0.0.73   "scripts/ap
 ```
 
 ## オプション: SSL設定
-httpsでVantiq Edgeにアクセスしたい場合の設定手順です。
+Vantiq Edgeコンテナ自体にSSL (HTTPS) の終端機能はありません。  
+ただし、一般的なWEBアプリと同様に、Vantiq Edgeコンテナの手前にリバースプロキシやロードバランサーを配置することでHTTPS通信を実現することは可能です。  
+リバースプロキシやロードバランサーを配置した場合の構成は、以下のようになります。  
+1. Vantiq Edge実行ノードの前段にLB (Load Balancer) を用意し、HTTPS終端とする。
+   - 構成概要:
+     - ユーザー ➔ HTTPS (ポート443) ➔ LB ➔ HTTP (ポート8080) ➔ Vantiq Edge実行ノード (Vantiq Edgeコンテナ)
+1. Vantiq Edge実行ノード内にリバースプロキシを配置し、HTTPS終端とする。
+   - 構成概要:
+     - ユーザー ➔ HTTPS (ポート443) ➔ Vantiq Edge実行ノード (リバースプロキシ ➔ HTTP (ポート8080) ➔ Vantiq Edgeコンテナ)
+
+具体的な設定手順は利用するサービス、アプリケーションによって異なるため、各利用環境に合わせた設定が必要となります。  
+以下ではSSL設定の参考例として、**①AWS環境でELBを利用する場合の設定手順** 、 **②Azure環境でApplication Gatewayを利用する場合の設定手順** 、 **③リバースプロキシとして[jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy)コンテナを利用する場合の設定手順** を紹介します。  
+
+### ① AWS環境でELBを利用する場合
+<details>
+
+<summary>手順を表示</summary>
+
+#### 前提条件
+AWS環境でELBを作成・配置する場合、異なるAZにあるサブネットが最低2つ必要になります。  
+作業前にELBを配置する予定のVPCの設定を確認してください。  
+
+#### 設定手順
+EC2インスタンスを作成し、同インスタンス上でVantiq Edgeコンテナを実行します。  
+Vantiq Edgeを起動するまでの手順は、 [セットアップ手順](#セットアップ手順) の内容と同様です。  
+
+ACMを使用してELBに適用する証明書をリクエストします。  
+証明書の自動更新のため、検証方法は `DNS検証` を選択しています。  
+![](./picture/setting_ssl_using_ALB_001.png)
+![](./picture/setting_ssl_using_ALB_002.png)
+
+証明書のリクエスト完了時に表示されるCNAMEレコードを利用しているDNSサービスに登録します。  
+Route53を利用してドメインを管理している場合は、ACMコンソールからワンボタンでレコード登録できます。  
+![](./picture/setting_ssl_using_ALB_003.png)
+
+CNAMEレコードをDNSサービスに登録してしばらく経つと証明書のステータスが「**発行済み**」に変わります。  
+![](./picture/setting_ssl_using_ALB_004.png)
+
+証明書の発行が完了したら、ELBおよび関連リソースを作成します。  
+始めにELB用セキュリティグループを作成し、HTTPS通信を許可するインバウンドルールを追加します。  
+![](./picture/setting_ssl_using_ALB_005.png)
+
+ELB用セキュリティグループの作成・設定が完了したら、ELBからVantiq Edgeへの通信を許可するためにVantiq Edge実行インスタンス用セキュリティグループのインバウンドルールにELB用セキュリティグループを追加します。  
+![](./picture/setting_ssl_using_ALB_006.png)
+
+次にターゲットグループを作成します。  
+今回の手順ではVantiq Edge実行インスタンスとELBは同VPCに配置するため、  
+ターゲットとしてVantiq Edge実行インスタンスとvantiq_edge_serverコンテナの待受けポート (8080番) を指定します。ヘルスチェックパスは`/healthz`を指定します。  
+![](./picture/setting_ssl_using_ALB_007.png)
+![](./picture/setting_ssl_using_ALB_008.png)
+
+ターゲットグループ作成直後はELBとの関連付けがされておらず、ターゲットへのヘルスチェックも未実施です。  
+![](./picture/setting_ssl_using_ALB_009.png)
+
+続いてELBを作成します。ELBのタイプは`Application Load Balancer`を選択します。  
+![](./picture/setting_ssl_using_ALB_010.png)
+
+ELBが利用するセキュリティグループに前手順で作成したELB用セキュリティグループを指定します。  
+リスナーとルーティングの設定として、`HTTPS:443`リスナーを追加し、転送先に前手順で作成したターゲットグループを指定します。  
+セキュリティリスナーの設定で証明書の取得先として`ACM`を選択し、前手順で発行した証明書を指定します。  
+![](./picture/setting_ssl_using_ALB_011.png)
+![](./picture/setting_ssl_using_ALB_012.png)
+
+ELBの作成が完了し設定に問題がなければ、ターゲットグループのヘルスチェック結果が「**正常**」となります。  
+![](./picture/setting_ssl_using_ALB_013.png)
+
+利用しているDNSサービスにELBのDNS名をCNAMEレコードとして追加します (本手順ではRoute53を使用しています)  
+![](./picture/setting_ssl_using_ALB_014.png)
+
+DNS設定の反映には数秒～数分掛かります。設定が反映されれば `https://<YOUR-FQDN>` でVantiq EdgeのIDEへ接続可能になります。
+![](./picture/setting_ssl_using_ALB_015.png)
+
+</details>
+
+### ② Azure環境でApplication Gatewayを利用する場合
+<details>
+
+<summary>手順を表示</summary>
+
+#### 前提条件
+Azure環境でApplication Gatewayを作成・配置する場合、VNet内に専用サブネットが必要になります。  
+VantiqEdge実行ノード (VM) と同じサブネットに同居できないため、事前にVM用とAppGW用のサブネットを用意する必要があります。  
+
+#### 設定手順
+VM (Virtual Machine) を作成し、同VM上でVantiq Edgeコンテナを実行します。  
+Vantiq Edgeを起動するまでの手順は、 [セットアップ手順](#セットアップ手順) の内容と同様です。  
+
+Application Gatewayを作成します。  
+![](./picture/setting_ssl_using_AppGW_001.png)
+![](./picture/setting_ssl_using_AppGW_002.png)
+
+Application Gatewayの設定はおおまかにフロントエンド、ルーティング規則、バックエンドの3つの要素で構成されます。  
+フロントエンドではApplication Gatewayにアクセスする際のIPアドレスを指定します。  
+![](./picture/setting_ssl_using_AppGW_003.png)
+
+バックエンドにはApplication Gatewayへのトラフィックを送信するターゲットを設定します。今回はターゲットとしてVantiq Edge実行ノード (VM) を指定します。  
+![](./picture/setting_ssl_using_AppGW_004.png)
+
+ルーティング規則にはフロントエンドとバックエンドを繋ぐルールを設定します。  
+リスナーではフロントエンド側の設定を行います。Vantiq Edgeとの通信暗号化のため、プロトコルとしてHTTPSを指定し、暗号化に利用するSSL証明書を指定します。  
+SSL証明書の指定方法は、Application Gatewayへ証明書ファイル(PFX形式)を直接アップロードする、もしくはKeyVaultに登録した証明書を指定する方法が選択可能です。  
+![](./picture/setting_ssl_using_AppGW_005.png)
+![](./picture/setting_ssl_using_AppGW_006.png)
+
+バックエンドターゲットにはバックエンド側のルールを設定します。トラフィックの送信先として前手順で作成したバックエンドプールを指定し、バックエンドとの通信プロトコル (HTTP)、ポート番号 (8080番) を設定します。  
+![](./picture/setting_ssl_using_AppGW_007.png)
+![](./picture/setting_ssl_using_AppGW_008.png)
+
+Application Gatewayの設定が完了したら、作成ボタンをクリックします。Application Gatewayのデプロイが完了するまでには5～15分程度掛かります。  
+![](./picture/setting_ssl_using_AppGW_009.png)
+
+Application Gatewayのデプロイが完了したら、Vantiq Edge実行ノード (VM) 側で通信を受け付けるための設定を行います。  
+VMに紐づいているNSGの受信セキュリティ規則に対して、Application GatewayからVMへの通信を許可するルールを追加します。  
+![](./picture/setting_ssl_using_AppGW_010.png)
+
+利用しているDNSサービスにApplication GatewayのパブリックIPアドレスをAレコードとして追加します (本手順ではRoute53を使用しています)  
+![](./picture/setting_ssl_using_AppGW_011.png)
+
+DNS設定の反映には数秒～数分掛かります。設定が反映されれば `https://<YOUR-FQDN>` でVantiq EdgeのIDEへ接続可能になります。
+![](./picture/setting_ssl_using_AppGW_012.png)
+
+</details>
+
+### ③ リバースプロキシコンテナ (jwilder/nginx-proxy) を利用する場合
+<details>
+
+<summary>手順を表示</summary>
+
 compose.yamlを配置するディレクトリにconfig/certsディレクトリを作成し、以下のようにSSL証明書と秘密鍵ファイルを配置します。
 その際にSSL証明書と秘密鍵のファイル名はFQDN名.拡張子としてください。拡張子は証明書はcrt、秘密鍵はkeyです。  
 ex: 
@@ -299,6 +426,9 @@ volumes:
 起動は通常時と同じく`docker compose up -d`で起動してください。  
 DNSなどの名前解決の設定はそれぞれの環境に合わせて設定を行ってください。  
 起動と名前解決の設定が完了したら`https://<YOUR-FQDN>`でVantiq EdgeのIDEにアクセスし、起動後の設定を行ってください。
+
+</details>
+
 
 # Vantiq Edge起動後の設定
 
