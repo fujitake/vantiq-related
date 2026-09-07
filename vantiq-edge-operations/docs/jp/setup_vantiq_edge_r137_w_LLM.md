@@ -174,6 +174,7 @@ vantiq_unstructured_api     quay.io/vantiq/unstructured-api:0.0.73   "scripts/ap
 Vantiq Edgeコンテナ自体にSSL (HTTPS) の終端機能はありません。  
 ただし、一般的なWEBアプリと同様に、Vantiq Edgeコンテナの手前にリバースプロキシやロードバランサーを配置することでHTTPS通信を実現することは可能です。  
 リバースプロキシやロードバランサーを配置した場合の構成は、以下のようになります。  
+**Vantiq社が本設定をサポートする訳ではございません。本作業及び[サーバー証明書の更新作業](https://github.com/fujitake/vantiq-related/blob/main/vantiq-edge-operations/docs/jp/update_vantiq_edge_certificate.md)は、ご自身でご対応ください。**
 1. Vantiq Edge実行ノードの前段にLB (Load Balancer) を用意し、HTTPS終端とする。
    - 構成概要:
      - ユーザー ➔ HTTPS (ポート443) ➔ LB ➔ HTTP (ポート8080) ➔ Vantiq Edge実行ノード (Vantiq Edgeコンテナ)
