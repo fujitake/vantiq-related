@@ -15,6 +15,7 @@ Vantiqアプリケーションの開発や運用に関するガイドやマテ�
 - [UDP Source](./docs/jp/udp-source.md)
 - [JDBC Source](./docs/jp/jdbc-source.md)
 - [Vantiq Test Tools](./docs/jp/test-tools.md)
+- [Vantiq MCP Server の開発ワークフロー（manifest / context / instruction）](./docs/jp/mcp-server-development-workflow.md)
 
 ## Vantiq Resources
 
