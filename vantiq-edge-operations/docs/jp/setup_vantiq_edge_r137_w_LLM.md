@@ -1,4 +1,4 @@
-# Vantiq Edge(R1.37以降)のインストールと大規模言語モデル関連機能の設定ガイド
+# Vantiq Edge(R1.37～R1.43)のインストールと大規模言語モデル関連機能の設定ガイド
 
 # はじめに
 
@@ -55,7 +55,7 @@ compose.yamlを配置するディレクトリにconfigディレクトリを作�
 |  R1.37 and R1.38  |  v1.7.4  |
 |  R1.39 and up to R1.40.9  |  v1.9.2  |
 |  R1.40.10 and up to R1.41  |  v1.12.5  |
-|  R1.42 and later  |  v1.13.4  |
+|  R1.42 and R1.43  |  v1.13.4  |
 
 ```yaml
 services:
@@ -172,9 +172,9 @@ vantiq_unstructured_api     quay.io/vantiq/unstructured-api:0.0.73   "scripts/ap
 
 ## オプション: SSL設定
 Vantiq Edgeコンテナ自体にSSL (HTTPS) の終端機能はありません。  
-ただし、一般的なWEBアプリと同様に、Vantiq Edgeコンテナの手前にリバースプロキシやロードバランサーを配置することでHTTPS通信を実現することは可能です。  
+ただし、一般的なWEBアプリと同様に、Vantiq Edgeコンテナの手前にリバースプロキシやロードバランサーを配置することでHTTPS通信を実現することは可能です。※1  
 リバースプロキシやロードバランサーを配置した場合の構成は、以下のようになります。  
-**Vantiq社が本設定をサポートする訳ではございません。本作業及び[サーバー証明書の更新作業](https://github.com/fujitake/vantiq-related/blob/main/vantiq-edge-operations/docs/jp/update_vantiq_edge_certificate.md)は、ご自身でご対応ください。**
+
 1. Vantiq Edge実行ノードの前段にLB (Load Balancer) を用意し、HTTPS終端とする。
    - 構成概要:
      - ユーザー ➔ HTTPS (ポート443) ➔ LB ➔ HTTP (ポート8080) ➔ Vantiq Edge実行ノード (Vantiq Edgeコンテナ)
@@ -183,7 +183,10 @@ Vantiq Edgeコンテナ自体にSSL (HTTPS) の終端機能はありません。
      - ユーザー ➔ HTTPS (ポート443) ➔ Vantiq Edge実行ノード (リバースプロキシ ➔ HTTP (ポート8080) ➔ Vantiq Edgeコンテナ)
 
 具体的な設定手順は利用するサービス、アプリケーションによって異なるため、各利用環境に合わせた設定が必要となります。  
-以下ではSSL設定の参考例として、**①AWS環境でELBを利用する場合の設定手順** 、 **②Azure環境でApplication Gatewayを利用する場合の設定手順** 、 **③リバースプロキシとして[jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy)コンテナを利用する場合の設定手順** を紹介します。  
+以下ではSSL設定の参考例として、**①AWS環境でELBを利用する場合の設定手順** 、 **②Azure環境でApplication Gatewayを利用する場合の設定手順** 、 **③リバースプロキシとして[jwilder/nginx-proxy](https://hub.docker.com/r/jwilder/nginx-proxy)コンテナを利用する場合の設定手順** を紹介します。※2  
+
+**※1 Vantiq社が本設定をサポートする訳ではございません。本作業及び[サーバー証明書の更新作業](https://github.com/fujitake/vantiq-related/blob/main/vantiq-edge-operations/docs/jp/update_vantiq_edge_certificate.md)は、ご自身でご対応ください。**  
+**※2 本手順は2026年9月時点のものです。利用している各サービスの更新に伴い、変わる可能性があります。**  
 
 ### ① AWS環境でELBを利用する場合
 <details>
